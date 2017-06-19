@@ -1,0 +1,29 @@
+# maven ignore
+target
+classes
+/src/main/webapp/dcpic/
+# eclipse ignore
+.settings/
+.project
+.classpath
+catalina.*/
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+# system ignore
+.DS_Store
+Thumbs.db
+# package ignore (optional)
+# *.jar
+# *.war
+# *.zip
+# *.tar
+# *.tar.gz

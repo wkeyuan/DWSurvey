@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+	
+	<bean id="shiroDbRealm" class="com.key.common.plugs.security.ShiroDbRealm" />
+
+	<!-- <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+		<property name="rememberMeManager" ref="rememberMeManager"/>  
+	</bean>
+	 -->
+	  <bean id="securityManager" class="com.key.common.plugs.security.MyDefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+		<property name="rememberMeManager" ref="rememberMeManager"/>  
+	</bean>
+	 
+	<bean id="formAuthFilter" class="com.key.common.plugs.security.FormAuthenticationWithLockFilter">
+		<property name="maxLoginAttempts" value="100"/>
+		<property name="successAdminUrl" value="/main.action?menu=3"/>
+		<property name="successAdminRole" value="admin"/>
+		<property name="rememberMeParam" value="rememberMe"/>
+	</bean>
+	
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login.jsp" />
+		<property name="successUrl" value="/design/my-survey.action" />
+		<property name="unauthorizedUrl" value="/login.jsp?una=0" />
+		<property name="filters">
+			<util:map>
+				<entry key="authc" value-ref="formAuthFilter">
+				</entry>
+			</util:map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/login.jsp = authc
+				/ic/* = user
+				/design/*=user
+				/da/*=user
+			</value>
+		</property>
+	</bean>
+
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	<!-- 使用记住我功能 -->
+	<!-- 会话Cookie模板 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+	    <constructor-arg value="sid"/>
+	    <property name="httpOnly" value="true"/>
+	    <property name="maxAge" value="-1"/>
+	</bean>
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+	    <constructor-arg value="rememberMe"/>
+	    <property name="httpOnly" value="true"/>
+	    <property name="maxAge" value="2592000"/><!-- 30天  (maxAge=-1表示浏览器关闭时失效) -->
+	</bean>
+	<!-- rememberMe管理器 -->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+	    <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+	     <property name="cookie" ref="rememberMeCookie"/>
+	</bean>
+	
+</beans>

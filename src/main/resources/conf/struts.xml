@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+		"http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<constant name="struts.convention.package.locators" value="dwsurvey,common" />
+	<constant name="struts.convention.package.locators.basePackage" value="com.key" />	
+
+  	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+   <!--  <constant name="struts.devMode" value="true" /> -->
+    <constant name="struts.multipart.maxSize" value="10485760"/>
+	<!-- 
+		使用Convention插件,实现约定大于配置的零配置文件风格.
+	             特殊的Result路径在Action类中使用@Result设定. 
+	-->
+
+	<!-- 关键地方  struts2.5 为了提升安全性，添加了 allomethod 这么个玩意-->
+	<!--<package name="dw-default" extends="struts-default" namespace="/" >
+		<global-allowed-methods>regex:.*</global-allowed-methods>
+	</package>-->
+
+</struts>

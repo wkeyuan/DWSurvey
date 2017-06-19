@@ -1,0 +1,3 @@
+Manifest-Version: 3.0
+Class-Path: 
+

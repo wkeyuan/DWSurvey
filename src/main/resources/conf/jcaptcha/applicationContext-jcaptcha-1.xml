@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 支持服务Dao层spring bean配置文件 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd">
+	
+	<bean id="imageCaptchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">    
+        <constructor-arg type="com.octo.captcha.service.captchastore.CaptchaStore" index="0">    
+            <ref bean="fastHashMapCaptchaStore"/>    
+        </constructor-arg>       
+        <!--which captcha Engine you use-->       
+        <constructor-arg type="com.octo.captcha.engine.CaptchaEngine" index="1">    
+            <ref bean="captchaEngineEx"/>    
+        </constructor-arg>       
+        <constructor-arg index="2">       
+            <value>180</value>       
+        </constructor-arg>       
+        <constructor-arg index="3">       
+            <value>100000</value>       
+        </constructor-arg>       
+        <constructor-arg index="4">       
+            <value>75000</value>       
+        </constructor-arg>      
+    </bean>    
+    <bean id="fastHashMapCaptchaStore" 
+      class="com.octo.captcha.service.captchastore.FastHashMapCaptchaStore"/>       
+    <!--you can define more than one captcha engine here -->       
+    <bean id="captchaEngineEx" class="com.key.common.plugs.jcaptcha.CaptchaEngineEx"/>
+    
+</beans>

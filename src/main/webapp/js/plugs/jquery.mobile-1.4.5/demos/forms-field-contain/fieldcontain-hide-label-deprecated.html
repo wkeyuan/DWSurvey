@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Field containers hide label - jQuery Mobile Demos</title>
+    <link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <script src="../js/jquery.js"></script>
+    <script src="../_assets/js/index.js"></script>
+    <script src="../js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos">
+
+    <div data-role="header" class="jqm-header">
+        <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p><span class="jqm-version"></span> Demos</p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+    </div><!-- /header -->
+
+	<div role="main" class="ui-content jqm-content">
+
+        <h1>Field containers, hide label/legend</h1>
+
+		<p><strong>Note:</strong> Deprecated in 1.4. Use class <code>ui-hidden-accessible</code> for the label/legend and no field container instead.</p>
+
+        <form action="#" method="get">
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="textinput-3">Text Input:</label>
+                    <input type="text" name="textinput-3" id="textinput-3" placeholder="Text input" value="">
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="search-3">Search Input:</label>
+                    <input type="search" name="search-3" id="search-3" value="">
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="textarea-3">Textarea:</label>
+                    <textarea cols="40" rows="8" name="textarea-3" id="textarea-3">Textarea</textarea>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="select-native-3">Native select:</label>
+                    <select name="select-native-3" id="select-native-3">
+                        <option value="small">One</option>
+                        <option value="medium">Two</option>
+                        <option value="large">Three</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="select-multiple-3">Custom multiple select:</label>
+                    <select multiple="multiple" data-native-menu="false" name="select-multiple-3" id="select-multiple-3">
+                        <option value="">Choices:</option>
+                        <option value="small">One</option>
+                        <option value="medium">Two</option>
+                        <option value="large">Three</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup">
+                        <legend>Vertical controlgroup, buttons:</legend>
+                        <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
+                        <input type="button" data-icon="back" data-iconpos="right" value="Two">
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Horizontal controlgroup, buttons:</legend>
+                        <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
+                        <input type="button" data-icon="back" data-iconpos="right" value="Two">
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup">
+                        <legend>Vertical controlgroup, select:</legend>
+                        <label for="select-v-3a">Select A</label>
+                        <select name="select-v-3a" id="select-v-3a">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-v-3b">Select B</label>
+                        <select name="select-v-3b" id="select-v-3b">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-v-3c">Select C</label>
+                        <select name="select-v-3c" id="select-v-3c">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Horizontal controlgroup, select:</legend>
+                        <label for="select-h-3a">Select A</label>
+                        <select name="select-h-3a" id="select-h-3a">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-h-3b">Select B</label>
+                        <select name="select-h-3b" id="select-h-3b">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-h-3c">Select C</label>
+                        <select name="select-h-3c" id="select-h-3c">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Horizontal controlgroup, mixed:</legend>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
+                        <button class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext">Button</button>
+                        <label for="select-v-3e">Select</label>
+                        <select name="select-v-3e" id="select-v-3e">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="slider-3">Slider:</label>
+                    <input type="range" name="slider-3" id="slider-3" value="50" min="0" max="100" data-highlight="true">
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="flip-3">Flip toggle:</label>
+                    <select name="flip-3" id="flip-3" data-role="slider">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup">
+                        <legend>Single checkbox:</legend>
+                        <label for="checkbox-3">I agree</label>
+                        <input type="checkbox" name="checkbox-3" id="checkbox-3">
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup">
+                        <legend>Vertical controlgroup, checkbox:</legend>
+                        <input type="checkbox" name="checkbox-v-3a" id="checkbox-v-3a">
+                        <label for="checkbox-v-3a">One</label>
+                        <input type="checkbox" name="checkbox-v-3b" id="checkbox-v-3b">
+                        <label for="checkbox-v-3b">Two</label>
+                        <input type="checkbox" name="checkbox-v-3c" id="checkbox-v-3c">
+                        <label for="checkbox-v-3c">Three</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup">
+                        <legend>Vertical controlgroup, radio:</legend>
+                        <input type="radio" name="radio-choice-v-3" id="radio-choice-v-3a" value="on" checked="checked">
+                        <label for="radio-choice-v-3a">One</label>
+                        <input type="radio" name="radio-choice-v-3" id="radio-choice-v-3b" value="off">
+                        <label for="radio-choice-v-3b">Two</label>
+                        <input type="radio" name="radio-choice-v-3" id="radio-choice-v-3c" value="other">
+                        <label for="radio-choice-v-3c">Three</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Horizontal controlgroup, checkbox:</legend>
+                        <input type="checkbox" name="checkbox-h-3a" id="checkbox-h-3a">
+                        <label for="checkbox-h-3a">One</label>
+                        <input type="checkbox" name="checkbox-h-3b" id="checkbox-h-3b">
+                        <label for="checkbox-h-3b">Two</label>
+                        <input type="checkbox" name="checkbox-h-3c" id="checkbox-h-3c">
+                        <label for="checkbox-h-3c">Three</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Horizontal controlgroup, radio:</legend>
+                        <input type="radio" name="radio-choice-h-3" id="radio-choice-h-3a" value="on" checked="checked">
+                        <label for="radio-choice-h-3a">One</label>
+                        <input type="radio" name="radio-choice-h-3" id="radio-choice-h-3b" value="off">
+                        <label for="radio-choice-h-3b">Two</label>
+                        <input type="radio" name="radio-choice-h-3" id="radio-choice-h-3c" value="other">
+                        <label for="radio-choice-h-3c">Three</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="submit-3">Send:</label>
+                    <button class="ui-shadow ui-btn ui-corner-all" type="submit" id="submit-3">Submit</button>
+                </div>
+            </div><!--/demo-html -->
+
+        </form>
+
+        <h2>Mini sized</h2>
+
+        <form action="#" method="get">
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="textinput-7">Text Input:</label>
+                    <input type="text" name="textinput-7" id="textinput-7" placeholder="Text input" value="" data-mini="true">
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="search-7">Search Input:</label>
+                    <input type="search" name="search-7" id="search-7" value="" data-mini="true">
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="textarea-7">Textarea:</label>
+                    <textarea cols="40" rows="8" name="textarea-7" id="textarea-7" data-mini="true">Textarea</textarea>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="select-native-7">Native select:</label>
+                    <select name="select-native-7" id="select-native-7" data-mini="true">
+                        <option value="small">One</option>
+                        <option value="medium">Two</option>
+                        <option value="large">Three</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="select-multiple-7">Custom multiple select:</label>
+                    <select multiple="multiple" data-native-menu="false" name="select-multiple-7" id="select-multiple-7" data-mini="true">
+                        <option value="">Choices:</option>
+                        <option value="small">One</option>
+                        <option value="medium">Two</option>
+                        <option value="large">Three</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Vertical controlgroup, buttons:</legend>
+                        <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
+                        <input type="button" data-icon="back" data-iconpos="right" value="Two">
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Horizontal controlgroup, buttons:</legend>
+                        <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
+                        <input type="button" data-icon="back" data-iconpos="right" value="Two">
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Vertical controlgroup, select:</legend>
+                        <label for="select-v-7a">Select A</label>
+                        <select name="select-v-7a" id="select-v-7a">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-v-7b">Select B</label>
+                        <select name="select-v-7b" id="select-v-7b">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-v-7c">Select C</label>
+                        <select name="select-v-7c" id="select-v-7c">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Horizontal controlgroup, select:</legend>
+                        <label for="select-h-7a">Select A</label>
+                        <select name="select-h-7a" id="select-h-7a">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-h-7b">Select B</label>
+                        <select name="select-h-7b" id="select-h-7b">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-h-7c">Select C</label>
+                        <select name="select-h-7c" id="select-h-7c">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Horizontal controlgroup, mixed:</legend>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
+                        <button class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext">Button</button>
+                        <label for="select-v-7e">Select</label>
+                        <select name="select-v-7e" id="select-v-7e">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="slider-7">Slider:</label>
+                    <input type="range" name="slider-7" id="slider-7" value="50" min="0" max="100" data-highlight="true" data-mini="true">
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="flip-7">Flip toggle:</label>
+                    <select name="flip-7" id="flip-7" data-role="slider" data-mini="true">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Single checkbox:</legend>
+                        <label for="checkbox-7">I agree</label>
+                        <input type="checkbox" name="checkbox-7" id="checkbox-7">
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Vertical controlgroup, checkbox:</legend>
+                        <input type="checkbox" name="checkbox-v-7a" id="checkbox-v-7a">
+                        <label for="checkbox-v-7a">One</label>
+                        <input type="checkbox" name="checkbox-v-7b" id="checkbox-v-7b">
+                        <label for="checkbox-v-7b">Two</label>
+                        <input type="checkbox" name="checkbox-v-7c" id="checkbox-v-7c">
+                        <label for="checkbox-v-7c">Three</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Vertical controlgroup, radio:</legend>
+                        <input type="radio" name="radio-choice-v-7" id="radio-choice-v-7a" value="on" checked="checked">
+                        <label for="radio-choice-v-7a">One</label>
+                        <input type="radio" name="radio-choice-v-7" id="radio-choice-v-7b" value="off">
+                        <label for="radio-choice-v-7b">Two</label>
+                        <input type="radio" name="radio-choice-v-7" id="radio-choice-v-7c" value="other">
+                        <label for="radio-choice-v-7c">Three</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Horizontal controlgroup, checkbox:</legend>
+                        <input type="checkbox" name="checkbox-h-7a" id="checkbox-h-7a">
+                        <label for="checkbox-h-7a">One</label>
+                        <input type="checkbox" name="checkbox-h-7b" id="checkbox-h-7b">
+                        <label for="checkbox-h-7b">Two</label>
+                        <input type="checkbox" name="checkbox-h-7c" id="checkbox-h-7c">
+                        <label for="checkbox-h-7c">Three</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Horizontal controlgroup, radio:</legend>
+                        <input type="radio" name="radio-choice-h-7" id="radio-choice-h-7a" value="on" checked="checked">
+                        <label for="radio-choice-h-7a">One</label>
+                        <input type="radio" name="radio-choice-h-7" id="radio-choice-h-7b" value="off">
+                        <label for="radio-choice-h-7b">Two</label>
+                        <input type="radio" name="radio-choice-h-7" id="radio-choice-h-7c" value="other">
+                        <label for="radio-choice-h-7c">Three</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+
+            <div data-demo-html="true">
+                <div class="ui-field-contain ui-hide-label">
+                    <label for="submit-7">Send:</label>
+                    <button type="submit" id="submit-7" class="ui-shadow ui-btn ui-corner-all ui-mini">Submit</button>
+                </div>
+            </div><!--/demo-html -->
+
+        </form>
+
+	</div><!-- /content -->
+	    <div data-role="panel" class="jqm-navmenu-panel" data-position="left" data-display="overlay" data-theme="a">
+	    	<ul class="jqm-list ui-alt-icon ui-nodisc-icon">
+<li data-filtertext="demos homepage" data-icon="home"><a href=".././">Home</a></li>
+<li data-filtertext="introduction overview getting started"><a href="../intro/" data-ajax="false">Introduction</a></li>
+<li data-filtertext="buttons button markup buttonmarkup method anchor link button element"><a href="../button-markup/" data-ajax="false">Buttons</a></li>
+<li data-filtertext="form button widget input button submit reset"><a href="../button/" data-ajax="false">Button widget</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+		    Checkboxradio widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="form checkboxradio widget checkbox input checkboxes controlgroups"><a href="../checkboxradio-checkbox/" data-ajax="false">Checkboxes</a></li>
+			<li data-filtertext="form checkboxradio widget radio input radio buttons controlgroups"><a href="../checkboxradio-radio/" data-ajax="false">Radio buttons</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Collapsible (set) widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="collapsibles content formatting"><a href="../collapsible/" data-ajax="false">Collapsible</a></li>
+			<li data-filtertext="dynamic collapsible set accordion append expand"><a href="../collapsible-dynamic/" data-ajax="false">Dynamic collapsibles</a></li>
+			<li data-filtertext="accordions collapsible set widget content formatting grouped collapsibles"><a href="../collapsibleset/" data-ajax="false">Collapsible set</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Controlgroup widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="controlgroups selectmenu checkboxradio input grouped buttons horizontal vertical"><a href="../controlgroup/" data-ajax="false">Controlgroup</a></li>
+			<li data-filtertext="dynamic controlgroup dynamically add buttons"><a href="../controlgroup-dynamic/" data-ajax="false">Dynamic controlgroups</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="form datepicker widget date input"><a href="../datepicker/" data-ajax="false">Datepicker</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Events<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="swipe to delete list items listviews swipe events"><a href="../swipe-list/" data-ajax="false">Swipe list items</a></li>
+			<li data-filtertext="swipe to navigate swipe page navigation swipe events"><a href="../swipe-page/" data-ajax="false">Swipe page navigation</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="filterable filter elements sorting searching listview table"><a href="../filterable/" data-ajax="false">Filterable widget</a></li>
+<li data-filtertext="form flipswitch widget flip toggle switch binary select checkbox input"><a href="../flipswitch/" data-ajax="false">Flipswitch widget</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Forms<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="../forms/" data-ajax="false">Forms</a></li>
+			<li data-filtertext="form hide labels hidden accessible ui-hidden-accessible forms"><a href="../forms-label-hidden-accessible/" data-ajax="false">Hide labels</a></li>
+			<li data-filtertext="form field containers fieldcontain ui-field-contain forms"><a href="../forms-field-contain/" data-ajax="false">Field containers</a></li>
+			<li data-filtertext="forms disabled form elements"><a href="../forms-disabled/" data-ajax="false">Forms disabled</a></li>
+			<li data-filtertext="forms gallery examples overview forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="../forms-gallery/" data-ajax="false">Forms gallery</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Grids<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="grids columns blocks content formatting rwd responsive css framework"><a href="../grids/" data-ajax="false">Grids</a></li>
+			<li data-filtertext="buttons in grids css framework"><a href="../grids-buttons/" data-ajax="false">Buttons in grids</a></li>
+			<li data-filtertext="custom responsive grids rwd css framework"><a href="../grids-custom-responsive/" data-ajax="false">Custom responsive grids</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="blocks content formatting sections heading"><a href="../body-bar-classes/" data-ajax="false">Grouping and dividing content</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Icons<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="button icons svg disc alt custom icon position"><a href="../icons/" data-ajax="false">Icons</a></li>
+			<li data-filtertext=""><a href="../icons-grunticon/" data-ajax="false">Grunticon loader</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Listview widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="listview widget thumbnails icons nested split button collapsible ul ol"><a href="../listview/" data-ajax="false">Listview</a></li>
+			<li data-filtertext="autocomplete filterable reveal listview filtertextbeforefilter placeholder"><a href="../listview-autocomplete/" data-ajax="false">Listview autocomplete</a></li>
+			<li data-filtertext="autocomplete filterable reveal listview remote data filtertextbeforefilter placeholder"><a href="../listview-autocomplete-remote/" data-ajax="false">Listview autocomplete remote data</a></li>
+			<li data-filtertext="autodividers anchor jump scroll linkbars listview lists ul ol"><a href="../listview-autodividers-linkbar/" data-ajax="false">Listview autodividers linkbar</a></li>
+			<li data-filtertext="listview autodividers selector autodividersselector lists ul ol"><a href="../listview-autodividers-selector/" data-ajax="false">Listview autodividers selector</a></li>
+			<li data-filtertext="listview nested list items"><a href="../listview-nested-lists/" data-ajax="false">Nested Listviews</a></li>
+			<li data-filtertext="listview collapsible list items flat"><a href="../listview-collapsible-item-flat/" data-ajax="false">Listview collapsible list items (flat)</a></li>
+			<li data-filtertext="listview collapsible list indented"><a href="../listview-collapsible-item-indented/" data-ajax="false">Listview collapsible list items (indented)</a></li>
+			<li data-filtertext="grid listview responsive grids responsive listviews lists ul"><a href="../listview-grid/" data-ajax="false">Listview responsive grid</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="loader widget page loading navigation overlay spinner"><a href="../loader/" data-ajax="false">Loader widget</a></li>
+<li data-filtertext="navbar widget navmenu toolbars header footer"><a href="../navbar/" data-ajax="false">Navbar widget</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Navigation<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="ajax navigation navigate widget history event method"><a href="../navigation/" data-ajax="false">Navigation</a></li>
+			<li data-filtertext="linking pages page links navigation ajax prefetch cache"><a href="../navigation-linking-pages/" data-ajax="false">Linking pages</a></li>
+			<!-- <li data-filtertext="php redirect server redirection server-side navigation"><a href="../navigation-php-redirect/" data-ajax="false">PHP redirect demo</a></li>-->
+			<li data-filtertext="navigation redirection hash query"><a href="../navigation-hash-processing/" data-ajax="false">Hash processing demo</a></li>
+			<li data-filtertext="navigation redirection hash query"><a href="../page-events/" data-ajax="false">Page Navigation Events</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Pages<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="pages page widget ajax navigation"><a href="../pages/" data-ajax="false">Pages</a></li>
+			<li data-filtertext="single page"><a href="../pages-single-page/" data-ajax="false">Single page</a></li>
+			<li data-filtertext="multipage multi-page page"><a href="../pages-multi-page/" data-ajax="false">Multi-page template</a></li>
+			<li data-filtertext="dialog page widget modal popup"><a href="../pages-dialog/" data-ajax="false">Dialog page</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Panel widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="panel widget sliding panels reveal push overlay responsive"><a href="../panel/" data-ajax="false">Panel</a></li>
+			<li data-filtertext=""><a href="../panel-external/" data-ajax="false">External panels</a></li>
+			<li data-filtertext="panel "><a href="../panel-fixed/" data-ajax="false">Fixed panels</a></li>
+			<li data-filtertext="panel slide panels sliding panels shadow rwd responsive breakpoint"><a href="../panel-responsive/" data-ajax="false">Panels responsive</a></li>
+			<li data-filtertext="panel custom style custom panel width reveal shadow listview panel styling page background wrapper"><a href="../panel-styling/" data-ajax="false">Custom panel style</a></li>
+			<li data-filtertext="panel open on swipe"><a href="../panel-swipe-open/" data-ajax="false">Panel open on swipe</a></li>
+			<li data-filtertext="panels outside page internal external toolbars"><a href="../panel-external-internal/" data-ajax="false">Panel external and internal</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Popup widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="popup widget popups dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="../popup/" data-ajax="false">Popup</a></li>
+			<li data-filtertext="popup alignment position"><a href="../popup-alignment/" data-ajax="false">Popup alignment</a></li>
+			<li data-filtertext="popup arrow size popups popover"><a href="../popup-arrow-size/" data-ajax="false">Popup arrow size</a></li>
+			<li data-filtertext="dynamic popups popup images lightbox"><a href="../popup-dynamic/" data-ajax="false">Dynamic popups</a></li>
+			<li data-filtertext="popups with iframes scaling"><a href="../popup-iframe/" data-ajax="false">Popups with iframes</a></li>
+			<li data-filtertext="popup image scaling"><a href="../popup-image-scaling/" data-ajax="false">Popup image scaling</a></li>
+			<li data-filtertext="external popup outside multi-page"><a href="../popup-outside-multipage/" data-ajax="false">Popup outside multi-page</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="form rangeslider widget dual sliders dual handle sliders range input"><a href="../rangeslider/" data-ajax="false">Rangeslider widget</a></li>
+<li data-filtertext="responsive web design rwd adaptive progressive enhancement PE accessible mobile breakpoints media query media queries"><a href="../rwd/" data-ajax="false">Responsive Web Design</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Selectmenu widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="form selectmenu widget select input custom select menu selects"><a href="../selectmenu/" data-ajax="false">Selectmenu</a></li>
+			<li data-filtertext="form custom select menu selectmenu widget custom menu option optgroup multiple selects"><a href="../selectmenu-custom/" data-ajax="false">Custom select menu</a></li>
+			<li data-filtertext="filterable select filter popup dialog"><a href="../selectmenu-custom-filter/" data-ajax="false">Custom select menu with filter</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Slider widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="form slider widget range input single sliders"><a href="../slider/" data-ajax="false">Slider</a></li>
+			<li data-filtertext="form slider widget flipswitch slider binary select flip toggle switch"><a href="../slider-flipswitch/" data-ajax="false">Slider flip toggle switch</a></li>
+			<li data-filtertext="form slider tooltip handle value input range sliders"><a href="../slider-tooltip/" data-ajax="false">Slider tooltip</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Table widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="table widget reflow column toggle th td responsive tables rwd hide show tabular"><a href="../table-column-toggle/" data-ajax="false">Table Column Toggle</a></li>
+			<li data-filtertext="table column toggle phone comparison demo"><a href="../table-column-toggle-example/" data-ajax="false">Table Column Toggle demo</a></li>
+			<li data-filtertext="responsive tables table column toggle heading groups rwd breakpoint"><a href="../table-column-toggle-heading-groups/" data-ajax="false">Table Column Toggle heading groups</a></li>
+			<li data-filtertext="responsive tables table column toggle hide rwd breakpoint customization options"><a href="../table-column-toggle-options/" data-ajax="false">Table Column Toggle options</a></li>
+			<li data-filtertext="table reflow th td responsive rwd columns tabular"><a href="../table-reflow/" data-ajax="false">Table Reflow</a></li>
+			<li data-filtertext="responsive tables table reflow heading groups rwd breakpoint"><a href="../table-reflow-heading-groups/" data-ajax="false">Table Reflow heading groups</a></li>
+			<li data-filtertext="responsive tables table reflow stripes strokes table style"><a href="../table-reflow-stripes-strokes/" data-ajax="false">Table Reflow stripes and strokes</a></li>
+			<li data-filtertext="responsive tables table reflow stack custom styles"><a href="../table-reflow-styling/" data-ajax="false">Table Reflow custom styles</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="ui tabs widget"><a href="../tabs/" data-ajax="false">Tabs widget</a></li>
+<li data-filtertext="form textinput widget text input textarea number date time tel email file color password"><a href="../textinput/" data-ajax="false">Textinput widget</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Theming<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="default theme swatches theming style css"><a href="../theme-default/" data-ajax="false">Default theme</a></li>
+			<li data-filtertext="classic theme old theme swatches theming style css"><a href="../theme-classic/" data-ajax="false">Classic theme</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Toolbar widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="toolbar widget header footer toolbars fixed fullscreen external sections"><a href="../toolbar/" data-ajax="false">Toolbar</a></li>
+			<li data-filtertext="dynamic toolbars dynamically add toolbar header footer"><a href="../toolbar-dynamic/" data-ajax="false">Dynamic toolbars</a></li>
+			<li data-filtertext="external toolbars header footer"><a href="../toolbar-external/" data-ajax="false">External toolbars</a></li>
+			<li data-filtertext="fixed toolbars header footer"><a href="../toolbar-fixed/" data-ajax="false">Fixed toolbars</a></li>
+			<li data-filtertext="fixed fullscreen toolbars header footer"><a href="../toolbar-fixed-fullscreen/" data-ajax="false">Fullscreen toolbars</a></li>
+			<li data-filtertext="external fixed toolbars header footer"><a href="../toolbar-fixed-external/" data-ajax="false">Fixed external toolbars</a></li>
+			<li data-filtertext="external persistent toolbars header footer navbar navmenu"><a href="../toolbar-fixed-persistent/" data-ajax="false">Persistent toolbars</a></li>
+			<li data-filtertext="external ajax optimized toolbars persistent toolbars header footer navbar"><a href="../toolbar-fixed-persistent-optimized/" data-ajax="false">Ajax optimized toolbars</a></li>
+			<li data-filtertext="form in toolbars header footer"><a href="../toolbar-fixed-forms/" data-ajax="false">Form in toolbar</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="page transitions animated pages popup navigation flip slide fade pop"><a href="../transitions/" data-ajax="false">Transitions</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			3rd party API demos<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="backbone requirejs navigation router"><a href="../backbone-requirejs/" data-ajax="false">Backbone RequireJS</a></li>
+			<li data-filtertext="google maps geolocation demo"><a href="../map-geolocation/" data-ajax="false">Google Maps geolocation</a></li>
+			<li data-filtertext="google maps hybrid"><a href="../map-list-toggle/" data-ajax="false">Google Maps list toggle</a></li>
+		</ul>
+	</div>
+</li>
+
+
+
+		     </ul>
+		</div><!-- /panel -->
+
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<p>Copyright 2014 The jQuery Foundation</p>
+	</div><!-- /footer -->
+	<!-- TODO: This should become an external panel so we can add input to markup (unique ID) -->
+    <div data-role="panel" class="jqm-search-panel" data-position="right" data-display="overlay" data-theme="a">
+		<div class="jqm-search">
+			<ul class="jqm-list" data-filter-placeholder="Search demos..." data-filter-reveal="true">
+<li data-filtertext="demos homepage" data-icon="home"><a href=".././">Home</a></li>
+<li data-filtertext="introduction overview getting started"><a href="../intro/" data-ajax="false">Introduction</a></li>
+<li data-filtertext="buttons button markup buttonmarkup method anchor link button element"><a href="../button-markup/" data-ajax="false">Buttons</a></li>
+<li data-filtertext="form button widget input button submit reset"><a href="../button/" data-ajax="false">Button widget</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+		    Checkboxradio widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="form checkboxradio widget checkbox input checkboxes controlgroups"><a href="../checkboxradio-checkbox/" data-ajax="false">Checkboxes</a></li>
+			<li data-filtertext="form checkboxradio widget radio input radio buttons controlgroups"><a href="../checkboxradio-radio/" data-ajax="false">Radio buttons</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Collapsible (set) widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="collapsibles content formatting"><a href="../collapsible/" data-ajax="false">Collapsible</a></li>
+			<li data-filtertext="dynamic collapsible set accordion append expand"><a href="../collapsible-dynamic/" data-ajax="false">Dynamic collapsibles</a></li>
+			<li data-filtertext="accordions collapsible set widget content formatting grouped collapsibles"><a href="../collapsibleset/" data-ajax="false">Collapsible set</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Controlgroup widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="controlgroups selectmenu checkboxradio input grouped buttons horizontal vertical"><a href="../controlgroup/" data-ajax="false">Controlgroup</a></li>
+			<li data-filtertext="dynamic controlgroup dynamically add buttons"><a href="../controlgroup-dynamic/" data-ajax="false">Dynamic controlgroups</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="form datepicker widget date input"><a href="../datepicker/" data-ajax="false">Datepicker</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Events<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="swipe to delete list items listviews swipe events"><a href="../swipe-list/" data-ajax="false">Swipe list items</a></li>
+			<li data-filtertext="swipe to navigate swipe page navigation swipe events"><a href="../swipe-page/" data-ajax="false">Swipe page navigation</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="filterable filter elements sorting searching listview table"><a href="../filterable/" data-ajax="false">Filterable widget</a></li>
+<li data-filtertext="form flipswitch widget flip toggle switch binary select checkbox input"><a href="../flipswitch/" data-ajax="false">Flipswitch widget</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Forms<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="../forms/" data-ajax="false">Forms</a></li>
+			<li data-filtertext="form hide labels hidden accessible ui-hidden-accessible forms"><a href="../forms-label-hidden-accessible/" data-ajax="false">Hide labels</a></li>
+			<li data-filtertext="form field containers fieldcontain ui-field-contain forms"><a href="../forms-field-contain/" data-ajax="false">Field containers</a></li>
+			<li data-filtertext="forms disabled form elements"><a href="../forms-disabled/" data-ajax="false">Forms disabled</a></li>
+			<li data-filtertext="forms gallery examples overview forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="../forms-gallery/" data-ajax="false">Forms gallery</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Grids<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="grids columns blocks content formatting rwd responsive css framework"><a href="../grids/" data-ajax="false">Grids</a></li>
+			<li data-filtertext="buttons in grids css framework"><a href="../grids-buttons/" data-ajax="false">Buttons in grids</a></li>
+			<li data-filtertext="custom responsive grids rwd css framework"><a href="../grids-custom-responsive/" data-ajax="false">Custom responsive grids</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="blocks content formatting sections heading"><a href="../body-bar-classes/" data-ajax="false">Grouping and dividing content</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Icons<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="button icons svg disc alt custom icon position"><a href="../icons/" data-ajax="false">Icons</a></li>
+			<li data-filtertext=""><a href="../icons-grunticon/" data-ajax="false">Grunticon loader</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Listview widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="listview widget thumbnails icons nested split button collapsible ul ol"><a href="../listview/" data-ajax="false">Listview</a></li>
+			<li data-filtertext="autocomplete filterable reveal listview filtertextbeforefilter placeholder"><a href="../listview-autocomplete/" data-ajax="false">Listview autocomplete</a></li>
+			<li data-filtertext="autocomplete filterable reveal listview remote data filtertextbeforefilter placeholder"><a href="../listview-autocomplete-remote/" data-ajax="false">Listview autocomplete remote data</a></li>
+			<li data-filtertext="autodividers anchor jump scroll linkbars listview lists ul ol"><a href="../listview-autodividers-linkbar/" data-ajax="false">Listview autodividers linkbar</a></li>
+			<li data-filtertext="listview autodividers selector autodividersselector lists ul ol"><a href="../listview-autodividers-selector/" data-ajax="false">Listview autodividers selector</a></li>
+			<li data-filtertext="listview nested list items"><a href="../listview-nested-lists/" data-ajax="false">Nested Listviews</a></li>
+			<li data-filtertext="listview collapsible list items flat"><a href="../listview-collapsible-item-flat/" data-ajax="false">Listview collapsible list items (flat)</a></li>
+			<li data-filtertext="listview collapsible list indented"><a href="../listview-collapsible-item-indented/" data-ajax="false">Listview collapsible list items (indented)</a></li>
+			<li data-filtertext="grid listview responsive grids responsive listviews lists ul"><a href="../listview-grid/" data-ajax="false">Listview responsive grid</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="loader widget page loading navigation overlay spinner"><a href="../loader/" data-ajax="false">Loader widget</a></li>
+<li data-filtertext="navbar widget navmenu toolbars header footer"><a href="../navbar/" data-ajax="false">Navbar widget</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Navigation<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="ajax navigation navigate widget history event method"><a href="../navigation/" data-ajax="false">Navigation</a></li>
+			<li data-filtertext="linking pages page links navigation ajax prefetch cache"><a href="../navigation-linking-pages/" data-ajax="false">Linking pages</a></li>
+			<!-- <li data-filtertext="php redirect server redirection server-side navigation"><a href="../navigation-php-redirect/" data-ajax="false">PHP redirect demo</a></li>-->
+			<li data-filtertext="navigation redirection hash query"><a href="../navigation-hash-processing/" data-ajax="false">Hash processing demo</a></li>
+			<li data-filtertext="navigation redirection hash query"><a href="../page-events/" data-ajax="false">Page Navigation Events</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Pages<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="pages page widget ajax navigation"><a href="../pages/" data-ajax="false">Pages</a></li>
+			<li data-filtertext="single page"><a href="../pages-single-page/" data-ajax="false">Single page</a></li>
+			<li data-filtertext="multipage multi-page page"><a href="../pages-multi-page/" data-ajax="false">Multi-page template</a></li>
+			<li data-filtertext="dialog page widget modal popup"><a href="../pages-dialog/" data-ajax="false">Dialog page</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Panel widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="panel widget sliding panels reveal push overlay responsive"><a href="../panel/" data-ajax="false">Panel</a></li>
+			<li data-filtertext=""><a href="../panel-external/" data-ajax="false">External panels</a></li>
+			<li data-filtertext="panel "><a href="../panel-fixed/" data-ajax="false">Fixed panels</a></li>
+			<li data-filtertext="panel slide panels sliding panels shadow rwd responsive breakpoint"><a href="../panel-responsive/" data-ajax="false">Panels responsive</a></li>
+			<li data-filtertext="panel custom style custom panel width reveal shadow listview panel styling page background wrapper"><a href="../panel-styling/" data-ajax="false">Custom panel style</a></li>
+			<li data-filtertext="panel open on swipe"><a href="../panel-swipe-open/" data-ajax="false">Panel open on swipe</a></li>
+			<li data-filtertext="panels outside page internal external toolbars"><a href="../panel-external-internal/" data-ajax="false">Panel external and internal</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Popup widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="popup widget popups dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="../popup/" data-ajax="false">Popup</a></li>
+			<li data-filtertext="popup alignment position"><a href="../popup-alignment/" data-ajax="false">Popup alignment</a></li>
+			<li data-filtertext="popup arrow size popups popover"><a href="../popup-arrow-size/" data-ajax="false">Popup arrow size</a></li>
+			<li data-filtertext="dynamic popups popup images lightbox"><a href="../popup-dynamic/" data-ajax="false">Dynamic popups</a></li>
+			<li data-filtertext="popups with iframes scaling"><a href="../popup-iframe/" data-ajax="false">Popups with iframes</a></li>
+			<li data-filtertext="popup image scaling"><a href="../popup-image-scaling/" data-ajax="false">Popup image scaling</a></li>
+			<li data-filtertext="external popup outside multi-page"><a href="../popup-outside-multipage/" data-ajax="false">Popup outside multi-page</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="form rangeslider widget dual sliders dual handle sliders range input"><a href="../rangeslider/" data-ajax="false">Rangeslider widget</a></li>
+<li data-filtertext="responsive web design rwd adaptive progressive enhancement PE accessible mobile breakpoints media query media queries"><a href="../rwd/" data-ajax="false">Responsive Web Design</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Selectmenu widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="form selectmenu widget select input custom select menu selects"><a href="../selectmenu/" data-ajax="false">Selectmenu</a></li>
+			<li data-filtertext="form custom select menu selectmenu widget custom menu option optgroup multiple selects"><a href="../selectmenu-custom/" data-ajax="false">Custom select menu</a></li>
+			<li data-filtertext="filterable select filter popup dialog"><a href="../selectmenu-custom-filter/" data-ajax="false">Custom select menu with filter</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Slider widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="form slider widget range input single sliders"><a href="../slider/" data-ajax="false">Slider</a></li>
+			<li data-filtertext="form slider widget flipswitch slider binary select flip toggle switch"><a href="../slider-flipswitch/" data-ajax="false">Slider flip toggle switch</a></li>
+			<li data-filtertext="form slider tooltip handle value input range sliders"><a href="../slider-tooltip/" data-ajax="false">Slider tooltip</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Table widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="table widget reflow column toggle th td responsive tables rwd hide show tabular"><a href="../table-column-toggle/" data-ajax="false">Table Column Toggle</a></li>
+			<li data-filtertext="table column toggle phone comparison demo"><a href="../table-column-toggle-example/" data-ajax="false">Table Column Toggle demo</a></li>
+			<li data-filtertext="responsive tables table column toggle heading groups rwd breakpoint"><a href="../table-column-toggle-heading-groups/" data-ajax="false">Table Column Toggle heading groups</a></li>
+			<li data-filtertext="responsive tables table column toggle hide rwd breakpoint customization options"><a href="../table-column-toggle-options/" data-ajax="false">Table Column Toggle options</a></li>
+			<li data-filtertext="table reflow th td responsive rwd columns tabular"><a href="../table-reflow/" data-ajax="false">Table Reflow</a></li>
+			<li data-filtertext="responsive tables table reflow heading groups rwd breakpoint"><a href="../table-reflow-heading-groups/" data-ajax="false">Table Reflow heading groups</a></li>
+			<li data-filtertext="responsive tables table reflow stripes strokes table style"><a href="../table-reflow-stripes-strokes/" data-ajax="false">Table Reflow stripes and strokes</a></li>
+			<li data-filtertext="responsive tables table reflow stack custom styles"><a href="../table-reflow-styling/" data-ajax="false">Table Reflow custom styles</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="ui tabs widget"><a href="../tabs/" data-ajax="false">Tabs widget</a></li>
+<li data-filtertext="form textinput widget text input textarea number date time tel email file color password"><a href="../textinput/" data-ajax="false">Textinput widget</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Theming<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="default theme swatches theming style css"><a href="../theme-default/" data-ajax="false">Default theme</a></li>
+			<li data-filtertext="classic theme old theme swatches theming style css"><a href="../theme-classic/" data-ajax="false">Classic theme</a></li>
+		</ul>
+	</div>
+</li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			Toolbar widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="toolbar widget header footer toolbars fixed fullscreen external sections"><a href="../toolbar/" data-ajax="false">Toolbar</a></li>
+			<li data-filtertext="dynamic toolbars dynamically add toolbar header footer"><a href="../toolbar-dynamic/" data-ajax="false">Dynamic toolbars</a></li>
+			<li data-filtertext="external toolbars header footer"><a href="../toolbar-external/" data-ajax="false">External toolbars</a></li>
+			<li data-filtertext="fixed toolbars header footer"><a href="../toolbar-fixed/" data-ajax="false">Fixed toolbars</a></li>
+			<li data-filtertext="fixed fullscreen toolbars header footer"><a href="../toolbar-fixed-fullscreen/" data-ajax="false">Fullscreen toolbars</a></li>
+			<li data-filtertext="external fixed toolbars header footer"><a href="../toolbar-fixed-external/" data-ajax="false">Fixed external toolbars</a></li>
+			<li data-filtertext="external persistent toolbars header footer navbar navmenu"><a href="../toolbar-fixed-persistent/" data-ajax="false">Persistent toolbars</a></li>
+			<li data-filtertext="external ajax optimized toolbars persistent toolbars header footer navbar"><a href="../toolbar-fixed-persistent-optimized/" data-ajax="false">Ajax optimized toolbars</a></li>
+			<li data-filtertext="form in toolbars header footer"><a href="../toolbar-fixed-forms/" data-ajax="false">Form in toolbar</a></li>
+		</ul>
+	</div>
+</li>
+<li data-filtertext="page transitions animated pages popup navigation flip slide fade pop"><a href="../transitions/" data-ajax="false">Transitions</a></li>
+<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
+			3rd party API demos<span class="ui-collapsible-heading-status"> click to expand contents</span>
+		</a>
+	</h3>
+	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+		<ul>
+			<li data-filtertext="backbone requirejs navigation router"><a href="../backbone-requirejs/" data-ajax="false">Backbone RequireJS</a></li>
+			<li data-filtertext="google maps geolocation demo"><a href="../map-geolocation/" data-ajax="false">Google Maps geolocation</a></li>
+			<li data-filtertext="google maps hybrid"><a href="../map-list-toggle/" data-ajax="false">Google Maps list toggle</a></li>
+		</ul>
+	</div>
+</li>
+
+
+
+			</ul>
+		</div>
+	</div><!-- /panel -->
+
+
+</div><!-- /page -->
+
+</body>
+</html>

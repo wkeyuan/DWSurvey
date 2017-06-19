@@ -1,0 +1,17 @@
+label.error {
+	color: #C40000;
+/* 	font-weight: bold; */
+	background: transparent url(images/error.png) no-repeat scroll 0px -1px;
+	padding-left: 18px;
+	/* font: 12px Arial,Helvetica,sans-serif; */
+	font-size:12px;
+	line-height: 1.62;
+	margin-left: 5px;
+}
+
+label.checked {
+	background: transparent url(images/checked.gif) no-repeat scroll 0 0;
+}
+.errorItem{
+	padding-top: 3px;
+}

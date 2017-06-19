@@ -1,0 +1,304 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 13px;
+/* 	line-height: 1.7em; */
+	background-color: #e9e6e6;
+	background-repeat: repeat-x;
+	background-position: top;
+}
+
+a,a:link,a:visited {
+	color: #3d8e7d;
+	color: #4C4C4C;
+	font-weight: normal;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #67ACC2;
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
+}
+
+img {
+	border: none;
+}
+
+blockquote {
+	font-style: italic;
+	margin: 0 0 0 10px;
+}
+
+cite {
+	font-weight: bold;
+	color: #3d8e7d;
+}
+
+cite span {
+	color: #3d8e7d;
+}
+
+em {
+	color: #3d8e7d;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	color: #000;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 34px;
+	margin: 0 0 20px;
+	padding: 5px 0px;
+}
+
+h2 {
+	font-size: 28px;
+	margin: 0 0 15px;
+	padding: 5px 0px;
+}
+
+h3 {
+	font-size: 24px;
+	margin: 0 0 15px;
+	padding: 0px;
+}
+
+h4 {
+	font-size: 18px;
+	margin: 0 0 15px;
+	padding: 0px;
+}
+
+h5 {
+	font-size: 16px;
+	margin: 0 0 10px;
+	padding: 0px;
+}
+
+h6 {
+	font-size: 14px;
+	margin: 0 0 5px;
+	padding: 0px;
+}
+
+.cleaner {
+	clear: both;
+}
+
+.h10 {
+	height: 10px;
+}
+
+.h20 {
+	height: 20px;
+}
+
+.h30 {
+	height: 30px;
+}
+
+.h40 {
+	height: 40px;
+}
+
+.h50 {
+	height: 50px;
+}
+
+.h60 {
+	height: 60px;
+}
+
+#body_wrapper {
+	width: 100%;
+	/* background: url(../images/body.png) top center no-repeat; */
+}
+
+.wrapper {
+	/* width: 940px; */
+	width:1000px;
+	padding: 0 10px;
+	margin: 0 auto;
+	/* background: url(../images/body.png) top center no-repeat; */
+}
+#header {
+	/* width: 940px; */
+	width:1000px;
+	height: 50px;
+	padding-top: 5px;
+}
+#header a:hover{
+	/* text-decoration: none; */
+}
+
+#site_title {
+	float: left;
+}
+
+#site_title h1 {
+	margin: 0;
+	padding: 0;
+}
+
+#site_title h1 a {
+	display: block;
+	width: 120px;
+	height: 45px;
+	color: #fff;
+	text-indent: -10000px;
+	background: url(../images/logo/logo.png) no-repeat top left;
+}
+
+#search_box {
+	float: right;
+	margin-top: 20px;
+	/* width: 240px; */
+	height: 24px;
+}
+
+#search_box form {
+	clear: both;
+	width: 240px;
+	height: 24px;
+	padding: 0;
+	margin: 0;
+}
+
+#searchfield {
+	display: block;
+	height: 24px;
+	width: 228px;
+	padding: 0 5px;
+	font-size: 12px;
+	color: #333;
+	background: none;
+	border: 1px solid #ccc;
+}
+
+/* menu */
+#menu {
+	clear: both;
+	/* width: 940px; */
+	width:1000px;
+	height: 50px;
+	background: url(../images/menu.png);
+	margin-top: 10px;
+}
+#menu ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#menu ul li {
+	padding: 0;
+	margin: 0;
+	display: inline;
+}
+
+#menu ul li a {
+	float: left;
+	display: block;
+	width: 130px;
+	height: 30px;
+	padding: 10px 0 0 0;
+	font-size: 14px;
+	color: #67acc2;
+	text-shadow: 1px 1px 1px #fff;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 700;
+	outline: none;
+	border: none;
+	letter-spacing: 1px;
+	background: url(../images/menu_divider.png) right repeat-y;
+}
+#menu ul li a:hover,#menu ul li a.currentNav {
+	color: #666;
+	text-shadow: 1px 1px 1px #fff;
+}
+
+#menu ul .last {
+	background: none;
+}
+.siteTitleNode{
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 65px;
+	margin-left: 20px;
+}
+
+/* end of menu */
+#footer_wrapper {
+	clear: both;
+	width: 100%;
+	/* background: #EDEBEB; */
+	padding-top:15px;
+	background: none;
+}
+
+#footer {
+	clear: both;
+	padding: 10px 0;
+	color: #000;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.footer_menu a{
+	color: #333;
+	text-decoration: none;
+}
+.footer_menu a:HOVER{
+	text-decoration: underline;
+}
+
+/** ºóÌ¨²Ëµ¥  **/
+#menuAdmin{
+	clear: both;
+	width: 100%;
+	height: 36px;
+	background: #459935;
+	/* background: #F59797; */
+	background-color: #65C9E6;
+}
+#menuAdmin ul {
+	/* width: 940px; */
+	width:1000px;
+	padding: 0px 10px;
+	margin: 0px auto;
+	list-style: none;
+}
+#menuAdmin ul li{
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+}
+#menuAdmin ul li a {
+	float: left;
+	display: block;
+	width:120px;
+	margin-left:2px;
+	padding: 8px 0px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	letter-spacing: 1px;
+}
+#menuAdmin ul li a:hover,#menuAdmin ul li a.currentAdmin{
+	background: #37712b;
+	background: #61BCD7;
+}

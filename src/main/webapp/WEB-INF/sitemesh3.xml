@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+ 	<mapping path="/*" decorator="/WEB-INF/page/layouts/default.jsp"/>
+ 	<mapping path="/design/my-survey-design*" exclue="true"/>
+ 	<mapping path="/survey!*" exclue="true"/>
+ 	<mapping path="/survey.*" exclue="true"/>
+ 	
+ 	<mapping path="/response*" exclue="true"/>
+ 	<!-- <mapping path="/da/my-survey-answer!responseAnswer.action" exclue="true"/> -->
+</sitemesh>
