@@ -7,7 +7,7 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 ## 演示地址
 
-[http://www.diaowen.com](http://www.diaowen.com)
+[http://www.diaowen.net](http://www.diaowen.net)
 
 用户名：service@diaowen  密码: 123456
 
