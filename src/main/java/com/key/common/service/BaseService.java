@@ -9,6 +9,13 @@ import com.key.common.base.entity.IdEntity;
 import com.key.common.plugs.page.Page;
 import com.key.common.plugs.page.PropertyFilter;
 
+/**
+ * 业务基类接口
+ * @author keyuan(keyuan258@gmail.com)
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://dwsurvey.net
+ */
 public interface BaseService<T extends IdEntity,ID extends Serializable> {
 	
 	public void setBaseDao();

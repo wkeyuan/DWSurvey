@@ -82,7 +82,7 @@ public class NotifyMessageProducer {
 		map.put("username", mail.getUsername());
 		map.put("content", mail.getContent());*/
 		map.put("subject", "柯远");
-		map.put("to", "912114781@qq.com");
+		map.put("to", "xx");
 		map.put("date", "2013-03-20");
 		map.put("username", "keyuan");
 		map.put("content", "activmq测试邮件");

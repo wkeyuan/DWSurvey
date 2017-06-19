@@ -11,6 +11,13 @@ import com.key.common.dao.BaseDao;
 import com.key.common.plugs.page.Page;
 import com.key.common.plugs.page.PropertyFilter;
 
+/**
+ * 业务基类
+ * @author keyuan(keyuan258@gmail.com)
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://dwsurvey.net
+ */
 @Transactional
 public abstract class BaseServiceImpl<T extends IdEntity, ID extends Serializable>
 		implements BaseService<T, ID> {

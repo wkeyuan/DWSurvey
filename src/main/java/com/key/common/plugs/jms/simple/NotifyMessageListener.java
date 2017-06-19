@@ -40,7 +40,7 @@ public class NotifyMessageListener implements MessageListener {
 			String content=mapMessage.getObject("content").toString();*/
 			
 			String subject= "柯远";
-			String to="912114781@qq.com";
+			String to="xx";
 			String date="2013-03-20";
 			String username="keyuan";
 			String content="activmq测试邮件";
