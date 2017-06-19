@@ -2,6 +2,9 @@
 
 DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
 
+![DWSurveyDesign](http://diaowenwebfile.oss-cn-shenzhen.aliyuncs.com/images/gif/dwsurvey-1.gif)
+
+
 ## 演示地址
 
 [http://www.diaowen.com](http://www.diaowen.com)
@@ -20,7 +23,7 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 配置文件地址
 
-conf/application.properties
+	conf/application.properties
 
 	#database settings
 	jdbc.url=jdbc:mysql://localhost:3306/diaowen?useUnicode=true&characterEncoding=utf8
@@ -39,7 +42,7 @@ conf/application.properties
 
 ### 全新体验、流程简单
 
-![pic](/resources/install/dwsurvey-git-1.png)
+![pic](http://diaowenwebfile.oss-cn-shenzhen.aliyuncs.com/images/gif/newUi.png)
 
 以一种全新的设计体验，告别繁琐的设计流程，通过简单有趣的方式，轻轻松松完成问卷设计，多种问卷样式模板选择，只为显现更精美的表单问卷.
 
@@ -57,7 +60,7 @@ conf/application.properties
 
 对于调问网问卷系统安装及使用的问题，可以在用户交流群里，向作者或其它同学提问。
 
-```调问网交流QQ群：198635495 ```
+调问网交流QQ群：198635495
 
 ## 开源协议
 
@@ -76,8 +79,6 @@ DWSurvey以宽通用公共许可证LGPL3.0为开源协议，更好的支持商�
 ## 作者
 
  柯远 ```keyuan258@gmail.com```
-
- ![pic](/resources/install/FF270C289E5AC672250B797A913AEE47.png)
 
 ### 谢谢您的支持
 
