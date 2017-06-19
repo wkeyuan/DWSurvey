@@ -1,4 +1,4 @@
-# DWSurvey 调问问卷系统
+# DWSurvey 调问表单问卷系统
 
 DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
 
