@@ -2,7 +2,7 @@
 
 DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
 
-![DWSurveyDesign](http://diaowenwebfile.oss-cn-shenzhen.aliyuncs.com/images/gif/dwsurvey-1.gif)
+![DWSurveyDesign](http://file.diaowen.net/images/gif/dwsurvey-2.gif)
 
 
 ## 演示地址
