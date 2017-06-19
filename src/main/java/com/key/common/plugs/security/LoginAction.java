@@ -33,7 +33,6 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Namespace("/")
 @Results({
-	@Result(name = "index", location = "index.jsp", type = "redirect"),
 	@Result(name = "login", location = "login.jsp", type = "redirect")
 	})
 @AllowedMethods({"login","logout"})
@@ -98,7 +97,7 @@ public class LoginAction extends ActionSupport {
 			SecurityUtils.getSubject().logout();
 		}
 		Struts2Utils.getSession().invalidate();
-		return "index";
+		return "login";
 	}
 	/* 给某个锁定的账号开锁,管理员使用 */
 	
