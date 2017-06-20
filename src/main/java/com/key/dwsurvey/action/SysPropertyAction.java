@@ -6,11 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.itextpdf.text.log.SysoCounter;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Namespaces;
 import org.apache.struts2.convention.annotation.Result;
@@ -43,7 +46,7 @@ public class SysPropertyAction extends ActionSupport{
 		String fileName="site.properties";
 		System.out.println("site.properties："+fileName);
 		ServletContext sc = Struts2Utils.getSession().getServletContext();
-		String filePath = "/WEB-INF/classes/conf/site/".replaceAll("/", File.separator);
+		String filePath = "/WEB-INF/classes/conf/site/".replaceAll("\\/", File.separator);
 		String fileRealPath = sc.getRealPath("/")+filePath+fileName;
 		
 		File file=new File(fileRealPath);
@@ -159,5 +162,6 @@ public class SysPropertyAction extends ActionSupport{
 		}
 		
 	}
+
 
 }
