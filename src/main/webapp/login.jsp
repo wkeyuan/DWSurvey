@@ -125,14 +125,14 @@ label.error{
 								<div class="frmItem">
 									<label for="" class="frm_label">邮箱</label>
 									<div class="frm_controls">
-										<input id="username" type="text" class="frm-controlM" name="username" value="<shiro:principal></shiro:principal>" >
+										<input id="username" type="text" class="frm-controlM" name="username" value="" >
 										<span class="frm_desc">用来登录调问网，接收到激活邮件才能完成注册</span>
 									</div>
 								</div>
 								<div class="frmItem">
 									<label for="" class="frm_label">密码</label>
 									<div class="frm_controls">
-										<input type="password"  name="password" id="passwordInput"  class="frm-controlM" >
+										<input type="password"  name="password" id="passwordInput"  class="frm-controlM" value="" >
 										<span class="frm_desc">字母、数字或者英文符号，最短6位，区分大小写</span>
 									</div>
 								</div>
