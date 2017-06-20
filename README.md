@@ -64,6 +64,12 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 调问网交流QQ群：635994795
 
+## 源代码发布
+
+    github: https://github.com/wkeyuan/DWSurvey
+
+    oschina: http://git.oschina.net/wkeyuan/DWSurvey
+
 ## 开源协议
 
 DWSurvey以宽通用公共许可证LGPL3.0为开源协议，更好的支持商业使用环境！
