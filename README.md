@@ -66,9 +66,9 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 ## 源代码发布
 
-    github: https://github.com/wkeyuan/DWSurvey
+github: https://github.com/wkeyuan/DWSurvey
 
-    oschina: http://git.oschina.net/wkeyuan/DWSurvey
+oschina: http://git.oschina.net/wkeyuan/DWSurvey
 
 ## 开源协议
 
