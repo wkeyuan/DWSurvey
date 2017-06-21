@@ -3,6 +3,7 @@ package com.key.common.base.action;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.key.common.utils.web.Struts2Utils;
 import com.octo.captcha.service.image.ImageCaptchaService;
 import com.opensymphony.xwork2.ActionSupport;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+//import com.sun.image.codec.jpeg.JPEGCodec;
+//import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 @Namespaces({ @Namespace("/") })
 public class JcaptchaAction extends ActionSupport {
@@ -26,6 +27,7 @@ public class JcaptchaAction extends ActionSupport {
 	public String execute() throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		HttpServletResponse response = Struts2Utils.getResponse();
+        ByteArrayOutputStream out = null;
         byte[] captchaChallengeAsJpeg = null;  
         // the output stream to render the captcha image as jpeg into  
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  
@@ -36,9 +38,14 @@ public class JcaptchaAction extends ActionSupport {
             String captchaId = request.getSession().getId();  
             // call the ImageCaptchaService getChallenge method  
             BufferedImage challenge = imageCaptchaService.getImageChallengeForID(captchaId, request.getLocale());
-            // a jpeg encoder  
-            JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);  
-            jpegEncoder.encode(challenge);
+            // a jpeg encoder
+/*** jdk1.7之后默认不支持了 **/
+//            JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
+//            jpegEncoder.encode(challenge);
+
+//            换成新版图片api
+            ImageIO.write(challenge, "jpg", jpegOutputStream);
+
         } catch (Exception e) {  
             // TODO Auto-generated catch block  
             e.printStackTrace();  
