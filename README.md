@@ -21,11 +21,19 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 	由于引用的外部jar在你本地maven仓库中可能没有，这时只要您本地有maven环境，执行下bin目录下面的文件就可以自动导入。
 
+## 环境配置说明
+
+    lib目录下的几个jar包可能是您中央仓库没有，所以运行时如果提示找不到相关jar
+
+    就请到bin目录下去执行jar导入命命，安装中央仓库缺失jar
+
+    可直接执行 install-lose-jar.sh
+
 ### 配置说明
 
 配置文件地址
 
-	conf/application.properties
+conf/application.properties
 
 	#database settings
 	jdbc.url=jdbc:mysql://localhost:3306/diaowen?useUnicode=true&characterEncoding=utf8
