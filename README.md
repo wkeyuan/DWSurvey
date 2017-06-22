@@ -9,7 +9,7 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 [http://www.diaowen.net](http://www.diaowen.net)
 
-用户名：service@diaowen.net  密码: 123456
+    用户名：service@diaowen.net  密码: 123456
 
 ## 安装
 
@@ -27,9 +27,11 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
     就请到bin目录下去执行jar导入命命，安装中央仓库缺失jar
 
-    可直接执行 install-lose-jar.sh
+    可直接执行 install-lose-jar.sh/install-lose-jar.bat
 
-### 配置说明
+### 配置说明、数据初始化
+
+先在您mysql中创建一个名为diaowen的数据库，然后导入/src/main/resources/conf/sql/目录下的dwsurvey.sql数据库脚本文件
 
 配置文件地址
 
@@ -98,4 +100,4 @@ DWSurvey以宽通用公共许可证LGPL3.0为开源协议，更好的支持商�
 
 ### 谢谢您的支持
 
- 觉得不错就点下右上角的star吧，随时关注我们的动态，非常感谢！
+ 觉得不错就点下右上角的star，随时关注我们的动态，非常感谢！
