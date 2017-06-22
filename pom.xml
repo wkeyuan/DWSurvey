@@ -6,7 +6,7 @@
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>diaowen Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/wkeyuan/DWSurvey</url>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -238,11 +238,11 @@
 		    <version>${org.springframework.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jms -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-jms</artifactId>
-    <version>${org.springframework.version}</version>
-</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
 		
 	    <dependency>
 		    <groupId>org.springframework</groupId>
@@ -560,6 +560,9 @@
 				  <include>**/*.dat</include>
 			  </includes>
 			  <filtering>false</filtering>
+		  </resource>
+		  <resource>
+			  <directory>src/main/resources</directory>
 		  </resource>
 	  </resources>
   </build>
