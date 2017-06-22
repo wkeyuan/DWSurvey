@@ -287,30 +287,30 @@
 		    <version>${org.springframework.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-jdbc</artifactId>
-    <version>${org.springframework.version}</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-web</artifactId>
-    <version>${org.springframework.version}</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-orm</artifactId>
-    <version>${org.springframework.version}</version>
-</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
-<dependency>
-    <groupId>cglib</groupId>
-    <artifactId>cglib-nodep</artifactId>
-    <version>2.2.2</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2.2</version>
+		</dependency>
 
 		
         <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
@@ -414,11 +414,11 @@
 	  </dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-api</artifactId>
-    <version>2.7</version>
-</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.7</version>
+		</dependency>
 		
         
          <!--utils-->
@@ -501,35 +501,35 @@
 	   </dependency>
 	   
 	   <!-- https://mvnrepository.com/artifact/antlr/antlr -->
-<dependency>
-    <groupId>antlr</groupId>
-    <artifactId>antlr</artifactId>
-    <version>2.7.7</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.antlr/antlr-runtime -->
-<dependency>
-    <groupId>org.antlr</groupId>
-    <artifactId>antlr-runtime</artifactId>
-    <version>3.0.1</version>
-</dependency>
-	   
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.antlr/antlr-runtime -->
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr-runtime</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
 	   <!-- local lib -->
 		<dependency>
   			<groupId>net.qrcode</groupId>
   			<artifactId>qrcode</artifactId>
   			<version>1.0</version>
-    </dependency>
-	<dependency>
-  			<groupId>net.xssprotect</groupId>
-  			<artifactId>xssprotest</artifactId>
-  			<version>1.0</version>
-    </dependency>
+		</dependency>
+		<dependency>
+				<groupId>net.xssprotect</groupId>
+				<artifactId>xssprotest</artifactId>
+				<version>1.0</version>
+		</dependency>
     
-    <dependency>
-  <groupId>net.spssw</groupId>
-  <artifactId>spssw</artifactId>
-  <version>1.66</version>
-    </dependency>
+		<dependency>
+	  		<groupId>net.spssw</groupId>
+	  		<artifactId>spssw</artifactId>
+	  		<version>1.66</version>
+		</dependency>
 
   </dependencies>
   <build>
