@@ -124,8 +124,13 @@ public class SurveyAction extends ActionSupport{
 	    	HttpServletResponse response=Struts2Utils.getResponse();
 	    	
 	    	String down=request.getParameter("down");
-	    	
-	    	String encoderContent="http://www.diaowen.net/survey!answerSurveryMobile.action?surveyId="+surveyId;
+
+			String baseUrl = "";
+			baseUrl = request.getScheme() +"://" + request.getServerName()
+					+ (request.getServerPort() == 80 ? "" : ":" +request.getServerPort())
+					+ request.getContextPath();
+
+	    	String encoderContent=baseUrl+"/survey!answerSurveryMobile.action?surveyId="+surveyId;
 //	    	String encoderContent="http://192.168.0.101:8080/survey!answerSurveryMobile.action?surveyId="+surveyId;
 	    	System.out.println(encoderContent);
 	    	ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  

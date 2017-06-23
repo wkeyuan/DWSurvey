@@ -46,9 +46,8 @@ public class SysPropertyAction extends ActionSupport{
 		String fileName="site.properties";
 		System.out.println("site.properties："+fileName);
 		ServletContext sc = Struts2Utils.getSession().getServletContext();
-		String filePath = "/WEB-INF/classes/conf/site/".replaceAll("\\/", File.separator);
+		String filePath = "/WEB-INF/classes/conf/site/".replace("/", File.separator);
 		String fileRealPath = sc.getRealPath("/")+filePath+fileName;
-		
 		File file=new File(fileRealPath);
 		InputStreamReader fr = new InputStreamReader(new FileInputStream(file),"UTF-8");
 		
@@ -97,7 +96,7 @@ public class SysPropertyAction extends ActionSupport{
 //		sysProperty.setAdminTelephone(adminTelephone);
 //		sysProperty.setIcpCode(icpCode);
 		
-		String siteFilePath = "/WEB-INF/classes/conf/site/site.properties".replaceAll("/", File.separator);
+		String siteFilePath = "/WEB-INF/classes/conf/site/site.properties".replace("/", File.separator);
 
 		StringBuffer siteData=new StringBuffer();
 		siteData.append("\r\nadminEmail=").append(adminEmail);
@@ -110,7 +109,7 @@ public class SysPropertyAction extends ActionSupport{
 		
 		//写LOGO DATA文件
 		String headerData="<a href=\"${ctx }\"><img alt=\"\" src=\"${ctx }/images/logo/LOGO.png\" align=\"middle\" height=\"46\" ><span class=\"titleTempSpan\">OSS</span></a> ";
-		String headerDataPath="/WEB-INF/page/layouts/logo-img.jsp".replaceAll("/", File.separator);
+		String headerDataPath="/WEB-INF/page/layouts/logo-img.jsp".replace("/", File.separator);
 		writeData(headerDataPath, headerData);
 		
 		if(adminTelephone!=null && adminEmail!=null){
@@ -118,17 +117,17 @@ public class SysPropertyAction extends ActionSupport{
 			String footer1="<div class=\"dw_footcopy\" style=\"font-size: 16px;color: gray;\"><p style=\"margin-bottom: 6px;\">"
 	    	+"邮箱："+adminEmail+"&nbsp;&nbsp;&nbsp;电话："+adminTelephone+"&nbsp;&nbsp;&nbsp;"
 	    	+"<a href=\"/\" style=\"color: gray;font-size: 16px;\">"+icpCode+"</a></p></div>";
-			String footerPath="/WEB-INF/page/layouts/footer-1.jsp".replaceAll("/", File.separator);
+			String footerPath="/WEB-INF/page/layouts/footer-1.jsp".replace("/", File.separator);
 			writeData(footerPath, footer1);
 			
 			String adminInfo="<div style=\"color: gray;\"><h3 style=\"line-height: 40px;\">联系信息</h3><p style=\"line-height: 40px;\">邮箱："+adminEmail+"</p><p style=\"line-height: 40px;\">电话："+adminTelephone+"</p><p style=\"line-height: 40px;\">"+icpCode+"</p></div>";
-			String adminInfoPath="/WEB-INF/page/layouts/admin-info.jsp".replaceAll("/", File.separator);
+			String adminInfoPath="/WEB-INF/page/layouts/admin-info.jsp".replace("/", File.separator);
 			writeData(adminInfoPath, adminInfo);
 		}
 		
 		if(loginBgImg!=null){
 			String loginbgimg="<div class=\"m-logbg\"><img src=\"${ctx }"+loginBgImg+"\" style=\"margin-top:0px; margin-left: 0px; opacity: 1;\" width=\"100%\" ></div>";
-			String loginbgimgPath="/WEB-INF/page/layouts/loginbgimg.jsp".replaceAll("/", File.separator);
+			String loginbgimgPath="/WEB-INF/page/layouts/loginbgimg.jsp".replace("/", File.separator);
 			writeData(loginbgimgPath, loginbgimg);
 		}
 		
@@ -136,23 +135,23 @@ public class SysPropertyAction extends ActionSupport{
 	}
 	
 	
-	private void writeData(String filePath,String data){
+	private void writeData(String filePath,String data) {
 		OutputStreamWriter fw = null;
-		try{
+		try {
 			ServletContext sc = Struts2Utils.getSession().getServletContext();
-			String fileRealPath = sc.getRealPath("/")+filePath;
-			File file=new File(fileRealPath);
+			String fileRealPath = sc.getRealPath("/") + filePath;
+			File file = new File(fileRealPath);
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			System.out.println("生成indexSurvey.JSP："+fileRealPath);
-		    fw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
-		    fw.write("<%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\" %>");
+			System.out.println("生成indexSurvey.JSP：" + fileRealPath);
+			fw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+			fw.write("<%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\" %>");
 			fw.write(data);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-			if(fw!=null){
+		} finally {
+			if (fw != null) {
 				try {
 					fw.close();
 				} catch (IOException e) {
@@ -160,7 +159,7 @@ public class SysPropertyAction extends ActionSupport{
 				}
 			}
 		}
-		
+
 	}
 
 
