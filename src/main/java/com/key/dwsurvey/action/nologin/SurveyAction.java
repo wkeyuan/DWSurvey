@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,8 +28,8 @@ import com.key.dwsurvey.entity.SurveyStyle;
 import com.key.dwsurvey.service.QuestionManager;
 import com.key.dwsurvey.service.SurveyAnswerManager;
 import com.opensymphony.xwork2.ActionSupport;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+//import com.sun.image.codec.jpeg.JPEGCodec;
+//import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * 问卷 action
@@ -129,9 +130,11 @@ public class SurveyAction extends ActionSupport{
 	    	System.out.println(encoderContent);
 	    	ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  
 	    	BufferedImage twoDimensionImg = new TwoDimensionCode().qRCodeCommon(encoderContent, "jpg", 7);
-	    	JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);  
-	        jpegEncoder.encode(twoDimensionImg);
-	        
+//	    	JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
+//	        jpegEncoder.encode(twoDimensionImg);
+
+			ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);
+
 	        if(down==null){
 		    	response.setHeader("Cache-Control", "no-store");
 		        response.setHeader("Pragma", "no-cache");
