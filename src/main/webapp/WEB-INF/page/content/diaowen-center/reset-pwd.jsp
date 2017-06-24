@@ -23,13 +23,14 @@
 	
 $(document).ready(function(){
 	var inputFormValidate=$("#input_form").validate({
-		rules: {
-			email: {required: true, email: true, maxlength: 60},
+		rules:{
+			curpwd:{required:true},
+			pwd:{required:true,minlength:6,maxlength:20},
+			pwd1:{required:true,equalTo:"#pwd"}
 		},
 		messages: {
-			email: {
-				email: "格式不正确！",
-				remote: "邮箱已存在"
+			pwd1:{
+				equalTo: "前后密码不一致！"
 			}
 		},
 		errorPlacement: function(error, element) {
@@ -38,7 +39,6 @@ $(document).ready(function(){
 			//	$(element).css("borderColor","#C40000");
 		}
 	});
-
 });
 
 	
@@ -69,33 +69,28 @@ $(document).ready(function(){
 				
 				<div class="surveyCollectMiddleContent">
 					<div style="padding: 25px 45px;overflow: auto;padding-top: 35px;">
-							<div style="border-bottom: 1px solid #DFDFDF;padding: 5px;color: #666565;">账号信息</div>
+
+							<div style="font-size: 18px;color: red;padding-bottom: 12px;">提醒：请一定要记住修改后的密码，不然您将无法进入调问问卷系统。</div>
+
+							<div style="border-bottom: 1px solid #DFDFDF;padding: 5px;color: #666565;">修改密码</div>
 							<div style="padding: 5px;color:#666565; ">
-								<form id="input_form" action="${ctx }/ic/user!save.action" method="post" >
+								<form id="input_form" action="${ctx }/ic/user!updatePwd.action" method="post" >
 								<table class="ac-form-table">
 									<tr>
-										<td width="80" align="right">账号</td>
-										<td class="ac-input-td"><input type="text" name="loginName" value="${user.loginName }" readonly="readonly"  style="background: rgb(240, 240, 240);" > </td>
+										<td width="80" align="right">原密码</td>
+										<td class="ac-input-td"><input type="password" name="curpwd" value="${user.name }"> </td>
 									</tr>
 									<tr>
-										<td width="80" align="right">邮箱</td>
-										<td class="ac-input-td"><input type="text" id="email" name="email" value="${user.email }"> </td>
+										<td width="80" align="right">新密码</td>
+										<td class="ac-input-td"><input type="password" id="pwd" name="pwd" value="${user.name }"> </td>
 									</tr>
 									<tr>
-										<td width="80" align="right">手机号</td>
-										<td class="ac-input-td"><input type="text" name="cellphone" value="${user.cellphone }"> </td>
-									</tr>
-									<tr>
-										<td width="80" align="right">姓名</td>
-										<td class="ac-input-td"><input type="text" name="name" value="${user.name }"> </td>
-									</tr>
-									<tr>
-										<td width="80" align="right">密码</td>
-										<td class="ac-input-td"><a href="${ctx}/ic/user!pwd.action" >修改密码</a> </td>
+										<td width="80" align="right">确认密码</td>
+										<td class="ac-input-td"><input type="password" id="pwd1" name="pwd1" value="${user.name }"> </td>
 									</tr>
 									<tr>
 										<td></td>
-										<td class="ac-input-td"> <button type="submit" class="sbtn25 sbtn25_1" > 保存修改 </button></td>
+										<td class="ac-input-td"> <button type="submit" class="sbtn25 sbtn25_1" > 更新密码 </button></td>
 									</tr>
 								</table>
 								</form>

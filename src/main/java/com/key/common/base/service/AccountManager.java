@@ -77,7 +77,20 @@ public class AccountManager {
 		}
 		userDao.save(user);
 	}
-	
+
+	@Transactional
+	public void updatePwd(String curpwd, String newPwd) {
+		User user = getCurUser();
+		if(user!=null){
+			//判断是否有重复用户
+			String curShaPassword = DigestUtils.sha1Hex(curpwd);
+			if(user.getShaPassword().equals(curShaPassword)){
+				String shaPassword = DigestUtils.sha1Hex(newPwd);
+				user.setShaPassword(shaPassword);
+				userDao.save(user);
+			}
+		}
+	}
 	/*public User getByUid(String userSource,String uid){
 		Criterion cri1=Restrictions.eq("thirdSource", userSource);
 		Criterion cri2=Restrictions.eq("thirdUid", uid);
@@ -182,5 +195,6 @@ public class AccountManager {
 		}
 		return null;
 	}
+
 
 }

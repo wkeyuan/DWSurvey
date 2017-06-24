@@ -1413,7 +1413,7 @@ body{
 .ac-input-td{
 	padding-left: 30px! important;
 }
-.ac-input-td input[type='text']{
+.ac-input-td input[type='text'],.ac-input-td input[type='password']{
 	padding: 8px 8px;
 	-moz-border-radius: 2px;
 	-khtml-border-radius: 2px;

@@ -22,14 +22,13 @@ import com.opensymphony.xwork2.ActionSupport;
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
 @Results({
 	@Result(name=UserAction.MYACCOUNT,location="/WEB-INF/page/content/diaowen-center/my-account.jsp",type=Struts2Utils.DISPATCHER),
-		@Result(name="editPwd",location="/WEB-INF/page/content/diaowen-center/resetpwd.jsp",type=Struts2Utils.DISPATCHER),
+		@Result(name="editPwd",location="/WEB-INF/page/content/diaowen-center/reset-pwd.jsp",type=Struts2Utils.DISPATCHER),
 		@Result(name=UserAction.SUCCESS,location="user!myaccount.action",type=Struts2Utils.REDIRECT)
 })
-@AllowedMethods({"myaccount","editpwd"})
+@AllowedMethods({"myaccount","pwd","updatePwd"})
 public class UserAction extends ActionSupport{
 	
 	public final static String MYACCOUNT="myaccount";
-
 	@Autowired
 	private AccountManager accountManager;
 	
@@ -41,9 +40,18 @@ public class UserAction extends ActionSupport{
 	}
 
 
-	public String editpwd() throws Exception {
+	public String pwd() throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		return "editPwd";
+	}
+
+	public String updatePwd() throws Exception {
+		HttpServletRequest request = Struts2Utils.getRequest();
+		String curpwd=request.getParameter("curpwd");
+		String newPwd = request.getParameter("pwd");
+		//先检查原密码是否正确
+		accountManager.updatePwd(curpwd,newPwd);
+		return SUCCESS;
 	}
 
 	public String save() throws Exception {
@@ -58,7 +66,5 @@ public class UserAction extends ActionSupport{
 		accountManager.saveUp(user);
 		return SUCCESS;
 	}
-
-
 
 }
