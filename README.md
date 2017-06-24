@@ -78,7 +78,7 @@ conf/application.properties
 
 github: https://github.com/wkeyuan/DWSurvey
 
-oschina: http://git.oschina.net/wkeyuan/DWSurvey
+oschina: http://gitee.com/wkeyuan/DWSurvey
 
 ## 开源协议
 

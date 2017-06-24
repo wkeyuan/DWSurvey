@@ -7,6 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${ctx }/js/plugs/jquery-ui-1.10.3.custom/css/mycss/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
 <title>我的账号</title>
+	<style type="text/css>">
+		.pwdTd{
+			display: none;
+		}
+	</style>
 <script type="text/javascript">
 	
 $(document).ready(function(){
@@ -63,7 +68,7 @@ $(document).ready(function(){
 									</tr>
 									<tr>
 										<td width="80" align="right">密码</td>
-										<td class="ac-input-td"><a href="">修改密码</a> </td>
+										<td class="ac-input-td"><a href="${ctx}" >修改密码</a> </td>
 									</tr>
 									<tr>
 										<td></td>

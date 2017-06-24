@@ -22,9 +22,10 @@ import com.opensymphony.xwork2.ActionSupport;
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
 @Results({
 	@Result(name=UserAction.MYACCOUNT,location="/WEB-INF/page/content/diaowen-center/my-account.jsp",type=Struts2Utils.DISPATCHER),
+		@Result(name="editPwd",location="/WEB-INF/page/content/diaowen-center/resetpwd.jsp",type=Struts2Utils.DISPATCHER),
 		@Result(name=UserAction.SUCCESS,location="user!myaccount.action",type=Struts2Utils.REDIRECT)
 })
-@AllowedMethods({"myaccount"})
+@AllowedMethods({"myaccount","editpwd"})
 public class UserAction extends ActionSupport{
 	
 	public final static String MYACCOUNT="myaccount";
@@ -39,6 +40,11 @@ public class UserAction extends ActionSupport{
 		return MYACCOUNT;
 	}
 
+
+	public String editpwd() throws Exception {
+		HttpServletRequest request = Struts2Utils.getRequest();
+		return "editPwd";
+	}
 
 	public String save() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
