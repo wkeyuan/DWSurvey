@@ -21,13 +21,14 @@ import com.opensymphony.xwork2.ActionSupport;
 @Namespace("/ic")
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
 @Results({
-	@Result(name=UserAction.MYACCOUNT,location="/WEB-INF/page/content/diaowen-center/my-account.jsp",type=Struts2Utils.DISPATCHER)
+	@Result(name=UserAction.MYACCOUNT,location="/WEB-INF/page/content/diaowen-center/my-account.jsp",type=Struts2Utils.DISPATCHER),
+		@Result(name=UserAction.SUCCESS,location="user!myaccount.action",type=Struts2Utils.REDIRECT)
 })
 @AllowedMethods({"myaccount"})
 public class UserAction extends ActionSupport{
 	
 	public final static String MYACCOUNT="myaccount";
-	
+
 	@Autowired
 	private AccountManager accountManager;
 	
@@ -37,6 +38,21 @@ public class UserAction extends ActionSupport{
 		request.setAttribute("user", user);
 		return MYACCOUNT;
 	}
-	
-	
+
+
+	public String save() throws Exception {
+		HttpServletRequest request=Struts2Utils.getRequest();
+		User user=accountManager.getCurUser();
+		String email = request.getParameter("email");
+		String cellphone = request.getParameter("cellphone");
+		String name = request.getParameter("name");
+		user.setEmail(email);
+		user.setCellphone(cellphone);
+		user.setName(name);
+		accountManager.saveUp(user);
+		return SUCCESS;
+	}
+
+
+
 }

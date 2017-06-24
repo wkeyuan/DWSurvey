@@ -43,22 +43,23 @@ $(document).ready(function(){
 					<div style="padding: 25px 45px;overflow: auto;padding-top: 35px;">
 							<div style="border-bottom: 1px solid #DFDFDF;padding: 5px;color: #666565;">账号信息</div>
 							<div style="padding: 5px;color:#666565; ">
+								<form action="${ctx }/ic/user!save.action" method="post" >
 								<table class="ac-form-table">
 									<tr>
 										<td width="80" align="right">账号</td>
-										<td class="ac-input-td"><input type="text" value="${user.loginName }" readonly="readonly" style="background: rgb(240, 240, 240);"> </td>
+										<td class="ac-input-td"><input type="text" name="loginName" value="${user.loginName }" readonly="readonly"  style="background: rgb(240, 240, 240);" > </td>
 									</tr>
 									<tr>
 										<td width="80" align="right">邮箱</td>
-										<td class="ac-input-td"><input type="text" value="${user.email }"> </td>
+										<td class="ac-input-td"><input type="text" name="email" value="${user.email }"> </td>
 									</tr>
 									<tr>
 										<td width="80" align="right">手机号</td>
-										<td class="ac-input-td"><input type="text" value="${user.cellphone }"> </td>
+										<td class="ac-input-td"><input type="text" name="cellphone" value="${user.cellphone }"> </td>
 									</tr>
 									<tr>
 										<td width="80" align="right">姓名</td>
-										<td class="ac-input-td"><input type="text" value="${user.name }"> </td>
+										<td class="ac-input-td"><input type="text" name="name" value="${user.name }"> </td>
 									</tr>
 									<tr>
 										<td width="80" align="right">密码</td>
@@ -66,9 +67,10 @@ $(document).ready(function(){
 									</tr>
 									<tr>
 										<td></td>
-										<td class="ac-input-td"> <a href="" class="sbtn25 sbtn25_1" > 保存修改 </a></td>
+										<td class="ac-input-td"> <button type="submit" class="sbtn25 sbtn25_1" > 保存修改 </button></td>
 									</tr>
 								</table>
+								</form>
 							</div>
 
 					</div>
