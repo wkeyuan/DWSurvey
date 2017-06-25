@@ -138,6 +138,7 @@
 									</span>
 									<span class="scmcSurveyLinkRight"><span id="clipLinkSpan" style="display: none;">复制成功</span></span>
 									<a href="#" style="display: block;" class="clipLink" id="clipLink" data-clipboard-text="${baseUrl }/wenjuan/${survey.sid }.html">复制链接</a>
+									<a target="_blank" href="${baseUrl }/wenjuan/${survey.sid }.html" style="margin-left: 12px;background: rgb(130, 144, 154);width: 110px;height: 50px;text-align: center;border-radius: 3px;color: #ffffff;" >打开</a>
 								</div>
 							</div>
 						</div>
