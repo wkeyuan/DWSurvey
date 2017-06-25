@@ -28,7 +28,7 @@ function binduploadImg(tImageId,fileQueueid,hiddenpath,buttonText){
 				//alert("成功"+ctx+ datatemp.location);
 		  //处理回显
 		 // var datatemp={"success":"true","filename":"Tulips.jpg  ","location":"/file/images/8o70tffwwhbhzjv.jpg"};
-			// alert(data);
+			alert(data);
 		  var datatemp=eval("("+data+")");
 		  if(datatemp.success=="true"){
 			var themeParam=$("#"+tImageId).parents(".theme_param");
@@ -48,6 +48,11 @@ function binduploadImg(tImageId,fileQueueid,hiddenpath,buttonText){
 				$("#dwSurveyLogo").find("img").attr("src",prevHost+ datatemp.location);
 				$("#dwSurveyLogo").show();
 				$("#dwSurveyTitle").removeClass("noLogoImg");
+			}else if(tImageId=="loginBgfile"){
+				//alert(prevHost+ datatemp.location);
+				$("#loginBgImgSrc").attr("src",prevHost+ datatemp.location);
+				$("#loginBgImgSrc").show();
+				$("#loginBgfileImgPath").val(datatemp.location);
 			}
 			themeParam.find(".upUseImgCheck").prop("checked",true);
 		  }else{
