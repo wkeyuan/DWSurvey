@@ -36,7 +36,7 @@
 					<%-- <li><a href="${ctx }/" >首页</a></li> --%>
 					<li><a href="${ctx }/design/my-survey.action">问卷</a></li>
 					<li><a href="${ctx }/sy/system/sys-property!input.action">设置</a></li>
-					<li><a href="http://docs.diaowen.net/">帮助</a></li>
+					<li><a href="http://support.diaowen.net/">帮助</a></li>
 					</ul>
 				</div>
 				<div class="header_Item header_user" style="float: right;margin-top: 12px;position: relative;zoom: 1;z-index: 165;">

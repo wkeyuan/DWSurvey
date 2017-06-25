@@ -31,24 +31,30 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 ### 配置说明、数据初始化
 
-先在您mysql中创建一个名为diaowen的数据库，然后导入/src/main/resources/conf/sql/目录下的dwsurvey.sql数据库脚本文件
+    先在您mysql导入/src/main/resources/conf/sql/目录下的dwsurvey.sql数据库脚本文件
 
 配置文件地址
 
-conf/application.properties
+    conf/application.properties
 
 	#database settings
 	jdbc.url=jdbc:mysql://localhost:3306/diaowen?useUnicode=true&characterEncoding=utf8
 	jdbc.username=root
 	jdbc.password=123456,.
 
-分别修改```jdbc.url、jdbc.username、jdbc.password```
+    分别修改```jdbc.url、jdbc.username、jdbc.password```
 
 ### 启动访问
 
 配置完成后，启动服务在浏览器中输入如```localhost:8080/dwsurvey```相应的地址看到登录页面，表示已经安装成功。
 
-如下图
+### war包下载
+
+如果不想自己编译可以直接使用我们已经编译好的war包安装
+
+最新的war包下载可以前往交流QQ群：635994795
+
+下载成功后，解压按前面说明配置数据库连接信息即可
 
 ## 特色
 
@@ -78,7 +84,7 @@ conf/application.properties
 
 github: https://github.com/wkeyuan/DWSurvey
 
-oschina: http://gitee.com/wkeyuan/DWSurvey
+gitee: http://gitee.com/wkeyuan/DWSurvey
 
 ## 开源协议
 

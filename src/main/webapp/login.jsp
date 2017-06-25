@@ -226,10 +226,6 @@ $("a").attr("hidefocus",true);
 <script type="text/javascript">
 
 $(document).ready(function(){
-
-	 if(url!=""){
-	    window.location=url;
-	 }
 	 
 	 var top=$(window).height()/2-320/2;
 	 var left=$(window).width()/2-550/2;
