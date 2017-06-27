@@ -1246,46 +1246,55 @@ label.error{
 					</c:when>
 					
 					<c:when test="${en.quType eq 'FILLBLANK' }">
-					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
-						<div class="surveyQuItemBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" class="quType" value="FILLBLANK">
-								<input type="hidden" class="quId" value="${en.id }">
-								<input type="hidden" class="orderById" value="${en.orderById }"/>
-								<input type="hidden" class="isRequired" value="${en.isRequired }">
-								<input type="hidden" class="answerTag" value="0" >
-								<div class="quLogicInputCase">
-									<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
-									<div class="quLogicItem quLogicItem_${logicSts.count }">
-										<input type="hidden" class="cgQuItemId" value="${quLogicEn.cgQuItemId }"/>
-										<input type="hidden" class="skQuId" value="${quLogicEn.skQuId }"/>
-										<input type="hidden" class="logicId" value="${quLogicEn.id }"/>
-										<input type="hidden" class="logicType" value="${quLogicEn.logicType }"/>
-									</div>
-									</c:forEach>
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">${i.count }、</div>
-										<div class="editAble quCoTitleEdit" >${en.quTitle}</div>
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<div class="quFillblankItem">
-												<input type="text" name="qu_${en.quType }_${en.id }" style="width:200px;padding:5px;" class="inputSytle_1 fillblankInput">
-												<div class="dwComEditMenuBtn" ></div>
+						<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
+							<div class="surveyQuItemBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" class="quType" value="FILLBLANK">
+									<input type="hidden" class="quId" value="${en.id }">
+									<input type="hidden" class="orderById" value="${en.orderById }"/>
+									<input type="hidden" class="isRequired" value="${en.isRequired }">
+									<input type="hidden" class="checkType" value="${en.checkType }">
+									<input type="hidden" class="answerTag" value="0" >
+									<div class="quLogicInputCase">
+										<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
+											<div class="quLogicItem quLogicItem_${logicSts.count }">
+												<input type="hidden" class="cgQuItemId" value="${quLogicEn.cgQuItemId }"/>
+												<input type="hidden" class="skQuId" value="${quLogicEn.skQuId }"/>
+												<input type="hidden" class="logicId" value="${quLogicEn.id }"/>
+												<input type="hidden" class="logicType" value="${quLogicEn.logicType }"/>
 											</div>
-										</li>
-									</ul>
+										</c:forEach>
 									</div>
 								</div>
-								
+								<div class="surveyQuItem">
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">${i.count }、</div>
+											<div class="editAble quCoTitleEdit" >${en.quTitle}</div>
+										</div>
+										<div class="quCoItem"><ul>
+											<li class="quCoItemUlLi">
+												<div class="quFillblankItem">
+														<%-- <input type="text" name="qu_${en.quType }_${en.id }" style="width:200px;padding:5px;" class="inputSytle_1 fillblankInput"> --%>
+													<c:choose>
+														<c:when test="${en.answerInputRow > 1 }">
+															<textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;"class="inputSytle_2 fillblankInput" ></textarea>
+														</c:when>
+														<c:otherwise>
+															<input type="text" name="qu_${en.quType }_${en.id }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;" class="inputSytle_1 fillblankInput" >
+														</c:otherwise>
+													</c:choose>
+													<div class="dwComEditMenuBtn" ></div>
+												</div>
+											</li>
+										</ul>
+										</div>
+									</div>
+
+								</div>
 							</div>
-					</div>
-					</li>
+						</li>
 					</c:when>
 					
 					<c:when test="${en.quType eq 'SCORE' }">

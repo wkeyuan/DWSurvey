@@ -115,7 +115,7 @@ button {
 										<td align="center">
 											<input type="hidden" name='surveyId' value="${en.id }">
 										</td>
-										<td align="left"><a href="${ctx }/wenjuan/${en.sid }.html" class="titleTag">${en.surveyName }</a></td>
+										<td align="left"><a target="_blank" href="${ctx }/wenjuan/${en.sid }.html" class="titleTag">${en.surveyName }</a></td>
 										<td align="left" width="100" >${en.userName }</td>
 										<td align="left">
 											<fmt:formatDate value="${en.createDate }" pattern="yyyy年MM月dd日 HH:mm"/>
@@ -129,6 +129,7 @@ button {
 											  <a class="btn btn-default" href="${ctx }/design/my-survey-design.action?surveyId=${en.id}" title="设计"data-toggle="tooltip" data-placement="top" ><i class="fa fa-pencil-square-o"></i></a>
 											  <a class="btn btn-default" href="${ctx }/design/my-collect.action?surveyId=${en.id}" title="收集答卷" data-toggle="tooltip" data-placement="top" ><i class="fa fa-comments-o"></i></a>
 											  <a class="btn btn-default" href="${ctx }/da/survey-report!defaultReport.action?surveyId=${en.id}" title="分析报告" data-toggle="tooltip" data-placement="top" ><i class="fa fa-line-chart"></i></a>
+											  <a class="btn btn-default copySurvey" href="#${en.id}" title="复制一份" data-toggle="tooltip" data-placement="top" ><i class="fa fa-files-o"></i></a>
 											  <a class="btn btn-default deleteSurvey" href="${ctx}/design/my-survey!delete.action?id=${en.id}" title="删除问卷" data-toggle="tooltip" data-placement="top" ><i class="fa fa-trash-o fa-fw"></i></a>
 											</div>&nbsp;
 											<div class="btn-group" style="display: none;">
@@ -214,6 +215,59 @@ $(".deleteSurvey").click(function(){
 	return false;
 });
 
+$(".copySurvey").click(function(){
+
+	var surveyId=$(this).parents("tr").find("input[name='surveyId']").val();
+	var titleValue=$(this).parents("tr").find(".titleTag").text();
+	var model_groupId1=$(this).parents("tr").find("input[name='groupId1']").val();
+	var model_groupId2=$(this).parents("tr").find("input[name='groupId2']").val();
+
+	$("body").append("<div id=\"myDialogRoot\"><div class='dialogMessage' style='padding-top:40px;margin-left:20px;padding-bottom:0px;'>"+
+			"<div>复制标题：<input id='surTitleTemp' type='text' style='padding:3px;width:320px;color:rgb(14, 136, 158);' value=''></div></div></div>");
+
+	var myDialog=$( "#myDialogRoot" ).dialog({
+		width:500,
+		height:220,
+		autoOpen: true,
+		modal:true,
+		position:["center","center"],
+		title:"复制问卷、表单",
+		resizable:false,
+		draggable:false,
+		closeOnEscape:false,
+		show: {effect:"blind",direction:"up",duration: 500},
+		hide: {effect:"blind",direction:"left",duration: 200},
+		buttons: {
+			"OK":{
+				text: "确认复制",
+				addClass:'dialogMessageButton dialogBtn1',
+				click: function() {
+					//执行发布
+					var surveyName=$("#surTitleTemp").val();
+					surveyName=optionValue=escape(encodeURIComponent(surveyName));
+
+					var params="surveyName="+surveyName;
+					params+="&fromBankId="+surveyId;
+					window.location.href="${ctx}/design/my-survey-design!copySurvey.action?"+params;
+				}
+			},
+			"CENCEL":{
+				text: "取消",
+				addClass:"dialogBtn1 dialogBtn1Cencel",
+				click: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		},
+		open:function(event,ui){
+			$(".ui-dialog-titlebar-close").hide();
+			$("#surTitleTemp").val(titleValue+"－副本");
+		},
+		close:function(event,ui){
+			$("#myDialogRoot").remove();
+		}
+	});
+});
 
 $("#surveyAdd-a").click(function(){
 	
@@ -246,12 +300,7 @@ $("#surveyAdd-a").click(function(){
 	                var surveyName=$("#surTitleTemp").val();
 	                surveyName=optionValue=escape(encodeURIComponent(surveyName));
 	                
-	                var groupId1=$("#myDialogRoot select[name='model_groupId1']").val();
-	                var groupId2=$("#myDialogRoot select[name='model_groupId2']").val();
 	                var params="surveyName="+surveyName;
-	                params+="&groupId1="+groupId1;
-	                params+="&groupId2="+groupId2;
-	                
 	            	window.location.href="${ctx}/design/my-survey-create!save.action?"+params;
 	            }
 			},

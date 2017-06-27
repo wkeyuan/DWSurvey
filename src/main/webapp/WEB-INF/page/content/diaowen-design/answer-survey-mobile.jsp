@@ -163,7 +163,7 @@ $(document).ready(function(){
 							</div>
 							<div class="surveyQuItem">
 								<div class="surveyQuItemContent">
-								<fieldset data-role="controlgroup" data-type="${en.hv eq 1 ? 'horizontal':'' }">
+								<fieldset data-role="controlgroup" >
 									<legend>
 										<span class="quTitleNum">${i.count }、</span>
 										<span class="quTitleText">${en.quTitle}</span>
@@ -205,7 +205,7 @@ $(document).ready(function(){
 							</div>
 							<div class="surveyQuItem">
 								<div class="surveyQuItemContent">
-								<fieldset data-role="controlgroup"  data-type="${en.hv eq 1 ? 'horizontal':'' }">
+								<fieldset data-role="controlgroup" >
 										<legend>
 											<span class="quTitleNum">${i.count }、</span>
 											<span class="quTitleText">${en.quTitle}</span>

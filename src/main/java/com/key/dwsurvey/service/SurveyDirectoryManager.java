@@ -76,4 +76,7 @@ public interface SurveyDirectoryManager extends BaseService<SurveyDirectory, Str
 	public Page<SurveyDirectory> findModel(Page<SurveyDirectory> page,
 			SurveyDirectory entity);
 
+	public SurveyDirectory createBySurvey(String fromBankId, String surveyName,
+										  String tag);
+
 }

@@ -55,7 +55,7 @@ import com.opensymphony.xwork2.ActionSupport;
 	@Result(name=MySurveyDesignAction.COLLECTSURVEY,location="my-collect.action?surveyId=${surveyId}",type=Struts2Utils.REDIRECT),
 	@Result(name=MySurveyDesignAction.RELOADDESIGN,location="/design/my-survey-design.action?surveyId=${surveyId}",type=Struts2Utils.REDIRECT)
 })
-@AllowedMethods({"previewDev","devSurvey","ajaxSave"})
+@AllowedMethods({"previewDev","devSurvey","ajaxSave","copySurvey"})
 public class MySurveyDesignAction extends ActionSupport{
 	//发布设置
 	protected final static String PREVIEWDEV="previewDev";
@@ -240,6 +240,19 @@ public class MySurveyDesignAction extends ActionSupport{
 		this.surveyId = surveyId;
 	}
 
+	public String copySurvey() throws Exception {
+		//引用问卷
+//		id="402880e541d051000141d0f708ff0004";
+		HttpServletRequest request=Struts2Utils.getRequest();
+		String fromBankId=request.getParameter("fromBankId");
+		String surveyName=request.getParameter("surveyName");
+		surveyName=URLDecoder.decode(surveyName,"utf-8");
+		String tag=request.getParameter("tag");
+		tag="2";
+		SurveyDirectory directory=surveyDirectoryManager.createBySurvey(fromBankId,surveyName,tag);
+		surveyId=directory.getId();
+		return RELOADDESIGN;
+	}
 	
 	private void buildSurveyHtml() throws Exception{
 		HttpServletRequest request=Struts2Utils.getRequest();

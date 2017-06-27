@@ -539,4 +539,31 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 	    return surveys;
 	}
 
+	@Override
+	public SurveyDirectory createBySurvey(String fromBankId, String surveyName,
+										  String tag) {//new
+		SurveyDirectory surveyDirectory = buildCopyObj(fromBankId, surveyName,
+				tag);
+
+		saveUserSurvey(surveyDirectory);
+		String belongId=surveyDirectory.getId();
+		List<Question> questions=questionManager.find(fromBankId, tag);
+		questionManager.saveBySurvey(belongId, 2 , questions);
+		return surveyDirectory;
+	}
+
+	private SurveyDirectory buildCopyObj(String fromBankId, String surveyName,String tag) {
+		SurveyDirectory surveyDirectory=new SurveyDirectory();
+		surveyDirectory.setSurveyName(surveyName);
+		surveyDirectory.setDirType(2);
+		surveyDirectory.setSurveyDetail(new SurveyDetail());
+		SurveyDirectory directory=getSurvey(fromBankId);
+		directory.setExcerptNum(directory.getExcerptNum()+1);
+		super.save(directory);
+		surveyDirectory.setSurveyQuNum(directory.getSurveyQuNum());
+		//surveyDirectory.setSurveyName(directory.getSurveyName());
+		surveyDirectory.getSurveyDetail().setSurveyNote(surveyDirectory.getSurveyDetail().getSurveyNote());
+		return surveyDirectory;
+	}
+
 }
