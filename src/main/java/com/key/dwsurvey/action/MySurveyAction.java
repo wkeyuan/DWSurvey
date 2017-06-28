@@ -41,7 +41,7 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 	@Override
 	public String list() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
-	    page=surveyDirectoryManager.findByUser(page);
+	    page=surveyDirectoryManager.findByUser(page,entity);
 	    return SUCCESS;
 	}
 	
@@ -116,6 +116,10 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 	}
 	
 	public void prepareSurveyState() throws Exception {
+		prepareModel();
+	}
+
+	public void prepareExecute() throws Exception {
 		prepareModel();
 	}
 	

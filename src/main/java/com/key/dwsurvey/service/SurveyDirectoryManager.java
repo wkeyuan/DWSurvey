@@ -63,7 +63,7 @@ public interface SurveyDirectoryManager extends BaseService<SurveyDirectory, Str
 	
 	public void saveAll(SurveyDirectory directory);
 
-	public Page<SurveyDirectory> findByUser(Page<SurveyDirectory> page);
+	public Page<SurveyDirectory> findByUser(Page<SurveyDirectory> page,SurveyDirectory surveyDirectory);
 	
 	public Page<SurveyDirectory> findByGroup(String groupId1,String groupId2,Page<SurveyDirectory> page);
 

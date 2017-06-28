@@ -439,16 +439,31 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 	}
 	
 	@Override
-	public Page<SurveyDirectory> findByUser(Page<SurveyDirectory> page) {
+	public Page<SurveyDirectory> findByUser(Page<SurveyDirectory> page,
+											SurveyDirectory entity) {
 	    User user=accountManager.getCurUser();
 	    if(user!=null){
-		Criterion cri1=Restrictions.eq("userId", user.getId());
-		Criterion cri2=Restrictions.eq("visibility", 1);
-		Criterion cri3=Restrictions.eq("dirType", 2);//非目录而是问卷
-		Criterion cri4=Restrictions.eq("surveyModel", 1);//问卷模块
-		page.setOrderBy("createDate");
-		page.setOrderDir("desc");
-		page=surveyDirectoryDao.findPage(page, cri1, cri2, cri3, cri4);
+			List<Criterion> criterions=new ArrayList<Criterion>();
+
+			criterions.add(Restrictions.eq("userId", user.getId()));
+			criterions.add(Restrictions.eq("visibility", 1));
+			criterions.add(Restrictions.eq("dirType", 2));
+			criterions.add(Restrictions.eq("surveyModel", 1));
+
+			if(entity!=null){
+				Integer surveyState = entity.getSurveyState();
+				if(surveyState!=null && !"".equals(surveyState)){
+					criterions.add(Restrictions.eq("surveyState", surveyState));
+				}
+				String surveyName = entity.getSurveyName();
+				if(surveyName!=null && !"".equals(surveyName)){
+					criterions.add(Restrictions.like("surveyName", "%"+surveyName+"%"));
+				}
+			}
+
+			page.setOrderBy("createDate");
+			page.setOrderDir("desc");
+			page=surveyDirectoryDao.findPageList(page,criterions);
 	    }
 	    return page;
 	}

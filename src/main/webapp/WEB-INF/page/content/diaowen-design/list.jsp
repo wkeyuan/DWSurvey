@@ -82,18 +82,20 @@ button {
 							所有问卷&nbsp;&nbsp;|&nbsp;&nbsp;
 								<a href="${ctx }/design/my-survey-create!save.action" id="surveyAdd-a" style="outline: none;text-decoration: none;" ><i class="fa fa-plus " aria-hidden="true"></i>&nbsp;新建问卷</a>
 							</div>
-							
+
+							<form action="${ctx}/design/my-survey.action" method="post" >
 							<div class="contacts_search" style="padding: 5px;color:#666565;" >
 								<div style="padding-left: 20px;padding-top: 8px;padding-bottom: 8px;">
 									<span style="font-size: 14px;vertical-align: middle;">状态&nbsp;</span>
-									<select style="vertical-align: middle;">  <option>不限</option><option>设计</option><option>发布</option><option>结束</option> </select>
+									<select name="surveyState" style="vertical-align: middle;">  <option value="">不限</option><option value="0">设计</option><option value="1">发布</option><option value="2">结束</option> </select>
 									&nbsp;&nbsp;
 									<span style="font-size: 14px;vertical-align: middle;">名称&nbsp;</span>
-									<input type="text" class="inputS1">
+									<input type="text" class="inputS1" name="surveyName" value="${surveyName}">
 									<input type="submit" value="查询" class="sbtn25 sbtn25_1" style="font-size: 16px;"/>
 								</div>
 								
 							</div>
+							</form>
 							
 							<div style="margin-top: 15px;">
 							<!-- <div style="padding: 5px;color: #666565;text-align: right;">
@@ -184,6 +186,9 @@ button {
 
 
 <script type="text/javascript">
+
+	$("select[name='surveyState']").val("${surveyState}");
+
 var options={
 		animation:true,
 		delay:100,
