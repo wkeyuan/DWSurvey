@@ -54,7 +54,9 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 最新的war包下载可以前往交流QQ群：635994795
 
-下载最新的DWSurvey.war，解压按前面说明配置数据库连接信息即可
+下载最新的DWSurvey.war，解压后会有一个diaowen目录，按前面说明配置数据库连接信息，再考到tomcat wabapps下
+
+解压命令：jar xvf DWSurvey.war    打包环境：jdk1.8, tomcat8.0
 
 ## 特色
 
