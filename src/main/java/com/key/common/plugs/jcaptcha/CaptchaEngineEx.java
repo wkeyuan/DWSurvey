@@ -24,7 +24,6 @@ import com.octo.captcha.component.word.wordgenerator.ComposeDictionaryWordGenera
 import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.sun.image.codec.jpeg.ImageFormatException;
 
 public class CaptchaEngineEx extends ListImageCaptchaEngine {
 
