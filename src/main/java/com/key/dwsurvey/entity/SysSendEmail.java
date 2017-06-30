@@ -3,7 +3,13 @@ package com.key.dwsurvey.entity;
 import java.util.Date;
 
 import com.key.common.base.entity.IdEntity;
-
+/**
+ * 系统邮件
+ * @author keyuan
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://dwsurvey.net
+ */
 public class SysSendEmail extends IdEntity {
 	//收件用户
 	private String inboxUserId;

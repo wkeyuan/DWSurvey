@@ -3,7 +3,7 @@
 <div style="color: gray;">
 	<h3 style="line-height: 40px;">联系信息</h3>
 	<p style="line-height: 40px;">邮箱：service@diaowen.net</p>
-	<p style="line-height: 40px;">电话：457647860</p>
+	<p style="line-height: 40px;">电话：0000000000</p>
 	<p style="line-height: 40px;">京ICP备13050030号-3</p>
 </div>
 

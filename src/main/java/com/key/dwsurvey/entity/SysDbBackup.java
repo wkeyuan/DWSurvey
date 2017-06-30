@@ -6,7 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.key.common.base.entity.IdEntity;
-
+/**
+ * 用作备分
+ * @author keyuan
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://dwsurvey.net
+ */
 @Entity
 @Table(name="t_sys_db_backup")
 public class SysDbBackup extends IdEntity{

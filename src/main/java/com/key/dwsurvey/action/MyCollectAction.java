@@ -50,16 +50,12 @@ public class MyCollectAction extends ActionSupport{
 	public String execute() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		String tabId=request.getParameter("tabId");
-		
-		
+
 		String baseUrl = "";
 		baseUrl = request.getScheme() +"://" + request.getServerName()  
 						+ (request.getServerPort() == 80 ? "" : ":" +request.getServerPort())
                         + request.getContextPath();
-//                        + request.getServletPath();
-//		if (request.getQueryString() != null){
-//			url += "?" + request.getQueryString();
-//		}
+
 		request.setAttribute("baseUrl", baseUrl);
 
 		User user=accountManager.getCurUser();
@@ -67,11 +63,6 @@ public class MyCollectAction extends ActionSupport{
     		SurveyDirectory surveyDirectory=surveyDirectoryManager.getSurveyByUser(surveyId, user.getId());
     		if(surveyDirectory!=null){
     			request.setAttribute("survey", surveyDirectory);
-    			/*for (int i = 0; i < 1000; i++) {
-    				invokeMessageProducer.send();
-    			}*/
-    			
-    			
     			if(IFRAME.equals(tabId)){
     				return IFRAME;
     			}else if(MAIL_INPUT.equals(tabId)){

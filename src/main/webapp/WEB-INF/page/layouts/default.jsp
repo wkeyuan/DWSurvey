@@ -25,11 +25,14 @@
 	
 	<div class="dw_foot" style="padding-top:20px;">
 		<%@ include file="/WEB-INF/page/layouts/footer-1.jsp"%>
+
+		<!-- 必须保留声明 start -->
 		<div class="footer-copyright" style="color: gray;padding-top: 0px;font-size: 16px;padding-bottom: 16px;">
-			Powered by <a href="http://www.dwsurvey.net" style="text-decoration: none;color: gray;">DWSurvey3.0</a>
+			Powered by <a href="http://www.dwsurvey.net" style="text-decoration: none;color: gray;">DWSurvey</a>
 			&nbsp;&nbsp;&nbsp;Copyright © 2012-2017
 			<a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">调问网</a>
 		</div>
+		<!-- 必须保留声明 end -->
 	</div>
 	
 	

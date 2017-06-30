@@ -7,7 +7,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.key.common.base.entity.IdEntity;
-
+/**
+ * 具体的一次调查
+ * @author keyuan
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://dwsurvey.net
+ */
 @Entity
 @Table(name="t_survey_answer")
 public class SurveyAnswer extends IdEntity{
