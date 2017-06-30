@@ -15,6 +15,12 @@
       <scope>test</scope>
     </dependency>
     
+<!-- https://mvnrepository.com/artifact/com.sun.xml.security/xml-security-impl -->
+	<dependency>
+		<groupId>com.sun.xml.security</groupId>
+		<artifactId>xml-security-impl</artifactId>
+		<version>1.0</version>
+	</dependency>
 	<dependency>
 		<groupId>org.apache.geronimo.specs</groupId>
 		<artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
