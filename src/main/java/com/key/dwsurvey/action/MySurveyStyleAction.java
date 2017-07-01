@@ -126,10 +126,8 @@ public class MySurveyStyleAction extends CrudActionSupport<SurveyStyle, String>{
 	public String ajaxGetStyle() throws Exception {
 	    try{
 			HttpServletResponse response=Struts2Utils.getResponse();
-			System.out.println(id);
 			entity=surveyStyleManager.get(id);
 			String jsonObj=JSONObject.fromObject(entity).toString();
-			System.out.println(jsonObj);
 			response.getWriter().write(jsonObj);
 		 }catch (Exception e) {
 			e.printStackTrace();

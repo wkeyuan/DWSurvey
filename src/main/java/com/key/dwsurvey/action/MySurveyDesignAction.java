@@ -104,10 +104,8 @@ public class MySurveyDesignAction extends ActionSupport{
 			//保存静态HTML路径
 			//buildSurveyHtml();
 			String url="/survey!answerSurvey.action?surveyId="+surveyId;
-			System.out.println(url);
 			String filePath="WEB-INF/wjHtml/"+dateFormat.format(createDate);
 			String fileName=surveyId+".html";
-			System.out.println("生成静态html："+fileName);
 			new JspToHtml().postJspToHtml(url, filePath, fileName);
 			survey.setHtmlPath(filePath+fileName);
 			//设置问卷状态为发布状态
@@ -215,15 +213,13 @@ public class MySurveyDesignAction extends ActionSupport{
 				    surveyDetail.setShowShareSurvey(Integer.parseInt(showShareSurvey));
 				    survey.setIsShare(Integer.parseInt(showShareSurvey));
 				}
-				System.out.println("showAnswerDa:"+showAnswerDa);
 				if(showAnswerDa!=null && !"".equals(showAnswerDa)){
 				    surveyDetail.setShowAnswerDa(Integer.parseInt(showAnswerDa));
 				    survey.setViewAnswer(Integer.parseInt(showAnswerDa));
 				}
 				
 				surveyDirectoryManager.save(survey);
-				
-				System.out.println("...saveDir..."+svyNote);
+
 				response.getWriter().write("true");
 				
 			}
@@ -301,7 +297,6 @@ public class MySurveyDesignAction extends ActionSupport{
 		if (!file.exists()) {
 			file.createNewFile();
 		}
-		System.out.println(name);
 		FileOutputStream fos = new FileOutputStream(file);
 		
 		os.writeTo(fos);

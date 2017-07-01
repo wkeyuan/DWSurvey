@@ -50,18 +50,16 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 	    String result="false";
 	    try{
 		User user = accountManager.getCurUser();
-		System.out.println("deleteId:"+id+":"+user);
 		if(user!=null){
 		    String userId=user.getId();
 		    SurveyDirectory surveyDirectory=surveyDirectoryManager.getSurveyByUser(id,userId);
 		    if(surveyDirectory!=null){
-		    	System.out.println("deleteId:"+id);
 		    	surveyDirectoryManager.delete(id);
 		    	result="true";
 		    }
 		}
 	    }catch (Exception e) {
-		result="false";
+			result="false";
 	    }
 	    response.getWriter().write(result);
 	    return null;
@@ -76,10 +74,8 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 			if(user!=null){
 				String userId=user.getId();
 				SurveyDirectory surveyDirectory=surveyDirectoryManager.getSurveyByUser(id, userId);
-				System.out.println(id+":"+entity.getSurveyState());
 				if(surveyDirectory!=null){
 					int surveyState=entity.getSurveyState();
-					System.out.println("surveyState:"+surveyState);
 					surveyDirectory.setSurveyState(surveyState);
 				}
 			}

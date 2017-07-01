@@ -78,8 +78,7 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
    /**
     * @return
     */
-   public Map getParameterMap() {
-
+   /*public Map getParameterMap() {
        HashMap paramMap = (HashMap) super.getParameterMap();
        paramMap = (HashMap) paramMap.clone();
 
@@ -94,8 +93,42 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
            entry.setValue(values);
        }
        return paramMap;
-   }
-    
+   }*/
+
+    /**
+     * 从request中获得参数Map，并返回可读的Map
+     *
+     * @param request
+     * @return
+     */
+    public static Map getParameterMap(HttpServletRequest request) {
+        // 参数Map
+        Map properties = request.getParameterMap();
+        // 返回值Map
+        Map returnMap = new HashMap();
+        Iterator entries = properties.entrySet().iterator();
+        Map.Entry entry;
+        String name = "";
+        String value = "";
+        while (entries.hasNext()) {
+            entry = (Map.Entry) entries.next();
+            name = (String) entry.getKey();
+            Object valueObj = entry.getValue();
+            if(null == valueObj){
+                value = "";
+            }else if(valueObj instanceof String[]){
+                String[] values = (String[])valueObj;
+                for(int i=0;i<values.length;i++){
+                    value = values[i] + ",";
+                }
+                value = value.substring(0, value.length()-1);
+            }else{
+                value = valueObj.toString();
+            }
+            returnMap.put(name, value);
+        }
+        return returnMap;
+    }
 
 
     /**
@@ -205,8 +238,7 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
     }
 
     /**
-     * 处理插件之所以报 mismatched tree node: EOF expecting错误是因为其对注入的脚本格式有校验
-     * 比如注入<scirpt>而没有匹配的结束标签</scirpt>时会报该错误，注入代码中开始标签和结束标签不匹配时会出该问题
+     * 插件之所以报 mismatched tree node: EOF expecting错误是因为其对注入的脚本格式有校验
      * @param value
      * @return
      */
