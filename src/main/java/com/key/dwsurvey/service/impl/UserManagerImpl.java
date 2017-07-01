@@ -47,18 +47,23 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 				entity.setShaPassword(shaPassword);
 //				entity.setSalt(salt);
 			}
-			
-//			List<Role> roles=new ArrayList<Role>();
-//			if(userRoleIds!=null){
-//				for (String roleId : userRoleIds) {
-//					Role role=new Role();
-//					role.setId(roleId);
-//					roles.add(role);
-//				}
-//			}
-//			entity.setRoleList(roles);
 			save(entity);
 		}
+	}
+
+	public Page<User> findPage(Page<User> page, User entity) {
+		List<Criterion> criterions=new ArrayList<Criterion>();
+		Integer status = entity.getStatus();
+		String loginName = entity.getLoginName();
+		criterions.add(Restrictions.eq("status", status));
+		System.out.println("status:"+status);
+		if(status!=null && !"".equals(status)){
+			criterions.add(Restrictions.eq("status", status));
+		}
+		if(loginName!=null && !"".equals(loginName)){
+			criterions.add(Restrictions.eq("loginName", loginName));
+		}
+		return super.findPageByCri(page, criterions);
 	}
 
 	/**

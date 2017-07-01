@@ -153,8 +153,7 @@ public class AccountManager {
 				//是邮箱账号
 				return userDao.findUniqueBy("email", loginName);
 			}else{
-//				return userDao.findUniqueBy("loginName", loginName);
-				return null;
+				return userDao.findUniqueBy("loginName", loginName);
 			}
 		}
 		return null;

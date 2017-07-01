@@ -131,5 +131,7 @@ public interface IHibernateDao<T, ID extends Serializable> extends ISimpleHibern
 	 * @return
 	 */
 	public List<Object[]> findList(String hql,Object... values );
+
+	public Page<T> findPageByCri(Page<T> page, List<Criterion> criterions);
 	
 }

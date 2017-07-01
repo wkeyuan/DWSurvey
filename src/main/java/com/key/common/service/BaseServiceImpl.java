@@ -80,4 +80,8 @@ public abstract class BaseServiceImpl<T extends IdEntity, ID extends Serializabl
 	public Page<T> findPage(Page<T> page, Criterion... criterions) {
 		return getBaseDao().findPage(page, criterions);
 	}
+
+	public Page<T> findPageByCri(Page<T> page, List<Criterion> criterions) {
+		return getBaseDao().findPageByCri(page, criterions);
+	}
 }

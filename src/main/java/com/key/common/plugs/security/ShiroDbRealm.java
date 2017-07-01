@@ -81,8 +81,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		String username = (String) principals.fromRealm(getName()).iterator().next();
 //		User user = accountManager.findUserByLoginName(username);
 		User user = accountManager.findUserByLoginNameOrEmail(username);
-		if (user != null) {
+		if (user != null && "1".equals(user.getId())) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+			info.addRole("admin");
 			return info;
 		} else {
 			return null;

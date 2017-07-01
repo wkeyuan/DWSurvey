@@ -527,5 +527,25 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 		page.setResult(result);
 		return page;
 	}
+
+	public Page<T> findPageByCri(Page<T> pageRequest, List<Criterion> criterions){
+		Criteria c = createCriteria(criterions);
+		Page<T> page = new Page<T>(pageRequest);
+		if (pageRequest.isCountTotal()) {
+			long totalCount = countCriteriaResult(c);
+			System.out.println("totalCount:"+totalCount);
+			page.setTotalItems(totalCount);
+			pageRequest.setTotalPage(page.getTotalPage());
+		}
+		if(pageRequest.isIslastpage()){
+			pageRequest.setPageNo(pageRequest.getTotalPage());
+			page.setPageNo(pageRequest.getPageNo());
+		}
+		setPageRequestToCriteria(c, pageRequest);
+
+		List result = c.list();
+		page.setResult(result);
+		return page;
+	}
 	
 }
