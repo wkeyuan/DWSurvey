@@ -2,6 +2,7 @@
 set -e
 
 WAR_FILE=/diaowen.war
+UNPACK_DIR=/dwsurvey
 WEBAPP_BASE=$CATALINA_HOME/webapps
 
 # determine context root path
@@ -32,8 +33,11 @@ init_run() {
     require_env MYSQL_PASSWORD
 
     echo "Unpacking war ..."
-    mkdir -p "$WEBAPP_DIR"
-    unzip -q -x "$WAR_FILE" -d "$WEBAPP_DIR"
+    mkdir -p "$UNPACK_DIR"
+    unzip -q -x "$WAR_FILE" -d "$UNPACK_DIR" \
+             -x "WEB-INF/wjHtml/*" \
+             -x "WEB-INF/classes/conf/site/*"
+    ln -snf "$UNPACK_DIR" "$WEBAPP_DIR"
 
     echo "Configuring dwsurvey ..."
     sed -i "s^jdbc.url=.*\$jdbc.url=jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?useUnicode=true\&characterEncoding=utf8g;

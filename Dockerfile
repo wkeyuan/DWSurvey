@@ -60,7 +60,8 @@ RUN apk add --no-cache mysql-client
 COPY --from=builder /DWSurvey/target/diaowen.war /diaowen.war
 COPY docker-entry.sh /docker-entry.sh
 
-# TODO set volumes
+# TODO this is a dirty hack
+VOLUME ["/dwsurvey/WEB-INF/wjHtml", "/dwsurvey/WEB-INF/classes/conf/site"]
 
 EXPOSE 8080
 

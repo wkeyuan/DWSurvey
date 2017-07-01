@@ -15,6 +15,9 @@ services:
   dwsurvey:
     image: dwsurvey
     restart: always
+    volumes:
+      - "dwsurvey-wjHtml:/dwsurvey/WEB-INF/wjHtml"
+      - "dwsurvey-site:/dwsurvey/WEB-INF/classes/conf/site"
     links:
       - db
     environment:
@@ -30,3 +33,5 @@ services:
 
 volumes:
   mysql-data: {}
+  dwsurvey-wjHtml: {}
+  dwsurvey-site: {}
