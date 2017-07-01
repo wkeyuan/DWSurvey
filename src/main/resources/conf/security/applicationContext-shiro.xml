@@ -41,10 +41,10 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/login.jsp = authc
-				/ic/* = user
-				/design/*=user
-				/da/*=user
-				/sy/*=roles[admin]
+				/ic/** = user
+				/design/** = user
+				/da/** = user
+				/sy/** = roles[admin]
 			</value>
 		</property>
 	</bean>
