@@ -219,11 +219,9 @@ $(".disUser_a").click(function(){
 	return false;
 });
 
-$("select[name='userGroupId']").val("${userGroupId}");
 $("select[name='status']").val("${status}");
 
 resizeBodyWidth();
-$(".dlcTitleBg").animate({opacity:0.6},0);
 $("a").attr("hidefocus",true);
 
 </script>

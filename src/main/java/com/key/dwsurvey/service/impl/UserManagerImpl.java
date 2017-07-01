@@ -55,8 +55,6 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 		List<Criterion> criterions=new ArrayList<Criterion>();
 		Integer status = entity.getStatus();
 		String loginName = entity.getLoginName();
-		criterions.add(Restrictions.eq("status", status));
-		System.out.println("status:"+status);
 		if(status!=null && !"".equals(status)){
 			criterions.add(Restrictions.eq("status", status));
 		}
