@@ -24,6 +24,7 @@ services:
       - MYSQL_PASSWORD=dwsurvey
       - ADMIN_EMAIL=admin@example.com
       - ADMIN_PASSWORD=123456
+      - CONTEXT_ROOT=/
     ports:
       - "8080:8080"
 

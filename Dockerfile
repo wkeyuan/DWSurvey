@@ -50,6 +50,7 @@ FROM tomcat:8.0-jre8
 
 ENV MYSQL_HOST= MYSQL_PORT=3306 MYSQL_DATABASE= MYSQL_USER= MYSQL_PASSWORD=
 ENV ADMIN_EMAIL= ADMIN_PASSWORD=
+ENV CONTEXT_ROOT=/
 
 # install xmlstarlet to edit configurations
 #RUN apk add --no-cache xmlstarlet mysql-client bash
@@ -57,7 +58,9 @@ RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
 		xmlstarlet \
 		mysql-client \
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/* \
+	&& rm -rf /usr/local/tomcat/webapps/ \
+	&& mkdir /usr/local/tomcat/webapps/
 
 COPY --from=builder /DWSurvey/target/diaowen.war /target/diaowen.war
 COPY docker-entry.sh /docker-entry.sh

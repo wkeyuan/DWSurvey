@@ -2,7 +2,15 @@
 set -e
 
 WAR_FILE=/target/diaowen.war
-WEBAPP_DIR=/usr/local/tomcat/webapps/diaowen
+WEBAPP_BASE=/usr/local/tomcat/webapps
+
+# determine context root path
+if [[ "x${CONTEXT_ROOT}x" == "xx" || "$CONTEXT_ROOT" == "/" ]]; then
+    CONTEXT_PATH=ROOT
+else
+    CONTEXT_PATH=${CONTEXT_ROOT}
+fi
+WEBAPP_DIR=${WEBAPP_BASE}/${CONTEXT_PATH}
 CONF_DIR=${WEBAPP_DIR}/WEB-INF/classes/conf
 
 require_env() {
@@ -24,7 +32,7 @@ init_run() {
     require_env MYSQL_PASSWORD
 
     echo "Unpacking war ..."
-    unzip -x "$WAR_FILE" -d "$WEBAPP_DIR"
+    unzip -q -x "$WAR_FILE" -d "$WEBAPP_DIR"
 
     echo "Configuring dwsurvey ..."
     sed -i "s^jdbc.url=.*\$jdbc.url=jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?useUnicode=true\&characterEncoding=utf8g;
