@@ -6,6 +6,7 @@ package com.key.common.plugs.xss;
 
 import com.blogspot.radialmind.html.HTMLParser;
 import com.blogspot.radialmind.xss.XSSFilter;
+import com.itextpdf.text.log.SysoCounter;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -44,7 +45,8 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
         }
         return value;
     }
-    
+
+
     /**
      * 覆盖getHeader方法，将参数名和参数值都做xss过滤。<br/>
      * 如果需要获得原始的值，则通过super.getHeaders(name)来获取<br/> getHeaderNames 也可能需要覆盖
@@ -101,29 +103,24 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
      * @param request
      * @return
      */
-    public static Map getParameterMap(HttpServletRequest request) {
+    public Map<String, String[]> getParameterMap(HttpServletRequest request) {
         // 参数Map
-        Map properties = request.getParameterMap();
-        // 返回值Map
-        Map returnMap = new HashMap();
+        Map<String, String[]> properties = request.getParameterMap();
+        Map<String,String[]> returnMap = new HashMap();
         Iterator entries = properties.entrySet().iterator();
         Map.Entry entry;
         String name = "";
-        String value = "";
+        String[] value ;
         while (entries.hasNext()) {
             entry = (Map.Entry) entries.next();
             name = (String) entry.getKey();
             Object valueObj = entry.getValue();
             if(null == valueObj){
-                value = "";
+                value = new String[]{};
             }else if(valueObj instanceof String[]){
-                String[] values = (String[])valueObj;
-                for(int i=0;i<values.length;i++){
-                    value = values[i] + ",";
-                }
-                value = value.substring(0, value.length()-1);
+                value = (String[])valueObj;
             }else{
-                value = valueObj.toString();
+                value = new String[]{valueObj.toString()};
             }
             returnMap.put(name, value);
         }
@@ -239,7 +236,7 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
 
     /**
      * 插件之所以报 mismatched tree node: EOF expecting错误是因为其对注入的脚本格式有校验
-     * @param value
+     * @param
      * @return
      */
     /*private String stripXSS(String value)
