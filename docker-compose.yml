@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb:10.3
+    restart: always
+    volumes:
+      - "mysql-data:/var/lib/mysql"
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=dwsurvey
+      - MYSQL_USER=dwsurvey
+      - MYSQL_PASSWORD=dwsurvey
+
+  dwsurvey:
+    image: dwsurvey
+    restart: always
+    links:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=dwsurvey
+      - MYSQL_USER=dwsurvey
+      - MYSQL_PASSWORD=dwsurvey
+      - ADMIN_EMAIL=admin@example.com
+      - ADMIN_PASSWORD=123456
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql-data: {}
