@@ -204,6 +204,12 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
         return result;
     }
 
+    /**
+     * 处理插件之所以报 mismatched tree node: EOF expecting错误是因为其对注入的脚本格式有校验
+     * 比如注入<scirpt>而没有匹配的结束标签</scirpt>时会报该错误，注入代码中开始标签和结束标签不匹配时会出该问题
+     * @param value
+     * @return
+     */
     private String stripXSS(String value)
     {
         if (value != null)
