@@ -38,7 +38,9 @@ RUN cd /DWSurvey && mvn dependency:resolve
 
 # copy src/ and build, src changes constantly
 COPY ./src /DWSurvey/src
-RUN cd /DWSurvey && mvn install
+RUN cd /DWSurvey \
+	&& find /DWSurvey/src -type f -exec chmod 640 {} \; \
+	&& mvn install
 
 # ------------------------- 8< -------------------------
 
@@ -46,26 +48,19 @@ RUN cd /DWSurvey && mvn install
 # see: https://bugs.alpinelinux.org/issues/7372
 # image layers: tomcat:8.0-jre8 -> openjdk:8-jre-alpine -> alpine:3.6
 # let's switch to 8.0-jre8-alpine after alpine has fixed the bug (alpine 3.6.3 release)
-FROM tomcat:8.0-jre8
+#FROM tomcat:8.0-jre8-alpine
+FROM davidcaste/alpine-tomcat:jre8tomcat8
 
 ENV MYSQL_HOST= MYSQL_PORT=3306 MYSQL_DATABASE= MYSQL_USER= MYSQL_PASSWORD=
 ENV ADMIN_EMAIL= ADMIN_PASSWORD=
 ENV CONTEXT_ROOT=/
 
-# install xmlstarlet to edit configurations
-#RUN apk add --no-cache xmlstarlet mysql-client bash
-RUN apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
-		xmlstarlet \
-		mysql-client \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& rm -rf /usr/local/tomcat/webapps/ \
-	&& mkdir /usr/local/tomcat/webapps/
+RUN apk add --no-cache mysql-client
 
-COPY --from=builder /DWSurvey/target/diaowen.war /target/diaowen.war
+COPY --from=builder /DWSurvey/target/diaowen.war /diaowen.war
 COPY docker-entry.sh /docker-entry.sh
 
-# TODO , specify volumes
+# TODO set volumes
 
 EXPOSE 8080
 

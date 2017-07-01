@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-WAR_FILE=/target/diaowen.war
-WEBAPP_BASE=/usr/local/tomcat/webapps
+WAR_FILE=/diaowen.war
+WEBAPP_BASE=$CATALINA_HOME/webapps
 
 # determine context root path
 if [[ "x${CONTEXT_ROOT}x" == "xx" || "$CONTEXT_ROOT" == "/" ]]; then
@@ -32,6 +32,7 @@ init_run() {
     require_env MYSQL_PASSWORD
 
     echo "Unpacking war ..."
+    mkdir -p "$WEBAPP_DIR"
     unzip -q -x "$WAR_FILE" -d "$WEBAPP_DIR"
 
     echo "Configuring dwsurvey ..."
@@ -67,6 +68,8 @@ migrate() {
     sed -i "s/USE \`dwsurvey\`;/USE \`${MYSQL_DATABASE}\`;/g" $MIGRATION_FILE
     # remove default user
     sed -i '/INSERT INTO `t_user`/d' $MIGRATION_FILE
+    # remove example survey (just don't INSERT anything), meaningless for production usage
+    sed -i '/INSERT INTO/d' $MIGRATION_FILE
     # apply migration file
     echo "Applying migration ..."
     mysql -h "$MYSQL_HOST" -P "$MYSQL_PORT" -u "$MYSQL_USER" --password="$MYSQL_PASSWORD" < $MIGRATION_FILE
@@ -90,7 +93,7 @@ fi
 
 # start tomcat
 if [ -z "$@" ]; then
-    catalina.sh run
+    exec $CATALINA_HOME/bin/catalina.sh run
 else
     exec "$@"
 fi
