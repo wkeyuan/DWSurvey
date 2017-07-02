@@ -379,6 +379,16 @@ $(document).ready(function(){
 		if(firstError!=null){
 			$(window).scrollTop(firstError.offset().top);
 		}
+		//
+		if($("#jcaptchaImgBody").is(":visible")){
+			var jcaptchaInput = $("input[name='jcaptchaInput']").val();
+			if(jcaptchaInput===""){
+				$("#jcaptchaImgBody .errorItem").show();
+				result = false;
+			}else{
+				$("#jcaptchaImgBody .errorItem").hide();
+			}
+		}
 		return result;
 	}
 	
@@ -1819,7 +1829,7 @@ label.error{
 											<p class="valid-msg fail" style="display: none;"><i>●</i><span class="msg_content">验证码错误，请重新输入</span></p>
 										</div>
 									</div>
-									
+									<div class="errorItem" style="display: none;"><label for="" class="error">验证码错误，请重新输入！</label></div>
 									<%-- 验证码：<input type="text" size="8" name="jcaptchaInput">
 									&nbsp;<img id="jcaptchaImg" alt="点击刷新" src="${ctx }/jcaptcha.action"  align="top">
 									&nbsp;点击图片刷新 --%>
@@ -1856,7 +1866,7 @@ label.error{
 </div>
 
 <div class="footer-copyright" style="color: gray;">
-		 <a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">调问网</a> 提供支持
+	<a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">调问网</a> 提供支持
 </div>
 		
 <div id="fixedMsg" style="position: fixed;top: 0px;width: 100%;padding: 10px;text-align: center;font-size: 18px;letter-spacing: 4px;line-height: 56px;background-color: #111;background-color: rgba(17,17,17,0.5);color: #fff;color: rgba(255,255,255,0.5);z-index: 200;display: none;"></div>

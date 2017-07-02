@@ -29,13 +29,12 @@ public class ToHtmlServlet extends HttpServlet {
 		String url=request.getParameter("url");
 		String filePath=request.getParameter("filePath");
 		String fileName=request.getParameter("fileName");
-		System.out.println(url+":"+filePath+":"+fileName);
+//		System.out.println(url+":"+filePath+":"+fileName);
 		//url = "/design/my-survey-design!previewDev.action?surveyId=402880ea4675ac62014675ac7b3a0000";
 		// 这是生成的html文件名,如index.htm
 		filePath = filePath.replace("/", File.separator);
 		filePath = filePath.replace("\\", File.separator);
 		String fileRealPath = sc.getRealPath("/") +File.separator+ filePath;
-		System.out.println(fileRealPath);
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 

@@ -251,7 +251,18 @@ $(document).ready(function(){
 									 		<span class="quTitleNum">${i.count }、</span>
 											<span class="quTitleText">${en.quTitle}</span>
 									 	</label>
-								     	<input id="qu_${en.quType }_${en.id }" type="text" name="qu_${en.quType }_${en.id }" class="fillblankInput" >
+
+										 <%--<input id="qu_${en.quType }_${en.id }" type="text" name="qu_${en.quType }_${en.id }" class="fillblankInput" >--%>
+
+										 <c:choose>
+											 <c:when test="${en.answerInputRow > 1 }">
+												 <textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" class="inputSytle_2 fillblankInput" ></textarea>
+											 </c:when>
+											 <c:otherwise>
+												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" >
+											 </c:otherwise>
+										 </c:choose>
+
 									 </div>
 								</div>
 							</div>
@@ -778,7 +789,7 @@ $(document).ready(function(){
 											<p class="valid-msg fail" style="display: none;"><i>●</i><span class="msg_content">验证码错误，请重新输入</span></p>
 										</div>
 									</div>
-									
+									<div class="errorItem" style="display: none;"><label for="" class="error">验证码错误，请重新输入！</label></div>
 									<%-- 验证码：<input type="text" size="8" name="jcaptchaInput">
 									&nbsp;<img id="jcaptchaImg" alt="点击刷新" src="${ctx }/jcaptcha.action"  align="top">
 									&nbsp;点击图片刷新 --%>
@@ -808,7 +819,7 @@ $(document).ready(function(){
   </div>
 
   <div data-role="footer">
-  	<h3><a href="${ctx }/index-m.jsp" style="text-decoration: none;" rel="external">调问网</a> 提供支持</h3>
+  	<h3><a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">调问网</a> 提供支持</h3>
   </div>
 </div>
 
@@ -956,6 +967,17 @@ $(document).ready(function(){
 		if(firstError!=null){
 			$(window).scrollTop(firstError.offset().top);
 		}
+
+		if($("#jcaptchaImgBody").is(":visible")){
+			var jcaptchaInput = $("input[name='jcaptchaInput']").val();
+			if(jcaptchaInput===""){
+				$("#jcaptchaImgBody .errorItem").show();
+				result = false;
+			}else{
+				$("#jcaptchaImgBody .errorItem").hide();
+			}
+		}
+
 		return result;
 	}
 	
