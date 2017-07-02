@@ -15,7 +15,12 @@ WEBAPP_DIR=${WEBAPP_BASE}/${CONTEXT_PATH}
 CONF_DIR=${WEBAPP_DIR}/WEB-INF/classes/conf
 
 require_env() {
-    ENV_NAME="$1"
+    local ENV_NAME="$1"
+    # if docker provides secret, secret wins env
+    if [[ -r "/run/secrets/$ENV_NAME" ]]; then
+        eval $ENV_NAME=$(cat /run/secrets/$ENV_NAME)
+    fi
+
     eval ENV_VALUE=\$$ENV_NAME
 
     if [ -z "$ENV_VALUE" ]; then
