@@ -968,7 +968,12 @@ $(document).ready(function(){
 			var isRequired=quItemBody.find(".isRequired").val();
 			
 			var validateStatus=false;
-			
+
+			if(isRequired==="0"){
+				validateStatus = true;
+				return true;
+			}
+
 			if(quType==="RADIO"){
 				validateStatus=quItemBody.find("input[type='radio']:checked")[0];
 			}else if(quType==="CHECKBOX"){

@@ -394,7 +394,7 @@ $(document).ready(function(){
 
 			if(isRequired==="0"){
 				validateStatus = true;
-				return ;
+				return true;
 			}
 
 			if(quType==="RADIO"){
