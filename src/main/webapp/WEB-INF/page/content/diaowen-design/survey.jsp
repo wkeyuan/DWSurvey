@@ -3181,7 +3181,7 @@
 			<div class="dwQuSetCon dwQuFormSetDialog dwQuDialogCon" >
 				<ul>
 					<!-- <li><input type="checkbox" name="quChage"><label>切换为多选</label> </li> -->
-					<li><label><input type="checkbox" name="setIsRequired"  >此题非必答</label> </li>
+					<li><label><input type="checkbox" name="setIsRequired"  >此题必答</label> </li>
 					<li class="optionAutoOrder"><label><input type="checkbox" name="setRandOrder" >选择随机排列</label> </li>
 					<li class="contactsAttrLi"><label><input type="checkbox" name="setAutoContacts" >关联到联系人属性</label> </li>
 					<li class="contactsFieldLi"><label>用户填写的内容，会成为联系人的</label>
