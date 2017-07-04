@@ -52,8 +52,7 @@ public class ReportAction extends ActionSupport{
 //		directory=directoryManager.getSurvey(surveyId);
 		directory=directoryManager.getSurveyBySid(sid);
 		Integer viewAnswer=directory.getViewAnswer();
-		
-		System.out.println("viewAnswer:"+viewAnswer);
+
 		if(viewAnswer!=null && viewAnswer.intValue()==1){
 			List<Question> questions = surveyStatsManager.findFrequency(directory);
 			surveyStats.setQuestions(questions);

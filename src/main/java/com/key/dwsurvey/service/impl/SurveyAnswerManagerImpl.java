@@ -141,7 +141,6 @@ public class SurveyAnswerManagerImpl extends
 	private int getquestionAnswer(String surveyAnswerId, Question question) {
 		int score = 0;
 		String quId = question.getId();
-		System.out.println(question.getQuName());
 		// 查询每一题的答案,如果是主观题，则判断是否答对
 		QuType quType = question.getQuType();
 		if (quType == QuType.YESNO) {// 是非题答案
@@ -311,7 +310,6 @@ public class SurveyAnswerManagerImpl extends
 				for (int j = 0; j < answers.size(); j++) {
 					SurveyAnswer surveyAnswer = answers.get(j);
 					String surveyAnswerId = surveyAnswer.getId();
-					System.out.println("answerId:" + surveyAnswerId);
 					// 得到详细结果
 					exportUtil.createRow((j + 1) + ((i - 1) * 100));
 					exportXLSRow(exportUtil, surveyAnswerId, questions, surveyAnswer);

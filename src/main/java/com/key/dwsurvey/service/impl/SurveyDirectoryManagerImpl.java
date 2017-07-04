@@ -82,7 +82,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 //			super.save(t);
 			surveyDirectoryDao.save(t);
 			//保存SurveyDirectory
-			System.out.println("getDirType:..."+t.getDirType());
 			if(t.getDirType()==2){
 				SurveyDetail surveyDetailTemp=t.getSurveyDetail();
 				
@@ -95,9 +94,7 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 					surveyDetail=new SurveyDetail();
 					surveyDetail.setSurveyNote("非常感谢您的参与！如有涉及个人信息，我们将严格保密。");
 				}
-				System.out.println("dirType..."+surveyDetail.getSurveyNote());
 				surveyDetail.setDirId(t.getId());
-				System.out.println("surveyDetail.getShowAnswerDa():"+surveyDetail.getShowAnswerDa());
 				surveyDetailManager.save(surveyDetail);
 			}
 		}
@@ -325,7 +322,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 		super.save(t);
 		//保存SurveyDirectory
 		if(t.getDirType()==2){
-			System.out.println("dirType...");
 			SurveyDetail surveyDetail=t.getSurveyDetail();
 			surveyDetail.setDirId(t.getId());
 			surveyDetailManager.save(surveyDetail);

@@ -2075,9 +2075,7 @@ function saveRadio(quItemBody,callback){
 			quTitle=escape(encodeURIComponent(quTitle));
 			data+="&quTitle="+quTitle;
 		}
-		
-		//var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quTitle="+quTitle+"&quId="+quId;
-		//var quItemLis=quItemBody.find(".quCoItem li.quCoItemUlLi");
+
 		var quItemOptions=null;
 		if(hv==3){
 			//还有是table的情况需要处理
@@ -2280,8 +2278,6 @@ function saveCheckbox(quItemBody,callback){
 			quTitle=escape(encodeURIComponent(quTitle));
 			data+="&quTitle="+quTitle;
 		}
-		//var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quTitle="+quTitle+"&quId="+quId;
-		//var quItemLis=quItemBody.find(".quCoItem li.quCoItemUlLi");
 		var quItemOptions=null;
 		if(hv==3){
 			//还有是table的情况需要处理
@@ -2643,8 +2639,6 @@ function saveScore(quItemBody,callback){
 			quTitle=escape(encodeURIComponent(quTitle));
 			data+="&quTitle="+quTitle;
 		}
-		//var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quTitle="+quTitle+"&quId="+quId;
-		//var quItemLis=quItemBody.find(".quCoItem li.quCoItemUlLi");
 		//评分题选项td
 		var quItemOptions=quItemBody.find(".quCoItem table.quCoItemTable tr td.quOptionEditTd");
 		$.each(quItemOptions,function(i){
@@ -2808,8 +2802,6 @@ function saveOrderqu(quItemBody,callback){
 			quTitle=escape(encodeURIComponent(quTitle));
 			data+="&quTitle="+quTitle;
 		}
-		//var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quTitle="+quTitle+"&quId="+quId;
-		//var quItemLis=quItemBody.find(".quCoItem li.quCoItemUlLi");
 		//评分题选项td
 		var quItemOptions=quItemBody.find(".quCoItem .quOrderByLeft  li.quCoItemUlLi");
 		$.each(quItemOptions,function(i){
@@ -3144,8 +3136,6 @@ function saveMultiFillblank(quItemBody,callback){
 			quTitle=escape(encodeURIComponent(quTitle));
 			data+="&quTitle="+quTitle;
 		}
-		//var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quTitle="+quTitle+"&quId="+quId;
-		//var quItemLis=quItemBody.find(".quCoItem li.quCoItemUlLi");
 		//评分题选项td
 		var quItemOptions=quItemBody.find(".quCoItem table.mFillblankTable tr td.mFillblankTableEditTd");
 		$.each(quItemOptions,function(i){
@@ -3483,9 +3473,11 @@ function deleteChenOption(){
 	var curEditTd=$(curEditObj).parents("td");
 	var curEditTdClass=curEditTd.attr("class");
 	if(curEditTdClass.indexOf("Column")>=0){
-		deleteChenRadioColumnOption();
+		// deleteChenRadioColumnOption();
+		deleteChenColumnOption();
 	}else{
-		deleteChenRadioRowOption();
+		// deleteChenRadioRowOption();
+		deleteChenRowOption();
 	}
 }
 /** 删除矩阵单选题列选项 **/
@@ -3838,22 +3830,3 @@ function notify(msg,delayHid) {
 			$( this ).remove();
 		});
 }
-
-/*
-//触发input菜单框
-function showInputMenuBtn(editAbleObj){
-	var quItemBody=$(editAbleObj).parents(".surveyQuItemBody");
-	var quType=quItemBody.find("input[name='quType']").val();
-	if(quType=="FILLBLANK"){
-		$("#dwCommonInputMenuRoot").show();
-		var fillblankInputObj=$(editAbleObj).find("input");
-		var editOffset=$(fillblankInputObj).offset();
-		var offLeft=editOffset.left+$(fillblankInputObj).width()+10;
-		$("#dwCommonInputMenuRoot").offset({top:editOffset.top,left:offLeft});
-		//quItemBody.find("input[name='hoverTag']").val("hover");
-	}
-}
-function hideInputMenuBtn(){
-	$("#dwCommonInputMenuRoot").hide();
-}
-*/

@@ -126,8 +126,7 @@ public class AnYesnoDaoImpl extends BaseDaoImpl<AnYesno, String> implements AnYe
 			colTab=" t_an_radio t2 ";
 			groupSql=" t1.yesno_answer,t2.qu_item_id ";
 			sql="select "+groupSql+",count(*) from "+rowTab+","+colTab+whereSql+groupSql;
-			
-			System.out.println(sql+":"+rowQuestion.getId()+","+colQuestion.getId());
+
 			List<Object[]> objects=session.createSQLQuery(sql).setParameter(0, rowQuestion.getId()).setParameter(1, colQuestion.getId()).list();
 			
 			List<QuRadio> quRadios=colQuestion.getQuRadios();
@@ -169,8 +168,7 @@ public class AnYesnoDaoImpl extends BaseDaoImpl<AnYesno, String> implements AnYe
 			colTab=" t_an_checkbox t2 ";
 			groupSql=" t1.yesno_answer,t2.qu_item_id ";
 			sql="select "+groupSql+",count(*) from "+rowTab+","+colTab+whereSql+groupSql;
-			
-			System.out.println(sql+":"+rowQuestion.getId()+","+colQuestion.getId());
+
 			List<Object[]> objects=session.createSQLQuery(sql).setParameter(0, rowQuestion.getId()).setParameter(1, colQuestion.getId()).list();
 			
 			List<QuCheckbox> quCheckboxs=colQuestion.getQuCheckboxs();

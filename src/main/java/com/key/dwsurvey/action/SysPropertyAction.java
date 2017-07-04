@@ -44,7 +44,6 @@ public class SysPropertyAction extends ActionSupport{
 		HttpServletRequest request = Struts2Utils.getRequest();
 		
 		String fileName="site.properties";
-		System.out.println("site.properties："+fileName);
 		ServletContext sc = Struts2Utils.getSession().getServletContext();
 		String filePath = "/WEB-INF/classes/conf/site/".replace("/", File.separator);
 		String fileRealPath = sc.getRealPath("/")+filePath+fileName;
@@ -144,7 +143,6 @@ public class SysPropertyAction extends ActionSupport{
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			System.out.println("生成indexSurvey.JSP：" + fileRealPath);
 			fw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
 			fw.write("<%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\" %>");
 			fw.write(data);

@@ -36,7 +36,6 @@ public class MySQLDatabaseBackup {
 		stringBuilder.append(" --user=").append(userName) .append(" --password=").append(password).append(" --lock-all-tables=true");
 		stringBuilder.append(" --result-file=").append(savePath + fileName).append(" --default-character-set=utf8 ").append(databaseName);
 		try {
-			System.out.println(stringBuilder.toString());
 			Process process = Runtime.getRuntime().exec(stringBuilder.toString());
 			if (process.waitFor() == 0) {// 0 表示线程正常终止。
 				return true;

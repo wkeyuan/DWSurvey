@@ -61,9 +61,6 @@ public class BaiduBOS {
 		// 上传Object.
 		String objectKey=fileName;
 		PutObjectResponse result = client.putObject(bucketName, objectKey, content, meta);
-		System.out.println(objectKey);
-		// 打印ETag
-		System.out.println(result.getETag());
 		content.close();
 	}
 	
@@ -86,9 +83,6 @@ public class BaiduBOS {
 		// 上传Object.
 		String key=fileName;
 		PutObjectResponse result = client.putObject(bucketName, key, content, meta);
-		System.out.println(key);
-		// 打印ETag
-		System.out.println(result.getETag());
 	}
 	
 	
@@ -108,7 +102,6 @@ public class BaiduBOS {
 	public static List<BosObjectSummary> getObjectList(String bucketName,String prefix,int endIndex,int maxKeys){
 		
 
-		System.out.println(prefix);
 		// 初始化OSSClient
 		BosClient client = getClient();
 
@@ -136,7 +129,6 @@ public class BaiduBOS {
 			nextMarker = listing.getNextMarker();
 		}
 
-		System.out.println("nextMarker:" + nextMarker);
 		// 遍历所有Object
 		List<BosObjectSummary> objectSummarys = listing.getContents();
 		

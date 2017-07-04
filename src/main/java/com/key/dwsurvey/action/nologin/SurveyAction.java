@@ -76,7 +76,6 @@ public class SurveyAction extends ActionSupport{
 	public String execute() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
-		System.out.println("sid:"+sid);
 //		SurveyDirectory surveyDirectory=surveyDirectoryManager.getSurveyBySid(sid);
 //		surveyId=surveyDirectory.getId();
 //		//收集规则处理
@@ -132,7 +131,6 @@ public class SurveyAction extends ActionSupport{
 
 	    	String encoderContent=baseUrl+"/survey!answerSurveryMobile.action?surveyId="+surveyId;
 //	    	String encoderContent="http://192.168.0.101:8080/survey!answerSurveryMobile.action?surveyId="+surveyId;
-	    	System.out.println(encoderContent);
 	    	ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  
 	    	BufferedImage twoDimensionImg = new TwoDimensionCode().qRCodeCommon(encoderContent, "jpg", 7);
 //	    	JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);

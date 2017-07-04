@@ -23,7 +23,6 @@ public class QuRadioDaoImpl extends BaseDaoImpl<QuRadio, String> implements QuRa
 		if(quId!=null && !"".equals(quId)){
 			String sql="update t_qu_radio set order_by_id=order_by_id-1 where qu_id=? and order_by_id>=?";
 			//更新排序号
-			System.out.println(sql+","+quId+","+orderById);
 			SQLQuery query=this.getSession().createSQLQuery(sql);
 			query.setString(0, quId);
 			query.setInteger(1, orderById);

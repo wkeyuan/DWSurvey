@@ -156,7 +156,6 @@ public class QuCheckboxAction extends ActionSupport{
 			quLogic.setLogicType(logicType);
 			quLogics.add(quLogic);
 
-			System.out.println("visibility:"+visibility);
 		}
 		entity.setQuestionLogics(quLogics);
 		
@@ -197,7 +196,6 @@ public class QuCheckboxAction extends ActionSupport{
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]}");
-		System.out.println(strBuf.toString());
 		return strBuf.toString();
 	}
 	

@@ -571,7 +571,6 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 			sqlBuf.append("count(case when data_source =2 then data_source end) datasource2, ");
 			sqlBuf.append("count(case when data_source =3 then data_source end) datasource3 ");
 			sqlBuf.append("from t_survey_answer where survey_id=? ");
-			System.out.println(sqlBuf.toString());
 			Object[] objects = (Object[]) this.getSession().createSQLQuery(sqlBuf.toString()).setString(0, surveyStats.getSurveyId()).uniqueResult();
 			
 			surveyStats.setFirstAnswer((Date)objects[0]);

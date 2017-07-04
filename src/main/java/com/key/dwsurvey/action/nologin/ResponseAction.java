@@ -149,7 +149,6 @@ public class ResponseAction extends ActionSupport {
 				request.setAttribute("msg", "rule2");// 表示私有问卷
 				return RELOAD_ANSER_ERROR;
 			} else if (3 == rule) {// 令牌
-				System.out.println("---");
 				String ruleCode = request.getParameter("ruleCode");
 				String surveyRuleCode = surveyDetail.getRuleCode();
 				if (ruleCode == null || !ruleCode.equals(surveyRuleCode)) {
@@ -174,7 +173,6 @@ public class ResponseAction extends ActionSupport {
 
 			} else if ("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)
 					|| "baiduBOS".equals(DiaowenProperty.DWSTORAGETYPE)) {
-				System.out.println("				  //这句话的意思，是让浏览器用utf8来解析返回的数据  ");
 				// 这句话的意思，是让浏览器用utf8来解析返回的数据
 				response.setHeader("Content-type", "text/html;charset=UTF-8");
 				// 这句话的意思，是告诉servlet用UTF-8转码，而不是用默认的ISO8859
@@ -251,13 +249,11 @@ public class ResponseAction extends ActionSupport {
 			if ((effective != null && effective > 1 && cookie != null)
 					|| (effectiveIp != null && effectiveIp == 1 && ipNum > 0)) {
 				// 已经回答过
-				System.out.println("已经回答过");
 				return RELOAD_ANSER_ERROR;
 			}
 
 			if (ipNum >= refreshNum) {
 				String code = request.getParameter("jcaptchaInput");
-				System.out.println("启用验证码");
 				if (imageCaptchaService.validateResponseForID(request
 						.getSession().getId(), code)) {
 					// 验证通过
@@ -277,7 +273,6 @@ public class ResponseAction extends ActionSupport {
 			entity.setAddr(addr);
 			entity.setCity(city);
 			entity.setSurveyId(surveyId);
-			System.out.println(ipAddr + ":" + addr + ":" + city);
 			// 得到 MAC
 			// 保存数据
 			entity.setDataSource(0);// 表示网调来源
@@ -302,10 +297,8 @@ public class ResponseAction extends ActionSupport {
 		try {
 			String ipAddr = ipService.getIp(request);
 			long ipNum = surveyAnswerManager.getCountByIp(surveyId, ipAddr);
-			System.out.println(surveyId);
 			SurveyDirectory directory = directoryManager.getSurvey(surveyId);
 			SurveyDetail surveyDetail = directory.getSurveyDetail();
-			System.out.println(surveyDetail + ":");
 			int refreshNum = surveyDetail.getRefreshNum();
 			User user = accountManager.getCurUser();
 
@@ -321,13 +314,11 @@ public class ResponseAction extends ActionSupport {
 			if ((effective != null && effective > 1 && cookie != null)
 					|| (effectiveIp != null && effectiveIp == 1 && ipNum > 0)) {
 				// 已经回答过
-				System.out.println("已经回答过");
 				return RELOAD_ANSER_ERROR_M;
 			}
 
 			if (ipNum >= refreshNum) {
 				String code = request.getParameter("jcaptchaInput");
-				System.out.println("启用验证码");
 				if (imageCaptchaService.validateResponseForID(request
 						.getSession().getId(), code)) {
 					// 验证通过
@@ -424,7 +415,6 @@ public class ResponseAction extends ActionSupport {
 			anRadio.setQuItemId(quItemId);
 			anRadio.setOtherText(otherText);
 
-			System.out.println(key + "...." + otherText);
 			compRadioMaps.put(key, anRadio);
 		}
 		quMaps.put("compRadioMaps", compRadioMaps);
@@ -519,7 +509,6 @@ public class ResponseAction extends ActionSupport {
 			}
 			chenScoreMaps.put(key, map);
 		}
-		System.out.println("chenScoreMaps:" + chenScoreMaps);
 		quMaps.put("chenScoreMaps", chenScoreMaps);
 		// 矩阵填空题
 		Map<String, Object> chenFbkMaps = WebUtils.getParametersStartingWith(
@@ -558,10 +547,6 @@ public class ResponseAction extends ActionSupport {
 		}
 		quMaps.put("compChenRadioMaps", chenCompChenRadioMaps);
 
-		System.out.println("quMaps....");
-		for (String key : quMaps.keySet()) {
-			System.out.println("key:" + key + "," + quMaps.get(key));
-		}
 		return quMaps;
 	}
 
@@ -627,7 +612,6 @@ public class ResponseAction extends ActionSupport {
 			int effective = surveyDetail.getEffective();
 			int rule = surveyDetail.getRule();
 
-			System.out.println("rule:" + rule);
 			request.setAttribute("directory", directory);
 
 			// 调查规则

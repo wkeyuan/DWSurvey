@@ -319,7 +319,6 @@ public class SurveyStatsManagerImpl extends
 					if(optionName.length()>15){
 						optionName=optionName.substring(0, 15)+"...";
 					}
-					System.out.println(optionName);
 					dataCross.setOptionName(optionName);
 				}
 				String statJson = JSONArray.fromObject(crosses).toString();
@@ -343,7 +342,6 @@ public class SurveyStatsManagerImpl extends
 				if(optionName.length()>15){
 					optionName=optionName.substring(0, 15)+"...";
 				}
-				System.out.println(optionName);
 				dataCross.setOptionName(optionName);
 			}
 			String statJson = JSONArray.fromObject(crosses).toString();
@@ -399,7 +397,6 @@ public class SurveyStatsManagerImpl extends
 			
 			textStr = htmlStr.trim();
 		} catch (Exception e) {
-			System.out.println("获取HTML中的text出错:");
 			e.printStackTrace();
 		}
 		return textStr;// 返回文本字符串

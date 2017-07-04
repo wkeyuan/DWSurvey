@@ -83,7 +83,6 @@ public abstract class CrudActionSupport<T extends IdEntity,ID extends Serializab
 	 * 在input()前执行二次绑定.
 	 */
 	public void prepareInput() throws Exception {
-		System.out.println("二次绑定....");
 		prepareModel();
 	}
 

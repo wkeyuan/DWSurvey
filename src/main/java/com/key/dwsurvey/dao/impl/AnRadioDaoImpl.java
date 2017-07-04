@@ -53,7 +53,6 @@ public class AnRadioDaoImpl extends BaseDaoImpl<AnRadio, String> implements AnRa
                                               Question colQuestion) {
 		List<DataCross> dataCrosses=new ArrayList<DataCross>();
 		List<QuRadio> rowList=rowQuestion.getQuRadios();
-		System.out.println("rowList.size():"+rowList.size());
 		
 		Session session=this.getSession();
 		
@@ -108,8 +107,7 @@ public class AnRadioDaoImpl extends BaseDaoImpl<AnRadio, String> implements AnRa
 			columnSql=" t1.qu_item_id as quItemId1, t2.qu_item_id as quItemId2 ";
 			groupSql=" t1.qu_item_id,t2.qu_item_id ";
 			sql="select "+columnSql+",count(*) from "+rowTab+","+colTab+whereSql+groupSql;
-			
-			System.out.println(sql+":"+rowQuestion.getId()+","+colQuestion.getId());
+
 			List<Object[]> objects=session.createSQLQuery(sql).setParameter(0, rowQuestion.getId()).setParameter(1, colQuestion.getId()).list();
 			
 			List<QuRadio> quRadios=colQuestion.getQuRadios();
@@ -145,8 +143,7 @@ public class AnRadioDaoImpl extends BaseDaoImpl<AnRadio, String> implements AnRa
 			columnSql=" t1.qu_item_id as quItemId1, t2.qu_item_id as quItemId2 ";
 			groupSql=" t1.qu_item_id, t2.qu_item_id ";
 			sql="select "+columnSql+",count(*) from "+rowTab+","+colTab+whereSql+groupSql;
-			
-			System.out.println(sql+":"+rowQuestion.getId()+","+colQuestion.getId());
+
 			List<Object[]> objects=session.createSQLQuery(sql).setParameter(0, rowQuestion.getId()).setParameter(1, colQuestion.getId()).list();
 			
 			List<QuCheckbox> quCheckboxs=colQuestion.getQuCheckboxs();

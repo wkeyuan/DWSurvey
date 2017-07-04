@@ -54,12 +54,10 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 */
 	public HibernateDao() {
 		super();
-		System.out.println("null super");
 	}
 
 	public HibernateDao(Class<T> entityClass) {
 		super(entityClass);
-		System.out.println(entityClass.getName());
 	}
 
 	//-- 分页查询函数 --//
@@ -155,10 +153,8 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 		Page<T> page = new Page<T>(pageRequest);
 
 		Criteria c = createCriteria(criterions);
-		System.out.println("pageRequest.isCountTotal():"+pageRequest.isCountTotal());
 		if (pageRequest.isCountTotal()) {
 			long totalCount = countCriteriaResult(c);
-			System.out.println("totalCount:"+totalCount);
 			page.setTotalItems(totalCount);
 			pageRequest.setTotalPage(page.getTotalPage());
 		}
@@ -281,7 +277,6 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 		// 先把Projection、ResultTransformer、OrderBy取出来,清空三者后再执行Count操作
 		Projection projection = impl.getProjection();
 		ResultTransformer transformer = impl.getResultTransformer();
-		System.out.println("count 查询"+impl.getEntityOrClassName());
 		List<CriteriaImpl.OrderEntry> orderEntries = null;
 		try {
 			orderEntries = (List) ReflectionUtils.getFieldValue(impl, "orderEntries");
@@ -338,7 +333,6 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	@Override
 	public Page<T> findPage(final PageRequest pageRequest, final List<PropertyFilter> filters) {
 		Criterion[] criterions = buildCriterionByPropertyFilter(filters);
-		System.out.println("findpage filters");
 		return findPage(pageRequest, criterions);
 	}
 
@@ -513,7 +507,6 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 		Page<T> page = new Page<T>(pageRequest);
 		if (pageRequest.isCountTotal()) {
 			long totalCount = countCriteriaResult(c);
-			System.out.println("totalCount:"+totalCount);
 			page.setTotalItems(totalCount);
 			pageRequest.setTotalPage(page.getTotalPage());
 		}
@@ -533,7 +526,6 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 		Page<T> page = new Page<T>(pageRequest);
 		if (pageRequest.isCountTotal()) {
 			long totalCount = countCriteriaResult(c);
-			System.out.println("totalCount:"+totalCount);
 			page.setTotalItems(totalCount);
 			pageRequest.setTotalPage(page.getTotalPage());
 		}

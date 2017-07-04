@@ -118,15 +118,12 @@ public class MySurveyAnswerAction extends ActionSupport{
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
 		try{
-			System.out.println("导出");
-			System.out.println("surveyId:"+surveyId);
 			String savePath = request.getSession().getServletContext().getRealPath("/");
 			User user=accountManager.getCurUser();
 	    	if(user!=null){
 	    		SurveyDirectory survey=directoryManager.getSurveyByUser(surveyId, user.getId());
 	    		if(survey!=null){
 	    			savePath=surveyAnswerManager.exportXLS(surveyId,savePath);
-	    			System.out.println("path:"+savePath);
 //	    			request.setAttribute("downPath", savePath);
 	    			response.sendRedirect(request.getContextPath()+savePath);
 	    		}

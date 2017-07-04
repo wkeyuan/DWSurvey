@@ -64,9 +64,6 @@ public class AliyunOSS {
 		String key = fileName;
 		PutObjectResult result = client.putObject(bucketName, key, content,
 				meta);
-		System.out.println(key);
-		// 打印ETag
-		System.out.println(result.getETag());
 		content.close();
 	}
 
@@ -91,9 +88,6 @@ public class AliyunOSS {
 		String key = fileName;
 		PutObjectResult result = client.putObject(bucketName, key, content,
 				meta);
-		System.out.println(key);
-		// 打印ETag
-		System.out.println(result.getETag());
 	}
 
 	public static InputStream getObject(String bucketName, String fileName) {
@@ -110,7 +104,6 @@ public class AliyunOSS {
 
 	public static List<OSSObjectSummary> getObjectList(String bucketName,
 			String prefix, int endIndex, int maxKeys) {
-		System.out.println(prefix);
 		// 初始化OSSClient
 		OSSClient client = getOSSClient();
 
@@ -136,7 +129,6 @@ public class AliyunOSS {
 			nextMarker = listing.getNextMarker();
 		}
 
-		System.out.println("nextMarker:" + nextMarker);
 		// 遍历所有Object
 		List<OSSObjectSummary> objectSummarys = listing.getObjectSummaries();
 

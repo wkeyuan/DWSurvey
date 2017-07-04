@@ -50,8 +50,6 @@ public class QuestionDaoImpl extends BaseDaoImpl<Question, String> implements Qu
 	}
 	
 	public void update(Question entity ){
-		System.out.println(entity.getId());
-		System.out.println(entity.getQuTitle());
 		super.save(entity);
 	}
 	/**
@@ -81,7 +79,6 @@ public class QuestionDaoImpl extends BaseDaoImpl<Question, String> implements Qu
 		}else if(quType==QuType.MULTIFILLBLANK){
 			saveMultiFillblank(entity, session);
 		}else if(quType==QuType.BIGQU){
-			System.out.println("save_bigqu");
 			saveQuBig(entity, session);
 		}else if(quType==QuType.SCORE){
 			saveQuScore(entity,session);
@@ -107,7 +104,6 @@ public class QuestionDaoImpl extends BaseDaoImpl<Question, String> implements Qu
 					questionLogic.setId(null);
 				}
 				questionLogic.setCkQuId(entity.getId());
-				System.out.println("questionLogic.getVisibility();:"+questionLogic.getVisibility());
 				session.saveOrUpdate(questionLogic);
 			}
 		}
@@ -161,7 +157,6 @@ public class QuestionDaoImpl extends BaseDaoImpl<Question, String> implements Qu
 	 * @param session
 	 */
 	private void saveQuChenRadio(Question entity, Session session,boolean isnew) {
-		System.out.println("...saveChenRadio....");
 		//保存相关选项信息
 		saveRows(entity,session);
 		saveColumns(entity,session);		
@@ -216,7 +211,6 @@ public class QuestionDaoImpl extends BaseDaoImpl<Question, String> implements Qu
 	 */
 	private void saveQuScore(Question entity, Session session) {
 		List<QuScore> quScores=entity.getQuScores();
-		System.out.println(quScores.size());
 		for (QuScore quScore : quScores) {
 			quScore.setQuId(entity.getId());
 			session.saveOrUpdate(quScore);
@@ -230,7 +224,6 @@ public class QuestionDaoImpl extends BaseDaoImpl<Question, String> implements Qu
 	 */
 	private void saveQuOrderby(Question entity, Session session) {
 		List<QuOrderby> quOrderbys=entity.getQuOrderbys();
-		System.out.println(quOrderbys.size());
 		for (QuOrderby quOrderby : quOrderbys) {
 			quOrderby.setQuId(entity.getId());
 			session.saveOrUpdate(quOrderby);
@@ -245,8 +238,6 @@ public class QuestionDaoImpl extends BaseDaoImpl<Question, String> implements Qu
 		List<Question> questions=entity.getQuestions();
 		session.save(entity);
 		for (Question question : questions) {
-			System.out.println("bigqu-child:"+question.getQuName());
-			System.out.println(question);
 			question.setParentQuId(entity.getId());
 			saveQuestion(question,session);
 		}

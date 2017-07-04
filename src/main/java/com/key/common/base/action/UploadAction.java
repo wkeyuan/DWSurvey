@@ -207,7 +207,6 @@ public class UploadAction extends ActionSupport{
 						fileName.append(str[pos]);
 					}
 					fileName.append(filenames[i].substring(filenames[i].lastIndexOf(".")));
-					System.out.println("path:"+path);
 					
 					if("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)){
 						//保存到aliyun

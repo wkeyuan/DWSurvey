@@ -50,7 +50,6 @@ public class PDFUtil {
 
 		renderer.createPDF(os);
 
-		System.out.println("转换成功！");
 		os.flush();
 		os.close();
 		return new File(outputFile);
@@ -93,7 +92,6 @@ public class PDFUtil {
 		while ((temp = in.readLine()) != null) {
 			sb.append(temp);
 		}
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 }

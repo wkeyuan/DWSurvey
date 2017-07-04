@@ -239,7 +239,6 @@ public final class ConfigManager {
 				reader.close();
 				
 				String path = this.getConfigPath();
-				System.out.println("updatePath:"+path);
 				String newContent = builder.toString();
 				if("local".equals(DiaowenProperty.DWSTORAGETYPE)){
 //					newContent = newContent.replaceAll( "http://file.diaowen.net", DiaowenProperty.STORAGE_URL_PREFIX);
@@ -248,10 +247,8 @@ public final class ConfigManager {
 				}else{
 					newContent = newContent.replaceAll( "http://file.diaowen.net/", DiaowenProperty.STORAGE_URL_PREFIX);
 				}
-				System.out.println(DiaowenProperty.STORAGE_URL_PREFIX);
 				// "imageUrlPrefix": "http://file.diaowen.net/", /* 图片访问路径前缀 */
 //				String newContent = newContent.replaceAll( "http://file.diaowen.net", DiaowenProperty.STORAGE_URL_PREFIX);
-				System.out.println(newContent);
 				OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
 				writer.write(newContent);
 				writer.close();

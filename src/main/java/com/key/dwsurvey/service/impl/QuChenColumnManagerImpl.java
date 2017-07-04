@@ -80,7 +80,6 @@ public class QuChenColumnManagerImpl extends BaseServiceImpl<QuChenColumn, Strin
 			int orderById=getOrderById(quId);
 			//新加选项
 			QuChenColumn quChenColumn=new QuChenColumn();
-			System.out.println("quId:"+quId);
 			quChenColumn.setQuId(quId);
 			quChenColumn.setOptionName(optionName);
 			//title

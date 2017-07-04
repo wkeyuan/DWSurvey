@@ -39,8 +39,7 @@ public class FileManager {
 		
 		if("local".equals(DiaowenProperty.DWSTORAGETYPE)) {
 			File dir = new File( this.rootPath + this.dir );
-			
-			System.out.println("dir:"+this.rootPath + this.dir);
+
 			State state = null;
 
 			if ( !dir.exists() ) {
@@ -52,10 +51,7 @@ public class FileManager {
 			}
 			
 			Collection<File> list = FileUtils.listFiles( dir, this.allowFiles, true );
-			
-			for (File file : list) {
-				System.out.println(file.getName());
-			}
+
 			if ( index < 0 || index > list.size() ) {
 				state = new MultiState( true );
 			} else {
