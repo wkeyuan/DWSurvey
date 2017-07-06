@@ -9,8 +9,6 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 [http://www.diaowen.net](http://www.diaowen.net)
 
-    用户名：service@diaowen.net  密码: 123456
-
 ## 安装
 
 因为DWSurvey是基于JAVA WEB实现，所以安装与一般的JAVA WEB程序无异，配置好数据库地址就可以正常使用。
