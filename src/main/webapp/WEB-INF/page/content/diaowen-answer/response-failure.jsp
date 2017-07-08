@@ -24,7 +24,7 @@
 		</div>
 		
 		<div class="footer-copyright" style="color: gray;">
-				 <a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">调问网</a> 提供支持
+			Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">DWSurvey</a>
 		</div>
 	</div>
 	

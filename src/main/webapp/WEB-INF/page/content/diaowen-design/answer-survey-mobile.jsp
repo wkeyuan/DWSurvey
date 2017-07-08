@@ -819,7 +819,8 @@ $(document).ready(function(){
   </div>
 
   <div data-role="footer">
-  	<h3><a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">调问网</a> 提供支持</h3>
+	  <%--请委必保留以下内容，自觉保留优先技术支持。--%>
+  	<h3>Powered by <a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a></h3>
   </div>
 </div>
 

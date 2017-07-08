@@ -45,7 +45,8 @@ import com.opensymphony.xwork2.ActionSupport;
 	@Result(name=SurveyAction.INDEXJSP,location="/index.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=SurveyAction.ANSERSURVEY,location="/WEB-INF/page/content/diaowen-design/answer-survey.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=SurveyAction.ANSERSURVEY_MOBILE,location="/WEB-INF/page/content/diaowen-design/answer-survey-mobile.jsp",type=Struts2Utils.DISPATCHER),
-	@Result(name=SurveyAction.SURVEYMODEL,location="/WEB-INF/page/content/diaowen-create/survey-model.jsp",type=Struts2Utils.DISPATCHER)
+	@Result(name=SurveyAction.SURVEYMODEL,location="/WEB-INF/page/content/diaowen-create/survey-model.jsp",type=Struts2Utils.DISPATCHER),
+	@Result(name = ResponseAction.RESPONSE_MSG, location = "/WEB-INF/page/content/diaowen-answer/response-msg.jsp", type = Struts2Utils.DISPATCHER)
 })
 
 @AllowedMethods({"answerSurvey","answerSurveryMobile","surveyModel","answerTD","ajaxCheckSurvey"})
@@ -92,24 +93,41 @@ public class SurveyAction extends ActionSupport{
 
 	//问卷的动态访问方式
 	public String answerSurvey() throws Exception {
-		buildSurvey();
+		HttpServletRequest request = Struts2Utils.getRequest();
+		SurveyDirectory survey=surveyDirectoryManager.getSurvey(surveyId);
+		// 如果是非发布状态
+		if (survey.getSurveyQuNum() <= 0 || survey.getSurveyState() != 1) {
+			request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
+			request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
+			return ResponseAction.RESPONSE_MSG;
+		}
+		buildSurvey(survey);
 		return ANSERSURVEY;
 	}
 	//问卷动态访问-移动端
 	public String answerSurveryMobile() throws Exception {
-	    buildSurvey();
+		HttpServletRequest request = Struts2Utils.getRequest();
+		SurveyDirectory survey=surveyDirectoryManager.getSurvey(surveyId);
+		// 如果是非发布状态
+		if (survey.getSurveyQuNum() <= 0 || survey.getSurveyState() != 1) {
+			request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
+			request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
+			return ResponseAction.RESPONSE_MSG;
+		}
+		buildSurvey(survey);
 	    return ANSERSURVEY_MOBILE;
 	}
 
 	//创建时卷模板
 	public String surveyModel() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
-		buildSurvey();
+		buildSurvey(null);
 		return SURVEYMODEL;
 	}
 	
-	private void buildSurvey() {
-		SurveyDirectory survey=surveyDirectoryManager.getSurvey(surveyId);
+	private void buildSurvey(SurveyDirectory survey) {
+		if (survey==null)
+		survey=surveyDirectoryManager.getSurvey(surveyId);
 		survey.setQuestions(questionManager.findDetails(surveyId, "2"));
 		Struts2Utils.setReqAttribute("survey", survey);
 		SurveyStyle surveyStyle=surveyStyleManager.getBySurveyId(surveyId);

@@ -50,11 +50,11 @@
   </div>
 
   <div data-role="content">
-   <p>问卷提交成功，感谢您的参与!</p>
+   <p>${msg }</p>
   </div>
 
   <div data-role="footer">
-      <h3>Powered by <a href="http://www.diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a> </h3>
+  <h3>Powered by <a href="http://www.diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a> </h3>
   </div>
 </div> 
 

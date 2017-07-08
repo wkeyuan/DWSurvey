@@ -1871,8 +1871,9 @@ label.error{
 
 </div>
 
-<div class="footer-copyright" style="color: gray;">
-	<a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">调问网</a> 提供支持
+<div class="footer-copyright" style="color: gray;padding-bottom: 5px;">
+	<%--请委必保留以下内容，自觉保留优先技术支持。--%>
+		Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;">DWSurvey</a>
 </div>
 		
 <div id="fixedMsg" style="position: fixed;top: 0px;width: 100%;padding: 10px;text-align: center;font-size: 18px;letter-spacing: 4px;line-height: 56px;background-color: #111;background-color: rgba(17,17,17,0.5);color: #fff;color: rgba(255,255,255,0.5);z-index: 200;display: none;"></div>
