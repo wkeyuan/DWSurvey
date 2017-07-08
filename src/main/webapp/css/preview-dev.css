@@ -1722,7 +1722,10 @@ table.quCoChenTable tr td label{
 .dwQuOptionItemContent label{
 	cursor: pointer!important;
 }
-.dwQuOptionItemContent input{
+/*.dwQuOptionItemContent input{
+	display: none;
+}*/
+.dwQuOptionItemContent input[type='radio'],.dwQuOptionItemContent input[type='checkbox']{
 	display: none;
 }
 .dwQuOptionItemContent .dwQuInputLabel{

@@ -422,6 +422,7 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		String surveyAnswerId=surveyAnswer.getId();
 		
 		int answerQuCount=0;
+		if (checkboxMaps!=null)
 		for (String key : checkboxMaps.keySet()) {
 			String quId=key;
 			Map<String, Object> map=(Map<String, Object>) checkboxMaps.get(key);
@@ -502,13 +503,14 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		String surveyId=surveyAnswer.getSurveyId();
 		String surveyAnswerId=surveyAnswer.getId();
 		int answerQuCount=0;
+		if (radioMaps!=null)
 		for (String key : radioMaps.keySet()) {
 			answerQuCount++;
 			String quId=key;
 			String quItemId=radioMaps.get(key).toString();
 			AnRadio anRadio=new AnRadio(surveyId,surveyAnswerId,quId,quItemId);
 			session.save(anRadio);
-		}		
+		}
 		return answerQuCount;
 	}
 

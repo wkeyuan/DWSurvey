@@ -1058,6 +1058,7 @@ $(document).ready(function(){
 																<div class="dwQuOptionItemContent">
 																<label class="dwRedioStyle dwQuInputLabel" ></label>
 																<input type="radio" ><label style="width:${600/en.cellCount-10 }px;" class="editAble quCoOptionEdit quCoOptionPadding">${en.quRadios[quOptionIndex].optionName }</label>
+																	<input type='text' class='optionInpText'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"/>
 																<div class="quItemInputCase"><input type="hidden" name="quItemId" value="${en.quRadios[quOptionIndex].id }"><input type="hidden" name="quItemSaveTag" value="1"></div>
 																</div>
 														</c:when>
@@ -1076,6 +1077,7 @@ $(document).ready(function(){
 													<div class="dwQuOptionItemContent">
 													<label class="dwRedioStyle dwQuInputLabel" ></label>
 													<input type="radio"><label class="editAble quCoOptionEdit quCoOptionPadding">${item.optionName }</label>
+														<input type='text' class='optionInpText'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"/>
 													<div class="quItemInputCase"><input type="hidden" name="quItemId" value="${item.id }"><input type="hidden" name="quItemSaveTag" value="1"></div>
 													</div>
 												</li>
@@ -1090,6 +1092,7 @@ $(document).ready(function(){
 													<div class="dwQuOptionItemContent">
 													<label class="dwRedioStyle dwQuInputLabel" ></label>
 													<input type="radio"><label class="editAble quCoOptionEdit quCoOptionPadding">${item.optionName }</label>
+														<input type='text' class='optionInpText'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"/>
 													<div class="quItemInputCase"><input type="hidden" name="quItemId" value="${item.id }"><input type="hidden" name="quItemSaveTag" value="1"></div>
 													</div>
 												</li>
@@ -1154,6 +1157,7 @@ $(document).ready(function(){
 														<div class="dwQuOptionItemContent">
 															<label class="dwCheckboxStyle dwQuInputLabel" ></label>
 															<input type="checkbox"><label style="width:${600/en.cellCount-10 }px;" class="editAble quCoOptionEdit quCoOptionPadding">${en.quCheckboxs[quOptionIndex].optionName }</label>
+															<input type='text' class='optionInpText'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"/>
 															<div class="quItemInputCase"><input type="hidden" name="quItemId" value="${en.quCheckboxs[quOptionIndex].id }"><input type="hidden" name="quItemSaveTag" value="1"></div>
 														</div>
 														</c:when>
@@ -1172,6 +1176,7 @@ $(document).ready(function(){
 												<div class="dwQuOptionItemContent">
 													<label class="dwCheckboxStyle dwQuInputLabel" ></label>
 													<input type="checkbox"><label class="editAble quCoOptionEdit quCoOptionPadding">${item.optionName }</label>
+													<input type='text' class='optionInpText'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"/>
 													<div class="quItemInputCase"><input type="hidden" name="quItemId" value="${item.id }"><input type="hidden" name="quItemSaveTag" value="1"></div>
 												</div>
 												</li>
@@ -1186,6 +1191,7 @@ $(document).ready(function(){
 												<div class="dwQuOptionItemContent">
 													<label class="dwCheckboxStyle dwQuInputLabel" ></label>
 													<input type="checkbox"><label class="editAble quCoOptionEdit quCoOptionPadding">${item.optionName }</label>
+													<input type='text' class='optionInpText'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"/>
 													<div class="quItemInputCase"><input type="hidden" name="quItemId" value="${item.id }"><input type="hidden" name="quItemSaveTag" value="1"></div>
 												</div>
 												</li>

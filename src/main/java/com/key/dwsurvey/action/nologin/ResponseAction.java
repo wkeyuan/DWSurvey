@@ -367,19 +367,10 @@ public class ResponseAction extends ActionSupport {
 		quMaps.put("yesnoMaps", yesnoMaps);
 		// 单选题quradio_id id_value
 		Map<String, Object> radioMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.RADIO + "_");
-		quMaps.put("radioMaps", radioMaps);
+				request, "qu_"+QuType.RADIO + "_");
 		// 多选题qucheckbox_id id_value,id_value
 		Map<String, Object> checkboxMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.CHECKBOX + "_");
-		// 得到每一个子项
-		for (String key : checkboxMaps.keySet()) {
-			String dfillValue = checkboxMaps.get(key).toString();
-			Map<String, Object> map = WebUtils.getParametersStartingWith(
-					request, dfillValue);
-			checkboxMaps.put(key, map);
-		}
-		quMaps.put("checkboxMaps", checkboxMaps);
+				request, "qu_"+QuType.CHECKBOX + "_");
 		// 填空题qufillblank_id value
 		Map<String, Object> fillblankMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.FILLBLANK + "_");
@@ -453,7 +444,6 @@ public class ResponseAction extends ActionSupport {
 			scoreMaps.put(key, map);
 		}
 		quMaps.put("scoreMaps", scoreMaps);
-
 		// 排序题
 		Map<String, Object> quOrderMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.ORDERQU + "_");
@@ -464,7 +454,6 @@ public class ResponseAction extends ActionSupport {
 			quOrderMaps.put(key, map);
 		}
 		quMaps.put("quOrderMaps", quOrderMaps);
-
 		// 矩阵单选题
 		Map<String, Object> chenRadioMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.CHENRADIO + "_");
@@ -527,7 +516,36 @@ public class ResponseAction extends ActionSupport {
 			chenFbkMaps.put(key, map);
 		}
 		quMaps.put("chenFbkMaps", chenFbkMaps);
-
+		//子级
+		for (String key:radioMaps.keySet()) {
+			String enId = key;
+			String quItemId = radioMaps.get(key).toString();
+			String otherText = Struts2Utils.getParameter("text_qu_"
+					+ QuType.RADIO + "_" + enId + "_" + quItemId);
+			AnRadio anRadio = new AnRadio();
+			anRadio.setQuId(enId);
+			anRadio.setQuItemId(quItemId);
+			anRadio.setOtherText(otherText);
+			radioMaps.put(key, anRadio);
+		}
+		quMaps.put("compRadioMaps", radioMaps);
+		// 子级
+		for (String key : checkboxMaps.keySet()) {
+			String dfillValue = checkboxMaps.get(key).toString();
+			Map<String, Object> map = WebUtils.getParametersStartingWith(
+					request, dfillValue);
+			for (String key2 : map.keySet()) {
+				String quItemId = map.get(key2).toString();
+				String otherText = Struts2Utils.getParameter("text_"
+						+ dfillValue + quItemId);
+				AnCheckbox anCheckbox = new AnCheckbox();
+				anCheckbox.setQuItemId(quItemId);
+				anCheckbox.setOtherText(otherText);
+				map.put(key2, anCheckbox);
+			}
+			checkboxMaps.put(key, map);
+		}
+		quMaps.put("compCheckboxMaps", checkboxMaps);
 		// 复合矩阵单选题
 		Map<String, Object> chenCompChenRadioMaps = WebUtils
 				.getParametersStartingWith(request, "qu_"
@@ -546,7 +564,6 @@ public class ResponseAction extends ActionSupport {
 			chenCompChenRadioMaps.put(key, map);
 		}
 		quMaps.put("compChenRadioMaps", chenCompChenRadioMaps);
-
 		return quMaps;
 	}
 
