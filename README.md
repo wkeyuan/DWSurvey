@@ -56,6 +56,24 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 解压命令：jar xvf DWSurvey.war    打包环境：jdk1.8, tomcat8.0
 
+### docker安装方式
+
+1、安装docker以及docker-compose，刚才给你文档了
+
+2、构建镜像：
+
+   docker build -t dwsurvey .
+
+3、启动一个mysql容器：
+
+   docker-compose up -d db
+
+4、启动 dwsurvey 容器：
+
+   docker-compose up -d dwsurvey
+
+访问 8080 端口，应该就可以登录了。
+
 ## 特色
 
 ### 全新体验、流程简单
