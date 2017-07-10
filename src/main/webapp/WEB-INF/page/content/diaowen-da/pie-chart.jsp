@@ -289,8 +289,6 @@ function substring(json) {
 							<div style="overflow: auto;">
 								<div style="float: left;" >
 									<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId }" class="dw_btn025 tabpic"><i class="fa fa-tasks"></i>&nbsp;表格</a>
-									<a href="${ctx }/da/survey-report!lineChart.action?surveyId=${surveyId }" class="dw_btn025 linepic " style="margin-left: 10px;"><i class="fa fa-bar-chart"></i>&nbsp;柱状图</a>
-									<a href="${ctx }/da/survey-report!pieChart.action?surveyId=${surveyId }" class="dw_btn025 piepic active" style="margin-left: 10px;"><i class="fa fa-pie-chart"></i>&nbsp;饼状图</a></div>
 								<div style="float: right;" >
 									<a href="" class="dw_btn025"><i class="fa fa-download"></i>下载报告</a>
 									<a href="" class="dw_btn025"><i class="fa fa-share"></i>分享</a></div>

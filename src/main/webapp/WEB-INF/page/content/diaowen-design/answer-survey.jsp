@@ -1872,7 +1872,7 @@ label.error{
 </div>
 
 <div class="footer-copyright" style="color: gray;padding-bottom: 5px;">
-	<%--请委必保留以下内容，自觉保留优先技术支持。--%>
+		<%--请保留以下内容--%>
 		Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;">DWSurvey</a>
 </div>
 		

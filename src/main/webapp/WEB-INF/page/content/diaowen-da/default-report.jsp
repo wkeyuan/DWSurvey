@@ -794,7 +794,6 @@ function substring(json) {
 		                    	<div class="selcc tbtag">
 		                            <div class="seli"><a class="nx-1" href="${ctx }/design/my-collect.action?surveyId=${surveyId}">答卷地址</a></div>
 		                            <div class="seli"><a class="nx-2" href="">社交分享</a></div>
-		                            <div class="seli"><a class="nx-3" href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=mail">邮件邀请</a></div>
 		                            <div class="seli"><a class="nx-3" href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp">网站组件</a></div>
 		                            <div class="seli"><a class="nx-3" href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin">微信收集</a></div>
 		                        </div>
@@ -968,7 +967,7 @@ function substring(json) {
 											<table class="suQuTable" border="0" cellpadding="0" cellspacing="0" style="border: none! important;margin-top: 8px;">
 													<tr>
 														<td width="15px">&nbsp;</td>
-														<td class="bfbTd">回答数：${en.anCount }条&nbsp;&nbsp;<a href="#">查看</a></td>
+														<td class="bfbTd">回答数：${en.anCount }条&nbsp;&nbsp;<a href="#" >查看</a></td>
 														<td colspan="4">&nbsp;</td>
 													</tr>
 												</table>
@@ -1426,9 +1425,6 @@ function substring(json) {
 											</div>
 											<div style="clear:both;"></div>
 										</c:when>
-										<c:otherwise>
-											题型开发中..
-										</c:otherwise>
 								</c:choose>
 								
 							</div>

@@ -172,6 +172,9 @@ $(document).ready(function(){
 										<div class="dwQuOptionItemContent">
 										<label for="qu_${en.quType }_${en.id }_${item.id}">${item.optionName }</label>
 										<input id="qu_${en.quType }_${en.id }_${item.id}" type="radio" name="qu_${en.quType }_${en.id }" value="${item.id }">
+											<c:if test="${item.isNote eq 1 }" >
+												<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"   name="text_qu_${en.quType }_${en.id }_${item.id }"  />
+											</c:if>
 										</div>
 									</c:forEach>
 								</fieldset>
@@ -214,6 +217,9 @@ $(document).ready(function(){
 										<div class="dwQuOptionItemContent">
 										<label for="tag_qu_${en.quType }_${en.id }_${item.id }" >${item.optionName }</label>
 										<input id="tag_qu_${en.quType }_${en.id }_${item.id }" type="checkbox" name="tag_qu_${en.quType }_${en.id }_${item.id }"  value="${item.id }" >
+											<c:if test="${item.isNote eq 1 }" >
+												<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;"  name="text_tag_qu_${en.quType }_${en.id }_${en.quCheckboxs[quOptionIndex].id }" />
+											</c:if>
 										</div>
 									</c:forEach>
 								</fieldset>
@@ -819,7 +825,7 @@ $(document).ready(function(){
   </div>
 
   <div data-role="footer">
-	  <%--请委必保留以下内容，自觉保留优先技术支持。--%>
+	  <%--请保留以下内容--%>
   	<h3>Powered by <a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a></h3>
   </div>
 </div>
