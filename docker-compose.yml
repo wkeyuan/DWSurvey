@@ -1,3 +1,4 @@
+# 这个 compose 仅仅是一个参考，生产环境部署时，请根据实际情况调整参数
 version: "3"
 
 services:
@@ -13,7 +14,7 @@ services:
       - MYSQL_PASSWORD=dwsurvey
 
   dwsurvey:
-    image: dwsurvey
+    image: wkeyuan/dwsurvey:latest
     restart: always
     volumes:
       - "dwsurvey-wjHtml:/dwsurvey/WEB-INF/wjHtml"
