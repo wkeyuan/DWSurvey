@@ -94,23 +94,44 @@ DWSurvey以宽通用公共许可证LGPL3.0为开源协议，更好的支持商�
 
 ## docker支持
 
-## 自己构建如何使用
+### 快速体验
 
-1、安装docker以及docker-compose，刚才给你文档了
+    # 启动一个 mysql 容器，等待初始化完成
+    docker-compose up -d db
 
-2、构建镜像：
+    # 启动 dwsurvey 容器
+    docker-compose up -d dwsurvey
 
-   docker build -t dwsurvey .
+### 环境变量
 
-3、启动一个mysql容器：
+如果你有现成的mysql，你可以单独启动 dwsurvey 容器。
 
-   docker-compose up -d db
+    # docker pull wkeyuan/dwsurvey:latest
+    # docker run -d -e ... wkeyuan/dwsurvey:latest
 
-4、启动 dwsurvey 容器：
+你可以通过环境变量来进行一些必要的配置，以下是所有支持的环境变量：
 
-   docker-compose up -d dwsurvey
+| 变量名 | 必须 | 作用 |
+| ------ | ---- | ---- |
+| ``MYSQL_HOST`` | 是 | 数据库地址，可以是域名或者IP。 |
+| ``MYSQL_PORT`` | 否 | 数据库端口，默认为 ``3306`` 。 |
+| ``MYSQL_DATABASE`` | 是 | dwsurvey使用的数据库，必须事先创建好。 |
+| ``MYSQL_USER`` | 是 | 数据库帐号，必须实现创建好。 |
+| ``MYSQL_PASSWORD`` | 是 | 数据库帐号的密码。 |
+| ``ADMIN_EMAIL`` | 首次必须 | 初始帐号的邮箱。首次运行时必须，后续升级时不需要该变量。 |
+| ``ADMIN_PASSWORD`` | 首次必须 | 初始帐号的密码。 |
+| ``CONTEXT_ROOT`` | 否 | 默认为 ``/`` ，访问的URL根路径。|
 
-访问 8080 端口，应该就可以登录了。
+### 本地构建镜像
+
+由于使用了 multistage build 的特性，要求 docker 的版本大于 ``17.05`` 。
+
+    docker build -t dwsurvey .
+
+由于构建时需要从 maven 仓库下载大量依赖包，为了加快速度，你可以使用参数 ``LOCAL_MAVEN_MIRROR`` 来指定使用的 maven 镜像
+（默认为阿里云的镜像）。
+
+    docker build --build-arg LOCAL_MAVEN_MIRROR=http://your-mirror -t dwsurvey .
 
 - - -
 
