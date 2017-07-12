@@ -88,27 +88,15 @@ public class MySurveyDesignAction extends ActionSupport{
 	}
 	
 	public String devSurvey() throws Exception {
-		
-		//生成问卷静态HTML，并保存在/WEB-INF/survey/2014/01/01/surveyId.html
-		//www.diaowen.com/wenjuan/adbc843242.html  访问地址  使用urlrewrite重定向到www.diaowen.com/*/*.html 处理action
-		/*
-		SurveyReqUrl surveyReqUrl=new SurveyReqUrl();
-		surveyReqUrl.setState(1);
-		surveyReqUrl.setSurveyId(surveyId);
-		surveyReqUrlManager.save(surveyReqUrl);*/
-		//生成静态HTML
 		SurveyDirectory survey=surveyDirectoryManager.get(surveyId);
 		Date createDate=survey.getCreateDate();
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd/");
 		try{
-			//保存静态HTML路径
-			//buildSurveyHtml();
 			String url="/survey!answerSurvey.action?surveyId="+surveyId;
 			String filePath="WEB-INF/wjHtml/"+dateFormat.format(createDate);
 			String fileName=surveyId+".html";
 			new JspToHtml().postJspToHtml(url, filePath, fileName);
 			survey.setHtmlPath(filePath+fileName);
-			//设置问卷状态为发布状态
 			survey.setSurveyState(1);
 			surveyDirectoryManager.save(survey);
 		}catch (Exception e) {

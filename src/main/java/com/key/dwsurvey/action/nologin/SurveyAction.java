@@ -95,12 +95,6 @@ public class SurveyAction extends ActionSupport{
 	public String answerSurvey() throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		SurveyDirectory survey=surveyDirectoryManager.getSurvey(surveyId);
-		// 如果是非发布状态
-		if (survey.getSurveyQuNum() <= 0 || survey.getSurveyState() != 1) {
-			request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
-			request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
-			return ResponseAction.RESPONSE_MSG;
-		}
 		buildSurvey(survey);
 		return ANSERSURVEY;
 	}
