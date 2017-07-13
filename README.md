@@ -36,7 +36,7 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
     conf/application.properties
 
 	#database settings
-	jdbc.url=jdbc:mysql://localhost:3306/diaowen?useUnicode=true&characterEncoding=utf8
+	jdbc.url=jdbc:mysql://localhost:3306/dwsurvey?useUnicode=true&characterEncoding=utf8
 	jdbc.username=root
 	jdbc.password=123456,.
 
@@ -52,9 +52,11 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 最新的war包下载可以前往交流QQ群：635994795
 
-下载最新的DWSurvey.war，解压后会有一个diaowen目录，按前面说明配置数据库连接信息，再考到tomcat wabapps下
+下载最新的diaowen.war，再考到tomcat wabapps下
 
-解压命令：jar xvf DWSurvey.war    打包环境：jdk1.8, tomcat8.0
+打包环境：jdk1.8, tomcat8.0
+
+外部解压命令：jar xvf diaowen.war
 
 ## 特色
 
