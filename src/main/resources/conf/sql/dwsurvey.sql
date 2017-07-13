@@ -715,9 +715,9 @@ CREATE TABLE `t_question` (
   `param_int02` int(11) DEFAULT NULL,
   `parent_qu_id` varchar(255) DEFAULT NULL,
   `qu_name` varchar(255) DEFAULT NULL,
-  `qu_note` varchar(255) DEFAULT NULL,
+  `qu_note` text,
   `qu_tag` int(11) DEFAULT NULL,
-  `qu_title` varchar(255) DEFAULT NULL,
+  `qu_title` text,
   `qu_type` int(11) DEFAULT NULL,
   `rand_order` int(11) DEFAULT NULL,
   `tag` int(11) DEFAULT NULL,
@@ -865,7 +865,7 @@ CREATE TABLE `t_survey_detail` (
   `rule_code` varchar(255) DEFAULT NULL,
   `show_answer_da` int(11) DEFAULT NULL,
   `show_share_survey` int(11) DEFAULT NULL,
-  `survey_note` varchar(255) DEFAULT NULL,
+  `survey_note` text,
   `survey_qu_num` int(11) DEFAULT NULL,
   `yn_end_num` int(11) DEFAULT NULL,
   `yn_end_time` int(11) DEFAULT NULL,
@@ -879,7 +879,7 @@ CREATE TABLE `t_survey_detail` (
 
 LOCK TABLES `t_survey_detail` WRITE;
 /*!40000 ALTER TABLE `t_survey_detail` DISABLE KEYS */;
-INSERT INTO `t_survey_detail` VALUES ('402880e55cb9c629015cb9d31f160001',0,0,'402880e55cb9c629015cb9d31eff0000',0,0,5,1000,'2017-06-18 14:28:34',1,0,1,3,0,'令牌',0,1,'非常感谢您的参与！如有涉及个人信息，我们将严格保密。',0,0,0);
+INSERT INTO `t_survey_detail` VALUES ('402880e55cb9c629015cb9d31f160001',0,0,'402880e55cb9c629015cb9d31eff0000',0,0,5,1000,'2017-07-13 23:21:00',1,0,1,3,0,'令牌',0,1,'非常感谢您的参与！如有涉及个人信息，我们将严格保密。',0,0,0);
 /*!40000 ALTER TABLE `t_survey_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1190,7 +1190,7 @@ CREATE TABLE `t_user` (
 
 LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
-INSERT INTO `t_user` VALUES ('1',NULL,'2013-03-21 21:15:21',NULL,NULL,'2013-03-21 21:15:21',1,'service@diaowen.net',NULL,NULL,'2013-03-21 21:15:34','dwsurvey','柯远',NULL,1,'7c4a8d09ca3762af61e59520943dc26494f8941b',1,1);
+INSERT INTO `t_user` VALUES ('1',NULL,'2013-03-21 21:15:21',NULL,NULL,'2013-03-21 21:15:21',1,'service@diaowen.net',NULL,NULL,'2013-03-21 21:15:34','dwsurvey','柯远',NULL,1,'7c4a8d09ca3762af61e59520943dc26494f8941b',2,1);
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1230,4 +1230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-18 14:30:13
+-- Dump completed on 2017-07-13 23:22:07

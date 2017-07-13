@@ -1,0 +1,5 @@
+ALTER TABLE `dwsurvey`.`t_question` 
+CHANGE COLUMN `qu_note` `qu_note` TEXT NULL DEFAULT NULL ,
+CHANGE COLUMN `qu_title` `qu_title` TEXT NULL DEFAULT NULL ;
+ALTER TABLE `dwsurvey`.`t_survey_detail` 
+CHANGE COLUMN `survey_note` `survey_note` TEXT NULL DEFAULT NULL ;
