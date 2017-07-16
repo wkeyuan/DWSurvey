@@ -1304,7 +1304,7 @@ $(document).ready(function(){
 													<label class="editAble quCoOptionEdit">${item.optionName }</label>
 													<div class="quItemInputCase"><input type="hidden" name="quItemId" value="${item.id }"><input type="hidden" name="quItemSaveTag" value="1"></div>
 												</td>
-												<td class="quCoItemTableTd"><table class="scoreNumTable"><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr></table></td>
+												<td class="quCoItemTableTd"><table class="scoreNumTable"><tr><c:forEach begin="1" end="${en.paramInt02 }" var="scoreNum"><td style="background-color: white;">${scoreNum }</td></c:forEach></tr></table></td>
 												<td class="quCoItemTableTd">分</td>
 											</tr>
 											</c:forEach>

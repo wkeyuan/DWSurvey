@@ -314,11 +314,12 @@ $(document).ready(function(){
 												<input type="hidden" class="answerTag" value="0" >
 												<fieldset class="starRating" data-role="controlgroup" >
 													<legend>${item.optionName }</legend>
+													<c:forEach begin="1" end="${en.paramInt02 }" var="scoreNum"><i class="fa fa-star-o"></i></c:forEach>
+													<%--<i class="fa fa-star-o"></i>
 													<i class="fa fa-star-o"></i>
 													<i class="fa fa-star-o"></i>
 													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>--%>
 												</fieldset>
 												<input name="item_qu_${en.quType }_${en.id }_${item.id }" value=""  type="hidden" class="scoreNumInput" >
 											</div>

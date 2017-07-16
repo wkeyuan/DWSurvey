@@ -112,6 +112,8 @@ button {
 										<th align="left" width="80">状态</th>
 										<th align="center" width="220" style="padding-left: 10px;">操作</th>
 									</tr>
+									<c:choose>
+									<c:when test="${page.totalItems > 0}">
 									<c:forEach items="${page.result }" var="en">
 									<tr>
 										<td align="center">
@@ -141,6 +143,17 @@ button {
 										</td>
 									</tr>
 									</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td colspan="7">
+
+												<div style="padding: 60px;font-size: 22px;text-align: center;color: #b1aeae;">还没有数据！</div>
+
+											</td>
+										</tr>
+									</c:otherwise>
+									</c:choose>
 								</table>
 								<div style="padding-top: 15px;text-align: center;">
 									<div class="btn-group">
