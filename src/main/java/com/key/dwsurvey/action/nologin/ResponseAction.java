@@ -129,68 +129,13 @@ public class ResponseAction extends ActionSupport {
 		SurveyDirectory directory = directoryManager.getSurveyBySid(sid);
 		if (directory != null) {
 			surveyId = directory.getId();
-			SurveyDetail surveyDetail = directory.getSurveyDetail();
-			int rule = surveyDetail.getRule();
-			if (directory.getSurveyQuNum() <= 0
-					|| directory.getSurveyState() != 1) {
-				request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
-				request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
-				return RESPONSE_MSG;
+			String filterStatus = filterStatus(directory,request);
+			if(filterStatus!=null){
+				return filterStatus;
 			}
-			if (2 == rule) {
-				request.setAttribute("msg", "rule2");
-				return RELOAD_ANSER_ERROR;
-			} else if (3 == rule) {
-				String ruleCode = request.getParameter("ruleCode");
-				String surveyRuleCode = surveyDetail.getRuleCode();
-				if (ruleCode == null || !ruleCode.equals(surveyRuleCode)) {
-					return ANSWER_INPUT_RULE;
-				}
-			}
-
 			if (HttpRequestDeviceUtils.isMobileDevice(request)) {
 				return RESPONSE_MOBILE;
-			} else if ("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)
-					|| "baiduBOS".equals(DiaowenProperty.DWSTORAGETYPE)) {
-				// 这句话的意思，是让浏览器用utf8来解析返回的数据
-				response.setHeader("Content-type", "text/html;charset=UTF-8");
-				// 这句话的意思，是告诉servlet用UTF-8转码，而不是用默认的ISO8859
-				response.setCharacterEncoding("UTF-8");
-				InputStream inputStream = null;
-				if ("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)) {
-					inputStream = AliyunOSS.getObject(
-							DiaowenProperty.WENJUANHTML_BACKET, surveyId
-									+ ".html");
-				} else {
-					inputStream = BaiduBOS.getObject(
-							DiaowenProperty.WENJUANHTML_BACKET, surveyId
-									+ ".html");
-				}
-
-				if (inputStream != null) {
-					PrintWriter writer = response.getWriter();
-					InputStreamReader isr = new InputStreamReader(inputStream,
-							"UTF-8");
-					BufferedReader b = new BufferedReader(isr);
-					try {
-						String s = null;
-						while ((s = b.readLine()) != null) {
-							writer.println(s);
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					} finally {
-						try {
-							writer.flush();
-							writer.close();
-							inputStream.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-
-			} else if ("local".equals(DiaowenProperty.DWSTORAGETYPE)) {
+			} else {
 				String htmlPath = directory.getHtmlPath();
 				request.getRequestDispatcher("/" + htmlPath).forward(request,
 						response);
@@ -200,29 +145,37 @@ public class ResponseAction extends ActionSupport {
 		return NONE;
 	}
 
+	private String filterStatus(SurveyDirectory directory,HttpServletRequest request){
+		SurveyDetail surveyDetail = directory.getSurveyDetail();
+		int rule = surveyDetail.getRule();
+		if (directory.getSurveyQuNum() <= 0
+				|| directory.getSurveyState() != 1) {
+			request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
+			request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
+			return RESPONSE_MSG;
+		}
+		if (2 == rule) {
+			request.setAttribute("msg", "rule2");
+			return RELOAD_ANSER_ERROR;
+		} else if (3 == rule) {
+			String ruleCode = request.getParameter("ruleCode");
+			String surveyRuleCode = surveyDetail.getRuleCode();
+			if (ruleCode == null || !ruleCode.equals(surveyRuleCode)) {
+				return ANSWER_INPUT_RULE;
+			}
+		}
+		return null;
+	}
+
 	public String answerMobile() throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		HttpServletResponse response = Struts2Utils.getResponse();
 		SurveyDirectory directory = directoryManager.getSurvey(surveyId);
 
 		if (directory != null) {
-			SurveyDetail surveyDetail = directory.getSurveyDetail();
-			int rule = surveyDetail.getRule();
-			if (directory.getSurveyQuNum() <= 0
-					|| directory.getSurveyState() != 1) {
-				request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
-				request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
-				return RESPONSE_MSG;
-			}
-			if (2 == rule) {
-				request.setAttribute("msg", "rule2");
-				return RELOAD_ANSER_ERROR;
-			} else if (3 == rule) {
-				String ruleCode = request.getParameter("ruleCode");
-				String surveyRuleCode = surveyDetail.getRuleCode();
-				if (ruleCode == null || !ruleCode.equals(surveyRuleCode)) {
-					return ANSWER_INPUT_RULE;
-				}
+			String filterStatus = filterStatus(directory,request);
+			if(filterStatus!=null){
+				return filterStatus;
 			}
 			String htmlPath = directory.getHtmlPath();
 			htmlPath = htmlPath.substring(0,htmlPath.lastIndexOf("/"));
