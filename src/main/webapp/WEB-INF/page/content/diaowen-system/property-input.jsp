@@ -12,6 +12,9 @@
 <script type="text/javascript" src="${ctx }/js/dw/uploadify.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+
+	currentMenu("systemset");
+
 	binduploadImg("loginBgfile","loginBgfileQueueid","loginBgfileImgPath","上传");
 	
 	$("#login_bg_div img").hover(function(){

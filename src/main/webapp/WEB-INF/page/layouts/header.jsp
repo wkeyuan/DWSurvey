@@ -34,10 +34,10 @@
 				<div class="header_Item header_menu">
 					<ul>
 					<%-- <li><a href="${ctx }/" >首页</a></li> --%>
-					<li><a href="${ctx }/design/my-survey.action">问卷</a></li>
+					<li><a href="${ctx }/design/my-survey.action" id="mysurvey">问卷</a></li>
 						<shiro:hasRole name="admin" >
-					<li><a href="${ctx }/sy/user/user-admin.action">用户</a></li>
-					<li><a href="${ctx }/sy/system/sys-property!input.action">设置</a></li>
+					<li><a href="${ctx }/sy/user/user-admin.action" id="usermanager">用户</a></li>
+					<li><a href="${ctx }/sy/system/sys-property!input.action" id="systemset">设置</a></li>
 						</shiro:hasRole>
 					<li><a href="http://support.diaowen.net/">帮助</a></li>
 					</ul>

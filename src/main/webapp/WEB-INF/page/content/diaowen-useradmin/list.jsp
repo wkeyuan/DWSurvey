@@ -19,7 +19,7 @@
 <script type="text/javascript">
 	
 $(document).ready(function(){
-	
+	currentMenu("usermanager");
 	$(".checkboxAll").unbind();
 	$(".checkboxAll").change(function(){
 		if($(this).prop("checked")){

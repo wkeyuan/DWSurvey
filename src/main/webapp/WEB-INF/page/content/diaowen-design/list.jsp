@@ -200,6 +200,8 @@ button {
 
 <script type="text/javascript">
 
+	currentMenu("mysurvey");
+
 	$("select[name='surveyState']").val("${surveyState}");
 
 var options={
