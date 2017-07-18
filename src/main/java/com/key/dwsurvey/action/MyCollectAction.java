@@ -25,7 +25,6 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({
 	@Result(name=MyCollectAction.COLLECT1,location="/WEB-INF/page/content/diaowen-collect/collect_1.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=MyCollectAction.IFRAME,location="/WEB-INF/page/content/diaowen-collect/collect_iframe.jsp",type=Struts2Utils.DISPATCHER),
-	@Result(name=MyCollectAction.MAIL_INPUT,location="/WEB-INF/page/content/diaowen-collect/collect_mail_input1.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=MyCollectAction.SITECOMP,location="/WEB-INF/page/content/diaowen-collect/collect_website.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=MyCollectAction.WEIXIN,location="/WEB-INF/page/content/diaowen-collect/collect_weixin.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=MyCollectAction.SHARE,location="/WEB-INF/page/content/diaowen-collect/collect_2.jsp",type=Struts2Utils.DISPATCHER)
@@ -34,7 +33,6 @@ public class MyCollectAction extends ActionSupport{
 	
 	protected final static String COLLECT1="collect1";
 	protected final static String IFRAME="iframe";
-	protected final static String MAIL_INPUT="mail";
 	protected final static String SITECOMP="sitecomp";
 	protected final static String WEIXIN="weixin";
 	protected final static String SHARE="share";
@@ -65,9 +63,6 @@ public class MyCollectAction extends ActionSupport{
     			request.setAttribute("survey", surveyDirectory);
     			if(IFRAME.equals(tabId)){
     				return IFRAME;
-    			}else if(MAIL_INPUT.equals(tabId)){
-    				request.setAttribute("user", accountManager.getCurUser());
-    				return MAIL_INPUT;
     			}else if(SITECOMP.equals(tabId)){
     				return SITECOMP;
     			}else if(WEIXIN.equals(tabId)){

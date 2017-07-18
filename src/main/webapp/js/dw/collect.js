@@ -100,7 +100,7 @@ $(document).ready(function(){
 						$("#myDialogRoot input[name='endNum']").val(survey.surveyDetail.endNum);
 						$("#myDialogRoot input[name='ynEndTime'][value='"+survey.surveyDetail.ynEndTime+"']").attr("checked",true);
 						if(survey.surveyDetail.endTime!="null"){
-							$("#myDialogRoot input[name='endTime']").val(survey.surveyDetail.endTime);	
+							$("#myDialogRoot input[name='endTime']").val(survey.surveyDetail.endTime);
 						}
 						$("#myDialogRoot input[name='showShareSurvey'][value='"+survey.surveyDetail.showShareSurvey+"']").attr("checked",true);
 						$("#myDialogRoot input[name='showAnswerDa'][value='"+survey.surveyDetail.showAnswerDa+"']").attr("checked",true);

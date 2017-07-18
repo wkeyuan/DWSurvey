@@ -24,7 +24,6 @@ import com.opensymphony.xwork2.ActionSupport;
 @Namespace("/design")
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
 @Results({
-	@Result(name=ActionSupport.SUCCESS,location="/WEB-INF/page/content/diaowen-create/create_empty.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name="design",location="/design/my-survey-design.action?surveyId=${surveyId}",type=Struts2Utils.REDIRECT)
 })
 public class MySurveyCreateAction extends ActionSupport{

@@ -391,11 +391,9 @@ public class ResponseAction extends ActionSupport {
 			compCheckboxMaps.put(key, map);
 		}
 		quMaps.put("compCheckboxMaps", compCheckboxMaps);
-		Map<String, Object> enumMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.ENUMQU + "_");
+		Map<String, Object> enumMaps = WebUtils.getParametersStartingWith(request, "qu_" + QuType.ENUMQU + "_");//枚举
 		quMaps.put("enumMaps", enumMaps);
-		Map<String, Object> scoreMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.SCORE + "_");
+		Map<String, Object> scoreMaps = WebUtils.getParametersStartingWith(request, "qu_" + QuType.SCORE + "_");//分数
 		for (String key : scoreMaps.keySet()) {
 			String tag = scoreMaps.get(key).toString();
 			Map<String, Object> map = WebUtils.getParametersStartingWith(
@@ -404,7 +402,7 @@ public class ResponseAction extends ActionSupport {
 		}
 		quMaps.put("scoreMaps", scoreMaps);
 		Map<String, Object> quOrderMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.ORDERQU + "_");
+				request, "qu_" + QuType.ORDERQU + "_");//排序
 		for (String key : quOrderMaps.keySet()) {
 			String tag = quOrderMaps.get(key).toString();
 			Map<String, Object> map = WebUtils.getParametersStartingWith(
