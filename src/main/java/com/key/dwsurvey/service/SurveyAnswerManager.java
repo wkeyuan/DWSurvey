@@ -11,6 +11,8 @@ import com.key.dwsurvey.entity.SurveyAnswer;
 import com.key.dwsurvey.entity.SurveyDetail;
 import com.key.dwsurvey.entity.SurveyStats;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 问卷回答
  * @author keyuan(keyuan258@gmail.com)
@@ -43,4 +45,5 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	 * @return
 	 */
 	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page,String surveyId);
+
 }

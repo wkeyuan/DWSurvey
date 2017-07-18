@@ -73,9 +73,9 @@ import com.opensymphony.xwork2.ActionSupport;
 		@Result(name = ResponseAction.RESPONSE_MSG, location = "/WEB-INF/page/content/diaowen-answer/response-msg.jsp", type = Struts2Utils.DISPATCHER),
 
 		@Result(name = ResponseAction.RELOAD_ANSWER_SUCCESS_M, location = "response!answerSuccessM.action?surveyId=${surveyId}", type = Struts2Utils.REDIRECT),
-		@Result(name = ResponseAction.RESPONSE_MOBILE, location = "/survey!answerSurveryMobile.action?surveyId=${surveyId}", type = Struts2Utils.REDIRECT) })
+		@Result(name = ResponseAction.RESPONSE_MOBILE, location = "response!answerMobile.action?surveyId=${surveyId}", type = Struts2Utils.REDIRECT) })
 
-@AllowedMethods({"saveMobile","answerSuccess","answerFailure","answerError","answerSuccessM","ajaxCheckSurvey"})
+@AllowedMethods({"saveMobile","answerSuccess","answerMobile","answerFailure","answerError","answerSuccessM","ajaxCheckSurvey"})
 public class ResponseAction extends ActionSupport {
 	private static final long serialVersionUID = -2289729314160067840L;
 
@@ -124,31 +124,23 @@ public class ResponseAction extends ActionSupport {
 	 * 进入答卷页面
 	 */
 	public String execute() throws Exception {
-
 		HttpServletRequest request = Struts2Utils.getRequest();
 		HttpServletResponse response = Struts2Utils.getResponse();
-
 		SurveyDirectory directory = directoryManager.getSurveyBySid(sid);
-
 		if (directory != null) {
 			surveyId = directory.getId();
-
 			SurveyDetail surveyDetail = directory.getSurveyDetail();
 			int rule = surveyDetail.getRule();
-
-			// 如果是非发布状态
 			if (directory.getSurveyQuNum() <= 0
 					|| directory.getSurveyState() != 1) {
 				request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
 				request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
 				return RESPONSE_MSG;
 			}
-
-			// 调查规则 私有与需要令牌
-			if (2 == rule) {// 私有
-				request.setAttribute("msg", "rule2");// 表示私有问卷
+			if (2 == rule) {
+				request.setAttribute("msg", "rule2");
 				return RELOAD_ANSER_ERROR;
-			} else if (3 == rule) {// 令牌
+			} else if (3 == rule) {
 				String ruleCode = request.getParameter("ruleCode");
 				String surveyRuleCode = surveyDetail.getRuleCode();
 				if (ruleCode == null || !ruleCode.equals(surveyRuleCode)) {
@@ -156,29 +148,14 @@ public class ResponseAction extends ActionSupport {
 				}
 			}
 
-			// 有效性过滤，如果已经答过问卷，且启用有效性检测，则根据间隔时间，限制用户填写
-			/*
-			 * String htmlPath=directory.getHtmlPath();
-			 * System.out.println("response:"+htmlPath);
-			 * request.getRequestDispatcher("/"+htmlPath).forward(request,
-			 * response);
-			 */
-
-			// 阿里云版跳转，拼掉上面request重定向
-			// 判断是否来自于手机端
-
 			if (HttpRequestDeviceUtils.isMobileDevice(request)) {
-				// 重定向到手机端
 				return RESPONSE_MOBILE;
-
 			} else if ("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)
 					|| "baiduBOS".equals(DiaowenProperty.DWSTORAGETYPE)) {
 				// 这句话的意思，是让浏览器用utf8来解析返回的数据
 				response.setHeader("Content-type", "text/html;charset=UTF-8");
 				// 这句话的意思，是告诉servlet用UTF-8转码，而不是用默认的ISO8859
 				response.setCharacterEncoding("UTF-8");
-
-				// 云支持
 				InputStream inputStream = null;
 				if ("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)) {
 					inputStream = AliyunOSS.getObject(
@@ -223,6 +200,39 @@ public class ResponseAction extends ActionSupport {
 		return NONE;
 	}
 
+	public String answerMobile() throws Exception {
+		HttpServletRequest request = Struts2Utils.getRequest();
+		HttpServletResponse response = Struts2Utils.getResponse();
+		SurveyDirectory directory = directoryManager.getSurvey(surveyId);
+
+		if (directory != null) {
+			SurveyDetail surveyDetail = directory.getSurveyDetail();
+			int rule = surveyDetail.getRule();
+			if (directory.getSurveyQuNum() <= 0
+					|| directory.getSurveyState() != 1) {
+				request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
+				request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
+				return RESPONSE_MSG;
+			}
+			if (2 == rule) {
+				request.setAttribute("msg", "rule2");
+				return RELOAD_ANSER_ERROR;
+			} else if (3 == rule) {
+				String ruleCode = request.getParameter("ruleCode");
+				String surveyRuleCode = surveyDetail.getRuleCode();
+				if (ruleCode == null || !ruleCode.equals(surveyRuleCode)) {
+					return ANSWER_INPUT_RULE;
+				}
+			}
+			String htmlPath = directory.getHtmlPath();
+			htmlPath = htmlPath.substring(0,htmlPath.lastIndexOf("/"));
+			request.getRequestDispatcher("/" + htmlPath+"/m_"+surveyId+".html").forward(request,response);
+			return NONE;
+		}
+
+		return NONE;
+	}
+
 	public String save() throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		HttpServletResponse response = Struts2Utils.getResponse();
@@ -230,54 +240,35 @@ public class ResponseAction extends ActionSupport {
 		try {
 			String ipAddr = ipService.getIp(request);
 			long ipNum = surveyAnswerManager.getCountByIp(surveyId, ipAddr);
-
 			SurveyDirectory directory = directoryManager.getSurvey(surveyId);
 			SurveyDetail surveyDetail = directory.getSurveyDetail();
-
 			int refreshNum = surveyDetail.getRefreshNum();
 			User user = accountManager.getCurUser();
-
 			SurveyAnswer entity = new SurveyAnswer();
 			if (user != null) {
 				entity.setUserId(user.getId());
 			}
-
 			Cookie cookie = CookieUtils.getCookie(request, surveyId);
-
 			Integer effectiveIp = surveyDetail.getEffectiveIp();
 			Integer effective = surveyDetail.getEffective();
-			if ((effective != null && effective > 1 && cookie != null)
-					|| (effectiveIp != null && effectiveIp == 1 && ipNum > 0)) {
-				// 已经回答过
+			if ((effective != null && effective > 1 && cookie != null) || (effectiveIp != null && effectiveIp == 1 && ipNum > 0)) {
 				return RELOAD_ANSER_ERROR;
 			}
-
 			if (ipNum >= refreshNum) {
 				String code = request.getParameter("jcaptchaInput");
-				if (imageCaptchaService.validateResponseForID(request
-						.getSession().getId(), code)) {
-					// 验证通过
-				} else {
-					// 验证码不正确
+				if (!imageCaptchaService.validateResponseForID(request.getSession().getId(), code)) {
 					return ANSWER_CODE_ERROR;
 				}
 			}
-
 			Map<String, Map<String, Object>> quMaps = buildSaveSurveyMap(request);
-
-			// 得到IP
 			String addr = ipService.getCountry(ipAddr);
 			String city = ipService.getCurCityByCountry(addr);
-
 			entity.setIpAddr(ipAddr);
 			entity.setAddr(addr);
 			entity.setCity(city);
 			entity.setSurveyId(surveyId);
-			// 得到 MAC
-			// 保存数据
-			entity.setDataSource(0);// 表示网调来源
+			entity.setDataSource(0);
 			surveyAnswerManager.saveAnswer(entity, quMaps);
-			// 保存cookie
 			int effe = surveyDetail.getEffectiveTime();
 			CookieUtils.addCookie(response, surveyId, (ipNum + 1) + "",
 					effe * 60, "/");
@@ -287,7 +278,6 @@ public class ResponseAction extends ActionSupport {
 			return RELOAD_ANSWER_FAILURE;
 		}
 		return RELOAD_ANSWER_SUCCESS;
-		// return SURVEY_RESULT;
 	}
 
 	public String saveMobile() throws Exception {
@@ -306,44 +296,30 @@ public class ResponseAction extends ActionSupport {
 			if (user != null) {
 				entity.setUserId(user.getId());
 			}
-
 			Cookie cookie = CookieUtils.getCookie(request, surveyId);
-
 			Integer effectiveIp = surveyDetail.getEffectiveIp();
 			Integer effective = surveyDetail.getEffective();
-			if ((effective != null && effective > 1 && cookie != null)
-					|| (effectiveIp != null && effectiveIp == 1 && ipNum > 0)) {
-				// 已经回答过
+			if ((effective != null && effective > 1 && cookie != null) || (effectiveIp != null && effectiveIp == 1 && ipNum > 0)) {
 				return RELOAD_ANSER_ERROR_M;
 			}
-
 			if (ipNum >= refreshNum) {
 				String code = request.getParameter("jcaptchaInput");
-				if (imageCaptchaService.validateResponseForID(request
+				if (!imageCaptchaService.validateResponseForID(request
 						.getSession().getId(), code)) {
-					// 验证通过
-				} else {
-					// 验证码不正确
 					return ANSWER_CODE_ERROR_M;
 				}
 			}
 
 			Map<String, Map<String, Object>> quMaps = buildSaveSurveyMap(request);
-
-			// 得到IP
 			String addr = ipService.getCountry(ipAddr);
 			String city = ipService.getCurCityByCountry(addr);
-
 			entity.setIpAddr(ipAddr);
 			entity.setAddr(addr);
 			entity.setCity(city);
 			entity.setSurveyId(surveyId);
-			System.out.println(ipAddr + ":" + addr + ":" + city);
-			// 得到 MAC
-			// 保存数据
-			entity.setDataSource(0);// 表示网调来源
+			entity.setDataSource(0);
 			surveyAnswerManager.saveAnswer(entity, quMaps);
-			// 保存cookie
+
 			int effe = surveyDetail.getEffectiveTime();
 			CookieUtils.addCookie(response, surveyId, (ipNum + 1) + "",
 					effe * 60, "/");
@@ -356,47 +332,35 @@ public class ResponseAction extends ActionSupport {
 		// return SURVEY_RESULT;
 	}
 
-	private Map<String, Map<String, Object>> buildSaveSurveyMap(
-			HttpServletRequest request) {
-		// 判断考试已经结束
 
+	public Map<String, Map<String, Object>> buildSaveSurveyMap(HttpServletRequest request) {
 		Map<String, Map<String, Object>> quMaps = new HashMap<String, Map<String, Object>>();
-		// 是非题 quyesno_id value
 		Map<String, Object> yesnoMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.YESNO + "_");
+				request, "qu_" + QuType.YESNO + "_");//是非
 		quMaps.put("yesnoMaps", yesnoMaps);
-		// 单选题quradio_id id_value
 		Map<String, Object> radioMaps = WebUtils.getParametersStartingWith(
-				request, "qu_"+QuType.RADIO + "_");
-		// 多选题qucheckbox_id id_value,id_value
+				request, "qu_"+QuType.RADIO + "_");//单选
 		Map<String, Object> checkboxMaps = WebUtils.getParametersStartingWith(
-				request, "qu_"+QuType.CHECKBOX + "_");
-		// 填空题qufillblank_id value
+				request, "qu_"+QuType.CHECKBOX + "_");//多选
 		Map<String, Object> fillblankMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.FILLBLANK + "_");
+				request, "qu_" + QuType.FILLBLANK + "_");//填空
 		quMaps.put("fillblankMaps", fillblankMaps);
-		// 多项填空题 qudfillblank_id id_value
 		Map<String, Object> dfillblankMaps = WebUtils
 				.getParametersStartingWith(request, "qu_"
-						+ QuType.MULTIFILLBLANK + "_");
-		// 得到每一个子项
+						+ QuType.MULTIFILLBLANK + "_");//多项填空
 		for (String key : dfillblankMaps.keySet()) {
 			String dfillValue = dfillblankMaps.get(key).toString();
 			Map<String, Object> map = WebUtils.getParametersStartingWith(
 					request, dfillValue);
 			dfillblankMaps.put(key, map);
 		}
-		// System.out.println("dfillblankMaps:"+dfillblankMaps);
 		quMaps.put("multifillblankMaps", dfillblankMaps);
-		// 多行填空题 quanswer_id value
 		Map<String, Object> answerMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.ANSWER + "_");
+				request, "qu_" + QuType.ANSWER + "_");//多行填空
 		quMaps.put("answerMaps", answerMaps);
-		// 复合单选
 		Map<String, Object> compRadioMaps = WebUtils.getParametersStartingWith(
-				request, "qu_" + QuType.COMPRADIO + "_");
+				request, "qu_" + QuType.COMPRADIO + "_");//复合单选
 		for (String key : compRadioMaps.keySet()) {
-			// qu_${en.quType }_${en.id }_${quItem.id }_othertext
 			String enId = key;
 			String quItemId = compRadioMaps.get(key).toString();
 			String otherText = Struts2Utils.getParameter("text_qu_"
@@ -405,16 +369,13 @@ public class ResponseAction extends ActionSupport {
 			anRadio.setQuId(enId);
 			anRadio.setQuItemId(quItemId);
 			anRadio.setOtherText(otherText);
-
 			compRadioMaps.put(key, anRadio);
 		}
 		quMaps.put("compRadioMaps", compRadioMaps);
-		// 复合多选
 		Map<String, Object> compCheckboxMaps = WebUtils
 				.getParametersStartingWith(request, "qu_" + QuType.COMPCHECKBOX
-						+ "_");
+						+ "_");//复合多选
 		for (String key : compCheckboxMaps.keySet()) {
-			// qu_${en.quType }_${en.id }_${quItem.id }_othertext
 			String dfillValue = compCheckboxMaps.get(key).toString();
 			Map<String, Object> map = WebUtils.getParametersStartingWith(
 					request, "tag_" + dfillValue);
@@ -430,11 +391,9 @@ public class ResponseAction extends ActionSupport {
 			compCheckboxMaps.put(key, map);
 		}
 		quMaps.put("compCheckboxMaps", compCheckboxMaps);
-		// 枚举题
 		Map<String, Object> enumMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.ENUMQU + "_");
 		quMaps.put("enumMaps", enumMaps);
-		// 评分题
 		Map<String, Object> scoreMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.SCORE + "_");
 		for (String key : scoreMaps.keySet()) {
@@ -444,7 +403,6 @@ public class ResponseAction extends ActionSupport {
 			scoreMaps.put(key, map);
 		}
 		quMaps.put("scoreMaps", scoreMaps);
-		// 排序题
 		Map<String, Object> quOrderMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.ORDERQU + "_");
 		for (String key : quOrderMaps.keySet()) {
@@ -454,7 +412,6 @@ public class ResponseAction extends ActionSupport {
 			quOrderMaps.put(key, map);
 		}
 		quMaps.put("quOrderMaps", quOrderMaps);
-		// 矩阵单选题
 		Map<String, Object> chenRadioMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.CHENRADIO + "_");
 		for (String key : chenRadioMaps.keySet()) {
@@ -464,7 +421,6 @@ public class ResponseAction extends ActionSupport {
 			chenRadioMaps.put(key, map);
 		}
 		quMaps.put("chenRadioMaps", chenRadioMaps);
-		// 矩阵多选题
 		Map<String, Object> chenCheckboxMaps = WebUtils
 				.getParametersStartingWith(request, "qu_" + QuType.CHENCHECKBOX
 						+ "_");
@@ -474,7 +430,6 @@ public class ResponseAction extends ActionSupport {
 					request, tag);
 			for (String keyRow : map.keySet()) {
 				String tagRow = map.get(keyRow).toString();
-				// String[] keyRowValues=request.getParameterValues(tagRow);
 				Map<String, Object> mapRow = WebUtils
 						.getParametersStartingWith(request, tagRow);
 				map.put(keyRow, mapRow);
@@ -482,7 +437,6 @@ public class ResponseAction extends ActionSupport {
 			chenCheckboxMaps.put(key, map);
 		}
 		quMaps.put("chenCheckboxMaps", chenCheckboxMaps);
-		// 矩阵评分题
 		Map<String, Object> chenScoreMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.CHENSCORE + "_");
 		for (String key : chenScoreMaps.keySet()) {
@@ -491,7 +445,6 @@ public class ResponseAction extends ActionSupport {
 					request, tag);
 			for (String keyRow : map.keySet()) {
 				String tagRow = map.get(keyRow).toString();
-				// String[] keyRowValues=request.getParameterValues(tagRow);
 				Map<String, Object> mapRow = WebUtils
 						.getParametersStartingWith(request, tagRow);
 				map.put(keyRow, mapRow);
@@ -499,7 +452,6 @@ public class ResponseAction extends ActionSupport {
 			chenScoreMaps.put(key, map);
 		}
 		quMaps.put("chenScoreMaps", chenScoreMaps);
-		// 矩阵填空题
 		Map<String, Object> chenFbkMaps = WebUtils.getParametersStartingWith(
 				request, "qu_" + QuType.CHENFBK + "_");
 		for (String key : chenFbkMaps.keySet()) {
@@ -508,7 +460,6 @@ public class ResponseAction extends ActionSupport {
 					request, tag);
 			for (String keyRow : map.keySet()) {
 				String tagRow = map.get(keyRow).toString();
-				// String[] keyRowValues=request.getParameterValues(tagRow);
 				Map<String, Object> mapRow = WebUtils
 						.getParametersStartingWith(request, tagRow);
 				map.put(keyRow, mapRow);
@@ -516,7 +467,6 @@ public class ResponseAction extends ActionSupport {
 			chenFbkMaps.put(key, map);
 		}
 		quMaps.put("chenFbkMaps", chenFbkMaps);
-		//子级
 		for (String key:radioMaps.keySet()) {
 			String enId = key;
 			String quItemId = radioMaps.get(key).toString();
@@ -529,7 +479,6 @@ public class ResponseAction extends ActionSupport {
 			radioMaps.put(key, anRadio);
 		}
 		quMaps.put("compRadioMaps", radioMaps);
-		// 子级
 		for (String key : checkboxMaps.keySet()) {
 			String dfillValue = checkboxMaps.get(key).toString();
 			Map<String, Object> map = WebUtils.getParametersStartingWith(
@@ -546,7 +495,6 @@ public class ResponseAction extends ActionSupport {
 			checkboxMaps.put(key, map);
 		}
 		quMaps.put("compCheckboxMaps", checkboxMaps);
-		// 复合矩阵单选题
 		Map<String, Object> chenCompChenRadioMaps = WebUtils
 				.getParametersStartingWith(request, "qu_"
 						+ QuType.COMPCHENRADIO + "_");
@@ -556,7 +504,6 @@ public class ResponseAction extends ActionSupport {
 					request, tag);
 			for (String keyRow : map.keySet()) {
 				String tagRow = map.get(keyRow).toString();
-				// String[] keyRowValues=request.getParameterValues(tagRow);
 				Map<String, Object> mapRow = WebUtils
 						.getParametersStartingWith(request, tagRow);
 				map.put(keyRow, mapRow);
@@ -622,15 +569,11 @@ public class ResponseAction extends ActionSupport {
 		// 0 1 2
 		String ajaxResult = "0";
 		try {
-
 			SurveyDirectory directory = directoryManager.getSurvey(surveyId);
-
 			SurveyDetail surveyDetail = directory.getSurveyDetail();
 			int effective = surveyDetail.getEffective();
 			int rule = surveyDetail.getRule();
-
 			request.setAttribute("directory", directory);
-
 			// 调查规则
 			String surveyStatus = "0";
 			// cookie
@@ -639,8 +582,7 @@ public class ResponseAction extends ActionSupport {
 			String ip = ipService.getIp(request);
 			Long ipNum = 0L;
 			if (effective > 1) {
-				// 表示启用有效性过滤
-				// 根据 cookie
+				// 根据 cookie过滤
 				if (cookie != null) {
 					String cookieValue = cookie.getValue();
 					if (cookieValue != null
@@ -658,14 +600,12 @@ public class ResponseAction extends ActionSupport {
 				}
 			}
 
-			// 每个IP只能回答一次
 			ipNum = surveyAnswerManager.getCountByIp(surveyId, ip);
 			if (ipNum == null) {
 				ipNum = 0L;
 			}
 			Integer effectiveIp = surveyDetail.getEffectiveIp();
 			if (effectiveIp != null && effectiveIp == 1 && ipNum > 0) {
-				// 已经回答过
 				surveyStatus = "2";
 			}
 
@@ -673,7 +613,6 @@ public class ResponseAction extends ActionSupport {
 			// 启用验证码
 			int refreshNum = surveyDetail.getRefreshNum();
 			if (ipNum >= refreshNum) {
-				// 启用验证码
 				isCheckCode = "3";
 			}
 			ajaxResult = "{surveyStatus:\"" + surveyStatus

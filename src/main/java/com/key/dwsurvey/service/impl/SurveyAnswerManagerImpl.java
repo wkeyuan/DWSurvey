@@ -2,13 +2,10 @@ package com.key.dwsurvey.service.impl;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.key.common.QuType;
+import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.dao.SurveyAnswerDao;
 import com.key.dwsurvey.entity.AnChenFbk;
 import com.key.dwsurvey.entity.SurveyDetail;
@@ -63,6 +60,9 @@ import com.key.dwsurvey.service.AnRadioManager;
 import com.key.dwsurvey.service.AnYesnoManager;
 import com.key.dwsurvey.service.QuestionManager;
 import com.key.dwsurvey.service.SurveyAnswerManager;
+import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -263,8 +263,6 @@ public class SurveyAnswerManagerImpl extends
 				criterionIp);
 		return answers;
 	}
-
-	
 	
 	
 	@Override
@@ -869,4 +867,6 @@ public class SurveyAnswerManagerImpl extends
 		}
 		super.delete(t);
 	}
+
+
 }

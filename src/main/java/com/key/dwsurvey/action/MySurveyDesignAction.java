@@ -97,6 +97,12 @@ public class MySurveyDesignAction extends ActionSupport{
 			String fileName=surveyId+".html";
 			new JspToHtml().postJspToHtml(url, filePath, fileName);
 			survey.setHtmlPath(filePath+fileName);
+
+			url="/survey!answerSurveryMobile.action?surveyId="+surveyId;
+			filePath="WEB-INF/wjHtml/"+dateFormat.format(createDate);
+			fileName="m_"+surveyId+".html";
+			new JspToHtml().postJspToHtml(url, filePath, fileName);
+
 			survey.setSurveyState(1);
 			surveyDirectoryManager.save(survey);
 		}catch (Exception e) {
