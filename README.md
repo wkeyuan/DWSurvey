@@ -46,7 +46,7 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 配置完成后，启动服务在浏览器中输入如```localhost:8080/diaowen```相应的地址看到登录页面，表示已经安装成功。
 
-初始账号：service@diaowen.net 密码：123456
+初始账号：```service@diaowen.net``` 密码：```123456```
 
 ### war包下载
 
