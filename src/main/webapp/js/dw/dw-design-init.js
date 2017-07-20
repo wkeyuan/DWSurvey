@@ -1603,7 +1603,6 @@ function bindQuHoverItem(){
 	
 	$(".dwOptionDel").unbind();
 	$(".dwOptionDel").click(function(){
-		alert("ss");
 		deleteDwOption();
 		return false;
 	});

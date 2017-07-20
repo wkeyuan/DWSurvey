@@ -334,7 +334,7 @@
 									</div>
 									<div class="quCoItem">
 										<table class="quCoItemTable" cellpadding="0" cellspacing="0">
-											<tr>
+											<tr class="quScoreOptionTr">
 												<td class="quCoItemTableTd quOptionEditTd">
 													<label class="editAble quCoOptionEdit">分项1</label>
 													<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div>
@@ -342,7 +342,7 @@
 												<td class="quCoItemTableTd"><table class="scoreNumTable"><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr></table></td>
 												<td class="quCoItemTableTd">分</td>
 											</tr>
-											<tr>
+											<tr class="quScoreOptionTr">
 												<td class="quCoItemTableTd quOptionEditTd">
 													<label class="editAble quCoOptionEdit">分项2</label>
 													<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div>
