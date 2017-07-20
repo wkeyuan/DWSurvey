@@ -25,9 +25,6 @@ public class StorageManager {
 	}
 	
 	public static State saveBinaryFile(byte[] data, String rootPath, String path) {
-		
-		if("local".equals(DiaowenProperty.DWSTORAGETYPE)){
-//			File file = new File(path);
 			File file = new File(rootPath+path);
 			State state = valid(file);
 			if (!state.isSuccess()) {
@@ -47,16 +44,12 @@ public class StorageManager {
 			state.putInfo( "size", data.length );
 			state.putInfo( "title", file.getName() );
 			return state;
-		}else{
-			return saveBinaryFileToYun(data, path);
-		}
-		
 	}
 	
 
 	public static State saveFileByInputStream(InputStream is, String rootPath, String path,
 			long maxSize) {
-		if("local".equals(DiaowenProperty.DWSTORAGETYPE)){
+
 			State state = null;
 
 			File tmpFile = getTmpFile();
@@ -89,14 +82,10 @@ public class StorageManager {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return new BaseState(false, AppInfo.IO_ERROR);	
-		}else{
-			return saveFileByInputStreamToYun(is, path);
-		}
+			return new BaseState(false, AppInfo.IO_ERROR);
 	}
 
 	public static State saveFileByInputStream(InputStream is,String rootPath, String path) {
-		if("local".equals(DiaowenProperty.DWSTORAGETYPE)){
 			State state = null;
 
 			File tmpFile = getTmpFile();
@@ -125,10 +114,7 @@ public class StorageManager {
 				e.printStackTrace();
 			}
 			return new BaseState(false, AppInfo.IO_ERROR);
-		}else{
-			return saveFileByInputStreamToYun(is, path);
-		}
-	
+
 	}
 	
 
@@ -172,76 +158,8 @@ public class StorageManager {
 
 		return new BaseState(true);
 	}
-
-	
-	
-	/**
-	 * SaveToYun
-	 */
 	
 
-	public static State saveBinaryFileToYun(byte[] data, String savePath) {
-		State state = null;
-		
-		File tmpFile = getTmpFile();
-		
-		try {
-			BufferedOutputStream bos = new BufferedOutputStream(
-					new FileOutputStream(tmpFile));
-			bos.write(data);
-			bos.flush();
-			bos.close();
-			
-			
-			if("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)){
-				// 阿里云支持 将文件写入到aliyun oss
-				AliyunOSS.putObject(DiaowenProperty.UPLOADFILE_BACKET, tmpFile, savePath);
-				tmpFile.delete();	
-			}else if("baiduBOS".equals(DiaowenProperty.DWSTORAGETYPE)){
-				BaiduBOS.putObject(DiaowenProperty.UPLOADFILE_BACKET,tmpFile, savePath);
-				tmpFile.delete();
-			}
-			
-			
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-			return new BaseState(false, AppInfo.IO_ERROR);
-		}
-
-		state = new BaseState(true, tmpFile.getAbsolutePath());
-		state.putInfo( "size", data.length );
-		state.putInfo( "title", tmpFile.getName() );
-		return state;
-	}
-	
-
-	public static State saveFileByInputStreamToYun(InputStream inputStream,
-			String savePath) {
-		State state = null;
-		
-		savePath=savePath.substring(1);
-		
-		try {
-//			AliyunOSS.pubObjects(AliyunOSS.UPLOADFILE_BACKET, inputStream, savePath);
-
-			if("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)){
-				// 阿里云支持 将文件写入到aliyun oss
-				AliyunOSS.putObject(DiaowenProperty.UPLOADFILE_BACKET, inputStream, savePath);
-			}else if("baiduBOS".equals(DiaowenProperty.DWSTORAGETYPE)){
-				BaiduBOS.putObject(DiaowenProperty.UPLOADFILE_BACKET,inputStream, savePath);
-			}
-			
-			state = new BaseState(true);
-			
-			//state.putInfo( "size", inputStream.length() );
-//			state.putInfo( "title", inputStream.getName() );
-			return state;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return new BaseState(false, AppInfo.IO_ERROR);
-	}
 	
 
 }

@@ -240,22 +240,11 @@ public final class ConfigManager {
 				
 				String path = this.getConfigPath();
 				String newContent = builder.toString();
-				if("local".equals(DiaowenProperty.DWSTORAGETYPE)){
-//					newContent = newContent.replaceAll( "http://file.diaowen.net", DiaowenProperty.STORAGE_URL_PREFIX);
-					newContent = newContent.replaceAll( "http://file.diaowen.net/", InitAppliction.contextPath );
-//					newContent = newContent.replaceAll( "http://file.diaowen.net", "../" );
-				}else{
-					newContent = newContent.replaceAll( "http://file.diaowen.net/", DiaowenProperty.STORAGE_URL_PREFIX);
-				}
-				// "imageUrlPrefix": "http://file.diaowen.net/", /* 图片访问路径前缀 */
-//				String newContent = newContent.replaceAll( "http://file.diaowen.net", DiaowenProperty.STORAGE_URL_PREFIX);
+				newContent = newContent.replaceAll( "http://file.diaowen.net/", InitAppliction.contextPath );
 				OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
 				writer.write(newContent);
 				writer.close();
-				
-				
-//				System.out.println(ServletActionContext.getContext());
-				
+
 			} catch ( UnsupportedEncodingException e ) {
 				e.printStackTrace();
 			} catch (Exception e) {

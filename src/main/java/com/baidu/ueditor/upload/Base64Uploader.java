@@ -28,14 +28,10 @@ public final class Base64Uploader {
 				(String) conf.get("filename"));
 		
 		savePath = savePath + suffix;
-//		String physicalPath = (String) conf.get("rootPath") + savePath;
-//		State storageState = StorageManager.saveBinaryFile(data, savePath);
-		State storageState = StorageManager.saveBinaryFile(data, (String) conf.get("rootPath"), savePath); 
-//		State storageState = StorageManager.saveBinaryFileToYun(data, savePath);
+		State storageState = StorageManager.saveBinaryFile(data, (String) conf.get("rootPath"), savePath);
 
 		if (storageState.isSuccess()) {
 			storageState.putInfo("url", PathFormat.format(savePath));
-//			storageState.putInfo("url", "http://file.diaowen.net"+PathFormat.format(savePath));
 			storageState.putInfo("type", suffix);
 			storageState.putInfo("original", "");
 		}

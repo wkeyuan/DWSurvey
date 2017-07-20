@@ -36,38 +36,32 @@ public class FileManager {
 	}
 	
 	public State listFile ( int index ) {
-		
-		if("local".equals(DiaowenProperty.DWSTORAGETYPE)) {
-			File dir = new File( this.rootPath + this.dir );
 
-			State state = null;
+		File dir = new File( this.rootPath + this.dir );
 
-			if ( !dir.exists() ) {
-				return new BaseState( false, AppInfo.NOT_EXIST );
-			}
-			
-			if ( !dir.isDirectory() ) {
-				return new BaseState( false, AppInfo.NOT_DIRECTORY );
-			}
-			
-			Collection<File> list = FileUtils.listFiles( dir, this.allowFiles, true );
+		State state = null;
 
-			if ( index < 0 || index > list.size() ) {
-				state = new MultiState( true );
-			} else {
-				Object[] fileList = Arrays.copyOfRange( list.toArray(), index, index + this.count );
-				state = this.getState( fileList );
-			}
-			
-			state.putInfo( "start", index );
-			state.putInfo( "total", list.size() );
-			
-			return state;
-		}else{
-			
-			return listFileByYun(index);
-			
+		if ( !dir.exists() ) {
+			return new BaseState( false, AppInfo.NOT_EXIST );
 		}
+
+		if ( !dir.isDirectory() ) {
+			return new BaseState( false, AppInfo.NOT_DIRECTORY );
+		}
+
+		Collection<File> list = FileUtils.listFiles( dir, this.allowFiles, true );
+
+		if ( index < 0 || index > list.size() ) {
+			state = new MultiState( true );
+		} else {
+			Object[] fileList = Arrays.copyOfRange( list.toArray(), index, index + this.count );
+			state = this.getState( fileList );
+		}
+
+		state.putInfo( "start", index );
+		state.putInfo( "total", list.size() );
+
+		return state;
 		
 	}
 	
@@ -130,80 +124,6 @@ public class FileManager {
 		}
 		
 		return exts;
-		
-	}
-	
-	/*
-	 * yun实现的操作
-	 */
-	public State listFileByYun ( int index ) {
-		dir=dir.substring(1);
-		
-		//得到当前用户
-		String userId=PathFormat.getUserId();
-		dir=dir+userId+"/";
-		State state = null;
-		try{
-			Collection list = null;
-			if("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)){
-				// 阿里云支持 
-				list = AliyunOSS.getObjectList(DiaowenProperty.UPLOADFILE_BACKET, dir,index+count,count);
-			}else if("baiduBOS".equals(DiaowenProperty.DWSTORAGETYPE)){
-				list = BaiduBOS.getObjectList(DiaowenProperty.UPLOADFILE_BACKET, dir,index+count,count);
-				
-			}
-
-			if ( index < 0 || index > list.size() ) {
-				state = new MultiState( true );
-			} else {
-				Object[] fileList = Arrays.copyOfRange( list.toArray(), index, index + this.count );
-				state = this.getStateByYun( fileList );
-			}
-			
-			state.putInfo( "start", index );
-			state.putInfo( "total", list.size() );
-			
-		}catch(Exception e){
-			state = new BaseState( false, AppInfo.NOT_EXIST );
-			e.printStackTrace();
-		}
-		
-		return state;
-		
-	}
-	
-	private State getStateByYun ( Object[] files ) {
-		
-		MultiState state = new MultiState( true );
-		BaseState fileState = null;
-		
-		
-		for ( Object obj : files ) {
-			if ( obj == null ) {
-				break;
-			}
-			
-			if(obj instanceof OSSObjectSummary ){
-				OSSObjectSummary file = (OSSObjectSummary)obj;
-
-				fileState = new BaseState( true );
-//				fileState.putInfo( "url", "http://file.diaowen.net/"+PathFormat.format( file.getKey() ) );
-				fileState.putInfo( "url", PathFormat.format( file.getKey() ) );
-				state.addState( fileState );
-				
-			}else{
-				//obj instanceof BosObjectSummary 
-				BosObjectSummary file = (BosObjectSummary)obj;
-				
-				fileState = new BaseState( true );
-//				fileState.putInfo( "url", "http://file.diaowen.net/"+PathFormat.format( file.getKey() ) );
-				fileState.putInfo( "url", PathFormat.format( file.getKey() ) );
-				state.addState( fileState );
-			}
-			
-		}
-		
-		return state;
 		
 	}
 	
