@@ -241,7 +241,6 @@ public class SurveyAnswerManagerImpl extends
 		Date date = calendarDate.getTime();
 
 		Criterion gtEndDate = Restrictions.gt("endAnDate", date);
-		// System.out.println("date:"+date.toString());
 		return surveyAnswerDao.findFirst("endAnDate", true, eqSurveyId, eqIp,
 				gtEndDate);
 
@@ -249,7 +248,6 @@ public class SurveyAnswerManagerImpl extends
 
 	@Override
 	public Long getCountByIp(String surveyId, String ip) {
-		// List<SurveyAnswer> answers = answersByIp(surveyId, ip);
 		String hql = "select count(*) from SurveyAnswer x where x.surveyId=? and x.ipAddr=?";
 		Long count = (Long) surveyAnswerDao.findUniObjs(hql, surveyId, ip);
 		return count;
@@ -267,8 +265,6 @@ public class SurveyAnswerManagerImpl extends
 	
 	@Override
 	public String exportXLS(String surveyId, String savePath) {
-		// String savePath =
-		// request.getSession().getServletContext().getRealPath("/");
 		String basepath = surveyId + "";
 		String urlPath = "/file/" + basepath + "/";// 下载所用的地址
 		String path = urlPath.replace("/", File.separator);// 文件系统路径
@@ -299,20 +295,15 @@ public class SurveyAnswerManagerImpl extends
 			// 得到题列表
 			List<Question> questions = questionManager.findDetails(surveyId,
 					"2");
-			// 生成表格的列标题
 			exportXLSTitle(exportUtil, questions);
 
-			System.out.println("--------------------------------------------");
 			for (int i = 1; i <= totalPage; i++) {
-				// for (SurveyAnswer surveyAnswer : answers) {
 				for (int j = 0; j < answers.size(); j++) {
 					SurveyAnswer surveyAnswer = answers.get(j);
 					String surveyAnswerId = surveyAnswer.getId();
-					// 得到详细结果
 					exportUtil.createRow((j + 1) + ((i - 1) * 100));
 					exportXLSRow(exportUtil, surveyAnswerId, questions, surveyAnswer);
 				}
-				System.out.println("..............................................");
 				page.setPageNo(i);
 				page = findPage(page, filters);
 				answers = page.getResult();
@@ -331,17 +322,13 @@ public class SurveyAnswerManagerImpl extends
 		
 		for (Question question : questions) {
 			// 遍历每一题
-			// 取出题的答案
 			getquestionAnswer(surveyAnswerId, question);
-			// 写入答案到excel中
 			// exportUtil.setCell(index, value);
 			QuType quType = question.getQuType();
 
 			String quName = question.getQuName();
-			// String titleName=quName+"["+quType.getCnName()+"]";
 			String titleName = quType.getCnName();
 			if (quType == QuType.YESNO) {// 是非题
-//				exportUtil.setCell(cellIndex++, titleName);
 				String yesnoAnswer = question.getAnYesno().getYesnoAnswer();
 				if("1".equals(yesnoAnswer)){
 					yesnoAnswer=question.getYesnoOption().getTrueValue();
@@ -359,13 +346,11 @@ public class SurveyAnswerManagerImpl extends
 					String quRadioId=quRadio.getId();
 					if(quRadioId.equals(quItemId)){
 						answerOptionName=quRadio.getOptionName();
-//						answerOptionName="1";
 						break;
 					}
 				}
 				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
 				exportUtil.setCell(cellIndex++, answerOptionName);
-//				exportUtil.setCell(cellIndex++, titleName);
 			} else if (quType == QuType.CHECKBOX) {// 多选题
 				List<AnCheckbox> anCheckboxs=question.getAnCheckboxs();
 				List<QuCheckbox> checkboxs = question.getQuCheckboxs();
@@ -382,14 +367,11 @@ public class SurveyAnswerManagerImpl extends
 					}
 					answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
 					exportUtil.setCell(cellIndex++, answerOptionName);
-//					String optionName = quCheckbox.getOptionName();
-//					exportUtil.setCell(cellIndex++, titleName);
 				}
 			} else if (quType == QuType.FILLBLANK) {// 填空题
 				AnFillblank anFillblank=question.getAnFillblank();
 				
 				exportUtil.setCell(cellIndex++, anFillblank.getAnswer());
-//				exportUtil.setCell(cellIndex++, titleName);
 			} else if (quType == QuType.ANSWER) {// 多行填空题
 				AnAnswer anAnswer=question.getAnAnswer();
 				
@@ -413,8 +395,6 @@ public class SurveyAnswerManagerImpl extends
 				answerOtherText=HtmlUtil.removeTagFromText(answerOtherText);
 				exportUtil.setCell(cellIndex++, answerOptionName);
 				exportUtil.setCell(cellIndex++, answerOtherText);
-//				exportUtil.setCell(cellIndex++, titleName);
-//				exportUtil.setCell(cellIndex++, "说明-" + titleName);
 			} else if (quType == QuType.COMPCHECKBOX) {// 复合多选题
 				List<AnCheckbox> anCheckboxs=question.getAnCheckboxs();
 				List<QuCheckbox> checkboxs = question.getQuCheckboxs();
@@ -438,8 +418,6 @@ public class SurveyAnswerManagerImpl extends
 						answerOtherText=HtmlUtil.removeTagFromText(answerOtherText);
 						exportUtil.setCell(cellIndex++, answerOtherText);	
 					}
-//					String optionName = quCheckbox.getOptionName();
-//					exportUtil.setCell(cellIndex++, titleName);
 				}
 			
 			} else if (quType == QuType.ENUMQU) {// 枚举题
@@ -468,8 +446,6 @@ public class SurveyAnswerManagerImpl extends
 						}
 					}
 					exportUtil.setCell(cellIndex++, answerOptionName);
-//					String optionName = quMultiFillblank.getOptionName();
-//					exportUtil.setCell(cellIndex++, optionName + "-" + titleName);
 				}
 			} else if (quType == QuType.SCORE) {// 评分题
 				List<QuScore> quScores = question.getQuScores();
@@ -484,8 +460,6 @@ public class SurveyAnswerManagerImpl extends
 						}
 					}
 					exportUtil.setCell(cellIndex++, answerScore);
-//					String optionName = quScore.getOptionName();
-//					exportUtil.setCell(cellIndex++, optionName + "-" + titleName);
 				}
 			} else if (quType == QuType.CHENRADIO) {// 矩阵单选题
 				List<QuChenRow> quChenRows = question.getRows();
@@ -513,8 +487,6 @@ public class SurveyAnswerManagerImpl extends
 					
 					answerColOptionName=HtmlUtil.removeTagFromText(answerColOptionName);
 					exportUtil.setCell(cellIndex++, answerColOptionName);
-//					String optionName = quChenRow.getOptionName();
-//					exportUtil.setCell(cellIndex++, optionName + "-" + titleName);
 				}
 			} else if (quType == QuType.CHENCHECKBOX) {// 矩阵多选题
 				List<QuChenRow> quChenRows = question.getRows();
@@ -535,7 +507,6 @@ public class SurveyAnswerManagerImpl extends
 						}
 						answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
 						exportUtil.setCell(cellIndex++, answerOptionName);
-//						exportUtil.setCell(cellIndex++, optionName + "-" + quChenColumn.getOptionName() + "-" + titleName);
 					}
 				}
 			} else if (quType == QuType.COMPCHENRADIO) {// 复合矩阵单选题
@@ -569,7 +540,6 @@ public class SurveyAnswerManagerImpl extends
 						}
 						answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
 						exportUtil.setCell(cellIndex++, answerOptionName);
-						//exportUtil.setCell(cellIndex++, optionName + "-" + quChenColumn.getOptionName() + "-" + titleName);
 					}
 				}
 			}

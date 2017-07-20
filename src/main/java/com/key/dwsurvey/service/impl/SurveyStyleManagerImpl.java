@@ -23,10 +23,6 @@ public class SurveyStyleManagerImpl implements SurveyStyleManager {
 	@Autowired
 	private SurveyStyleDao surveyStyleDao;
 	
-	/*public SurveyStyle get(String id) {
-		return surveyStyleDao.get(id);
-	}*/
-	
 	public SurveyStyle get(String id) {
 		return surveyStyleDao.findUniqueBy("id", id);
 	}

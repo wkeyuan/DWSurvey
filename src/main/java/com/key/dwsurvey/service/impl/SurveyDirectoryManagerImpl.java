@@ -79,7 +79,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 				sId=RandomUtils.randomStr(6, 12);
 				t.setSid(sId);
 			}
-//			super.save(t);
 			surveyDirectoryDao.save(t);
 			//保存SurveyDirectory
 			if(t.getDirType()==2){
@@ -329,9 +328,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 	}
 	
 	public void saveUserSurvey(SurveyDirectory entity) {
-		//用户问卷，系统指定存放目录
-		//用户存放目录，ID=1，name=用户问卷  之后以用户的LoginName来分子目录
-		//创建用户存放目录
 		User user = accountManager.getCurUser();
 		if(user!=null){
 			String enId = entity.getId();
@@ -424,7 +420,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 				questionManager.save(question);
 			}
 		}
-//		surveyDirectoryDao.save(directory);
 	}
 
 	@Override
@@ -477,16 +472,11 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 			criterions.add(cri1_2);
 		}
 	    
-	    
-	    //Criterion cri2=Restrictions.eq("isShare", isShare);
 	    Criterion cri2=Restrictions.eq("visibility", 1);
-	    //Criterion cri3=Restrictions.ne("surveyTag", 2);
 	    Criterion cri4=Restrictions.eq("surveyModel", 4);
-	    //Criterion cri4=Restrictions.gt("surveyQuNum", 5);
-	    
+
 	    criterions.add(cri2);
 	    criterions.add(cri4);
-//	    Page<SurveyDirectory> page=new Page<SurveyDirectory>();
 	    page.setOrderBy("createDate");
 		page.setOrderDir("desc");
 		
@@ -511,10 +501,8 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 		}
 	    Criterion cri2=Restrictions.eq("visibility", 1);
 	    criterions.add(cri2);
-//		Criterion cri3=Restrictions.ne("surveyTag", 2);
 	    Criterion cri4=Restrictions.eq("surveyModel", 4);
 	    criterions.add(cri4);
-	    //Criterion cri4=Restrictions.gt("surveyQuNum", 5);
 	    page.setOrderBy("createDate");
 		page.setOrderDir("desc");
 	    return surveyDirectoryDao.findPageList(page,criterions);
@@ -526,8 +514,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 	    Criterion cri2=Restrictions.eq("parentId", "402880e5428a2dca01428a2f1f290000");
 	    Criterion cri3=Restrictions.eq("surveyTag", 1);
 	    Criterion cri4=Restrictions.isNull("sid");
-	    //SELECT * FROM `diaowen`.`t_survey_directory` where visibility=1 and dir_type=2 and sid!=''
-//	    Criterion cri5=Restrictions.isNotNull("htmlPath");
 	    Page<SurveyDirectory> page=new Page<SurveyDirectory>();
 	    page.setOrderBy("createDate");
 		page.setOrderDir("desc");
@@ -572,7 +558,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 		directory.setExcerptNum(directory.getExcerptNum()+1);
 		super.save(directory);
 		surveyDirectory.setSurveyQuNum(directory.getSurveyQuNum());
-		//surveyDirectory.setSurveyName(directory.getSurveyName());
 		surveyDirectory.getSurveyDetail().setSurveyNote(surveyDirectory.getSurveyDetail().getSurveyNote());
 		return surveyDirectory;
 	}

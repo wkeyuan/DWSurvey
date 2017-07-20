@@ -31,7 +31,6 @@ public class AnAnswerManagerImpl extends BaseServiceImpl<AnAnswer, String> imple
 	
 	//根据exam_user信息查询答案
 		public AnAnswer findAnswer(String belongAnswerId,String quId){
-			//belongAnswerId quId
 			Criterion criterion1=Restrictions.eq("belongAnswerId", belongAnswerId);
 			Criterion criterion2=Restrictions.eq("quId", quId);
 			return anAnswerDao.findUnique(criterion1,criterion2);

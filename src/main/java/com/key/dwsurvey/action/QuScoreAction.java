@@ -111,7 +111,6 @@ public class QuScoreAction extends ActionSupport{
 				optionId=null;
 			}
 			quScore.setId(optionId);
-//			quRadio.setOptionTitle(key);
 			optionNameValue=URLDecoder.decode(optionNameValue,"utf-8");
 			quScore.setOptionName(optionNameValue);
 			quScore.setOrderById(Integer.parseInt(key));
@@ -173,7 +172,6 @@ public class QuScoreAction extends ActionSupport{
 		}
 		int strLen=strBuf.length();
 		if(strBuf.lastIndexOf(",")==(strLen-1)){
-//			strBuf.substring(0, strLen-1);
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]");
@@ -188,11 +186,9 @@ public class QuScoreAction extends ActionSupport{
 		}
 		strLen=strBuf.length();
 		if(strBuf.lastIndexOf(",")==(strLen-1)){
-//			strBuf.substring(0, strLen-1);
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]}");
-//		System.out.println(strBuf.toString());
 		return strBuf.toString();
 	}
 	

@@ -160,7 +160,6 @@ public class QuMultiFillblankAction extends ActionSupport{
 		}
 		int strLen=strBuf.length();
 		if(strBuf.lastIndexOf(",")==(strLen-1)){
-//			strBuf.substring(0, strLen-1);
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]");
@@ -175,11 +174,9 @@ public class QuMultiFillblankAction extends ActionSupport{
 		}
 		strLen=strBuf.length();
 		if(strBuf.lastIndexOf(",")==(strLen-1)){
-//			strBuf.substring(0, strLen-1);
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]}");
-//		System.out.println(strBuf.toString());
 		return strBuf.toString();
 	}
 	

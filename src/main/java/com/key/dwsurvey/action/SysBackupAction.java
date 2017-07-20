@@ -35,7 +35,6 @@ public class SysBackupAction extends CrudActionSupport<SysDbBackup, String>{
 	
 	@Override
 	public String input() throws Exception {
-		// TODO Auto-generated method stub
 		return super.input();
 	}
 	

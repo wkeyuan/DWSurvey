@@ -4,14 +4,6 @@
  */
 package com.key.common.plugs.xss;
 
-import com.blogspot.radialmind.html.HTMLParser;
-import com.blogspot.radialmind.xss.XSSFilter;
-import com.itextpdf.text.log.SysoCounter;
-
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

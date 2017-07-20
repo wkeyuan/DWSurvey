@@ -87,14 +87,6 @@ public class SysPropertyAction extends ActionSupport{
 		String tongjiCode = Struts2Utils.getParameter("tongjiCode");
 		String loginBgImg = Struts2Utils.getParameter("loginBgImg");
 		
-//		SysProperty sysProperty = new SysProperty();
-//		sysProperty.setSiteName(siteName);
-//		sysProperty.setLogoPath(logoPath);
-//		sysProperty.setAdminEmail(adminEmail);
-//		sysProperty.setAdminQQ(adminQQ);
-//		sysProperty.setAdminTelephone(adminTelephone);
-//		sysProperty.setIcpCode(icpCode);
-		
 		String siteFilePath = "/WEB-INF/classes/conf/site/site.properties".replace("/", File.separator);
 
 		StringBuffer siteData=new StringBuffer();

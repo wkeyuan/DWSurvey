@@ -32,9 +32,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Namespaces({@Namespace("/design")})
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
-@Results({
-	@Result(name=ActionSupport.SUCCESS,location="/WEB-INF/page/content/diaowen-design/survey_html_model.jsp",type=Struts2Utils.DISPATCHER)
-})
+@Results({})
 @AllowedMethods({"ajaxGetStyle"})
 public class MySurveyStyleAction extends CrudActionSupport<SurveyStyle, String>{
 	
@@ -67,7 +65,6 @@ public class MySurveyStyleAction extends CrudActionSupport<SurveyStyle, String>{
 		try{
 			User user=accountManager.getCurUser();
 	    	if(user!=null){
-	    		//SurveyDirectory survey=surveyDirectoryManager.getSurveyByUser(surveyId, user.getId());
 	    		SurveyDirectory survey=surveyDirectoryManager.getSurvey(surveyId);
 	    		if(survey!=null && user.getId().equals(survey.getUserId())){
 	    			
@@ -90,7 +87,6 @@ public class MySurveyStyleAction extends CrudActionSupport<SurveyStyle, String>{
 	    			}
 	    			if(ynEndNum!=null && !"".equals(ynEndNum)){
 	    			    surveyDetail.setYnEndNum(Integer.parseInt(ynEndNum));
-	    			    //surveyDetail.setEndNum(Integer.parseInt(endNum));
 	    			    if(endNum!=null && endNum.matches("\\d*")){
 	    			    	surveyDetail.setEndNum(Integer.parseInt(endNum));			
 	    			    }
@@ -109,8 +105,7 @@ public class MySurveyStyleAction extends CrudActionSupport<SurveyStyle, String>{
 	    			    survey.setViewAnswer(Integer.parseInt(showAnswerDa));
 	    			}
 	    			surveyDirectoryManager.save(survey);
-//	    			surveyDirectoryManager.saveUserSurvey(survey);
-	    			
+
 	    			//保存样式 
 	    			surveyStyleManager.save(entity);
 	    			response.getWriter().write("true");

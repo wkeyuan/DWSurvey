@@ -222,17 +222,6 @@ public class QuestionManagerImpl extends BaseServiceImpl<Question, String> imple
 			//同时删除掉相应的选项
 			if(question!=null){
 				QuType quType=question.getQuType();
-				/*
-				 if(quType==QuType.YESNO){
-				 
-				}else if(quType==QuType.RADIO){
-					quRadioManager.deteteByQuId(quId);
-				}else if(quType==QuType.CHECKBOX){
-					quCheckboxManager.deteteByQuId(quId);
-				}else if(quType==QuType.FILLBLANK){
-					quMultiFillblankManager.deteteByQuId(quId);
-				}
-				*/
 				String belongId = question.getBelongId();
 				int orderById= question.getOrderById();
 				questionDao.delete(question);
@@ -260,7 +249,6 @@ public class QuestionManagerImpl extends BaseServiceImpl<Question, String> imple
 			
 			save(prevQuestion);
 			save(nextQuestion);
-			//System.out.println(prevNum+":"+nextNum+"----------------");
 			return true;
 		}
 		return false;
@@ -286,7 +274,6 @@ public class QuestionManagerImpl extends BaseServiceImpl<Question, String> imple
 	@Transactional
 	public void saveChangeQu(String belongId,int tag, String[] quIds) {
 		for (String quId : quIds) {
-//			Question changeQuestion=questionManager.get(quId);
 			Question changeQuestion=findUnById(quId);
 			copyQu(belongId, tag, changeQuestion);
 		}

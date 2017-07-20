@@ -30,27 +30,16 @@ public class JspToHtml {
 		//${pageContext.request.scheme}://${pageContext.request.serverName }:${pageContext.request.serverPort} pageContext.request.contextPath
 		String reqTarget = request.getScheme()+"://"+request.getServerName()+(request.getServerPort()==80?"":":"+request.getServerPort())+request.getContextPath();
 		reqTarget =reqTarget+"/toHtml";
-		System.out.println("reqTarget:"+reqTarget);
 		//?url="+postUrl+"&filePath="+filePath+"&fileName="+fileName;
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("url", postUrl);
 		map.put("filePath", filePath);
 		map.put("fileName", fileName);
-		
-		System.out.println(reqTarget);
+
 		Connection connection = Jsoup.connect(reqTarget);
 		connection.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31");
 		connection.data(map);
 		Document doc=connection.timeout(8000).get();
-//		System.out.println(doc.html());
-		/*URL url = new java.net.URL(reqTarget);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestProperty("url", postUrl);
-        connection.setRequestProperty("filePath", filePath);
-        connection.setRequestProperty("fileName", fileName);
-        connection.setRequestProperty("User-Agent", "Mozilla/4.0");
-        connection.connect();*/
-        
 	}
 	
 	public void jspWriteToHtml(String url, String filePath,String fileName) throws Exception {
@@ -62,7 +51,6 @@ public class JspToHtml {
 		filePath = filePath.replace("/", File.separator);
 		filePath = filePath.replace("\\", File.separator);
 		String fileRealPath = sc.getRealPath("/") + filePath;
-		System.out.println(fileRealPath);
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 
@@ -89,11 +77,9 @@ public class JspToHtml {
 			}
 		};
 
-		//rd.include(request, rep);
 		rd.forward(request, response);
 		pw.flush();
 
-		// 把jsp输出的内容写到xxx.htm
 		File file2 = new File(fileRealPath);
 		if (!file2.exists() || !file2.isDirectory()) {
 			file2.mkdirs();
@@ -102,7 +88,6 @@ public class JspToHtml {
 		if (!file.exists()) {
 			file.createNewFile();
 		}
-		System.out.println(fileRealPath);
 		FileOutputStream fos = new FileOutputStream(file);
 		os.writeTo(fos);
 		fos.close();

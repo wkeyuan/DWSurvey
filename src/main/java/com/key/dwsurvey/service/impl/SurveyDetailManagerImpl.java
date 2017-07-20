@@ -47,7 +47,6 @@ public class SurveyDetailManagerImpl extends BaseServiceImpl<SurveyDetail, Strin
 	
 	private SurveyDetail findUn(String dirId){
 		Criterion criterion=Restrictions.eq("dirId", dirId);
-//		return surveyDetailDao.findUnique(criterion);
 		 List<SurveyDetail> details=surveyDetailDao.find(criterion);
 		 if(details!=null && details.size()>0){
 			 return details.get(0);

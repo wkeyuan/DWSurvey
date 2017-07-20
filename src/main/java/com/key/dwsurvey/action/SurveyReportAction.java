@@ -53,7 +53,6 @@ public class SurveyReportAction extends ActionSupport{
 	private String surveyId;
 	
 	public String defaultReport() throws Exception {
-		// TODO Auto-generated method stub
 		// 得到频数分析数据
 		User user = accountManager.getCurUser();
 		if(user!=null){
@@ -100,9 +99,6 @@ public class SurveyReportAction extends ActionSupport{
 			Question question=new Question();
 			question.setId(questionId);
 			surveyStatsManager.questionDateCross(question);
-			//取饼状图数据
-			//取折线图数据
-			//response.setContentType("application/json");
 			response.getWriter().write(question.getStatJson());
 		}
 		return null;

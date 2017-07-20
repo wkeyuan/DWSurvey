@@ -537,6 +537,13 @@
 	  		<version>1.66</version>
 		</dependency>
 
+	  <dependency>
+		  <groupId>com.baidu</groupId>
+		  <artifactId>ueditor</artifactId>
+		  <version>1.1.2</version>
+	  </dependency>
+
+
   </dependencies>
   <build>
     <finalName>diaowen</finalName>
