@@ -45,7 +45,7 @@ public class SurveyDirectory extends IdEntity{
 	//是否显示  1显示 0不显示
 	private Integer visibility=1;
 
-	//问卷所属的问卷模块   1问卷模块，2测评，3投票 4＝3.0版引用模板
+	//问卷所属的问卷模块   1问卷模块
 	private Integer surveyModel=1;
 	//是否公开结果  0不  1公开
 	private Integer viewAnswer=0;
@@ -58,8 +58,6 @@ public class SurveyDirectory extends IdEntity{
 	
 	//静态HTML保存路径
 	private String htmlPath;
-
-//	private List<SurveyGroup> surveyGroups=new ArrayList<SurveyGroup>();
 	
 	public String getParentId() {
 		return parentId;
@@ -141,18 +139,6 @@ public class SurveyDirectory extends IdEntity{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	/*
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY, targetEntity = SurveyGroup.class)
-	@JoinTable(name = "T_SURVEYDIR_GROUPS", joinColumns = { @JoinColumn(name = "SURVEY_Id") }, inverseJoinColumns = { @JoinColumn(name = "GROUP_ID") })
-	public List<SurveyGroup> getSurveyGroups() {
-		return surveyGroups;
-	}
-
-	public void setSurveyGroups(List<SurveyGroup> surveyGroups) {
-		this.surveyGroups = surveyGroups;
-	}
-	*/
 
 	public Integer getSurveyTag() {
 		return surveyTag;
