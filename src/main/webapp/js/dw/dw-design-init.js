@@ -1124,8 +1124,10 @@ function bindQuHoverItem(){
 		//先出加载提示图标
 		myeditor.ready(function(){
 			setTimeout(function(){
-				myeditor.setContent($(curEditObj).html());
-				myeditor.focus(true);
+				if(curEditObj!=null){
+					myeditor.setContent($(curEditObj).html());
+					myeditor.focus(true);
+				}
 	        },800);
 		});
 		return false;
