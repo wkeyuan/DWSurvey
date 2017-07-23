@@ -165,5 +165,5 @@ public class SurveyAction extends ActionSupport{
 	public void setSurveyId(String surveyId) {
 		this.surveyId = surveyId;
 	}
-	
+
 }
