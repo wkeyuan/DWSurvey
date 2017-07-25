@@ -64,6 +64,18 @@ public class ToHtmlServlet extends HttpServlet {
 		rd.forward(request, rep);
 		pw.flush();
 
+        try{
+            pdocument(fileName,fileRealPath,os);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print("<p align=center><font size=3 color=red>首页已经成功生成！Andrew</font></p>");
+	}
+
+	private void pdocument(String fileRealPath,String fileName,ByteArrayOutputStream os) throws Exception{
 		Document document = Jsoup.parse(os.toString());
 		Elements elements = document.getElementsByTag("a");
 
@@ -81,13 +93,7 @@ public class ToHtmlServlet extends HttpServlet {
 
 //		File file=jspWriteLocal(fileName, fileRealPath, os);
 		printStream(fileRealPath,fileName,document.html());
-
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.print("<p align=center><font size=3 color=red>首页已经成功生成！Andrew</font></p>");
 	}
-
-	
 	/**
 	 * JSP内容输入到本地
 	 * @param fileName
@@ -153,7 +159,7 @@ public class ToHtmlServlet extends HttpServlet {
 	}
 
 
-	public static void printStream(String savePath,String fileName,String content) throws IOException{
+	public void printStream(String savePath,String fileName,String content) throws IOException{
 		createFile(savePath);
 		FileOutputStream out=null;
 		try {
