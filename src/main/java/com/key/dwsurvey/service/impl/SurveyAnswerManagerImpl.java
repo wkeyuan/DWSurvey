@@ -570,11 +570,6 @@ public class SurveyAnswerManagerImpl extends
 			if (quType == QuType.YESNO) {// 是非题
 				exportUtil.setCell(cellIndex++, titleName);
 			} else if (quType == QuType.RADIO) {// 单选题
-			// List<QuRadio> radios=question.getQuRadios();
-			// for (QuRadio quRadio : radios) {
-			// String optionName = quRadio.getOptionName();
-			// exportUtil.setCell(cellIndex++, optionName+"-"+titleName);
-			// }
 				exportUtil.setCell(cellIndex++, titleName);
 			} else if (quType == QuType.CHECKBOX) {// 多选题
 				List<QuCheckbox> checkboxs = question.getQuCheckboxs();
@@ -589,15 +584,6 @@ public class SurveyAnswerManagerImpl extends
 			} else if (quType == QuType.ANSWER) {// 多行填空题
 				exportUtil.setCell(cellIndex++, titleName);
 			} else if (quType == QuType.COMPRADIO) {// 复合单选题
-			// List<QuRadio> radios=question.getQuRadios();
-			// for (QuRadio quRadio : radios) {
-			// String optionName = quRadio.getOptionName();
-			// exportUtil.setCell(cellIndex++, optionName+"-"+titleName);
-			// int isNote=quRadio.getIsNote();
-			// if(isNote==1){
-			// exportUtil.setCell(cellIndex++, "说明-"+optionName+"-"+titleName);
-			// }
-			// }
 				exportUtil.setCell(cellIndex++, titleName);
 				exportUtil.setCell(cellIndex++, titleName+"-说明" );
 
@@ -641,10 +627,6 @@ public class SurveyAnswerManagerImpl extends
 				List<QuChenColumn> quChenColumns = question.getColumns();
 				for (QuChenRow quChenRow : quChenRows) {
 					String optionName = quChenRow.getOptionName();
-					// for (QuChenColumn quChenColumn : quChenColumns) {
-					// exportUtil.setCell(cellIndex++,
-					// optionName+"-"+quChenColumn.getOptionName()+"-"+titleName);
-					// }
 					optionName=HtmlUtil.removeTagFromText(optionName);
 					exportUtil.setCell(cellIndex++, titleName+ "-"
 							+ optionName );

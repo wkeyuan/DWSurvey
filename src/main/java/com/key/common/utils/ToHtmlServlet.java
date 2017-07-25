@@ -64,7 +64,11 @@ public class ToHtmlServlet extends HttpServlet {
 		rd.forward(request, rep);
 		pw.flush();
 
-        pdocument(fileName,fileRealPath,os);
+        try{
+            pdocument(fileName,fileRealPath,os);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
