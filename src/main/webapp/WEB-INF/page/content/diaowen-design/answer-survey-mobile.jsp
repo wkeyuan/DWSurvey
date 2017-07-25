@@ -825,7 +825,7 @@ $(document).ready(function(){
 		</div>
   </div>
 
-  <div data-role="footer">
+  <div data-role="footer" class="footer-copyright" >
 	  <%--请保留以下内容--%>
   	<h3>Powered by <a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a></h3>
   </div>

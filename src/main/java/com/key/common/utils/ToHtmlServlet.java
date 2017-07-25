@@ -1,43 +1,41 @@
 package com.key.common.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.Properties;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
+import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import com.itextpdf.text.log.SysoCounter;
 import com.key.common.plugs.aliyun.AliyunOSS;
 import com.key.common.plugs.baiduyun.BaiduBOS;
+import com.key.common.utils.web.Struts2Utils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class ToHtmlServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -9118659583515649615L;
-	
+	private static String contentCopyright = null;
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext sc = getServletContext();
 		String url=request.getParameter("url");
 		String filePath=request.getParameter("filePath");
 		String fileName=request.getParameter("fileName");
-//		System.out.println(url+":"+filePath+":"+fileName);
 		//url = "/design/my-survey-design!previewDev.action?surveyId=402880ea4675ac62014675ac7b3a0000";
 		// 这是生成的html文件名,如index.htm
 		filePath = filePath.replace("/", File.separator);
 		filePath = filePath.replace("\\", File.separator);
 		String fileRealPath = sc.getRealPath("/") +File.separator+ filePath;
+
+//		String content = exeDown(url);
+//		printStream(fileRealPath,fileName,content);
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
-
 		final ServletOutputStream stream = new ServletOutputStream() {
 			public void write(byte[] data, int offset, int length) {
 				os.write(data, offset, length);
@@ -46,10 +44,10 @@ public class ToHtmlServlet extends HttpServlet {
 			public void write(int b) throws IOException {
 				os.write(b);
 			}
+
 		};
 
-		final PrintWriter pw = new PrintWriter(new OutputStreamWriter(os,"utf-8"));
-
+		final PrintWriter pw = new PrintWriter(new OutputStreamWriter(os,"UTF-8"));
 		HttpServletResponse rep = new HttpServletResponseWrapper(response) {
 			public ServletOutputStream getOutputStream() {
 				return stream;
@@ -58,27 +56,35 @@ public class ToHtmlServlet extends HttpServlet {
 			public PrintWriter getWriter() {
 				return pw;
 			}
+
 		};
 
 		//rd.include(request, rep);
 		rd.forward(request, rep);
 		pw.flush();
-		
-		
-		// 把jsp输出的内容写到xxx.htm
-		File file=jspWriteLocal(fileName, fileRealPath, os);
-		
-		if("aliyunOSS".equals(DiaowenProperty.DWSTORAGETYPE)){
-			// 阿里云支持 将文件写入到aliyun oss
-			AliyunOSS.putObject(DiaowenProperty.WENJUANHTML_BACKET,file,fileName);
-			//delete本地服务器文件
-			file.delete();
-		}else if("baiduBOS".equals(DiaowenProperty.DWSTORAGETYPE)){
-			BaiduBOS.putObject(DiaowenProperty.WENJUANHTML_BACKET,file,fileName);
-			//delete本地服务器文件
-			file.delete();
+
+		Document document = Jsoup.parse(os.toString());
+		Elements elements = document.getElementsByTag("a");
+
+		String contentCopyrightStr = "";
+		//自定义问卷内容的版权，可以在设置中设置名称，然后就自动显示
+		if(DiaowenProperty.contentCopyright!=null){
+			contentCopyrightStr = "内容版权 <a href=\"/\" style=\"text-decoration: none;color: gray;\">"+DiaowenProperty.contentCopyright+"</a>";
 		}
-		
+		// 修改说明：
+		// 前部分是DWSurvey官网的保留声明，虽然这块目前是法律的灰色地带，但从维护一个健康的开源社区，从DWSurvey帮助到您的角度，请您能保留下来。
+		// 后部分 contentCopyright 是关于问卷内容的版权声明，这个不用说肯定属于您或您公司，写法示例如：调问网
+		Elements elements1 = document.getElementsByClass("footer-copyright").remove();
+		document.body().append("<div class=\"footer-copyright\" data-role=\"footer\" style=\"color: gray;padding-bottom: 5px;\"> \n" +
+				"   <!-- 尊重开源，保留声明 BEGIN --> Powered by \n" +
+				"   <a href=\"http://www.diaowen.net\" style=\"text-decoration: none;color: gray;\">DwSurvey</a>&nbsp; \n" +
+				"   <!-- 尊重开源，保留声明 END --> \n" + contentCopyrightStr +
+				"   </div>");
+		// 把jsp输出的内容写到xxx.htm
+
+//		File file=jspWriteLocal(fileName, fileRealPath, os);
+		printStream(fileRealPath,fileName,document.html());
+
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print("<p align=center><font size=3 color=red>首页已经成功生成！Andrew</font></p>");
@@ -106,9 +112,73 @@ public class ToHtmlServlet extends HttpServlet {
 		}
 		FileOutputStream fos = new FileOutputStream(file);
 		os.writeTo(fos);
+		//fos.write("http://www.diaowen.net/wenjuan/u2qhavhgufi.html".getBytes());
 		fos.close();
 		return file;
 	}
-	
 
+	private File jspWriteLocal(String fileName, String fileRealPath,
+							   final String doc) throws IOException,
+			FileNotFoundException {
+		File file2 = new File(fileRealPath);
+		if (!file2.exists() || !file2.isDirectory()) {
+			file2.mkdirs();
+		}
+		File file = new File(fileRealPath + fileName);
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		FileOutputStream fos = new FileOutputStream(file);
+//		os.writeTo(fos);
+		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+		System.out.println(doc);
+		osw.write(doc);
+		//fos.write("http://www.diaowen.net/wenjuan/u2qhavhgufi.html".getBytes());
+		fos.close();
+		return file;
+	}
+
+	public static String exeDown(String url){
+		String content="";
+		Document doc;
+		try {
+			doc = Jsoup.connect(url)
+					.data("query", "nnd")
+					.userAgent("Mozilla")
+					.cookie("auth", "token")
+					.timeout(5000)
+					.post();
+			content=doc.html();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return content;
+	}
+
+
+	public static void printStream(String savePath,String fileName,String content) throws IOException{
+		createFile(savePath);
+		FileOutputStream out=null;
+		try {
+			out=new FileOutputStream(savePath+File.separator+fileName);
+			out.write(content.getBytes());
+		}catch (Exception e){
+			e.printStackTrace();;
+		}finally{
+			if(out!=null){
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private static void createFile(String rootPath) {
+		File file=new File(rootPath);
+		if(!file.exists()){
+			file.mkdirs();
+		}
+	}
 }

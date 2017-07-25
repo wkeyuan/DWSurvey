@@ -1,9 +1,13 @@
 package com.key.common.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.key.common.utils.web.Struts2Utils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -11,6 +15,8 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 import com.baidu.ueditor.ConfigManager;
 import com.sun.org.apache.xml.internal.security.Init;
+
+import javax.servlet.ServletContext;
 
 /**
  * 
@@ -30,6 +36,7 @@ public class DiaowenProperty extends
 	public static String UPLOADFILE_BACKET = null;
 	public static String UPLOADFILE_JM_BACKET = null;
 
+	public static String contentCopyright = null;
 //	private static Map<String, String> ctxPropertiesMap;
 
 	@Override
@@ -56,7 +63,11 @@ public class DiaowenProperty extends
 			ctxPropertiesMap.put(keyStr, value);
 		}
 		*/
-		
+		contentCopyright = props.getProperty("contentCopyright");
+		if(contentCopyright!=null){
+			contentCopyright = unicode2String(contentCopyright);
+		}
+		System.out.println("contentCopyright:"+contentCopyright);
 	}
 /*
 	public static String getContextProperty(String name) {
@@ -67,5 +78,25 @@ public class DiaowenProperty extends
 		System.out.println("系统初始化方法。。。");
 		System.out.println(ServletActionContext.getContext());
 	}
-	
+
+	/**
+	 * unicode 转字符串
+	 */
+	public static String unicode2String(String unicode) {
+
+		StringBuffer string = new StringBuffer();
+
+		String[] hex = unicode.split("\\\\u");
+
+		for (int i = 1; i < hex.length; i++) {
+
+			// 转换出每一个代码点
+			int data = Integer.parseInt(hex[i], 16);
+
+			// 追加成string
+			string.append((char) data);
+		}
+
+		return string.toString();
+	}
 }
