@@ -70,10 +70,10 @@ public class SysPropertyAction extends ActionSupport{
 		   request.setAttribute("adminEmail", adminEmail);
 		   request.setAttribute("adminQQ", adminQQ);
 		   request.setAttribute("adminTelephone", adminTelephone);
-		   request.setAttribute("icpCode", icpCode);
+		   request.setAttribute("icpCode", decodeUnicode(icpCode));
 		   request.setAttribute("tongjiCode", tongjiCode);
 		   request.setAttribute("loginBgImg", loginBgImg);
-			request.setAttribute("contentCopyright", contentCopyright);
+			request.setAttribute("contentCopyright", decodeUnicode(contentCopyright));
 	    } catch (IOException e1) {
 	        e1.printStackTrace();
 	    }
@@ -201,5 +201,23 @@ public class SysPropertyAction extends ActionSupport{
 		return unicode.toString();
 	}
 
+	public static String decodeUnicode(final String dataStr) {
+		int start = 0;
+		int end = 0;
+		final StringBuffer buffer = new StringBuffer();
+		while (start > -1) {
+			end = dataStr.indexOf("\\u", start + 2);
+			String charStr = "";
+			if (end == -1) {
+				charStr = dataStr.substring(start + 2, dataStr.length());
+			} else {
+				charStr = dataStr.substring(start + 2, end);
+			}
+			char letter = (char) Integer.parseInt(charStr, 16); // 16进制parse整形字符串。
+			buffer.append(new Character(letter).toString());
+			start = end;
+		}
+		return buffer.toString();
+	}
 
 }

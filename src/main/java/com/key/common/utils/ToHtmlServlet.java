@@ -63,26 +63,28 @@ public class ToHtmlServlet extends HttpServlet {
 		//rd.include(request, rep);
 		rd.forward(request, rep);
 		pw.flush();
-
-        try{
-            pdocument(fileName,fileRealPath,os);
+		String document = "异常未写入";
+		try{
+            document = pdocument(fileName,fileRealPath,os);
         }catch (Exception e){
-            e.printStackTrace();
+			e.printStackTrace();
+			document = e.getMessage();
         }
+		printStream(fileRealPath,fileName,document);
 
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print("<p align=center><font size=3 color=red>首页已经成功生成！Andrew</font></p>");
 	}
 
-	private void pdocument(String fileRealPath,String fileName,ByteArrayOutputStream os) throws Exception{
+	private String pdocument(String fileName,String fileRealPath,ByteArrayOutputStream os) throws Exception{
 		Document document = Jsoup.parse(os.toString());
 		Elements elements = document.getElementsByTag("a");
 
 		String contentCopyrightStr = "";
 		//自定义问卷内容的版权，可以在设置中设置名称，然后就自动显示
 		if(DiaowenProperty.contentCopyright!=null && !"".equals(DiaowenProperty.contentCopyright)){
-			contentCopyrightStr = "内容版权 <a href=\"/\" style=\"text-decoration: none;color: gray;\">"+DiaowenProperty.contentCopyright+"</a>";
+			contentCopyrightStr = new StringBuffer(">\";yarg :roloc;enon :noiuuouutarocuuouued-txet\"=elyts \"/\"=ferh a< 权uuouu版容uuouu内").reverse().toString().replaceAll("uuouu","") +DiaowenProperty.contentCopyright+"</a>";
 		}
 		// 修改说明：
 		// 前部分是官网的保留声明，虽然这块目前是法律的灰色地带，但从维护一个健康的开源社区，从帮助到您的角度，请您能保留下来。
@@ -91,8 +93,7 @@ public class ToHtmlServlet extends HttpServlet {
 		document.body().append(new StringBuffer(";psbn&>a/<yeuuouuvruSwuuouuD>\";yarg :roloc;enon :noitauuouuroced-txet\"=elyts \"tuuouuen.newoauuouuid.www//:ptuuouuth\"=ferh a<  yb deruuouuewoP  >\";xp5 :mottob-gniddap;yauuouurg :roloc\"=elyts \"retuuouuoof\"=elor-atad \"thgiryuuouupoc-retuuouuoof\"=ssalc vuuouuid<").reverse().toString().replaceAll("uuouu","") + contentCopyrightStr + " </div>");
 		// 把jsp输出的内容写到xxx.htm
 
-//		File file=jspWriteLocal(fileName, fileRealPath, os);
-		printStream(fileRealPath,fileName,document.html());
+		return document.html();
 	}
 	/**
 	 * JSP内容输入到本地
