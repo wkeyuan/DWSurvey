@@ -79,19 +79,6 @@ function resizeBodyWidth(){
 	}else{
 		$(".bodyCenter").width(960);
 	}
-	/*if(browseWidth<=900){
-		$("#wrap").width(900);
-	}else{
-		$("#wrap").width("auto");
-	}
-	if(browseWidth<=1100){
-		$("#dwBody").width(900);
-		$("#dwBody").css("margin","10px auto");
-	}else{
-		$("#dwBody").width("auto");
-		$("#dwBody").css("margin","10px 100px");
-	}*/
-	//alert($("#dwBody").width());
 }
 function resizeBodyHeight(){
 	//autoContentHeight

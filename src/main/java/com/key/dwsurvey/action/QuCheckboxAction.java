@@ -165,7 +165,6 @@ public class QuCheckboxAction extends ActionSupport{
 	public static String buildResultJson(Question entity){
 		//{id:'null',quItems:[{id:'null',title:'null'},{id:'null',title:'null'}]}
 		StringBuffer strBuf=new StringBuffer();
-		//{id:'',quItems:[{id:'',title:''},{id:'',title:''}]}
 		strBuf.append("{id:'").append(entity.getId());
 		strBuf.append("',orderById:");
 		strBuf.append(entity.getOrderById());
@@ -177,7 +176,6 @@ public class QuCheckboxAction extends ActionSupport{
 		}
 		int strLen=strBuf.length();
 		if(strBuf.lastIndexOf(",")==(strLen-1)){
-//			strBuf.substring(0, strLen-1);
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]");
@@ -192,7 +190,6 @@ public class QuCheckboxAction extends ActionSupport{
 		}
 		strLen=strBuf.length();
 		if(strBuf.lastIndexOf(",")==(strLen-1)){
-//			strBuf.substring(0, strLen-1);
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]}");

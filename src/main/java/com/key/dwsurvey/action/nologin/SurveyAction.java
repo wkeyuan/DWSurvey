@@ -122,8 +122,6 @@ public class SurveyAction extends ActionSupport{
 	    	String encoderContent=baseUrl+"/response!answerMobile.action?surveyId="+surveyId;
 	    	ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  
 	    	BufferedImage twoDimensionImg = new TwoDimensionCode().qRCodeCommon(encoderContent, "jpg", 7);
-//	    	JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
-//	        jpegEncoder.encode(twoDimensionImg);
 
 			ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);
 

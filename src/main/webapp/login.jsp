@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>调问网-专业且开源的问卷表单系统</title>
-<meta name="keywords" content="调问开源问卷表单,DWSurvey，调查问卷，问卷调查系统，调查问卷设计，调查问卷格式，大学生问卷，在线问卷，表单系统" />
+<title>调问-专业且开源的问卷表单系统</title>
 <meta name="description" content="调问问卷表单－开源且专业的调研系统" />
 
 <script type="text/javascript" src="${ctx }/js/plugs/jquery-ui-1.10.3.custom/js/jquery-1.10.1.js"></script>

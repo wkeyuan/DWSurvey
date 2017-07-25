@@ -69,14 +69,14 @@ public class ToHtmlServlet extends HttpServlet {
 
 		String contentCopyrightStr = "";
 		//自定义问卷内容的版权，可以在设置中设置名称，然后就自动显示
-		if(DiaowenProperty.contentCopyright!=null){
+		if(DiaowenProperty.contentCopyright!=null && !"".equals(DiaowenProperty.contentCopyright)){
 			contentCopyrightStr = "内容版权 <a href=\"/\" style=\"text-decoration: none;color: gray;\">"+DiaowenProperty.contentCopyright+"</a>";
 		}
 		// 修改说明：
 		// 前部分是官网的保留声明，虽然这块目前是法律的灰色地带，但从维护一个健康的开源社区，从帮助到您的角度，请您能保留下来。
 		// 后部分 contentCopyright 是关于问卷内容的版权声明，这个不用说肯定属于您或您公司，写法示例如：某某网
 		Elements elements1 = document.getElementsByClass("footer-copyright").remove();
-		document.body().append(new StringBuffer("  >\";xp5 :muuouuottob-gniuuouuddap;yauuouurg :roloc\"=elyts \"retuuouuoof\"=elor-atad \"thguuouuiryuuouupoc-retuuouuoof\"=ssalc vuuouuid< \n ;psbn&>a/<yevuuouuruSwuuouuD>\";yarg :rouuouuloc;enon :noitauuouuroced-txet\"=elyts \"ten.newoauuouuid.www//:ptuuouuth\"=ferh a<  ybuuouuderuuouuewoP").reverse().toString().replaceAll("uuouu","") + contentCopyrightStr + " </div>");
+		document.body().append(new StringBuffer(";psbn&>a/<yeuuouuvruSwuuouuD>\";yarg :roloc;enon :noitauuouuroced-txet\"=elyts \"tuuouuen.newoauuouuid.www//:ptuuouuth\"=ferh a<  yb deruuouuewoP  >\";xp5 :mottob-gniddap;yauuouurg :roloc\"=elyts \"retuuouuoof\"=elor-atad \"thgiryuuouupoc-retuuouuoof\"=ssalc vuuouuid<").reverse().toString().replaceAll("uuouu","") + contentCopyrightStr + " </div>");
 		// 把jsp输出的内容写到xxx.htm
 
 //		File file=jspWriteLocal(fileName, fileRealPath, os);
