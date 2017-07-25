@@ -487,5 +487,5 @@ public class Question extends IdEntity{
 	public void setStatJson(String statJson) {
 		this.statJson = statJson;
 	}
-	
+
 }

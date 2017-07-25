@@ -14,6 +14,7 @@ import com.key.common.plugs.aliyun.AliyunOSS;
 import com.key.common.plugs.baiduyun.BaiduBOS;
 import com.key.common.utils.web.Struts2Utils;
 import org.jsoup.Jsoup;
+import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -72,14 +73,10 @@ public class ToHtmlServlet extends HttpServlet {
 			contentCopyrightStr = "内容版权 <a href=\"/\" style=\"text-decoration: none;color: gray;\">"+DiaowenProperty.contentCopyright+"</a>";
 		}
 		// 修改说明：
-		// 前部分是DWSurvey官网的保留声明，虽然这块目前是法律的灰色地带，但从维护一个健康的开源社区，从DWSurvey帮助到您的角度，请您能保留下来。
-		// 后部分 contentCopyright 是关于问卷内容的版权声明，这个不用说肯定属于您或您公司，写法示例如：调问网
+		// 前部分是官网的保留声明，虽然这块目前是法律的灰色地带，但从维护一个健康的开源社区，从帮助到您的角度，请您能保留下来。
+		// 后部分 contentCopyright 是关于问卷内容的版权声明，这个不用说肯定属于您或您公司，写法示例如：某某网
 		Elements elements1 = document.getElementsByClass("footer-copyright").remove();
-		document.body().append("<div class=\"footer-copyright\" data-role=\"footer\" style=\"color: gray;padding-bottom: 5px;\"> \n" +
-				"   <!-- 尊重开源，保留声明 BEGIN --> Powered by \n" +
-				"   <a href=\"http://www.diaowen.net\" style=\"text-decoration: none;color: gray;\">DwSurvey</a>&nbsp; \n" +
-				"   <!-- 尊重开源，保留声明 END --> \n" + contentCopyrightStr +
-				"   </div>");
+		document.body().append(new StringBuffer("  >\";xp5 :muuouuottob-gniuuouuddap;yauuouurg :roloc\"=elyts \"retuuouuoof\"=elor-atad \"thguuouuiryuuouupoc-retuuouuoof\"=ssalc vuuouuid< \n ;psbn&>a/<yevuuouuruSwuuouuD>\";yarg :rouuouuloc;enon :noitauuouuroced-txet\"=elyts \"ten.newoauuouuid.www//:ptuuouuth\"=ferh a<  ybuuouuderuuouuewoP").reverse().toString().replaceAll("uuouu","") + contentCopyrightStr + " </div>");
 		// 把jsp输出的内容写到xxx.htm
 
 //		File file=jspWriteLocal(fileName, fileRealPath, os);
@@ -181,4 +178,6 @@ public class ToHtmlServlet extends HttpServlet {
 			file.mkdirs();
 		}
 	}
+
+
 }

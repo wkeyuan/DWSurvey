@@ -13,7 +13,6 @@
 <link href="${ctx }/js/plugs/uploadify-v3.1/uploadify.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx }/js/plugs/uploadify-v3.1/jquery.uploadify-3.1.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/uploadify.js"></script>
-<script type="text/javascript" src="${ctx }/js/dw/address.js"></script>
 <link href="${ctx }/css/preview-dev.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${ctx }/js/plugs/colpick-jQuery/css/colpick.css" type="text/css"/>
 
@@ -1301,12 +1300,6 @@ label.error{
 													<c:choose>
 														<c:when test="${en.answerInputRow > 1 }">
 															<textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;"class="inputSytle_2 fillblankInput" ></textarea>
-														</c:when>
-														<c:when test="${en.contactsField eq 8}">
-															<select style="padding: 5px;" class="hat_province"><option>--选择省--</option> </select>
-															<select style="padding: 5px;" class="hat_city"><option>--选择市--</option> </select>
-															<select style="padding: 5px;" class="hat_area"><option>--选择区--</option> </select>
-															<input type="text" name="qu_${en.quType }_${en.id }" class="fbk_input" style="display: none;" >
 														</c:when>
 														<c:otherwise>
 															<input type="text" name="qu_${en.quType }_${en.id }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;" class="inputSytle_1 fillblankInput" >
