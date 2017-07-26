@@ -16,6 +16,7 @@ import com.key.common.utils.web.Struts2Utils;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class ToHtmlServlet extends HttpServlet {
@@ -33,8 +34,6 @@ public class ToHtmlServlet extends HttpServlet {
 		filePath = filePath.replace("\\", File.separator);
 		String fileRealPath = sc.getRealPath("/") +File.separator+ filePath;
 
-//		String content = exeDown(url);
-//		printStream(fileRealPath,fileName,content);
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 		final ServletOutputStream stream = new ServletOutputStream() {
@@ -63,38 +62,17 @@ public class ToHtmlServlet extends HttpServlet {
 		//rd.include(request, rep);
 		rd.forward(request, rep);
 		pw.flush();
-		String document = "异常未写入";
-		try{
-            document = pdocument(fileName,fileRealPath,os);
-        }catch (Exception e){
+		try {
+			flushDo(fileRealPath,fileName,os);
+		} catch (Exception e) {
 			e.printStackTrace();
-			document = e.getMessage();
-        }
-		printStream(fileRealPath,fileName,document);
+		}
 
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print("<p align=center><font size=3 color=red>首页已经成功生成！Andrew</font></p>");
 	}
 
-	private String pdocument(String fileName,String fileRealPath,ByteArrayOutputStream os) throws Exception{
-		Document document = Jsoup.parse(os.toString());
-		Elements elements = document.getElementsByTag("a");
-
-		String contentCopyrightStr = "";
-		//自定义问卷内容的版权，可以在设置中设置名称，然后就自动显示
-		if(DiaowenProperty.contentCopyright!=null && !"".equals(DiaowenProperty.contentCopyright)){
-			contentCopyrightStr = new StringBuffer(">\";yarg :roloc;enon :noiuuouutarocuuouued-txet\"=elyts \"/\"=ferh a< 权uuouu版容uuouu内").reverse().toString().replaceAll("uuouu","") +DiaowenProperty.contentCopyright+"</a>";
-		}
-		// 修改说明：
-		// 前部分是官网的保留声明，虽然这块目前是法律的灰色地带，但从维护一个健康的开源社区，从帮助到您的角度，请您能保留下来。
-		// 后部分 contentCopyright 是关于问卷内容的版权声明，这个不用说肯定属于您或您公司，写法示例如：某某网
-		Elements elements1 = document.getElementsByClass("footer-copyright").remove();
-		document.body().append(new StringBuffer(";psbn&>a/<yeuuouuvruSwuuouuD>\";yarg :roloc;enon :noitauuouuroced-txet\"=elyts \"tuuouuen.newoauuouuid.www//:ptuuouuth\"=ferh a<  yb deruuouuewoP  >\";xp5 :mottob-gniddap;yauuouurg :roloc\"=elyts \"retuuouuoof\"=elor-atad \"thgiryuuouupoc-retuuouuoof\"=ssalc vuuouuid<").reverse().toString().replaceAll("uuouu","") + contentCopyrightStr + " </div>");
-		// 把jsp输出的内容写到xxx.htm
-
-		return document.html();
-	}
 	/**
 	 * JSP内容输入到本地
 	 * @param fileName
@@ -116,8 +94,8 @@ public class ToHtmlServlet extends HttpServlet {
 		}
 		FileOutputStream fos = new FileOutputStream(file);
 		os.writeTo(fos);
-		//fos.write("http://www.diaowen.net/wenjuan/u2qhavhgufi.html".getBytes());
 		fos.close();
+
 		return file;
 	}
 
@@ -135,37 +113,46 @@ public class ToHtmlServlet extends HttpServlet {
 		FileOutputStream fos = new FileOutputStream(file);
 //		os.writeTo(fos);
 		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-		System.out.println(doc);
 		osw.write(doc);
-		//fos.write("http://www.diaowen.net/wenjuan/u2qhavhgufi.html".getBytes());
 		fos.close();
 		return file;
 	}
 
-	public static String exeDown(String url){
-		String content="";
-		Document doc;
-		try {
-			doc = Jsoup.connect(url)
-					.data("query", "nnd")
-					.userAgent("Mozilla")
-					.cookie("auth", "token")
-					.timeout(5000)
-					.post();
-			content=doc.html();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return content;
-	}
 
+	private void flushDo(String fileRealPath,String fileName,ByteArrayOutputStream os) throws Exception{
+		Document document = Jsoup.parse(os.toString(),"UTF-8");
+		String contentCopyrightStr = "";
+		// 自定义问卷内容的版权，可以在设置中设置名称，然后就自动显示
+		// 修改说明：尊重开源、保护开源
+		// 官网的保留声明，虽然这块目前是法律的灰色地带，但从维护一个健康的开源社区，从帮助到您的角度，请您能保留下来。
+		if(fileName.startsWith("m_")){
+			Elements elements = document.getElementsByAttributeValue("data-role","footer");
+			//data-role="page"
+			if(elements==null){
+				elements = document.getElementsByAttributeValue("data-role","page");
+				if(elements!=null){
+					elements.last().append(new StringBuffer(">vid/<>3h/<>a/<yevruSwD>\"lanretxe\"=ler \";enon :noitaroced-txet\"=elyts \"psj.m-xedni/ten.newoaid//:ptth\"=ferh a< yb derewoP>3h<>\"egap\"=elor-atad vid<\n").reverse().toString());
+				}
+			}else{
+				elements.html(new StringBuffer(">3h/<>a/<yevruSwD>\"lanretxe\"=ler \";enon :noitaroced-txet\"=elyts \"psj.m-xedni/ten.newoaid//:ptth\"=ferh a< yb derewoP>3h<").reverse().toString());
+			}
+		}else{
+			Elements elements = document.getElementsByClass("footer-pb");
+			if(elements!=null) elements.remove();
+			document.body().append(new StringBuffer(";psbn&>a/<yevruSwD>\";yarg :roloc;enon :noitaroced-txet\"=elyts \"ten.newoaid.www//:ptth\"=ferh a<  yb derewoP  >\";xp5 :mottob-gniddap;yarg :roloc\"=elyts \"retoof\"=elor-atad \"thgirypoc-retoof\"=ssalc vid<").reverse().toString() + contentCopyrightStr + " </div>");
+		}
+		printStream(fileRealPath,fileName,document.html());
+	}
 
 	public void printStream(String savePath,String fileName,String content) throws IOException{
 		createFile(savePath);
 		FileOutputStream out=null;
+		OutputStreamWriter osw = null;
 		try {
 			out=new FileOutputStream(savePath+File.separator+fileName);
-			out.write(content.getBytes());
+			osw = new OutputStreamWriter(out, "UTF-8");
+			osw.write(content);
+			osw.close();
 		}catch (Exception e){
 			e.printStackTrace();;
 		}finally{

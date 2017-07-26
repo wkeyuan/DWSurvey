@@ -834,7 +834,7 @@ $(document).ready(function(){
 </form>
 
 <div id="fixedMsg" style="position: fixed;top: 0px;width: 100%;padding: 10px;text-align: center;font-size: 18px;letter-spacing: 4px;line-height: 56px;background-color: #111;background-color: rgba(17,17,17,0.5);color: #fff;color: rgba(255,255,255,0.5);z-index: 200;display: none;"></div>
-
+<%@ include file="/WEB-INF/page/layouts/other.jsp"%>
 <script type="text/javascript">
 $(document).ready(function(){
 	//分页设置 nextPage_a prevPage_a
@@ -1485,6 +1485,6 @@ if(errorcode=="3"){
 
 </script>
 
-<%@ include file="/WEB-INF/page/layouts/other.jsp"%>
+
 </body>
 </html>

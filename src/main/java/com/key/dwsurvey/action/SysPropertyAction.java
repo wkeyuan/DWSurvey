@@ -65,15 +65,13 @@ public class SysPropertyAction extends ActionSupport{
 		   String icpCode = p.getProperty("icpCode");
 		   String tongjiCode = p.getProperty("tongjiCode");
 		   String loginBgImg = p.getProperty("loginBgImg");
-		   String contentCopyright = p.getProperty("contentCopyright");
 
 		   request.setAttribute("adminEmail", adminEmail);
 		   request.setAttribute("adminQQ", adminQQ);
 		   request.setAttribute("adminTelephone", adminTelephone);
-		   request.setAttribute("icpCode", decodeUnicode(icpCode));
+		   request.setAttribute("icpCode", icpCode);
 		   request.setAttribute("tongjiCode", tongjiCode);
 		   request.setAttribute("loginBgImg", loginBgImg);
-			request.setAttribute("contentCopyright", decodeUnicode(contentCopyright));
 	    } catch (IOException e1) {
 	        e1.printStackTrace();
 	    }
@@ -91,7 +89,6 @@ public class SysPropertyAction extends ActionSupport{
 		String icpCode = Struts2Utils.getParameter("icpCode");
 		//网站备案信息代码
 		String loginBgImg = Struts2Utils.getParameter("loginBgImg");
-		String contentCopyright = Struts2Utils.getParameter("contentCopyright");
 
 		String siteFilePath = "/WEB-INF/classes/conf/site/site.properties".replace("/", File.separator);
 
@@ -99,13 +96,11 @@ public class SysPropertyAction extends ActionSupport{
 		props.put("adminEmail",adminEmail!=null?adminEmail:"");
 		props.put("adminQQ",adminQQ!=null?adminQQ:"");
 		props.put("adminTelephone",adminTelephone!=null?adminTelephone:"");
-		props.put("icpCode",icpCode!=null?string2Unicode(icpCode):"");
+		props.put("icpCode",icpCode!=null?icpCode:"");
 		props.put("loginBgImg",loginBgImg!=null?loginBgImg:"");
-		props.put("contentCopyright",contentCopyright!=null?string2Unicode(contentCopyright):"");
 
 		writeData(siteFilePath, props);
 
-		DiaowenProperty.contentCopyright = contentCopyright;
 		//写LOGO DATA文件
 		String headerData="<a href=\"${ctx }\"><img alt=\"\" src=\"${ctx }/images/logo/LOGO.png\" align=\"middle\" height=\"46\" ><span class=\"titleTempSpan\">OSS</span></a> ";
 		String headerDataPath="/WEB-INF/page/layouts/logo-img.jsp".replace("/", File.separator);
@@ -201,23 +196,5 @@ public class SysPropertyAction extends ActionSupport{
 		return unicode.toString();
 	}
 
-	public static String decodeUnicode(final String dataStr) {
-		int start = 0;
-		int end = 0;
-		final StringBuffer buffer = new StringBuffer();
-		while (start > -1) {
-			end = dataStr.indexOf("\\u", start + 2);
-			String charStr = "";
-			if (end == -1) {
-				charStr = dataStr.substring(start + 2, dataStr.length());
-			} else {
-				charStr = dataStr.substring(start + 2, end);
-			}
-			char letter = (char) Integer.parseInt(charStr, 16); // 16进制parse整形字符串。
-			buffer.append(new Character(letter).toString());
-			start = end;
-		}
-		return buffer.toString();
-	}
 
 }

@@ -105,11 +105,12 @@ $(document).ready(function(){
 													<td width="80" align="right" >备案代码</td>
 													<td class="ac-input-td"><input type="text" name="icpCode" value="${icpCode }"> </td>
 												</tr>
-												<tr>
+												<%--
+												<tr style="display: none;">
 													<td width="80" align="right" >内容版权</td>
 													<td class="ac-input-td"><input type="text" name="contentCopyright" value="${contentCopyright }" ></td>
 												</tr>
-												<tr><td>&nbsp;</td><td class="ac-input-td" valign="top" style="padding-top: 0px;">所属机构名称如：调问网 </td></tr>
+												<tr><td>&nbsp;</td><td class="ac-input-td" valign="top" style="padding-top: 0px;">所属机构名称如：调问网 </td></tr>--%>
 											</table>
 										</td>
 										<td valign="top" align="left" >
