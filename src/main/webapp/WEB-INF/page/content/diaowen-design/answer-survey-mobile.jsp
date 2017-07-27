@@ -261,6 +261,9 @@ $(document).ready(function(){
 										 <%--<input id="qu_${en.quType }_${en.id }" type="text" name="qu_${en.quType }_${en.id }" class="fillblankInput" >--%>
 
 										 <c:choose>
+											 <c:when test="${en.checkType eq 'DATE'}">
+												 <input type="date" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput"  >
+											 </c:when>
 											 <c:when test="${en.answerInputRow > 1 }">
 												 <textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" class="inputSytle_2 fillblankInput" ></textarea>
 											 </c:when>
