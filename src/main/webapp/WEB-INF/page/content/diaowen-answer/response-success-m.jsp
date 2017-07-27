@@ -54,7 +54,7 @@
   </div>
 
   <div data-role="footer">
-      <%--请委必保留以下内容，自觉保留优先技术支持。--%>
+      <%--尊重开源、保留声明，感谢您的大力支持--%>
       <h3>Powered by <a href="http://www.diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a> </h3>
   </div>
 </div> 

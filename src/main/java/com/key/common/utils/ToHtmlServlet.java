@@ -73,6 +73,30 @@ public class ToHtmlServlet extends HttpServlet {
 		out.print("<p align=center><font size=3 color=red>首页已经成功生成！Andrew</font></p>");
 	}
 
+	private void flushDo(String fileRealPath,String fileName,final ByteArrayOutputStream os) throws Exception{
+		Document document = Jsoup.parse(os.toString("UTF-8"),"UTF-8");
+		String contentCopyrightStr = "";// 自定义问卷内容的版权，可以在设置中设置名称，然后就自动显示
+		Elements isElements = document.getElementsByAttributeValue("href",new StringBuffer("ten.newoaid.www//:ptth").reverse().toString());
+		if (isElements==null){
+			if(fileName.startsWith("m_")){
+				Elements elements = document.getElementsByAttributeValue("data-role","footer");
+				if(elements==null){
+					elements = document.getElementsByAttributeValue("data-role","page");
+					if(elements!=null){
+						elements.last().append(new StringBuffer(">vid/<>3h/<>a/<yevruSwD>\"lanretxe\"=ler \";enon :noitaroced-txet\"=elyts \"psj.m-xedni/ten.newoaid//:ptth\"=ferh a< yb derewoP>3h<>\"egap\"=elor-atad vid<\n").reverse().toString());
+					}
+				}else{
+					elements.html(new StringBuffer(">3h/<>a/<yevruSwD>\"lanretxe\"=ler \";enon :noitaroced-txet\"=elyts \"psj.m-xedni/ten.newoaid//:ptth\"=ferh a< yb derewoP>3h<").reverse().toString());
+				}
+			}else{
+				Elements elements = document.getElementsByClass("footer-pb");
+				if(elements!=null) elements.remove();
+				document.body().append(new StringBuffer(";psbn&>a/<yevruSwD>\";yarg :roloc;enon :noitaroced-txet\"=elyts \"ten.newoaid.www//:ptth\"=ferh a<  yb derewoP  >\";xp5 :mottob-gniddap;yarg :roloc\"=elyts \"retoof\"=elor-atad \"thgirypoc-retoof\"=ssalc vid<").reverse().toString() + contentCopyrightStr + " </div>");
+			}
+		}
+		printStream(fileRealPath,fileName,document.html());
+	}
+
 	/**
 	 * JSP内容输入到本地
 	 * @param fileName
@@ -118,39 +142,13 @@ public class ToHtmlServlet extends HttpServlet {
 		return file;
 	}
 
-
-	private void flushDo(String fileRealPath,String fileName,ByteArrayOutputStream os) throws Exception{
-		Document document = Jsoup.parse(os.toString(),"UTF-8");
-		String contentCopyrightStr = "";
-		// 自定义问卷内容的版权，可以在设置中设置名称，然后就自动显示
-		// 修改说明：尊重开源、保护开源
-		// 官网的保留声明，虽然这块目前是法律的灰色地带，但从维护一个健康的开源社区，从帮助到您的角度，请您能保留下来。
-		if(fileName.startsWith("m_")){
-			Elements elements = document.getElementsByAttributeValue("data-role","footer");
-			//data-role="page"
-			if(elements==null){
-				elements = document.getElementsByAttributeValue("data-role","page");
-				if(elements!=null){
-					elements.last().append(new StringBuffer(">vid/<>3h/<>a/<yevruSwD>\"lanretxe\"=ler \";enon :noitaroced-txet\"=elyts \"psj.m-xedni/ten.newoaid//:ptth\"=ferh a< yb derewoP>3h<>\"egap\"=elor-atad vid<\n").reverse().toString());
-				}
-			}else{
-				elements.html(new StringBuffer(">3h/<>a/<yevruSwD>\"lanretxe\"=ler \";enon :noitaroced-txet\"=elyts \"psj.m-xedni/ten.newoaid//:ptth\"=ferh a< yb derewoP>3h<").reverse().toString());
-			}
-		}else{
-			Elements elements = document.getElementsByClass("footer-pb");
-			if(elements!=null) elements.remove();
-			document.body().append(new StringBuffer(";psbn&>a/<yevruSwD>\";yarg :roloc;enon :noitaroced-txet\"=elyts \"ten.newoaid.www//:ptth\"=ferh a<  yb derewoP  >\";xp5 :mottob-gniddap;yarg :roloc\"=elyts \"retoof\"=elor-atad \"thgirypoc-retoof\"=ssalc vid<").reverse().toString() + contentCopyrightStr + " </div>");
-		}
-		printStream(fileRealPath,fileName,document.html());
-	}
-
 	public void printStream(String savePath,String fileName,String content) throws IOException{
 		createFile(savePath);
 		FileOutputStream out=null;
 		OutputStreamWriter osw = null;
 		try {
 			out=new FileOutputStream(savePath+File.separator+fileName);
-			osw = new OutputStreamWriter(out, "UTF-8");
+			osw = new OutputStreamWriter(out,"UTF-8");
 			osw.write(content);
 			osw.close();
 		}catch (Exception e){
