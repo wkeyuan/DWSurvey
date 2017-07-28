@@ -35,7 +35,6 @@ public class JspToHtml {
 		map.put("url", postUrl);
 		map.put("filePath", filePath);
 		map.put("fileName", fileName);
-
 		Connection connection = Jsoup.connect(reqTarget);
 		connection.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31");
 		connection.data(map);
@@ -65,7 +64,7 @@ public class JspToHtml {
 		};
 
 		final PrintWriter pw = new PrintWriter(new OutputStreamWriter(os,
-				"utf-8"));
+				"UTF-8"));
 
 		HttpServletResponse rep = new HttpServletResponseWrapper(response) {
 			public ServletOutputStream getOutputStream() {

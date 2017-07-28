@@ -142,7 +142,6 @@ public class QuFillblankAction extends ActionSupport{
 	public static String buildResultJson(Question entity){
 		//{id:'null',quItems:[{id:'null',title:'null'},{id:'null',title:'null'}]}
 		StringBuffer strBuf=new StringBuffer();
-		//{id:'',quItems:[{id:'',title:''},{id:'',title:''}]}
 		strBuf.append("{id:'").append(entity.getId());
 		strBuf.append("',orderById:");
 		strBuf.append(entity.getOrderById());
@@ -157,11 +156,9 @@ public class QuFillblankAction extends ActionSupport{
 		}
 		int strLen=strBuf.length();
 		if(strBuf.lastIndexOf(",")==(strLen-1)){
-//			strBuf.substring(0, strLen-1);
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]}");
-//		System.out.println(strBuf.toString());
 		return strBuf.toString();
 	}
 	

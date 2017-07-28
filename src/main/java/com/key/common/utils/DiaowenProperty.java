@@ -1,9 +1,13 @@
 package com.key.common.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.key.common.utils.web.Struts2Utils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -11,6 +15,8 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 import com.baidu.ueditor.ConfigManager;
 import com.sun.org.apache.xml.internal.security.Init;
+
+import javax.servlet.ServletContext;
 
 /**
  * 
@@ -56,7 +62,6 @@ public class DiaowenProperty extends
 			ctxPropertiesMap.put(keyStr, value);
 		}
 		*/
-		
 	}
 /*
 	public static String getContextProperty(String name) {
@@ -67,5 +72,5 @@ public class DiaowenProperty extends
 		System.out.println("系统初始化方法。。。");
 		System.out.println(ServletActionContext.getContext());
 	}
-	
+
 }

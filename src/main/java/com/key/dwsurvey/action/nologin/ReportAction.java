@@ -47,9 +47,7 @@ public class ReportAction extends ActionSupport{
 	private String sid;
 	
 	public String execute() throws Exception {
-		// TODO Auto-generated method stub
 		// 得到频数分析数据
-//		directory=directoryManager.getSurvey(surveyId);
 		directory=directoryManager.getSurveyBySid(sid);
 		Integer viewAnswer=directory.getViewAnswer();
 

@@ -261,6 +261,9 @@ $(document).ready(function(){
 										 <%--<input id="qu_${en.quType }_${en.id }" type="text" name="qu_${en.quType }_${en.id }" class="fillblankInput" >--%>
 
 										 <c:choose>
+											 <c:when test="${en.checkType eq 'DATE'}">
+												 <input type="date" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput"  >
+											 </c:when>
 											 <c:when test="${en.answerInputRow > 1 }">
 												 <textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" class="inputSytle_2 fillblankInput" ></textarea>
 											 </c:when>
@@ -825,8 +828,8 @@ $(document).ready(function(){
 		</div>
   </div>
 
-  <div data-role="footer">
-	  <%--请保留以下内容--%>
+  <div data-role="footer" >
+	  <%--尊重开源、保留声明，感谢您的大力支持--%>
   	<h3>Powered by <a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a></h3>
   </div>
 </div>
@@ -834,7 +837,7 @@ $(document).ready(function(){
 </form>
 
 <div id="fixedMsg" style="position: fixed;top: 0px;width: 100%;padding: 10px;text-align: center;font-size: 18px;letter-spacing: 4px;line-height: 56px;background-color: #111;background-color: rgba(17,17,17,0.5);color: #fff;color: rgba(255,255,255,0.5);z-index: 200;display: none;"></div>
-
+<%@ include file="/WEB-INF/page/layouts/other.jsp"%>
 <script type="text/javascript">
 $(document).ready(function(){
 	//分页设置 nextPage_a prevPage_a
@@ -1485,6 +1488,6 @@ if(errorcode=="3"){
 
 </script>
 
-<%@ include file="/WEB-INF/page/layouts/other.jsp"%>
+
 </body>
 </html>

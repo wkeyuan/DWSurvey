@@ -76,14 +76,6 @@ public class SurveyAction extends ActionSupport{
 	public String execute() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
-//		SurveyDirectory surveyDirectory=surveyDirectoryManager.getSurveyBySid(sid);
-//		surveyId=surveyDirectory.getId();
-//		//收集规则处理
-//		
-//		String htmlPath=surveyDirectory.getHtmlPath();
-//		System.out.println(htmlPath);
-//		request.getRequestDispatcher("/"+htmlPath).forward(request, response);
-		
 		String htmlPath="http://wj.diaowen.net/test";
 		//request.getRequestDispatcher(htmlPath).forward(request, response);
 		response.sendRedirect(htmlPath);
@@ -130,8 +122,6 @@ public class SurveyAction extends ActionSupport{
 	    	String encoderContent=baseUrl+"/response!answerMobile.action?surveyId="+surveyId;
 	    	ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  
 	    	BufferedImage twoDimensionImg = new TwoDimensionCode().qRCodeCommon(encoderContent, "jpg", 7);
-//	    	JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
-//	        jpegEncoder.encode(twoDimensionImg);
 
 			ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);
 
@@ -154,18 +144,8 @@ public class SurveyAction extends ActionSupport{
     		   responseOutputStream.flush();
     		   responseOutputStream.close();
 	        }
-	        /*
-	        //String filePath="WEB-INF/wjHtml/"+dateFormat.format(createDate);
-	        String fileRealPath =  request.getSession().getServletContext().getRealPath("/") + "WEB-INF/wjHtml/jpg/";
-	        String fileName=surveyId+".jpg";
-	     // 把jsp输出的内容写到xxx.htm
-	        File file = jpgWriteLocal(fileName, fileRealPath, jpegOutputStream);
-	     // 阿里云支持 将文件写入到aliyun oss
-			AliyunOSS.pubObjects(file,fileName);
-			file.delete();
-			*/
-	        
-			
+
+
 	        return null;
 	}
 
@@ -183,5 +163,5 @@ public class SurveyAction extends ActionSupport{
 	public void setSurveyId(String surveyId) {
 		this.surveyId = surveyId;
 	}
-	
+
 }

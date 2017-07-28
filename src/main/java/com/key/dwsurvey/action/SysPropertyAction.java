@@ -14,6 +14,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import com.itextpdf.text.log.SysoCounter;
+import com.key.common.utils.DiaowenProperty;
+import com.key.common.utils.EncodeUtils;
+import org.apache.commons.codec.binary.StringUtils;
+import org.apache.poi.util.StringUtil;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Namespaces;
 import org.apache.struts2.convention.annotation.Result;
@@ -84,20 +88,19 @@ public class SysPropertyAction extends ActionSupport{
 		//网站备案信息代码
 		String icpCode = Struts2Utils.getParameter("icpCode");
 		//网站备案信息代码
-		String tongjiCode = Struts2Utils.getParameter("tongjiCode");
 		String loginBgImg = Struts2Utils.getParameter("loginBgImg");
-		
+
 		String siteFilePath = "/WEB-INF/classes/conf/site/site.properties".replace("/", File.separator);
 
-		StringBuffer siteData=new StringBuffer();
-		siteData.append("\r\nadminEmail=").append(adminEmail);
-		siteData.append("\r\nadminQQ=").append(adminQQ);
-		siteData.append("\r\nadminTelephone=").append(adminTelephone);
-		siteData.append("\r\nicpCode=").append(icpCode);
-		siteData.append("\r\ntongjiCode=").append(tongjiCode);
-		siteData.append("\r\nloginBgImg=").append(loginBgImg);
-		writeData(siteFilePath, siteData.toString());
-		
+		Properties props = new Properties();
+		props.put("adminEmail",adminEmail!=null?adminEmail:"");
+		props.put("adminQQ",adminQQ!=null?adminQQ:"");
+		props.put("adminTelephone",adminTelephone!=null?adminTelephone:"");
+		props.put("icpCode",icpCode!=null?icpCode:"");
+		props.put("loginBgImg",loginBgImg!=null?loginBgImg:"");
+
+		writeData(siteFilePath, props);
+
 		//写LOGO DATA文件
 		String headerData="<a href=\"${ctx }\"><img alt=\"\" src=\"${ctx }/images/logo/LOGO.png\" align=\"middle\" height=\"46\" ><span class=\"titleTempSpan\">OSS</span></a> ";
 		String headerDataPath="/WEB-INF/page/layouts/logo-img.jsp".replace("/", File.separator);
@@ -150,6 +153,47 @@ public class SysPropertyAction extends ActionSupport{
 			}
 		}
 
+	}
+
+	private void writeData(String filePath,Properties props) {
+		OutputStreamWriter fw = null;
+		try {
+			ServletContext sc = Struts2Utils.getSession().getServletContext();
+			String fileRealPath = sc.getRealPath("/") + filePath;
+			File file = new File(fileRealPath);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			fw = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+			props.store(fw,"UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (fw != null) {
+				try {
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	public static String string2Unicode(String string) {
+
+		StringBuffer unicode = new StringBuffer();
+
+		for (int i = 0; i < string.length(); i++) {
+
+			// 取出每一个字符
+			char c = string.charAt(i);
+
+			// 转换为unicode
+			unicode.append("\\u" + Integer.toHexString(c));
+		}
+
+		return unicode.toString();
 	}
 
 

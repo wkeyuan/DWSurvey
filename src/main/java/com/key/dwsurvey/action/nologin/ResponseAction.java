@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,10 +13,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.baidubce.util.DateUtils;
 import com.key.dwsurvey.entity.AnCheckbox;
 import com.key.dwsurvey.entity.AnRadio;
 import com.key.dwsurvey.entity.SurveyDetail;
 import com.key.dwsurvey.service.SurveyDirectoryManager;
+import org.apache.commons.httpclient.util.DateUtil;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.WebUtils;
@@ -148,8 +151,15 @@ public class ResponseAction extends ActionSupport {
 	private String filterStatus(SurveyDirectory directory,HttpServletRequest request){
 		SurveyDetail surveyDetail = directory.getSurveyDetail();
 		int rule = surveyDetail.getRule();
+		Integer ynEndNum = surveyDetail.getYnEndNum();
+		Integer endNum = surveyDetail.getEndNum();
+		Integer ynEndTime = surveyDetail.getYnEndTime();
+		Date endTime = surveyDetail.getEndTime();
+		Integer anserNum = directory.getAnswerNum();
+
+//		|| (endTime!=null && ynEndTime==1 && endTime.getTime() < (new Date().getTime())
 		if (directory.getSurveyQuNum() <= 0
-				|| directory.getSurveyState() != 1) {
+				|| directory.getSurveyState() != 1 || (anserNum!=null && ynEndNum==1 && anserNum > endNum )) {
 			request.setAttribute("surveyName", "目前该问卷已暂停收集，请稍后再试");
 			request.setAttribute("msg", "目前该问卷已暂停收集，请稍后再试");
 			return RESPONSE_MSG;

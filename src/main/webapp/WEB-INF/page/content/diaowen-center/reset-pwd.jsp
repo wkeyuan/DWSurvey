@@ -13,7 +13,7 @@
 	<script src="${ctx}/js/plugs/validate/messages_cn.js" type="text/javascript"></script>
 	<script src="${ctx }/js/plugs/validate/jquery.metadata.js" type="text/javascript"></script>
 	<script src="${ctx }/js/common/common.js" type="text/javascript"></script>
-<title>我的账号</title>
+<title>修改密码</title>
 	<style type="text/css>">
 		.pwdTd{
 			display: none;

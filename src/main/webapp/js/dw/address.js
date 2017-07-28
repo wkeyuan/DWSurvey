@@ -24,6 +24,7 @@ function bindAddrChange(){
 			if(province===thVal){
 				var citys=item.citys;
 				$(".hat_city").empty();
+				$(".hat_city").append("<option >－－请选择市－－</option>");
 				$.each(citys,function(j,itemCity){
 					var city=itemCity.city;
 					$(".hat_city").append("<option value='"+city+"'>"+city+"</option>");
@@ -44,6 +45,7 @@ function bindAddrChange(){
 					var city=itemCity.city;
 					if(city===thCity){
 						$(".hat_area").empty();
+						$(".hat_area").append("<option >－－请选择区－－</option>");
 						var areas=itemCity.areas;
 						$.each(areas,function(k,itemArea){
 							var area=itemArea.area;
@@ -54,4 +56,5 @@ function bindAddrChange(){
 			}
 		});
 	});
+
 }

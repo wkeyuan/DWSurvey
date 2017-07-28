@@ -1532,7 +1532,7 @@
 						</div>
 				</div>
 			</li>
-			<li id="cityQuModel">
+			<li id="cityQuModel" style="display: none;">
 				<%--城市模板 --%>
 				<div class="dwToolbar_icon"></div>
 				<div class="dwQuTypeModel">

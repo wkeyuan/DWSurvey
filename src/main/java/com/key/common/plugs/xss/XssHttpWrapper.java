@@ -71,26 +71,6 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
        return values;
    }
 
-   /**
-    * @return
-    */
-   /*public Map getParameterMap() {
-       HashMap paramMap = (HashMap) super.getParameterMap();
-       paramMap = (HashMap) paramMap.clone();
-
-       for (Iterator iterator = paramMap.entrySet().iterator(); iterator.hasNext(); ) {
-           Map.Entry entry = (Map.Entry) iterator.next();
-           String[] values = (String[]) entry.getValue();
-           for (int i = 0; i < values.length; i++) {
-               if(values[i] instanceof String){
-                   values[i] = xssEncode((String)values[i]);
-               }
-           }
-           entry.setValue(values);
-       }
-       return paramMap;
-   }*/
-
     /**
      * 从request中获得参数Map，并返回可读的Map
      *
@@ -180,31 +160,6 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
         return sb.toString();
     }
 
-
-    /**
-     * 将容易引起xss漏洞的半角字符直接替换成全角字符
-     *
-     * @param s
-     * @return
-     */
-   /*private static String xssEncode(String s) {
-        if (s == null || s.isEmpty()) {
-            return s;
-        }
-
-        StringReader reader = new StringReader(s);
-        StringWriter writer = new StringWriter();
-        try {
-            HTMLParser.process(reader, writer, new XSSFilter(), true);
-            return writer.toString();
-        } catch (NullPointerException e) {
-            return s;
-        } catch (Exception ex) {
-            ex.printStackTrace(System.out);
-        }
-        return null;
-    }
-*/
 
     /**
      * 将容易引起xss漏洞的半角字符直接替换成全角字符

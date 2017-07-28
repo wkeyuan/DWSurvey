@@ -107,9 +107,6 @@ public class QuRadioManagerImpl extends BaseServiceImpl<QuRadio, String> impleme
 	@Override
 	@Transactional
 	public void ajaxDelete(String quItemId) {
-		/*QuRadio quRadio=get(quItemId);
-		quRadio.setVisibility(0);
-		quRadioDao.save(quRadio);*/
 		QuRadio quRadio=get(quItemId);
 		String quId=quRadio.getQuId();
 		int orderById=quRadio.getOrderById();

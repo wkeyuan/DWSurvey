@@ -13,7 +13,7 @@
 <link href="${ctx }/js/plugs/uploadify-v3.1/uploadify.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx }/js/plugs/uploadify-v3.1/jquery.uploadify-3.1.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/uploadify.js"></script>
-
+<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
 <link href="${ctx }/css/preview-dev.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${ctx }/js/plugs/colpick-jQuery/css/colpick.css" type="text/css"/>
 
@@ -1299,6 +1299,9 @@ label.error{
 												<div class="quFillblankItem">
 														<%-- <input type="text" name="qu_${en.quType }_${en.id }" style="width:200px;padding:5px;" class="inputSytle_1 fillblankInput"> --%>
 													<c:choose>
+														<c:when test="${en.checkType eq 'DATE'}">
+															<input type="text" name="qu_${en.quType }_${en.id }" style="width: 300px;padding: 6px 10px 5px;border: 1px solid #83ABCB;outline: none;" class=" fillblankInput Wdate" onClick="WdatePicker()" >
+														</c:when>
 														<c:when test="${en.answerInputRow > 1 }">
 															<textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;"class="inputSytle_2 fillblankInput" ></textarea>
 														</c:when>
@@ -1871,9 +1874,12 @@ label.error{
 
 </div>
 
-<div class="footer-copyright" style="color: gray;padding-bottom: 5px;">
-		<%--请保留以下内容--%>
-		Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;">DWSurvey</a>
+
+<div class="footer-copyright footer-pb" style="color: gray;padding-bottom: 5px;">
+		<%--尊重开源、保留声明，感谢您的大力支持--%>
+		Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;">DWSurvey</a>&nbsp;
+		<%-- 自定义内容版：已为您准备好内容版权声明模版，您可以为自己的卷子加上内容版权声明 --%>
+		<%--内容版权 <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;">调问网</a>--%>
 </div>
 		
 <div id="fixedMsg" style="position: fixed;top: 0px;width: 100%;padding: 10px;text-align: center;font-size: 18px;letter-spacing: 4px;line-height: 56px;background-color: #111;background-color: rgba(17,17,17,0.5);color: #fff;color: rgba(255,255,255,0.5);z-index: 200;display: none;"></div>

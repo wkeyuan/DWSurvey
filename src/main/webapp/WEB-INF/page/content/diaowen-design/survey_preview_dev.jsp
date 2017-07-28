@@ -1245,6 +1245,9 @@ $(document).ready(function(){
 										<li class="quCoItemUlLi">
 											<div class="quFillblankItem">
 												<c:choose>
+													<c:when test="${en.checkType eq 'DATE'}">
+														<input type="text" name="qu_${en.quType }_${en.id }" style="width: 300px;padding: 6px 10px 5px;border: 1px solid #83ABCB;outline: none;" class=" fillblankInput Wdate" onClick="WdatePicker()" >
+													</c:when>
 													<c:when test="${en.answerInputRow > 1 }">
 														<textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;"class="inputSytle_2 fillblankInput" ></textarea>
 													</c:when>
@@ -1797,6 +1800,13 @@ $(document).ready(function(){
 		</div>
 		
 	</div>
+
+
+	<div class="footer-copyright footer-pb" style="color: gray;padding-bottom: 5px;">
+		<%--尊重开源、保留声明，感谢您的大力支持--%>
+		Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;">DWSurvey</a>&nbsp;
+	</div>
+
 </div>
 
 
@@ -1807,6 +1817,7 @@ $(document).ready(function(){
 <!-- <div id="dwPad">
 	<iframe name="PhoneSurvey" frameborder="0" scrolling="" src="http://localhost:8080/survey!answerSurveryMobile.action?surveyId=402880e4480248300148024b65960000" class="uploadfile" id="PhoneSurvey" style="width:255px;height:455px;margin:96px 0 0 67px;"></iframe>
 </div> -->
+
 
 </div>
 <script type="text/javascript">
