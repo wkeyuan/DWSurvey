@@ -103,6 +103,11 @@ public class MySurveyAnswerAction extends ActionSupport{
 		    		SurveyDirectory survey=directoryManager.getSurveyByUser(answer.getSurveyId(), user.getId());
 		    		if(survey!=null){
 		    			surveyAnswerManager.delete(answer);
+						Integer answerNum = survey.getAnswerNum();
+						if(answerNum!=null && answerNum>=1){
+							survey.setAnswerNum(answerNum-1);
+							directoryManager.save(survey);
+						}
 		    		}
 		    	}
 			}
