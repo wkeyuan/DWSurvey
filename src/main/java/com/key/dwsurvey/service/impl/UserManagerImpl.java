@@ -59,7 +59,7 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 			criterions.add(Restrictions.eq("status", status));
 		}
 		if(loginName!=null && !"".equals(loginName)){
-			criterions.add(Restrictions.like("loginName", loginName));
+			criterions.add(Restrictions.like("loginName", "%"+loginName+"%"));
 		}
 		return super.findPageByCri(page, criterions);
 	}
