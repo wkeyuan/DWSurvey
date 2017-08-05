@@ -585,8 +585,11 @@
      <log4j.version>2.0</log4j.version>
      <commons.fileupload.version>1.2.1</commons.fileupload.version>
      <cxf.version>3.0.2</cxf.version>
+	  <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	  <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	  <maven.compiler.encoding>UTF-8</maven.compiler.encoding>-->
   </properties>
-  
+
   <profiles>
     <profile>
         <id>jdk-1.8</id>
