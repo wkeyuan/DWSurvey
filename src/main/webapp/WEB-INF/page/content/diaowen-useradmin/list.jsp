@@ -82,7 +82,7 @@ $(document).ready(function(){
 										<span style="font-size: 14px;vertical-align: middle;">状态&nbsp;</span>
 										<select name="status" style="vertical-align: middle;">
 											<option value="">不限</option>
-											<option value="1">可用</option>
+											<option value="2">可用</option>
 											<option value="0">禁用</option>
 										</select>&nbsp;&nbsp;
 									<span style="font-size: 14px;vertical-align: middle;">用户名&nbsp;</span>
