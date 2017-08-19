@@ -129,6 +129,7 @@ $(document).ready(function(){
   </div>
   <div id="m-errorMsg"></div>
   <div data-role="content" >
+
     <div id="dwSurveyQuContent" style="">
 			<div id="dwSurveyQuContentBg">
 			
@@ -1111,6 +1112,7 @@ $(document).ready(function(){
 	$("#dwSurveyQuContent input[type='radio'],#dwSurveyQuContent input[type='checkbox']").change(function(){
 		runlogic($(this));
 		validateCheck($(this).parents(".li_surveyQuItemBody"),false);
+		$(".fillblankInput,.dwMFillblankInput,.dwChenMFillblankInput").blur();
 	});
 	
 	//填空题
