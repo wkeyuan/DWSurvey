@@ -92,7 +92,7 @@ gitee: http://gitee.com/wkeyuan/DWSurvey
 
 ## 开源协议
 
-DWSurvey以宽通用公共许可证LGPL3.0为开源协议，更好的支持商业使用环境！
+DWSurvey以通用公共许可证AGPL3.0为开源协议，商业环境使用请购买商业授权！
 
 - - -
 
