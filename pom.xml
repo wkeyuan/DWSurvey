@@ -21,6 +21,7 @@
 		<artifactId>xml-security-impl</artifactId>
 		<version>1.0</version>
 	</dependency>
+
 	<dependency>
 		<groupId>org.apache.geronimo.specs</groupId>
 		<artifactId>geronimo-j2ee-management_1.1_spec</artifactId>
@@ -39,10 +40,18 @@
 	</dependency>
 	<dependency>
 		<groupId>com.itextpdf</groupId>
-		<artifactId>itextpdf</artifactId>
+		<artifactId>itextpdfitextpdf</artifactId>
 		<version>5.4.3</version>
 	</dependency>
-	<dependency>
+	  <!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf -->
+	  <dependency>
+		  <groupId>com.itextpdf</groupId>
+		  <artifactId>itextpdf</artifactId>
+		  <version>5.5.11</version>
+	  </dependency>
+
+
+	  <dependency>
 		<groupId>com.itextpdf</groupId>
 		<artifactId>itext-asian</artifactId>
 		<version>5.2.0</version>
@@ -202,26 +211,27 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/core-renderer -->
-<dependency>
-    <groupId>org.xhtmlrenderer</groupId>
-    <artifactId>core-renderer</artifactId>
-    <version>R8</version>
-</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.json/json -->
-<dependency>
-    <groupId>org.json</groupId>
-    <artifactId>json</artifactId>
-    <version>20160810</version>
-</dependency>
-		
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
-<dependency>
-    <groupId>org.apache.activemq</groupId>
-    <artifactId>activemq-all</artifactId>
-    <version>5.8.0</version>
-</dependency>
+
+	  <dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>core-renderer</artifactId>
+			<version>R8</version>
+		</dependency>
+
+				<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+
+
+				<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.8.0</version>
+		</dependency>
 		
 		
      	<dependency>
