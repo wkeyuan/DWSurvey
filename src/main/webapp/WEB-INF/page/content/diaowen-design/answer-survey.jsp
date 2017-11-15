@@ -1235,7 +1235,7 @@ label.error{
 													<div class="dwQuOptionItemContent">
 														<label class="dwCheckboxStyle dwQuInputLabel" ></label>
 														<input type="checkbox" name="tag_qu_${en.quType }_${en.id }_${item.id }"  value="${item.id }" ><label class="editAble quCoOptionEdit quCoOptionPadding">${item.optionName }</label>
-														<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"  name="text_tag_qu_${en.quType }_${en.id }_${en.quCheckboxs[quOptionIndex].id }" />
+														<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"  name="text_tag_qu_${en.quType }_${en.id }_${item.id }" />
 													</div>
 												</li>
 												<!-- <li><select> <option>可想而知</option> </select> </li> -->
@@ -1249,7 +1249,7 @@ label.error{
 												<div class="dwQuOptionItemContent">
 													<label class="dwCheckboxStyle dwQuInputLabel" ></label>
 													<input type="checkbox" name="tag_qu_${en.quType }_${en.id }_${item.id }"  value="${item.id }" ><label class="editAble quCoOptionEdit quCoOptionPadding">${item.optionName }</label>
-													<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"  name="text_tag_qu_${en.quType }_${en.id }_${en.quCheckboxs[quOptionIndex].id }" />
+													<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"  name="text_tag_qu_${en.quType }_${en.id }_${item.id }" />
 												</div>
 												</li>
 												<!-- <li><select> <option>可想而知</option> </select> </li> -->

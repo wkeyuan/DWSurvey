@@ -219,7 +219,7 @@ $(document).ready(function(){
 										<label for="tag_qu_${en.quType }_${en.id }_${item.id }" >${item.optionName }</label>
 										<input id="tag_qu_${en.quType }_${en.id }_${item.id }" type="checkbox" name="tag_qu_${en.quType }_${en.id }_${item.id }"  value="${item.id }" >
 											<c:if test="${item.isNote eq 1 }" >
-												<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;"  name="text_tag_qu_${en.quType }_${en.id }_${en.quCheckboxs[quOptionIndex].id }" />
+												<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;"  name="text_tag_qu_${en.quType }_${en.id }_${item.id }" />
 											</c:if>
 										</div>
 									</c:forEach>
