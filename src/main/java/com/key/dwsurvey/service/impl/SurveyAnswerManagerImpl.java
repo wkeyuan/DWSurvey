@@ -116,7 +116,7 @@ public class SurveyAnswerManagerImpl extends
 
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,
-			Map<String, Map<String, Object>> quMaps) {
+						   Map<String, Map<String, Object>> quMaps) {
 		surveyAnswerDao.saveAnswer(surveyAnswer, quMaps);
 	}
 
@@ -133,7 +133,7 @@ public class SurveyAnswerManagerImpl extends
 
 	/**
 	 * 取问卷值方式
-	 * 
+	 *
 	 * @param surveyAnswerId
 	 * @param question
 	 * @return
@@ -143,19 +143,35 @@ public class SurveyAnswerManagerImpl extends
 		String quId = question.getId();
 		// 查询每一题的答案,如果是主观题，则判断是否答对
 		QuType quType = question.getQuType();
+
+		//重置导出
+		question.setAnAnswer(new AnAnswer());
+		question.setAnCheckboxs(new ArrayList<AnCheckbox>());
+		question.setAnDFillblanks(new ArrayList<AnDFillblank>());
+		question.setAnEnumqus(new ArrayList<AnEnumqu>());
+		question.setAnFillblank(new AnFillblank());
+		question.setAnRadio(new AnRadio());
+		question.setAnYesno(new AnYesno());
+		question.setAnScores(new ArrayList<AnScore>());
+		question.setAnChenRadios(new ArrayList<AnChenRadio>());
+		question.setAnChenCheckboxs(new ArrayList<AnChenCheckbox>());
+		question.setAnChenFbks(new ArrayList<AnChenFbk>());
+		question.setAnCompChenRadios(new ArrayList<AnCompChenRadio>());
+		question.setAnChenScores(new ArrayList<AnChenScore>());
+
 		if (quType == QuType.YESNO) {// 是非题答案
 			AnYesno anYesno = anYesnoManager.findAnswer(surveyAnswerId, quId);
 			if (anYesno != null) {
 				question.setAnYesno(anYesno);
 			}
 		} else if (quType == QuType.RADIO || quType == QuType.COMPRADIO) {// 单选题答案
-																			// 复合
+			// 复合
 			AnRadio anRadio = anRadioManager.findAnswer(surveyAnswerId, quId);
 			if (anRadio != null) {
 				question.setAnRadio(anRadio);
 			}
 		} else if (quType == QuType.CHECKBOX || quType == QuType.COMPCHECKBOX) {// 多选题答案
-																				// 复合
+			// 复合
 			List<AnCheckbox> anCheckboxs = anCheckboxManager.findAnswer(
 					surveyAnswerId, quId);
 			if (anCheckboxs != null) {
@@ -182,10 +198,10 @@ public class SurveyAnswerManagerImpl extends
 				question.setAnAnswer(anAnswer);
 			}
 		} else if (quType == QuType.BIGQU) {// 大题答案
-		// List<Question> childQuestions=question.getQuestions();
-		// for (Question childQuestion : childQuestions) {
-		// score=getquestionAnswer(surveyAnswerId, childQuestion);
-		// }
+			// List<Question> childQuestions=question.getQuestions();
+			// for (Question childQuestion : childQuestions) {
+			// score=getquestionAnswer(surveyAnswerId, childQuestion);
+			// }
 		} else if (quType == QuType.ENUMQU) {
 			List<AnEnumqu> anEnumqus = anEnumquManager.findAnswer(
 					surveyAnswerId, quId);
@@ -261,56 +277,44 @@ public class SurveyAnswerManagerImpl extends
 				criterionIp);
 		return answers;
 	}
-	
-	
+
+
 	@Override
 	public String exportXLS(String surveyId, String savePath) {
 		String basepath = surveyId + "";
 		String urlPath = "/file/" + basepath + "/";// 下载所用的地址
 		String path = urlPath.replace("/", File.separator);// 文件系统路径
-															// File.separator +
-															// "file" +
-															// File.separator+basepath
-															// + File.separator;
+		// File.separator +
+		// "file" +
+		// File.separator+basepath
+		// + File.separator;
 		savePath = savePath + path;
 		File file = new File(savePath);
 		if (!file.exists())
 			file.mkdirs();
-		
+
 		SurveyDirectory surveyDirectory = directoryManager.getSurvey(surveyId);
 		String fileName = surveyId + "_exportSurvey.xls";
 
 		XLSExportUtil exportUtil = new XLSExportUtil(fileName, savePath);
-
-		List<PropertyFilter> filters = new ArrayList<PropertyFilter>();
-		filters.add(new PropertyFilter("EQS_surveyId", surveyId));
+		Criterion cri1 = Restrictions.eq("surveyId",surveyId);
 		Page<SurveyAnswer> page = new Page<SurveyAnswer>();
-		page.setPageSize(100);
+		page.setPageSize(5000);
 		try {
-			
-			page = findPage(page, filters);
+			page = findPage(page,cri1);
 			int totalPage = page.getTotalPage();
 			List<SurveyAnswer> answers = page.getResult();
-
-			// 得到题列表
-			List<Question> questions = questionManager.findDetails(surveyId,
-					"2");
+			List<Question> questions = questionManager.findDetails(surveyId,"2");
 			exportXLSTitle(exportUtil, questions);
-
-			for (int i = 1; i <= totalPage; i++) {
-				for (int j = 0; j < answers.size(); j++) {
-					SurveyAnswer surveyAnswer = answers.get(j);
-					String surveyAnswerId = surveyAnswer.getId();
-					exportUtil.createRow((j + 1) + ((i - 1) * 100));
-					exportXLSRow(exportUtil, surveyAnswerId, questions, surveyAnswer);
-				}
-				page.setPageNo(i);
-				page = findPage(page, filters);
-				answers = page.getResult();
+			int answerListSize = answers.size();
+			for (int j = 0; j < answerListSize; j++) {
+				SurveyAnswer surveyAnswer = answers.get(j);
+				String surveyAnswerId = surveyAnswer.getId();
+				exportUtil.createRow(j+1);
+				exportXLSRow(exportUtil, surveyAnswerId, questions, surveyAnswer);
+				System.out.println(j+1+"/"+answerListSize);
 			}
-
 			exportUtil.exportXLS();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -319,13 +323,9 @@ public class SurveyAnswerManagerImpl extends
 
 	private void exportXLSRow(XLSExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer) {
 		int cellIndex = 0;
-		
 		for (Question question : questions) {
-			// 遍历每一题
 			getquestionAnswer(surveyAnswerId, question);
-			// exportUtil.setCell(index, value);
 			QuType quType = question.getQuType();
-
 			String quName = question.getQuName();
 			String titleName = quType.getCnName();
 			if (quType == QuType.YESNO) {// 是非题
@@ -350,6 +350,7 @@ public class SurveyAnswerManagerImpl extends
 					}
 				}
 				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
+				answerOptionName = answerOptionName.replace("&nbsp;"," ");
 				exportUtil.setCell(cellIndex++, answerOptionName);
 			} else if (quType == QuType.CHECKBOX) {// 多选题
 				List<AnCheckbox> anCheckboxs=question.getAnCheckboxs();
@@ -366,17 +367,15 @@ public class SurveyAnswerManagerImpl extends
 						}
 					}
 					answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
+					answerOptionName = answerOptionName.replace("&nbsp;"," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 				}
 			} else if (quType == QuType.FILLBLANK) {// 填空题
 				AnFillblank anFillblank=question.getAnFillblank();
-				
 				exportUtil.setCell(cellIndex++, anFillblank.getAnswer());
 			} else if (quType == QuType.ANSWER) {// 多行填空题
 				AnAnswer anAnswer=question.getAnAnswer();
-				
 				exportUtil.setCell(cellIndex++, anAnswer.getAnswer());
-//				exportUtil.setCell(cellIndex++, titleName);
 			} else if (quType == QuType.COMPRADIO) {// 复合单选题
 				AnRadio anRadio=question.getAnRadio();
 				String quItemId = anRadio.getQuItemId();
@@ -393,6 +392,7 @@ public class SurveyAnswerManagerImpl extends
 				}
 				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
 				answerOtherText=HtmlUtil.removeTagFromText(answerOtherText);
+				answerOptionName = answerOptionName.replace("&nbsp;"," ");
 				exportUtil.setCell(cellIndex++, answerOptionName);
 				exportUtil.setCell(cellIndex++, answerOtherText);
 			} else if (quType == QuType.COMPCHECKBOX) {// 复合多选题
@@ -411,15 +411,14 @@ public class SurveyAnswerManagerImpl extends
 							break;
 						}
 					}
-					
 					answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
+					answerOptionName = answerOptionName.replace("&nbsp;"," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 					if(1==quCheckbox.getIsNote()){
 						answerOtherText=HtmlUtil.removeTagFromText(answerOtherText);
-						exportUtil.setCell(cellIndex++, answerOtherText);	
+						exportUtil.setCell(cellIndex++, answerOtherText);
 					}
 				}
-			
 			} else if (quType == QuType.ENUMQU) {// 枚举题
 				List<AnEnumqu> anEnumqus=question.getAnEnumqus();
 				int enumNum = question.getParamInt01();
@@ -445,6 +444,7 @@ public class SurveyAnswerManagerImpl extends
 							break;
 						}
 					}
+					answerOptionName = answerOptionName.replace("&nbsp;"," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 				}
 			} else if (quType == QuType.SCORE) {// 评分题
@@ -484,11 +484,11 @@ public class SurveyAnswerManagerImpl extends
 							break;
 						}
 					}
-					
 					answerColOptionName=HtmlUtil.removeTagFromText(answerColOptionName);
+					answerColOptionName = answerColOptionName.replace("&nbsp;"," ");
 					exportUtil.setCell(cellIndex++, answerColOptionName);
 				}
-			} else if (quType == QuType.CHENCHECKBOX) {// 矩阵多选题
+			} else if (quType == QuType.CHENCHECKBOX) {
 				List<QuChenRow> quChenRows = question.getRows();
 				List<QuChenColumn> quChenColumns = question.getColumns();
 				List<AnChenCheckbox> anChenCheckboxs = question.getAnChenCheckboxs();
@@ -506,10 +506,11 @@ public class SurveyAnswerManagerImpl extends
 							}
 						}
 						answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
+						answerOptionName = answerOptionName.replace("&nbsp;"," ");
 						exportUtil.setCell(cellIndex++, answerOptionName);
 					}
 				}
-			} else if (quType == QuType.COMPCHENRADIO) {// 复合矩阵单选题
+			} else if (quType == QuType.COMPCHENRADIO) {
 				List<QuChenRow> quChenRows = question.getRows();
 				List<QuChenColumn> quChenColumns = question.getColumns();
 				List<QuChenOption> quChenOptions = question.getOptions();
@@ -539,25 +540,26 @@ public class SurveyAnswerManagerImpl extends
 							}
 						}
 						answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
+						answerOptionName = answerOptionName.replace("&nbsp;"," ");
 						exportUtil.setCell(cellIndex++, answerOptionName);
 					}
 				}
 			}
 		}
-		
+
 		exportUtil.setCell(cellIndex++,  surveyAnswer.getIpAddr());
 		exportUtil.setCell(cellIndex++,  surveyAnswer.getCity());
 		exportUtil.setCell(cellIndex++,  new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(surveyAnswer.getEndAnDate()));
-		
-		
+
+
 	}
 
 	private void exportXLSTitle(XLSExportUtil exportUtil,
-			List<Question> questions) {
+								List<Question> questions) {
 		exportUtil.createRow(0);
 		int cellIndex = 0;
-		
-		
+
+
 		int quNum=0;
 		for (Question question : questions) {
 			quNum++;
@@ -575,7 +577,7 @@ public class SurveyAnswerManagerImpl extends
 				List<QuCheckbox> checkboxs = question.getQuCheckboxs();
 				for (QuCheckbox quCheckbox : checkboxs) {
 					String optionName = quCheckbox.getOptionName();
-					
+
 					optionName=HtmlUtil.removeTagFromText(optionName);
 					exportUtil.setCell(cellIndex++,titleName+ "－"+optionName );
 				}
@@ -610,7 +612,7 @@ public class SurveyAnswerManagerImpl extends
 						.getQuMultiFillblanks();
 				for (QuMultiFillblank quMultiFillblank : quMultiFillblanks) {
 					String optionName = quMultiFillblank.getOptionName();
-					
+
 					optionName=HtmlUtil.removeTagFromText(optionName);
 					exportUtil.setCell(cellIndex++, titleName + "－"
 							+ optionName);
@@ -657,11 +659,11 @@ public class SurveyAnswerManagerImpl extends
 				}
 			}
 		}
-		
+
 		exportUtil.setCell(cellIndex++,  "回答者IP");
 		exportUtil.setCell(cellIndex++,  "IP所在地");
 		exportUtil.setCell(cellIndex++,  "回答时间");
-		
+
 	}
 
 	public void writeToXLS() {
@@ -688,7 +690,7 @@ public class SurveyAnswerManagerImpl extends
 		}
 		return page;
 	}
-	
+
 	/**
 	 * 取一份卷子回答的数据
 	 */
@@ -700,8 +702,8 @@ public class SurveyAnswerManagerImpl extends
 		page=findPage(page, cri1, cri2);
 		return page;
 	}
-	
-	
+
+
 	@Override
 	@Transactional
 	public void delete(SurveyAnswer t) {
@@ -717,7 +719,7 @@ public class SurveyAnswerManagerImpl extends
 				QuType quType = question.getQuType();
 
 				if (quType == QuType.YESNO) {// 是非题
-					
+
 				} else if (quType == QuType.RADIO) {// 单选题
 					AnRadio anRadio=anRadioManager.findAnswer(belongAnswerId, quId);
 					if(anRadio!=null){
@@ -742,21 +744,21 @@ public class SurveyAnswerManagerImpl extends
 						anFillblankManager.save(anFillblank);
 					}
 				} else if (quType == QuType.ANSWER) {// 多行填空题
-					
+
 					AnAnswer anAnswer=anAnswerManager.findAnswer(belongAnswerId, quId);
 					if(anAnswer!=null){
 						anAnswer.setVisibility(0);
 						//是否显示  1显示 0不显示
 						anAnswerManager.save(anAnswer);
 					}
-					
+
 				} else if (quType == QuType.COMPRADIO) {// 复合单选题
 
-					
+
 				} else if (quType == QuType.COMPCHECKBOX) {// 复合多选题
-					
+
 				} else if (quType == QuType.ENUMQU) {// 枚举题
-					
+
 				} else if (quType == QuType.MULTIFILLBLANK) {// 组合填空题
 					List<AnDFillblank> anDFillblanks=anDFillblankManager.findAnswer(belongAnswerId, quId);
 					if(anDFillblanks!=null){
@@ -767,7 +769,7 @@ public class SurveyAnswerManagerImpl extends
 						}
 					}
 				} else if (quType == QuType.SCORE) {// 评分题
-					
+
 					List<AnScore> anScores=anScoreManager.findAnswer(belongAnswerId, quId);
 					if(anScores!=null){
 						for (AnScore anScore : anScores) {
@@ -775,11 +777,11 @@ public class SurveyAnswerManagerImpl extends
 							//是否显示  1显示 0不显示
 							anScoreManager.save(anScore);
 						}
-						
+
 					}
-					
+
 				} else if (quType == QuType.CHENRADIO) {// 矩阵单选题
-					
+
 					List<AnChenRadio> anChenRadios=anChenRadioManager.findAnswer(belongAnswerId, quId);
 					if(anChenRadios!=null){
 						for (AnChenRadio anChenRadio : anChenRadios) {
@@ -788,9 +790,9 @@ public class SurveyAnswerManagerImpl extends
 							anChenRadioManager.save(anChenRadio);
 						}
 					}
-					
+
 				} else if (quType == QuType.CHENCHECKBOX) {// 矩阵多选题
-					
+
 					List<AnChenCheckbox> anChenCheckboxs=anChenCheckboxManager.findAnswer(belongAnswerId, quId);
 					if(anChenCheckboxs!=null){
 						for (AnChenCheckbox anChenCheckbox : anChenCheckboxs) {
@@ -798,13 +800,13 @@ public class SurveyAnswerManagerImpl extends
 							//是否显示  1显示 0不显示
 							anChenCheckboxManager.save(anChenCheckbox);
 						}
-						
+
 					}
-					
+
 				} else if (quType == QuType.COMPCHENRADIO) {// 复合矩阵单选题
-					
+
 				} else if (quType == QuType.CHENSCORE) {// 矩阵评分
-					
+
 					List<AnChenScore> anChenScores=anChenScoreManager.findAnswer(belongAnswerId, quId);
 					if(anChenScores!=null){
 						for (AnChenScore anChenScore : anChenScores) {
@@ -813,8 +815,8 @@ public class SurveyAnswerManagerImpl extends
 							anChenScoreManager.save(anChenScore);
 						}
 					}
-				} 
-			
+				}
+
 			}
 		}
 		super.delete(t);
