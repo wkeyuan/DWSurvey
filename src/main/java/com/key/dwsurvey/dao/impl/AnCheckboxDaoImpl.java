@@ -41,7 +41,7 @@ public class AnCheckboxDaoImpl extends BaseDaoImpl<AnCheckbox, String> implement
 					int anCount=Integer.parseInt(objects[1].toString());
 					count+=anCount;
 					quCheckbox.setAnCount(anCount);
-					continue;
+					break;
 				}
 			}
 		}
@@ -193,7 +193,7 @@ public class AnCheckboxDaoImpl extends BaseDaoImpl<AnCheckbox, String> implement
 		String sql="select qu_item_id,count(*) from t_an_checkbox where  visibility=1 and qu_id=? GROUP BY qu_item_id";
 		
 		String quId=question.getId();
-		List<Object[]> list=this.getSession().createSQLQuery(sql).setParameter(0, quId).list();
+		List<Object[]> list=this.getSession().createSQLQuery(sql).setParameter(0,quId).list();
 		
 		List<QuCheckbox> quCheckboxs=question.getQuCheckboxs();
 		for (QuCheckbox quCheckbox : quCheckboxs) {

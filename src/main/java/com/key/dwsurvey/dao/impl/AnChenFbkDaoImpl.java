@@ -43,7 +43,7 @@ public class AnChenFbkDaoImpl extends BaseDaoImpl<AnChenFbk, String> implements 
 					count+=anCount;
 					quChenRow.setAnCount(quChenRow.getAnCount()+anCount);
 					//quChenColumn.setAnCount(anCount);;
-					continue;
+					break;
 				}
 			}
 			

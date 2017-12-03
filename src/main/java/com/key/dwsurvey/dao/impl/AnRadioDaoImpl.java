@@ -41,7 +41,7 @@ public class AnRadioDaoImpl extends BaseDaoImpl<AnRadio, String> implements AnRa
 					int anCount=Integer.parseInt(objects[1].toString());
 					count+=anCount;
 					quRadio.setAnCount(anCount);
-					continue;
+					break;
 				}
 			}
 		}

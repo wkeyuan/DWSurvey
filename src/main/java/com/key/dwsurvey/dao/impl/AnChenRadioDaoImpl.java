@@ -57,7 +57,7 @@ public class AnChenRadioDaoImpl extends BaseDaoImpl<AnChenRadio, String> impleme
 					count+=anCount;
 					quChenRow.setAnCount(quChenRow.getAnCount()+anCount);
 					//quChenColumn.setAnCount(anCount);;
-					continue;
+					break;
 				}
 			}
 			

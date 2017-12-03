@@ -57,7 +57,7 @@ public class AnChenCheckboxDaoImpl extends BaseDaoImpl<AnChenCheckbox, String> i
 					count+=anCount;
 					quChenRow.setAnCount(quChenRow.getAnCount()+anCount);
 					//quChenColumn.setAnCount(anCount);;
-					continue;
+					break;
 				}
 			}
 			

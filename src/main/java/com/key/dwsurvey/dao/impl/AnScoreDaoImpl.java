@@ -37,7 +37,7 @@ public class AnScoreDaoImpl extends BaseDaoImpl<AnScore, String> implements AnSc
 					count+=anCount;
 					quScore.setAnCount(anCount);
 					quScore.setAvgScore(Float.parseFloat(objects[2].toString()));;
-					continue;
+					break;
 				}
 			}
 		}

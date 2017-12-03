@@ -33,7 +33,7 @@ public class AnDFillblankDaoImpl extends BaseDaoImpl<AnDFillblank, String> imple
 			for (Object[] objects : list) {
 				if(quMultiFillblankId.equals(objects[0].toString())){
 					quMultiFillblank.setAnCount(Integer.parseInt(objects[1].toString()));
-					continue;
+					break;
 				}
 			}
 		}
