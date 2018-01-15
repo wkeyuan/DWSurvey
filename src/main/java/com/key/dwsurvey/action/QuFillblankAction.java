@@ -9,10 +9,15 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.key.common.plugs.page.Page;
+import com.key.dwsurvey.entity.AnFillblank;
 import com.key.dwsurvey.entity.Question;
 import com.key.dwsurvey.entity.QuestionLogic;
 
+import com.key.dwsurvey.service.AnFillblankManager;
 import org.apache.struts2.convention.annotation.*;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.WebUtils;
 
@@ -31,11 +36,15 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Namespaces({@Namespace("/design")})
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack") })
-@Results({})
-@AllowedMethods({"ajaxSave"})
+@Results({
+		@Result(name="answers",location="/WEB-INF/page/content/diaowen-da/fillblank.jsp",type=Struts2Utils.DISPATCHER)
+})
+@AllowedMethods({"ajaxSave","answers"})
 public class QuFillblankAction extends ActionSupport{
 	@Autowired
 	private QuestionManager questionManager;
+	@Autowired
+	private AnFillblankManager anFillblankManager;
 	
 	public String ajaxSave() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
@@ -161,5 +170,28 @@ public class QuFillblankAction extends ActionSupport{
 		strBuf.append("]}");
 		return strBuf.toString();
 	}
-	
+
+
+	private Page<AnFillblank> anPage = new Page<AnFillblank>();
+	//取上传题结果
+	public String answers() throws Exception {
+		HttpServletRequest request = Struts2Utils.getRequest();
+		String quId = request.getParameter("quId");
+		String surveyId = request.getParameter("surveyId");
+		anPage.setPageSize(1000);
+		Criterion cri1 = Restrictions.eq("quId",quId);
+		anPage = anFillblankManager.findPage(anPage, cri1);
+		request.setAttribute("surveyId",surveyId);
+		return "answers";
+	}
+
+	public Page<AnFillblank> getAnPage() {
+		return anPage;
+	}
+
+	public void setAnPage(Page<AnFillblank> anPage) {
+		this.anPage = anPage;
+	}
+
+
 }

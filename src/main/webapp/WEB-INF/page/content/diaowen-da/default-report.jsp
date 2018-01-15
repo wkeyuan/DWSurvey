@@ -967,7 +967,7 @@ function substring(json) {
 											<table class="suQuTable" border="0" cellpadding="0" cellspacing="0" style="border: none! important;margin-top: 8px;">
 													<tr>
 														<td width="15px">&nbsp;</td>
-														<td class="bfbTd">回答数：${en.anCount }条&nbsp;&nbsp;<a href="#" class="fb_answer" >查看</a></td>
+														<td class="bfbTd">回答数：${en.anCount }条&nbsp;&nbsp;<a href="${ctx}/design/qu-fillblank!answers.action?quId=${en.id}&surveyId=${surveyId}" class="fb_answer" >查看</a></td>
 														<td colspan="4">&nbsp;</td>
 													</tr>
 												</table>
