@@ -5,11 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="${ctx }/js/plugs/zero-clipboard/ZeroClipboard.js"></script>
 <script type="text/javascript" src="${ctx }/js/plugs/colpick-jQuery/js/colpick.js"></script>
 <link rel="stylesheet" href="${ctx }/js/plugs/colpick-jQuery/css/colpick.css" type="text/css"/>
 <script type="text/javascript" src="${ctx }/js/dw/collect.js"></script>
-
+<script type="text/javascript" src="${ctx }/js/plugs/clipboard.js/clipboard.min.js"></script>
 <title>网站组件</title>
 <style type="text/css">
 .colpick{
@@ -171,7 +170,7 @@
 										</textarea>
 										<div style="text-align: center;padding-top: 8px;">
 										<span id="compCopyMsg" style="display:none;color: #7BA400;font-size: 22px;position: absolute;margin-left: -120px;">复制成功！</span>
-										<a href="#" class="sbtn25 sbtn25_1" id="compTextareaCodeBtn">复制代码</a>
+										<a href="#" class="sbtn25 sbtn25_1" id="compTextareaCodeBtn" data-clipboard-target="#compCodeText" >复制代码</a>
 										</div>
 									</div>
 									<div style="clear: both;"></div>
@@ -208,27 +207,6 @@
 	</div>
 </div>	
 <script type="text/javascript">
-
-ZeroClipboard.setMoviePath( "${ctx}/js/plugs/zero-clipboard/ZeroClipboard.swf" );
-
-function bindClipBoard(textareaId,clipBtn,clipSpanId){
-	var clip = new ZeroClipboard.Client();
-	clip.setHandCursor( true );
-	clip.setCSSEffects( true ); 
-	var clipText=$("#"+textareaId).text();
-	clip.setText(clipText); // 设置要复制的文本。 
-	//这个 button 不一定要求是一个 input 按钮，也可以是其他 DOM 元素。 
-	clip.glue(clipBtn); // 和上一句位置不可调换
-	clip.addEventListener('complete', function (client, text) {
-		//notify("复制成功!"); alert("复制成功！");
-		$("#compCodeText").select();
-		$("#"+clipSpanId).show().delay(5000).fadeOut("slow");
-	});
-}
-
-//$("#compCodeText").text($("#compStyle1").html());
-
-bindClipBoard("compCodeText","compTextareaCodeBtn","compCopyMsg");
 
 $("#compCodeText").click(function(){
 	$(this).select();
@@ -297,9 +275,20 @@ function updateCode(){
 		copyCode=$("#webSiteRightCode").html();
 	}
 	$("#compCodeText").text("<!-- Diaowen.net Button BEGIN -->"+copyCode+"<!-- Diaowen.net Button END -->");
-	bindClipBoard("compCodeText","compTextareaCodeBtn","compCopyMsg");
 }
 updateCode();
+
+var clipboard = new ClipboardJS('#compTextareaCodeBtn');
+
+clipboard.on('success', function(e) {
+	$("#compCopyMsg").show().delay(5000).fadeOut("slow");
+});
+
+clipboard.on('error', function(e) {
+	$("#compCopyMsg").text("浏览器不支持！");
+	$("#compCopyMsg").show().delay(5000).fadeOut("slow");
+});
+
 </script>
 </body>
 </html>
