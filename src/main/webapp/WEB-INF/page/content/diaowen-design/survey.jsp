@@ -3339,14 +3339,7 @@
 								<div class="p_DialogContentItem"><label><input type="checkbox" name="ynEndTime" value="1"> 到&nbsp;<input type="text" size="20"  class="inputSytle_1 Wdate" onfocus="WdatePicker({minDate:'%y-%M-{%d+1}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="endTime">&nbsp;时结束 </label></div>
 						</div>
 					</div>
-					<div style="clear: both;"></div>
-					<div class="p_DialogContent">
-						<div class="p_DialogContentTitle">答完后</div>
-						<div class="p_DialogContentRoot">
-								<div class="p_DialogContentItem"><label><input type="checkbox" name="showShareSurvey" value="1"> 显示分享按钮，分享答题链接到更多社交网站</label></div>
-								<div class="p_DialogContentItem"><label><input type="checkbox" name="showAnswerDa" value="1"> 允许受访人答完问卷后查看结果</label></div>
-						</div>
-					</div>
+
 				</div>
 				<div class="dwQuDialogBtnCon" ><input type="button" value="保存" class="quDialogBtn" id="dwDialogSurveyAttrSave"/></div>
 		</div>

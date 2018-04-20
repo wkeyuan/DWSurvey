@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%-- <script type="text/javascript" src="${ctx }/js/plugs/zero-clipboard/ZeroClipboard.js"></script> --%>
-<script type="text/javascript" src="${ctx }/js/plugs/zeroclipboard-master/dist/ZeroClipboard.js"></script>
+<script type="text/javascript" src="${ctx }/js/plugs/clipboard.js/clipboard.min.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/collect.js"></script>
 <title>答案地址 数据收集</title>
 </head>
@@ -172,38 +171,28 @@
 	
 <script type="text/javascript">
 
-/*
-ZeroClipboard.setMoviePath( "${ctx}/js/plugs/zero-clipboard/ZeroClipboard.swf" );
-function bindClipBoard(textareaId,clipBtn,clipSpanId){
-	var clip = new ZeroClipboard.Client();
-	clip.setHandCursor( true );
-	clip.setCSSEffects( true );
-	var clipText=$("#"+textareaId).text();
-	clip.setText(clipText); // 设置要复制的文本。
-	//这个 button 不一定要求是一个 input 按钮，也可以是其他 DOM 元素。 
-	clip.glue(clipBtn); // 和上一句位置不可调换 
-	clip.addEventListener('complete', function (client, text) {
-		//alert(text+":复成功");//notify("复制成功!");
-		$("#"+clipSpanId).show().delay(5000).fadeOut("slow");
-		//$("#"+textareaId).select();
-	});
-	clip.reposition(clipBtn); 
-}
-bindClipBoard("linkTextarea","clipLink","clipLinkSpan");
-*/
-
-
-var client = new ZeroClipboard( document.getElementById("clipLink") );
+/*var client = new ZeroClipboard( document.getElementById("clipLink") );
 client.on( "ready", function( readyEvent ) {
-  	// alert( "ZeroClipboard SWF is ready!" );
+  	 alert( "ZeroClipboard SWF is ready!" );
 	  client.on( "aftercopy", function( event ) {
 	    // `this` === `client`
 	    // `event.target` === the element that was clicked
 	    // event.target.style.display = "none";
 		  $("#clipLinkSpan").show().delay(5000).fadeOut("slow");
 	  } );
-} );
+});*/
 
+var clipboard = new ClipboardJS('.clipLink');
+
+clipboard.on('success', function(e) {
+	$("#clipLinkSpan").text("复制成功");
+	$("#clipLinkSpan").show().delay(5000).fadeOut("slow");
+});
+
+clipboard.on('error', function(e) {
+	$("#clipLinkSpan").text("浏览器不支持！");
+	$("#clipLinkSpan").show().delay(5000).fadeOut("slow");
+});
 
 </script>
 </body>

@@ -1768,7 +1768,7 @@ function showUIDialog(thDialogObj){
 		}
 	}else if(thObjClass.indexOf("surveyAttrSetToolbar_li")>=0){
 		$("#modelUIDialog .dwSurveyAttrSetDialog").show();
-		$("#modelUIDialog").dialog("option","height",490);
+		$("#modelUIDialog").dialog("option","height",390);
 		//$("#modelUIDialog").dialog("option","position",["center","center"]);
 	}
 	
