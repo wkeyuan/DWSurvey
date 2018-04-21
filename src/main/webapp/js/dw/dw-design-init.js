@@ -394,8 +394,8 @@ $(document).ready(function(){
 		var selVal=$(this).val();
 		$(this).next().hide();
 		if(selVal==3){
-			//按列  width=690
 			$(this).next().show();
+			validateGen();
 		}
 	});
 	
@@ -598,22 +598,17 @@ $(document).ready(function(){
 					quItemBody.find(".quCoItem ul li").width("");
 				}
 			}else if(selVal==3){
-				//按列  width=690
-				/*quItemBody.find(".quCoItem ul").addClass("transverse");
-				quItemBody.find(".quCoItem ul li").width(600/2);
-				quItemBody.find(".quCoItem ul li label").width(600/2-50);*/
-				//转换到tr中去
+				if(!$("#dwCommonDialogForm").valid()){
+					notify("参数不对，请检查！",800);
+					return false;
+				}
 				if(oldHv==3){
-					if(oldCellCount!=setCellCount){//列数发生了变化
-						//调查quTableOption2Table(quItemBody);
+					if(oldCellCount!=setCellCount){
 						quTableOption2Table(quItemBody);
 					}
 				}else{
 					quLiOption2Table(quItemBody);					
 				}
-			}else if(selVal==4){
-				//下拉选项
-				
 			}
 		}
 		dwCommonDialogHide();
@@ -1098,12 +1093,6 @@ function bindQuHoverItem(){
 	$(".SeniorEdit").unbind();
 	$(".SeniorEdit").click(function(){
 		ueDialog.dialog( "open" );
-		/*if(myeditor){
-			myeditor.reset();
-			setTimeout(function(){
-				myeditor.setContent($(curEditObj).html());
-	        },800);
-        }*/
 		ueEditObj=curEditObj;
 		myeditor.destroy();
 		myeditor = null;
@@ -1223,7 +1212,6 @@ function bindQuHoverItem(){
 					type:"post",
 					success:function(msg){
 						if(msg=="true"){
-							//quBody.hide("slow",function(){$(this).remove();resetQuItem();});
 							quBody.hide("slow",function(){$(this).parent().remove();resetQuItem();});
 						}else{
 							alert("删除失败，请重试！");
@@ -1231,7 +1219,6 @@ function bindQuHoverItem(){
 					}
 				});
 			}else{
-//				quBody.hide("slow",function(){$(this).remove();resetQuItem();});
 				quBody.hide("slow",function(){$(this).parent().remove();resetQuItem();});
 			}
 		}
@@ -1282,6 +1269,7 @@ function bindQuHoverItem(){
 		showDialog($(this));
 		var quItemBody=$(this).parents(".surveyQuItemBody");
 		resetQuItemHover(quItemBody);
+		validateGen();
 		return false;
 	});
 	
@@ -1296,10 +1284,8 @@ function bindQuHoverItem(){
 		saveQus(fristQuItemBody,function(){
 			$(".dwQuDialogCon").hide();
 			$("#dwCommonDialog .dwQuDialogLogic").show();
-			
 			resetQuItemHover(quItemBody);
 			bindDialogRemoveLogic();
-			
 			$("#dwQuLogicTable").empty();
 			//逻辑数据回显示
 			var quLogicItems=quItemBody.find(".quLogicItem");
@@ -1315,23 +1301,19 @@ function bindQuHoverItem(){
 						geLe=$(this).find("input[name='geLe']").val();
 						scoreNum=$(this).find("input[name='scoreNum']").val();
 					}
-					
 					var thClass=$(this).attr("class");
 					thClass=thClass.replace("quLogicItem", "");
 					thClass=thClass.replace(" ", "");
 					//回显相应的选项
 					addQuDialogLogicTr(false,function(){
 						//执行成功--设置值
-						
 						var lastTr=$("#dwQuLogicTable").find("tr").last();
 						lastTr.attr("class",thClass);
 						lastTr.find(".logicQuOptionSel").val(cgQuItemId);
 						lastTr.find(".logicQuSel").val(skQuId);
 						lastTr.find(".logicType").val(logicType);
-						
 						lastTr.find(".logicQuOptionSel").change();
 						lastTr.find(".logicQuSel").change();
-						
 						// 设置分数 geLe scoreNum
 						if(quType==="SCORE"){
 							lastTr.find(".logicScoreGtLt").val(geLe);
@@ -1665,7 +1647,6 @@ function dwCommonEditHide(){
 
 function setShowDialogOffset(thDialogObj){
 	var thObjClass=thDialogObj.attr("class");
-	//var item=thDialogObj.parents(".surveyQuItemBody");
 	if(thObjClass.indexOf("dwFbMenuBtn")<0 && thObjClass.indexOf("quCoOptionEdit")<0){
 		var thOffset=thDialogObj.offset();
 		$("#dwCommonDialog").show(0,function(){
@@ -1674,13 +1655,6 @@ function setShowDialogOffset(thDialogObj){
 			var dwCommonRefIcon=$("#dwCommonDialog").find(".dwCommonRefIcon");
 			dwCommonRefIcon.removeClass("right");
 			dwCommonRefIcon.removeClass("left");
-			/*if(thObjClass.indexOf("addMoreColumnOption")>=0){
-				thOffsetLeft=thOffsetLeft-$("#dwCommonDialog").width()-50;
-				dwCommonRefIcon.addClass("right");
-			}else{
-				dwCommonRefIcon.addClass("left");
-			}*/
-			//自动根据x坐标来判断，取代之前固定的方式，更加灵活
 			browseWidth=$(window).width();			
 			browseHeight=$(window).height();
 			if((thOffsetLeft-100)>browseWidth/2){
@@ -1689,10 +1663,6 @@ function setShowDialogOffset(thDialogObj){
 			}else{
 				dwCommonRefIcon.addClass("left");
 			}
-			/*if(thObjClass.indexOf("option_Set")>=0){
-				thOffsetLeft=browseWidth/2-$("#dwCommonDialog").width()/2;
-				thOffsetTop=browseHeight/2-$("#dwCommonDialog").height()/2;
-			}*/
 			$("#dwCommonDialog").offset({ top: thOffsetTop, left: thOffsetLeft });
 		});
 	}
@@ -1701,14 +1671,10 @@ function setShowDialogOffset(thDialogObj){
 //显示模式窗口
 function showUIDialog(thDialogObj){
 	var thObjClass=thDialogObj.attr("class");
-	
 	$("#modelUIDialog").dialog("open");
 	$(".dwQuDialogCon").hide();
-	
 	if(thObjClass.indexOf("dwFbMenuBtn")>=0){
-		
 		$("#modelUIDialog .dwQuFillDataTypeOption").show();
-		
 		$("#modelUIDialog").dialog("open");
 		var quItemBody=$(thDialogObj).parents(".surveyQuItemBody");
 		var checkType_val=quItemBody.find("input[name='checkType']").val();
@@ -1729,25 +1695,19 @@ function showUIDialog(thDialogObj){
 		}
 		qu_inputWidth.val(answerInputWidth_val);
 		qu_inputRow.val(answerInputRow_val);
-		
-//		var quItemBody=$(this).parents(".surveyQuItemBody");
 		resetQuItemHover(quItemBody);
 		$(thDialogObj).parents(".quCoItemUlLi").addClass("menuBtnClick");
-		
 		$("#modelUIDialog").dialog("option","height",220);
-		
 	}else if(thObjClass.indexOf("quCoOptionEdit")>=0) {
 		$("#modelUIDialog .dwQuRadioCheckboxOption").show();
 		//设置回显值 isNote checkType
 		var quOption_isNote=$("#modelUIDialog input[name='quOption_isNote']");
 		var quOption_checkType=$("#modelUIDialog select[name='quOption_checkType']");
 		var quOption_isRequiredFill=$("#modelUIDialog input[name='quOption_isRequiredFill']");
-		
 		var quOptionParent=$(thDialogObj).parent();
 		var isNote_val=quOptionParent.find("input[name='isNote']").val();
 		var checkType_val=quOptionParent.find("input[name='checkType']").val();
 		var isRequiredFill_val=quOptionParent.find("input[name='isRequiredFill']").val();
-		
 		if(isNote_val=="1"){
 			quOption_isNote.prop("checked",true);
 			$(".quOptionFillContentLi,.quOptionFillRequiredLi").show();
@@ -1769,20 +1729,15 @@ function showUIDialog(thDialogObj){
 	}else if(thObjClass.indexOf("surveyAttrSetToolbar_li")>=0){
 		$("#modelUIDialog .dwSurveyAttrSetDialog").show();
 		$("#modelUIDialog").dialog("option","height",390);
-		//$("#modelUIDialog").dialog("option","position",["center","center"]);
 	}
-	
 	dwDialogObj=thDialogObj;
 }
 
 //显示弹出层
 function showDialog(thDialogObj){
-	
 	var thObjClass=thDialogObj.attr("class");
-
 	curEditCallback();
 	setShowDialogOffset(thDialogObj);
-	//"dwQuSetCon" dwQuAddMore
 	var quItemBody=$(thDialogObj).parents(".surveyQuItemBody");
 	$("#dwCommonDialog .dwQuDialogCon").hide();
 	if(thObjClass.indexOf("addMoreOption")>=0){
@@ -1796,11 +1751,8 @@ function showDialog(thDialogObj){
 		var cellCount=quItemBody.find("input[name='cellCount']").val();
 		var paramInt01=quItemBody.find("input[name='paramInt01']");
 		var paramInt02=quItemBody.find("input[name='paramInt02']");
-		
-		//contactsAttr contactsField
 		var contactsAttr=quItemBody.find("input[name='contactsAttr']").val();
 		var contactsField=quItemBody.find("input[name='contactsField']").val();
-		
 		$("#dwCommonDialog input[name='setIsRequired']").prop("checked",false);
 		$("#dwCommonDialog input[name='setRandOrder']").prop("checked",false);
 		$("#dwCommonDialog select[name='setHv']").val(2);
@@ -1811,11 +1763,8 @@ function showDialog(thDialogObj){
 		$("#dwCommonDialog .optionRangeHv").hide();
 		$("#dwCommonDialog .scoreMinMax").hide();
 		$("#dwCommonDialog .minMaxLi").hide();
-		
 		if(isRequired==1){
-			//alert($("#dwCommonDialog input[name='setIsRequired']").val());
 			$("#dwCommonDialog input[name='setIsRequired']").prop("checked",true);
-			//alert("set");
 		}
 		if(randOrder==1){
 			$("#dwCommonDialog input[name='setRandOrder']").prop("checked",true);
@@ -1827,7 +1776,7 @@ function showDialog(thDialogObj){
 		}
 		$("#dwCommonDialog select[name='setHv']").val(hv);
 		$("#dwCommonDialog input[name='setCellCount']").val(cellCount);
-		
+
 		//单选，多选 才启用选项随机排列
 		if(quType==="RADIO" || quType==="CHECKBOX"){
 			$("#dwCommonDialog .optionAutoOrder").show();
@@ -1837,9 +1786,6 @@ function showDialog(thDialogObj){
 		}else if(quType==="SCORE"){
 			$("#dwCommonDialog .optionAutoOrder").show();
 			$("#dwCommonDialog .scoreMinMax").show();
-			/*if(paramInt01[0]){
-				$("#dwCommonDialog .scoreMinMax .minScore").val(paramInt01.val());				
-			}*/
 			if(paramInt02[0]){
 				$("#dwCommonDialog .scoreMinMax .maxScore").val(paramInt02.val());
 			}
@@ -1853,7 +1799,7 @@ function showDialog(thDialogObj){
 				$("#dwCommonDialog .minMaxLi .minNum").val(paramInt01.val());				
 			}
 		}
-		
+
 		//单选，多选，填空题情况下才启用关联到联系设置项
 		if((quType=="RADIO" || quType=="CHECKBOX" || quType=="FILLBLANK")){
 			$("#dwCommonDialog .contactsAttrLi").show();
@@ -1907,7 +1853,7 @@ function showDialog(thDialogObj){
 		$("#dwCommonDialog .dwQuAddMore").show();
 	}
 	dwDialogObj=thDialogObj;
-	
+
 }
 
 function dwCommonDialogHide(){
@@ -1928,7 +1874,7 @@ function resetQuItemHover(quItemBody){
 function setSaveTag0(){
 	var quItemBody=$(curEditObj).parents(".surveyQuItemBody");
 	quItemBody.find("input[name='saveTag']").val(0);
-	
+
 	var thClass=$(curEditObj).attr("class");
 	if(thClass.indexOf("quCoTitleEdit")>0){
 		//题目标题
@@ -1948,10 +1894,10 @@ function setSaveTag0(){
 function editAble(editAbleObj){
 	dwCommonDialogHide();
 	curEditCallback();
-	
+
 	var quItemBody=$(editAbleObj).parents(".surveyQuItemBody");
 	resetQuItemHover(quItemBody);
-	
+
 	var thClass=$(editAbleObj).attr("class");
 	var editOffset=$(editAbleObj).offset();
 	$("#dwCommonEditRoot").removeClass();
@@ -1972,7 +1918,7 @@ function editAble(editAbleObj){
 	$("#dwComEditContent").focus();
 	$("#dwComEditContent").html($(editAbleObj).html());
 	var dwEditWidth=$(editAbleObj).width();
-	
+
 	//dwEditWidth<200?dwEditWidth=200:dwEditWidth;
 	if(thClass.indexOf("dwSvyNoteEdit")<0 && thClass.indexOf("dwSvyName")<0){
 		var hv=quItemBody.find("input[name='hv']").val();
@@ -2066,11 +2012,11 @@ function saveRadio(quItemBody,callback){
 		var cellCount=quItemBody.find("input[name='cellCount']").val();
 		var contactsAttr=quItemBody.find("input[name='contactsAttr']").val();
 		var contactsField=quItemBody.find("input[name='contactsField']").val();
-		
+
 		var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quId="+quId;
 		data+="&isRequired="+isRequired+"&hv="+hv+"&randOrder="+randOrder+"&cellCount="+cellCount;
 		data+="&contactsAttr="+contactsAttr+"&contactsField="+contactsField;
-		
+
 		var quTitleSaveTag=quItemBody.find("input[name='quTitleSaveTag']").val();
 		if(quTitleSaveTag==0){
 			var quTitle=quItemBody.find(".quCoTitleEdit").html();
@@ -2085,7 +2031,7 @@ function saveRadio(quItemBody,callback){
 		}else{
 			quItemOptions=quItemBody.find(".quCoItem li.quCoItemUlLi");
 		}
-		
+
 		$.each(quItemOptions,function(i){
 			var optionValue=$(this).find("label.quCoOptionEdit").html();
 			var optionId=$(this).find(".quItemInputCase input[name='quItemId']").val();
@@ -2104,13 +2050,13 @@ function saveRadio(quItemBody,callback){
 			//更新 字母 title标记到选项上.
 			$(this).addClass("quOption_"+i);
 		});
-		
+
 		//逻辑选项
 		var quLogicItems=quItemBody.find(".quLogicItem");
 		$.each(quLogicItems,function(i){
 			var thClass=$(this).attr("class");
 			thClass=thClass.replace("quLogicItem quLogicItem_","");
-			
+
 			var quLogicId=$(this).find("input[name='quLogicId']").val();
 			var cgQuItemId=$(this).find("input[name='cgQuItemId']").val();
 			var skQuId=$(this).find("input[name='skQuId']").val();
@@ -2143,7 +2089,7 @@ function saveRadio(quItemBody,callback){
 						quItemOption.find("input[name='quItemId']").val(item.id);
 						quItemOption.find(".quItemInputCase input[name='quItemSaveTag']").val(1);
 					});
-					
+
 					//同步logic Id信息
 					var quLogics=jsons.quLogics;
 					$.each(quLogics,function(i,item){
@@ -2151,10 +2097,10 @@ function saveRadio(quItemBody,callback){
 						logicItem.find("input[name='quLogicId']").val(item.id);
 						logicItem.find("input[name='logicSaveTag']").val(1);
 					});
-					
+
 					quItemBody.find("input[name='saveTag']").val(1);
 					quItemBody.find(".quCoTitle input[name='quTitleSaveTag']").val(1);
-					
+
 					//执行保存下一题
 					saveQus(quItemBody.next(),callback);
 					//同步-更新题目排序号
@@ -2206,7 +2152,6 @@ function addRadioItem(quItemBody,itemText){
 		quItemBody.find(".quCoItem .tableQuColItem tr td").width(tdWidth);
 		quItemBody.find(".quCoItem .tableQuColItem tr td label").width(tdLabelWidth);
 		newEditObj=quItemBody.find(".quCoItem table").find(".editAble").last();
-		//itemText="fsdfsdf";
 	}else{
 		//ul li处理
 		var quRadioItemHtml=$("#quRadioItem").html();
@@ -3323,7 +3268,6 @@ function saveChen(quItemBody,callback){
 		$.each(quLogicItems,function(i){
 			var thClass=$(this).attr("class");
 			thClass=thClass.replace("quLogicItem quLogicItem_","");
-			
 			var quLogicId=$(this).find("input[name='quLogicId']").val();
 			var cgQuItemId=$(this).find("input[name='cgQuItemId']").val();
 			var skQuId=$(this).find("input[name='skQuId']").val();
@@ -3339,13 +3283,11 @@ function saveChen(quItemBody,callback){
 				data+="&logicType_"+itemIndex+"="+logicType;
 			}
 		});
-		
 		$.ajax({
 			url:url,
 			data:data,
 			type:'post',
 			success:function(msg){
-				//alert(msg);// resultJson quItemId
 				if(msg!="error"){
 					var jsons=eval("("+msg+")");
 					//alert(jsons);
@@ -3527,7 +3469,6 @@ function deleteChenRowOption(){
 	}
 }
 
-
 /**逻辑设置**/
 //添加逻辑选项
 function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
@@ -3554,18 +3495,12 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 		var appendTrHtml=$("#setQuLogicItemTrModel").html();
 		if(quType==="SCORE"){
 			appendTrHtml=$("#setQuLogicItemTrModel_score").html();
-			//如果是评分题
 		}
-		
 		$("#dwQuLogicTable").append("<tr>"+appendTrHtml+"</tr>");
 		var lastTr=$("#dwQuLogicTable").find("tr").last();
-
 		if(quType==="FILLBLANK"){
-			//---ifSpanText1
 			lastTr.find(".ifSpanText1").text("如果回答");
-			//lastTr.find("td:eq(1)").hide();
 		}
-		
 		if(autoClass){
 			var quLogicItemNum=quLogicInputCase.find("input[name='quLogicItemNum']");
 			var newQuLogicItemNum=(parseInt(quLogicItemNum.val())+1);
@@ -3573,16 +3508,11 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 			var newQuLogicItemClass="quLogicItem_"+newQuLogicItemNum;
 			lastTr.attr("class",newQuLogicItemClass);
 		}
-	
 		var dwQuOptionSel=lastTr.find(".logicQuOptionSel");
-		//dwQuOptionSel.empty();
-		
 		var eachTag=true;
 		if(quType==="CHENRADIO" || quType==="CHENCHECKBOX" || quType==="CHENSCORE" || quType==="CHENFBK"){
-			
 			var quChenColumnTds=quItemBody.find(".quChenColumnTd");
 			var quChenRowTds=quItemBody.find(".quChenRowTd");
-
 			$.each(quChenRowTds,function(){
 				var rowText=$(this).find(".quCoOptionEdit").text();
 				var rowQuItemId=$(this).find("input[name='quItemId']").val();	
@@ -3598,7 +3528,6 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 							return false;
 						}
 					});
-					
 					if(eachTag){
 						dwQuOptionSel.append("<option value='"+optionId+"'>"+rowText+":"+colText+"</option>");	
 					}
@@ -3637,39 +3566,31 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 						return false;
 					}
 				});
-				//alert(optionText);
 				if(eachTag){
 					dwQuOptionSel.append("<option value='"+optionId+"'>"+optionText+"</option>");	
 				}
 			});
 		}
-		
 		if(logicQuOptionSels.size()==0){
 			dwQuOptionSel.append("<option value='0'>任意选项</option>");	
 		}else{
-			//移除所有-移除已经设置过的
 			$("#dwQuLogicTable").find(".logicQuOptionSel option[value='0']").remove();
 		}
-		
 		if(quType==="FILLBLANK"){
 			dwQuOptionSel.val("0");
 		}
-		//当前所有题
 		var logicQuSel=lastTr.find(".logicQuSel");
-		
 		var quItemBodys=$("#dwSurveyQuContent .surveyQuItemBody");
 		$.each(quItemBodys,function(){
 			//logicQuSels
 			if($(this).find(".quCoTitleEdit")[0]){
 				var quCoNumText=$(this).find(".quCoNum").text();
 				var quTitleText=$(this).find(".quCoTitleEdit").text();
-				
 				var quId=$(this).find("input[name='quId']").val();
 				eachTag=true;
 				if(curQuId==quId){
 					eachTag=false;
 				}
-				
 				if(eachTag){
 					$.each(dwLogicQuSels,function(){
 						var dwLogicQuSelVal=$(this).val();
@@ -3679,14 +3600,12 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 						}
 					});
 				}
-				
 				if(eachTag){
 					logicQuSel.append("<option value='"+quId+"'>"+quCoNumText+quTitleText+"</option>");	
 				}
 			}
 		});
 		logicQuSel.append("<option value='1'>正常结束（计入结果）</option><option value='2'>提前结束（不计入结果）</option>");
-		
 		if(quType==="SCORE"){
 			var logicScoreNum=lastTr.find(".logicScoreNum");
 			logicScoreNum.empty();
@@ -3698,12 +3617,10 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 			dwQuOptionSel.append("<option value='0'>回答完成</option>");
 			lastTr.find(".ifSpanText1").text("如果本题");
 		}
-		
 		if(autoClass){
 			logicQuSel.prepend("<option value=''>-请选择题目-</option>");
 			dwQuOptionSel.prepend("<option value=''>-请选择选项-</option>");
 		}
-		
 		bindDialogRemoveLogic();
 		trueCallback();
 	}else{
@@ -3742,7 +3659,6 @@ function bindDialogRemoveLogic(){
 			}
 		}
 		logicItemTr.remove();
-		
 		refreshQuLogicInfo(quItemBody);
 		return false;
 	});
@@ -3805,9 +3721,29 @@ function setSelectText(el) {
     //      }
 }
 
+function validateGen(){
+	$("#dwCommonDialogForm").validate({
+		rules:{
+			setCellCount:{
+				required:true,
+				digits:true,
+				min:1
+			}
+		},
+		errorPlacement: function(error, element) {
+			//error.appendTo(element.parent().parent());
+			element.parent().append(error);
+			//	$(element).css("borderColor","#C40000");
+		}
+	});
+	$("input[name='setCellCount']").unbind();
+	$("input[name='setCellCount']").blur(function(){
+		$("#dwCommonDialogForm").validate();
+	});
+	$("input[name='setCellCount']").blur();
+}
+
 function notify(msg,delayHid) {
-	//var msg = "保存成功";
-	//alert(msg);
 	$(".notification").remove();
 	if(delayHid==null){
 		delayHid=5000;

@@ -9,6 +9,10 @@
 <link href="${ctx }/js/plugs/jquery-ui-1.10.3.custom/css/mycss/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx }/js/plugs/jquery-ui-1.10.3.custom/js/jquery-1.10.1.js"></script>
 <script type="text/javascript" src="${ctx }/js/plugs/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js"></script>
+<link href="${ctx}/js/plugs/validate/jquery.validate.css" type="text/css" rel="stylesheet" />
+<script src="${ctx}/js/plugs/validate/jquery.validate.js" type="text/javascript"></script>
+<script src="${ctx}/js/plugs/validate/messages_cn.js" type="text/javascript"></script>
+<script src="${ctx }/js/plugs/validate/jquery.metadata.js" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8" src="${ctx }/js/plugs/ueditor1_4_2-utf8-jsp/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="${ctx }/js/plugs/ueditor1_4_2-utf8-jsp/ueditor.all.min.js"> </script>
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -18,6 +22,7 @@
 <script type="text/javascript" src="${ctx }/js/dw/address.js"></script>
 <script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
 <link href="${ctx }/css/design-survey.css" rel="stylesheet" type="text/css" />
+
 <!--[if lt IE 7]><link rel="stylesheet" href="ie-stuff.css" type="text/css" media="screen"/><![endif]--> 
 <script type="text/javascript">
 </script>
@@ -3170,6 +3175,7 @@
 </div>
 
 <div id="dwCommonDialog">
+	<form action="#" id="dwCommonDialogForm">
 	<div class="dwCommonRefIcon"><div class="dwCommonRefIcon1"></div><div class="dwCommonRefIcon2"></div></div>
 	<div class="dwCommonDialogBody">
 		<div  class="dwCommonDialogTitle"><span id="dwComDialogTitleText">标题文本</span><span id="dwCommonDialogClose" class="closeDialog"></span></div>
@@ -3205,7 +3211,7 @@
 					<option value="3">按列</option>
 					<!-- <option value="4">下拉显示</option> -->
 					</select>
-					<span class="option_range_3" style="display:none;"><input type="text" name="setCellCount"  size="2" value="2">&nbsp;列</span>
+					<span class="option_range_3" style="display:none;"><input type="text" name="setCellCount"  size="2" value="3" class="" >&nbsp;列</span>
 					</li>
 					<!-- <li class="minNumLi">最少选&nbsp;<input type="text" size="3" name="minNum">&nbsp;项 </li>
 					<li class="maxNumLi">最多选&nbsp;<input type="text" size="3" name="maxNum">&nbsp;项 </li> -->
@@ -3251,6 +3257,7 @@
 			
 		</div>
 	</div>
+	</form>
 </div>
 
 <div id="modelUIDialog">
