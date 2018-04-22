@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="${ctx }/js/plugs/zeroclipboard-master/dist/ZeroClipboard.js"></script>
+<script type="text/javascript" src="${ctx }/js/plugs/clipboard.js/clipboard.min.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/collect.js"></script>
 <title>数据收集</title>
 </head>
@@ -120,9 +120,9 @@
 							<div class="weixinSteps">
 								<div class="wxinTitle">发送或分享给好友</div>
 								<div class="wxinContent"><ul>
-									<li><span>1、使用微信扫一扫功能。</span><img src="${ctx }/images/img1/weixin_a_s1.png" ></li>
-									<li><span>2、打开问卷后，点击右上角的“分享”按钮。</span><img src="${ctx }/images/img1/weixin_a_s2.png" ></li>
-									<li><span>3、选择“发送给朋友”或“分享到朋友圈”。</span><img src="${ctx }/images/img1/weixin_a_s3.png" ></li>	
+									<li><span>1、使用微信扫一扫功能。</span><img src="${ctx }/images/img1/weixin_collect1.jpg" width="260" ></li>
+									<li><span>2、打开问卷后，点击右上角的“分享”按钮。</span><img src="${ctx }/images/img1/weixin_collect2.jpg"  width="260" ></li>
+									<li><span>3、选择“发送给朋友”或“分享到朋友圈”。</span><img src="${ctx }/images/img1/weixin_collect3.jpg"  width="260" ></li>
 								</ul></div>
 							</div>
 						</div>
@@ -173,20 +173,18 @@
 	</div>
 <script type="text/javascript">
 
-var client = new ZeroClipboard( document.getElementById("clipLink") );
-client.on( "ready", function( readyEvent ) {
-  	// alert( "ZeroClipboard SWF is ready!" );
-	  client.on( "aftercopy", function( event ) {
-	    // `this` === `client`
-	    // `event.target` === the element that was clicked
-	    // event.target.style.display = "none";
-		  $("#clipLinkSpan").show().delay(5000).fadeOut("slow");
-		  return false;
-	  });
-});
-$("#clipLink").click(function(){
-	return false;
-});
+	var clipboard = new ClipboardJS('.clipLink');
+
+	clipboard.on('success', function(e) {
+		$("#clipLinkSpan").text("复制成功");
+		$("#clipLinkSpan").show().delay(5000).fadeOut("slow");
+	});
+
+	clipboard.on('error', function(e) {
+		$("#clipLinkSpan").text("浏览器不支持！");
+		$("#clipLinkSpan").show().delay(5000).fadeOut("slow");
+	});
+
 </script>
 </body>
 </html>
