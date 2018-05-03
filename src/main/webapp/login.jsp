@@ -67,18 +67,7 @@ label.error{
 }
 </style>
 </head>
-<body style="background-color: #537088;">
-<%-- <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/6608914805422388314.jpg" style="margin-top:-50px; margin-left: 0px; opacity: 1;" width="100%" ></div> --%>
-<%-- <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/6608415627143877023.jpg" style="margin-top:-375px; margin-left: 0px; opacity: 1;" width="100%" ></div>--%>
-<%-- <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/6619354668328056805.jpg" style="margin-top:0px; margin-left: 0px; opacity: 1;" width="100%" ></div> --%> 
-<%-- <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/132daa5ad6227e1fb5aa3c7f52033279.jpg" style="margin-top:0px; margin-left: 0px; opacity: 1;" width="100%" ></div> --%>
-<%-- <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/5da3acedb562404bed2457bc4bcff436.jpg" style="margin-top:0px; margin-left: 0px; opacity: 1;" width="100%" ></div>--%>
-<%-- <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/1d841d916211750f292f37449042b3a1.jpg" style="margin-top:0px; margin-left: 0px; opacity: 1;" width="100%" ></div> --%>
- 
-<%--  <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/9b39ef953da82d911cb886effe8f55a0.jpg" style="margin-top:0px; margin-left: 0px; opacity: 1;" width="100%" ></div> --%> 
-<%--  <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/b02577eda22997e9882dfe7212e459ef.jpg" style="margin-top:0px; margin-left: 0px; opacity: 1;" width="100%" ></div> --%> 
-<%--  <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/19473ca656f68ea546bc9a181b713952.jpg" style="margin-top:0px; margin-left: 0px; opacity: 1;" width="100%" ></div> --%> 
-<%-- <div class="m-logbg"><img src="${ctx }/images/style-model/login_bg/1a357f7a35cc6a1445f8a9d2fac7166e.jpg" style="margin-top:0px; margin-left: 0px; opacity: 1;" width="100%" ></div> --%> 
+<body style="background-color: #537088;"> 
 <%@ include file="/WEB-INF/page/layouts/loginbgimg.jsp"%>
 
 <div id="wrap" class="wrapLogin">

@@ -127,9 +127,7 @@ $(document).ready(function(){
 														</div>
 														<div>点击选择背景图或上传自定义的背景图</div>
 														<div id="login_bg_div">
-															<img class="active_img" src="${ctx }/images/style-model/login_bg/8.jpg" style="opacity: 1;" width="60" >
-															<img src="${ctx }/images/style-model/login_bg/9.jpg" style="opacity: 1;" width="60" >
-															<img src="${ctx }/images/style-model/login_bg/10.jpg" style="opacity: 1;" width="60" >
+															<img class="active_img" src="${ctx }/images/style-model/login_bg/1.jpg" style="opacity: 1;" width="60" >
 															<img src="${ctx }/images/style-model/login_bg/2.jpg" style="opacity: 1;" width="60" >
 															<img src="${ctx }/images/style-model/login_bg/3.jpg" style="opacity: 1;" width="60" >
 															<img src="${ctx }/images/style-model/login_bg/4.jpg" style="opacity: 1;" width="60" >
