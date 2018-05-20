@@ -37,17 +37,6 @@
 		<artifactId>hamcrest-core</artifactId>
 		<version>1.1</version>
 	</dependency>
-	<dependency>
-		<groupId>com.itextpdf</groupId>
-		<artifactId>itextpdf</artifactId>
-		<version>5.4.3</version>
-	</dependency>
-	<dependency>
-		<groupId>com.itextpdf</groupId>
-		<artifactId>itext-asian</artifactId>
-		<version>5.2.0</version>
-	</dependency>
-
 	<!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
 	<dependency>
 		<groupId>com.lowagie</groupId>
