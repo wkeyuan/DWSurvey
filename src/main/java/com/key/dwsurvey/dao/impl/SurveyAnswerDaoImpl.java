@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.key.dwsurvey.dao.SurveyAnswerDao;
 import com.key.dwsurvey.service.SurveyStatsManager;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -57,8 +59,11 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		if(answerNum==null){
 			answerNum=0;
 		}
-		survey.setAnswerNum(answerNum+1);
-		session.update(survey);//更新回答数
+		Query query = session.createQuery("update SurveyDirectory set answerNum=answerNum+1 where id=?");
+		query.setString(0, surveyId);
+		query.executeUpdate();
+//		survey.setAnswerNum(answerNum+1);
+//		session.update(survey);//更新回答数
 		int surveyQuAnItemNum=survey.getAnItemLeastNum();//可以回答的最少项目数
 		
 		surveyAnswer.setBgAnDate(curDate);

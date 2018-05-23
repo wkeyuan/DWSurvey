@@ -41,7 +41,7 @@ public class SurveyDirectory extends IdEntity{
 	//可以回答的最少选项数目 
 	private Integer anItemLeastNum=0;
 	//回答次数
-	private Integer answerNum;
+	private Integer answerNum=0;
 	//是否显示  1显示 0不显示
 	private Integer visibility=1;
 
