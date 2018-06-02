@@ -16,7 +16,7 @@ import com.key.common.plugs.page.PropertyFilter;
  * @author keyuan(keyuan258@gmail.com)
  *
  * https://github.com/wkeyuan/DWSurvey
- * http://dwsurvey.net
+ * http://www.dwsurvey.net
  */
 @Transactional
 public abstract class BaseServiceImpl<T extends IdEntity, ID extends Serializable>

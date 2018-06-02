@@ -1,24 +1,5 @@
 package com.key.dwsurvey.action.nologin;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.key.dwsurvey.service.SurveyDirectoryManager;
-import com.key.dwsurvey.service.SurveyStyleManager;
-import org.apache.struts2.convention.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.key.common.plugs.ipaddr.IPService;
 import com.key.common.utils.DiaowenProperty;
 import com.key.common.utils.twodimension.TwoDimensionCode;
@@ -27,7 +8,18 @@ import com.key.dwsurvey.entity.SurveyDirectory;
 import com.key.dwsurvey.entity.SurveyStyle;
 import com.key.dwsurvey.service.QuestionManager;
 import com.key.dwsurvey.service.SurveyAnswerManager;
+import com.key.dwsurvey.service.SurveyDirectoryManager;
+import com.key.dwsurvey.service.SurveyStyleManager;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.convention.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 //import com.sun.image.codec.jpeg.JPEGCodec;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
@@ -36,7 +28,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author KeYuan(keyuan258@gmail.com)
  *
  * https://github.com/wkeyuan/DWSurvey
- * http://dwsurvey.net
+ * http://www.dwsurvey.net
  *
  */
 @Namespace("/")

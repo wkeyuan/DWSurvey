@@ -1,16 +1,5 @@
 package com.key.dwsurvey.action;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.key.dwsurvey.service.SurveyDirectoryManager;
-
-import org.apache.struts2.convention.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.key.common.base.entity.User;
 import com.key.common.base.service.AccountManager;
 import com.key.common.plugs.page.Page;
@@ -19,7 +8,15 @@ import com.key.dwsurvey.entity.Question;
 import com.key.dwsurvey.entity.SurveyAnswer;
 import com.key.dwsurvey.entity.SurveyDirectory;
 import com.key.dwsurvey.service.SurveyAnswerManager;
+import com.key.dwsurvey.service.SurveyDirectoryManager;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.convention.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 答卷数据

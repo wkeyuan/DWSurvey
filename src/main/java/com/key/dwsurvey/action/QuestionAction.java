@@ -1,14 +1,13 @@
 package com.key.dwsurvey.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.convention.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.service.QuestionManager;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.convention.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 题目 action

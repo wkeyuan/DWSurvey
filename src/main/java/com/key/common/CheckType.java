@@ -1,5 +1,13 @@
 package com.key.common;
 
+/**
+ * CheckType
+ * @author KeYuan(keyuan258@gmail.com)
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://www.dwsurvey.net
+ *
+ */
 public enum CheckType {
 	NO("无验证", 0), 
 	EMAIL("Email", 1), 

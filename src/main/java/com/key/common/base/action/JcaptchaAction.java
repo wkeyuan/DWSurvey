@@ -1,20 +1,18 @@
 package com.key.common.base.action;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
+import com.key.common.utils.web.Struts2Utils;
+import com.octo.captcha.service.image.ImageCaptchaService;
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Namespaces;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.Namespaces;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.key.common.utils.web.Struts2Utils;
-import com.octo.captcha.service.image.ImageCaptchaService;
-import com.opensymphony.xwork2.ActionSupport;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 //import com.sun.image.codec.jpeg.JPEGCodec;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
 

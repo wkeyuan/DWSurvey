@@ -1,5 +1,13 @@
 package com.key.common;
 
+/**
+ * YesnoOption
+ * @author KeYuan(keyuan258@gmail.com)
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://www.dwsurvey.net
+ *
+ */
 public enum YesnoOption {
 	
 	OPTION1("是","否",0),

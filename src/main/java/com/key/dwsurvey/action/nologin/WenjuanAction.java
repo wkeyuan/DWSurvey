@@ -1,16 +1,17 @@
 package com.key.dwsurvey.action.nologin;
 
-import org.apache.struts2.convention.annotation.InterceptorRef;
-import org.apache.struts2.convention.annotation.InterceptorRefs;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
-
 import com.key.common.utils.web.Struts2Utils;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.convention.annotation.*;
 
-import java.net.URLEncoder;
-
+/**
+ * WenjuanAction
+ * @author KeYuan(keyuan258@gmail.com)
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://www.dwsurvey.net
+ *
+ */
 @Namespace("/")
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
 @Results({

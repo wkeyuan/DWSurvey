@@ -1,28 +1,25 @@
 package com.key.dwsurvey.action;
 
+import com.key.common.CheckType;
+import com.key.common.QuType;
+import com.key.common.utils.web.Struts2Utils;
+import com.key.dwsurvey.entity.QuCheckbox;
+import com.key.dwsurvey.entity.Question;
+import com.key.dwsurvey.entity.QuestionLogic;
+import com.key.dwsurvey.service.QuCheckboxManager;
+import com.key.dwsurvey.service.QuestionManager;
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.convention.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.key.dwsurvey.entity.QuCheckbox;
-import com.key.dwsurvey.entity.Question;
-import com.key.dwsurvey.entity.QuestionLogic;
-
-import org.apache.struts2.convention.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.util.WebUtils;
-
-import com.key.common.utils.web.Struts2Utils;
-import com.key.common.CheckType;
-import com.key.common.QuType;
-import com.key.dwsurvey.service.QuCheckboxManager;
-import com.key.dwsurvey.service.QuestionManager;
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 单选题 action

@@ -1,13 +1,13 @@
 package com.key.dwsurvey.action;
 
-import com.key.common.utils.web.Struts2Utils;
-import com.key.dwsurvey.service.QuChenRowManager;
 import com.key.common.QuType;
+import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.entity.QuChenColumn;
 import com.key.dwsurvey.entity.QuChenRow;
 import com.key.dwsurvey.entity.Question;
 import com.key.dwsurvey.entity.QuestionLogic;
 import com.key.dwsurvey.service.QuChenColumnManager;
+import com.key.dwsurvey.service.QuChenRowManager;
 import com.key.dwsurvey.service.QuestionManager;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.*;

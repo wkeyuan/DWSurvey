@@ -1,15 +1,22 @@
 package com.key.dwsurvey.action;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import com.key.common.base.entity.User;
+import com.key.common.base.service.AccountManager;
+import com.key.common.utils.DiaowenProperty;
+import com.key.common.utils.JspToHtml;
+import com.key.common.utils.web.Struts2Utils;
+import com.key.dwsurvey.entity.Question;
+import com.key.dwsurvey.entity.SurveyDetail;
+import com.key.dwsurvey.entity.SurveyDirectory;
+import com.key.dwsurvey.entity.SurveyStyle;
+import com.key.dwsurvey.service.QuestionManager;
+import com.key.dwsurvey.service.SurveyDirectoryManager;
+import com.key.dwsurvey.service.SurveyReqUrlManager;
+import com.key.dwsurvey.service.SurveyStyleManager;
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -17,25 +24,11 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
-
-import com.key.dwsurvey.entity.SurveyDetail;
-import com.key.dwsurvey.service.SurveyDirectoryManager;
-import com.key.dwsurvey.entity.Question;
-import com.key.dwsurvey.service.SurveyReqUrlManager;
-import com.key.dwsurvey.service.SurveyStyleManager;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.key.common.base.entity.User;
-import com.key.common.base.service.AccountManager;
-import com.key.common.utils.DiaowenProperty;
-import com.key.common.utils.JspToHtml;
-import com.key.common.utils.web.Struts2Utils;
-import com.key.dwsurvey.entity.SurveyDirectory;
-import com.key.dwsurvey.entity.SurveyStyle;
-import com.key.dwsurvey.service.QuestionManager;
-import com.opensymphony.xwork2.ActionSupport;
+import java.io.*;
+import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 
 /**

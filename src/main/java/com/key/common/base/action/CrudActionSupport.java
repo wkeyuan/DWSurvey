@@ -1,18 +1,17 @@
 package com.key.common.base.action;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.key.common.base.entity.IdEntity;
 import com.key.common.plugs.page.Page;
 import com.key.common.plugs.page.PropertyFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.key.common.base.entity.IdEntity;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Struts2中典型CRUD Action的抽象基类.

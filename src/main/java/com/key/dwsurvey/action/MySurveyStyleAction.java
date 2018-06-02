@@ -1,25 +1,21 @@
 package com.key.dwsurvey.action;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.key.dwsurvey.entity.SurveyDetail;
-import com.key.dwsurvey.service.SurveyDirectoryManager;
-import com.key.dwsurvey.service.SurveyStyleManager;
-import net.sf.json.JSONObject;
-
-import org.apache.struts2.convention.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.key.common.base.action.CrudActionSupport;
 import com.key.common.base.entity.User;
 import com.key.common.base.service.AccountManager;
 import com.key.common.utils.web.Struts2Utils;
+import com.key.dwsurvey.entity.SurveyDetail;
 import com.key.dwsurvey.entity.SurveyDirectory;
 import com.key.dwsurvey.entity.SurveyStyle;
-import com.opensymphony.xwork2.ActionSupport;
+import com.key.dwsurvey.service.SurveyDirectoryManager;
+import com.key.dwsurvey.service.SurveyStyleManager;
+import net.sf.json.JSONObject;
+import org.apache.struts2.convention.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * 问卷样式

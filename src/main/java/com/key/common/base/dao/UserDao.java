@@ -2,7 +2,6 @@ package com.key.common.base.dao;
 
 import com.key.common.base.entity.User;
 import com.key.common.dao.BaseDao;
-import com.key.common.plugs.page.Page;
 
 
 /**

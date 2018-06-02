@@ -1,5 +1,14 @@
 package com.key.common;
 
+/**
+ * quType
+ * @author KeYuan(keyuan258@gmail.com)
+ *
+ * https://github.com/wkeyuan/DWSurvey
+ * http://www.dwsurvey.net
+ *
+ */
+
 public enum QuType {
 
 	YESNO("是非题","yesno", 0), 

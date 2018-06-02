@@ -718,13 +718,6 @@ $(document).ready(function(){
 								<div class="p_DialogContentItem"><label><input type="checkbox" name="ynEndTime" value="1"> 到&nbsp;<input value="${survey.surveyDetail.endTime}" name="endTime" type="text" size="16"  class="inputSytle_1 Wdate" onfocus="WdatePicker({minDate:'%y-%M-{%d+1}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" >&nbsp;时结束 </label></div>
 						</div>
 					</div>
-					<div class="p_DialogContent">
-						<div class="p_DialogContentTitle">答完后</div>
-						<div class="p_DialogContentRoot">
-								<div class="p_DialogContentItem"><label><input type="checkbox" name="showShareSurvey" value="1"> 显示分享按钮，分享答题链接到更多社交网站</label></div>
-								<div class="p_DialogContentItem"><label><input type="checkbox" name="showAnswerDa" value="1"> 允许受访人答完问卷后查看结果</label></div>
-						</div>
-					</div>
 				</div>
 			</li>
 			<li>

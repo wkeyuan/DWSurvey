@@ -1,23 +1,22 @@
 package com.key.dwsurvey.action;
 
-import javax.servlet.http.HttpServletRequest;
-
-import com.key.dwsurvey.service.SurveyDirectoryManager;
-import org.apache.struts2.convention.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.key.common.base.entity.User;
 import com.key.common.base.service.AccountManager;
 import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.entity.SurveyDirectory;
+import com.key.dwsurvey.service.SurveyDirectoryManager;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.convention.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 收集入口 action
  * @author KeYuan(keyuan258@gmail.com)
  *
  * https://github.com/wkeyuan/DWSurvey
- * http://dwsurvey.net
+ * http://www.dwsurvey.net
  *
  */
 @Namespace("/design")

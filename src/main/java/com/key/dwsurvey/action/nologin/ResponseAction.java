@@ -1,45 +1,29 @@
 package com.key.dwsurvey.action.nologin;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.baidubce.util.DateUtils;
-import com.key.dwsurvey.entity.AnCheckbox;
-import com.key.dwsurvey.entity.AnRadio;
-import com.key.dwsurvey.entity.SurveyDetail;
+import com.key.common.QuType;
+import com.key.common.base.action.CrudActionSupport;
+import com.key.common.base.entity.User;
+import com.key.common.base.service.AccountManager;
+import com.key.common.plugs.ipaddr.IPService;
+import com.key.common.utils.CookieUtils;
+import com.key.common.utils.HttpRequestDeviceUtils;
+import com.key.common.utils.NumberUtils;
+import com.key.common.utils.web.Struts2Utils;
+import com.key.dwsurvey.entity.*;
+import com.key.dwsurvey.service.SurveyAnswerManager;
 import com.key.dwsurvey.service.SurveyDirectoryManager;
-import org.apache.commons.httpclient.util.DateUtil;
+import com.octo.captcha.service.image.ImageCaptchaService;
+import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.WebUtils;
 
-import com.key.common.base.action.CrudActionSupport;
-import com.key.common.base.entity.User;
-import com.key.common.base.service.AccountManager;
-import com.key.common.plugs.aliyun.AliyunOSS;
-import com.key.common.plugs.baiduyun.BaiduBOS;
-import com.key.common.plugs.ipaddr.IPService;
-import com.key.common.utils.CookieUtils;
-import com.key.common.utils.DiaowenProperty;
-import com.key.common.utils.HttpRequestDeviceUtils;
-import com.key.common.utils.NumberUtils;
-import com.key.common.utils.web.Struts2Utils;
-import com.key.common.QuType;
-import com.key.dwsurvey.entity.SurveyAnswer;
-import com.key.dwsurvey.entity.SurveyDirectory;
-import com.key.dwsurvey.service.SurveyAnswerManager;
-import com.octo.captcha.service.image.ImageCaptchaService;
-import com.opensymphony.xwork2.ActionSupport;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
