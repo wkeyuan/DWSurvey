@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.key.dwsurvey.dao.QuMultiFillblankDao;
+import com.key.dwsurvey.entity.AnDFillblank;
 import com.key.dwsurvey.entity.QuMultiFillblank;
 import com.key.dwsurvey.service.QuMultiFillblankManager;
 import org.hibernate.criterion.Criterion;
@@ -111,4 +112,5 @@ public class QuMultiFillblankManagerImpl extends BaseServiceImpl<QuMultiFillblan
 		QuMultiFillblank quMultiFillblank=get(quItemId);
 		quMultiFillblankDao.save(quMultiFillblank);
 	}
+
 }

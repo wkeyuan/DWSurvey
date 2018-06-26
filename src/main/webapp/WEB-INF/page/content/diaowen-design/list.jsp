@@ -126,7 +126,7 @@ button {
 										</td>
 										<td align="left">${empty(en.answerNum) ? '0':en.answerNum  }&nbsp;</td>
 										<td align="left" >
-											${en.surveyState eq 0 ? '设计':en.surveyState eq 1?'收集':en.surveyState eq 2?'收集完成':'' }
+											${en.surveyState eq 0 ? '设计':en.surveyState eq 1?'发布':en.surveyState eq 2?'收集完成':'' }
 										</td>
 										<td align="left">
 											<div class="btn-group surveyLeftBtnGroup">

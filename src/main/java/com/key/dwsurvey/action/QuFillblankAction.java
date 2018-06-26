@@ -179,8 +179,7 @@ public class QuFillblankAction extends ActionSupport{
 		String quId = request.getParameter("quId");
 		String surveyId = request.getParameter("surveyId");
 		anPage.setPageSize(1000);
-		Criterion cri1 = Restrictions.eq("quId",quId);
-		anPage = anFillblankManager.findPage(anPage, cri1);
+		anPage = anFillblankManager.findPage(anPage, quId);
 		request.setAttribute("surveyId",surveyId);
 		return "answers";
 	}

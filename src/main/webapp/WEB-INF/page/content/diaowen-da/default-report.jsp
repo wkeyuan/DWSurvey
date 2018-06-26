@@ -779,7 +779,6 @@ function substring(json) {
 		                	<div class="selc">
 		                    	<div class="selcc tbtag">
 		                            <div class="seli"><a class="nx-1 sur_collectSet" href="#collectSet">收集规则</a></div>
-		                            <div class="seli"><a class="nx-2" href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${surveyId}">样式设置</a></div>
 		                            <div class="seli"><a class="nx-6 sur_edit" href="${ctx }/design/my-survey-design.action?surveyId=${surveyId}">问卷编辑</a></div>
 		                        </div>
 		                    </div>
@@ -1062,7 +1061,7 @@ function substring(json) {
 													<tr class="quTrOptions">
 														<td width="15px">&nbsp;</td>
 														<td width="520px">${quEn.optionName }</td>
-														<td class="bfbTd">回答数：${quEn.anCount }条&nbsp;&nbsp;<a href="#">查看</a></td></td>
+														<td class="bfbTd">回答数：${quEn.anCount }条&nbsp;&nbsp;<a href="${ctx}/design/qu-multi-fillblank!answers.action?quItemId=${quEn.id}&surveyId=${surveyId}">查看</a></td></td>
 														<td colspan="4"></td>
 													</tr>
 												</c:forEach>

@@ -52,8 +52,8 @@
 <div id="tools_wrap">
 <div id="tools">
 <div class="tools_tabs">
-	<div class="tools_tabs_left"><ul><li class="current" id="tools_tab1_li">基本</li><li id="tools_tab2_li">常用</li></ul></div>
-	<div class="tools_tabs_right"><ul><li style="padding: 0px;font: 12px;line-height: 22px;"><a href="http://support.diaowen.net/" target="_black" style="text-decoration: none;color: gray;">帮助</a></li></ul></div>
+	<div class="tools_tabs_left"><ul><li class="current" id="tools_tab1_li">基本</li></ul></div>
+	<div class="tools_tabs_right"><ul><li style="padding: 0px;font-size: 12px;line-height: 22px;"><a href="http://support.diaowen.net/" target="_black" style="text-decoration: none;color: gray;">帮助</a></li></ul></div>
 </div>
 
 <div class="tools_contents">
@@ -519,319 +519,521 @@
 		</div>
 		<div class="tooltext">基本题型</div>
 	</div>
-	
-	<div id="toolsChenQu" class="tools_item" style="">
-		<div class="toolbars">
-			<ul class="dragQuUl">
-			<li id="chenRadioQuModel">
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="CHENRADIO" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
+
+		<div id="contactPersonQuestion" class="tools_item">
+			<div class="toolbars">
+				<ul class="dragQuUl">
+					<li id="birthdayQuModel" style="display: none;">
+						<%--生日模板 --%>
+						<div class="dwToolbar_icon"></div>
+						<div class="dwQuTypeModel">
+							<div class="surveyQuItemBody quDragBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" name="quType" value="FILLBLANK" >
+									<input type="hidden" name="quId" value="">
+									<input type="hidden" name="orderById" value="0"/>
+									<input type="hidden" name="saveTag" value="0">
+									<input type="hidden" name="hoverTag" value="0">
+									<input type="hidden" name="isRequired" value="1">
+									<input type="hidden" name="hv" value="2">
+									<input type="hidden" name="randOrder" value="0">
+									<input type="hidden" name="cellCount" value="0">
+
+									<input type="hidden" name="answerInputWidth" value="300">
+									<input type="hidden" name="answerInputRow" value="1">
+
+									<div class="quLogicInputCase">
+										<input type="hidden" name="quLogicItemNum" value="0">
+									</div>
 								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
+								<div class="surveyQuItem">
+									<div class="surveyQuItemLeftTools">
 										<ul class="surveyQuItemLeftToolsUl">
 											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
 											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
 											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
 											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
 										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
+									</div>
+									<div class="surveyQuItemRightTools">
 										<ul class="surveyQuItemRightToolsUl">
 											<li class="questionUp"><div class="dwQuIcon"></div></li>
 											<li class="questionDown"><div class="dwQuIcon"></div></li>
 										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >请问你的年级是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
 									</div>
-
-									<div class="quCoItem">
-										<div class="quCoItemLeftChenTableDiv">
-										<table class="quCoChenTable" >
-												<tr><td></td>
-														<td class="quChenColumnTd"><label class="editAble quCoOptionEdit">列1</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td>
-														<td class="quChenColumnTd"><label class="editAble quCoOptionEdit">列2</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td>
-												</tr>
-												<tr class="quChenRowTr"><td class="quChenRowTd"><label class="editAble quCoOptionEdit">行1</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td><td><input type="radio"> </td><td><input type="radio"> </td></tr>
-												<tr class="quChenRowTr"><td class="quChenRowTd"><label class="editAble quCoOptionEdit">行2</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td><td><input type="radio"> </td><td><input type="radio"> </td></tr>
-										</table>
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">1、</div>
+											<div class="editAble quCoTitleEdit" >您的生日是？</div>
+											<input type="hidden" name="quTitleSaveTag" value="0">
 										</div>
-										<div class="quCoRightTools">
-										<ul class="quCoBottomToolsUl" >
-											<li class="addColumnOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreColumnOption" title="批量添加"><div class="dwQuIcon" ></div></li>
+										<div class="quCoItem"><ul>
+											<li class="quCoItemUlLi">
+												<!-- <input type="text" style="width:200px;padding:5px;"> -->
+												<div class="quFillblankItem">
+													<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
+													<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
+													<div class="dwFbMenuBtn" ></div>
+												</div>
+											</li>
 										</ul>
 										</div>
 									</div>
-									<div style="clear: both;"></div>
-									<div class="quCoBottomTools" >
-										<ul class="quCoBottomToolsUl" >
-											<li class="addRowOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreRowOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-									</div>
-
 								</div>
 							</div>
 						</div>
-				</div>
-			</li>
-			<li id="chenCheckboxQuModel">
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="CHENCHECKBOX" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
+					</li>
+					<li id="emailQuModel">
+						<%--Email模板 --%>
+						<div class="dwToolbar_icon"></div>
+						<div class="dwQuTypeModel">
+							<div class="surveyQuItemBody quDragBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" name="quType" value="FILLBLANK" >
+									<input type="hidden" name="quId" value="">
+									<input type="hidden" name="orderById" value="0"/>
+									<input type="hidden" name="saveTag" value="0">
+									<input type="hidden" name="hoverTag" value="0">
+									<input type="hidden" name="isRequired" value="1">
+									<input type="hidden" name="hv" value="2">
+									<input type="hidden" name="randOrder" value="0">
+									<input type="hidden" name="cellCount" value="0">
+									<input type="hidden" name="checkType" value="EMAIL">
+
+									<input type="hidden" name="answerInputWidth" value="300">
+									<input type="hidden" name="answerInputRow" value="1">
+
+									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsField" value="5">
+									<div class="quLogicInputCase">
+										<input type="hidden" name="quLogicItemNum" value="0">
+									</div>
 								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
+								<div class="surveyQuItem">
+									<div class="surveyQuItemLeftTools">
 										<ul class="surveyQuItemLeftToolsUl">
 											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
 											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
 											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
 											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
 										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
+									</div>
+									<div class="surveyQuItemRightTools">
 										<ul class="surveyQuItemRightToolsUl">
 											<li class="questionUp"><div class="dwQuIcon"></div></li>
 											<li class="questionDown"><div class="dwQuIcon"></div></li>
 										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >请问你的年级是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
 									</div>
-
-									<div class="quCoItem">
-										<div class="quCoItemLeftChenTableDiv">
-										<table class="quCoChenTable" >
-												<tr><td></td>
-														<td class="quChenColumnTd"><label class="editAble quCoOptionEdit">列1</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td>
-														<td class="quChenColumnTd"><label class="editAble quCoOptionEdit">列2</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td>
-												</tr>
-												<tr class="quChenRowTr"><td class="quChenRowTd"><label class="editAble quCoOptionEdit">行1</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td><td><input type="checkbox"> </td><td><input type="checkbox"> </td></tr>
-												<tr class="quChenRowTr"><td class="quChenRowTd"><label class="editAble quCoOptionEdit">行2</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td><td><input type="checkbox"> </td><td><input type="checkbox"> </td></tr>
-										</table>
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">1、</div>
+											<div class="editAble quCoTitleEdit" >您的邮箱是？</div>
+											<input type="hidden" name="quTitleSaveTag" value="0">
 										</div>
-										<div class="quCoRightTools">
-										<ul class="quCoBottomToolsUl" >
-											<li class="addColumnOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreColumnOption" title="批量添加"><div class="dwQuIcon" ></div></li>
+										<div class="quCoItem"><ul>
+											<li class="quCoItemUlLi">
+												<!-- <input type="text" style="width:200px;padding:5px;"> -->
+												<div class="quFillblankItem">
+													<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
+													<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
+													<div class="dwFbMenuBtn" ></div>
+												</div>
+											</li>
 										</ul>
 										</div>
 									</div>
-									<div style="clear: both;"></div>
-									<div class="quCoBottomTools" >
-										<ul class="quCoBottomToolsUl" >
-											<li class="addRowOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreRowOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-									</div>
-
 								</div>
 							</div>
 						</div>
-				</div>
-			</li>
-			<li id="chenScoreQuModel">
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="CHENSCORE" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<!-- <li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li> -->
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >请问你的年级是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
+					</li>
+					<li id="genderQuModel">
+						<%--性别模板 --%>
+						<div class="dwToolbar_icon"></div>
+						<div class="dwQuTypeModel">
+							<div class="surveyQuItemBody quDragBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" name="quType" value="RADIO">
+									<input type="hidden" name="quId" value="">
+									<input type="hidden" name="orderById" value="0"/>
+									<input type="hidden" name="saveTag" value="0">
+									<input type="hidden" name="hoverTag" value="0">
+									<input type="hidden" name="isRequired" value="1">
+									<input type="hidden" name="hv" value="1">
+									<input type="hidden" name="randOrder" value="0">
+									<input type="hidden" name="cellCount" value="0">
 
-									<div class="quCoItem">
-										<div class="quCoItemLeftChenTableDiv">
-										<table class="quCoChenTable" >
-												<tr><td></td>
-														<td class="quChenColumnTd"><label class="editAble quCoOptionEdit">列1</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td>
-														<td class="quChenColumnTd"><label class="editAble quCoOptionEdit">列2</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td>
-												</tr>
-												<tr class="quChenRowTr"><td class="quChenRowTd"><label class="editAble quCoOptionEdit">行1</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td><td>评分 </td><td>评分 </td></tr>
-												<tr class="quChenRowTr"><td class="quChenRowTd"><label class="editAble quCoOptionEdit">行2</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td><td>评分 </td><td>评分 </td></tr>
-										</table>
-										</div>
-										<div class="quCoRightTools">
-										<ul class="quCoBottomToolsUl" >
-											<li class="addColumnOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreColumnOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-										</div>
-									</div>
-									<div style="clear: both;"></div>
-									<div class="quCoBottomTools" >
-										<ul class="quCoBottomToolsUl" >
-											<li class="addRowOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreRowOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-									</div>
+									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsField" value="6">
 
+									<div class="quLogicInputCase">
+										<input type="hidden" name="quLogicItemNum" value="0">
+									</div>
 								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="chenFillblankQuModel">
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="CHENFBK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
+								<div class="surveyQuItem">
+									<div class="surveyQuItemLeftTools">
 										<ul class="surveyQuItemLeftToolsUl">
 											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
 											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
 											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
 											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
 										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
+									</div>
+									<div class="surveyQuItemRightTools">
 										<ul class="surveyQuItemRightToolsUl">
 											<li class="questionUp"><div class="dwQuIcon"></div></li>
 											<li class="questionDown"><div class="dwQuIcon"></div></li>
 										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >请问你的年级是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
 									</div>
-
-									<div class="quCoItem">
-										<div class="quCoItemLeftChenTableDiv">
-										<table class="quCoChenTable" >
-												<tr><td></td>
-														<td class="quChenColumnTd"><label class="editAble quCoOptionEdit">列1</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td>
-														<td class="quChenColumnTd"><label class="editAble quCoOptionEdit">列2</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td>
-												</tr>
-												<tr class="quChenRowTr"><td class="quChenRowTd"><label class="editAble quCoOptionEdit">行1</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td><td><input type="text"> </td><td><input type="text"> </td></tr>
-												<tr class="quChenRowTr"><td class="quChenRowTd"><label class="editAble quCoOptionEdit">行2</label>
-														<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div></td><td><input type="text"> </td><td><input type="text"> </td></tr>
-										</table>
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">1、</div>
+											<div class="editAble quCoTitleEdit" >您的性别是？</div>
+											<input type="hidden" name="quTitleSaveTag" value="0">
 										</div>
-										<div class="quCoRightTools">
-										<ul class="quCoBottomToolsUl" >
-											<li class="addColumnOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreColumnOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
+										<div class="quCoItem"><ul class="transverse">
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">男</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">女</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+										</ul></div>
+										<div class="quCoBottomTools" >
+											<ul class="quCoBottomToolsUl" >
+												<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
+												<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
+											</ul>
 										</div>
 									</div>
-									<div style="clear: both;"></div>
-									<div class="quCoBottomTools" >
-										<ul class="quCoBottomToolsUl" >
-											<li class="addRowOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreRowOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-									</div>
-
 								</div>
 							</div>
 						</div>
-				</div>
-			</li>
-		    </ul>
+					</li>
+					<li id="educationQuModel">
+						<%--学历模板 --%>
+						<div class="dwToolbar_icon"></div>
+						<div class="dwQuTypeModel">
+							<div class="surveyQuItemBody quDragBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" name="quType" value="RADIO">
+									<input type="hidden" name="quId" value="">
+									<input type="hidden" name="orderById" value="0"/>
+									<input type="hidden" name="saveTag" value="0">
+									<input type="hidden" name="hoverTag" value="0">
+									<input type="hidden" name="isRequired" value="1">
+									<input type="hidden" name="hv" value="1">
+									<input type="hidden" name="randOrder" value="0">
+									<input type="hidden" name="cellCount" value="0">
+
+									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsField" value="6">
+
+									<div class="quLogicInputCase">
+										<input type="hidden" name="quLogicItemNum" value="0">
+									</div>
+								</div>
+								<div class="surveyQuItem">
+									<div class="surveyQuItemLeftTools">
+										<ul class="surveyQuItemLeftToolsUl">
+											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
+											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
+											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
+											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
+										</ul>
+									</div>
+									<div class="surveyQuItemRightTools">
+										<ul class="surveyQuItemRightToolsUl">
+											<li class="questionUp"><div class="dwQuIcon"></div></li>
+											<li class="questionDown"><div class="dwQuIcon"></div></li>
+										</ul>
+									</div>
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">1、</div>
+											<div class="editAble quCoTitleEdit" >您的最高学历是？</div>
+											<input type="hidden" name="quTitleSaveTag" value="0">
+										</div>
+										<div class="quCoItem"><ul class="transverse">
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">博士</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">硕士</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">本科</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">专科</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+										</ul></div>
+										<div class="quCoBottomTools" >
+											<ul class="quCoBottomToolsUl" >
+												<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
+												<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li id="maritalQuModel">
+						<%--婚姻状况模板 --%>
+						<div class="dwToolbar_icon"></div>
+						<div class="dwQuTypeModel">
+							<div class="surveyQuItemBody quDragBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" name="quType" value="RADIO">
+									<input type="hidden" name="quId" value="">
+									<input type="hidden" name="orderById" value="0"/>
+									<input type="hidden" name="saveTag" value="0">
+									<input type="hidden" name="hoverTag" value="0">
+									<input type="hidden" name="isRequired" value="1">
+									<input type="hidden" name="hv" value="1">
+									<input type="hidden" name="randOrder" value="0">
+									<input type="hidden" name="cellCount" value="0">
+
+									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsField" value="6">
+
+									<div class="quLogicInputCase">
+										<input type="hidden" name="quLogicItemNum" value="0">
+									</div>
+								</div>
+								<div class="surveyQuItem">
+									<div class="surveyQuItemLeftTools">
+										<ul class="surveyQuItemLeftToolsUl">
+											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
+											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
+											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
+											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
+										</ul>
+									</div>
+									<div class="surveyQuItemRightTools">
+										<ul class="surveyQuItemRightToolsUl">
+											<li class="questionUp"><div class="dwQuIcon"></div></li>
+											<li class="questionDown"><div class="dwQuIcon"></div></li>
+										</ul>
+									</div>
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">1、</div>
+											<div class="editAble quCoTitleEdit" >请问您婚否？</div>
+											<input type="hidden" name="quTitleSaveTag" value="0">
+										</div>
+										<div class="quCoItem"><ul class="transverse">
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">是</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">否</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+										</ul></div>
+										<div class="quCoBottomTools" >
+											<ul class="quCoBottomToolsUl" >
+												<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
+												<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li id="salaryQuModel">
+						<%--收入模板 --%>
+						<div class="dwToolbar_icon"></div>
+						<div class="dwQuTypeModel">
+							<div class="surveyQuItemBody quDragBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" name="quType" value="RADIO">
+									<input type="hidden" name="quId" value="">
+									<input type="hidden" name="orderById" value="0"/>
+									<input type="hidden" name="saveTag" value="0">
+									<input type="hidden" name="hoverTag" value="0">
+									<input type="hidden" name="isRequired" value="1">
+									<input type="hidden" name="hv" value="1">
+									<input type="hidden" name="randOrder" value="0">
+									<input type="hidden" name="cellCount" value="0">
+
+									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsField" value="6">
+
+									<div class="quLogicInputCase">
+										<input type="hidden" name="quLogicItemNum" value="0">
+									</div>
+								</div>
+								<div class="surveyQuItem">
+									<div class="surveyQuItemLeftTools">
+										<ul class="surveyQuItemLeftToolsUl">
+											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
+											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
+											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
+											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
+										</ul>
+									</div>
+									<div class="surveyQuItemRightTools">
+										<ul class="surveyQuItemRightToolsUl">
+											<li class="questionUp"><div class="dwQuIcon"></div></li>
+											<li class="questionDown"><div class="dwQuIcon"></div></li>
+										</ul>
+									</div>
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">1、</div>
+											<div class="editAble quCoTitleEdit" >您的月平均收入是？</div>
+											<input type="hidden" name="quTitleSaveTag" value="0">
+										</div>
+										<div class="quCoItem"><ul class="transverse">
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">3000元以下</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">3000-5000元</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">3000-5000元</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">5000-10000元</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">10000-20000元</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+											<li class="quCoItemUlLi">
+												<input type="radio"><label class="editAble quCoOptionEdit">20000元以上</label>
+												<div class="quItemInputCase">
+													<input type="hidden" name="quItemId" value="">
+													<input type="hidden" name="quItemSaveTag" value="0">
+													<input type="hidden" name="isNote" value="0">
+													<input type="hidden" name="checkType" value="NO">
+													<input type="hidden" name="isRequiredFill" value="0">
+												</div>
+											</li>
+										</ul></div>
+										<div class="quCoBottomTools" >
+											<ul class="quCoBottomToolsUl" >
+												<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
+												<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- <li id="exportToolbar">
+                        <div class="dwToolbar_icon"></div>
+                    </li>
+                    <li id="logicToolbar">
+                        <div class="dwToolbar_icon"></div>
+                    </li>
+                    <li id="qubankToolbar" >
+                        <div class="dwToolbar_icon"></div>
+                    </li> -->
+				</ul>
+			</div>
+			<div class="tooltext">常用题型</div>
 		</div>
-		<div class="tooltext">矩阵题型</div>
-	</div>
-	
+
 	<div id="toolsAuxiliaryQu" class="tools_item">
 		<div class="toolbars">
 			<ul class="dragQuUl">
@@ -921,962 +1123,21 @@
 						</div>
 				</div>
 			</li>
+			<li id="surveyAttrSetToolbar"  class="surveyAttrSetToolbar_li">
+				<a href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${param['surveyId']}" >
+					<span class="dwToolbar_icon" title="问卷设置"></span>
+				</a>
+			</li>
 		    </ul>
 		</div>
 		<div class="tooltext">辅助组件</div>
 	</div>
-	
-	<div id="toolsEvent" class="tools_item">
-		<div class="toolbars">
-			<ul>
-			<!-- <li id="exportToolbar">
-				<div class="dwToolbar_icon"></div>
-			</li> -->
-			<!-- <li id="logicToolbar" class="logicToolbar_li">
-				<a href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${param['surveyId']}" >
-				<span class="dwToolbar_icon"></span>
-				</a>
-			</li>
-			<li id="qubankToolbar" >
-				<div class="dwToolbar_icon" ></div>
-			</li> -->
-			<!-- 
-			<li id="qubankToolbar" >
-				<a href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${param['surveyId']}" >
-				<span class="dwToolbar_icon" title="题库"></span>
-				</a>
-			</li>
-			<li id="exportToolbar">
-				<a href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${param['surveyId']}" >
-				<span class="dwToolbar_icon" title="导入"></span>
-				</a>
-			</li>
-			 -->
-			<li id="surveyAttrSetToolbar"  class="surveyAttrSetToolbar_li">
-				<a href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${param['surveyId']}" >
-				<span class="dwToolbar_icon" title="问卷设置"></span>
-				</a>
-			</li>
-			<li id="surveyStyleEditToolbar">
-				<a href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${param['surveyId']}" >
-				<span class="dwToolbar_icon" title="样式编辑"></span>
-				</a>
-			</li>
-			<%-- <li id="previewToolbar">
-				<a href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${param['surveyId']}" >
-				<span class="dwToolbar_icon" title="预览"></span>
-				</a>
-			</li> --%>
-		    </ul>
-		</div>
-		<div class="tooltext">操作</div>
-	</div>
+
 	</div>
 	
 	<div id="tools_tab2" class="tools_tab_div">
-		
-		<div id="contactPersonQuestion" class="tools_item">
-			<div class="toolbars">
-				<ul class="dragQuUl">
-				<li id="userNameQuModel">
-				<%-- 您的姓名--%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="FILLBLANK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<input type="hidden" name="checkType" value="NO">
-								
-								<input type="hidden" name="answerInputWidth" value="300">
-								<input type="hidden" name="answerInputRow" value="1">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="1">
-								
-								<div class="quLogicInputCase">
-									<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您的姓名？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<!-- <input type="text" style="width:200px;padding:5px;"> -->
-											<div class="quFillblankItem">
-												<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
-												<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
-												<div class="dwFbMenuBtn" ></div>
-											</div>
-										</li>
-									</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="phoneNoQuModel">
-				<%-- 手机模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="FILLBLANK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<input type="hidden" name="checkType" value="PHONENUM">
-								
-								<input type="hidden" name="answerInputWidth" value="300">
-								<input type="hidden" name="answerInputRow" value="1">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="2">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您的手机号？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<!-- <input type="text" style="width:200px;padding:5px;"> -->
-											<div class="quFillblankItem">
-												<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
-												<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
-												<div class="dwFbMenuBtn" ></div>
-											</div>
-										</li>
-									</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="addressQuModel">
-				<%-- 地址模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="FILLBLANK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<input type="hidden" name="checkType" value="NO">
-								
-								<input type="hidden" name="answerInputWidth" value="300">
-								<input type="hidden" name="answerInputRow" value="2">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="3">
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您的地址？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<!-- <input type="text" style="width:200px;padding:5px;"> -->
-											<div class="quFillblankItem">
-												<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
-												<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
-												<div class="dwFbMenuBtn" ></div>
-											</div>
-										</li>
-									</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="birthdayQuModel" style="display: none;">
-				<%--生日模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="FILLBLANK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								
-								<input type="hidden" name="answerInputWidth" value="300">
-								<input type="hidden" name="answerInputRow" value="1">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您的生日是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<!-- <input type="text" style="width:200px;padding:5px;"> -->
-											<div class="quFillblankItem">
-												<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
-												<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
-												<div class="dwFbMenuBtn" ></div>
-											</div>
-										</li>
-									</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="emailQuModel">
-				<%--Email模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="FILLBLANK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<input type="hidden" name="checkType" value="EMAIL">
-								
-								<input type="hidden" name="answerInputWidth" value="300">
-								<input type="hidden" name="answerInputRow" value="1">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="5">
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您的邮箱是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<!-- <input type="text" style="width:200px;padding:5px;"> -->
-											<div class="quFillblankItem">
-												<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
-												<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
-												<div class="dwFbMenuBtn" ></div>
-											</div>
-										</li>
-									</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="genderQuModel">
-				<%--性别模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="RADIO">
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="1">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="6">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您的性别是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul class="transverse">
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">男</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">女</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-									</ul></div>
-									<div class="quCoBottomTools" >
-										<ul class="quCoBottomToolsUl" >
-											<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="educationQuModel">
-				<%--学历模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="RADIO">
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="1">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="6">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您的最高学历是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul class="transverse">
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">博士</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">硕士</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">本科</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">专科</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-									</ul></div>
-									<div class="quCoBottomTools" >
-										<ul class="quCoBottomToolsUl" >
-											<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="companyQuModel" style="display: none;">
-				<%--公司模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="FILLBLANK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<input type="hidden" name="checkType" value="NO">
-								
-								<input type="hidden" name="answerInputWidth" value="300">
-								<input type="hidden" name="answerInputRow" value="1">
-								
-								<input type="hidden" name="contactsAttr" value="0">
-								<input type="hidden" name="contactsField" value="0">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您现在所在的公司？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<!-- <input type="text" style="width:200px;padding:5px;"> -->
-											<div class="quFillblankItem">
-												<input type="text" style="width:200px;padding:5px;">
-												<div class="dwComEditMenuBtn" ></div>
-											</div>
-										</li>
-									</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="cityQuModel" style="display: none;">
-				<%--城市模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="FILLBLANK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<input type="hidden" name="checkType" value="NO">
-								
-								<input type="hidden" name="answerInputWidth" value="300">
-								<input type="hidden" name="answerInputRow" value="1">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="8">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您所在的城市？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<!-- <input type="text" style="width:200px;padding:5px;"> -->
-											<!-- <div class="quFillblankItem">
-												<input type="text" style="width:200px;padding:5px;">
-												<div class="dwComEditMenuBtn" ></div>
-											</div> -->
-											<select style="padding: 5px;" class="hat_province"><option>--选择省--</option> </select>
-											<select style="padding: 5px;" class="hat_city"><option>--选择市--</option> </select>
-											<select style="padding: 5px;" class="hat_area"><option>--选择区--</option> </select>
-										</li>
-									</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="maritalQuModel">
-				<%--婚姻状况模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="RADIO">
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="1">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="6">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >请问您婚否？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul class="transverse">
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">是</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">否</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-									</ul></div>
-									<div class="quCoBottomTools" >
-										<ul class="quCoBottomToolsUl" >
-											<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="salaryQuModel">
-				<%--收入模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="RADIO">
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="1">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								
-								<input type="hidden" name="contactsAttr" value="1">
-								<input type="hidden" name="contactsField" value="6">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >您的月平均收入是？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul class="transverse">
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">3000元以下</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">3000-5000元</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">3000-5000元</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">5000-10000元</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">10000-20000元</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-										<li class="quCoItemUlLi">
-											<input type="radio"><label class="editAble quCoOptionEdit">20000元以上</label>
-											<div class="quItemInputCase">
-												<input type="hidden" name="quItemId" value="">
-												<input type="hidden" name="quItemSaveTag" value="0">
-												<input type="hidden" name="isNote" value="0">
-												<input type="hidden" name="checkType" value="NO">
-												<input type="hidden" name="isRequiredFill" value="0">
-											</div>
-										</li>
-									</ul></div>
-									<div class="quCoBottomTools" >
-										<ul class="quCoBottomToolsUl" >
-											<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
-											<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-			<li id="dateQuModel">
-				<%--日期模板 --%>
-				<div class="dwToolbar_icon"></div>
-				<div class="dwQuTypeModel">
-						<div class="surveyQuItemBody quDragBody">
-							<div class="initLine"></div>
-							<div class="quInputCase" style="display: none;">
-								<input type="hidden" name="quType" value="FILLBLANK" >
-								<input type="hidden" name="quId" value="">
-								<input type="hidden" name="orderById" value="0"/>
-								<input type="hidden" name="saveTag" value="0">
-								<input type="hidden" name="hoverTag" value="0">
-								<input type="hidden" name="isRequired" value="1">
-								<input type="hidden" name="hv" value="2">
-								<input type="hidden" name="randOrder" value="0">
-								<input type="hidden" name="cellCount" value="0">
-								<input type="hidden" name="checkType" value="DATE">
-								
-								<input type="hidden" name="answerInputWidth" value="300">
-								<input type="hidden" name="answerInputRow" value="1">
-								
-								<input type="hidden" name="contactsAttr" value="0">
-								<input type="hidden" name="contactsField" value="0">
-								
-								<div class="quLogicInputCase">
-								<input type="hidden" name="quLogicItemNum" value="0">
-								</div>
-							</div>
-							<div class="surveyQuItem">
-								<div class="surveyQuItemLeftTools">
-										<ul class="surveyQuItemLeftToolsUl">
-											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
-											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemRightTools">
-										<ul class="surveyQuItemRightToolsUl">
-											<li class="questionUp"><div class="dwQuIcon"></div></li>
-											<li class="questionDown"><div class="dwQuIcon"></div></li>
-										</ul>
-								</div>
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<div class="quCoNum">1、</div>
-										<div class="editAble quCoTitleEdit" >日期？</div>
-										<input type="hidden" name="quTitleSaveTag" value="0">
-									</div>
-									<div class="quCoItem"><ul>
-										<li class="quCoItemUlLi">
-											<!-- <input type="text" style="width:200px;padding:5px;"> -->
-											<div class="quFillblankItem">
-												<input type="text" style="width:200px;padding:5px;"  class="Wdate" onClick="WdatePicker()">
-												<div class="dwComEditMenuBtn" ></div>
-											</div>
-										</li>
-									</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			</li>
-				<!-- <li id="exportToolbar">
-					<div class="dwToolbar_icon"></div>
-				</li>
-				<li id="logicToolbar">
-					<div class="dwToolbar_icon"></div>
-				</li>
-				<li id="qubankToolbar" >
-					<div class="dwToolbar_icon"></div>
-				</li> -->
-			    </ul>
-			</div>
-			<div class="tooltext">常用题型</div>
-	</div>
+
+
 	
 	</div>
 	
@@ -1886,15 +1147,9 @@
 			<li id="publishBtn" >
 				<div class="dwToolbar_icon"></div>
 			</li>
-			<li id="saveＭodelBtn" style="display: none;" class="saveＭodelBtn_li">
-				<div class="dwToolbar_icon"></div>
-			</li>
 			<li id="saveBtn" >
 				<div class="dwToolbar_icon"></div>
 			</li>
-			<!-- <li id="previewBtn" >
-				<div class="dwToolbar_icon"></div>
-			</li> -->
 		    </ul>
 		</div>
 	</div>

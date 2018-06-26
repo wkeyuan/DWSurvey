@@ -1,5 +1,6 @@
 package com.key.dwsurvey.service.impl;
 
+import com.key.common.plugs.page.Page;
 import com.key.dwsurvey.entity.AnFillblank;
 import com.key.dwsurvey.entity.Question;
 import com.key.dwsurvey.service.AnFillblankManager;
@@ -41,5 +42,11 @@ public class AnFillblankManagerImpl extends BaseServiceImpl<AnFillblank, String>
 	public void findGroupStats(Question question) {
 		anFillblankDao.findGroupStats(question);
 	}
-	
+
+
+	@Override
+	public Page<AnFillblank> findPage(Page<AnFillblank> page, String quId) {
+		Criterion cri1 = Restrictions.eq("quId",quId);
+		return findPage(page,cri1);
+	}
 }

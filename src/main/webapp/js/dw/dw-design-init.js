@@ -952,7 +952,7 @@ $(document).ready(function(){
 		
 		saveSurvey(function(){
 			isSaveProgress=false;
-			window.location.href=ctx+"/design/my-survey-design!previewDev.action?surveyId="+questionBelongId;
+			window.location.href=ctx+"/design/my-survey-design!devSurvey.action?surveyId="+questionBelongId;
 		});
 		/*
 		var fristQuItemBody=$("#dwSurveyQuContent .li_surveyQuItemBody").first();

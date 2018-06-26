@@ -23,13 +23,6 @@ public class InitAppliction implements ServletContextListener {
 		System.out.println("getContextPath:"+servletContext.getContextPath());
 		contextPath = servletContext.getContextPath();
 		
-		//云数据同步
-		if(!"local".equals(DiaowenProperty.DWSTORAGETYPE)){
-			
-			
-			
-		}
-		
 	}
 
 	

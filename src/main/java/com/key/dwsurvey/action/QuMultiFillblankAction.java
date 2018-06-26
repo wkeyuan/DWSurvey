@@ -9,15 +9,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.key.common.plugs.page.Page;
+import com.key.dwsurvey.entity.*;
+import com.key.dwsurvey.service.AnDFillblankManager;
 import org.apache.struts2.convention.annotation.*;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.WebUtils;
 
 import com.key.common.utils.web.Struts2Utils;
 import com.key.common.QuType;
-import com.key.dwsurvey.entity.QuMultiFillblank;
-import com.key.dwsurvey.entity.Question;
-import com.key.dwsurvey.entity.QuestionLogic;
 import com.key.dwsurvey.service.QuMultiFillblankManager;
 import com.key.dwsurvey.service.QuestionManager;
 import com.opensymphony.xwork2.ActionSupport;
@@ -32,14 +34,18 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Namespaces({@Namespace("/design")})
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack") })
-@Results({})
+@Results({
+		@Result(name="answers",location="/WEB-INF/page/content/diaowen-da/dfillblank.jsp",type=Struts2Utils.DISPATCHER)
+})
 @AllowedMethods({"ajaxSave","ajaxDelete"})
 public class QuMultiFillblankAction extends ActionSupport{
 	@Autowired
 	private QuestionManager questionManager;
 	@Autowired
 	private QuMultiFillblankManager quMultiFillblankManager;
-	
+	@Autowired
+	private AnDFillblankManager anDFillblankManager;
+
 	public String ajaxSave() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
@@ -199,4 +205,24 @@ public class QuMultiFillblankAction extends ActionSupport{
 		return null;
 	}
 
+
+	private Page<AnDFillblank> anPage = new Page<AnDFillblank>();
+	//取上传题结果
+	public String answers() throws Exception {
+		HttpServletRequest request = Struts2Utils.getRequest();
+		String quItemId = request.getParameter("quItemId");
+		String surveyId = request.getParameter("surveyId");
+		anPage.setPageSize(1000);
+		anPage = anDFillblankManager.findPage(anPage, quItemId);
+		request.setAttribute("surveyId",surveyId);
+		return "answers";
+	}
+
+	public Page<AnDFillblank> getAnPage() {
+		return anPage;
+	}
+
+	public void setAnPage(Page<AnDFillblank> anPage) {
+		this.anPage = anPage;
+	}
 }

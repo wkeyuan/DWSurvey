@@ -2,7 +2,9 @@ package com.key.dwsurvey.service.impl;
 
 import java.util.List;
 
+import com.key.common.plugs.page.Page;
 import com.key.dwsurvey.dao.AnDFillblankDao;
+import com.key.dwsurvey.entity.AnFillblank;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,11 @@ public class AnDFillblankManagerImpl extends BaseServiceImpl<AnDFillblank, Strin
 	@Override
 	public void findGroupStats(Question question) {
 		anDFillblankDao.findGroupStats(question);
+	}
+
+	public Page<AnDFillblank> findPage(Page<AnDFillblank> page, String quItemId){
+		Criterion cri1 = Restrictions.eq("quItemId",quItemId);
+		return findPage(page,cri1);
 	}
 	
 }

@@ -217,7 +217,6 @@ function buildPieChart(resultJson,quId){
 		                	<div class="selc">
 		                    	<div class="selcc tbtag">
 		                            <div class="seli"><a class="nx-1 sur_collectSet" href="#collectSet">收集规则</a></div>
-		                            <div class="seli"><a class="nx-2" href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${surveyId}">样式设置</a></div>
 		                            <div class="seli"><a class="nx-6 sur_edit" href="${ctx }/design/my-survey-design.action?surveyId=${surveyId}">问卷编辑</a></div>
 		                        </div>
 		                    </div>

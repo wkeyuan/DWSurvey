@@ -2,7 +2,9 @@ package com.key.dwsurvey.service;
 
 import java.util.List;
 
+import com.key.common.plugs.page.Page;
 import com.key.common.service.BaseService;
+import com.key.dwsurvey.entity.AnDFillblank;
 import com.key.dwsurvey.entity.QuMultiFillblank;
 
 /**
@@ -23,4 +25,5 @@ public interface QuMultiFillblankManager  extends BaseService<QuMultiFillblank, 
 	public void ajaxDelete(String quItemId);
 
 	public void saveAttr(String quItemId);
+
 }
