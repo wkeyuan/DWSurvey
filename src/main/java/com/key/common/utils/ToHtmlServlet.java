@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import com.itextpdf.text.log.SysoCounter;
-import com.key.common.plugs.aliyun.AliyunOSS;
-import com.key.common.plugs.baiduyun.BaiduBOS;
 import com.key.common.utils.web.Struts2Utils;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
