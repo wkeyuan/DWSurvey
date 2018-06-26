@@ -37,7 +37,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({
 		@Result(name="answers",location="/WEB-INF/page/content/diaowen-da/dfillblank.jsp",type=Struts2Utils.DISPATCHER)
 })
-@AllowedMethods({"ajaxSave","ajaxDelete"})
+@AllowedMethods({"ajaxSave","ajaxDelete","answers"})
 public class QuMultiFillblankAction extends ActionSupport{
 	@Autowired
 	private QuestionManager questionManager;

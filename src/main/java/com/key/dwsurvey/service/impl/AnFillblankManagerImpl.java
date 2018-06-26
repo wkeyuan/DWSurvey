@@ -47,6 +47,7 @@ public class AnFillblankManagerImpl extends BaseServiceImpl<AnFillblank, String>
 	@Override
 	public Page<AnFillblank> findPage(Page<AnFillblank> page, String quId) {
 		Criterion cri1 = Restrictions.eq("quId",quId);
-		return findPage(page,cri1);
+		Criterion cri2 = Restrictions.eq("visibility",1);
+		return findPage(page,cri1,cri2);
 	}
 }

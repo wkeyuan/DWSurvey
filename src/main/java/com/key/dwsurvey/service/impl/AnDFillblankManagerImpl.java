@@ -48,7 +48,8 @@ public class AnDFillblankManagerImpl extends BaseServiceImpl<AnDFillblank, Strin
 
 	public Page<AnDFillblank> findPage(Page<AnDFillblank> page, String quItemId){
 		Criterion cri1 = Restrictions.eq("quItemId",quItemId);
-		return findPage(page,cri1);
+		Criterion cri2 = Restrictions.eq("visibility",1);
+		return findPage(page,cri1,cri2);
 	}
 	
 }
