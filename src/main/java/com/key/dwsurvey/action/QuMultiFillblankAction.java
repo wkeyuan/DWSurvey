@@ -54,7 +54,6 @@ public class QuMultiFillblankAction extends ActionSupport{
 			questionManager.save(entity);
 			String resultJson=buildResultJson(entity);
 			response.getWriter().write(resultJson);
-			//返回各部分ID
 		}catch (Exception e) {
 			e.printStackTrace();
 			response.getWriter().write("error");
@@ -68,7 +67,6 @@ public class QuMultiFillblankAction extends ActionSupport{
 		String quTitle=request.getParameter("quTitle");
 		String orderById=request.getParameter("orderById");
 		String tag=request.getParameter("tag");
-		//isRequired 是否必选
 		String isRequired=request.getParameter("isRequired");
 		//hv 1水平显示 2垂直显示
 		String hv=request.getParameter("hv");
@@ -77,7 +75,6 @@ public class QuMultiFillblankAction extends ActionSupport{
 		String cellCount=request.getParameter("cellCount");
 		String paramInt01=request.getParameter("paramInt01");//最小分
 		String paramInt02=request.getParameter("paramInt02");//最大分
-		
 		if("".equals(quId)){
 			quId=null;
 		}
@@ -96,14 +93,12 @@ public class QuMultiFillblankAction extends ActionSupport{
 		randOrder=(randOrder==null || "".equals(randOrder))?"0":randOrder;
 		cellCount=(cellCount==null || "".equals(cellCount))?"0":cellCount;
 		paramInt01=(paramInt01==null || "".equals(paramInt01))?"0":paramInt01;
-		
 		entity.setIsRequired(Integer.parseInt(isRequired));
 		entity.setHv(Integer.parseInt(hv));
 		entity.setRandOrder(Integer.parseInt(randOrder));
 		entity.setCellCount(Integer.parseInt(cellCount));
 		entity.setParamInt01(Integer.parseInt(paramInt01));
 		entity.setParamInt02(10);
-		//quOption
 		Map<String, Object> optionNameMap=WebUtils.getParametersStartingWith(request, "optionValue_");
 		List<QuMultiFillblank> quMFillblanks=new ArrayList<QuMultiFillblank>();
 		for (String key : optionNameMap.keySet()) {
@@ -132,12 +127,9 @@ public class QuMultiFillblankAction extends ActionSupport{
 			String visibility=request.getParameter("visibility_"+key);
 			String logicType=request.getParameter("logicType_"+key);
 			Object quLogicId=quLogicIdMap.get(key);
-			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():"";
+			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():null;
 			
 			QuestionLogic quLogic=new QuestionLogic();
-			if("".equals(quLogic)){
-				quLogic=null;
-			}
 			quLogic.setId(quLogicIdValue);
 			quLogic.setCgQuItemId(cgQuItemId);
 			quLogic.setSkQuId(skQuId);
@@ -152,9 +144,7 @@ public class QuMultiFillblankAction extends ActionSupport{
 	}
 	
 	public static String buildResultJson(Question entity){
-		//{id:'null',quItems:[{id:'null',title:'null'},{id:'null',title:'null'}]}
 		StringBuffer strBuf=new StringBuffer();
-		//{id:'',quItems:[{id:'',title:''},{id:'',title:''}]}
 		strBuf.append("{id:'").append(entity.getId());
 		strBuf.append("',orderById:");
 		strBuf.append(entity.getOrderById());

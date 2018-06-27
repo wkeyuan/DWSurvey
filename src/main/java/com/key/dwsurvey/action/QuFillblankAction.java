@@ -54,7 +54,6 @@ public class QuFillblankAction extends ActionSupport{
 			questionManager.save(entity);
 			String resultJson=buildResultJson(entity);
 			response.getWriter().write(resultJson);
-			//返回各部分ID
 		}catch (Exception e) {
 			e.printStackTrace();
 			response.getWriter().write("error");
@@ -68,24 +67,15 @@ public class QuFillblankAction extends ActionSupport{
 		String quTitle=request.getParameter("quTitle");
 		String orderById=request.getParameter("orderById");
 		String tag=request.getParameter("tag");
-		//isRequired 是否必选
 		String isRequired=request.getParameter("isRequired");
-		
 		String answerInputWidth=request.getParameter("answerInputWidth");
 		String answerInputRow=request.getParameter("answerInputRow");
-		
 		String contactsAttr=request.getParameter("contactsAttr");
 		String contactsField=request.getParameter("contactsField");
-		
 		String checkType=request.getParameter("checkType");
-		
-		/** 某一类型题目特有的 **/
-		//hv 1水平显示 2垂直显示
 		String hv=request.getParameter("hv");
-		//randOrder 选项随机排列
 		String randOrder=request.getParameter("randOrder");
 		String cellCount=request.getParameter("cellCount");
-		
 		if("".equals(quId)){
 			quId=null;
 		}
@@ -98,29 +88,23 @@ public class QuFillblankAction extends ActionSupport{
 		entity.setOrderById(Integer.parseInt(orderById));
 		entity.setTag(Integer.parseInt(tag));
 		entity.setQuType(QuType.FILLBLANK);
-		//参数
 		isRequired=(isRequired==null || "".equals(isRequired))?"0":isRequired;
 		hv=(hv==null || "".equals(hv))?"0":hv;
 		randOrder=(randOrder==null || "".equals(randOrder))?"0":randOrder;
 		cellCount=(cellCount==null || "".equals(cellCount))?"0":cellCount;
-		
 		contactsAttr=(contactsAttr==null || "".equals(contactsAttr))?"0":contactsAttr;
 		entity.setContactsAttr(Integer.parseInt(contactsAttr));
 		entity.setContactsField(contactsField);
-		
 		answerInputWidth=(answerInputWidth==null || "".equals(answerInputWidth))?"300":answerInputWidth;
 		answerInputRow=(answerInputRow==null || "".equals(answerInputRow))?"1":answerInputRow;
 		entity.setAnswerInputWidth(Integer.parseInt(answerInputWidth));
 		entity.setAnswerInputRow(Integer.parseInt(answerInputRow));
-		
 		entity.setIsRequired(Integer.parseInt(isRequired));
 		entity.setHv(Integer.parseInt(hv));
 		entity.setRandOrder(Integer.parseInt(randOrder));
 		entity.setCellCount(Integer.parseInt(cellCount));
-		
 		checkType=(checkType==null || "".equals(checkType))?"NO":checkType;
 		entity.setCheckType(CheckType.valueOf(checkType));
-		//逻辑选项设置
 		Map<String, Object> quLogicIdMap=WebUtils.getParametersStartingWith(request, "quLogicId_");
 		List<QuestionLogic> quLogics=new ArrayList<QuestionLogic>();
 		for (String key : quLogicIdMap.keySet()) {
@@ -129,12 +113,8 @@ public class QuFillblankAction extends ActionSupport{
 			String visibility=request.getParameter("visibility_"+key);
 			String logicType=request.getParameter("logicType_"+key);
 			Object quLogicId=quLogicIdMap.get(key);
-			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():"";
-			
+			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():null;
 			QuestionLogic quLogic=new QuestionLogic();
-			if("".equals(quLogic)){
-				quLogic=null;
-			}
 			quLogic.setId(quLogicIdValue);
 			quLogic.setCgQuItemId(cgQuItemId);
 			quLogic.setSkQuId(skQuId);
@@ -144,17 +124,14 @@ public class QuFillblankAction extends ActionSupport{
 			quLogics.add(quLogic);
 		}
 		entity.setQuestionLogics(quLogics);
-		
 		return entity;
 	}
 	
 	public static String buildResultJson(Question entity){
-		//{id:'null',quItems:[{id:'null',title:'null'},{id:'null',title:'null'}]}
 		StringBuffer strBuf=new StringBuffer();
 		strBuf.append("{id:'").append(entity.getId());
 		strBuf.append("',orderById:");
 		strBuf.append(entity.getOrderById());
-		
 		strBuf.append(",quLogics:[");
 		List<QuestionLogic> questionLogics=entity.getQuestionLogics();
 		if(questionLogics!=null){
@@ -173,7 +150,6 @@ public class QuFillblankAction extends ActionSupport{
 
 
 	private Page<AnFillblank> anPage = new Page<AnFillblank>();
-	//取上传题结果
 	public String answers() throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		String quId = request.getParameter("quId");

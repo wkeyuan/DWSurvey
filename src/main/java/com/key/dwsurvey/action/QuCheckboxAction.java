@@ -48,7 +48,6 @@ public class QuCheckboxAction extends ActionSupport{
 			questionManager.save(entity);
 			String resultJson=buildResultJson(entity);
 			response.getWriter().write(resultJson);
-			//返回各部分ID
 		}catch (Exception e) {
 			e.printStackTrace();
 			response.getWriter().write("error");
@@ -62,16 +61,12 @@ public class QuCheckboxAction extends ActionSupport{
 		String quTitle=request.getParameter("quTitle");
 		String orderById=request.getParameter("orderById");
 		String tag=request.getParameter("tag");
-		//isRequired 是否必选
 		String isRequired=request.getParameter("isRequired");
-		//hv 1水平显示 2垂直显示
 		String hv=request.getParameter("hv");
-		//randOrder 选项随机排列
 		String randOrder=request.getParameter("randOrder");
 		String cellCount=request.getParameter("cellCount");
 		String contactsAttr=request.getParameter("contactsAttr");
 		String contactsField=request.getParameter("contactsField");
-		
 		if("".equals(quId)){
 			quId=null;
 		}
@@ -84,21 +79,17 @@ public class QuCheckboxAction extends ActionSupport{
 		entity.setOrderById(Integer.parseInt(orderById));
 		entity.setTag(Integer.parseInt(tag));
 		entity.setQuType(QuType.CHECKBOX);
-		//参数
 		isRequired=(isRequired==null || "".equals(isRequired))?"0":isRequired;
 		hv=(hv==null || "".equals(hv))?"0":hv;
 		randOrder=(randOrder==null || "".equals(randOrder))?"0":randOrder;
 		cellCount=(cellCount==null || "".equals(cellCount))?"0":cellCount;
-				
 		contactsAttr=(contactsAttr==null || "".equals(contactsAttr))?"0":contactsAttr;
 		entity.setContactsAttr(Integer.parseInt(contactsAttr));
 		entity.setContactsField(contactsField);
-		
 		entity.setIsRequired(Integer.parseInt(isRequired));
 		entity.setHv(Integer.parseInt(hv));
 		entity.setRandOrder(Integer.parseInt(randOrder));
 		entity.setCellCount(Integer.parseInt(cellCount));
-		//quOption
 		Map<String, Object> optionNameMap=WebUtils.getParametersStartingWith(request, "optionValue_");
 		List<QuCheckbox> quCheckboxs=new ArrayList<QuCheckbox>();
 		for (String key : optionNameMap.keySet()) {
@@ -118,19 +109,15 @@ public class QuCheckboxAction extends ActionSupport{
 			optionNameValue=URLDecoder.decode(optionNameValue,"utf-8");
 			quCheckbox.setOptionName(optionNameValue);
 			quCheckbox.setOrderById(Integer.parseInt(key));
-			
 			isNote=(isNote==null || "".equals(isNote))?"0":isNote;
 			checkType=(checkType==null || "".equals(checkType))?"NO":checkType;
 			isRequiredFill=(isRequiredFill==null || "".equals(isRequiredFill))?"0":isRequiredFill;
 			quCheckbox.setIsNote(Integer.parseInt(isNote));
 			quCheckbox.setCheckType(CheckType.valueOf(checkType));
 			quCheckbox.setIsRequiredFill(Integer.parseInt(isRequiredFill));
-			
 			quCheckboxs.add(quCheckbox);
 		}
 		entity.setQuCheckboxs(quCheckboxs);
-
-		//逻辑选项设置
 		Map<String, Object> quLogicIdMap=WebUtils.getParametersStartingWith(request, "quLogicId_");
 		List<QuestionLogic> quLogics=new ArrayList<QuestionLogic>();
 		for (String key : quLogicIdMap.keySet()) {
@@ -139,12 +126,8 @@ public class QuCheckboxAction extends ActionSupport{
 			String visibility=request.getParameter("visibility_"+key);
 			String logicType=request.getParameter("logicType_"+key);
 			Object quLogicId=quLogicIdMap.get(key);
-			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():"";
-
+			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():null;
 			QuestionLogic quLogic=new QuestionLogic();
-			if("".equals(quLogic)){
-				quLogic=null;
-			}
 			quLogic.setId(quLogicIdValue);
 			quLogic.setCgQuItemId(cgQuItemId);
 			quLogic.setSkQuId(skQuId);
@@ -152,10 +135,8 @@ public class QuCheckboxAction extends ActionSupport{
 			quLogic.setTitle(key);
 			quLogic.setLogicType(logicType);
 			quLogics.add(quLogic);
-
 		}
 		entity.setQuestionLogics(quLogics);
-		
 		return entity;
 	}
 	
@@ -176,7 +157,6 @@ public class QuCheckboxAction extends ActionSupport{
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]");
-
 		strBuf.append(",quLogics:[");
 		List<QuestionLogic> questionLogics=entity.getQuestionLogics();
 		if(questionLogics!=null){

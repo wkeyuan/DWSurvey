@@ -50,7 +50,6 @@ public class QuRadioAction extends ActionSupport{
 			questionManager.save(entity);
 			String resultJson=buildResultJson(entity);
 			response.getWriter().write(resultJson);
-			//返回各部分ID
 		}catch (Exception e) {
 			e.printStackTrace();
 			response.getWriter().write("error");
@@ -64,11 +63,8 @@ public class QuRadioAction extends ActionSupport{
 		String quTitle=request.getParameter("quTitle");
 		String orderById=request.getParameter("orderById");
 		String tag=request.getParameter("tag");
-		//isRequired 是否必选
 		String isRequired=request.getParameter("isRequired");
-		//hv 1水平显示 2垂直显示
 		String hv=request.getParameter("hv");
-		//randOrder 选项随机排列
 		String randOrder=request.getParameter("randOrder");
 		String cellCount=request.getParameter("cellCount");
 		String contactsAttr=request.getParameter("contactsAttr");
@@ -86,21 +82,17 @@ public class QuRadioAction extends ActionSupport{
 		entity.setOrderById(Integer.parseInt(orderById));
 		entity.setTag(Integer.parseInt(tag));
 		entity.setQuType(QuType.RADIO);
-		//参数
 		isRequired=(isRequired==null || "".equals(isRequired))?"0":isRequired;
 		hv=(hv==null || "".equals(hv))?"0":hv;
 		randOrder=(randOrder==null || "".equals(randOrder))?"0":randOrder;
 		cellCount=(cellCount==null || "".equals(cellCount))?"0":cellCount;
-		
 		contactsAttr=(contactsAttr==null || "".equals(contactsAttr))?"0":contactsAttr;
 		entity.setContactsAttr(Integer.parseInt(contactsAttr));
 		entity.setContactsField(contactsField);
-		
 		entity.setIsRequired(Integer.parseInt(isRequired));
 		entity.setHv(Integer.parseInt(hv));
 		entity.setRandOrder(Integer.parseInt(randOrder));
 		entity.setCellCount(Integer.parseInt(cellCount));
-		//quOption
 		Map<String, Object> optionNameMap=WebUtils.getParametersStartingWith(request, "optionValue_");
 		List<QuRadio> quRadios=new ArrayList<QuRadio>();
 		for (String key : optionNameMap.keySet()) {
@@ -139,14 +131,9 @@ public class QuRadioAction extends ActionSupport{
 			String skQuId=request.getParameter("skQuId_"+key);
 			String visibility=request.getParameter("visibility_"+key);
 			String logicType=request.getParameter("logicType_"+key);
-
 			Object quLogicId=quLogicIdMap.get(key);
-			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():"";
-
+			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():null;
 			QuestionLogic quLogic=new QuestionLogic();
-			if("".equals(quLogic)){
-				quLogic=null;
-			}
 			quLogic.setId(quLogicIdValue);
 			quLogic.setCgQuItemId(cgQuItemId);
 			quLogic.setSkQuId(skQuId);
@@ -161,9 +148,7 @@ public class QuRadioAction extends ActionSupport{
 	}
 	
 	public static String buildResultJson(Question entity){
-		//{id:'null',quItems:[{id:'null',title:'null'},{id:'null',title:'null'}]}
 		StringBuffer strBuf=new StringBuffer();
-		//{id:'',quItems:[{id:'',title:''},{id:'',title:''}]}
 		strBuf.append("{id:'").append(entity.getId());
 		strBuf.append("',orderById:");
 		strBuf.append(entity.getOrderById());

@@ -65,14 +65,10 @@ public class QuChenAction extends ActionSupport{
 		String orderById=request.getParameter("orderById");
 		String tag=request.getParameter("tag");
 		String quType=request.getParameter("quType");
-		//isRequired 是否必选
 		String isRequired=request.getParameter("isRequired");
-		//hv 1水平显示 2垂直显示
 		String hv=request.getParameter("hv");
-		//randOrder 选项随机排列
 		String randOrder=request.getParameter("randOrder");
 		String cellCount=request.getParameter("cellCount");
-		
 		if("".equals(quId)){
 			quId=null;
 		}
@@ -84,19 +80,15 @@ public class QuChenAction extends ActionSupport{
 		}
 		entity.setOrderById(Integer.parseInt(orderById));
 		entity.setTag(Integer.parseInt(tag));
-		//quType
 		entity.setQuType(QuType.valueOf(quType));
-		//参数
 		isRequired=(isRequired==null || "".equals(isRequired))?"0":isRequired;
 		hv=(hv==null || "".equals(hv))?"0":hv;
 		randOrder=(randOrder==null || "".equals(randOrder))?"0":randOrder;
 		cellCount=(cellCount==null || "".equals(cellCount))?"0":cellCount;
-		
 		entity.setIsRequired(Integer.parseInt(isRequired));
 		entity.setHv(Integer.parseInt(hv));
 		entity.setRandOrder(Integer.parseInt(randOrder));
 		entity.setCellCount(Integer.parseInt(cellCount));
-		//quChenColumn列选项
 		Map<String, Object> columnOptionNameMaps=WebUtils.getParametersStartingWith(request, "columnValue_");
 		List<QuChenColumn> quChenColumns=new ArrayList<QuChenColumn>();
 		for (String key : columnOptionNameMaps.keySet()) {
@@ -114,8 +106,6 @@ public class QuChenAction extends ActionSupport{
 			quChenColumns.add(quChenColumn);
 		}
 		entity.setColumns(quChenColumns);
-		
-		//quChenRow行选项
 		Map<String, Object> rowOptionNameMaps=WebUtils.getParametersStartingWith(request, "rowValue_");
 		List<QuChenRow> quChenRows=new ArrayList<QuChenRow>();
 		for (String key : rowOptionNameMaps.keySet()) {
@@ -133,8 +123,6 @@ public class QuChenAction extends ActionSupport{
 			quChenRows.add(quChenRow);
 		}
 		entity.setRows(quChenRows);
-		
-		//逻辑选项设置
 		Map<String, Object> quLogicIdMap=WebUtils.getParametersStartingWith(request, "quLogicId_");
 		List<QuestionLogic> quLogics=new ArrayList<QuestionLogic>();
 		for (String key : quLogicIdMap.keySet()) {
@@ -143,12 +131,8 @@ public class QuChenAction extends ActionSupport{
 			String visibility=request.getParameter("visibility_"+key);
 			String logicType=request.getParameter("logicType_"+key);
 			Object quLogicId=quLogicIdMap.get(key);
-			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():"";
-			
+			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():null;
 			QuestionLogic quLogic=new QuestionLogic();
-			if("".equals(quLogic)){
-				quLogic=null;
-			}
 			quLogic.setId(quLogicIdValue);
 			quLogic.setCgQuItemId(cgQuItemId);
 			quLogic.setSkQuId(skQuId);
@@ -158,17 +142,14 @@ public class QuChenAction extends ActionSupport{
 			quLogics.add(quLogic);
 		}
 		entity.setQuestionLogics(quLogics);
-		
 		return entity;
 	}
 	
 	public static String buildResultJson(Question entity){
-		//{id:'null',quItems:[{id:'null',title:'null'},{id:'null',title:'null'}]}
 		StringBuffer strBuf=new StringBuffer();
 		strBuf.append("{id:'").append(entity.getId());
 		strBuf.append("',orderById:");
 		strBuf.append(entity.getOrderById());
-		//列选项
 		strBuf.append(",quColumnItems:[");
 		List<QuChenColumn> quChenColumns=entity.getColumns();
 		for (QuChenColumn column : quChenColumns) {
@@ -180,8 +161,6 @@ public class QuChenAction extends ActionSupport{
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]");
-		
-		//行选项
 		strBuf.append(",quRowItems:[");
 		List<QuChenRow> rows=entity.getRows();
 		for (QuChenRow quChenRow : rows) {
@@ -193,8 +172,6 @@ public class QuChenAction extends ActionSupport{
 			strBuf.replace(strLen-1, strLen, "");
 		}
 		strBuf.append("]");
-		
-		//逻辑选项
 		strBuf.append(",quLogics:[");
 		List<QuestionLogic> questionLogics=entity.getQuestionLogics();
 		if(questionLogics!=null){

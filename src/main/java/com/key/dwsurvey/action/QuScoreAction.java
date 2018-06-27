@@ -49,7 +49,6 @@ public class QuScoreAction extends ActionSupport{
 			questionManager.save(entity);
 			String resultJson=buildResultJson(entity);
 			response.getWriter().write(resultJson);
-			//返回各部分ID
 		}catch (Exception e) {
 			e.printStackTrace();
 			response.getWriter().write("error");
@@ -67,7 +66,6 @@ public class QuScoreAction extends ActionSupport{
 		String isRequired=request.getParameter("isRequired");
 		//hv 1水平显示 2垂直显示
 		String hv=request.getParameter("hv");
-		//randOrder 选项随机排列
 		String randOrder=request.getParameter("randOrder");
 		String cellCount=request.getParameter("cellCount");
 		
@@ -86,13 +84,11 @@ public class QuScoreAction extends ActionSupport{
 		entity.setOrderById(Integer.parseInt(orderById));
 		entity.setTag(Integer.parseInt(tag));
 		entity.setQuType(QuType.SCORE);
-		//参数
 		isRequired=(isRequired==null || "".equals(isRequired))?"0":isRequired;
 		hv=(hv==null || "".equals(hv))?"0":hv;
 		randOrder=(randOrder==null || "".equals(randOrder))?"0":randOrder;
 		cellCount=(cellCount==null || "".equals(cellCount))?"0":cellCount;
 		paramInt02=(paramInt02==null || "".equals(paramInt02))?"0":paramInt02;
-		
 		entity.setIsRequired(Integer.parseInt(isRequired));
 		entity.setHv(Integer.parseInt(hv));
 		entity.setRandOrder(Integer.parseInt(randOrder));
@@ -118,7 +114,6 @@ public class QuScoreAction extends ActionSupport{
 		}
 		entity.setQuScores(quScores);
 		
-		//逻辑选项设置
 		Map<String, Object> quLogicIdMap=WebUtils.getParametersStartingWith(request, "quLogicId_");
 		List<QuestionLogic> quLogics=new ArrayList<QuestionLogic>();
 		for (String key : quLogicIdMap.keySet()) {
@@ -130,12 +125,9 @@ public class QuScoreAction extends ActionSupport{
 			String logicType=request.getParameter("logicType_"+key);
 			
 			Object quLogicId=quLogicIdMap.get(key);
-			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():"";
+			String quLogicIdValue=(quLogicId!=null)?quLogicId.toString():null;
 			
 			QuestionLogic quLogic=new QuestionLogic();
-			if("".equals(quLogic)){
-				quLogic=null;
-			}
 			if(geLe==null || "".equals(geLe)){
 			    geLe="le";
 			}
@@ -158,9 +150,7 @@ public class QuScoreAction extends ActionSupport{
 	}
 	
 	public static String buildResultJson(Question entity){
-		//{id:'null',quItems:[{id:'null',title:'null'},{id:'null',title:'null'}]}
 		StringBuffer strBuf=new StringBuffer();
-		//{id:'',quItems:[{id:'',title:''},{id:'',title:''}]}
 		strBuf.append("{id:'").append(entity.getId());
 		strBuf.append("',orderById:");
 		strBuf.append(entity.getOrderById());
