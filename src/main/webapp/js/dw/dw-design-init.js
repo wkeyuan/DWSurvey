@@ -647,9 +647,7 @@ $(document).ready(function(){
 		var quOptionParent=$(dwDialogObj).parent();
 		//设置回显值 isNote checkType
 		var quOption_isNote=$("#modelUIDialog input[name='quOption_isNote']");
-		var quOption_checkType=$("#modelUIDialog select[name='quOption_checkType']");
-		var quOption_isRequiredFill=$("#modelUIDialog input[name='quOption_isRequiredFill']");
-		
+
 		var isNote=quOptionParent.find("input[name='isNote']");
 		var checkType=quOptionParent.find("input[name='checkType']");
 		var isRequiredFill=quOptionParent.find("input[name='isRequiredFill']");
@@ -658,30 +656,15 @@ $(document).ready(function(){
 			quItemBody.find("input[name='saveTag']").val(0);
 			quOptionParent.find("input[name='quItemSaveTag']").val(0);
 		}
-		if(quOption_checkType.val()!=checkType.val()){
-			quItemBody.find("input[name='saveTag']").val(0);
-			quOptionParent.find("input[name='quItemSaveTag']").val(0);
-		}
-		if(quOption_isRequiredFill.val()!=isRequiredFill.val()){
-			quItemBody.find("input[name='saveTag']").val(0);
-			quOptionParent.find("input[name='quItemSaveTag']").val(0);
-		}
+
 		//alert(isNote.attr("name"));
 		if(quOption_isNote.prop("checked")){
 			isNote.val(1);	
 		}else{
 			isNote.val(0);
 		}
-		var checkTypeVal=quOption_checkType.val();
-		if(checkTypeVal==""){
-			checkTypeVal="NO";
-		}
-		checkType.val(checkTypeVal);
-		if(quOption_isRequiredFill.prop("checked")){
-			isRequiredFill.val(1);
-		}else{
-			isRequiredFill.val(0);
-		}
+		checkType.val("NO");
+		isRequiredFill.val(0);
 		//显示填空框
 		//$(dwDialogObj).after("<input type='text' class='optionInpText' />");
 		quOptionParent.find(".optionInpText").show();
@@ -694,35 +677,19 @@ $(document).ready(function(){
 	
 	//填空题--填空框设置
 	$("#dwDialogQuFillOptionSave").click(function(){
-		//alert("..dwDialogObj:"+$(dwDialogObj).attr("class"));
 		var quItemBody=$(dwDialogObj).parents(".surveyQuItemBody");
-		//设置回显值 isNote checkType
-		var quFill_checkType=$("#modelUIDialog select[name='quFill_checkType']");
 		var qu_inputWidth=$("#modelUIDialog input[name='qu_inputWidth']");
 		var qu_inputRow=$("#modelUIDialog input[name='qu_inputRow']");
-		//var quFill_checkType=$("#dwCommonDialog select[name='quFill_checkType']");
-		//var quOption_isRequiredFill=$("#dwCommonDialog input[name='quOption_isRequiredFill']");
-		
 		var checkType=quItemBody.find("input[name='checkType']");
-		//输入框 input 大小调整 quFillblankAnswerInput  quFillblankAnswerTextarea
 		var answerInputWidth=quItemBody.find("input[name='answerInputWidth']");
 		var answerInputRow=quItemBody.find("input[name='answerInputRow']");
-		
-		//	var saveTag=quItemBody.find("input[name='saveTag']").val();
-		if(checkType.val()!=quFill_checkType.val() || answerInputWidth.val()!=qu_inputWidth.val() || answerInputRow.val()!=qu_inputRow.val()){
+
+		if(answerInputWidth.val()!=qu_inputWidth.val() || answerInputRow.val()!=qu_inputRow.val()){
 			quItemBody.find("input[name='saveTag']").val(0);
 		}
-		
-		var checkTypeVal=quFill_checkType.val();
-		if(checkTypeVal==""){
-			checkTypeVal="NO";
-		}
-		checkType.val(checkTypeVal);
-	
+		checkType.val("NO");
 		answerInputWidth.val(qu_inputWidth.val());
 		answerInputRow.val(qu_inputRow.val());
-		
-		//alert(qu_inputRow);
 		if(qu_inputRow.val()>1){
 			quItemBody.find(".quFillblankAnswerTextarea").show();
 			quItemBody.find(".quFillblankAnswerInput").hide();
@@ -733,8 +700,6 @@ $(document).ready(function(){
 			quItemBody.find(".quFillblankAnswerInput").show();
 			quItemBody.find(".quFillblankAnswerInput").width(qu_inputWidth.val());
 		}
-		
-		//quItemBody.find(".quCoItemUlLi").removeClass("menuBtnClick");
 		quItemBody.find(".quCoItemUlLi").removeClass("hover");
 		$("#modelUIDialog").dialog("close");
 		resetQuItemHover(null);
@@ -1131,18 +1096,6 @@ function bindQuHoverItem(){
 		/*resetQuItemHover(quItemBody);
 		$(this).parents(".quCoItemUlLi").addClass("menuBtnClick");*/
 		return false;
-	});
-	
-	$("input[name='quOption_isNote']").unbind();
-	$("input[name='quOption_isNote']").click(function(){
-		var optionCk=$(this).prop("checked");
-		if(optionCk){
-			$(".quOptionFillContentLi,.quOptionFillRequiredLi").show();
-			//$("#modelUIDialog").dialog("open");
-			$("#modelUIDialog").dialog("option","height",230);
-		}else{
-			$(".quOptionFillContentLi,.quOptionFillRequiredLi").hide();
-		}
 	});
 	
 	$("#dwSurveyQuContent .surveyQuItemBody").unbind();
@@ -1683,8 +1636,6 @@ function showUIDialog(thDialogObj){
 		if(checkType_val==""){
 			checkType_val="NO";
 		}
-		var checkType=$("#modelUIDialog select[name='quFill_checkType']");
-		checkType.val(checkType_val);
 		var qu_inputWidth=$("#modelUIDialog input[name='qu_inputWidth']");
 		var qu_inputRow=$("#modelUIDialog input[name='qu_inputRow']");
 		if(answerInputWidth_val==""){
@@ -1813,12 +1764,6 @@ function showDialog(thDialogObj){
 		$("#dwCommonDialog .dwQuDialogLoad").show();
 	}else if(thObjClass.indexOf("dwFbMenuBtn")>=0){
 		$("#dwCommonDialog .dwQuFillDataTypeOption").show();
-		var checkType_val=quItemBody.find("input[name='checkType']").val();
-		if(checkType_val==""){
-			checkType_val="NO";
-		}
-		var checkType=$("#dwCommonDialog select[name='quFill_checkType']");
-		checkType.val(checkType_val);
 	}else if(thObjClass.indexOf("quCoOptionEdit")>=0){
 		$("#dwCommonDialog .dwQuRadioCheckboxOption").show();
 		//设置回显值 isNote checkType

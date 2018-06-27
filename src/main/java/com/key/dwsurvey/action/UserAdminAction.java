@@ -54,7 +54,6 @@ public class UserAdminAction extends CrudActionSupport<User, String> {
 	@Override
 	public String save() throws Exception {
 		HttpServletRequest request= Struts2Utils.getRequest();
-		entity.setStatus(1);
 		userManager.adminSave(entity,null);
 		return RELOAD;
 	}

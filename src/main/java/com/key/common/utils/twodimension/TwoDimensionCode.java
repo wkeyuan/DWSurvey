@@ -1,19 +1,19 @@
 package com.key.common.utils.twodimension;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import com.key.common.plugs.ipaddr.IPSeeker;
 import jp.sourceforge.qrcode.QRCodeDecoder;
 import jp.sourceforge.qrcode.exception.DecodingFailedException;
 
 import com.swetake.util.Qrcode;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 public class TwoDimensionCode {
 	
@@ -134,6 +134,12 @@ public class TwoDimensionCode {
 			} else {
 				throw new Exception("QRCode content bytes length = " + contentBytes.length + " not in [0, 800].");
 			}
+			Image logo = ImageIO.read(new URL("http://www.diaowen.net/images/logo/200-200.png"));
+			int widthLogo = logo.getWidth(null)>bufImg.getWidth()*2/10?(bufImg.getWidth()*2/10):logo.getWidth(null),
+					heightLogo = logo.getHeight(null)>bufImg.getHeight()*2/10?(bufImg.getHeight()*2/10):logo.getWidth(null);
+			int x = (bufImg.getWidth() - widthLogo) / 2;
+			int y = (bufImg.getHeight() - heightLogo) / 2;
+			gs.drawImage(logo, x, y, widthLogo, heightLogo, null);
 			gs.dispose();
 			bufImg.flush();
 		} catch (Exception e) {
@@ -188,6 +194,7 @@ public class TwoDimensionCode {
 		return content;
 	}
 
+
 	public static void main(String[] args) {
 	/*
 		String imgPath = "G:/twoDim/Michael_QRCode.png";
@@ -206,7 +213,7 @@ public class TwoDimensionCode {
 		String decoderContent = handler.decoderQRCode(imgPath);
 		System.out.println("解析结果如下：");
 		System.out.println(decoderContent);
-		System.out.println("========decoder success!!!");
+		System.out.println("========decoder success!!!");/Users/keyuan/Documents/GIT/my-gitlab/dw/dwsurvey/src/main/webapp/images/logo/200-200.png
 		*/
 	}
 }

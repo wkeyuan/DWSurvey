@@ -2527,26 +2527,6 @@
 					<li><label>输入框高：</label>
 					<input type="text" name="qu_inputRow" value="1"><span>&nbsp;行</span>
 					</li>
-					<li><label>数据类型：</label>
-					<select class="option_range" name="quFill_checkType"  style="width:120px;">
-					<option value="NO">无验证</option>
-					<option value="EMAIL">Email</option>
-					<!-- <option value="STRLEN">字符长度</option> -->
-					<option value="UNSTRCN">禁止中文</option>
-					<option value="STRCN">仅许中文</option>
-					<option value="NUM">数值</option>
-					<option value="TELENUM">电话号码</option>
-					<option value="PHONENUM">手机号码</option>
-					<option value="DATE">日期</option>
-					<option value="IDENTCODE">身份证号</option>
-					<option value="ZIPCODE">邮政编码</option>
-					<option value="URL">网址</option>
-					<!-- <option value="4">下拉显示</option> -->
-					</select>
-					<span class="option_range_3" style="display:none;">&nbsp;列</span>
-					</li>
-					<!-- <li>最少选&nbsp;<input type="text" size="3">&nbsp;项 </li>
-					<li>最多选&nbsp;<input type="text" size="3">&nbsp;项 </li> -->
 				</ul>
 				<div class="dwQuDialogBtnCon" ><input type="button" value="保存" class="quDialogBtn" id="dwDialogQuFillOptionSave"/></div>
 			</div>
@@ -2555,26 +2535,6 @@
 				<ul>
 					<li><label>选项设置</label></li>
 					<li class="quOptionAddFill"><label><input type="checkbox" name="quOption_isNote" >选项后添加填空</label> </li>
-					<li class="quOptionFillContentLi"><label style="padding-left:16px;">填空内容：</label>
-					<select class="option_range" name="quOption_checkType"  style="width:120px;">
-					<option value="NO">无限制</option>
-					<option value="EMAIL">Email</option>
-					<!-- <option value="STRLEN">字符长度</option> -->
-					<option value="UNSTRCN">禁止中文</option>
-					<option value="STRCN">仅许中文</option>
-					<option value="NUM">数值</option>
-					<option value="TELENUM">电话号码</option>
-					<option value="PHONENUM">手机号码</option>
-					<option value="DATE">日期</option>
-					<option value="IDENTCODE">身份证号</option>
-					<option value="ZIPCODE">邮政编码</option>
-					<option value="URL">网址</option>
-					<!-- <option value="4">下拉显示</option> -->
-					</select>
-					<span class="option_range_3" style="display:none;">&nbsp;列</span>
-					</li>
-					<li class="quOptionFillRequiredLi"><label style="padding-left:15px;"><input type="checkbox" name="quOption_isRequiredFill" checked="checked" >&nbsp;该空可不填</label>&nbsp;</li>
-					<!-- <li>最多选&nbsp;<input type="text" size="3">&nbsp;项 </li> -->
 				</ul>
 				<div class="dwQuDialogBtnCon" ><input type="button" value="保存" class="quDialogBtn" id="dwDialogQuOptionSetSave"/></div>
 		</div>
