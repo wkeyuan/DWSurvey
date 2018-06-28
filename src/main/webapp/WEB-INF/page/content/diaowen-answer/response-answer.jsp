@@ -88,11 +88,15 @@
 															<c:choose>
 																	<c:when test="${en.anRadio.quItemId eq quItem.id }">
 																		<li><input type="radio" name="qu_${en.quType }_${en.id }" value="${quItem.id }" checked="checked"  /></li>
-																		<li>${quItem.optionName }</li>
+																		<li>${quItem.optionName }
+																			<c:if test="${quItem.isNote eq 1}"> <input type="text" value="${en.anRadio.otherText }" disabled > </c:if>
+																		</li>
 																	</c:when>
 																	<c:otherwise>
 																		<li><input type="radio" name="qu_${en.quType }_${en.id }" value="${quItem.id }"  /></li>
-																		<li>${quItem.optionName }</li>
+																		<li>${quItem.optionName }
+																			<c:if test="${quItem.isNote eq 1}"> <input type="text" value="${en.anRadio.otherText }" disabled > </c:if>
+																		</li>
 																	</c:otherwise>
 															</c:choose>
 														</ul>
@@ -113,12 +117,16 @@
 																		<c:choose>
 																			<c:when test="${anCk.quItemId eq quItem.id }">
 																				<li><input type="checkbox" name="tag_qu_${en.quType }_${en.id }_${quItem.id }"  value="${quItem.id }"  checked="checked"/></li>
-																				<li>${quItem.optionName }</li>
+																				<li>${quItem.optionName }
+																					<c:if test="${quItem.isNote eq 1}"> <input type="text" value="${anCk.otherText }" disabled > </c:if>
+																				</li>
 																				<c:set var="isBreak" value="1"></c:set>
 																			</c:when>
 																			<c:when test="${(fn:length(en.anCheckboxs) eq iStatus.count ) && (isBreak eq 0) }">
 																				<li><input type="checkbox" name="tag_qu_${en.quType }_${en.id }_${quItem.id }"  value="${quItem.id }" /></li>
-																				<li>${quItem.optionName }</li>
+																				<li>${quItem.optionName }
+																					<c:if test="${quItem.isNote eq 1}"> <input type="text" value="${anCk.otherText }" disabled > </c:if>
+																				</li>
 																				<c:set var="isBreak" value="0"></c:set>
 																			</c:when>
 																		</c:choose>
@@ -130,7 +138,10 @@
 														<c:forEach items="${en.quCheckboxs }" var="quItem">
 															<li><ul class="quItem-ul">
 																<li><input type="checkbox" name="tag_qu_${en.quType }_${en.id }_${quItem.id }"  value="${quItem.id }" /></li>
-																<li>${quItem.optionName }</li>
+																<li>
+																	${quItem.optionName }
+																	<c:if test="${quItem.isNote eq 1}"> <input type="text" value="" disabled > </c:if>
+																</li>
 															</ul></li>
 														</c:forEach>
 													</c:otherwise>
@@ -140,7 +151,7 @@
 										<%--填空 --%>
 										<c:when test="${en.quType eq 'FILLBLANK' }">
 											<ul class="r-qu-body-ul1 r-qu-body-ul3">
-													<li>${en.anFillblank.answer } <%-- <input type="text"  name="qu_${en.quType }_${en.id }" value="${en.anFillblank.answer }"/> --%></li>
+													<li><input type="text" value="${en.anFillblank.answer }" disabled > <%-- <input type="text"  name="qu_${en.quType }_${en.id }" value="${en.anFillblank.answer }"/> --%></li>
 											</ul>
 										</c:when>
 										<%--多行填空 --%>
