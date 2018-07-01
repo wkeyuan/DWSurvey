@@ -1753,7 +1753,7 @@ function showDialog(thDialogObj){
 
 		//单选，多选，填空题情况下才启用关联到联系设置项
 		if((quType=="RADIO" || quType=="CHECKBOX" || quType=="FILLBLANK")){
-			$("#dwCommonDialog .contactsAttrLi").show();
+			// $("#dwCommonDialog .contactsAttrLi").show();
 			if( contactsAttr==1){
 				$("#dwCommonDialog input[name='setAutoContacts']").prop("checked",true);
 				$("#dwCommonDialog .contactsFieldLi").show();

@@ -342,33 +342,50 @@ public class SurveyAnswerManagerImpl extends
 				String quItemId = question.getAnRadio().getQuItemId();
 				List<QuRadio> quRadios=question.getQuRadios();
 				String answerOptionName="";
+				String answerOtherText="";
+				boolean isNote = false;
 				for (QuRadio quRadio : quRadios) {
 					String quRadioId=quRadio.getId();
 					if(quRadioId.equals(quItemId)){
 						answerOptionName=quRadio.getOptionName();
+						if(quRadio.getIsNote()==1){
+							answerOtherText = question.getAnRadio().getOtherText();
+							isNote = true;
+						}
 						break;
 					}
 				}
 				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
 				answerOptionName = answerOptionName.replace("&nbsp;"," ");
 				exportUtil.setCell(cellIndex++, answerOptionName);
+
+//				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
+				if(isNote) exportUtil.setCell(cellIndex++, answerOtherText);
 			} else if (quType == QuType.CHECKBOX) {// 多选题
 				List<AnCheckbox> anCheckboxs=question.getAnCheckboxs();
 				List<QuCheckbox> checkboxs = question.getQuCheckboxs();
 				for (QuCheckbox quCheckbox : checkboxs) {
 					String quCkId=quCheckbox.getId();
 					String answerOptionName="0";
+					String answerOtherText="";
+					boolean isNote = false;
 					for (AnCheckbox anCheckbox : anCheckboxs) {
 						String anQuItemId=anCheckbox.getQuItemId();
 						if(quCkId.equals(anQuItemId)){
 							answerOptionName=quCheckbox.getOptionName();
 							answerOptionName="1";
+							if(quCheckbox.getIsNote() == 1){
+								answerOtherText = anCheckbox.getOtherText();
+								isNote = true;
+							}
 							break;
 						}
 					}
 					answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
 					answerOptionName = answerOptionName.replace("&nbsp;"," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
+
+					if(isNote) exportUtil.setCell(cellIndex++, answerOtherText);
 				}
 			} else if (quType == QuType.FILLBLANK) {// 填空题
 				AnFillblank anFillblank=question.getAnFillblank();
@@ -572,14 +589,27 @@ public class SurveyAnswerManagerImpl extends
 			if (quType == QuType.YESNO) {// 是非题
 				exportUtil.setCell(cellIndex++, titleName);
 			} else if (quType == QuType.RADIO) {// 单选题
+				List<QuRadio> quRadios=question.getQuRadios();
+				boolean isNote = false;
+				for (QuRadio quRadio : quRadios) {
+					if(quRadio.getIsNote()==1){
+						isNote = true;
+					}
+					break;
+				}
+
 				exportUtil.setCell(cellIndex++, titleName);
+				if(isNote) exportUtil.setCell(cellIndex++, titleName + "选项说明");
+
 			} else if (quType == QuType.CHECKBOX) {// 多选题
 				List<QuCheckbox> checkboxs = question.getQuCheckboxs();
 				for (QuCheckbox quCheckbox : checkboxs) {
 					String optionName = quCheckbox.getOptionName();
-
 					optionName=HtmlUtil.removeTagFromText(optionName);
-					exportUtil.setCell(cellIndex++,titleName+ "－"+optionName );
+					exportUtil.setCell(cellIndex++,titleName + "－" + optionName );
+					if(quCheckbox.getIsNote()==1){
+						exportUtil.setCell(cellIndex++, titleName+ "－" + optionName  + "－选项说明");
+					}
 				}
 			} else if (quType == QuType.FILLBLANK) {// 填空题
 				exportUtil.setCell(cellIndex++, titleName);
