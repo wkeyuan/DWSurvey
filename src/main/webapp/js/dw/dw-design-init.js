@@ -894,20 +894,7 @@ $(document).ready(function(){
 			isSaveProgress=false;
 			notify("保存成功",1000);
 		});
-		/*var fristQuItemBody=$("#dwSurveyQuContent .li_surveyQuItemBody").first();
-		saveQus(fristQuItemBody,function(){});*/
-		/*var quBodys=$("#dwSurveyQuContent .surveyQuItemBody");
-		$.each(quBodys,function(i){
-			var quType=$(this).find("input[name='quType']").val();
-			if(quType=="RADIO"){
-				//保存单选
-				saveRadio($(this),i);
-				quCBNum++;
-			}else if(quType=="CHECKBOX"){
-				callbackNum++;
-			}
-		});
-		*/
+
 	});
 	
 	$("#publishBtn").click(function(){
@@ -919,11 +906,6 @@ $(document).ready(function(){
 			isSaveProgress=false;
 			window.location.href=ctx+"/design/my-survey-design!devSurvey.action?surveyId="+questionBelongId;
 		});
-		/*
-		var fristQuItemBody=$("#dwSurveyQuContent .li_surveyQuItemBody").first();
-		saveQus(fristQuItemBody,function(){
-			window.location.href=ctx+"/design/my-survey-design!previewDev.action?surveyId="+questionBelongId;
-		});*/
 		
 	});
 	

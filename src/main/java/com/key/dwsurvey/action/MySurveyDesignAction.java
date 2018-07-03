@@ -96,6 +96,8 @@ public class MySurveyDesignAction extends ActionSupport{
 			fileName="m_"+surveyId+".html";
 			new JspToHtml().postJspToHtml(url, filePath, fileName);
 
+			List<Question> questions=questionManager.find(surveyId, "2");
+			survey.setSurveyQuNum(questions.size());
 			survey.setSurveyState(1);
 			surveyDirectoryManager.save(survey);
 		}catch (Exception e) {
