@@ -28,7 +28,7 @@ public class AnCheckboxDaoImpl extends BaseDaoImpl<AnCheckbox, String> implement
 
 	@Override
 	public void findGroupStats(Question question) {
-		String sql="select qu_item_id,count(qu_item_id) count from t_an_checkbox where visibility=1 and qu_id=? GROUP BY qu_item_id ;";
+		String sql="select qu_item_id,count(qu_item_id) count from t_an_checkbox where visibility=1 and qu_id=? GROUP BY qu_item_id";
 		List<Object[]> list=this.getSession().createSQLQuery(sql).setString(0, question.getId()).list();
 		List<QuCheckbox> quCheckboxs=question.getQuCheckboxs();
 		
