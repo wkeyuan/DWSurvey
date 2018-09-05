@@ -785,8 +785,6 @@ $(document).ready(function(){
 				<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
 					<div class="surveyQuItemBody">
 							<div class="surveyQuItem">
-								<!-- <div class="pageBorderTop nohover"  ></div> -->
-								
 								<div id="jcaptchaImgBody" class="r-qu-body" style="display: none;">
 									
 									<div class="frmItem" style="">
@@ -801,9 +799,6 @@ $(document).ready(function(){
 										</div>
 									</div>
 									<div class="errorItem" style="display: none;"><label for="" class="error">验证码错误，请重新输入！</label></div>
-									<%-- 验证码：<input type="text" size="8" name="jcaptchaInput">
-									&nbsp;<img id="jcaptchaImg" alt="点击刷新" src="${ctx }/jcaptcha.action"  align="top">
-									&nbsp;点击图片刷新 --%>
 								</div>
 								
 								
@@ -830,7 +825,6 @@ $(document).ready(function(){
   </div>
 
   <div data-role="footer" >
-	  <%--尊重开源、保留声明，感谢您的大力支持--%>
   	<h3>Powered by <a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a></h3>
   </div>
 </div>
@@ -843,12 +837,13 @@ $(document).ready(function(){
 $(document).ready(function(){
 	//分页设置 nextPage_a prevPage_a
 	$(".nextPage_a").click(function(){
-		var thParent=$(this).parent();
-		var nextPageNo=thParent.find("input[name='nextPageNo']").val();
-		$(".li_surveyQuItemBody").hide();
-		$(".surveyQu_"+nextPageNo).fadeIn("slow");
-		//$(window).scrollTop(10);
-		$("html,body").animate({scrollTop:10},500);
+		if(validateForms()){
+			var thParent=$(this).parent();
+			var nextPageNo=thParent.find("input[name='nextPageNo']").val();
+			$(".li_surveyQuItemBody").hide();
+			$(".surveyQu_"+nextPageNo).fadeIn("slow");
+			$("html,body").animate({scrollTop:10},500);
+		}
 		return false;
 	});
 	$(".prevPage_a").click(function(){
