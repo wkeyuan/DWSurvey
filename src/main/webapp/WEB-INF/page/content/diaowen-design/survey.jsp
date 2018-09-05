@@ -605,7 +605,7 @@
 									<input type="hidden" name="answerInputWidth" value="300">
 									<input type="hidden" name="answerInputRow" value="1">
 
-									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsAttr" value="0">
 									<input type="hidden" name="contactsField" value="5">
 									<div class="quLogicInputCase">
 										<input type="hidden" name="quLogicItemNum" value="0">
@@ -634,7 +634,6 @@
 										</div>
 										<div class="quCoItem"><ul>
 											<li class="quCoItemUlLi">
-												<!-- <input type="text" style="width:200px;padding:5px;"> -->
 												<div class="quFillblankItem">
 													<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
 													<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
@@ -665,7 +664,7 @@
 									<input type="hidden" name="randOrder" value="0">
 									<input type="hidden" name="cellCount" value="0">
 
-									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsAttr" value="0">
 									<input type="hidden" name="contactsField" value="6">
 
 									<div class="quLogicInputCase">
@@ -743,7 +742,7 @@
 									<input type="hidden" name="randOrder" value="0">
 									<input type="hidden" name="cellCount" value="0">
 
-									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsAttr" value="0">
 									<input type="hidden" name="contactsField" value="6">
 
 									<div class="quLogicInputCase">
@@ -841,7 +840,7 @@
 									<input type="hidden" name="randOrder" value="0">
 									<input type="hidden" name="cellCount" value="0">
 
-									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsAttr" value="0">
 									<input type="hidden" name="contactsField" value="6">
 
 									<div class="quLogicInputCase">
@@ -919,7 +918,7 @@
 									<input type="hidden" name="randOrder" value="0">
 									<input type="hidden" name="cellCount" value="0">
 
-									<input type="hidden" name="contactsAttr" value="1">
+									<input type="hidden" name="contactsAttr" value="0">
 									<input type="hidden" name="contactsField" value="6">
 
 									<div class="quLogicInputCase">
@@ -950,16 +949,6 @@
 										<div class="quCoItem"><ul class="transverse">
 											<li class="quCoItemUlLi">
 												<input type="radio"><label class="editAble quCoOptionEdit">3000元以下</label>
-												<div class="quItemInputCase">
-													<input type="hidden" name="quItemId" value="">
-													<input type="hidden" name="quItemSaveTag" value="0">
-													<input type="hidden" name="isNote" value="0">
-													<input type="hidden" name="checkType" value="NO">
-													<input type="hidden" name="isRequiredFill" value="0">
-												</div>
-											</li>
-											<li class="quCoItemUlLi">
-												<input type="radio"><label class="editAble quCoOptionEdit">3000-5000元</label>
 												<div class="quItemInputCase">
 													<input type="hidden" name="quItemId" value="">
 													<input type="hidden" name="quItemSaveTag" value="0">
@@ -1020,15 +1009,6 @@
 							</div>
 						</div>
 					</li>
-					<!-- <li id="exportToolbar">
-                        <div class="dwToolbar_icon"></div>
-                    </li>
-                    <li id="logicToolbar">
-                        <div class="dwToolbar_icon"></div>
-                    </li>
-                    <li id="qubankToolbar" >
-                        <div class="dwToolbar_icon"></div>
-                    </li> -->
 				</ul>
 			</div>
 			<div class="tooltext">常用题型</div>
@@ -1100,9 +1080,6 @@
 							<div class="surveyQuItem">
 								<div class="surveyQuItemLeftTools">
 										<ul class="surveyQuItemLeftToolsUl">
-											<!--<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
-											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
-											<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li> -->
 											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
 										</ul>
 								</div>
@@ -1124,7 +1101,7 @@
 				</div>
 			</li>
 			<li id="surveyAttrSetToolbar"  class="surveyAttrSetToolbar_li">
-				<a href="${ctx }/design/my-survey-design!previewDev.action?surveyId=${param['surveyId']}" >
+				<a href="#" >
 					<span class="dwToolbar_icon" title="问卷设置"></span>
 				</a>
 			</li>
@@ -2443,7 +2420,7 @@
 				<ul>
 					<!-- <li><input type="checkbox" name="quChage"><label>切换为多选</label> </li> -->
 					<li><label><input type="checkbox" name="setIsRequired"  >此题必答</label> </li>
-					<li class="optionAutoOrder"><label><input type="checkbox" name="setRandOrder" >选择随机排列</label> </li>
+					<li class="optionAutoOrder" style="display: none;"><label><input type="checkbox" name="setRandOrder" >选择随机排列</label> </li>
 					<li class="contactsAttrLi" style="display: none;"><label><input type="checkbox" name="setAutoContacts" >关联到联系人属性</label> </li>
 					<li class="contactsFieldLi"><label>用户填写的内容，会成为联系人的</label>
 					<select class="contacts_range" name="setContactsField"  style="width:120px;">
@@ -2522,7 +2499,7 @@
 			<div class="dwQuFillDataTypeOption dwQuFormSetDialog dwQuDialogCon" >
 				<ul>
 					<li><label>输入框宽：</label>
-					<input type="text" name="qu_inputWidth" value="300"><span>&nbsp;字符</span>
+					<input type="text" name="qu_inputWidth" value="300"><span>&nbsp;像素</span>
 					</li>
 					<li><label>输入框高：</label>
 					<input type="text" name="qu_inputRow" value="1"><span>&nbsp;行</span>

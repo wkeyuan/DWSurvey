@@ -1712,18 +1712,15 @@ function showDialog(thDialogObj){
 
 		//单选，多选 才启用选项随机排列
 		if(quType==="RADIO" || quType==="CHECKBOX"){
-			$("#dwCommonDialog .optionAutoOrder").show();
 			$("#dwCommonDialog .optionRangeHv").show();
 		}else if(quType==="ORDERQU"){
-			$("#dwCommonDialog .optionAutoOrder").show();
+
 		}else if(quType==="SCORE"){
-			$("#dwCommonDialog .optionAutoOrder").show();
 			$("#dwCommonDialog .scoreMinMax").show();
 			if(paramInt02[0]){
 				$("#dwCommonDialog .scoreMinMax .maxScore").val(paramInt02.val());
 			}
 		}else if(quType==="MULTIFILLBLANK"){
-			$("#dwCommonDialog .optionAutoOrder").show();
 			$("#dwCommonDialog .minMaxLi").show();
 			$("#dwCommonDialog .minMaxLi .minSpan .lgleftLabel").text("最少回答");
 			$("#dwCommonDialog .minMaxLi .maxSpan").hide();

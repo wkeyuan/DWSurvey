@@ -23,12 +23,14 @@ $(document).ready(function(){
 	
 	//分页设置 nextPage_a prevPage_a
 	$(".nextPage_a").click(function(){
-		var thParent=$(this).parent();
-		var nextPageNo=thParent.find("input[name='nextPageNo']").val();
-		$(".li_surveyQuItemBody").hide();
-		$(".surveyQu_"+nextPageNo).fadeIn("slow");
-		//$(window).scrollTop(10);
-		$("html,body").animate({scrollTop:10},500);
+		if(validateForms()){
+			var thParent=$(this).parent();
+			var nextPageNo=thParent.find("input[name='nextPageNo']").val();
+			$(".li_surveyQuItemBody").hide();
+			$(".surveyQu_"+nextPageNo).fadeIn("slow");
+			//$(window).scrollTop(10);
+			$("html,body").animate({scrollTop:10},500);
+		}
 		return false;
 	});
 	$(".prevPage_a").click(function(){
