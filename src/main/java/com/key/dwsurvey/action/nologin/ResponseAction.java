@@ -165,6 +165,7 @@ public class ResponseAction extends ActionSupport {
 	public String answerMobile() throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		HttpServletResponse response = Struts2Utils.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
 		SurveyDirectory directory = directoryManager.getSurvey(surveyId);
 
 		if (directory != null) {

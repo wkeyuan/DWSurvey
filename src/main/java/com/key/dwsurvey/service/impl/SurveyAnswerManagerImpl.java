@@ -3,9 +3,9 @@ package com.key.dwsurvey.service.impl;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.key.common.QuType;
-import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.dao.SurveyAnswerDao;
 import com.key.dwsurvey.entity.AnChenFbk;
 import com.key.dwsurvey.entity.SurveyDetail;
@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.key.common.base.entity.User;
 import com.key.common.plugs.page.Page;
-import com.key.common.plugs.page.PropertyFilter;
 import com.key.common.service.BaseServiceImpl;
 import com.key.common.utils.excel.XLSExportUtil;
 import com.key.common.utils.parsehtml.HtmlUtil;
@@ -60,9 +59,6 @@ import com.key.dwsurvey.service.AnRadioManager;
 import com.key.dwsurvey.service.AnYesnoManager;
 import com.key.dwsurvey.service.QuestionManager;
 import com.key.dwsurvey.service.SurveyAnswerManager;
-import org.springframework.web.util.WebUtils;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -321,10 +317,28 @@ public class SurveyAnswerManagerImpl extends
 		return urlPath + fileName;
 	}
 
-	private void exportXLSRow(XLSExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer) {
-		int cellIndex = 0;
+	private void exportXLSRow(XLSExportUtil exportUtil,final String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer) {
+		int count = 0;
+		Map<Integer,Question> questionMap = new ConcurrentHashMap<>();
 		for (Question question : questions) {
-			getquestionAnswer(surveyAnswerId, question);
+			// 同一用户并发取所有题目的答案
+			// 这里可以考虑到一份问卷题目有限，所以没有用线程池处理
+			new Thread(new GetAnswerQuestionRunnable(count++,questionMap,surveyAnswerId,question)).start();
+		}
+
+		// 等待所有题目返回之后再插入row
+		while (questionMap.size() != questions.size()){
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		int cellIndex = 0;
+
+		for (int index = 0;index < questionMap.size();index++){
+			Question question = questionMap.get(index);
 			QuType quType = question.getQuType();
 			String quName = question.getQuName();
 			String titleName = quType.getCnName();
@@ -346,13 +360,15 @@ public class SurveyAnswerManagerImpl extends
 				boolean isNote = false;
 				for (QuRadio quRadio : quRadios) {
 					String quRadioId=quRadio.getId();
+					if(quRadio.getIsNote() ==1){
+						isNote = true;
+					}
 					if(quRadioId.equals(quItemId)){
 						answerOptionName=quRadio.getOptionName();
-						if(quRadio.getIsNote()==1){
+						if(quRadio.getIsNote() ==1){
 							answerOtherText = question.getAnRadio().getOtherText();
-							isNote = true;
 						}
-						break;
+//						break;
 					}
 				}
 				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
@@ -360,21 +376,23 @@ public class SurveyAnswerManagerImpl extends
 				exportUtil.setCell(cellIndex++, answerOptionName);
 
 //				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
-				if(isNote) exportUtil.setCell(cellIndex++, answerOtherText);
+				if(isNote) {
+					exportUtil.setCell(cellIndex++, answerOtherText);
+				}
 			} else if (quType == QuType.CHECKBOX) {// 多选题
 				List<AnCheckbox> anCheckboxs=question.getAnCheckboxs();
 				List<QuCheckbox> checkboxs = question.getQuCheckboxs();
 				for (QuCheckbox quCheckbox : checkboxs) {
 					String quCkId=quCheckbox.getId();
-					String answerOptionName="0";
+				 	String answerOptionName="0";
 					String answerOtherText="";
-					boolean isNote = false;
+					boolean isNote = quCheckbox.getIsNote() == 1;
 					for (AnCheckbox anCheckbox : anCheckboxs) {
 						String anQuItemId=anCheckbox.getQuItemId();
 						if(quCkId.equals(anQuItemId)){
 							answerOptionName=quCheckbox.getOptionName();
 							answerOptionName="1";
-							if(quCheckbox.getIsNote() == 1){
+							if(isNote){
 								answerOtherText = anCheckbox.getOtherText();
 								isNote = true;
 							}
@@ -385,7 +403,9 @@ public class SurveyAnswerManagerImpl extends
 					answerOptionName = answerOptionName.replace("&nbsp;"," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 
-					if(isNote) exportUtil.setCell(cellIndex++, answerOtherText);
+					if(isNote) {
+						exportUtil.setCell(cellIndex++, answerOtherText);
+					}
 				}
 			} else if (quType == QuType.FILLBLANK) {// 填空题
 				AnFillblank anFillblank=question.getAnFillblank();
@@ -595,7 +615,7 @@ public class SurveyAnswerManagerImpl extends
 					if(quRadio.getIsNote()==1){
 						isNote = true;
 					}
-					break;
+//					break;
 				}
 
 				exportUtil.setCell(cellIndex++, titleName);
@@ -852,5 +872,24 @@ public class SurveyAnswerManagerImpl extends
 		super.delete(t);
 	}
 
+	public class GetAnswerQuestionRunnable implements Runnable{
+		private int index;
+		private Map<Integer,Question> questionMap;
+		private String surveyAnswerId;
+		private Question question;
 
+
+		public GetAnswerQuestionRunnable(int index,Map<Integer,Question> questionMap,String surveyAnswerId,Question question){
+			this.index = index;
+			this.questionMap = questionMap;
+			this.surveyAnswerId = surveyAnswerId;
+			this.question = question;
+		}
+
+		@Override
+		public void run() {
+			getquestionAnswer(surveyAnswerId, question);
+			questionMap.put(index,question);
+		}
+	}
 }
