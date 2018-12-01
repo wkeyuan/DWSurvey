@@ -1,8 +1,8 @@
 package com.key.dwsurvey.action.nologin;
 
 import com.key.common.plugs.ipaddr.IPService;
+import com.key.common.plugs.zxing.ZxingUtil;
 import com.key.common.utils.DiaowenProperty;
-import com.key.common.utils.twodimension.TwoDimensionCode;
 import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.entity.SurveyDirectory;
 import com.key.dwsurvey.entity.SurveyStyle;
@@ -111,32 +111,33 @@ public class SurveyAction extends ActionSupport{
 					+ (request.getServerPort() == 80 ? "" : ":" +request.getServerPort())
 					+ request.getContextPath();
 
-	    	String encoderContent=baseUrl+"/response!answerMobile.action?surveyId="+surveyId;
-	    	ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  
-	    	BufferedImage twoDimensionImg = new TwoDimensionCode().qRCodeCommon(encoderContent, "jpg", 7);
-
-			ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);
-
-	        if(down==null){
-		    	response.setHeader("Cache-Control", "no-store");
-		        response.setHeader("Pragma", "no-cache");
-		        response.setDateHeader("Expires", 0);
-		        response.setContentType("image/jpeg");
-		        ServletOutputStream responseOutputStream = response.getOutputStream();
-		       responseOutputStream.write(jpegOutputStream.toByteArray());
-		       responseOutputStream.flush();
-		       responseOutputStream.close();
-	        }else{
-        	   response.addHeader("Content-Disposition", "attachment;filename=" + new String(("diaowen_"+surveyId+".jpg").getBytes()));
-        	   byte[] bys = jpegOutputStream.toByteArray();
-    		   response.addHeader("Content-Length", "" + bys.length);
-    		   ServletOutputStream responseOutputStream = response.getOutputStream();
-    		   response.setContentType("application/octet-stream");	
-    		   responseOutputStream.write(bys);
-    		   responseOutputStream.flush();
-    		   responseOutputStream.close();
-	        }
-
+	    	try{
+				String encoderContent=baseUrl+"/response!answerMobile.action?surveyId="+surveyId;
+				ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+				BufferedImage twoDimensionImg = ZxingUtil.qRCodeCommon(encoderContent, "jpg", 7);
+				ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);
+				if(down==null){
+					response.setHeader("Cache-Control", "no-store");
+					response.setHeader("Pragma", "no-cache");
+					response.setDateHeader("Expires", 0);
+					response.setContentType("image/jpeg");
+					ServletOutputStream responseOutputStream = response.getOutputStream();
+					responseOutputStream.write(jpegOutputStream.toByteArray());
+					responseOutputStream.flush();
+					responseOutputStream.close();
+				}else{
+					response.addHeader("Content-Disposition", "attachment;filename=" + new String(("diaowen_"+surveyId+".jpg").getBytes()));
+					byte[] bys = jpegOutputStream.toByteArray();
+					response.addHeader("Content-Length", "" + bys.length);
+					ServletOutputStream responseOutputStream = response.getOutputStream();
+					response.setContentType("application/octet-stream");
+					responseOutputStream.write(bys);
+					responseOutputStream.flush();
+					responseOutputStream.close();
+				}
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 
 	        return null;
 	}
