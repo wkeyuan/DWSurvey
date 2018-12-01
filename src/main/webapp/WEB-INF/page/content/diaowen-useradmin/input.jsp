@@ -93,7 +93,7 @@ $(document).ready(function(){
 											<table class="ac-form-table">
 												<tr>
 													<td width="80" align="right"><span class="red-color">*&nbsp;</span>登录名</td>
-													<td class="ac-input-td"><input type="text"  name="loginName" value="${loginName }" disabled style="background: #cecad2;"  > </td>
+													<td class="ac-input-td"><input type="text"  name="loginName" value="${loginName }"  > </td>
 												</tr>
 												<tr>
 													<td width="80" align="right"><span class="red-color">*&nbsp;</span>昵称</td>

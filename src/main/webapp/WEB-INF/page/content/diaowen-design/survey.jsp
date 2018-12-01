@@ -2333,21 +2333,6 @@
 		</tr>
 </table>
 
-<table class="modelHtml" >
-<tr id="quChenColumnModel">
-	<td class="quChenColumnTd">
-	<label class="editAble quCoOptionEdit">新项</label>
-	<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div>
-	</td>
-</tr>
-<tr id="quChenRowModel">
-	<td class="quChenRowTd">
-	<label class="editAble quCoOptionEdit">新项</label>
-	<div class="quItemInputCase"><input type="hidden" name="quItemId" value=""><input type="hidden" name="quItemSaveTag" value="0"></div>
-	</td>
-</tr>
-</table>
-
 <!-- 逻辑值保存模板 -->
 <div id="quLogicItemModel" class="modelHtml">
 <div class="quLogicItem">

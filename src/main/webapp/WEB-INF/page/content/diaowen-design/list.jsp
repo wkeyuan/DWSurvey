@@ -162,9 +162,6 @@ button {
 										</c:if>
 										<c:if test="${page.startpage > 1}">
 											<a href="${ctx }/design/my-survey.action?page.pageNo=1" class="btn btn-default">1</a>
-											<c:if test="${page.startpage > 2 }">
-												<span>...</span>
-											</c:if>
 										</c:if>
 										<c:forEach begin="${page.startpage }" end="${page.endpage }" var="en">
 											<c:choose>
@@ -173,9 +170,6 @@ button {
 											</c:choose>
 										</c:forEach>
 										<c:if test="${page.totalPage > (page.endpage)}">
-											<c:if test="${page.totalPage > (page.endpage+1)}">
-												<span>...</span>
-											</c:if>
 											<a href="${ctx }/design/my-survey.action?page.pageNo=${page.totalPage}" class="btn btn-default">${page.totalPage }</a>
 										</c:if>
 										<c:if test="${page.totalPage > page.pageNo}">
