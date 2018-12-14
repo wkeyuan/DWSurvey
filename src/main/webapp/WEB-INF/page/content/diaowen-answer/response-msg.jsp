@@ -20,7 +20,6 @@
 		</div>
 		
 		<div class="footer-copyright" style="color: gray;">
-			<%--尊重开源、保留声明，感谢您的大力支持--%>
 				Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">DWSurvey</a>
 		</div>
 	</div>

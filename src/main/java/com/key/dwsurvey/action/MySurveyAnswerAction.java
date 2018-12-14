@@ -126,7 +126,6 @@ public class MySurveyAnswerAction extends ActionSupport{
 	    		SurveyDirectory survey=directoryManager.getSurveyByUser(surveyId, user.getId());
 	    		if(survey!=null){
 	    			savePath=surveyAnswerManager.exportXLS(surveyId,savePath);
-//	    			request.setAttribute("downPath", savePath);
 	    			response.sendRedirect(request.getContextPath()+savePath);
 	    		}
 	    	}

@@ -28,6 +28,7 @@
 </script>
 </head>
 <body>
+<%--<div><span>找不到人填问卷？加QQ群：457647860 互填互助完成调研作业</span></div>--%>
 <div id="wrap">
 <input type="hidden" id="id" name="id" value="${survey.id }">
 <input type="hidden" id="ctx" value="${ctx }">
@@ -45,7 +46,9 @@
 </div>
 </div>
 <div id="header_right">
-<div style="line-height: 22px;"><a href="${ctx }/design/my-survey.action">问卷</a>&nbsp;&nbsp;<a href="${ctx }/ic/user!myaccount.action">账号</a></div>
+<div style="line-height: 22px;">
+	<a href="${ctx }/design/my-survey.action">问卷</a>&nbsp;&nbsp;<a href="${ctx }/ic/user!myaccount.action">账号</a>
+</div>
 </div>
 </div>
 
@@ -2445,20 +2448,6 @@
 			<div class="dwQuDialogLogic dwQuDialogCon">
 				<div class="dwQuDialogLogicTitle">逻辑设置</div>
 				<table id="dwQuLogicTable">
-					<!-- <tr><td>如果本题选项选中</td>
-						<td><select name="option_id" class="option_select" ><option>任意选项</option></select></td>
-						<td>则跳转到</td>
-						<td><select name="jump_to_qid" class="jump_qid_select" ><option value="">-请选择题目-</option><option value="1">正常结束（计入结果）</option><option value="2">提前结束（不计入结果）</option></select></td>
-						<td><div class="dialogRemoveLogic"></div></td>
-					</tr> -->
-					<!-- <tr><td>如果选项</td>
-						<td><select name="option_id" class="option_select" style="width: 120px;"><option>任意选项</option></select>
-							评分&nbsp;<select name="option_id" class="option_select"  style="width: 60px;"><option>小于</option><option>大于</option></select>
-						<select name="option_id" class="option_select"  style="width: 40px;"><option>2</option><option>3</option></select>&nbsp;分,</td>
-						<td>则&nbsp;<select name="option_id" class="option_select"  style="width: 60px;"><option>显示</option><option>跳到</option></select> </td>
-						<td><select name="jump_to_qid" class="jump_qid_select" ><option value="" style="width: 140px;">-请选择题目-</option><option value="1">正常结束（计入结果）</option><option value="2">提前结束（不计入结果）</option></select></td>
-						<td><div class="dialogRemoveLogic"></div></td>
-					</tr> -->
 				</table>
 				<div class="dwQuDialogBotEvent"><div class="dwQuDialogAddLogic"><div class="dwQuIcon"></div></div></div>
 				<div class="dwQuDialogBtnCon" ><input type="button" value="保存" class="quDialogBtn" id="dwDialogSaveLogic"/></div>
@@ -2535,45 +2524,12 @@
 		
 		</div>
 </div>
-
-<!-- 
-设置填空题选项
-<div id="dwCommonInputMenuRoot"  >
-	<div class="dwCommonInputMenu">
-	<ul class="dwComEditMenuUl" >
-		<li><a href="javascript:;" class="SeniorEdit"><i class="menu_edit2_icon"></i>高级编辑</a></li>
-		<li><a href="javascript:;" class="reference_Set"><i class="menu_edit4_icon"></i>引用设置</a></li>
-	</ul>
-	<div class="dwComEditMenuBtn"></div>
-	</div>
-</div> -->
-
-<%-- 
-	逻辑题临时
-		<c:choose>
-			<c:when test="${empty en.questionLogics }">
-			<div class="quLogicData">
-				<div class="dwQuIcon"></div>
-				<div class="quLogicInfo">1</div>
-			</div>
-			</c:when>
-			<c:otherwise>
-			<div class="quLogicData" style="display: inline;">
-				<div class="dwQuIcon"></div>
-				<div class="quLogicInfo">1</div>
-			</div>
-			</c:otherwise>
-		</c:choose> 
-		--%>
 <script type="text/javascript">
-	<!-- 初始化属性 -->
-	//alert("${survey.surveyDetail.effectiveIp}");
 	if("${survey.surveyDetail.effective}">1){
 		$("input[name='effective']").attr("checked",true);	
 	}else{
 		$("input[name='effective']").attr("checked",false);
 	}
-	
 	$("input[name='effectiveIp'][value='${survey.surveyDetail.effectiveIp}']").attr("checked",true);
 	$("input[name='rule'][value='${survey.surveyDetail.rule}']").attr("checked",true);
 	$("input[name='ruleCode']").val("${survey.surveyDetail.ruleCode}");
@@ -2587,7 +2543,6 @@
 	$("input[name='showAnswerDa'][value='${survey.surveyDetail.showAnswerDa}']").attr("checked",true);
 </script>
 <%@ include file="/WEB-INF/page/layouts/other.jsp"%>
-
 <div style="text-align: center;">
 <div class="dw_foot" style="padding-bottom: 30px;">
 	<div class="footer-copyright" style="color: gray;padding-top: 0px;font-size: 16px;">
