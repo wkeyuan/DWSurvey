@@ -18,8 +18,12 @@
               <to>/nosm/response!input.action?year=$1&amp;month=$2&amp;day=$3&amp;parentId=$4</to>
        </rule>
         <rule>
-              <from>/wenjuan/(.*).html</from>
-              <to>/response.action?sid=$1</to>
+            <from>/wenjuan/(.*).html</from>
+            <to>/dwsurvey.action?sid=$1</to>
+        </rule>
+        <rule>
+              <from>/dwsurvey/(.*).html</from>
+              <to>/dwsurvey.action?sid=$1</to>
        </rule>
    <!--
     <rule>

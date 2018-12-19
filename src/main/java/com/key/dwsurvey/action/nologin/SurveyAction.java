@@ -36,8 +36,7 @@ import java.io.ByteArrayOutputStream;
 @Results({
 	@Result(name=SurveyAction.INDEXJSP,location="/index.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=SurveyAction.ANSERSURVEY,location="/WEB-INF/page/content/diaowen-design/answer-survey.jsp",type=Struts2Utils.DISPATCHER),
-	@Result(name=SurveyAction.ANSERSURVEY_MOBILE,location="/WEB-INF/page/content/diaowen-design/answer-survey-mobile.jsp",type=Struts2Utils.DISPATCHER),
-	@Result(name = ResponseAction.RESPONSE_MSG, location = "/WEB-INF/page/content/diaowen-answer/response-msg.jsp", type = Struts2Utils.DISPATCHER)
+	@Result(name=SurveyAction.ANSERSURVEY_MOBILE,location="/WEB-INF/page/content/diaowen-design/answer-survey-mobile.jsp",type=Struts2Utils.DISPATCHER)
 })
 
 @AllowedMethods({"answerSurvey","answerSurveryMobile","surveyModel","answerTD","ajaxCheckSurvey"})

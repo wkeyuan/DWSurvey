@@ -130,11 +130,11 @@
 									<span class="scmcSurveyLinkLeft">&nbsp;</span>
 									<span class="scmcSurveyLinkCenter"  id="linkTextarea" >
 									<%-- http://www.diaowen.net/wenjuan/${survey.sid }.html --%>
-									${baseUrl }/wenjuan/${survey.sid }.html
+									${baseUrl }/dwsurvey/${survey.sid }.html
 									</span>
 									<span class="scmcSurveyLinkRight"><span id="clipLinkSpan" style="display: none;">复制成功</span></span>
-									<a href="#" style="display: block;" class="clipLink" id="clipLink" data-clipboard-text="${baseUrl }/wenjuan/${survey.sid }.html">复制链接</a>
-									<a target="_blank" href="${baseUrl }/wenjuan/${survey.sid }.html" style="margin-left: 12px;background: rgb(130, 144, 154);width: 95px;height: 50px;text-align: center;border-radius: 3px;color: #ffffff;" >打开</a>
+									<a href="#" style="display: block;" class="clipLink" id="clipLink" data-clipboard-text="${baseUrl }/dwsurvey/${survey.sid }.html">复制链接</a>
+									<a target="_blank" href="${baseUrl }/dwsurvey/${survey.sid }.html" style="margin-left: 12px;background: rgb(130, 144, 154);width: 95px;height: 50px;text-align: center;border-radius: 3px;color: #ffffff;" >打开</a>
 								</div>
 							</div>
 						</div>

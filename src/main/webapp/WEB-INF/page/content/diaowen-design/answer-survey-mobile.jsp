@@ -111,7 +111,7 @@
 </style>
 </head>
 <body>
-<form id="surveyForm" action="${ctx }/response!saveMobile.action" method="post" data-ajax="false">
+<form id="surveyForm" action="${ctx }/dwsurvey!saveMobile.action" method="post" data-ajax="false">
 <input type="hidden" id="surveyId" name="surveyId" value="${survey.id }">
 <input type="hidden" name="form-from" value="mobile" >
 <div data-role="page" >

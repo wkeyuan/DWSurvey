@@ -72,7 +72,7 @@ label.error{
 <input type="hidden" id="surveyStyleId" value="${surveyStyle.id }">
 <input type="hidden" id="prevHost" value="${ctx }">
 
-<form id="surveyForm" action="${ctx }/response!save.action" method="post" >
+<form id="surveyForm" action="${ctx }/dwsurvey!save.action" method="post" >
 <input type="hidden" id="surveyId" name="surveyId" value="${survey.id }">
 <input type="hidden" id="sid" name="sid" value="${survey.sid }">
 <div id="dw_body" style="padding-top:10px;">
@@ -910,7 +910,7 @@ function refreshAutoCode(codeImgId){
 }
 
 //判则判断 
-var url="${ctx}/response!ajaxCheckSurvey.action";
+var url="${ctx}/dwsurvey!ajaxCheckSurvey.action";
 var data="surveyId=${survey.id}";
 $.ajax({
 	url:url,
