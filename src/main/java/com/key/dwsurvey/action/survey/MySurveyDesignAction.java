@@ -43,7 +43,7 @@ import java.util.List;
 @Namespace("/design")
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
 @Results({
-	@Result(name=ActionSupport.SUCCESS,location="/WEB-INF/page/content/diaowen-design/des-survey.jsp",type=Struts2Utils.DISPATCHER),
+	@Result(name=ActionSupport.SUCCESS,location="/WEB-INF/page/content/diaowen-design/design-survey.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=MySurveyDesignAction.PREVIEWDEV,location="/WEB-INF/page/content/diaowen-design/survey_preview_dev.jsp",type=Struts2Utils.DISPATCHER),
 	@Result(name=MySurveyDesignAction.COLLECTSURVEY,location="my-collect.action?surveyId=${surveyId}",type=Struts2Utils.REDIRECT),
 	@Result(name=MySurveyDesignAction.RELOADDESIGN,location="/design/my-survey-design.action?surveyId=${surveyId}",type=Struts2Utils.REDIRECT)

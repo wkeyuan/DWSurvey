@@ -143,7 +143,7 @@
 										<span class="scmcSurveyLinkLeft">&nbsp;</span>
 										<span class="scmcSurveyLinkCenter"  id="linkTextarea" >${baseUrl }/wenjuan/${survey.sid }.html</span>
 										<span class="scmcSurveyLinkRight"><span id="clipLinkSpan" style="display: none;">复制成功</span></span>
-										<a href="#" style="display: block;" class="clipLink" id="clipLink" data-clipboard-text="${baseUrl }/wenjuan/${survey.sid }.html">复制链接</a>
+										<span style="display: block;" class="clipLink" id="clipLink" data-clipboard-text="${baseUrl }/wenjuan/${survey.sid }.html">复制链接</span>
 									</div>
 								</div>
 							</div>
@@ -177,11 +177,13 @@
 	clipboard.on('success', function(e) {
 		$("#clipLinkSpan").text("复制成功");
 		$("#clipLinkSpan").show().delay(5000).fadeOut("slow");
+		return false;
 	});
 
 	clipboard.on('error', function(e) {
 		$("#clipLinkSpan").text("浏览器不支持！");
 		$("#clipLinkSpan").show().delay(5000).fadeOut("slow");
+		return false;
 	});
 
 </script>

@@ -35,8 +35,8 @@ import java.io.ByteArrayOutputStream;
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
 @Results({
 	@Result(name=SurveyAction.INDEXJSP,location="/index.jsp",type=Struts2Utils.DISPATCHER),
-	@Result(name=SurveyAction.ANSERSURVEY,location="/WEB-INF/page/content/diaowen-design/ans-survey-p.jsp",type=Struts2Utils.DISPATCHER),
-	@Result(name=SurveyAction.ANSERSURVEY_MOBILE,location="/WEB-INF/page/content/diaowen-design/ans-survey-m.jsp",type=Struts2Utils.DISPATCHER)
+	@Result(name=SurveyAction.ANSERSURVEY,location="/WEB-INF/page/content/diaowen-design/answer-survey-p.jsp",type=Struts2Utils.DISPATCHER),
+	@Result(name=SurveyAction.ANSERSURVEY_MOBILE,location="/WEB-INF/page/content/diaowen-design/answer-survey-m.jsp",type=Struts2Utils.DISPATCHER)
 })
 
 @AllowedMethods({"answerSurvey","answerSurveryMobile","surveyModel","answerTD","ajaxCheckSurvey"})
