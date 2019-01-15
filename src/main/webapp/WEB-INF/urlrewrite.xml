@@ -23,7 +23,7 @@
         </rule>
         <rule>
               <from>/dwsurvey/(.*).html</from>
-              <to>/dwsurvey.action?sid=$1</to>
+            <to>/dws-answer.action?sid=$1</to>
        </rule>
    <!--
     <rule>
