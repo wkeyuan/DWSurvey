@@ -52,7 +52,6 @@ public class DiaowenProperty extends
 	}
 */
 	public void diaowenInit(){
-		System.out.println("做点有意义事情。。。");
 		System.out.println(ServletActionContext.getContext());
 	}
 

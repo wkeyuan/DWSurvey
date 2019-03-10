@@ -56,7 +56,7 @@
 <div id="tools">
 <div class="tools_tabs">
 	<div class="tools_tabs_left"><ul><li class="current" id="tools_tab1_li">基本</li></ul></div>
-	<div class="tools_tabs_right"><ul><li style="padding: 0px;font-size: 12px;line-height: 28px;"><a href="http://www.dwsurvey.net/newbuy.html" target="_black" style="text-decoration: none;color: gray;">升级到高级版</a></li></ul></div>
+	<div class="tools_tabs_right"><ul><li style="padding: 0px;font-size: 12px;line-height: 28px;"><a href="http://www.diaowen.net/buy2.jsp" target="_black" style="text-decoration: none;color: gray;">升级到高级版</a></li></ul></div>
 </div>
 
 <div class="tools_contents">

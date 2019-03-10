@@ -6,4 +6,5 @@
  	<mapping path="/survey.*" exclue="true"/>
  	<mapping path="/dwsurvey*" exclue="true"/>
  	<!-- <mapping path="/da/my-survey-answer!responseAnswer.action" exclue="true"/> -->
+    <mapping path="/dws-answer*" exclue="true"/>
 </sitemesh>

@@ -111,7 +111,7 @@ button {
 										<td align="center">
 											<input type="hidden" name='surveyId' value="${en.id }">
 										</td>
-										<td align="left"><a target="_blank" href="${ctx }/wenjuan/${en.sid }.html" class="titleTag">${en.surveyName }</a></td>
+										<td align="left"><a target="_blank" href="${ctx }/dwsurvey/${en.sid }.html" class="titleTag">${en.surveyName }</a></td>
 										<td align="left" width="100" >${en.userName }</td>
 										<td align="left">
 											<fmt:formatDate value="${en.createDate }" pattern="yyyy年MM月dd日 HH:mm"/>

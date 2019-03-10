@@ -122,7 +122,7 @@
 									<!-- <span  id="clipLinkSpan"   style="display: none;font-size:16px;color:#80AA00;">复制成功</span> -->
 									</div>
 									<div class="scmcRightTopLeftNote">复制下面的问卷链接到QQ，Email等工具中直接发给被用户</div>
-									<div><span style="color: #d15985;line-height: 36px;">找不到人填问卷？加QQ群：811287103 互填互助快速完成调研</span></div>
+									<div><span style="color: #d15985;line-height: 36px;">找不到人填问卷？加QQ群：457647860 互填互助快速完成调研</span></div>
 								</div>
 							</div>
 							<div style="clear: both;"></div>

@@ -20,10 +20,6 @@
 			<list>
 				<!-- 标准配置 -->
 				<value>classpath*:/conf/application.properties</value>
-				<!-- 本地开发环境配置 -->
-				<value>classpath*:/conf/application.local.properties</value>
-				<!-- 服务器生产环境配置 -->
-				<value>classpath*:/conf/site/site.properties</value>
 			</list>
 		</property>
 	</bean>
