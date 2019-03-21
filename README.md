@@ -19,14 +19,6 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 	由于引用的外部jar在你本地maven仓库中可能没有，这时只要您本地有maven环境，执行下bin目录下面的文件就可以自动导入。
 
-## 环境配置说明
-
-    lib目录下的几个jar包可能是您中央仓库没有，所以运行时如果提示找不到相关jar
-
-    就请到bin目录下去执行jar导入命命，安装中央仓库缺失jar
-
-    可直接执行 install-lose-jar.sh/install-lose-jar.bat
-
 ### 配置说明、数据初始化
 
     先在您mysql导入/src/main/resources/conf/sql/目录下的dwsurvey.sql数据库脚本文件
@@ -52,11 +44,11 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 如果不想自己编译可以直接使用我们已经编译好的war包安装
 
-最新的war包下载可以前往交流QQ ```群1：635994795(满)```，```群2：301105635(可加)```
+最新的war包下载可以前往交流QQ ```群1：635994795(满)```，```群2：301105635(满)```, 群3：811287103(可加) （加群时请说明来由）
 
 下载最新的diaowen.war，再考到tomcat wabapps下
 
-打包环境：jdk1.8, tomcat8.0
+打包环境版本：jdk1.8, tomcat8.0
 
 外部解压命令：jar xvf diaowen.war
 
@@ -82,9 +74,9 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 对于调问网问卷系统安装及使用的问题，可以在用户交流群里，向作者或其它同学提问。
 
-调问网交流QQ群 ```群1：635994795(满)```，```群2：301105635(可加)```（加群时请说明从那知道的）
+调问网交流QQ群 ```群1：635994795(满)```，```群2：301105635(满)```, 群3：811287103(可加)（加群时请说明来由）
 
-## 源代码发布
+## 源代码地址
 
 github: https://github.com/wkeyuan/DWSurvey
 
@@ -93,49 +85,6 @@ gitee: http://gitee.com/wkeyuan/DWSurvey
 ## 开源协议
 
 DWSurvey以通用公共许可证AGPL3.0为开源协议，商业环境使用请购买商业授权！
-
-- - -
-
-## docker支持
-
-### 快速体验
-
-    # 启动一个 mysql 容器，等待初始化完成
-    docker-compose up -d db
-
-    # 启动 dwsurvey 容器
-    docker-compose up -d dwsurvey
-
-### 环境变量
-
-如果你有现成的mysql，你可以单独启动 dwsurvey 容器。
-
-    # docker pull wkeyuan/dwsurvey:latest
-    # docker run -d -e ... wkeyuan/dwsurvey:latest
-
-你可以通过环境变量来进行一些必要的配置，以下是所有支持的环境变量：
-
-| 变量名 | 必须 | 作用 |
-| ------ | ---- | ---- |
-| ``MYSQL_HOST`` | 是 | 数据库地址，可以是域名或者IP。 |
-| ``MYSQL_PORT`` | 否 | 数据库端口，默认为 ``3306`` 。 |
-| ``MYSQL_DATABASE`` | 是 | dwsurvey使用的数据库，必须事先创建好。 |
-| ``MYSQL_USER`` | 是 | 数据库帐号，必须实现创建好。 |
-| ``MYSQL_PASSWORD`` | 是 | 数据库帐号的密码。 |
-| ``ADMIN_EMAIL`` | 首次必须 | 初始帐号的邮箱。首次运行时必须，后续升级时不需要该变量。 |
-| ``ADMIN_PASSWORD`` | 首次必须 | 初始帐号的密码。 |
-| ``CONTEXT_ROOT`` | 否 | 默认为 ``/`` ，访问的URL根路径。|
-
-### 本地构建镜像
-
-由于使用了 multistage build 的特性，要求 docker 的版本大于 ``17.05`` 。
-
-    docker build -t dwsurvey .
-
-由于构建时需要从 maven 仓库下载大量依赖包，为了加快速度，你可以使用参数 ``LOCAL_MAVEN_MIRROR`` 来指定使用的 maven 镜像
-（默认为阿里云的镜像）。
-
-    docker build --build-arg LOCAL_MAVEN_MIRROR=http://your-mirror -t dwsurvey .
 
 - - -
 
