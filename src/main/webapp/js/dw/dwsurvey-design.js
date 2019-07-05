@@ -2703,67 +2703,23 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 		}
 		var dwQuOptionSel=lastTr.find(".logicQuOptionSel");
 		var eachTag=true;
-		if(quType==="CHENRADIO" || quType==="CHENCHECKBOX" || quType==="CHENSCORE" || quType==="CHENFBK"){
-			var quChenColumnTds=quItemBody.find(".quChenColumnTd");
-			var quChenRowTds=quItemBody.find(".quChenRowTd");
-			$.each(quChenRowTds,function(){
-				var rowText=$(this).find(".quCoOptionEdit").text();
-				var rowQuItemId=$(this).find("input[name='quItemId']").val();	
-				$.each(quChenColumnTds,function(){
-					var colText=$(this).find(".quCoOptionEdit").text();
-					var colQuItemId=$(this).find("input[name='quItemId']").val();
-					var optionId=rowQuItemId+":"+colQuItemId;
-					eachTag=true;
-					$.each(logicQuOptionSels,function(){
-						var selOptionVal=$(this).val();
-						if(selOptionVal==optionId){
-							eachTag=false;
-							return false;
-						}
-					});
-					if(eachTag){
-						dwQuOptionSel.append("<option value='"+optionId+"'>"+rowText+":"+colText+"</option>");	
-					}
-				});
-			});
-			
-			/*
-			$.each(quItemInputCases,function(){
+		$.each(quItemInputCases,function(){
 //				var optionText=$(this).prev().text();
-				var optionText=$(this).parent().find("label.quCoOptionEdit").text();
-				var optionId=$(this).find("input[name='quItemId']").val();
-				eachTag=true;
-				$.each(logicQuOptionSels,function(){
-					var selOptionVal=$(this).val();
-					if(selOptionVal==optionId){
-						eachTag=false;
-						return false;
-					}
-				});
-				//alert(optionText);
-				if(eachTag){
-					dwQuOptionSel.append("<option value='"+optionId+"'>"+optionText+"</option>");	
+			var optionText=$(this).parent().find("label.quCoOptionEdit").text();
+			var optionId=$(this).find("input[name='quItemId']").val();
+			eachTag=true;
+			$.each(logicQuOptionSels,function(){
+				var selOptionVal=$(this).val();
+				if(selOptionVal==optionId){
+					eachTag=false;
+					return false;
 				}
 			});
-			*/
-		}else{
-			$.each(quItemInputCases,function(){
-//				var optionText=$(this).prev().text();
-				var optionText=$(this).parent().find("label.quCoOptionEdit").text();
-				var optionId=$(this).find("input[name='quItemId']").val();
-				eachTag=true;
-				$.each(logicQuOptionSels,function(){
-					var selOptionVal=$(this).val();
-					if(selOptionVal==optionId){
-						eachTag=false;
-						return false;
-					}
-				});
-				if(eachTag){
-					dwQuOptionSel.append("<option value='"+optionId+"'>"+optionText+"</option>");	
-				}
-			});
-		}
+			if(eachTag){
+				dwQuOptionSel.append("<option value='"+optionId+"'>"+optionText+"</option>");
+			}
+		});
+
 		if(logicQuOptionSels.size()==0){
 			dwQuOptionSel.append("<option value='0'>任意选项</option>");	
 		}else{
@@ -2798,7 +2754,6 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 				}
 			}
 		});
-		logicQuSel.append("<option value='1'>正常结束（计入结果）</option><option value='2'>提前结束（不计入结果）</option>");
 		if(quType==="ORDERQU"){
 			dwQuOptionSel.empty();
 			dwQuOptionSel.append("<option value='0'>回答完成</option>");
