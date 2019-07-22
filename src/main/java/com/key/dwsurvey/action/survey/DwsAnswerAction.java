@@ -153,6 +153,7 @@ public class DwsAnswerAction extends ActionSupport {
             }
             String htmlPath = directory.getHtmlPath();
             htmlPath = htmlPath.substring(0,htmlPath.lastIndexOf("/"));
+            response.setContentType("text/html;charset=utf-8");
             request.getRequestDispatcher("/" + htmlPath+"/m_"+surveyId+".html").forward(request,response);
             return NONE;
         }
