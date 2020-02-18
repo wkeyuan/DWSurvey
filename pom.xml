@@ -588,7 +588,7 @@
   </build>
   <properties>
   	 <org.springframework.version>3.1.2.RELEASE</org.springframework.version>
-	  <org.struts2.version>2.5.13</org.struts2.version>
+	  <org.struts2.version>2.5.22</org.struts2.version>
      <log4j.version>2.0</log4j.version>
      <commons.fileupload.version>1.2.1</commons.fileupload.version>
      <cxf.version>3.0.2</cxf.version>
