@@ -12,7 +12,8 @@
 <script type="text/javascript" src="${ctx }/js/plugs/colpick-jQuery/js/colpick.js"></script>
 <link href="${ctx }/js/plugs/uploadify-v3.1/uploadify.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx }/js/plugs/uploadify-v3.1/jquery.uploadify-3.1.js"></script>
-<script type="text/javascript" src="${ctx }/js/dw/uploadify.js"></script><script type="text/javascript" src="${ctx }/js/common/common.js"></script><script type="text/javascript" src="${ctx }/js/common/ans-p.js"></script>
+<script type="text/javascript" src="${ctx }/js/dw/uploadify.js"></script>
+	<script type="text/javascript" src="${ctx }/js/common/common.js"></script><script type="text/javascript" src="${ctx }/js/common/ans-p.js"></script>
 <script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
 <link href="${ctx }/css/preview-dev.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${ctx }/js/plugs/colpick-jQuery/css/colpick.css" type="text/css"/>

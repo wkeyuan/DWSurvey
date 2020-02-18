@@ -8,7 +8,7 @@
   <name>diaowen Maven Webapp</name>
   <url>https://github.com/wkeyuan/DWSurvey</url>
 
-	<repositories>
+<!--	<repositories>
 		<repository>
 			<snapshots>
 				<enabled>true</enabled>
@@ -17,7 +17,7 @@
 			<name>DWSurveyRepostiory</name>
 			<url>http://maven.dwsurvey.net:8081/repository/maven-public/</url>
 		</repository>
-	</repositories>
+	</repositories>-->
 
 	<dependencies>
 

@@ -147,10 +147,10 @@
 								<div style="padding-top: 15px;overflow: auto;clear: both;">
 								<div class="scmcSurveyTdCode">
 									<%-- <img alt="" src="${ctx }/images/style-model/secode.png" height="130" > --%>
-									<img alt="" src="${ctx }/survey!answerTD.action?surveyId=${survey.id}" height="130" >
+									<img alt="" src="${ctx }/survey!answerTD.action?sid=${survey.sid}" height="130" >
 								</div>
 								<div class="scmcRightTopRight" style="float: left ;padding-left: 30px;">
-									<a href="${ctx }/survey!answerTD.action?surveyId=${survey.id}&down" class="sbtn25 sbtn25_1">下载二维码</a>
+									<a href="${ctx }/survey!answerTD.action?sid=${survey.sid}&down" class="sbtn25 sbtn25_1">下载二维码</a>
 									<div class="scmcRightTopLeftNote" style="width: 100px;padding-top: 25px;">复制下面的问卷链接到QQ，Email等工具中直接发给被用户</div>
 								</div>
 								</div>

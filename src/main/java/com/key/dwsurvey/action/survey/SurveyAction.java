@@ -111,7 +111,7 @@ public class SurveyAction extends ActionSupport{
 					+ request.getContextPath();
 
 	    	try{
-				String encoderContent=baseUrl+"/response!answerMobile.action?surveyId="+surveyId;
+				String encoderContent=baseUrl+"/dwsurvey/"+sid+".html";
 				ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
 				BufferedImage twoDimensionImg = ZxingUtil.qRCodeCommon(encoderContent, "jpg", 7);
 				ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);

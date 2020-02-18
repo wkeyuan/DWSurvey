@@ -14,16 +14,6 @@
 			</div>
 			<shiro:guest>
 				<div class="header_Item header_menu">
-				<ul>
-				<%--<li><a href="/" class="active dw-menu-a" id="indexMenu">首页</a></li>--%>
-				<%--<li><a href="/feature.jsp" class="dw-menu-a" id="featureMenu">功能</a></li>--%>
-				<%--<li><a href="${ctx }/survey-model.action" class="dw-menu-a">下载</a></li>--%>
-				<%--<li><a href="${ctx }/survey-model.action" class="dw-menu-a">帮助</a></li>--%>
-				<%--<li><a href="${ctx }/survey-model.action" class="dw-menu-a">GITHUB</a></li>--%>
-				<!--
-				<li><a href="http://support.diaowen.net/" class="dw-menu-a" id="helpMenu">帮助</a></li>
-				-->
-				</ul>
 				</div>
 				<div class="header_Item header_user" style="float: right;">
 					<a href="${ctx }/login.jsp" class="btn-a-1">登录</a>
