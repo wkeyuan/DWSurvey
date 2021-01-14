@@ -111,7 +111,7 @@
 	<dependency>
 		<groupId>org.apache.poi</groupId>
 		<artifactId>poi</artifactId>
-		<version>3.7</version>
+		<version>3.17</version>
 	</dependency>
 
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
