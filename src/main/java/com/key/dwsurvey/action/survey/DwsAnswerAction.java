@@ -197,8 +197,9 @@ public class DwsAnswerAction extends ActionSupport {
             entity.setDataSource(0);
             surveyAnswerManager.saveAnswer(entity, quMaps);
             int effe = surveyDetail.getEffectiveTime();
+
             CookieUtils.addCookie(response, surveyId, (ipNum + 1) + "",
-                    effe * 60, "/");
+                    effe * 60, request.getContextPath());
         } catch (Exception e) {
             e.printStackTrace();
             return RELOAD_ANSWER_FAILURE;
@@ -248,7 +249,7 @@ public class DwsAnswerAction extends ActionSupport {
 
             int effe = surveyDetail.getEffectiveTime();
             CookieUtils.addCookie(response, surveyId, (ipNum + 1) + "",
-                    effe * 60, "/");
+                    effe * 60, request.getContextPath());
         } catch (Exception e) {
             e.printStackTrace();
             return RELOAD_ANSWER_FAILURE;
