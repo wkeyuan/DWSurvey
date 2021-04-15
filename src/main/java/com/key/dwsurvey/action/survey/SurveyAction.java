@@ -41,14 +41,14 @@ import java.io.ByteArrayOutputStream;
 
 @AllowedMethods({"answerSurvey","answerSurveryMobile","surveyModel","answerTD","ajaxCheckSurvey"})
 public class SurveyAction extends ActionSupport{
-	
+
 	protected final static String INDEXJSP="indexJsp";
 	protected final static String ANSERSURVEY="answerSurvey";
 	protected final static String ANSERSURVEY_MOBILE="answerSurveyMobile";
 	protected final static String SURVEYMODEL="surveyModel";
 	protected final static String ANSWER_INPUT_ERROR = "answerInputError";//已经答过，在间隔时间内
 	protected final static String ANSWER_INPUT_RULE = "answer_input_rule";//令牌
-	
+
 	@Autowired
 	private SurveyDirectoryManager surveyDirectoryManager;
 	@Autowired
@@ -87,7 +87,7 @@ public class SurveyAction extends ActionSupport{
 		buildSurvey(survey);
 	    return ANSERSURVEY_MOBILE;
 	}
-	
+
 	private void buildSurvey(SurveyDirectory survey) {
 		if (survey==null)
 		survey=surveyDirectoryManager.getSurvey(surveyId);
@@ -102,7 +102,7 @@ public class SurveyAction extends ActionSupport{
 	public String answerTD() throws Exception{
 	    	HttpServletRequest request=Struts2Utils.getRequest();
 	    	HttpServletResponse response=Struts2Utils.getResponse();
-	    	
+
 	    	String down=request.getParameter("down");
 
 			String baseUrl = "";
@@ -111,6 +111,13 @@ public class SurveyAction extends ActionSupport{
 					+ request.getContextPath();
 
 	    	try{
+
+	    		if(sid==null && surveyId!=null){
+	    			SurveyDirectory surveyDirectory = surveyDirectoryManager.getSurvey(surveyId);
+	    			if(surveyDirectory!=null){
+						sid = surveyDirectory.getSid();
+					}
+				}
 				String encoderContent=baseUrl+"/dwsurvey/"+sid+".html";
 				ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
 				BufferedImage twoDimensionImg = ZxingUtil.qRCodeCommon(encoderContent, "jpg", 7);

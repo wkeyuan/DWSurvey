@@ -2,12 +2,18 @@
 
 DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
 
-![DWSurveyDesign](http://file.diaowen.net/images/gif/dwsurvey-2.gif)
-
+![可视化问卷设计](http://file.diaowen.net/images/gif/dwsurvey-2.gif "可视化问卷编辑器")
 
 ## 演示地址
 
-[http://www.diaowen.net](http://www.diaowen.net)
+开源版服务，开放源代码，可独立部署。
+
+ 地址：[http://www.diaowen.net](http://www.diaowen.net)
+
+企业版在线服务，功能更丰富，不需要部署，可直接发布问卷进行数据收集。
+
+ 地址：[https://www.surveyform.cn](https://www.surveyform.cn)
+
 
 ## 安装
 
@@ -15,7 +21,7 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 ### 安装说明
 
-	服务器必须安装由 JAVA 1.6+、MySQL、Apache Tomcat 构成的环境
+	服务器必须安装由 JAVA 1.6+、MySQL、Apache Tomcat 8.0 构成的环境
 
 	由于引用的外部jar在你本地maven仓库中可能没有，这时只要您本地有maven环境，执行下bin目录下面的文件就可以自动导入。
 
