@@ -21,13 +21,6 @@
 
 	<dependencies>
 
-
-		<dependency>
-			<groupId>net.spssw</groupId>
-			<artifactId>spssw</artifactId>
-			<version>1.66</version>
-		</dependency>
-
 		<dependency>
 			<groupId>com.baidu</groupId>
 			<artifactId>ueditor</artifactId>
