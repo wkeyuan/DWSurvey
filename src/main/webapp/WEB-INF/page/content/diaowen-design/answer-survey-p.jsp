@@ -49,7 +49,7 @@
  .progressbarDiv .ui-progressbar-value{
 	background: #83AE00! important;
 	border: none;
-} 
+}
 .ui-progressbar .ui-progressbar-value{
 	margin: 0px;
 }
@@ -101,7 +101,7 @@ label.error{
 			<ul id="dwSurveyQuContentAppUl">
 				<!-- 题目内容 -->
 				<c:forEach items="${survey.questions }" var="en" varStatus="i">
-				
+
 				<c:choose>
 					<c:when test="${en.quType eq 'RADIO' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
@@ -125,7 +125,7 @@ label.error{
 								</div>
 							</div>
 							<div class="surveyQuItem">
-								
+
 								<div class="surveyQuItemContent">
 									<div class="quCoTitle">
 										<div class="quCoNum">${i.count }、</div>
@@ -188,12 +188,12 @@ label.error{
 									</c:choose>
 									</div>
 								</div>
-								
+
 							</div>
 					</div>
 					</li>
 					</c:when>
-					
+
 					<c:when test="${en.quType eq 'CHECKBOX' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
 						<div class="surveyQuItemBody">
@@ -217,7 +217,7 @@ label.error{
 								<input type="hidden" name="qu_${en.quType }_${en.id }" value="tag_qu_${en.quType }_${en.id }_" />
 							</div>
 							<div class="surveyQuItem">
-								
+
 								<div class="surveyQuItemContent">
 									<div class="quCoTitle">
 										<div class="quCoNum">${i.count }、</div>
@@ -279,14 +279,14 @@ label.error{
 										</c:otherwise>
 									</c:choose>
 									</div>
-									
+
 								</div>
-								
+
 							</div>
 					</div>
 					</li>
 					</c:when>
-					
+
 					<c:when test="${en.quType eq 'FILLBLANK' }">
 						<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
 							<div class="surveyQuItemBody">
@@ -397,12 +397,12 @@ label.error{
 										<div style="clear: both;"></div>
 									</div>
 								</div>
-								
+
 							</div>
 					</div>
 					</li>
 					</c:when>
-					
+
 					<%-- 分页题 --%>
 					<c:when test="${en.quType eq 'PAGETAG' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
@@ -438,7 +438,7 @@ label.error{
 					</div>
 					</li>
 					</c:when>
-					
+
 					<%--段落说明 --%>
 					<c:when test="${en.quType eq 'PARAGRAPH' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
@@ -469,7 +469,7 @@ label.error{
 					</div>
 					</li>
 					</c:when>
-					
+
 					<%--多项填空题 --%>
 					<c:when test="${en.quType eq 'MULTIFILLBLANK' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
@@ -493,7 +493,7 @@ label.error{
 								<input type="hidden" name="qu_${en.quType }_${en.id }" value="text_qu_${en.quType }_${en.id }_" />
 							</div>
 							<div class="surveyQuItem">
-								
+
 								<div class="surveyQuItemContent">
 									<div class="quCoTitle">
 										<div class="quCoNum">${i.count }、</div>
@@ -511,26 +511,26 @@ label.error{
 										</tr>
 										</c:forEach>
 									</table>
-									
+
 									</div>
 								</div>
-								
+
 							</div>
 					</div>
 					</li>
 					</c:when>
 
 				</c:choose>
-				
+
 				</c:forEach>
-				
-				
+
+
 				<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
 					<div class="surveyQuItemBody">
 							<div class="surveyQuItem">
 								<!-- <div class="pageBorderTop nohover"  ></div> -->
 								<div id="jcaptchaImgBody" class="r-qu-body" style="display: none;">
-									
+
 									<div class="frmItem" style="">
 										<label for="" class="frm_label">验证码</label>
 										<div class="frm_controls">
@@ -562,7 +562,7 @@ label.error{
 							</div>
 					</div>
 				</li>
-				
+
 			</ul>
 			</div>
 		</div>
@@ -571,7 +571,7 @@ label.error{
 			<div class="progress-label">完成度：0%</div>
 			<div id="resultProgress" class="progressbarDiv"></div>
 		</div>
-		
+
 	</div>
 </div>
 </form>
@@ -582,7 +582,7 @@ label.error{
 <div class="footer-copyright footer-pb" style="color: gray;padding-bottom: 5px;">
 		Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;">DWSurvey</a>&nbsp;
 </div>
-		
+
 <div id="fixedMsg" style="position: fixed;top: 0px;width: 100%;padding: 10px;text-align: center;font-size: 18px;letter-spacing: 4px;line-height: 56px;background-color: #111;background-color: rgba(17,17,17,0.5);color: #fff;color: rgba(255,255,255,0.5);z-index: 200;display: none;"></div>
 <script type="text/javascript">
 var bfbFloat=0;
@@ -593,8 +593,8 @@ function refreshAutoCode(codeImgId){
 	$("#"+codeImgId).attr("src",ctx+"/jcaptcha.action");
 }
 
-//判则判断 
-var url="${ctx}/dwsurvey!ajaxCheckSurvey.action";
+//判则判断
+var url="${ctx}/dws-answer!ajaxCheckSurvey.action";
 var data="surveyId=${survey.id}";
 $.ajax({
 	url:url,
@@ -605,7 +605,7 @@ $.ajax({
 		if(json.isCheckCode==="3"){
 			$("#jcaptchaImgBody").show();
 		}
-		
+
 		if(json.surveyStatus!="0"){
 			$("#fixedMsg").show();
 			$("#fixedMsg").html("您已经回答过此问卷！");

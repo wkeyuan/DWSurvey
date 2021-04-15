@@ -205,7 +205,7 @@ $(document).ready(function(){
     }
 
 //判则判断
-    var url= ctx + "/response!ajaxCheckSurvey.action";
+    var url= ctx + "/dws-answer!ajaxCheckSurvey.action";
     var surveyId = $("#surveyId").val();
     var data="surveyId="+surveyId;
     $.ajax({
