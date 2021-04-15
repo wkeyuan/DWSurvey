@@ -23,11 +23,6 @@
 
 
 		<dependency>
-			<groupId>net.xssprotect</groupId>
-			<artifactId>xssprotest</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-		<dependency>
 			<groupId>net.spssw</groupId>
 			<artifactId>spssw</artifactId>
 			<version>1.66</version>
@@ -45,7 +40,7 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    
+
 <!-- https://mvnrepository.com/artifact/com.sun.xml.security/xml-security-impl -->
 	<dependency>
 		<groupId>com.sun.xml.security</groupId>
@@ -133,32 +128,32 @@
 		    <artifactId>mimepull</artifactId>
 		    <version>1.4</version>
 	</dependency>
-	
+
     <dependency>
 		    <groupId>javax.mail</groupId>
 		    <artifactId>mail</artifactId>
 		    <version>1.4.4</version>
 	</dependency>
-	
+
     <dependency>
 		    <groupId>com.itextpdf.tool</groupId>
 		    <artifactId>xmlworker</artifactId>
 		    <version>5.4.3</version>
 	</dependency>
-	
+
      <dependency>
 		    <groupId>org.apache.xbean</groupId>
 		    <artifactId>xbean-spring</artifactId>
 		    <version>3.12</version>
 	</dependency>
-    
+
      <dependency>
 		    <groupId>org.tuckey</groupId>
 		    <artifactId>urlrewritefilter</artifactId>
 		    <version>4.0.3</version>
 	</dependency>
-    
-    
+
+
      <dependency>
 		    <groupId>org.apache.struts</groupId>
 		    <artifactId>struts2-spring-plugin</artifactId>
@@ -176,7 +171,7 @@
 		    <artifactId>struts2-convention-plugin</artifactId>
 		    <version>${org.struts2.version}</version>
 		</dependency>
-		
+
     <dependency>
 		    <groupId>org.apache.struts</groupId>
 		    <artifactId>struts2-convention-plugin</artifactId>
@@ -188,7 +183,7 @@
 		    <artifactId>hibernate-validator</artifactId>
 		    <version>4.2.0.Final</version>
 		</dependency>
-		
+
 	<dependency>
 		    <groupId>org.hibernate.javax.persistence</groupId>
 		    <artifactId>hibernate-jpa-2.0-api</artifactId>
@@ -201,55 +196,55 @@
 		    <artifactId>hibernate-commons-annotations</artifactId>
 		    <version>3.2.0.Final</version>
 		</dependency>
-		
+
     <dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-core</artifactId>
 		    <version>3.6.8.Final</version>
 		</dependency>
 
-		
+
 		<dependency>
 		    <groupId>com.baidubce</groupId>
 		    <artifactId>bce-java-sdk</artifactId>
 		    <version>0.10.5</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>com.aliyun.oss</groupId>
 		    <artifactId>aliyun-sdk-oss</artifactId>
 		    <version>2.0.3</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/core-renderer -->
 <dependency>
     <groupId>org.xhtmlrenderer</groupId>
     <artifactId>core-renderer</artifactId>
     <version>R8</version>
 </dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 <dependency>
     <groupId>org.json</groupId>
     <artifactId>json</artifactId>
     <version>20160810</version>
 </dependency>
-		
-		
+
+
 		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
 <dependency>
     <groupId>org.apache.activemq</groupId>
     <artifactId>activemq-all</artifactId>
     <version>5.8.0</version>
 </dependency>
-		
-		
+
+
      	<dependency>
 		    <groupId>org.apache.activemq</groupId>
 		    <artifactId>activeio-core</artifactId>
 		    <version>3.1.4</version>
 		</dependency>
-		
+
 		 <!-- Spring -->
 	    <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
 		<dependency>
@@ -269,7 +264,7 @@
 			<artifactId>spring-jms</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		
+
 	    <dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-context</artifactId>
@@ -305,7 +300,7 @@
             <artifactId>spring-expression</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -338,7 +333,7 @@
 			<version>2.2.2</version>
 		</dependency>
 
-		
+
         <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
 		<dependency>
 		    <groupId>commons-logging</groupId>
@@ -351,13 +346,13 @@
             <artifactId>commons-codec</artifactId>
             <version>1.4</version>
         </dependency>
-        
+
        <dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-lang3</artifactId>
 		    <version>3.6</version>
 		</dependency>
-        
+
         <dependency>
 		    <groupId>commons-lang</groupId>
 		    <artifactId>commons-lang</artifactId>
@@ -369,7 +364,7 @@
             <artifactId>commons-httpclient</artifactId>
             <version>3.0.1</version>
         </dependency>
-    
+
 	   <dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpcore</artifactId>
@@ -381,7 +376,7 @@
     		<artifactId>httpclient</artifactId>
     		<version>4.5.2</version>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>org.apache.httpcomponents</groupId>
     		<artifactId>httpclient-cache</artifactId>
@@ -392,38 +387,38 @@
     		<artifactId>httpcore-nio</artifactId>
     		<version>4.4.5</version>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>org.apache.httpcomponents</groupId>
     		<artifactId>httpmime</artifactId>
     		<version>4.5.2</version>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>com.fasterxml.jackson.core</groupId>
     		<artifactId>jackson-annotations</artifactId>
     		<version>2.1.1</version>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>com.fasterxml.jackson.core</groupId>
     		<artifactId>jackson-core</artifactId>
     		<version>2.1.1</version>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>com.fasterxml.jackson.core</groupId>
     		<artifactId>jackson-databind</artifactId>
     		<version>2.1.1</version>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>com.sun.jersey</groupId>
     		<artifactId>jersey-client</artifactId>
     		<version>1.19.1</version>
 		</dependency>
-		
-		
+
+
 		<!-- log4j2 -->
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
@@ -445,8 +440,8 @@
 			<artifactId>log4j-api</artifactId>
 			<version>2.7</version>
 		</dependency>
-		
-        
+
+
          <!--utils-->
  		 <dependency>
             <groupId>com.google.guava</groupId>
@@ -458,8 +453,8 @@
             <artifactId>guava</artifactId>
             <version>17.0</version>
         </dependency>
-        
-        
+
+
          <!-- 读取字节码包 -->
         <dependency>
             <groupId>org.javassist</groupId>
@@ -471,7 +466,7 @@
             <artifactId>shiro-all</artifactId>
             <version>1.2.1</version>
         </dependency>
-        
+
 		<dependency>
 		    <groupId>commons-beanutils</groupId>
 		    <artifactId>commons-beanutils</artifactId>
@@ -483,7 +478,7 @@
 		    <artifactId>dozer</artifactId>
 		    <version>5.3.2</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>net.sf.json-lib</groupId>
 		    <artifactId>json-lib</artifactId>
@@ -496,7 +491,7 @@
 		    <artifactId>slf4j-log4j12</artifactId>
 		    <version>1.6.0</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>jstl</artifactId>
@@ -510,7 +505,7 @@
 		    <version>1.1.2</version>
 		    <type>jar</type>
 		</dependency>
-		
+
 		   <!-- servlet3 -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -518,14 +513,14 @@
             <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
 			<scope>provided</scope>
 	   </dependency>
-	   
+
 	   <!-- https://mvnrepository.com/artifact/antlr/antlr -->
 		<dependency>
 			<groupId>antlr</groupId>
