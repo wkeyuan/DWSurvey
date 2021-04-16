@@ -98,6 +98,10 @@ public class DwsAnswerAction extends ActionSupport {
         if (directory != null) {
             surveyId = directory.getId();
             String filterStatus = filterStatus(directory,request);
+
+            request.setCharacterEncoding("utf-8");
+            response.setContentType("text/html;charset=utf-8");
+
             if(filterStatus!=null){
                 return filterStatus;
             }
@@ -148,12 +152,13 @@ public class DwsAnswerAction extends ActionSupport {
         SurveyDirectory directory = directoryManager.getSurvey(surveyId);
         if (directory != null) {
             String filterStatus = filterStatus(directory,request);
+            request.setCharacterEncoding("utf-8");
+            response.setContentType("text/html;charset=utf-8");
             if(filterStatus!=null){
                 return filterStatus;
             }
             String htmlPath = directory.getHtmlPath();
             htmlPath = htmlPath.substring(0,htmlPath.lastIndexOf("/"));
-            response.setContentType("text/html;charset=utf-8");
             request.getRequestDispatcher("/" + htmlPath+"/m_"+surveyId+".html").forward(request,response);
             return NONE;
         }
