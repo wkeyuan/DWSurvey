@@ -14,6 +14,7 @@ import com.key.dwsurvey.service.SurveyDirectoryManager;
 import com.key.dwsurvey.service.SurveyReqUrlManager;
 import com.key.dwsurvey.service.SurveyStyleManager;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.*;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class MySurveyDesignAction extends ActionSupport{
 	protected final static String PREVIEWDEV="previewDev";
 	protected final static String COLLECTSURVEY="collectSurvey";
 	protected final static String RELOADDESIGN="reloadDesign";
-	
+
 	@Autowired
 	private QuestionManager questionManager;
 	@Autowired
@@ -67,19 +69,19 @@ public class MySurveyDesignAction extends ActionSupport{
 	private AccountManager accountManager;
 
 	private String surveyId;
-	
+
 	@Override
 	public String execute() throws Exception {
 		buildSurvey();
 		return SUCCESS;
 	}
-	
+
 	public String previewDev() throws Exception {
 		buildSurvey();
-		
+
 		return PREVIEWDEV;
 	}
-	
+
 	public String devSurvey() throws Exception {
 		SurveyDirectory survey=surveyDirectoryManager.get(surveyId);
 		Date createDate=survey.getCreateDate();
@@ -105,7 +107,7 @@ public class MySurveyDesignAction extends ActionSupport{
 		}
 		return COLLECTSURVEY;
 	}
-	
+
 	private void buildSurvey() {
 		//判断是否拥有权限
 		User user= accountManager.getCurUser();
@@ -122,7 +124,7 @@ public class MySurveyDesignAction extends ActionSupport{
 				Struts2Utils.setReqAttribute("survey", surveyDirectory);
 				SurveyStyle surveyStyle=surveyStyleManager.getBySurveyId(surveyId);
 				Struts2Utils.setReqAttribute("surveyStyle", surveyStyle);
-				
+
 				Struts2Utils.setReqAttribute("prevHost", DiaowenProperty.STORAGE_URL_PREFIX);
 			}else{
 				Struts2Utils.setReqAttribute("msg", "未登录或没有相应数据权限");
@@ -151,15 +153,15 @@ public class MySurveyDesignAction extends ActionSupport{
 		String endTime=request.getParameter("endTime");
 		String showShareSurvey=request.getParameter("showShareSurvey");
 		String showAnswerDa=request.getParameter("showAnswerDa");
-		
-		
+
+
 		SurveyDirectory survey=surveyDirectoryManager.getSurvey(surveyId);
 		SurveyDetail surveyDetail=survey.getSurveyDetail();
 		User user= accountManager.getCurUser();
 		if(user!=null && survey!=null){
 			String userId=user.getId();
 			if(userId.equals(survey.getUserId())){
-				
+
 				if( svyNote!=null){
 					svyNote=URLDecoder.decode(svyNote,"utf-8");
 					surveyDetail.setSurveyNote(svyNote);
@@ -190,13 +192,15 @@ public class MySurveyDesignAction extends ActionSupport{
 				    surveyDetail.setYnEndNum(Integer.parseInt(ynEndNum));
 				    //surveyDetail.setEndNum(Integer.parseInt(endNum));
 				    if(endNum!=null && endNum.matches("\\d*")){
-					surveyDetail.setEndNum(Integer.parseInt(endNum));			
+					surveyDetail.setEndNum(Integer.parseInt(endNum));
 				    }
 				}
 				if(ynEndTime!=null && !"".equals(ynEndTime)){
 				    surveyDetail.setYnEndTime(Integer.parseInt(ynEndTime));
-//				    surveyDetail.setEndTime(endTime);
-				    surveyDetail.setEndTime(new Date());
+				    if(endTime!=null){
+						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						surveyDetail.setEndTime(simpleDateFormat.parse(endTime));
+					}
 				}
 				if(showShareSurvey!=null && !"".equals(showShareSurvey)){
 				    surveyDetail.setShowShareSurvey(Integer.parseInt(showShareSurvey));
@@ -206,17 +210,17 @@ public class MySurveyDesignAction extends ActionSupport{
 				    surveyDetail.setShowAnswerDa(Integer.parseInt(showAnswerDa));
 				    survey.setViewAnswer(Integer.parseInt(showAnswerDa));
 				}
-				
+
 				surveyDirectoryManager.save(survey);
 
 				response.getWriter().write("true");
-				
+
 			}
 		}
-		
+
 		return NONE;
 	}
-	
+
 	public String getSurveyId() {
 		return surveyId;
 	}
@@ -238,7 +242,7 @@ public class MySurveyDesignAction extends ActionSupport{
 		surveyId=directory.getId();
 		return RELOADDESIGN;
 	}
-	
+
 	private void buildSurveyHtml() throws Exception{
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
@@ -251,7 +255,7 @@ public class MySurveyDesignAction extends ActionSupport{
 		// 这是生成的html文件名,如index.htm.
 		name = "/survey.htm";
 		name = sc.getRealPath(name);
-		
+
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 
@@ -264,7 +268,7 @@ public class MySurveyDesignAction extends ActionSupport{
 				os.write(b);
 			}
 		};
-		
+
 		final PrintWriter pw = new PrintWriter(new OutputStreamWriter(os,"utf-8"));
 
 		HttpServletResponse rep = new HttpServletResponseWrapper(response) {
@@ -280,17 +284,17 @@ public class MySurveyDesignAction extends ActionSupport{
 //		rd.include(request, rep);
 		rd.forward(request,rep);
 		pw.flush();
-		
+
 		// 把jsp输出的内容写到xxx.htm
 		File file = new File(name);
 		if (!file.exists()) {
 			file.createNewFile();
 		}
 		FileOutputStream fos = new FileOutputStream(file);
-		
+
 		os.writeTo(fos);
 		fos.close();
 	}
 
-	
+
 }

@@ -2,7 +2,7 @@
 
 DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
 
-![可视化问卷设计](http://file.diaowen.net/images/gif/dwsurvey-2.gif "可视化问卷编辑器")
+<img src="http://file.diaowen.net/images/gif/dwsurvey-2.gif" alt="可视化问卷设计" align="bottom" />
 
 ## 演示地址
 
@@ -81,6 +81,9 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 对于调问网问卷系统安装及使用的问题，可以在用户交流群里，向作者或其它同学提问。
 
 调问网交流QQ群 ```群1：635994795(满)```，```群2：301105635(满)```, 群3：811287103(可加)（加群时请说明来由）
+
+微信：
+<img src="https://www.surveyform.cn/images/dwsurvey_wx_28261618534356.jpg" alt="图片替换文本" width="200" height="200" align="top" />
 
 ## 源代码地址
 
