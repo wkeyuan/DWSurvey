@@ -11,7 +11,8 @@
 <script type="text/javascript" src="${ctx }/js/plugs/jquery-ui-1.10.3.custom/js/jquery-1.10.1.js"></script>
 <script type="text/javascript" src="${ctx }/js/plugs/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/responsive-width.js"></script>
-<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
+<%--<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>--%>
+	<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/laydate/laydate.js"></script>
 <sitemesh:write property='head' />
 <link href="${ctx }/css/dw-user.css" rel="stylesheet" type="text/css" />
 <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -21,8 +22,8 @@
 	<input type="hidden" id="ctx" name="ctx" value="${ctx }">
 	<%@ include file="/WEB-INF/page/layouts/header.jsp"%>
 	<sitemesh:write property='body' />
-	
-	
+
+
 	<div class="dw_foot" style="padding-top:20px;">
 		<%@ include file="/WEB-INF/page/layouts/footer-1.jsp"%>
 
@@ -34,8 +35,8 @@
 		</div>
 		<!-- 必须保留声明 end -->
 	</div>
-	
-	
+
+
 	</div>
 	<%@ include file="/WEB-INF/page/layouts/other.jsp"%>
 <script type="text/javascript">

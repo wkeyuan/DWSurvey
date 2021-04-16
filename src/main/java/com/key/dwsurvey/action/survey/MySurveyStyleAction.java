@@ -30,7 +30,7 @@ import java.util.Date;
 @InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack")})
 @Results({})
 public class MySurveyStyleAction extends CrudActionSupport<SurveyStyle, String>{
-	
+
 	private String surveyId;
 	@Autowired
 	private SurveyStyleManager surveyStyleManager;
@@ -38,14 +38,15 @@ public class MySurveyStyleAction extends CrudActionSupport<SurveyStyle, String>{
 	private SurveyDirectoryManager surveyDirectoryManager;
 	@Autowired
 	private AccountManager accountManager;
-	
+
 	public String save() throws Exception  {
+
 		return NONE;
 	}
-	
+
 	public String ajaxGetStyle() throws Exception {
 	    return null;
 	}
 
-	
+
 }

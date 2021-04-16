@@ -3,6 +3,7 @@ package com.key.dwsurvey.action.survey;
 import com.key.common.base.action.CrudActionSupport;
 import com.key.common.base.entity.User;
 import com.key.common.base.service.AccountManager;
+import com.key.common.utils.web.JsonDateValueProcessor;
 import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.entity.SurveyDirectory;
 import com.key.dwsurvey.service.SurveyDirectoryManager;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * 我的问卷 action
@@ -30,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 })
 @AllowedMethods({"surveyState","attrs"})
 public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
-	
+
 	@Autowired
 	private SurveyDirectoryManager surveyDirectoryManager;
 	@Autowired
@@ -46,7 +48,7 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 	    page=surveyDirectoryManager.findByUser(page,entity);
 	    return SUCCESS;
 	}
-	
+
 	public String delete() throws Exception {
 	    HttpServletResponse response=Struts2Utils.getResponse();
 	    String result="false";
@@ -66,7 +68,7 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 	    response.getWriter().write(result);
 	    return null;
 	}
-	
+
 	//问卷壮态设置
 	public String surveyState() throws Exception{
 		HttpServletResponse resp=Struts2Utils.getResponse();
@@ -89,7 +91,7 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 		resp.getWriter().write(result);
 		return null;
 	}
-	
+
 
 
 	public String attrs() throws Exception {
@@ -98,21 +100,24 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 		try{
 			SurveyDirectory survey=surveyDirectoryManager.getSurvey(id);
 			JsonConfig cfg = new JsonConfig();
+			cfg.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor());
 			cfg.setExcludes(new String[]{"handler","hibernateLazyInitializer"});
 			JSONObject jsonObject=JSONObject.fromObject(survey,cfg);
+
+
 			response.getWriter().write(jsonObject.toString());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	
+
+
 	@Override
 	protected void prepareModel() throws Exception {
 		entity=surveyDirectoryManager.getModel(id);
 	}
-	
+
 	public void prepareSurveyState() throws Exception {
 		prepareModel();
 	}
@@ -120,5 +125,5 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 	public void prepareExecute() throws Exception {
 		prepareModel();
 	}
-	
+
 }
