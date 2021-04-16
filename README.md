@@ -1,8 +1,13 @@
 # DWSurvey 调问表单问卷系统
 
+[![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
+[![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
+
+关注我们更新，记得Star一下哦。 
+
 DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
 
-<img src="http://file.diaowen.net/images/gif/dwsurvey-2.gif" alt="可视化问卷设计" align="bottom" />
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0416/132431_5d99a296_1401416.gif "dwsurvey-2.gif")
 
 ## 演示地址
 
