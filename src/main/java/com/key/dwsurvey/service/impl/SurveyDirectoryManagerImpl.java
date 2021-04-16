@@ -443,7 +443,7 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 
 			if(entity!=null){
 				Integer surveyState = entity.getSurveyState();
-				if(surveyState!=null && !"".equals(surveyState)){
+				if(surveyState!=null){
 					criterions.add(Restrictions.eq("surveyState", surveyState));
 				}
 				String surveyName = entity.getSurveyName();
