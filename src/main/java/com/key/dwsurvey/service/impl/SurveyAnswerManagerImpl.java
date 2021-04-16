@@ -7,10 +7,8 @@ import java.util.*;
 import com.key.common.QuType;
 import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.dao.SurveyAnswerDao;
-import com.key.dwsurvey.entity.AnChenFbk;
-import com.key.dwsurvey.entity.SurveyDetail;
-import com.key.dwsurvey.service.AnScoreManager;
-import com.key.dwsurvey.service.SurveyDirectoryManager;
+import com.key.dwsurvey.entity.*;
+import com.key.dwsurvey.service.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,43 +21,6 @@ import com.key.common.plugs.page.PropertyFilter;
 import com.key.common.service.BaseServiceImpl;
 import com.key.common.utils.excel.XLSExportUtil;
 import com.key.common.utils.parsehtml.HtmlUtil;
-import com.key.dwsurvey.entity.AnAnswer;
-import com.key.dwsurvey.entity.AnCheckbox;
-import com.key.dwsurvey.entity.AnChenCheckbox;
-import com.key.dwsurvey.entity.AnChenRadio;
-import com.key.dwsurvey.entity.AnChenScore;
-import com.key.dwsurvey.entity.AnCompChenRadio;
-import com.key.dwsurvey.entity.AnDFillblank;
-import com.key.dwsurvey.entity.AnEnumqu;
-import com.key.dwsurvey.entity.AnFillblank;
-import com.key.dwsurvey.entity.AnRadio;
-import com.key.dwsurvey.entity.AnScore;
-import com.key.dwsurvey.entity.AnYesno;
-import com.key.dwsurvey.entity.QuCheckbox;
-import com.key.dwsurvey.entity.QuChenColumn;
-import com.key.dwsurvey.entity.QuChenOption;
-import com.key.dwsurvey.entity.QuChenRow;
-import com.key.dwsurvey.entity.QuMultiFillblank;
-import com.key.dwsurvey.entity.QuRadio;
-import com.key.dwsurvey.entity.QuScore;
-import com.key.dwsurvey.entity.Question;
-import com.key.dwsurvey.entity.SurveyAnswer;
-import com.key.dwsurvey.entity.SurveyDirectory;
-import com.key.dwsurvey.entity.SurveyStats;
-import com.key.dwsurvey.service.AnAnswerManager;
-import com.key.dwsurvey.service.AnCheckboxManager;
-import com.key.dwsurvey.service.AnChenCheckboxManager;
-import com.key.dwsurvey.service.AnChenFbkManager;
-import com.key.dwsurvey.service.AnChenRadioManager;
-import com.key.dwsurvey.service.AnChenScoreManager;
-import com.key.dwsurvey.service.AnCompChenRadioManager;
-import com.key.dwsurvey.service.AnDFillblankManager;
-import com.key.dwsurvey.service.AnEnumquManager;
-import com.key.dwsurvey.service.AnFillblankManager;
-import com.key.dwsurvey.service.AnRadioManager;
-import com.key.dwsurvey.service.AnYesnoManager;
-import com.key.dwsurvey.service.QuestionManager;
-import com.key.dwsurvey.service.SurveyAnswerManager;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,6 +69,8 @@ public class SurveyAnswerManagerImpl extends
 	private AnScoreManager anScoreManager;
 	@Autowired
 	private SurveyDirectoryManager directoryManager;
+	@Autowired
+	private AnOrderManager anOrderManager;
 
 	@Override
 	public void setBaseDao() {
@@ -158,6 +121,7 @@ public class SurveyAnswerManagerImpl extends
 		question.setAnChenFbks(new ArrayList<AnChenFbk>());
 		question.setAnCompChenRadios(new ArrayList<AnCompChenRadio>());
 		question.setAnChenScores(new ArrayList<AnChenScore>());
+		question.setAnOrders(new ArrayList<AnOrder>());
 
 		if (quType == QuType.YESNO) {// 是非题答案
 			AnYesno anYesno = anYesnoManager.findAnswer(surveyAnswerId, quId);
@@ -237,6 +201,11 @@ public class SurveyAnswerManagerImpl extends
 					.findAnswer(surveyAnswerId, quId);
 			if (anCompChenRadios != null) {
 				question.setAnCompChenRadios(anCompChenRadios);
+			}
+		} else if(quType == QuType.ORDERQU){
+			List<AnOrder> anOrders = anOrderManager.findAnswer(surveyAnswerId,quId);
+			if(anOrders!=null){
+				question.setAnOrders(anOrders);
 			}
 		}
 		return score;

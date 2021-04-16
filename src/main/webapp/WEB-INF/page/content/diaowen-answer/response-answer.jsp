@@ -19,7 +19,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("input,textarea,select").attr("disabled","disabled");
-		
+
 
 		resetQuNum();
 		function resetQuNum(){
@@ -27,9 +27,9 @@
 			$.each(quCoNums,function(i,item){
 				$(this).html((i+1));
 			});
-			
+
 		}
-		
+
 	});
 	resizeBodyWidth();
 </script>
@@ -52,9 +52,9 @@
 			</div>
 			<div class="middle-body-content">
 				<c:forEach items="${questions }" var="en" varStatus="i">
-				
+
 				<c:if test="${en.quType ne 'PARAGRAPH' && en.quType ne 'PAGETAG' }">
-				
+
 						<%--题干 --%>
 						<div class="r-qu-body">
 							<div class="r-qu-body-title"><span class="quCoNum">${i.count }</span>、${en.quTitle }[${en.quType.cnName }]</div>
@@ -70,7 +70,7 @@
 													</c:when>
 													<c:when test="${en.anYesno.yesnoAnswer eq 0 }">
 														<li> <input type="radio" name="qu_${en.quType }_${en.id }" value="${en.yesnoOption.trueValue }"  />${en.yesnoOption.trueValue }</li>
-														<li> <input type="radio" name="qu_${en.quType }_${en.id }" value="${en.yesnoOption.falseValue }"  checked="checked"/>${en.yesnoOption.falseValue } </li>	
+														<li> <input type="radio" name="qu_${en.quType }_${en.id }" value="${en.yesnoOption.falseValue }"  checked="checked"/>${en.yesnoOption.falseValue } </li>
 													</c:when>
 													<c:otherwise>
 														<li> <input type="radio" name="qu_${en.quType }_${en.id }" value="${en.yesnoOption.trueValue }"  />${en.yesnoOption.trueValue }</li>
@@ -83,7 +83,7 @@
 										<c:when test="${en.quType eq 'RADIO' }">
 											<ul class="r-qu-body-ul1 ${en.hv eq 1 ?'r-qu-body-ul2':'' }">
 												<c:forEach items="${en.quRadios }" var="quItem">
-													<li> 
+													<li>
 														<ul class="quItem-ul">
 															<c:choose>
 																	<c:when test="${en.anRadio.quItemId eq quItem.id }">
@@ -164,7 +164,7 @@
 										<c:when test="${en.quType eq 'COMPRADIO' }">
 											<ul class="r-qu-body-ul1">
 												<c:forEach items="${en.quRadios }" var="quItem">
-													<li> 
+													<li>
 														<ul class="quItem-ul ">
 															<c:choose>
 																<c:when test="${en.anRadio.quItemId eq quItem.id }">
@@ -260,7 +260,7 @@
 															<c:choose>
 																<c:when test="${anDf.quItemId eq quItem.id }">
 																		<li>${quItem.optionName } <input type="text" name="text_qu_${en.quType }_${en.id }_${quItem.id }"  value="${anDf.answer }"/></li>
-																		<c:set var="isBreak" value="1"></c:set>																
+																		<c:set var="isBreak" value="1"></c:set>
 																</c:when>
 																<c:when test="${(fn:length(en.anDFillblanks) eq iStatus.count ) && (isBreak eq 0)}">
 																		<li>${quItem.optionName } <input type="text" name="text_qu_${en.quType }_${en.id }_${quItem.id }"  value=""/></li>
@@ -410,23 +410,40 @@
 												</script>
 										</c:forEach>
 										</c:when>
+										<c:when test="${en.quType eq 'ORDERQU' }">
+
+											<table class="qusTable" style="padding:5px;" width="90%">
+												<tr><th align="left" style="padding-left: 13px;">选项</th><th align="center">排序号</th></tr>
+												<c:forEach items="${en.quOrderbys }" var="item" varStatus="itemVarStatus">
+													<tr class="quOrderByTableTr"><td class="quOrderTabConnect" style="padding-left: 13px;" >${item.optionName }</td>
+														<td id="${item.id}_orderQuItem" align="center"></td></tr>
+												</c:forEach>
+											</table>
+
+											<c:forEach items="${en.anOrders}" var="enOrder">
+												<script type="text/javascript">
+													$("#${enOrder.quRowId}_orderQuItem").text(${enOrder.orderyNum});
+												</script>
+											</c:forEach>
+
+										</c:when>
 										<c:otherwise>
 											<!-- 题型开发中.. -->
 										</c:otherwise>
 								</c:choose>
 							</div>
 						</div>
-						
+
 				</c:if>
 				</c:forEach>
 			</div>
-			
+
 			<div class="button-body-btn">
-				
+
 			</div>
 			</form>
 		</div>
-		
+
 	</div>
 </div>
 

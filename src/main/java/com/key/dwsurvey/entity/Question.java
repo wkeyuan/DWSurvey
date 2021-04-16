@@ -14,7 +14,7 @@ import com.key.common.CheckType;
 import com.key.common.QuType;
 
 /**
- * 
+ *
  * @author keyuan
  *
  * https://github.com/wkeyuan/DWSurvey
@@ -23,7 +23,7 @@ import com.key.common.QuType;
 @Entity
 @Table(name="t_question")
 public class Question extends IdEntity{
-	
+
 	//所属问卷或题库
 	private String belongId;
 	//题目名称
@@ -42,7 +42,7 @@ public class Question extends IdEntity{
 	private Integer orderById;
 	// 创建时间
 	private Date createDate=new Date();
-	// 是否是大小题    1默认题  2大题  3大题下面的小题   
+	// 是否是大小题    1默认题  2大题  3大题下面的小题
 	private Integer quTag=1;
 	// 所属大题  只有小题才有此属性 即quTag=3的题
 	private String parentQuId;
@@ -56,30 +56,30 @@ public class Question extends IdEntity{
 	private Integer paramInt01 = 3;
 	//评分题，最大分值
 	private Integer paramInt02 = 10;
-	//是否显示 0不显示   1显示 
+	//是否显示 0不显示   1显示
 	private Integer visibility=1;
-	
+
 	//如果是复制的题，则有复制于那一题
 	public String copyFromId;
-	
-	//控制性属性 
+
+	//控制性属性
 	//1水平显示 2垂直显示
 	private Integer hv=2;
 	//选项随机排列  1随机排列 0不随机排列
 	private Integer randOrder=0;
 	//按列显示时，列数
 	private Integer cellCount=0;
-	
+
 	//联系人属性
 	//1关联到联系人属性  0不关联到联系人属性
 	private Integer contactsAttr=0;
 	//关联的联系人字段
 	private String contactsField;
-	
+
 	//填空的input
 	private Integer answerInputWidth;
 	private Integer answerInputRow;
-	
+
 	public String getBelongId() {
 		return belongId;
 	}
@@ -198,7 +198,7 @@ public class Question extends IdEntity{
 	public void setCopyFromId(String copyFromId) {
 		this.copyFromId = copyFromId;
 	}
-	
+
 	public Integer getRandOrder() {
 		return randOrder;
 	}
@@ -250,7 +250,7 @@ public class Question extends IdEntity{
 	private List<QuMultiFillblank> quMultiFillblanks=new ArrayList<QuMultiFillblank>();
 	private List<QuScore> quScores=new ArrayList<QuScore>();
 	private List<QuOrderby> quOrderbys=new ArrayList<QuOrderby>();
-	
+
 	private List<QuChenOption> options=new ArrayList<QuChenOption>();
 	private List<QuChenRow> rows=new ArrayList<QuChenRow>();
 	private List<QuChenColumn> columns=new ArrayList<QuChenColumn>();
@@ -267,7 +267,7 @@ public class Question extends IdEntity{
 	private AnFillblank anFillblank=new AnFillblank();
 	private AnRadio anRadio=new AnRadio();
 	private AnYesno anYesno=new AnYesno();
-	
+
 	private List<AnScore> anScores=new ArrayList<AnScore>();
 	private List<AnChenRadio> anChenRadios=new ArrayList<AnChenRadio>();
 	private List<AnChenCheckbox> anChenCheckboxs=new ArrayList<AnChenCheckbox>();
@@ -275,10 +275,11 @@ public class Question extends IdEntity{
 	private List<AnCompChenRadio> anCompChenRadios=new ArrayList<AnCompChenRadio>();
 	private Integer anCount=0;
 	private List<AnChenScore> anChenScores=new ArrayList<AnChenScore>();
-	
-	//逻辑设置 
+	private List<AnOrder> anOrders = new ArrayList<AnOrder>();
+
+	//逻辑设置
 	private List<QuestionLogic> questionLogics;
-	
+
 	@Transient
 	public List<QuRadio> getQuRadios() {
 		return quRadios;
@@ -314,7 +315,7 @@ public class Question extends IdEntity{
 	public void setQuOrderbys(List<QuOrderby> quOrderbys) {
 		this.quOrderbys = quOrderbys;
 	}
-	
+
 	@Transient
 	public List<QuChenOption> getOptions() {
 		return options;
@@ -336,7 +337,7 @@ public class Question extends IdEntity{
 	public void setColumns(List<QuChenColumn> columns) {
 		this.columns = columns;
 	}
-	@Transient	
+	@Transient
 	public String getRowContent() {
 		return rowContent;
 	}
@@ -476,7 +477,14 @@ public class Question extends IdEntity{
 	public void setAnChenScores(List<AnChenScore> anChenScores) {
 		this.anChenScores = anChenScores;
 	}
+	@Transient
+	public List<AnOrder> getAnOrders() {
+		return anOrders;
+	}
 
+	public void setAnOrders(List<AnOrder> anOrders) {
+		this.anOrders = anOrders;
+	}
 
 	//统计json
 	public String statJson="";
