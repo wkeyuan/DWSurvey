@@ -12,11 +12,11 @@
 <body>
 	<input type="hidden" id="id" name="id" value="${surveyId }">
 	<input type="hidden" id="surveyState" name="surveyState" value="${survey.surveyState }">
-	
-	<div class="creatgeSurveyStepBody">
+
+	<div class="creatgeSurveyStepBody" >
 		<div class="creatgeSurveyStepContent bodyCenter">
 			<ul class="createSsUl">
-				<li><a href=""  class="clickHideMenu csscStep csscStep4"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">设计问卷</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;">
 		                	<div class="selc">
@@ -29,10 +29,10 @@
 		            </div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5 active"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据收集</span><span class="csscStepRight" >&nbsp;</span></a>
+				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5 active"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据分析</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;margin-left: 15px;">
 		                	<div class="selc">
@@ -46,16 +46,15 @@
 			</ul>
 		</div>
 	</div>
-	
+
 	<div style="">
 		<div class="main-tabs-content bodyCenter">
 			<div class="tab-content">
 				<div class="tab-content-collectTab">
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1 active"><span class="collectTabItemLeft">&nbsp;</span><span>答卷地址</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4" ><span class="collectTabItemLeft">&nbsp;</span><span>社交分享</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5"><span class="collectTabItemLeft">&nbsp;</span><span>网站组件</span></a>
-					<%-- <a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=iframe" class="collectTab tabItem_6"><span class="collectTabItemLeft">&nbsp;</span><span>IFrame嵌入</span></a> --%>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2"><span class="collectTabItemLeft">&nbsp;</span><span>微信收集</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1 active"> <i class="fa fa-chain" aria-hidden="true"></i> <span>答卷地址</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4 " > <i class="fa fa-share-alt" aria-hidden="true"></i> <span>社交分享</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5 "> <i class="fa fa-paperclip" aria-hidden="true"></i> <span>网站组件</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2 ">  <i class="fa fa-weixin" aria-hidden="true"></i> <span>微信收集</span></a>
 				</div>
 			</div>
 		</div>
@@ -65,7 +64,7 @@
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-				
+
 				<!-- <div class="surveyCollectMiddleTab">
 					<div class="scmTabLeft">
 						<div class="scmTabLeftItem"><a href="">问卷设计</a>&nbsp;&nbsp;&gt;</div>
@@ -97,7 +96,7 @@
 									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">重新打开收集</a>
 								</c:when>
 							</c:choose>
-							
+
 						</div>
 					</div>
 					<div class="surveyCollectInfoDiv">
@@ -110,9 +109,9 @@
 						</span>
 					</div>
 				</div>
-				
+
 				<div class="surveyCollectMiddleContent">
-					
+
 					<div class="collect_1_content">
 					<div style="padding:0px 60px;">
 						<div style="" >
@@ -158,16 +157,16 @@
 						</div>
 						</div>
 					</div>
-					
 
-					
+
+
 				</div>
 			</div>
-			
+
 		</div>
 		</div>
 	</div>
-	
+
 <script type="text/javascript">
 
 /*var client = new ZeroClipboard( document.getElementById("clipLink") );

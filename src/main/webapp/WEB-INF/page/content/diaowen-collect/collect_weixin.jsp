@@ -12,11 +12,11 @@
 <body>
 	<input type="hidden" id="id" name="id" value="${surveyId }">
 	<input type="hidden" id="surveyState" name="surveyState" value="${survey.surveyState }">
-	
+
 	<div class="creatgeSurveyStepBody">
 		<div class="creatgeSurveyStepContent bodyCenter">
 			<ul class="createSsUl">
-				<li><a href=""  class="clickHideMenu csscStep csscStep4"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">设计问卷</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;">
 		                	<div class="selc">
@@ -29,9 +29,9 @@
 		            </div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="csscStep csscStep5 active"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据收集</span><span class="csscStepRight" >&nbsp;</span></a></li>
+				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5 active"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据分析</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;margin-left: 15px;">
 		                	<div class="selc">
@@ -45,15 +45,15 @@
 			</ul>
 		</div>
 	</div>
-	
+
 	<div style="">
 		<div class="main-tabs-content bodyCenter">
 			<div class="tab-content">
 				<div class="tab-content-collectTab">
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1"><span class="collectTabItemLeft">&nbsp;</span><span>答卷地址</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4" ><span class="collectTabItemLeft">&nbsp;</span><span>社交分享</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5"><span class="collectTabItemLeft">&nbsp;</span><span>网站组件</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2 active"><span class="collectTabItemLeft">&nbsp;</span><span>微信收集</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1"> <i class="fa fa-chain" aria-hidden="true"></i> <span>答卷地址</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4" > <i class="fa fa-share-alt" aria-hidden="true"></i> <span>社交分享</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5"> <i class="fa fa-paperclip" aria-hidden="true"></i> <span>网站组件</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2 active">  <i class="fa fa-weixin" aria-hidden="true"></i> <span>微信收集</span></a>
 				</div>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-				
+
 				<div class="surveyCollectTop">
 					<div class="surveyCollectTitleDiv">
 						<span class="surveyCollectTitle">${survey.surveyName }</span>
@@ -79,7 +79,7 @@
 									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">重新打开收集</a>
 								</c:when>
 							</c:choose>
-							
+
 						</div>
 					</div>
 					<div class="surveyCollectInfoDiv">
@@ -92,14 +92,14 @@
 						</span>
 					</div>
 				</div>
-				
+
 				<div class="surveyCollectMiddleContent">
-					
+
 					<div class="collect_1_content">
 					<div class="collect_weixin_content">
-						
+
 						<div style="clear: both;"></div>
-						
+
 						<div style="margin: 0px auto; width: 930px;padding-top: 10px;">
 							<div class="scmcRightTop" >
 								<div class="scmcRightTopLeft">
@@ -114,7 +114,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div style="">
 							<div class="weixinSteps">
 								<div class="wxinTitle">发送或分享给好友</div>
@@ -125,8 +125,8 @@
 								</ul></div>
 							</div>
 						</div>
-						
-						
+
+
 						<div style="margin: 0px auto; width: 930px;margin-top: 30px;" >
 							<div>
 							<div class="scmcRightTop" >
@@ -150,7 +150,7 @@
 						</div>
 						</div>
 						<div style="clear: both;"></div>
-						
+
 						<div style="margin-top: 15px;">
 							<div class="weixinSteps">
 								<div class="wxinTitle">通过微信公众账号</div>
@@ -160,13 +160,13 @@
 								</ul></div>
 							</div>
 						</div>
-						
-						
+
+
 					</div>
 				</div>
 				</div>
 			</div>
-			
+
 		</div>
 		</div>
 	</div>

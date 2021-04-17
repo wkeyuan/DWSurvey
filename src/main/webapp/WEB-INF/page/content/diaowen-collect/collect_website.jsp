@@ -34,7 +34,7 @@
 	<div class="creatgeSurveyStepBody">
 		<div class="creatgeSurveyStepContent bodyCenter">
 			<ul class="createSsUl">
-				<li><a href=""  class="clickHideMenu csscStep csscStep4"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">设计问卷</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;">
 		                	<div class="selc">
@@ -47,9 +47,9 @@
 		            </div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="csscStep csscStep5 active"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据收集</span><span class="csscStepRight" >&nbsp;</span></a></li>
+				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5 active"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据分析</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;margin-left: 15px;">
 		                	<div class="selc">
@@ -63,16 +63,15 @@
 			</ul>
 		</div>
 	</div>
-	
+
 	<div style="">
 		<div class="main-tabs-content bodyCenter">
 			<div class="tab-content">
 				<div class="tab-content-collectTab">
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1"><span class="collectTabItemLeft">&nbsp;</span><span>答卷地址</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4" ><span class="collectTabItemLeft">&nbsp;</span><span>社交分享</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5 active"><span class="collectTabItemLeft">&nbsp;</span><span>网站组件</span></a>
-					<%-- <a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=iframe" class="collectTab tabItem_6"><span class="collectTabItemLeft">&nbsp;</span><span>IFrame嵌入</span></a> --%>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2"><span class="collectTabItemLeft">&nbsp;</span><span>微信收集</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1"> <i class="fa fa-chain" aria-hidden="true"></i> <span>答卷地址</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4" > <i class="fa fa-share-alt" aria-hidden="true"></i> <span>社交分享</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5 active"> <i class="fa fa-paperclip" aria-hidden="true"></i> <span>网站组件</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2 ">  <i class="fa fa-weixin" aria-hidden="true"></i> <span>微信收集</span></a>
 				</div>
 			</div>
 		</div>
@@ -82,8 +81,8 @@
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-				
-				
+
+
 				<div class="surveyCollectTop">
 					<div class="surveyCollectTitleDiv">
 						<span class="surveyCollectTitle">${survey.surveyName }</span>
@@ -99,7 +98,7 @@
 									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">重新打开收集</a>
 								</c:when>
 							</c:choose>
-							
+
 						</div>
 					</div>
 					<div class="surveyCollectInfoDiv">
@@ -112,9 +111,9 @@
 						</span>
 					</div>
 				</div>
-				
+
 				<div class="surveyCollectMiddleContent">
-					
+
 					<div class="collect_1_content">
 					<div style="margin: 0px auto; width: 950px;">
 						<div style="clear: both;"></div>
@@ -124,7 +123,7 @@
 									<div class="scmcRightTopLeftTitle">通过您的网站收集问卷</div>
 								</div>
 								<div style="padding-top: 15px;overflow: auto;clear: both;">
-								
+
 								<div class="scmcsiteLeft">
 									<div class="scmcsiteTitle">1、风格选择</div>
 									<div class="scmcsiteLeftContent">
@@ -159,13 +158,13 @@
 									</div>
 									<div style="clear: both;"></div>
 									<div style="color: #9B9B9B;font-size: 14px;padding-top: 10px;">高度与背景色可自动调节，请从页面左右侧预览实际效果。</div>
-									
+
 								</div>
 								<div class="scmcsiteRight">
 									<div class="scmcsiteTitle">2、代码复制</div>
 									<div class="scmcsiteRightContent">
 										<textarea id="compCodeText" rows="" cols="" class="scmcsiteRCEdit" readonly="readonly">
-										
+
 										</textarea>
 										<div style="text-align: center;padding-top: 8px;">
 										<span id="compCopyMsg" style="display:none;color: #7BA400;font-size: 22px;position: absolute;margin-left: -120px;">复制成功！</span>
@@ -175,36 +174,36 @@
 									<div style="clear: both;"></div>
 									<div style="color: #9B9B9B;font-size: 14px;padding-top: 10px;">高度与背景色可自动调节，请从页面左右侧预览实际效果。</div>
 								</div>
-								
+
 								</div>
 							</div>
 						</div>
 						</div>
 					</div>
-					
-					
+
+
 				</div>
 			</div>
-			
+
 		</div>
 		</div>
 	</div>
-	
+
 <div id="compStyle1" style="display: none;"><!-- DIAOWEN.NET Button BEGIN --><div style="position: fixed;right: 0px;top: 100px;z-index: 9999;"><a href="http://www.diaowen.net/wenjuan/${survey.sid }.html" style="background: #1C658B;width: 15px;height: 100px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;font-weight: bold;color: white! important;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;-khtml-border-top-left-radius: 5px;border-top-left-radius: 5px;-moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px;-khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;">问卷调查</a></div><!-- DIAOWEN.NET Button END --></div>
-	
+
 <div id="priviewContent" class="priviewContentFixed">
 	<div id="webSiteLeftCode">
 	<div id="webSiteFixedLeft" class="websiteFixed" style="position: fixed;left: 0px;top: 520px;z-index: 9999;display: none;">
 		<a class="websiteAId" href="http://www.diaowen.net/wenjuan/${survey.sid }.html" style="background: #1C658B;width: 15px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;padding-bottom:10px;font-weight: bold;color: white;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topright: 5px;-webkit-border-top-right-radius: 5px;-khtml-border-top-right-radius: 5px;border-top-right-radius: 5px;-moz-border-radius-bottomright: 5px;-webkit-border-bottom-right-radius: 5px;-khtml-border-bottom-right-radius: 5px;border-bottom-right-radius: 5px;">问卷调查</a>
 	</div>
 	</div>
-	
+
 	<div id="webSiteRightCode">
 	<div id="webSiteFixedRight" class="websiteFixed" style="position: fixed;right: 0px;top: 520px;z-index: 9999;">
 		<a class="websiteAId" href="http://www.diaowen.net/wenjuan/${survey.sid }.html" style="background: #1C658B;width: 15px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;padding-bottom:10px;font-weight: bold;color: white;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;-khtml-border-top-left-radius: 5px;border-top-left-radius: 5px;-moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px;-khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;">问卷调查</a>
 	</div>
 	</div>
-</div>	
+</div>
 <script type="text/javascript">
 
 $("#compCodeText").click(function(){
@@ -242,7 +241,7 @@ $("#site_color_box").colpick({
 		updateCode();
 	},
 	onSubmit:function(hsb,hex,rgb,el) {
-		
+
 	}
 });
 

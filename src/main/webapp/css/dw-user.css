@@ -58,7 +58,7 @@ input,select{
 	text-align: center;
 	text-decoration: none;
 	font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
-	
+
 	filter:alpha(opacity=100); /*IE滤镜，透明度50%*/
 	-moz-opacity:1; /*Firefox私有，透明度50%*/
 	opacity:1;/*其他，透明度50%*/
@@ -154,7 +154,7 @@ input,select{
 	background: #599FD1;
 	border: 1px solid #599FD1;
 	color: white;
-	
+
 	background: #FEFFFF;
     border: 1px solid transparent;
     color: rgb(27, 5, 5);
@@ -228,7 +228,7 @@ a{
 }
 .a-style-1{
 	color: #5A9ECD;
-	
+
 }
 body{
 	/* background: #EDEDEF; */
@@ -319,7 +319,7 @@ body{
 	text-align: right;
 	display: inline-block;
 	overflow: hidden;
-	
+
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
@@ -361,7 +361,7 @@ body{
 	color: #9b9a9a;
 }
 .surveyCollectInfoLeft{
-	
+
 }
 .surveyCollectInfoRight{
 	float: right;
@@ -374,7 +374,7 @@ body{
 	overflow: auto;
 }
 .surveyCollectTitleDiv{
-	
+
 }
 
 .surveyCollectMiddleTab{
@@ -423,7 +423,7 @@ body{
 	margin-top: 5px;
 }
 .surveyCollectMiddleContent{
-	
+
 }
 .collect_1_content{
 	width: 100%;
@@ -496,7 +496,7 @@ body{
 	padding: 0px;
 	font-size: 18px;
 	color: #064152;
-		
+
 	/* -moz-border-radius: 5px;
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -582,6 +582,7 @@ body{
 	padding: 0px;
 	background: #e6e6e6;
 	zoom: 1;
+	padding-top: 6px;
 }
 .creatgeSurveyStepContent{
 	text-align: center;
@@ -722,7 +723,7 @@ body{
 	-webkit-box-shadow: 0 1px 3px #e6e6e6;
 	-moz-box-shadow: 0 1px 3px #e6e6e6;
 	-o-box-shadow: 0 1px 3px #e6e6e6;
-	
+
 	padding: 0;
 	margin: 0;
 }
@@ -751,7 +752,7 @@ body{
 	/* border-top: 1px solid #202020;
 	border-bottom: 1px solid #0c0c0c;
 	background-color: #191919; */
-	
+
 	border-top: 1px solid #F1F1F1;
 	border-bottom: 1px solid #C5C5C5;
 	background-color: #e6e6e6;
@@ -785,7 +786,7 @@ body{
 	background: #F4F4F4;
 }
 .seli:hover a{
-	
+
 }
 .a-w-sel.a-w-sel-head .seli:hover a{
 	background-color: #333;
@@ -996,7 +997,7 @@ body{
 .kso_rwdContainer ul li:hover,.kso_rwdContainer ul li.active{
 	color: #61A4D3;
 	background: #FBFBFB;
-	
+
 }
 .createSurveyContent{
 	background: white;
@@ -1022,7 +1023,7 @@ body{
 	color: #6F6F6F;
 	padding: 10px 12px;
 	font-family: "微软雅黑";
-	
+
 	line-height: 1.4em;
 	margin: 0px;
 	border-left: 4px solid transparent;
@@ -1035,7 +1036,7 @@ body{
 	background: white;
 }
 .surveyUList li a{
-	color: #615c5c;	
+	color: #615c5c;
 }
 .surveyUList li:hover  a,.surveyUList li.active a{
 	color: #0F78B0;
@@ -1083,7 +1084,7 @@ body{
 .addInboxUser:hover{
 	background: #E6E6E6;
 	color: #599FD1;
-} 
+}
 .addInboxUser span{
 	display: inline-block;
 }
@@ -1108,7 +1109,7 @@ body{
 	text-align: center;
 }
 .listPageNos{
-	
+
 }
 .listPageNos .pageNo{
 	border: 1px solid #E8ECEF;
@@ -1298,12 +1299,12 @@ body{
 	margin-bottom:15px;
 	background: rgb(245, 245, 245);
   	padding: 10px 5px;
-	
+
 }
 .ui-corner-all,.ui-corner-left{
-	 -moz-border-radius: 0px; 
-	 -webkit-border-radius: 0px; 
-	 -khtml-border-radius: 0px; 
+	 -moz-border-radius: 0px;
+	 -webkit-border-radius: 0px;
+	 -khtml-border-radius: 0px;
 	 border-radius: 0px;
 	 border: none;
 }
@@ -1529,7 +1530,7 @@ body{
 	margin: 0px auto;
 	/*
 	background: #FEFDFD;
-	margin-top: 60px; 
+	margin-top: 60px;
 	border: 1px solid #BED5E7;
 	-webkit-box-shadow: 0 0 5px #C5C5C5;
 	box-shadow: 0 0 5px #C5C5C5;  */
@@ -1537,14 +1538,14 @@ body{
 }
 .dlcTitleBg{
 	background: #EFF2F9;
-	background: #24292C; 
+	background: #24292C;
 	background: #EBEAEB;
 	background: #24292C;
 	background: #111;
 	color: rgb(0, 0, 0);
 	padding: 16px 30px;
 	height: 26px;
-	
+
 }
 
 .dlcTitle{
@@ -1565,7 +1566,7 @@ body{
 .dlcTitleTab{
 	padding:20px 50px;
 	line-height: 58px;
-	height: 58px;	
+	height: 58px;
 	color: rgba(255,255,255,0.5);
 	outline: none;
 }
@@ -1668,24 +1669,24 @@ a.dlcTitleTab:HOVER{
 	padding: 8px! important;
 	outline:0;
 	vertical-align: middle;
-} 
+}
 .auth-code img,  .auth-code a{
 	vertical-align: middle;
 }
 .auth-code img{
 	margin: 2px;
 	margin-left: 3px;
-	
-	-moz-border-radius-topright: 4px; 
-	-webkit-border-top-right-radius: 4px; 
-	-khtml-border-top-right-radius: 4px; 
+
+	-moz-border-radius-topright: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-khtml-border-top-right-radius: 4px;
 	border-top-right-radius: 4px;
-	
-	-moz-border-radius-bottomright: 4px; 
-	-webkit-border-bottom-right-radius: 4px; 
-	-khtml-border-bottom-right-radius: 4px; 
+
+	-moz-border-radius-bottomright: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-khtml-border-bottom-right-radius: 4px;
 	border-bottom-right-radius: 4px;
-	
+
 	border-left: 1px solid #CCCCCC;
 	padding-left: 4px;
 }
@@ -1835,7 +1836,7 @@ a.dw_style_a_1:hover{
 	vertical-align: middle;
 	background-color: #e8f0f7;
 	border-color: #C2D4E3;
-	
+
 	border-radius: 17px;
 	border-style: solid;
 	border-width: 1px;
@@ -1845,18 +1846,18 @@ a.dw_style_a_1:hover{
 	padding: 2px 9px;
 	color: #7F7F7F;
 	outline: 0;
-	
+
 	padding-right: 25px;
-	
+
 	position: relative;
 	max-width: 465px;
 	height: 12px;
 	line-height: 12px;
 	font-size: 12px;
-	
+
 	float: left;
 	margin: 0 5px 0 0;
-	
+
 	margin-top: 7px;
 	overflow: hidden;
 }
@@ -1866,11 +1867,11 @@ a.dw_style_a_1:hover{
 	height: 12px;
 	line-height: 12px;
 	font-size: 12px;
-	
+
 	margin-right: -18px;
 	background: transparent;
 	border-color: transparent;
-	
+
 	float: left;
 	margin: 0 5px 0 0;
 
@@ -1884,10 +1885,10 @@ a.dw_style_a_1:hover{
 	padding: 2px 9px;
 	color: #7F7F7F;
 	outline: 0;
-	
+
 	margin-top: 7px;
 	overflow: hidden;
-	
+
 }
 .inboxEditableAddr-ipt {
 	position: absolute;
@@ -1903,7 +1904,7 @@ a.dw_style_a_1:hover{
 	top: -1px;
 	left: 2px;
 	-webkit-appearance: none;
-	
+
 	font: -webkit-small-control;
 	color: initial;
 	letter-spacing: normal;
@@ -1997,7 +1998,7 @@ a.dw_style_a_1:hover{
 	line-height: 1.4em;
 	font-family: "微软雅黑";
 	color: #444;
-	
+
 	filter:alpha(opacity=92); /*IE滤镜，透明度50%*/
 	-moz-opacity:0.92; /*Firefox私有，透明度50%*/
 	opacity:0.92;/*其他，透明度50%*/

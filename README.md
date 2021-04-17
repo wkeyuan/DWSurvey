@@ -87,14 +87,15 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 调问网交流QQ群 ```群1：635994795(满)```，```群2：301105635(满)```, 群3：811287103(可加)（加群时请说明来由）
 
-微信：
-<img src="https://www.surveyform.cn/images/dwsurvey_wx_28261618534356.jpg" alt="图片替换文本" width="200" height="200" align="top" />
+微信公众号
+
+<img src="http://www.diaowen.net/images/dw_ewm.png" alt="图片替换文本" width="200" height="200" align="top" />
 
 ## 源代码地址
 
-github: https://github.com/wkeyuan/DWSurvey
-
 gitee: http://gitee.com/wkeyuan/DWSurvey
+
+github: https://github.com/wkeyuan/DWSurvey
 
 ## 开源协议
 

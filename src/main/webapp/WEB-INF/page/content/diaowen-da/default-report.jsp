@@ -33,7 +33,7 @@ $(document).ready(function(){
 		}
 		th.parent().find(".dw_btn026.active").removeClass("active");
 		th.addClass("active");
-		
+
 		if(amchartdivId!=null){
 			var amchartdivObj=$("#"+amchartdivId);
 			if(!amchartdivObj[0]){
@@ -44,9 +44,9 @@ $(document).ready(function(){
 					data:data,
 					type:"post",
 					success:function(msg){
-						
+
 						$("#amchart_"+quId).find(".higChartSvg").hide();
-						
+
 						if(thClass.indexOf("linechart_pic")>0){
 							//buildChart(msg,quId);
 							higLineChart(msg,quId);
@@ -58,7 +58,7 @@ $(document).ready(function(){
 						}else if(thClass.indexOf("columnchart_pic")>0){
 							higColumnChart(msg,quId);
 						}
-							
+
 					}
 				});
 			}else{
@@ -66,10 +66,10 @@ $(document).ready(function(){
 				amchartdivObj.show();
 			}
 		}
-		
+
 		return false;
 	});
-	
+
 	//$("")
 	//$(".linechart_pic").click();
 	//$(".piechart_pic").click();
@@ -82,27 +82,27 @@ $(document).ready(function(){
 		$.each(quCoNums,function(i,item){
 			$(this).html((i+1)+"、");
 		});
-		
+
 	}
 });
 
 
 function getHighchartsData(quItemBody,charType){
 	var quType=quItemBody.find("input[name='quType']").val();
-	
+
 	var categories=[];
 	var series=new Array();
 	var seriesData=new Array();
 	var tagText="次数";
 	var legendData=new Array();
-	
+
 	var seriesType = 'bar';
 	if (charType==="Line") {
-		seriesType = 'line';	
+		seriesType = 'line';
 	}
-	
+
 	if(quType==="CHENRADIO" || quType==="CHENCHECKBOX" ||  quType==="CHENSCORE"){
-		
+
 		if(charType==="PIE"){
 			seriesData=new Array();
 			var rowItemTrs=quItemBody.find(".rowItemTr");
@@ -115,33 +115,33 @@ function getHighchartsData(quItemBody,charType){
 					var columnItemOptionName=$(this).find(".columnItemOptionName").text();
 					var anCount=$(this).find("input[name='columnItemAnCount']").val();
 					//seriesData.push([rowItemOptionName+"|"+columnItemOptionName, parseInt(anCount)]);
-					
+
 					var data = {};
 				    data["value"] = parseInt(anCount);
 				    data["name"] = rowItemOptionName+"|"+columnItemOptionName;
 				    series.push(data);
-				    
+
 				});
 			});
-			
+
 			/*
 			series=[{                                 //指定数据列
 		        name: '选项',                          //数据列名
 		        data: seriesData                      //数据
 		    }];
 			*/
-			
+
 		}else{
-			
-			
-			
+
+
+
 			var columnItemTrs=quItemBody.find(".anColumnTable:eq(0) .columnItemTr");
 			$.each(columnItemTrs,function(){
 				//var columnItemOptionName=$(this).find("input[name='columnItemOptionName']").val();
 				var columnItemOptionName=$(this).find(".columnItemOptionName").text();
 				categories.push(columnItemOptionName);
 			});
-			
+
 			var rowItemTrs=quItemBody.find(".rowItemTr");
 			$.each(rowItemTrs,function(){
 				//var rowItemOptionName=$(this).find("input[name='rowItemOptionName']").val();
@@ -158,28 +158,28 @@ function getHighchartsData(quItemBody,charType){
 			        type: seriesType,
 			        data: seriesData                      //数据
 			    });
-			        
+
 				legendData.push(rowItemOptionName);
-				
+
 			});
 		}
-		
+
 	}else{
-		
-		var seriesDataTemp="[";	
-		
+
+		var seriesDataTemp="[";
+
 		var quRadioOptions=quItemBody.find(".quTrOptions");
 		$.each(quRadioOptions,function(i,item){
 			var quOptionName=$(this).find(".optionName").text();
 			var anCount=$(this).find("input[name='quItemAnCount']").val();
-			
+
 			if(anCount==""){
 				anCount=0;
 			}
 			categories.push(quOptionName);
 			if(quType==="SCORE"){
 				var avgScore=$(this).find("input[name='quItemAvgScore']").val();
-				//平均分 setAvgScore  
+				//平均分 setAvgScore
 				//alert(avgScore);
 				avgScore=parseFloat(avgScore).toFixed(2);
 				if(avgScore==="NaN"){
@@ -192,7 +192,7 @@ function getHighchartsData(quItemBody,charType){
 				    data["name"] = quOptionName;
 				    seriesData.push(data);
 				}else{
-					seriesData.push(parseFloat(avgScore));	
+					seriesData.push(parseFloat(avgScore));
 				}
 				tagText="分数";
 			} else if(quType==="ORDERQU"){
@@ -202,7 +202,7 @@ function getHighchartsData(quItemBody,charType){
 				    data["name"] = quOptionName;
 				    seriesData.push(data);
 				}else{
-					seriesData.push(parseInt(anCount));	
+					seriesData.push(parseInt(anCount));
 				}
 				tagText="排名";
 			} else{
@@ -215,13 +215,13 @@ function getHighchartsData(quItemBody,charType){
 				    data["name"] = quOptionName;
 				    seriesData.push(data);
 				}else{
-					seriesData.push(parseInt(anCount));	
+					seriesData.push(parseInt(anCount));
 				}
 			}
-			
-			
+
+
 		});
-		
+
 		if(charType==="PIE"){
 			/*
 			series=[{
@@ -254,9 +254,9 @@ function getHighchartsData(quItemBody,charType){
 		        data: seriesData
 		    }]
 		}
-		
+
 	}
-	
+
 	return [categories,series,tagText,legendData];
 }
 
@@ -267,18 +267,18 @@ function higColumnChart(resultJson,quId){
 	$("#amchart_"+quId).prepend("<div id='"+chartdivId+"' class=\"higChartSvg\"></div>");
 	$("#"+chartdivId).css({"height": "300px"});
 	//$("#"+chartdivId).css({"width": "800px"});
-	
+
 	var quItemBody=$("#quTr_"+quId);
 	var quTitle=quItemBody.find(".quCoTitleText").text();
-	
+
 	var quTypeName=quItemBody.find("input[name='quTypeCnName']").val();
-	
+
 	var datas=getHighchartsData(quItemBody,"column");
 	var categories=datas[0];
 	var series=datas[1];
 	var tagText=datas[2];
 	var legendData = datas[3];
-	
+
 	var myChart = echarts.init($('#'+chartdivId)[0],"shine");
 	// 指定图表的配置项和数据
 	var option = {
@@ -335,7 +335,7 @@ function higColumnChart(resultJson,quId){
 	    		show: false
 	    	}/*,
 	    	splitLine: {show:true}
-	    	 
+
 	    	splitArea:{
 	    		interval: 0,
 	    		show : true
@@ -362,8 +362,8 @@ function higColumnChart(resultJson,quId){
 	    },
 	    series: series
 	};
-	
-	/* 
+
+	/*
 	option = {
 		    tooltip: {
 		        trigger: 'axis'
@@ -398,7 +398,7 @@ function higColumnChart(resultJson,quId){
 		            interval: 50,
 		            axisLabel: {
 		                formatter: '{value} ml'
-		            } 
+		            }
 		        }
 		    ],
 		    series: [
@@ -425,22 +425,22 @@ function higColumnChart(resultJson,quId){
 }
 
 function higPieChart(resultJson,quId){
-	
+
 	//$("#"+chartdivId).css({"margin-top":"10px"});
 	var chartdivId="pie_chart_"+quId;
 	$("#amchart_"+quId).prepend("<div id='"+chartdivId+"' class=\"higChartSvg\"></div>");
 	$("#"+chartdivId).css({"height": "300px"});
-	
+
 	var quItemBody=$("#quTr_"+quId);
 	var quTitle=quItemBody.find(".quCoTitleText").text();
 	var quTypeName=quItemBody.find("input[name='quTypeCnName']").val();
-	
+
 	var datas=getHighchartsData(quItemBody,"PIE");
 	var series=datas[1];
 	var tagText=datas[2];
 	var categories = datas[0]
 	var legendData = datas[3];
-	
+
     // Build the chart
     var myChart = echarts.init($('#'+chartdivId)[0],"shine");
     var option = {
@@ -471,7 +471,7 @@ function higPieChart(resultJson,quId){
 		        y : 'bottom',
 		        data: categories//['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
 		    },
-		    series :// series 
+		    series :// series
 		    	[
 		        {
 		            //name: '访问来源',
@@ -498,28 +498,28 @@ function higPieChart(resultJson,quId){
 		    ]
 		};
     myChart.setOption(option);
-    
+
 }
 
 
 
 function higBarChart(resultJson,quId){
-	
+
 	//$("#"+chartdivId).css({"margin-top":"10px"});
 	var chartdivId="bar_chart_"+quId;
 	$("#amchart_"+quId).prepend("<div id='"+chartdivId+"' class=\"higChartSvg\"></div>");
 	$("#"+chartdivId).css({"height": "300px"});
-	
+
 	var quItemBody=$("#quTr_"+quId);
 	var quTitle=quItemBody.find(".quCoTitleText").text();
 	var quTypeName=quItemBody.find("input[name='quTypeCnName']").val();
-	
+
 	var datas=getHighchartsData(quItemBody,"BAR");
 	var categories=datas[0];
 	var series=datas[1];
 	var tagText=datas[2];
 	var legendData = datas[3];
-	
+
 	var myChart = echarts.init($('#'+chartdivId)[0],"shine");
 	var option = {
 	    title: {
@@ -609,21 +609,21 @@ function higBarChart(resultJson,quId){
 
 function higLineChart(resultJson,quId){
 	//根据quId得到数据对象，并且解析
-	
+
 	var chartdivId="line_chart_"+quId;
 	$("#amchart_"+quId).prepend("<div id='"+chartdivId+"' class=\"higChartSvg\"></div>");
 	$("#"+chartdivId).css({"height": "300px"});
-	
+
 	var quItemBody=$("#quTr_"+quId);
 	var quTitle=quItemBody.find(".quCoTitleText").text();
 	var quTypeName=quItemBody.find("input[name='quTypeCnName']").val();
-	
+
 	var datas=getHighchartsData(quItemBody,"Line");
 	var categories=datas[0];
 	var series=datas[1];
 	var tagText=datas[2];
 	var legendData = datas[3];
-	
+
 	var myChart = echarts.init($('#'+chartdivId)[0],"shine");
 	// 指定图表的配置项和数据
 	var option = {
@@ -708,7 +708,7 @@ function higLineChart(resultJson,quId){
 	};
 	// 使用刚指定的配置项和数据显示图表。
 	myChart.setOption(option);
-	
+
 }
 
 
@@ -746,7 +746,7 @@ function substring(json) {
 }
 
 .suQuTable .quTrOptions:FIRST-CHILD  td,.suQuTable .rowItemTr:FIRST-CHILD  td,.suQuTable .columnItemTr:FIRST-CHILD td {
- 	border-top: none! important; 
+ 	border-top: none! important;
 }
 .r-qu-body-title .quCoNum {
     float: left;
@@ -763,17 +763,17 @@ function substring(json) {
 }
 
 .higChartSvg{
-	
+
 }
 </style>
 </head>
 <body>
 	<input type="hidden" id="id" name="id" value="${surveyId }">
-	
+
 	<div class="creatgeSurveyStepBody">
 		<div class="creatgeSurveyStepContent bodyCenter">
 				<ul class="createSsUl">
-				<li><a href=""  class="clickHideMenu csscStep csscStep4"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">设计问卷</span><span class="csscStepRight">&nbsp;</span></a>
+					<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;">
 		                	<div class="selc">
@@ -786,7 +786,7 @@ function substring(json) {
 		            </div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据收集</span><span class="csscStepRight" >&nbsp;</span></a>
+				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;">
 		                	<div class="selc">
@@ -801,18 +801,18 @@ function substring(json) {
 		            </div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6 active"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据分析</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6 active"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 				</li>
 			</ul>
 		</div>
 	</div>
-	
+
 	<div style="">
 		<div class="main-tabs-content bodyCenter">
 			<div class="tab-content">
 				<div class="tab-content-collectTab">
-					<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}" class="collectTab tabItem_1 active"><span class="collectTabItemLeft">&nbsp;</span><span>默认报告</span></a>
-					<a href="${ctx }/da/my-survey-answer.action?surveyId=${surveyId}" class="collectTab tabItem_3"><span class="collectTabItemLeft">&nbsp;</span><span>原始数据</span></a>
+					<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}" class="collectTab tabItem_1 active">  <i class="fa fa-area-chart" aria-hidden="true"></i>  <span>默认报告</span></a>
+					<a href="${ctx }/da/my-survey-answer.action?surveyId=${surveyId}" class="collectTab tabItem_3"> <i class="fa fa-database" aria-hidden="true"></i> <span>原始数据</span></a>
 					<a href="#" class="collectTab tabItem_3" style="display: none;"><span class="collectTabItemLeft">&nbsp;</span><span>问卷日志</span></a>
 				</div>
 			</div>
@@ -823,8 +823,8 @@ function substring(json) {
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-				
-				
+
+
 				<div class="surveyCollectTop">
 					<div class="surveyCollectTitleDiv">
 						<span class="surveyCollectTitle">${directory.surveyName }</span>
@@ -842,25 +842,25 @@ function substring(json) {
 						</span>
 					</div>
 				</div>
-				
+
 				<div class="surveyCollectMiddleContent">
 					<div style="padding: 15px 25px;overflow: auto;">
 							<div style="overflow: auto;">
 								<div style="float: left;" >
 									<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId }" class="dw_btn025 tabpic active"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
 									<%-- <a href="${ctx }/da/survey-report!lineChart.action?surveyId=${surveyId }" class="dw_btn025 linepic" style="margin-left: 10px;"><i class="fa fa-bar-chart"></i>&nbsp;柱状图</a>
-									<a href="${ctx }/da/survey-report!pieChart.action?surveyId=${surveyId }" class="dw_btn025 piepic " style="margin-left: 10px;"><i class="fa fa-pie-chart"></i>&nbsp;饼状图</a> --%> 
+									<a href="${ctx }/da/survey-report!pieChart.action?surveyId=${surveyId }" class="dw_btn025 piepic " style="margin-left: 10px;"><i class="fa fa-pie-chart"></i>&nbsp;饼状图</a> --%>
 								</div>
 								<div style="float: right;" >
 									<a href="${ctx }/da/my-survey-answer!exportXLS.action?surveyId=${surveyId }" class="dw_btn025"><i class="fa fa-download"></i>下载数据</a>
 									<!-- <a href="" class="dw_btn025"><i class="fa fa-share"></i>分享</a>-->
-									</div> 
+									</div>
 							</div>
 							<div style="padding-top:8px;">
 								<div class="" style="border: 1px solid #D1D6DD;padding: 0px;">
 									<table id="content-tableList" width="100%"  cellpadding="0" cellspacing="0">
 								<c:forEach items="${surveyStats.questions }" var="en" varStatus="i">
-								
+
 								<c:if test="${en.quType ne 'PARAGRAPH' && en.quType ne 'PAGETAG' }">
 								<tr id="quTr_${en.id }">
 									<td colspan="3">
@@ -870,9 +870,9 @@ function substring(json) {
 											<input type="hidden" name="quAnCount" value="${en.anCount }">
 											<%-- <input type="hidden" name="quTitle" value="${en.quTitle }"> --%>
 											<input type="hidden" name="quTypeCnName" value="${en.quType.cnName }">
-					
-				
-							
+
+
+
 							<div class="r-qu-body-title">
 								<div class="quCoNum">${i.count }、</div>
 								<div class="quCoTitleText">${en.quTitle }[${en.quType.cnName }]</div>
@@ -1080,7 +1080,7 @@ function substring(json) {
 															<td width="180px"><div id="bfbTd${en.quType }${i.count }_${quI.count}" class="progressbarDiv progress${quI.index }"></div></td>
 															<td width="60px" align="right" id="bfbNum${en.quType }${i.count }_${quI.count}" class="bfbTd">0%</td>
 															<%-- <td align="left" class="tdAnCount">&nbsp;&nbsp;${quEn.anCount }次</td> --%>
-															<td align="left" class="tdAnCount">&nbsp;&nbsp;平均</td> 
+															<td align="left" class="tdAnCount">&nbsp;&nbsp;平均</td>
 															<td width="40px">&nbsp;
 																<input type="hidden" name="quItemAnCount" value="${quEn.anCount }">
 																<input type="hidden" name="quItemAvgScore" value="${quEn.avgScore }" >
@@ -1092,7 +1092,7 @@ function substring(json) {
 															var avgScore=parseFloat("${quEn.avgScore}");
 															var bfbFloat=avgScore/"${en.paramInt02}"*100;
 															var bfbVal = bfbFloat.toFixed(2);
-															//平均分 setAvgScore  
+															//平均分 setAvgScore
 															avgScore=avgScore.toFixed(2);
 															if(avgScore==="NaN"){
 																avgScore="0.00";
@@ -1117,7 +1117,7 @@ function substring(json) {
 										<%--矩阵单选题 --%>
 										<c:when test="${en.quType eq 'CHENRADIO' }">
 													<table class="suQuTable" border="0" cellpadding="0" cellspacing="0">
-														
+
 														<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
 														<tr class="rowItemTr">
 															<td width="15px">&nbsp;
@@ -1154,9 +1154,9 @@ function substring(json) {
 																		$("#bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}").html(bfbVal+"%");
 																		$("#bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").html("&nbsp;&nbsp;"+anCount+"次");
 																		$("#bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }").progressbar({value: bfbFloat});
-																		
+
 																		$("#coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").val(anCount);
-																		
+
 																	</script>
 																</c:if>
 															</c:forEach>
@@ -1183,7 +1183,7 @@ function substring(json) {
 										<%--矩阵多选题 --%>
 										<c:when test="${en.quType eq 'CHENCHECKBOX' }">
 											<table class="suQuTable" border="0" cellpadding="0" cellspacing="0">
-													
+
 													<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
 													<tr class="rowItemTr">
 														<td width="15px">&nbsp;
@@ -1220,7 +1220,7 @@ function substring(json) {
 																			$("#bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}").html(bfbVal+"%");
 																			$("#bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").html("&nbsp;&nbsp;"+anCount+"次");
 																			$("#bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }").progressbar({value: bfbFloat});
-																			
+
 																			$("#coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").val(anCount);
 																		</script>
 																	</c:if>
@@ -1232,7 +1232,7 @@ function substring(json) {
 														</td>
 													</tr>
 													</c:forEach>
-													
+
 													</table>
 											<div class="reportPic">
 												<div class="chartBtnEvent">
@@ -1249,8 +1249,8 @@ function substring(json) {
 										<%--矩阵评分题 --%>
 										<c:when test="${en.quType eq 'CHENSCORE' }">
 											<table class="suQuTable" border="0" cellpadding="0" cellspacing="0">
-													
-														<%-- 
+
+														<%--
 														<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
 														<tr class="rowItemTr">
 															<td width="15px">&nbsp;
@@ -1273,8 +1273,8 @@ function substring(json) {
 																	<div class="columnItemOptionName" style="display: none;">${columnItem.optionName }</div>
 																	<input type="hidden" name="columnItemAnCount" value="0" id="coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}">
 															 --%>
-															
-													
+
+
 													<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
 													<tr class="rowItemTr">
 															<td width="15px">&nbsp;
@@ -1293,12 +1293,12 @@ function substring(json) {
 														<td width="180px"><div id="bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }" class="progressbarDiv progress${rowI.index }"></div></td>
 														<td width="60px" align="right" id="bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}" class="bfbTd">0%</td>
 														<%-- <td align="left" id="bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}" class="tdAnCount">&nbsp;0次</td> --%>
-														<td align="left" class="tdAnCount">&nbsp;&nbsp;平均</td> 
+														<td align="left" class="tdAnCount">&nbsp;&nbsp;平均</td>
 														<td width="40px">&nbsp;</td>
 														<td>
 																<div class="columnItemOptionName" style="display: none;">${columnItem.optionName }</div>
 																<input type="hidden" name="columnItemAnCount" value="0" id="coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}">
-														
+
 														<c:forEach items="${en.anChenScores }" var="anItem">
 															<c:if test="${anItem.quRowId eq rowItem.id && anItem.quColId eq columnItem.id }">
 																<!-- <script type="text/javascript">
@@ -1315,14 +1315,14 @@ function substring(json) {
 																	//var bfbFloat=avgScore/"${en.paramInt02}"*100;
 																	var bfbFloat=avgScore/5*100;
 																	var bfbVal = bfbFloat.toFixed(2);
-																	//平均分 setAvgScore  
+																	//平均分 setAvgScore
 																	avgScore=avgScore.toFixed(2);
 																	if(avgScore==="NaN"){
 																		avgScore="0.00";
 																	}
 																	$("#bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}").html(avgScore+"分");
 																	$("#bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }").progressbar({value: bfbFloat});
-																	
+
 																	$("#coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").val(avgScore);
 																</script>
 															</c:if>
@@ -1333,7 +1333,7 @@ function substring(json) {
 													</table>
 													</td>
 													</c:forEach>
-													
+
 													</table>
 											<div class="reportPic">
 												<div class="chartBtnEvent">
@@ -1425,24 +1425,24 @@ function substring(json) {
 											<div style="clear:both;"></div>
 										</c:when>
 								</c:choose>
-								
+
 							</div>
 						</div>
-						
+
 									</td>
 								</tr>
 								</c:if>
-								
+
 								</c:forEach>
 							</table>
-									
+
 								</div>
-							</div>			
+							</div>
 					</div>
-					
+
 				</div>
 			</div>
-			
+
 		</div>
 		</div>
 	</div>

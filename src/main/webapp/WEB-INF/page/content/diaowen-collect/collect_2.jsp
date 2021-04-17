@@ -16,7 +16,7 @@
 	<div class="creatgeSurveyStepBody">
 		<div class="creatgeSurveyStepContent bodyCenter">
 			<ul class="createSsUl">
-				<li><a href=""  class="clickHideMenu csscStep csscStep4"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">设计问卷</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;">
 		                	<div class="selc">
@@ -29,10 +29,10 @@
 		            </div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5 active"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据收集</span><span class="csscStepRight" >&nbsp;</span></a>
+				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5 active"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据分析</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;margin-left: 15px;">
 		                	<div class="selc">
@@ -46,16 +46,15 @@
 			</ul>
 		</div>
 	</div>
-	
+
 	<div style="">
 		<div class="main-tabs-content bodyCenter">
 			<div class="tab-content">
 				<div class="tab-content-collectTab">
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1 "><span class="collectTabItemLeft">&nbsp;</span><span>答卷地址</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4 active" ><span class="collectTabItemLeft">&nbsp;</span><span>社交分享</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5"><span class="collectTabItemLeft">&nbsp;</span><span>网站组件</span></a>
-					<%-- <a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=iframe" class="collectTab tabItem_6"><span class="collectTabItemLeft">&nbsp;</span><span>IFrame嵌入</span></a> --%>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2"><span class="collectTabItemLeft">&nbsp;</span><span>微信收集</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1"> <i class="fa fa-chain" aria-hidden="true"></i> <span>答卷地址</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4 active" > <i class="fa fa-share-alt" aria-hidden="true"></i> <span>社交分享</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5 "> <i class="fa fa-paperclip" aria-hidden="true"></i> <span>网站组件</span></a>
+					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2 ">  <i class="fa fa-weixin" aria-hidden="true"></i> <span>微信收集</span></a>
 				</div>
 			</div>
 		</div>
@@ -65,7 +64,7 @@
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-				
+
 				<!-- <div class="surveyCollectMiddleTab">
 					<div class="scmTabLeft">
 						<div class="scmTabLeftItem"><a href="">问卷设计</a>&nbsp;&nbsp;&gt;</div>
@@ -97,7 +96,7 @@
 									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">重新打开收集</a>
 								</c:when>
 							</c:choose>
-							
+
 						</div>
 					</div>
 					<div class="surveyCollectInfoDiv">
@@ -110,9 +109,9 @@
 						</span>
 					</div>
 				</div>
-				
+
 				<div class="surveyCollectMiddleContent">
-					
+
 					<div class="collect_1_content">
 					<div style="padding:0px 60px;">
 						<div style="" >
@@ -146,21 +145,21 @@
 												document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
 												</script>
 												<!-- Baidu Button END -->
-												
+
 										<!-- <div class="bshare-custom icon-medium-plus"><div class="bsPromo bsPromo2"></div><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div>
 										<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
 										<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script> -->
-										
+
 									</div>
 									<div style="text-align: right;float: right;line-height: 45px;">还可以输入：<span id="wordsInfo" style="color: green;">120</span>个字符。</div>
 								</div>
 							</div>
 						</div>
 						<div style="clear: both;"></div>
-						
+
 						</div>
 					</div>
-					
+
 					<%-- <div class="scmcLeft">
 						<ul>
 							<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="hover">答卷地址</a></li>
@@ -190,14 +189,14 @@
 						</div>
 						</div>
 					</div> -->
-					
+
 				</div>
 			</div>
-			
+
 		</div>
 		</div>
 	</div>
-	
+
 <script type="text/javascript">
 
 /*
@@ -208,14 +207,14 @@ function bindClipBoard(textareaId,clipBtn,clipSpanId){
 	clip.setCSSEffects( true );
 	var clipText=$("#"+textareaId).text();
 	clip.setText(clipText); // 设置要复制的文本。
-	//这个 button 不一定要求是一个 input 按钮，也可以是其他 DOM 元素。 
-	clip.glue(clipBtn); // 和上一句位置不可调换 
+	//这个 button 不一定要求是一个 input 按钮，也可以是其他 DOM 元素。
+	clip.glue(clipBtn); // 和上一句位置不可调换
 	clip.addEventListener('complete', function (client, text) {
 		//alert(text+":复成功");//notify("复制成功!");
 		$("#"+clipSpanId).show().delay(5000).fadeOut("slow");
 		//$("#"+textareaId).select();
 	});
-	clip.reposition(clipBtn); 
+	clip.reposition(clipBtn);
 }
 bindClipBoard("linkTextarea","clipLink","clipLinkSpan");
 */

@@ -15,11 +15,11 @@
 </head>
 <body>
 	<input type="hidden" id="id" name="id" value="${survey.id }">
-	
+
 	<div class="creatgeSurveyStepBody">
 		<div class="creatgeSurveyStepContent bodyCenter">
 			<ul class="createSsUl">
-				<li><a href=""  class="clickHideMenu csscStep csscStep4"><span class="csscStepLeft" style="width: 36px">&nbsp;</span><span class="csscStepCenter">设计问卷</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;">
 		                	<div class="selc">
@@ -32,7 +32,7 @@
 		            </div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5"><span class="csscStepLeft" style="width: 36px">&nbsp;</span><span class="csscStepCenter">数据收集</span><span class="csscStepRight" >&nbsp;</span></a>
+				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 					<div class="a-w-sel">
 		            	<div class="w-sel" style="margin-top: 4px;">
 		                	<div class="selc">
@@ -47,18 +47,18 @@
 		            </div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6 active"><span class="csscStepLeft"  style="width: 36px">&nbsp;</span><span class="csscStepCenter">数据分析</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6 active"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
 				</li>
 			</ul>
 		</div>
 	</div>
-	
+
 	<div style="">
 		<div class="main-tabs-content bodyCenter">
 			<div class="tab-content">
 				<div class="tab-content-collectTab">
-					<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}" class="collectTab tabItem_1 "><span class="collectTabItemLeft">&nbsp;</span><span>默认报告</span></a>
-					<a href="${ctx }/da/my-survey-answer.action?surveyId=${surveyId}" class="collectTab tabItem_3 active"><span class="collectTabItemLeft">&nbsp;</span><span>原始数据</span></a>
+					<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}" class="collectTab tabItem_1">  <i class="fa fa-area-chart" aria-hidden="true"></i>  <span>默认报告</span></a>
+					<a href="${ctx }/da/my-survey-answer.action?surveyId=${surveyId}" class="collectTab tabItem_3 active"> <i class="fa fa-database" aria-hidden="true"></i> <span>原始数据</span></a>
 				</div>
 			</div>
 		</div>
@@ -68,7 +68,7 @@
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-				
+
 				<div class="surveyCollectTop">
 					<div class="surveyCollectTitleDiv">
 						<span class="surveyCollectTitle">${survey.surveyName }</span>
@@ -84,7 +84,7 @@
 									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">重新打开收集</a>
 								</c:when>
 							</c:choose>
-							
+
 						</div>
 					</div>
 					<div class="surveyCollectInfoDiv">
@@ -97,11 +97,11 @@
 						</span>
 					</div>
 				</div>
-				
+
 				<div class="surveyCollectMiddleContent">
-					
+
 					<div class="collect_1_content">
-					
+
 					<div style="padding:0px 60px;">
 						<div style="" >
 							<div style="overflow: auto;">
@@ -141,7 +141,7 @@
 									</c:forEach>
 								</table>
 							</div>
-							
+
 							<div style="padding-top: 15px;text-align: center;">
 									<div class="btn-group">
 										<c:if test="${page.pageNo > 1}">
@@ -168,20 +168,20 @@
 										<c:if test="${page.totalPage > page.pageNo}">
 											<a href="${ctx }/da/my-survey-answer.action?surveyId=${surveyId }&page.pageNo=${page.pageNo+1}" class="btn btn-default">&gt;</a>
 										</c:if>
-										
+
 									</div>
 								</div>
-							
-							
+
+
 						</div>
 					</div>
 					</div>
-					
-					
-					
+
+
+
 				</div>
 			</div>
-			
+
 		</div>
 		</div>
 	</div>
@@ -191,7 +191,7 @@ $(".scmcSurveySNSShare textarea").focus(function(){
 	$(this).css({"background-color":"#FDF9CD","border-color":"#98C5C3"});
 });
 $(".scmcSurveySNSShare textarea").blur(function(){
-	$(this).css("background-color","#F9F7D7");	
+	$(this).css("background-color","#F9F7D7");
 });
 
 $(".deleteSurveyAnswer").click(function(){
