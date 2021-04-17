@@ -1,0 +1,12 @@
+#answer-m-head .dwSvyName{
+    color: dodgerblue;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+}
+#dwSurveyNoteEdit{
+    padding: 10px 0px;
+    color: #333;
+    font-size: 14px;
+    line-height: 20px;
+}

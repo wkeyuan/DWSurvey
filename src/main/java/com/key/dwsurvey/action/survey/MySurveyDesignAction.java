@@ -15,6 +15,7 @@ import com.key.dwsurvey.service.SurveyReqUrlManager;
 import com.key.dwsurvey.service.SurveyStyleManager;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -197,7 +198,7 @@ public class MySurveyDesignAction extends ActionSupport{
 				}
 				if(ynEndTime!=null && !"".equals(ynEndTime)){
 				    surveyDetail.setYnEndTime(Integer.parseInt(ynEndTime));
-				    if(endTime!=null){
+				    if(StringUtils.isNotEmpty(endTime)){
 						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						surveyDetail.setEndTime(simpleDateFormat.parse(endTime));
 					}
