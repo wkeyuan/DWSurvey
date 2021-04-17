@@ -1793,7 +1793,7 @@
 	<tr id="setQuLogicItemTrModel">
 		<td class="ifSpanText1">如果本题回答</td>
 		<td><select name="option_id" class="logicQuOptionSel" ></select></td>
-		<td>则&nbsp;<select name="option_id" class="logicType"  style="width: 60px;"><option value="2">显示</option><option value="1">跳到</option></select> </td>
+		<td>则&nbsp;<select name="option_id" class="logicType"  style="width: 60px;"><option value="2">显示</option><%--<option value="1">跳到</option>--%></select> </td>
 		<td><select name="jump_to_qid" class="logicQuSel" ></select></td>
 		<td><div class="dialogRemoveLogic"></div></td>
 	</tr>
