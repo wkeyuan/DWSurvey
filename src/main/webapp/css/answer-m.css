@@ -1,12 +1,265 @@
+/*** old ***/
+.starRating{
+    font-size: 26px;
+}
+.starRating .fa{
+    cursor: pointer;
+}
+.starRating .fa-star{
+    color: #3388CC;
+}
+.subbtn{
+    opacity:1! important;
+    color: white;
+}
+.m_quOrderByUi{
+    margin: 5px 0 5px 0;
+    padding: 0;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+}
+.m_quOrderByUi li{
+    border-color: #fff;
+    font-size: 16px;
+    min-height: 41px;
+    position: relative;
+    padding-right: 45px!important;
+    border-bottom: 1px solid #EBEBEB!important;
+}
+.m_orderby_num{
+    position: absolute;
+    right: 10px;
+    top: 55%;
+    margin-top: -15px;
+    min-width: 26px;
+    height: 26px;
+    background: #85C8FF;
+    color: #fff;
+    text-align: center;
+    line-height: 26px;
+    border-radius: 15px;
+    z-index: 100;
+    display: none;
+}
+.m_orderby_sel{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    font-size: 30px;
+    z-index: 9999;
+
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgb(166, 166, 166);
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+
+    display: inline-block;
+}
+
+body{
+    padding: 0px;
+    margin: 0px;
+}
+/*** new ***/
 #answer-m-head .dwSvyName{
-    color: dodgerblue;
+    color: #365f8f;
     font-weight: bold;
     letter-spacing: 2px;
     text-align: center;
+    font-size: 22px;
+    padding: 10px 0px;
 }
 #dwSurveyNoteEdit{
     padding: 10px 0px;
+    color: grey;
+    font-size: 13px;
+    line-height: 22px;
+}
+#answer-m-content{
+    padding-top: 10px;
+}
+#dwSurveyQuContentAppUl{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+#dwSurveyQuContentAppUl li{
+    padding-bottom: 20px;
+}
+#dwSurveyQuContentAppUl li .controlgroup > legend{
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 26px;
+}
+
+.surveyQuItem .surveyQuItemContent {
+    padding: 0px;
+    border: none;
+    width: 100%;
+}
+.surveyQuItemContent .dwQuOptionItemContent{
+    margin: .5em 0;
+    position: relative;
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
     color: #333;
+    /*text-shadow: 0 1px 0 #f3f3f3;*/
+    padding: 6px 10px;
+    border-radius: .3125em;
     font-size: 14px;
-    line-height: 20px;
+    background-color: white;
+}
+.surveyQuItemContent .columnItemContnetTd .dwQuOptionItemContent{
+    margin: 0px;
+    background-color: white;
+    border: none;
+    color: #333;
+    text-shadow: none;
+    padding: 0px;
+    border-radius: 0em;
+    font-size: 14px;
+}
+.surveyQuItemContent .dwQuOptionItemContent:active{
+    border-color: rgb(129, 152, 186);
+    border-color: #5aa9ef;
+    border-color: #1e94fc;
+    background: #dae8f5;
+    background: white;
+    border-color: #ddd;
+}
+.surveyQuItemContent .dwQuOptionItemContent.active{
+    border-color: #1e94fc;
+    background: #dae8f5;
+    background: white;
+    border-color: #ddd;
+    background-color: #e4edf7;
+}
+.surveyQuItemContent .dwQuOptionItemContent input{
+
+}
+.surveyQuItemContent .dwQuOptionItemContent label{
+    margin: 0;
+    text-align: left;
+    white-space: normal;
+    z-index: 2;
+}
+.surveyQuItemContent .inputSytle_1{
+    display: block;
+    width: 100%;
+    outline: 0;
+    margin: 0;
+    text-align: left;
+    padding: 6px 5px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+.dwQuOptionItemContent input[type='radio'],.dwQuOptionItemContent input[type='checkbox']{
+    display: none;
+}
+/**  单选样式***/
+.dwQuOptionItemContent .dwRedioStyle {
+    background: transparent url(../images/answer-icon-1.png) no-repeat center top;
+    vertical-align: middle;
+    height: 22px;
+    width: 22px;
+    background-position: -2px -6px;
+    display:inline-block;;
+}
+.dwQuOptionItemContent .dwRedioStyle.checked{
+    background-position: -2px -31px;
+}
+/**多选样式**/
+.dwQuOptionItemContent .dwCheckboxStyle {
+    background: transparent url(../images/answer-icon-1.png) no-repeat center top;
+    vertical-align: middle;
+    height: 22px;
+    width: 22px;
+    background-position: -2px -60px;
+    display:inline-block;
+}
+.dwQuOptionItemContent .dwCheckboxStyle.checked{
+    background-position: -2px -87px;
+}
+.ui-controlgroup-controls{
+    border-bottom:1px solid #ddd;
+    margin-top: 8px;
+}
+.ui-controlgroup-controls .m_clickQuOrderItem{
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+    color: #333;
+    text-shadow: 0 1px 0 #f3f3f3;
+    font-size: 14px;
+    border-radius: 0px;
+    border-bottom: none;
+}
+.ui-controlgroup-controls .m_clickQuOrderItem:first-child{
+
+}
+.ui-controlgroup-controls .m_clickQuOrderItem label{
+    border: none;
+}
+
+.surveyQuItemContent .mFillblankTableTr label{
+    display: block;
+    margin: 0 0 .4em;
+}
+
+.surveyQuItemContent .mFillblankTableTr{
+    margin: 10px 0px;
+}
+.surveyQuItemContent .mFillblankTableTr .dwQuOptionItemContent label{
+    display: inline-block;
+    margin: 0px;
+}
+.surveyQuItemContent .quSliderItemTr .mFillblankTableEditTd label{
+    margin: 0px;
+}
+
+.surveyQuItemContent .mFillblankTableTr .dwMFillblankInput,input[type='text'].fillblankInput{
+    width: 100%;
+    outline: 0;
+    margin: 0;
+}
+.surveyQuItemContent .mFillblankTableTr .dwMFillblankInput,input[type='text'].fillblankInput,.option_other_text{
+    display: block;
+    padding: 6px 5px;
+    border: 1px solid #ddd;
+    text-align: left;
+    box-sizing: border-box;
+}
+.nextPage_a, .submitSurvey{
+    width: 100%;
+    line-height: 25px;
+    border-radius: 2px;
+    padding: 8px 0px;
+    margin-left: 0px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background: #1e94fc;
+    border: none;
+}
+.dw-footer{
+    display: block;
+    padding: 20px 0px;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: normal;
+    padding-top: 30px;
+    color: #333;
+    background-color: #eeeeee;
+}
+.dw-footer a{
+    color: #333;
 }
