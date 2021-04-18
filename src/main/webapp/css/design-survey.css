@@ -59,7 +59,7 @@ textarea{
 	padding-top: 5px;
 	padding-bottom: 4px;
 	overflow: auto;
-	zoom: 1; 
+	zoom: 1;
 	width: 100%;
 	background: #24292c;
 }
@@ -143,7 +143,7 @@ textarea{
 #tools .tools_tabs .tools_tabs_left ul li:hover{
 	border-top: 3px solid #9AC600;
 	background: #E8EBEE;
-} 
+}
 #tools .tools_tabs .tools_tabs_left ul li.current{
 	border-top: 3px solid #9AC600;
 	background: #F7F7F7;
@@ -163,7 +163,7 @@ textarea{
 	color: #333333;
 }
 #tools .tools_tabs .tools_tabs_left ul li:hover{
-	
+
 }
 /** 定义工具栏样式  **/
 .tools_tab_div{
@@ -189,7 +189,7 @@ textarea{
 	display: inline;
 }
 #toolsBashQu{
-	width: 320px;
+	width: 371px;
 }
 #toolsChenQu{
 	width: 251px;
@@ -879,7 +879,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	overflow: auto;
 }
 .quCoNum{
-	
+
 }
 .quCoTitle .quCoNum{
 	float: left;
@@ -900,7 +900,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	padding: 0px;
 	margin: 0px;
 	list-style: none;
-	
+
 	font-size: 14px;
 	display: inline-block;
 	width: 100%;
@@ -924,7 +924,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 .surveyQuItemContent .quCoItem ul li label{
 	vertical-align: middle;
 	cursor: text;
-	
+
 	display: inline-block;
 	max-width: 600px;
 	table-layout:fixed; word-break: break-all;
@@ -947,7 +947,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	padding:3px 0px;
 	vertical-align: middle;
 	cursor: text;
-	
+
 	display: inline-block;
 	max-width: 600px;
 	table-layout:fixed; word-break: break-all;
@@ -1111,7 +1111,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	color: #333333;
 	font-family: "微软雅黑";
 	line-height: 1.4em;
-	
+
 	table-layout:fixed; word-break: break-all;
 }
 /** 问卷标题 **/
@@ -1124,7 +1124,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	color:#222222;
 	cursor:text;
 	padding-top:2px;
-	padding-bottom:1px; 
+	padding-bottom:1px;
 	line-height:1.4em;
 	overflow: auto;
 }
@@ -1191,7 +1191,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	right:-25px;
 }
 #dwCommonEditRoot.quOptionEdit  .dwComEditOptionUl{
-	
+
 }
 #dwCommonEditRoot.quOptionEdit .dwComEditMenuBtn{
 	width: 23px;
@@ -1283,7 +1283,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	border-color: transparent #0D75AD transparent transparent;
 }
 #dwCommonDialog .dwCommonRefIcon.right{
-	right: -30px;	
+	right: -30px;
 }
 .dwCommonRefIcon.right .dwCommonRefIcon1{
 	left: -1px;
@@ -1393,7 +1393,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 .dwQuDialogLogic{
 	padding: 0px 30px;
 	margin: 0px;
-	overflow: auto;	
+	overflow: auto;
 }
 .dwQuDialogLogicTitle{
 	font-size: 12px;
@@ -1447,7 +1447,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	text-align: center;
 }
 .dwQuDialogLoad img{
-	
+
 }
 #modelUIDialogContent{
 	padding: 10px 20px;
@@ -1570,7 +1570,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 }
 /**多项填空题**/
 .mFillblankTable{
-	
+
 }
 .mFillblankTable tr td{
 	padding: 5px 8px;
@@ -1694,7 +1694,7 @@ select option{
 	line-height: 1.4em;
 	font-family: "微软雅黑";
 	color: #444;
-	
+
 	filter:alpha(opacity=92); /*IE滤镜，透明度50%*/
 	-moz-opacity:0.92; /*Firefox私有，透明度50%*/
 	opacity:0.92;/*其他，透明度50%*/
