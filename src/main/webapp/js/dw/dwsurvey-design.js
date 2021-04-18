@@ -542,14 +542,29 @@ $(document).ready(function(){
 		var quItemBody=$(dwDialogObj).parents(".surveyQuItemBody");
 		var qu_inputWidth=$("#modelUIDialog input[name='qu_inputWidth']");
 		var qu_inputRow=$("#modelUIDialog input[name='qu_inputRow']");
+		var option_range_date=$("#modelUIDialog select.option_range_date");
+
 		var checkType=quItemBody.find("input[name='checkType']");
 		var answerInputWidth=quItemBody.find("input[name='answerInputWidth']");
 		var answerInputRow=quItemBody.find("input[name='answerInputRow']");
+		var paramInt01=quItemBody.find("input[name='paramInt01']");
 
 		if(answerInputWidth.val()!=qu_inputWidth.val() || answerInputRow.val()!=qu_inputRow.val()){
 			quItemBody.find("input[name='saveTag']").val(0);
 		}
-		checkType.val("NO");
+
+		if(checkType[0]){
+			var checkTypeVal = checkType.val();
+			if(checkTypeVal=="DATE"){
+				if(paramInt01[0]){
+					paramInt01.val(option_range_date.val());
+				}else{
+					quItemBody.find(".quInputCase").append("<input type=\"hidden\" name=\"paramInt01\" value=\""+option_range_date.val()+"\">");
+				}
+				quItemBody.find("input[name='saveTag']").val(0);
+			}
+		}
+
 		answerInputWidth.val(qu_inputWidth.val());
 		answerInputRow.val(qu_inputRow.val());
 		if(qu_inputRow.val()>1){
@@ -1371,6 +1386,7 @@ function showUIDialog(thDialogObj){
 		var checkType_val=quItemBody.find("input[name='checkType']").val();
 		var answerInputWidth_val=quItemBody.find("input[name='answerInputWidth']").val();
 		var answerInputRow_val=quItemBody.find("input[name='answerInputRow']").val();
+		var paramInt01=quItemBody.find("input[name='paramInt01']");
 		if(checkType_val==""){
 			checkType_val="NO";
 		}
@@ -1384,6 +1400,14 @@ function showUIDialog(thDialogObj){
 		}
 		qu_inputWidth.val(answerInputWidth_val);
 		qu_inputRow.val(answerInputRow_val);
+
+		$("#modelUIDialog .dwQuFillDataTypeOption .option_range_date_li").hide();
+		if(checkType_val==="DATE"){
+			$("#modelUIDialog .dwQuFillDataTypeOption .option_range_date_li").show();
+			if(paramInt01[0]){
+				$("#modelUIDialog .dwQuFillDataTypeOption .option_range_date_li .option_range_date").val(paramInt01.val());
+			}
+		}
 		resetQuItemHover(quItemBody);
 		$(thDialogObj).parents(".quCoItemUlLi").addClass("menuBtnClick");
 		$("#modelUIDialog").dialog("option","height",220);
@@ -2148,11 +2172,16 @@ function saveFillblank(quItemBody,callback){
 		var contactsField=quItemBody.find("input[name='contactsField']").val();
 
 		var checkType=quItemBody.find("input[name='checkType']").val();
+		var paramInt01=quItemBody.find("input[name='paramInt01']");
 
 		var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quId="+quId;
 		data+="&isRequired="+isRequired+"&hv="+hv+"&randOrder="+randOrder+"&cellCount="+cellCount;
 		data+="&answerInputWidth="+answerInputWidth+"&answerInputRow="+answerInputRow;
 		data+="&contactsAttr="+contactsAttr+"&contactsField="+contactsField+"&checkType="+checkType;
+
+		if(paramInt01[0]){
+			data+="&paramInt01="+paramInt01.val();
+		}
 
 		var quTitleSaveTag=quItemBody.find("input[name='quTitleSaveTag']").val();
 		if(quTitleSaveTag==0){
@@ -2160,6 +2189,7 @@ function saveFillblank(quItemBody,callback){
 			quTitle=escape(encodeURIComponent(quTitle));
 			data+="&quTitle="+quTitle;
 		}
+
 		//逻辑选项
 		var quLogicItems=quItemBody.find(".quLogicItem");
 		$.each(quLogicItems,function(i){
@@ -2182,6 +2212,7 @@ function saveFillblank(quItemBody,callback){
 			}
 
 		});
+
 		$.ajax({
 			url:url,
 			data:data,
@@ -2204,6 +2235,7 @@ function saveFillblank(quItemBody,callback){
 
 					quItemBody.find("input[name='saveTag']").val(1);
 					quItemBody.find(".quCoTitle input[name='quTitleSaveTag']").val(1);
+
 					//执行保存下一题
 					saveQus(quItemBody.next(),callback);
 					//同步-更新题目排序号
@@ -2216,6 +2248,7 @@ function saveFillblank(quItemBody,callback){
 		saveQus(quItemBody.next(),callback);
 	}
 }
+
 
 //*****评分题****//
 /**

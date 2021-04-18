@@ -15,6 +15,7 @@ import com.key.dwsurvey.entity.Question;
 import com.key.dwsurvey.entity.QuestionLogic;
 
 import com.key.dwsurvey.service.AnFillblankManager;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.WebUtils;
@@ -43,7 +44,7 @@ public class QuFillblankAction extends ActionSupport{
 	private QuestionManager questionManager;
 	@Autowired
 	private AnFillblankManager anFillblankManager;
-	
+
 	public String ajaxSave() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
@@ -58,7 +59,7 @@ public class QuFillblankAction extends ActionSupport{
 		}
 		return null;
 	}
-	
+
 	private Question ajaxBuildSaveOption(HttpServletRequest request) throws UnsupportedEncodingException {
 		String quId=request.getParameter("quId");
 		String belongId=request.getParameter("belongId");
@@ -74,6 +75,8 @@ public class QuFillblankAction extends ActionSupport{
 		String hv=request.getParameter("hv");
 		String randOrder=request.getParameter("randOrder");
 		String cellCount=request.getParameter("cellCount");
+		String paramInt01=request.getParameter("paramInt01");
+		//System.out.println("paramInt01:"+paramInt01);
 		if("".equals(quId)){
 			quId=null;
 		}
@@ -95,6 +98,7 @@ public class QuFillblankAction extends ActionSupport{
 		entity.setContactsField(contactsField);
 		answerInputWidth=(answerInputWidth==null || "".equals(answerInputWidth))?"300":answerInputWidth;
 		answerInputRow=(answerInputRow==null || "".equals(answerInputRow))?"1":answerInputRow;
+		paramInt01=(StringUtils.isEmpty(paramInt01))?"0":paramInt01;
 		entity.setAnswerInputWidth(Integer.parseInt(answerInputWidth));
 		entity.setAnswerInputRow(Integer.parseInt(answerInputRow));
 		entity.setIsRequired(Integer.parseInt(isRequired));
@@ -103,6 +107,7 @@ public class QuFillblankAction extends ActionSupport{
 		entity.setCellCount(Integer.parseInt(cellCount));
 		checkType=(checkType==null || "".equals(checkType))?"NO":checkType;
 		entity.setCheckType(CheckType.valueOf(checkType));
+		entity.setParamInt01(Integer.parseInt(paramInt01));
 		Map<String, Object> quLogicIdMap=WebUtils.getParametersStartingWith(request, "quLogicId_");
 		List<QuestionLogic> quLogics=new ArrayList<QuestionLogic>();
 		for (String key : quLogicIdMap.keySet()) {
@@ -124,7 +129,7 @@ public class QuFillblankAction extends ActionSupport{
 		entity.setQuestionLogics(quLogics);
 		return entity;
 	}
-	
+
 	public static String buildResultJson(Question entity){
 		StringBuffer strBuf=new StringBuffer();
 		strBuf.append("{id:'").append(entity.getId());

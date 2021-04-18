@@ -164,11 +164,48 @@ $(document).ready(function(){
         return false;
     });
 
-    $("#dwSurveyQuContent input[type='radio'],#dwSurveyQuContent input[type='checkbox']").change(function(){
+    $("#dwSurveyQuContent .dwQuOptionItemContent").unbind();
+    $("#dwSurveyQuContent .dwQuOptionItemContent").click(function(){
+        clickItem($(this));
         lgcommon($(this));
         validateCheck($(this).parents(".li_surveyQuItemBody"),false);
         $(".fillblankInput,.dwMFillblankInput,.dwChenMFillblankInput").blur();
     });
+
+    function clickItem(thObj){
+        var quItemBody=thObj.parents(".li_surveyQuItemBody");
+        var quType=quItemBody.find(".quType").val();
+        var dwQuInputLabel=thObj.find(".dwQuInputLabel");
+        if("RADIO"===quType){
+
+            quItemBody.find(".dwQuInputLabel").removeClass("checked");
+            quItemBody.find("input[type='radio']").prop("checked",false);
+            thObj.find("input[type='radio']").prop("checked",true);
+            dwQuInputLabel.addClass("checked");
+            quItemBody.find(".dwQuOptionItemContent").removeClass("active");
+            thObj.addClass("active");
+
+        }else if("CHECKBOX"===quType){
+            var thCheckbox = thObj.find("input[type='checkbox']");
+            if(thCheckbox.prop("checked")){
+                thObj.find("input[type='checkbox']").prop("checked",false);
+                dwQuInputLabel.removeClass("checked");
+                thObj.removeClass("active");
+            }else{
+                thObj.find("input[type='checkbox']").prop("checked",true);
+                dwQuInputLabel.addClass("checked");
+                thObj.addClass("active");
+            }
+        }else if("MULTIFILLBLANK"===quType){
+
+            var chenRow=thObj.parents(".mFillblankTableTr");
+            chenRow.find(".dwQuInputLabel").removeClass("checked");
+            chenRow.find("input[type='radio']").prop("checked",false);
+            thObj.find("input[type='radio']").prop("checked",true);
+            dwQuInputLabel.addClass("checked");
+
+        }
+    }
 
     //填空题
     $(".fillblankInput,.dwMFillblankInput,.dwChenMFillblankInput").blur(function(){
@@ -245,6 +282,8 @@ $(document).ready(function(){
         hidQuItemBody.addClass("hidFor"+logicId);
         hidQuItemBody.find(".answerTag").attr("disabled",true);
     });
+
+    bindDateEvent();
 });
 
 

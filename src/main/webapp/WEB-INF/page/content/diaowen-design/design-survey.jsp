@@ -522,6 +522,69 @@
 		<div id="contactPersonQuestion" class="tools_item">
 			<div class="toolbars">
 				<ul class="dragQuUl">
+					<li id="dateQuModel" style="">
+						<div class="dwToolbar_icon"></div>
+						<div class="dwQuTypeModel">
+							<div class="surveyQuItemBody quDragBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" name="quType" value="FILLBLANK" >
+									<input type="hidden" name="quId" value="">
+									<input type="hidden" name="orderById" value="0"/>
+									<input type="hidden" name="saveTag" value="0">
+									<input type="hidden" name="hoverTag" value="0">
+									<input type="hidden" name="isRequired" value="1">
+									<input type="hidden" name="hv" value="2">
+									<input type="hidden" name="randOrder" value="0">
+									<input type="hidden" name="cellCount" value="0">
+									<input type="hidden" name="checkType" value="DATE">
+									<input type="hidden" name="contactsAttr" value="0">
+									<input type="hidden" name="contactsField" value="0">
+									<input type="hidden" name="answerInputWidth" value="300">
+									<input type="hidden" name="answerInputRow" value="1">
+									<input type="hidden" name="paramInt01" value="3">
+
+									<div class="quLogicInputCase">
+										<input type="hidden" name="quLogicItemNum" value="0">
+									</div>
+								</div>
+								<div class="surveyQuItem">
+									<div class="surveyQuItemLeftTools">
+										<ul class="surveyQuItemLeftToolsUl">
+											<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
+											<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
+											<%--<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>--%>
+											<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
+										</ul>
+									</div>
+									<div class="surveyQuItemRightTools">
+										<ul class="surveyQuItemRightToolsUl">
+											<li class="questionUp"><div class="dwQuIcon"></div></li>
+											<li class="questionDown"><div class="dwQuIcon"></div></li>
+										</ul>
+									</div>
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">1、</div>
+											<div class="editAble quCoTitleEdit" >日期控件？</div>
+											<input type="hidden" name="quTitleSaveTag" value="0">
+										</div>
+										<div class="quCoItem"><ul>
+											<li class="quCoItemUlLi">
+												<!-- <input type="text" style="width:200px;padding:5px;"> -->
+												<div class="quFillblankItem">
+													<input type="text" style="width:200px;padding:5px;" class="quFillblankAnswerInput" />
+													<textarea rows="5" style="width:300px;display: none;"class="quFillblankAnswerTextarea" ></textarea>
+													<div class="dwFbMenuBtn" ></div>
+												</div>
+											</li>
+										</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
 					<li id="birthdayQuModel" style="display: none;">
 						<div class="dwToolbar_icon"></div>
 						<div class="dwQuTypeModel">
@@ -1452,6 +1515,8 @@
 
 								<input type="hidden" name="contactsAttr" value="${en.contactsAttr }">
 								<input type="hidden" name="contactsField" value="${en.contactsField }">
+								<input type="hidden" name="paramInt01" value="${en.paramInt01 }">
+
 								<div class="quLogicInputCase">
 									<input type="hidden" name="quLogicItemNum" value="${fn:length(en.questionLogics) }">
 									<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
@@ -2036,7 +2101,7 @@
 	<tr id="setQuLogicItemTrModel">
 		<td class="ifSpanText1">如果本题回答</td>
 		<td><select name="option_id" class="logicQuOptionSel" ></select></td>
-		<td>则&nbsp;<select name="option_id" class="logicType"  style="width: 60px;"><option value="2">显示</option><option value="1">跳到</option></select> </td>
+		<td>则&nbsp;<select name="option_id" class="logicType"  style="width: 60px;"><option value="2">显示</option><%--<option value="1">跳到</option>--%></select> </td>
 		<td><select name="jump_to_qid" class="logicQuSel" ></select></td>
 		<td><div class="dialogRemoveLogic"></div></td>
 	</tr>
@@ -2151,6 +2216,17 @@
 					</li>
 					<li><label>输入框高：</label>
 					<input type="text" name="qu_inputRow" value="1"><span>&nbsp;行</span>
+					</li>
+					<li class="option_range_date_li" style="display: list-item;"><label>日期格式：</label>
+						<select class="option_range_date">
+							<option value="3">年月日（YYYY-MM-DD）</option>
+							<option value="2">年月（YYYY-MM）</option>
+							<option value="1">年（YYYY）</option>
+							<option value="4">年月日时分秒（YYYY-MM-DD HH:mm:ss）</option>
+							<option value="5">时分秒（HH:mm:ss）</option>
+							<option value="6">时分（HH:mm）</option>
+							<option value="0">直接输入日期（不使用控件，格式不限）</option>
+						</select>
 					</li>
 				</ul>
 				<div class="dwQuDialogBtnCon" ><input type="button" value="保存" class="quDialogBtn" id="dwDialogQuFillOptionSave"/></div>

@@ -7,109 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>${survey.surveyName }</title>
-<link href="${ctx }/css/sur-mobile.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${ctx }/js/plugs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
 <script type="text/javascript" src="${ctx }/js/plugs/jquery-ui-1.10.3.custom/js/jquery-1.10.1.js"></script>
-<script src="${ctx }/js/plugs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<%--<script src="${ctx }/js/plugs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>--%>
+<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/laydate/laydate.js"></script>
+<script type="text/javascript" src="${ctx }/js/common/ans-common.js"></script>
 <script type="text/javascript" src="${ctx }/js/common/common.js"></script>
 <script src="${ctx }/js/common/ans-m.js"></script>
 <link href="${ctx }/js/plugs/font-awesome-4.2.0/css/font-awesome.css" rel="stylesheet">
-
 <link href="${ctx}/js/plugs/validate/jquery.validate.css" type="text/css" rel="stylesheet" />
-
-
-<style type="text/css">
-.ui-page {
-	background:white;
-}
-.ui-header{
-	background-color: #5693C0! important;
-	text-shadow:0 1px 0 #3D586C! important;
-	padding-bottom: 5px;
-}
-.ui-content{
-	padding: 0px 1em;
-}
-.ui-footer{
-	color: #3D586C! important;
-	background: none! important;
-}
-.ui-header, .ui-footer{
-	border: none! important;
-}
-.starRating{
-	font-size: 26px;
-}
-.starRating .fa{
-	cursor: pointer;
-}
-.starRating .fa-star{
-	color: #3388CC;
-}
-.subbtn{
-	opacity:1! important;
-	color: white;
-}
-.quTitleNum{
-	/* position: absolute; */
-}
-.quTitleText{
-	/* text-indent: 2em; */
-}
-#dwSurveyNote{
-	padding-top: 0px;
-}
-.m_quOrderByUi{
-	  margin: 5px 0 5px 0;
-  padding: 0;
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-}
-.m_quOrderByUi li{
-  border-color: #fff;
-  font-size: 16px;
-  min-height: 41px;
-  position: relative;
-  padding-right: 45px!important;
-  border-bottom: 1px solid #EBEBEB!important;
-}
-.m_orderby_num{
-  position: absolute;
-  right: 10px;
-  top: 55%;
-  margin-top: -15px;
-  min-width: 26px;
-  height: 26px;
-  background: #85C8FF;
-  color: #fff;
-  text-align: center;
-  line-height: 26px;
-  border-radius: 15px;
-  z-index: 100;
-  display: none;
-}
-.m_orderby_sel{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  font-size: 30px;
-  z-index: 9999;
-
-  background-color: rgb(248, 248, 248);
-  border: 1px solid rgb(166, 166, 166);
-  border-image-source: initial;
-  border-image-slice: initial;
-  border-image-width: initial;
-  border-image-outset: initial;
-  border-image-repeat: initial;
-
-    display: inline-block;
-}
-
-</style>
+<link href="${ctx }/css/answer-m.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <input type="hidden" id="ctx" name="ctx" value="${ctx }">
@@ -117,24 +24,22 @@
 <input type="hidden" id="surveyId" name="surveyId" value="${survey.id }">
 <input type="hidden" name="form-from" value="mobile" >
 
-
-<div data-role="page" >
-  <div data-role="header">
+<div style="padding: 0px 10px;">
+  <div  id="answer-m-head" >
     	<div id="dwSurveyTitle" class="noLogoImg" style="padding-top: 5px;">
     		<!-- <i class="fa fa-star"></i> -->
-			<div id="dwSurveyName" class="dwSvyName" style="color:rgb(244, 234, 195);">${survey.surveyName }</div>
+			<div id="dwSurveyName" class="dwSvyName" style="">${survey.surveyName }</div>
 		</div>
 		<div id="dwSurveyNote">
-			<div id="dwSurveyNoteEdit"  style="color:white;font-weight: normal;line-height: 20px;">${survey.surveyDetail.surveyNote }</div>
+			<div id="dwSurveyNoteEdit" >${survey.surveyDetail.surveyNote }</div>
 		</div>
   </div>
   <div id="m-errorMsg"></div>
-  <div data-role="content" >
+  <div id="answer-m-content">
 
     <div id="dwSurveyQuContent" style="">
 			<div id="dwSurveyQuContentBg">
 
-			<!-- <div style="border-top: 3px solid #81AB00;margin:0px auto;padding-bottom: 15px;"></div> -->
 			<c:set var="pageNo" value="1"></c:set>
 			<c:set var="isNextPage" value="0"></c:set>
 			<ul id="dwSurveyQuContentAppUl">
@@ -165,21 +70,23 @@
 							</div>
 							<div class="surveyQuItem">
 								<div class="surveyQuItemContent">
-								<fieldset data-role="controlgroup" >
+								<div class="controlgroup" >
 									<legend>
 										<span class="quTitleNum">${i.count }、</span>
 										<span class="quTitleText">${en.quTitle}</span>
 									</legend>
 									<c:forEach items="${en.quRadios }" var="item" >
-										<div class="dwQuOptionItemContent">
-										<label for="qu_${en.quType }_${en.id }_${item.id}">${item.optionName }</label>
-										<input id="qu_${en.quType }_${en.id }_${item.id}" type="radio" name="qu_${en.quType }_${en.id }" value="${item.id }">
+										<div class="dwQuOptionItemContent"  >
+											<label class="dwRedioStyle dwQuInputLabel" ></label>
+											<input id="qu_${en.quType }_${en.id }_${item.id}" type="radio" name="qu_${en.quType }_${en.id }" value="${item.id }">
+											<label for="qu_${en.quType }_${en.id }_${item.id}">${item.optionName }</label>
 											<c:if test="${item.isNote eq 1 }" >
-												<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;${item.isNote eq 1 ? '':'display: none;'}"   name="text_qu_${en.quType }_${en.id }_${item.id }"  />
+												<input type='text' class='inputSytle_1 option_other_text' name="text_qu_${en.quType }_${en.id }_${item.id }"  />
 											</c:if>
 										</div>
+
 									</c:forEach>
-								</fieldset>
+								</div>
 								</div>
 							</div>
 					</div>
@@ -210,21 +117,24 @@
 							</div>
 							<div class="surveyQuItem">
 								<div class="surveyQuItemContent">
-								<fieldset data-role="controlgroup" >
+								<div class="controlgroup" >
 										<legend>
 											<span class="quTitleNum">${i.count }、</span>
 											<span class="quTitleText">${en.quTitle}</span>
 										</legend>
 									<c:forEach items="${en.quCheckboxs }" var="item">
-										<div class="dwQuOptionItemContent">
-										<label for="tag_qu_${en.quType }_${en.id }_${item.id }" >${item.optionName }</label>
-										<input id="tag_qu_${en.quType }_${en.id }_${item.id }" type="checkbox" name="tag_qu_${en.quType }_${en.id }_${item.id }"  value="${item.id }" >
+
+										<div class="dwQuOptionItemContent" >
+											<label class="dwCheckboxStyle dwQuInputLabel" ></label>
+											<input id="tag_qu_${en.quType }_${en.id }_${item.id }" type="checkbox" name="tag_qu_${en.quType }_${en.id }_${item.id }"  value="${item.id }" >
+											<label for="tag_qu_${en.quType }_${en.id }_${item.id }" >${item.optionName }</label>
 											<c:if test="${item.isNote eq 1 }" >
-												<input type='text' class='inputSytle_1'  style="width:200px;padding:5px;"  name="text_tag_qu_${en.quType }_${en.id }_${item.id }" />
+												<input type='text' class='inputSytle_1 option_other_text' name="text_tag_qu_${en.quType }_${en.id }_${item.id }" />
 											</c:if>
 										</div>
+
 									</c:forEach>
-								</fieldset>
+								</div>
 								</div>
 							</div>
 					</div>
@@ -240,7 +150,9 @@
 								<input type="hidden" class="quId" value="${en.id }">
 								<input type="hidden" class="orderById" value="${en.orderById }"/>
 								<input type="hidden" class="isRequired" value="${en.isRequired }">
+								<input type="hidden" class="checkType" value="${en.checkType }">
 								<input type="hidden" class="answerTag" value="0" >
+								<input type="hidden" class="paramInt01" value="${en.paramInt01}">
 								<div class="quLogicInputCase">
 									<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
 									<div class="quLogicItem quLogicItem_${logicSts.count }">
@@ -264,13 +176,13 @@
 
 										 <c:choose>
 											 <c:when test="${en.checkType eq 'DATE'}">
-												 <input type="date" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput"  >
+												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" readonly style="margin-top: 10px;"  >
 											 </c:when>
 											 <c:when test="${en.answerInputRow > 1 }">
-												 <textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" class="inputSytle_2 fillblankInput" ></textarea>
+												 <textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" class="inputSytle_2 fillblankInput" style="margin-top: 10px;"  > ></textarea>
 											 </c:when>
 											 <c:otherwise>
-												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" >
+												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" style="margin-top: 10px;" >
 											 </c:otherwise>
 										 </c:choose>
 
@@ -304,53 +216,26 @@
 
 							<div class="surveyQuItem">
 								<div class="surveyQuItemContent">
-								<fieldset data-role="controlgroup" >
-										<legend>
-											<span class="quTitleNum">${i.count }、</span>
-											<span class="quTitleText">${en.quTitle}</span>
-										</legend>
-								<div class="ui-controlgroup-controls ">
-									<c:forEach items="${en.quOrderbys }" var="item">
-										<div class="ui-checkbox m_clickQuOrderItem">
-											<label class="ui-btn ui-corner-all ui-btn-inherit itemOptionname"  style="text-align: left;" >${item.optionName }</label>
-											<div class="m_orderby_num">0</div>
-											<div style="display: none;">
-												<input  name="item_qu_${en.quType }_${en.id }_${item.id }"  value="0" type="hidden" class="quOrderItemHidInput" >
+									<div class="controlgroup" >
+											<legend>
+												<span class="quTitleNum">${i.count }、</span>
+												<span class="quTitleText">${en.quTitle}</span>
+											</legend>
+											<div class="ui-controlgroup-controls ">
+												<c:forEach items="${en.quOrderbys }" var="item">
+													<div class="ui-checkbox m_clickQuOrderItem">
+														<label class="ui-btn ui-corner-all ui-btn-inherit itemOptionname"  style="text-align: left;" >${item.optionName }</label>
+														<div class="m_orderby_num">0</div>
+														<div style="display: none;">
+															<input  name="item_qu_${en.quType }_${en.id }_${item.id }"  value="0" type="hidden" class="quOrderItemHidInput" >
+														</div>
+													</div>
+												</c:forEach>
 											</div>
-										</div>
-									</c:forEach>
-								</div>
-
-								</fieldset>
-								</div>
-							</div>
-
-
-							<%-- <div class="surveyQuItem">
-								<div class="surveyQuItemContent">
-									<div class="quCoTitle">
-										<legend>
-										<span>${i.count }、</span>
-										<span>${en.quTitle}</span>
-										</legend>
-									</div>
-									<div class="quCoItem quOrderByCoItem">
-										<div  class="quOrderByLeft">
-										<ul class="quOrderByLeftUl">
-										<c:forEach items="${en.quOrderbys }" var="item">
-											<li class="quCoItemUlLi">
-												<label class="editAble quCoOptionEdit" style="padding: 5px;background: #EDEDED;">${item.optionName }
-													<input  name="item_qu_${en.quType }_${en.id }_${item.id }"  value="1" type="hidden" class="quOrderItemHidInput" >
-												</label>
-											</li>
-										</c:forEach>
-										</ul>
-										</div>
-										<div style="clear: both;"></div>
 									</div>
 								</div>
 							</div>
-							 --%>
+
 					</div>
 					</li>
 					</c:when>
@@ -478,7 +363,7 @@
 				</c:forEach>
 
 
-				<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
+				<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="padding-bottom: 40px;padding-top: 20px;${pageNo gt 1 ?'display: none':''}">
 					<div class="surveyQuItemBody">
 							<div class="surveyQuItem">
 								<div id="jcaptchaImgBody" class="r-qu-body" style="display: none;">
@@ -500,7 +385,7 @@
 
 
 								<input type="hidden" class="quType" value="submitSurveyBtn">
-								<div class="surveyQuItemContent" style="margin-bottom: 0px;min-height:20px;">
+								<div class="surveyQuItemContent" >
 									<!-- <a href="#" data-theme="b"  data-role="button">提&nbsp;交</a>&nbsp;&nbsp; -->
 									<input type="button" class="submitSurvey" id="submitSurvey" value="提&nbsp;交" data-role="button" data-theme="b" />
 									 <!-- <a href="#" class="sbtn24 sbtn24_0 submitSurvey">提&nbsp;交</a>&nbsp;&nbsp; -->
@@ -519,12 +404,14 @@
 			</div>
 		</div>
   </div>
-
-  <div data-role="footer" >
-  	<h3>Powered by <a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external">DWSurvey</a></h3>
-  </div>
 </div>
+
 </form>
+
+<div class="dw-footer" >
+	<div><a href="http://diaowen.net/index-m.jsp" style="text-decoration: none;" rel="external" title="开源的调查问卷系统" >调问网&nbsp;DWSurvey&nbsp;</a>提供技术支持</div>
+</div>
+
 <div id="fixedMsg" style="position: fixed;top: 0px;width: 100%;padding: 10px;text-align: center;font-size: 18px;letter-spacing: 4px;line-height: 56px;background-color: #111;background-color: rgba(17,17,17,0.5);color: #fff;color: rgba(255,255,255,0.5);z-index: 200;display: none;"></div>
 <%@ include file="/WEB-INF/page/layouts/other.jsp"%>
 </body>
