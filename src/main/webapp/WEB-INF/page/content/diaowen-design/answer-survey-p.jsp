@@ -520,6 +520,60 @@ label.error{
 					</li>
 					</c:when>
 
+					<c:when test="${en.quType eq 'SCORE' }">
+						<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
+							<div class="surveyQuItemBody">
+								<div class="initLine"></div>
+								<div class="quInputCase" style="display: none;">
+									<input type="hidden" class="quType" value="SCORE">
+									<input type="hidden" class="quId" value="${en.id }">
+									<input type="hidden" class="orderById" value="${en.orderById }"/>
+									<input type="hidden" class="isRequired" value="${en.isRequired }">
+									<div class="quLogicInputCase">
+										<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
+											<div class="quLogicItem quLogicItem_${logicSts.count }">
+												<input type="hidden" class="cgQuItemId" value="${quLogicEn.cgQuItemId }"/>
+												<input type="hidden" class="skQuId" value="${quLogicEn.skQuId }"/>
+												<input type="hidden" class="logicId" value="${quLogicEn.id }"/>
+												<input type="hidden" class="geLe" value="${quLogicEn.geLe }"/>
+												<input type="hidden" class="scoreNum" value="${quLogicEn.scoreNum }"/>
+												<input type="hidden" class="logicType" value="${quLogicEn.logicType }"/>
+											</div>
+										</c:forEach>
+									</div>
+									<input type="hidden" name="qu_${en.quType }_${en.id }" value="item_qu_${en.quType }_${en.id }_" />
+								</div>
+								<div class="surveyQuItem">
+									<div class="surveyQuItemContent">
+										<div class="quCoTitle">
+											<div class="quCoNum">${i.count }、</div>
+											<div class="editAble quCoTitleEdit" >${en.quTitle}</div>
+										</div>
+										<div class="quCoItem">
+											<table class="quCoItemTable" cellpadding="0" cellspacing="0">
+												<c:forEach items="${en.quScores }" var="item">
+													<tr class="quScoreOptionTr">
+														<td class="quCoItemTableTd quOptionEditTd">
+															<label class="editAble quCoOptionEdit">${item.optionName }</label>
+															<input class="dwScoreOptionId" value="${item.id }" disabled="disabled" type="hidden"/>
+															<input type="hidden" class="answerTag" value="0" >
+														</td>
+														<td class="quCoItemTableTd">
+															<table class="scoreNumTable" border="0" cellspacing="0" cellpadding="1" ><tr><td style="background-color: white;">1</td><td style="background-color: white;">2</td><td style="background-color: white;">3</td><td style="background-color: white;">4</td><td style="background-color: white;">5</td></tr></table>
+															<input name="item_qu_${en.quType }_${en.id }_${item.id }" value=""  type="hidden" class="scoreNumInput" >
+														</td>
+														<td class="quCoItemTableTd scoreNumText">分</td>
+													</tr>
+												</c:forEach>
+											</table>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</li>
+					</c:when>
+
 				</c:choose>
 
 				</c:forEach>
