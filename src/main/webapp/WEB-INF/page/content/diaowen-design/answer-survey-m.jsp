@@ -97,7 +97,7 @@
   opacity: 0;
   font-size: 30px;
   z-index: 9999;
-  
+
   background-color: rgb(248, 248, 248);
   border: 1px solid rgb(166, 166, 166);
   border-image-source: initial;
@@ -105,16 +105,19 @@
   border-image-width: initial;
   border-image-outset: initial;
   border-image-repeat: initial;
-  
+
     display: inline-block;
 }
 
 </style>
 </head>
 <body>
+<input type="hidden" id="ctx" name="ctx" value="${ctx }">
 <form id="surveyForm" action="${ctx }/dws-answer!saveMobile.action" method="post" data-ajax="false">
 <input type="hidden" id="surveyId" name="surveyId" value="${survey.id }">
 <input type="hidden" name="form-from" value="mobile" >
+
+
 <div data-role="page" >
   <div data-role="header">
     	<div id="dwSurveyTitle" class="noLogoImg" style="padding-top: 5px;">
@@ -130,14 +133,14 @@
 
     <div id="dwSurveyQuContent" style="">
 			<div id="dwSurveyQuContentBg">
-			
+
 			<!-- <div style="border-top: 3px solid #81AB00;margin:0px auto;padding-bottom: 15px;"></div> -->
 			<c:set var="pageNo" value="1"></c:set>
 			<c:set var="isNextPage" value="0"></c:set>
 			<ul id="dwSurveyQuContentAppUl">
 				<!-- 题目内容 -->
 				<c:forEach items="${survey.questions }" var="en" varStatus="i">
-				
+
 				<c:choose>
 					<c:when test="${en.quType eq 'RADIO' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
@@ -182,7 +185,7 @@
 					</div>
 					</li>
 					</c:when>
-					
+
 					<c:when test="${en.quType eq 'CHECKBOX' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
 						<div class="surveyQuItemBody">
@@ -227,7 +230,7 @@
 					</div>
 					</li>
 					</c:when>
-					
+
 					<c:when test="${en.quType eq 'FILLBLANK' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
 						<div class="surveyQuItemBody">
@@ -277,7 +280,7 @@
 					</div>
 					</li>
 					</c:when>
-					
+
 					<c:when test="${en.quType eq 'ORDERQU' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
 						<div class="surveyQuItemBody">
@@ -298,7 +301,7 @@
 								</div>
 								<input type="hidden" name="qu_${en.quType }_${en.id }" value="item_qu_${en.quType }_${en.id }_" />
 							</div>
-							
+
 							<div class="surveyQuItem">
 								<div class="surveyQuItemContent">
 								<fieldset data-role="controlgroup" >
@@ -317,12 +320,12 @@
 										</div>
 									</c:forEach>
 								</div>
-										
+
 								</fieldset>
 								</div>
 							</div>
-							
-							
+
+
 							<%-- <div class="surveyQuItem">
 								<div class="surveyQuItemContent">
 									<div class="quCoTitle">
@@ -351,7 +354,7 @@
 					</div>
 					</li>
 					</c:when>
-					
+
 					<%-- 分页题 --%>
 					<c:when test="${en.quType eq 'PAGETAG' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
@@ -387,7 +390,7 @@
 					</div>
 					</li>
 					</c:when>
-					
+
 					<%--段落说明 --%>
 					<c:when test="${en.quType eq 'PARAGRAPH' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
@@ -419,7 +422,7 @@
 					</div>
 					</li>
 					</c:when>
-					
+
 					<%--多项填空题 --%>
 					<c:when test="${en.quType eq 'MULTIFILLBLANK' }">
 					<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
@@ -443,7 +446,7 @@
 								<input type="hidden" name="qu_${en.quType }_${en.id }" value="text_qu_${en.quType }_${en.id }_" />
 							</div>
 							<div class="surveyQuItem">
-								
+
 								<div class="surveyQuItemContent">
 									<div class="quCoTitle">
 										<legend>
@@ -452,7 +455,7 @@
 										</legend>
 									</div>
 									<div class="quCoItem">
-											
+
 											<c:forEach items="${en.quMultiFillblanks }" var="item">
 											<div class="mFillblankTableTr">
 													<label  for="text_qu_${en.quType }_${en.id }_${item.id }">${item.optionName }</label>
@@ -461,25 +464,25 @@
 													<input type="hidden" class="answerTag" value="0" >
 											</div>
 											</c:forEach>
-									
+
 									</div>
 								</div>
-								
+
 							</div>
 					</div>
 					</li>
 					</c:when>
 
 				</c:choose>
-				
+
 				</c:forEach>
-				
-				
+
+
 				<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="${pageNo gt 1 ?'display: none':''}">
 					<div class="surveyQuItemBody">
 							<div class="surveyQuItem">
 								<div id="jcaptchaImgBody" class="r-qu-body" style="display: none;">
-									
+
 									<div class="frmItem" style="">
 										<label for="" class="frm_label">验证码</label>
 										<div class="frm_controls">
@@ -493,14 +496,14 @@
 									</div>
 									<div class="errorItem" style="display: none;"><label for="" class="error">验证码错误，请重新输入！</label></div>
 								</div>
-								
-								
-								
+
+
+
 								<input type="hidden" class="quType" value="submitSurveyBtn">
 								<div class="surveyQuItemContent" style="margin-bottom: 0px;min-height:20px;">
 									<!-- <a href="#" data-theme="b"  data-role="button">提&nbsp;交</a>&nbsp;&nbsp; -->
 									<input type="button" class="submitSurvey" id="submitSurvey" value="提&nbsp;交" data-role="button" data-theme="b" />
-									 <!-- <a href="#" class="sbtn24 sbtn24_0 submitSurvey">提&nbsp;交</a>&nbsp;&nbsp; -->  
+									 <!-- <a href="#" class="sbtn24 sbtn24_0 submitSurvey">提&nbsp;交</a>&nbsp;&nbsp; -->
 									<c:if test="${pageNo > 1 }">
 									<a href="#" class="sbtn24 sbtn24_1 prevPage_a">上一页</a>
 									<input type="hidden" name="prevPageNo" value="${pageNo-1 }">
@@ -511,7 +514,7 @@
 							</div>
 					</div>
 				</li>
-				
+
 			</ul>
 			</div>
 		</div>
