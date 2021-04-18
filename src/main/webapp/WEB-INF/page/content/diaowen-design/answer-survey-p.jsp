@@ -13,8 +13,10 @@
 <link href="${ctx }/js/plugs/uploadify-v3.1/uploadify.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx }/js/plugs/uploadify-v3.1/jquery.uploadify-3.1.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/uploadify.js"></script>
-	<script type="text/javascript" src="${ctx }/js/common/common.js"></script><script type="text/javascript" src="${ctx }/js/common/ans-p.js"></script>
-<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/laydate/laydate.js"></script>
+<script type="text/javascript" src="${ctx }/js/common/ans-common.js"></script>
+<script type="text/javascript" src="${ctx }/js/common/common.js"></script><script type="text/javascript" src="${ctx }/js/common/ans-p.js"></script>
+<%--<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>--%>
 <link href="${ctx }/css/preview-dev.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${ctx }/js/plugs/colpick-jQuery/css/colpick.css" type="text/css"/>
 <link href="${ctx}/js/plugs/validate/jquery.validate.css" type="text/css" rel="stylesheet" />
@@ -298,6 +300,7 @@ label.error{
 									<input type="hidden" class="isRequired" value="${en.isRequired }">
 									<input type="hidden" class="checkType" value="${en.checkType }">
 									<input type="hidden" class="answerTag" value="0" >
+									<input type="hidden" class="paramInt01" value="${en.paramInt01}">
 									<div class="quLogicInputCase">
 										<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
 											<div class="quLogicItem quLogicItem_${logicSts.count }">
@@ -321,7 +324,7 @@ label.error{
 														<%-- <input type="text" name="qu_${en.quType }_${en.id }" style="width:200px;padding:5px;" class="inputSytle_1 fillblankInput"> --%>
 													<c:choose>
 														<c:when test="${en.checkType eq 'DATE'}">
-															<input type="text" name="qu_${en.quType }_${en.id }" style="width: 300px;padding: 6px 10px 5px;border: 1px solid #83ABCB;outline: none;" class=" fillblankInput Wdate" onClick="WdatePicker()" >
+															<input type="text" name="qu_${en.quType }_${en.id }" style="width: 300px;padding: 6px 10px 5px;border: 1px solid #83ABCB;outline: none;" class=" fillblankInput" >
 														</c:when>
 														<c:when test="${en.answerInputRow > 1 }">
 															<textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;"class="inputSytle_2 fillblankInput" ></textarea>

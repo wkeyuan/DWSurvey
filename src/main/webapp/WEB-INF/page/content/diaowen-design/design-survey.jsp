@@ -18,7 +18,6 @@
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
 <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
 <script type="text/javascript" charset="utf-8" src="${ctx }/js/plugs/ueditor1_4_2-utf8-jsp/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript" src="${ctx }/js/dw/dwsurvey-design-qu.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/dwsurvey-design.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/address.js"></script>
 <%--<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>--%>

@@ -1,5 +1,5 @@
 function bindDateEvent(){
-    var checkTypeDates = $("#dwSurveyQuContent input[name='checkType'][value='DATE']");
+    var checkTypeDates = $("#dwSurveyQuContent .checkType[value='DATE']");
     $.each(checkTypeDates,function(){
         var surveyQuItemBody = $(this).parents(".surveyQuItemBody");
         var paramInt01 = surveyQuItemBody.find(".paramInt01");
@@ -29,7 +29,7 @@ function bindDateEvent(){
         }
         console.debug("dateType:"+dateType);
         laydate.render({
-            elem: surveyQuItemBody.find("input[type='text']")[0] //指定元素
+            elem: surveyQuItemBody.find("input.fillblankInput")[0] //指定元素
             ,type: 'datetime'
             ,format: dateFmt
             ,type: dateType

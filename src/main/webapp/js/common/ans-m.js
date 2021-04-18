@@ -282,6 +282,8 @@ $(document).ready(function(){
         hidQuItemBody.addClass("hidFor"+logicId);
         hidQuItemBody.find(".answerTag").attr("disabled",true);
     });
+
+    bindDateEvent();
 });
 
 

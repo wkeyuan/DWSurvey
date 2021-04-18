@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="${ctx }/js/plugs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
 <script type="text/javascript" src="${ctx }/js/plugs/jquery-ui-1.10.3.custom/js/jquery-1.10.1.js"></script>
 <%--<script src="${ctx }/js/plugs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>--%>
+<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/laydate/laydate.js"></script>
+<script type="text/javascript" src="${ctx }/js/common/ans-common.js"></script>
 <script type="text/javascript" src="${ctx }/js/common/common.js"></script>
 <script src="${ctx }/js/common/ans-m.js"></script>
 <link href="${ctx }/js/plugs/font-awesome-4.2.0/css/font-awesome.css" rel="stylesheet">
@@ -145,7 +147,9 @@
 								<input type="hidden" class="quId" value="${en.id }">
 								<input type="hidden" class="orderById" value="${en.orderById }"/>
 								<input type="hidden" class="isRequired" value="${en.isRequired }">
+								<input type="hidden" class="checkType" value="${en.checkType }">
 								<input type="hidden" class="answerTag" value="0" >
+								<input type="hidden" class="paramInt01" value="${en.paramInt01}">
 								<div class="quLogicInputCase">
 									<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
 									<div class="quLogicItem quLogicItem_${logicSts.count }">
@@ -169,7 +173,7 @@
 
 										 <c:choose>
 											 <c:when test="${en.checkType eq 'DATE'}">
-												 <input type="date" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" style="margin-top: 10px;"  >
+												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" readonly style="margin-top: 10px;"  >
 											 </c:when>
 											 <c:when test="${en.answerInputRow > 1 }">
 												 <textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" class="inputSytle_2 fillblankInput" style="margin-top: 10px;"  > ></textarea>

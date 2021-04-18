@@ -543,6 +543,7 @@ $(document).ready(function(){
 				}else{
 					quItemBody.find(".quInputCase").append("<input type=\"hidden\" name=\"paramInt01\" value=\""+option_range_date.val()+"\">");
 				}
+				quItemBody.find("input[name='saveTag']").val(0);
 			}
 		}
 

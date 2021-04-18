@@ -393,4 +393,6 @@ $(document).ready(function(){
         return false;
     });
 
+    bindDateEvent();
+
 });
