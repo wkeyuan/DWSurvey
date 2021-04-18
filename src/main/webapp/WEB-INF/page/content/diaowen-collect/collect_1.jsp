@@ -169,6 +169,7 @@
 
 <script type="text/javascript">
 
+	currentMenu("mysurvey");
 /*var client = new ZeroClipboard( document.getElementById("clipLink") );
 client.on( "ready", function( readyEvent ) {
   	 alert( "ZeroClipboard SWF is ready!" );

@@ -296,6 +296,7 @@ body{
 }
 .header_menu a.active{
 	color: white;
+	color: #5B9FD0;
 }
 .header_user{
 	padding-top: 18px;

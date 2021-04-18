@@ -206,6 +206,8 @@
 </div>
 <script type="text/javascript">
 
+	currentMenu("mysurvey");
+
 $("#compCodeText").click(function(){
 	$(this).select();
 });

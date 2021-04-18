@@ -172,6 +172,8 @@
 	</div>
 <script type="text/javascript">
 
+	currentMenu("mysurvey");
+
 	var clipboard = new ClipboardJS('.clipLink');
 
 	clipboard.on('success', function(e) {

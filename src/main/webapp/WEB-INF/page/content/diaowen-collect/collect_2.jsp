@@ -199,6 +199,7 @@
 
 <script type="text/javascript">
 
+	currentMenu("mysurvey");
 /*
 ZeroClipboard.setMoviePath( "${ctx}/js/plugs/zero-clipboard/ZeroClipboard.swf" );
 function bindClipBoard(textareaId,clipBtn,clipSpanId){

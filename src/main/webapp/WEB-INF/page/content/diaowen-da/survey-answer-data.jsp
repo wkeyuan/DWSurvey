@@ -187,6 +187,8 @@
 	</div>
 <script type="text/javascript">
 
+	currentMenu("mysurvey");
+
 $(".scmcSurveySNSShare textarea").focus(function(){
 	$(this).css({"background-color":"#FDF9CD","border-color":"#98C5C3"});
 });

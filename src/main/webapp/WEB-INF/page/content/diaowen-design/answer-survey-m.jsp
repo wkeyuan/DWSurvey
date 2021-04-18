@@ -420,20 +420,20 @@
 				<li class="li_surveyQuItemBody surveyQu_${pageNo }"  style="padding-bottom: 40px;padding-top: 20px;${pageNo gt 1 ?'display: none':''}">
 					<div class="surveyQuItemBody">
 							<div class="surveyQuItem">
-								<div id="jcaptchaImgBody" class="r-qu-body" style="display: none;">
+								<div id="jcaptchaImgBody" class="r-qu-body" style="display: none;padding-bottom: 15px;">
 
 									<div class="frmItem" style="">
-										<label for="" class="frm_label">验证码</label>
+										<label class="frm_label">验证码</label>
 										<div class="frm_controls">
 											<span class="auth-code" id="verifycodeImgArea">
-											<input name="jcaptchaInput" type="text" class="" style="" autocomplete="off">
+											<input name="jcaptchaInput" type="text" class="" style="padding: 6px;" autocomplete="off">
 											<img id="register-jcaptchaImg" onclick="refreshAutoCode('register-jcaptchaImg')" src="${ctx }/jcaptcha.action" alt="验证码" height="40"></span>
 											<a href="javascript:refreshAutoCode('register-jcaptchaImg');" style="margin-left: 5px;" hidefocus="true">换一张</a>
 											<span class="frm_desc">验证码，区分大小写</span>
 											<p class="valid-msg fail" style="display: none;"><i>●</i><span class="msg_content">验证码错误，请重新输入</span></p>
 										</div>
 									</div>
-									<div class="errorItem" style="display: none;"><label for="" class="error">验证码错误，请重新输入！</label></div>
+									<div class="errorItem" style="display: none;"><label class="error">验证码错误，请重新输入！</label></div>
 								</div>
 
 

@@ -1449,6 +1449,7 @@ function substring(json) {
 <script type="text/javascript">
 $(document).ready(function(){
 	//.quTrOptions  td
+	currentMenu("mysurvey");
 });
 </script>
 </body>

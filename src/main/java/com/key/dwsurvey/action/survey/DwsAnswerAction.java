@@ -343,6 +343,16 @@ public class DwsAnswerAction extends ActionSupport {
             anRadio.setOtherText(otherText);
             radioMaps.put(key, anRadio);
         }
+        // 评分题
+        Map<String, Object> scoreMaps = WebUtils.getParametersStartingWith(
+                request, "qu_" + QuType.SCORE + "_");
+        for (String key : scoreMaps.keySet()) {
+            String tag = scoreMaps.get(key).toString();
+            Map<String, Object> map = WebUtils.getParametersStartingWith(
+                    request, tag);
+            scoreMaps.put(key, map);
+        }
+        quMaps.put("scoreMaps", scoreMaps);
         quMaps.put("compRadioMaps", radioMaps);
         for (String key : checkboxMaps.keySet()) {
             String dfillValue = checkboxMaps.get(key).toString();
