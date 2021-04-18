@@ -165,6 +165,46 @@ $(document).ready(function(){
         });
     }
 
+    //评分题
+    $(".scoreNumTable tr td").click(function(){
+        //scoreNumInput
+        var quScoreOptionTr=$(this).parents(".quScoreOptionTr");
+        var tdText=$(this).text();
+        quScoreOptionTr.find(".scoreNumTable tr td").css({"background":"white"});
+        quScoreOptionTr.find(".scoreNumText").html($(this).text()+"&nbsp;分");
+
+        $(this).prevAll().css({"background":""});
+        $(this).css({"background":""});
+
+        quScoreOptionTr.find(".scoreNumInput").val(tdText);
+        quScoreOptionTr.find(".scoreNumText").html(tdText+"&nbsp;分");
+
+        runlogic($(this));
+        answerProgressbar($(this));
+        validateCheck($(this).parents(".li_surveyQuItemBody"),false);
+    });
+
+    bindScoreNumTdHover();
+    function bindScoreNumTdHover(){
+        $(".scoreNumTable tr td").hover(function(){
+            var quScoreOptionTr = $(this).parents(".quScoreOptionTr");
+            var scoreNumInput=quScoreOptionTr.find(".scoreNumInput").val();
+            if(scoreNumInput==""){
+                $(this).prevAll().css({"background":""});
+                $(this).css({"background":""});
+                quScoreOptionTr.find(".scoreNumText").html($(this).text()+"&nbsp;分");
+            }
+        },function(){
+            var quScoreOptionTr = $(this).parents(".quScoreOptionTr");
+            var scoreNumInput=quScoreOptionTr.find(".scoreNumInput").val();
+            if(scoreNumInput==""){
+                $(this).prevAll().css({"background":"white"});
+                $(this).css({"background":"white"});
+                quScoreOptionTr.find(".scoreNumText").html("分");
+            }
+        });
+    }
+
 
     function validateForms(){
         var result=true;
@@ -225,6 +265,18 @@ $(document).ready(function(){
                 var quScoreOptionTrs=quItemBody.find(".mFillblankTableTr");
                 $.each(quScoreOptionTrs,function(){
                     var scoreNumInput=$(this).find(".dwMFillblankInput");
+                    if(scoreNumInput.val()===""){
+                        validateStatus=false;
+                        return false;
+                    }
+                });
+
+            }else if(quType==="SCORE"){
+
+                validateStatus=true;
+                var quScoreOptionTrs=quItemBody.find(".quScoreOptionTr");
+                $.each(quScoreOptionTrs,function(){
+                    var scoreNumInput=$(this).find(".scoreNumInput");
                     if(scoreNumInput.val()===""){
                         validateStatus=false;
                         return false;
@@ -355,6 +407,15 @@ $(document).ready(function(){
                 mFillblankTableTr.find(".answerTag").val(1);
             }else{
                 mFillblankTableTr.find(".answerTag").val(0);
+            }
+        }else if( quType==="SCORE" ){
+            //<input type="hidden" class="answerTag" value="0" >
+            var quScoreOptionTr=thObj.parents(".quScoreOptionTr");
+            var scoreNumInput=quScoreOptionTr.find(".scoreNumInput");
+            if(scoreNumInput.val()!=""){
+                quScoreOptionTr.find(".answerTag").val(1);
+            }else{
+                quScoreOptionTr.find(".answerTag").val(0);
             }
         }
 

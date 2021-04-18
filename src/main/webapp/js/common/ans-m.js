@@ -74,6 +74,47 @@ $(document).ready(function(){
         });
     }
 
+    /**评分题*/
+    $(".starRating  .fa").hover(function(){
+        var prevAll=$(this).prevAll();
+        prevAll.removeClass("fa-star-o");
+        prevAll.addClass("fa-star");
+        $(this).removeClass("fa-star-o");
+        $(this).addClass("fa-star");
+    },function(){
+        var scoreRow=$(this).parents(".scoreRow");
+        var starNum=scoreRow.find(".scoreNumInput").val();
+        if(starNum==""&&starNum<=0){
+            var thParent=$(this).parent();
+            var fas=thParent.find(".fa");
+            fas.removeClass("fa-star");
+            fas.addClass("fa-star-o");
+        }
+    });
+
+    $(".starRating  .fa").click(function(){
+        var thParent=$(this).parent();
+        var fas=thParent.find(".fa");
+        fas.removeClass("fa-star");
+        fas.addClass("fa-star-o");
+
+        var prevAll=$(this).prevAll();
+        prevAll.removeClass("fa-star-o");
+        prevAll.addClass("fa-star");
+        $(this).removeClass("fa-star-o");
+        $(this).addClass("fa-star");
+
+        var scoreRow=$(this).parents(".scoreRow");
+        var starNum=0;
+        if(prevAll[0]){
+            starNum=prevAll.size();
+        }
+        scoreRow.find(".scoreNumInput").val(starNum+1);
+
+        validateCheck($(this).parents(".li_surveyQuItemBody"),false);
+        return false;
+    });
+
     //表单验证
     /**初始化表单骓证配置**/
     function validateForms(){
@@ -132,6 +173,18 @@ $(document).ready(function(){
                 var quScoreOptionTrs=quItemBody.find(".mFillblankTableTr");
                 $.each(quScoreOptionTrs,function(){
                     var scoreNumInput=$(this).find(".dwMFillblankInput");
+                    if(scoreNumInput.val()===""){
+                        validateStatus=false;
+                        return false;
+                    }
+                });
+
+            }else if(quType==="SCORE"){
+
+                validateStatus=true;
+                var quScoreOptionTrs=quItemBody.find(".quScoreOptionTr");
+                $.each(quScoreOptionTrs,function(){
+                    var scoreNumInput=$(this).find(".scoreNumInput");
                     if(scoreNumInput.val()===""){
                         validateStatus=false;
                         return false;
