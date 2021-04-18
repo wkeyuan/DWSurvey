@@ -93,7 +93,7 @@ body{
 #dwSurveyQuContentAppUl li{
     padding-bottom: 20px;
 }
-#dwSurveyQuContentAppUl li .controlgroup > legend{
+#dwSurveyQuContentAppUl li .surveyQuItemContent legend{
     font-weight: bold;
     color: black;
     font-size: 16px;
@@ -263,4 +263,26 @@ body{
 }
 .dw-footer a{
     color: #333;
+}
+
+.dwsurvey-controlgroup{
+    margin: 6px;
+    margin-bottom: 8px;
+    margin-left: 0px;
+}
+.dwsurvey-controlgroup .starOptionTitle{
+    font-size: 14px;
+}
+.dwsurvey-controlgroup .starOptionContent{
+    font-size: 14px;
+}
+.starRating{
+    font-size: 14px;
+}
+.starRating .fa{
+    cursor: pointer;
+    padding: 3px;
+}
+.starRating .fa-star{
+    color: #1e94fc;
 }
