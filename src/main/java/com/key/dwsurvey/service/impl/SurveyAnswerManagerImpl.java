@@ -293,8 +293,13 @@ public class SurveyAnswerManagerImpl extends
 	private void exportXLSRow(XLSExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer) {
 		int cellIndex = 0;
 		for (Question question : questions) {
-			getquestionAnswer(surveyAnswerId, question);
+
 			QuType quType = question.getQuType();
+			if(quType==QuType.PAGETAG || quType==QuType.PARAGRAPH){
+				continue;
+			}
+
+			getquestionAnswer(surveyAnswerId, question);
 			String quName = question.getQuName();
 			String titleName = quType.getCnName();
 			if (quType == QuType.YESNO) {// 是非题
@@ -546,13 +551,13 @@ public class SurveyAnswerManagerImpl extends
 								List<Question> questions) {
 		exportUtil.createRow(0);
 		int cellIndex = 0;
-
-
 		int quNum=0;
 		for (Question question : questions) {
-			quNum++;
 			QuType quType = question.getQuType();
-
+			if(quType==QuType.PAGETAG || quType==QuType.PARAGRAPH){
+				continue;
+			}
+			quNum++;
 //			String quName = question.getQuName();
 			String quName = question.getQuTitle();
 			quName=HtmlUtil.removeTagFromText(quName);
