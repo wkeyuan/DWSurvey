@@ -354,7 +354,9 @@ public class SurveyAnswerManagerImpl extends
 					answerOptionName = answerOptionName.replace("&nbsp;"," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 
-					if(isNote) exportUtil.setCell(cellIndex++, answerOtherText);
+//					if(isNote) exportUtil.setCell(cellIndex++, answerOtherText);
+					Integer isNote1 = quCheckbox.getIsNote();
+					if(isNote1!=null && isNote1==1) exportUtil.setCell(cellIndex++, answerOtherText);
 				}
 			} else if (quType == QuType.FILLBLANK) {// 填空题
 				AnFillblank anFillblank=question.getAnFillblank();
