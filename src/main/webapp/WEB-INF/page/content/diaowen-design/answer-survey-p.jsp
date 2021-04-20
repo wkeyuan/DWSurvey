@@ -33,7 +33,13 @@
   width: 200px;
   z-index: 200;
   position: fixed;
-  transform: rotate(90deg);
+  /*transform: rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-webkit-transform:rotate(90deg);
+	transform:rotate(90deg);
+	filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1);*/
+  right: 10px;
+  bottom: 50px;
 }
 .progress-label {
 	font-size:14px;
