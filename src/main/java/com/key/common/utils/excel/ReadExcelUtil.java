@@ -10,6 +10,9 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.CellType;
+
+import static org.apache.poi.ss.usermodel.CellType.*;
 
 public class ReadExcelUtil {
 	public static HSSFWorkbook getWorkBook(String filePath){
@@ -41,7 +44,7 @@ public class ReadExcelUtil {
 		String msg = getCellStringValue(sfCell);
 		return msg;
 	}
-	
+
 	public static void reader(String filePath) {
 		try {
 			POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(filePath));
@@ -49,7 +52,7 @@ public class ReadExcelUtil {
 			HSSFSheet sheet = wb.getSheetAt(0);
 			HSSFRow row = sheet.getRow(3);
 			HSSFCell cell = row.getCell((short) 0);
-			int type = cell.getCellType();
+			CellType type = cell.getCellType();
 			String msg = getCellStringValue(cell);
 			System.out.println(type + ":" + msg);
 		} catch (IOException e) {
@@ -59,28 +62,29 @@ public class ReadExcelUtil {
 
 	public static String getCellStringValue(HSSFCell cell) {
 		String cellValue = "";
-		switch (cell.getCellType()) {
-		case HSSFCell.CELL_TYPE_STRING:
+		CellType cellType = cell.getCellType();
+		switch (cellType) {
+			case STRING:
 			cellValue = cell.getStringCellValue();
 			if (cellValue.trim().equals("") || cellValue.trim().length() <= 0) {
 				cellValue = " ";
 			}
 			break;
-		case HSSFCell.CELL_TYPE_NUMERIC:
+			case NUMERIC:
 			// cellValue = String.valueOf(cell.getNumericCellValue());
 			DecimalFormat formatter = new DecimalFormat("######");
 			cellValue = formatter.format(cell.getNumericCellValue());
 			break;
-		case HSSFCell.CELL_TYPE_FORMULA:
-			cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+		case FORMULA:
+			cell.setCellType(NUMERIC);
 			cellValue = String.valueOf(cell.getNumericCellValue());
 			break;
-		case HSSFCell.CELL_TYPE_BLANK:
+			case BLANK:
 			cellValue = " ";
 			break;
-		case HSSFCell.CELL_TYPE_BOOLEAN:
+			case BOOLEAN:
 			break;
-		case HSSFCell.CELL_TYPE_ERROR:
+			case ERROR:
 			break;
 		default:
 			break;

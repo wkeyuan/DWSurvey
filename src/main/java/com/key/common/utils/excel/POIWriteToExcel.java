@@ -12,10 +12,11 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
 
 /**
  * 此类采用 poi包 实现了向 .xls 文件写入的功能， 目前为止 FastExcel 还没有提供向 .xls 文件写入的功能
- * 
+ *
  * @author hellojim
  * @company cxtech
  */
@@ -129,7 +130,8 @@ public class POIWriteToExcel {
 		// 把字体颜色设置为红色
 		font.setColor(HSSFFont.COLOR_NORMAL);
 		// 把字体设置为粗体
-		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+//		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		font.setBold(true);
 		// 创建格式
 		HSSFCellStyle cellStyle = workbook.createCellStyle();
 		// 把创建的字体付加于格式
@@ -152,7 +154,7 @@ public class POIWriteToExcel {
 				}
 
 				// 设置此单元格中存入的是字符串
-				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+//				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
 				// 设置编码 这个是用来处理中文问题的
 				// cell.setEncoding(HSSFCell.ENCODING_UTF_16);
 				// 向此单元格中放入值
@@ -181,7 +183,8 @@ public class POIWriteToExcel {
 		// 把字体颜色设置为红色
 		font.setColor(HSSFFont.COLOR_NORMAL);
 		// 把字体设置为粗体
-		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+//		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		font.setBold(true);
 		// 创建格式
 		HSSFCellStyle cellStyle = workbook1.createCellStyle();
 		// 把创建的字体付加于格式
@@ -204,7 +207,8 @@ public class POIWriteToExcel {
 				}
 
 				// 设置此单元格中存入的是字符串
-				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+//				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+				cell.setCellType(CellType.STRING);
 				// 设置编码 这个是用来处理中文问题的
 				// cell.setEncoding(HSSFCell.ENCODING_UTF_16);
 				// 向此单元格中放入值

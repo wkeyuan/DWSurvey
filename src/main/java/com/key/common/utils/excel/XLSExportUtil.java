@@ -11,6 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
 
 /**
  * 生成导出Excel文件对象
@@ -29,7 +30,7 @@ public class XLSExportUtil {
 	private HSSFRow row;
 	/**
 	 * 初始化Excel
-	 * 
+	 *
 	 * @param fileName
 	 *            导出文件名
 	 */
@@ -43,8 +44,7 @@ public class XLSExportUtil {
 	/** */
 	/**
 	 * 导出Excel文件
-	 * 
-	 * @throws XLSException
+	 *
 	 */
 	public void exportXLS() throws Exception {
 		try {
@@ -67,7 +67,7 @@ public class XLSExportUtil {
 	/** */
 	/**
 	 * 增加一行
-	 * 
+	 *
 	 * @param index
 	 *            行号
 	 */
@@ -78,7 +78,7 @@ public class XLSExportUtil {
 	/** */
 	/**
 	 * 设置单元格
-	 * 
+	 *
 	 * @param index
 	 *            列号
 	 * @param value
@@ -87,14 +87,15 @@ public class XLSExportUtil {
 	@SuppressWarnings("deprecation")
 	public void setCell(int index, String value) {
 		HSSFCell cell = this.row.createCell((short) index);
-		cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+//		cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+		cell.setCellType(CellType.STRING);
 		cell.setCellValue(value);
 	}
 
 	/** */
 	/**
 	 * 设置单元格
-	 * 
+	 *
 	 * @param index
 	 *            列号
 	 * @param value
@@ -112,7 +113,7 @@ public class XLSExportUtil {
 	/** */
 	/**
 	 * 设置单元格
-	 * 
+	 *
 	 * @param index
 	 *            列号
 	 * @param value
@@ -120,14 +121,15 @@ public class XLSExportUtil {
 	 */
 	public void setCell(int index, int value) {
 		HSSFCell cell = this.row.createCell((short) index);
-		cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+//		cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+		cell.setCellType(CellType.NUMERIC);
 		cell.setCellValue(value);
 	}
 
 	/** */
 	/**
 	 * 设置单元格
-	 * 
+	 *
 	 * @param index
 	 *            列号
 	 * @param value
@@ -135,7 +137,8 @@ public class XLSExportUtil {
 	 */
 	public void setCell(int index, double value) {
 		HSSFCell cell = this.row.createCell((short) index);
-		cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+//		cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
+		cell.setCellType(CellType.NUMERIC);
 		cell.setCellValue(value);
 		HSSFCellStyle cellStyle = workbook.createCellStyle(); // 建立新的cell样式
 		HSSFDataFormat format = workbook.createDataFormat();
