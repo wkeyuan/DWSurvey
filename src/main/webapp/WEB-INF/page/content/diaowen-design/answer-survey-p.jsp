@@ -489,6 +489,7 @@ label.error{
 								<input type="hidden" class="quId" value="${en.id }">
 								<input type="hidden" class="orderById" value="${en.orderById }"/>
 								<input type="hidden" class="isRequired" value="${en.isRequired }">
+								<input type="hidden" class="paramInt01" value="${en.paramInt01 }">
 								<div class="quLogicInputCase">
 									<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
 									<div class="quLogicItem quLogicItem_${logicSts.count }">

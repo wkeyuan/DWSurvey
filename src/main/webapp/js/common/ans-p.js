@@ -263,13 +263,30 @@ $(document).ready(function(){
 
                 validateStatus=true;
                 var quScoreOptionTrs=quItemBody.find(".mFillblankTableTr");
+                var paramInt01=quItemBody.find(".paramInt01");
+                var anNum = 0;
                 $.each(quScoreOptionTrs,function(){
                     var scoreNumInput=$(this).find(".dwMFillblankInput");
-                    if(scoreNumInput.val()===""){
-                        validateStatus=false;
-                        return false;
+                    if(scoreNumInput.val()!=""){
+                        anNum++;
                     }
                 });
+
+                if(paramInt01[0]){
+                    if(paramInt01.val()=='0'){
+                        if(anNum!=quScoreOptionTrs.size()) {
+                            validateStatus = false;
+                        }
+                    }else{
+                        if(anNum<parseInt(paramInt01.val())) {
+                            validateStatus = false;
+                        }
+                    }
+                }else{
+                    if(anNum!=quScoreOptionTrs.size()) {
+                        validateStatus = false;
+                    }
+                }
 
             }else if(quType==="SCORE"){
 
