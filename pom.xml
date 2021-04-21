@@ -197,18 +197,6 @@
 		</dependency>
 
 
-		<dependency>
-		    <groupId>com.baidubce</groupId>
-		    <artifactId>bce-java-sdk</artifactId>
-		    <version>0.10.5</version>
-		</dependency>
-
-		<dependency>
-		    <groupId>com.aliyun.oss</groupId>
-		    <artifactId>aliyun-sdk-oss</artifactId>
-		    <version>2.0.3</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/core-renderer -->
 <dependency>
     <groupId>org.xhtmlrenderer</groupId>
@@ -548,8 +536,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
         <configuration>
-          <source>7</source>
-          <target>7</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
       <plugin>
