@@ -1,5 +1,6 @@
+<%@ page import="com.key.common.plugs.version.VersionInfo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
  <%@include file="/common/taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -30,7 +31,7 @@
 
 		<!-- 必须保留声明 start -->
 		<div class="footer-copyright" style="color: gray;padding-top: 0px;font-size: 16px;padding-bottom: 16px;">
-			Powered by <a href="http://www.dwsurvey.net" style="text-decoration: none;color: gray;">DWSurvey</a>
+			Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;"> <%=VersionInfo.getVersionInfo()%> </a>
 			&nbsp;&nbsp;&nbsp;Copyright © 2012-2017
 			<a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">调问网</a>
 		</div>
