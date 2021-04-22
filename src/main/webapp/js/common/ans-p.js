@@ -179,7 +179,6 @@ $(document).ready(function(){
         quScoreOptionTr.find(".scoreNumInput").val(tdText);
         quScoreOptionTr.find(".scoreNumText").html(tdText+"&nbsp;分");
 
-        runlogic($(this));
         answerProgressbar($(this));
         validateCheck($(this).parents(".li_surveyQuItemBody"),false);
     });
