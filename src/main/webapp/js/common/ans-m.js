@@ -159,7 +159,17 @@ $(document).ready(function(){
                 return true;
             }
             if(quType==="RADIO"){
-                validateStatus=quItemBody.find("input[type='radio']:checked")[0];
+                var hv = quItemBody.find(".hv").val();
+                if(hv=="4"){
+                    var radioSelectVal = quItemBody.find(".radioSelect").val();
+                    if(radioSelectVal!="" && radioSelectVal!="0"){
+                        validateStatus = true;
+                    }else{
+                        validateStatus = false;
+                    }
+                }else{
+                    validateStatus=quItemBody.find("input[type='radio']:checked")[0];
+                }
             }else if(quType==="CHECKBOX"){
                 validateStatus=quItemBody.find("input[type='checkbox']:checked")[0];
             }else if(quType==="FILLBLANK"){
@@ -231,6 +241,25 @@ $(document).ready(function(){
         if(validateForms()){
             $("#surveyForm").submit();
         }
+        return false;
+    });
+
+    $(".radioSelect").change(function(){
+        var thVal = $(this).val();
+        var thName = $(this).attr("name");
+        var quCoItemUlLi = $(this).parents("li.quCoItemUlLi");
+        var quItemInputCase= quCoItemUlLi.find(".quItemInputCase[itemid='"+thVal+"']");
+        var isNote = quItemInputCase.find(".isNote").val();
+        if(isNote=="1"){
+            quCoItemUlLi.find(".dwQuOptionItemNote").hide();
+            var dwQuOptionItemNote = quCoItemUlLi.find(".dwQuOptionItemNote[name='text_"+thName+"_"+thVal+"']");
+            dwQuOptionItemNote.show();
+        }else{
+            quCoItemUlLi.find(".dwQuOptionItemNote").hide();
+        }
+        var thObj = $(this);
+        var quItemBody = $(this).parents(".li_surveyQuItemBody");
+        validateCheck(quItemBody,false);
         return false;
     });
 

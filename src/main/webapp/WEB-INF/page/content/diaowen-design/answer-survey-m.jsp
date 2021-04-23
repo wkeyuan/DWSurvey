@@ -57,6 +57,7 @@
 								<input type="hidden" class="orderById" value="${en.orderById }"/>
 								<input type="hidden" class="isRequired" value="${en.isRequired }">
 								<input type="hidden" class="answerTag" value="0" >
+								<input type="hidden" class="hv" value="${en.hv}" >
 								<div class="quLogicInputCase">
 								<c:forEach items="${en.questionLogics }" var="quLogicEn" varStatus="logicSts">
 									<div class="quLogicItem quLogicItem_${logicSts.count }">

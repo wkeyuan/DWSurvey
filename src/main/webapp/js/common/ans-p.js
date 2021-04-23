@@ -250,7 +250,17 @@ $(document).ready(function(){
             }
 
             if(quType==="RADIO"){
-                validateStatus=quItemBody.find("input[type='radio']:checked")[0];
+                var hv = quItemBody.find(".hv").val();
+                if(hv=="4" && quType ==="RADIO"){
+                    var radioSelectVal = quItemBody.find(".radioSelect").val();
+                    if(radioSelectVal!="" && radioSelectVal!="0"){
+                        validateStatus = true;
+                    }else{
+                        validateStatus = false;
+                    }
+                }else{
+                    validateStatus=quItemBody.find("input[type='radio']:checked")[0];
+                }
             }else if(quType==="CHECKBOX"){
                 validateStatus=quItemBody.find("input[type='checkbox']:checked")[0];
             }else if(quType==="FILLBLANK"){
@@ -331,6 +341,26 @@ $(document).ready(function(){
         hidQuItemBody.find(".answerTag").attr("disabled",true);
     });
 
+    $(".radioSelect").change(function(){
+        var thVal = $(this).val();
+        var thName = $(this).attr("name");
+        var quCoItemUlLi = $(this).parents("li.quCoItemUlLi");
+        var quItemInputCase= quCoItemUlLi.find(".quItemInputCase[itemid='"+thVal+"']");
+        var isNote = quItemInputCase.find(".isNote").val();
+
+        if(isNote=="1"){
+            quCoItemUlLi.find(".dwQuOptionItemNote").hide();
+            var dwQuOptionItemNote = quCoItemUlLi.find(".dwQuOptionItemNote[name='text_"+thName+"_"+thVal+"']");
+            dwQuOptionItemNote.show();
+        }else{
+            quCoItemUlLi.find(".dwQuOptionItemNote").hide();
+        }
+        var thObj = $(this);
+        answerProgressbar(thObj);
+        var quItemBody = $(this).parents(".li_surveyQuItemBody");
+        validateCheck(quItemBody,false);
+        return false;
+    });
 
     $(".dwQuOptionItemContent").click(function(){
         var thObj=$(this);
@@ -388,12 +418,22 @@ $(document).ready(function(){
         var quType=quItemBody.find(".quType").val();
 
         if(quType==="RADIO"){
-            //quItemBody.find(".answerTag").val(1);
-            var checks=quItemBody.find("input[type='radio']:checked");
-            if(checks[0]){
-                quItemBody.find(".answerTag").val(1);
+            var hv = quItemBody.find(".hv").val();
+            if(hv=="4"){
+                var radioSelectVal = quItemBody.find(".radioSelect").val();
+                if(radioSelectVal!=""){
+                    quItemBody.find(".answerTag").val(1);
+                }else{
+                    quItemBody.find(".answerTag").val(0);
+                }
             }else{
-                quItemBody.find(".answerTag").val(0);
+                //quItemBody.find(".answerTag").val(1);
+                var checks=quItemBody.find("input[type='radio']:checked");
+                if(checks[0]){
+                    quItemBody.find(".answerTag").val(1);
+                }else{
+                    quItemBody.find(".answerTag").val(0);
+                }
             }
         }else if(quType=="CHECKBOX"){
             var checks=quItemBody.find("input[type='checkbox']:checked");
