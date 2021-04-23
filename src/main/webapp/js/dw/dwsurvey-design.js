@@ -523,14 +523,19 @@ $(document).ready(function(){
 		}
 		if(quOption_isNote.prop("checked")){
 			isNote.val(1);
+			if(!quOptionParent.find(".optionInpText")[0]){
+				$(dwDialogObj).after("<input type='text' class='optionInpText' />");
+			}
+			quOptionParent.find(".optionInpText").show();
 		}else{
 			isNote.val(0);
+			quOptionParent.find(".optionInpText").hide();
 		}
 		checkType.val("NO");
 		isRequiredFill.val(0);
 		//显示填空框
-		//$(dwDialogObj).after("<input type='text' class='optionInpText' />");
-		quOptionParent.find(".optionInpText").show();
+		// $(dwDialogObj).after("<input type='text' class='optionInpText' />");
+		// quOptionParent.find(".optionInpText").show();
 
 		$("#modelUIDialog").dialog("close");
 		//resetQuItemHover(null);
