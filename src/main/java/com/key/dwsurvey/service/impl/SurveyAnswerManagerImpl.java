@@ -319,12 +319,17 @@ public class SurveyAnswerManagerImpl extends
 				String answerOtherText="";
 				boolean isNote = false;
 				for (QuRadio quRadio : quRadios) {
+					if (quRadio.getIsNote() == 1) {
+						isNote = true;
+						break;
+					}
+				}
+				for (QuRadio quRadio : quRadios) {
 					String quRadioId=quRadio.getId();
 					if(quRadioId.equals(quItemId)){
 						answerOptionName=quRadio.getOptionName();
 						if(quRadio.getIsNote()==1){
 							answerOtherText = question.getAnRadio().getOtherText();
-							isNote = true;
 						}
 						break;
 					}
