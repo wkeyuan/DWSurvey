@@ -515,6 +515,93 @@
 					</div>
 				</div>
 			</li>
+			<li id="selectQuModel">
+					<div class="dwToolbar_icon"></div>
+					<div class="dwQuTypeModel">
+						<div class="surveyQuItemBody quDragBody">
+							<div class="initLine"></div>
+							<div class="quInputCase" style="display: none;">
+								<input type="hidden" name="quType" value="RADIO">
+								<input type="hidden" name="quId" value="">
+								<input type="hidden" name="orderById" value="0"/>
+								<input type="hidden" name="saveTag" value="0">
+								<input type="hidden" name="hoverTag" value="0">
+								<input type="hidden" name="isRequired" value="1">
+								<input type="hidden" name="hv" value="4">
+								<input type="hidden" name="randOrder" value="0">
+								<input type="hidden" name="cellCount" value="0">
+
+								<input type="hidden" name="contactsAttr" value="0">
+								<input type="hidden" name="contactsField" value="0">
+
+								<div class="quLogicInputCase">
+									<input type="hidden" name="quLogicItemNum" value="0">
+								</div>
+							</div>
+							<div class="surveyQuItem">
+								<div class="surveyQuItemLeftTools">
+									<ul class="surveyQuItemLeftToolsUl">
+										<li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
+										<li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
+										<li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
+										<li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
+									</ul>
+								</div>
+								<div class="surveyQuItemRightTools">
+									<ul class="surveyQuItemRightToolsUl">
+										<li class="questionUp"><div class="dwQuIcon"></div></li>
+										<li class="questionDown"><div class="dwQuIcon"></div></li>
+									</ul>
+								</div>
+								<div class="surveyQuItemContent">
+									<div class="quCoTitle">
+										<div class="quCoNum">1、</div>
+										<div class="editAble quCoTitleEdit" >题标题？</div>
+										<input type="hidden" name="quTitleSaveTag" value="0">
+									</div>
+									<div class="quCoItem">
+
+										<div class="selectItems" style="margin-top: 6px;">
+											<select style="padding: 5px;" class="radioSelect" name="qu_RADIO_402880e56beac087016bee02c9e90003">
+												<option value="0">--真实下拉数据在发布后出现--</option>
+												<option value="402880e56beac087016bee02c9e90004"> 选项1 </option>
+												<option value="402880e56beac087016bee02c9ea0005"> 选项2 </option>
+											</select>
+										</div>
+
+										<ul class="selectRadioUl">
+										<li class="quCoItemUlLi">
+											<input type="radio"><label class="editAble quCoOptionEdit">选项1</label>
+											<div class="quItemInputCase">
+												<input type="hidden" name="quItemId" value="">
+												<input type="hidden" name="quItemSaveTag" value="0">
+												<input type="hidden" name="isNote" value="0">
+												<input type="hidden" name="checkType" value="NO">
+												<input type="hidden" name="isRequiredFill" value="0">
+											</div>
+										</li>
+										<li class="quCoItemUlLi">
+											<input type="radio"><label class="editAble quCoOptionEdit">选项2</label>
+											<div class="quItemInputCase">
+												<input type="hidden" name="quItemId" value="">
+												<input type="hidden" name="quItemSaveTag" value="0">
+												<input type="hidden" name="isNote" value="0">
+												<input type="hidden" name="checkType" value="NO">
+												<input type="hidden" name="isRequiredFill" value="0">
+											</div>
+										</li>
+									</ul></div>
+									<div class="quCoBottomTools" >
+										<ul class="quCoBottomToolsUl" >
+											<li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
+											<li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
 		    </ul>
 		</div>
 		<div class="tooltext">基本题型</div>
@@ -1288,6 +1375,15 @@
 										<input type="hidden" name="quTitleSaveTag" value="1">
 									</div>
 									<div class="quCoItem">
+
+										<c:if test="${en.hv eq 4}" >
+											<div class="selectItems" style="margin-top: 6px;" >
+												<select style="padding: 5px;" class="radioSelect" name="qu_RADIO_402880e56beac087016bee02c9e90003">
+													<option value="0">--真实下拉效果数据，请发布后查看--</option>
+												</select>
+											</div>
+										</c:if>
+
 									<c:choose>
 										<c:when test="${en.hv eq 3 }">
 											<table class='tableQuColItem'>
@@ -1334,7 +1430,7 @@
 											</ul>
 										</c:when>
 										<c:otherwise>
-											<ul>
+											<ul class="${en.hv eq 4?'selectRadioUl':''}" >
 												<c:forEach items="${en.quRadios }" var="item">
 												<li class="quCoItemUlLi">
 													<input type="radio"><label class="editAble quCoOptionEdit">${item.optionName }</label>
