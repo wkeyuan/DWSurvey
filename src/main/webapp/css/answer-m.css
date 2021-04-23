@@ -286,3 +286,12 @@ body{
 .starRating .fa-star{
     color: #365f8f;
 }
+.quCoItem ul li{
+    list-style: none;
+}
+.radioSelectSet select{
+    width: 100%;
+    border: 1px #cecad2 solid;
+    margin: .5em 0;
+    outline-style: none;
+}

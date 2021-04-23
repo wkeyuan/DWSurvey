@@ -75,17 +75,41 @@
 										<span class="quTitleNum">${i.count }、</span>
 										<span class="quTitleText">${en.quTitle}</span>
 									</legend>
-									<c:forEach items="${en.quRadios }" var="item" >
-										<div class="dwQuOptionItemContent"  >
-											<label class="dwRedioStyle dwQuInputLabel" ></label>
-											<input id="qu_${en.quType }_${en.id }_${item.id}" type="radio" name="qu_${en.quType }_${en.id }" value="${item.id }">
-											<label for="qu_${en.quType }_${en.id }_${item.id}">${item.optionName }</label>
-											<c:if test="${item.isNote eq 1 }" >
-												<input type='text' class='inputSytle_1 option_other_text' name="text_qu_${en.quType }_${en.id }_${item.id }"  />
-											</c:if>
-										</div>
 
-									</c:forEach>
+									<c:choose>
+									<c:when test="${en.hv eq 4 }">
+										<div class="quCoItem radioSelect_coitem">
+											<div class="radioSelectSet">
+												<select style="padding: 5px;" class="radioSelect"  name="qu_${en.quType }_${en.id }" >
+													<option value="0">--请选择--</option>
+													<c:forEach items="${en.quRadios }" var="item">
+														<option value="${item.id }" > ${item.optionName } </option>
+													</c:forEach>
+												</select>
+												<c:forEach items="${en.quRadios }" var="item" >
+													<div class="quItemInputCase" itemid="${item.id }">
+														<input type="hidden" class="isNote" value="${item.isNote }">
+													</div>
+													<c:if test="${item.isNote eq 1}">
+														<div><input type='text' class='inputSytle_1 dwQuOptionItemNote'  style="display: none;"   name="text_qu_${en.quType }_${en.id }_${item.id }"  /></div>
+													</c:if>
+												</c:forEach>
+											</div>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${en.quRadios }" var="item" >
+											<div class="dwQuOptionItemContent"  >
+												<label class="dwRedioStyle dwQuInputLabel" ></label>
+												<input id="qu_${en.quType }_${en.id }_${item.id}" type="radio" name="qu_${en.quType }_${en.id }" value="${item.id }">
+												<label for="qu_${en.quType }_${en.id }_${item.id}">${item.optionName }</label>
+												<c:if test="${item.isNote eq 1 }" >
+													<input type='text' class='inputSytle_1 option_other_text' name="text_qu_${en.quType }_${en.id }_${item.id }"  />
+												</c:if>
+											</div>
+										</c:forEach>
+									</c:otherwise>
+									</c:choose>
 								</div>
 								</div>
 							</div>

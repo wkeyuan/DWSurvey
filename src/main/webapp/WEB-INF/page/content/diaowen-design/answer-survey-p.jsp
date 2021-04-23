@@ -179,6 +179,26 @@ label.error{
 												</c:forEach>
 											</ul>
 										</c:when>
+										<c:when test="${en.hv eq 4 }">
+											<ul>
+												<li class="quCoItemUlLi">
+													<select style="padding: 5px;" class="radioSelect"  name="qu_${en.quType }_${en.id }" >
+														<option value="0">--请选择--</option>
+														<c:forEach items="${en.quRadios }" var="item">
+															<option value="${item.id }" > ${item.optionName } </option>
+														</c:forEach>
+													</select>
+													<c:forEach items="${en.quRadios }" var="item" >
+														<div class="quItemInputCase" itemid="${item.id }">
+															<input type="hidden" class="isNote" value="${item.isNote }">
+														</div>
+														<c:if test="${item.isNote eq 1}">
+															<input type='text' class='inputSytle_1 dwQuOptionItemNote'  style="width:200px;padding:5px;display: none;"   name="text_qu_${en.quType }_${en.id }_${item.id }"  />
+														</c:if>
+													</c:forEach>
+												</li>
+											</ul>
+										</c:when>
 										<c:otherwise>
 											<ul>
 												<c:forEach items="${en.quRadios }" var="item">
