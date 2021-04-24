@@ -47,6 +47,13 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
      */
     @Override
     public String getHeader(String name) {
+        if("If-None-Match".equals(name)){
+//            W/"14873-1619252839000"
+            String value = super.getHeader(name);
+            if(value==null || value.length()<50){
+                return super.getHeader(name);
+            }
+        }
         String value = super.getHeader(xssEncode(name));
         if (value != null) {
             value = xssEncode(value);
@@ -54,8 +61,8 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
         return value;
     }
 
-    
-    
+
+
     /**
     *
     * @param name
@@ -169,6 +176,7 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
      */
     public String xssEncode(String s)
     {
+
         if (s == null || s.isEmpty())
         {
             return s;
@@ -188,7 +196,6 @@ public class XssHttpWrapper extends HttpServletRequestWrapper {
                 result = escape(result);
             }
         }
-
         return result;
     }
 

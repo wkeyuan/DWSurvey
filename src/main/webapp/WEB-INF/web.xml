@@ -47,7 +47,7 @@
 	</filter-mapping>
 
 	  <!-- 配置Java Xss保护过滤器 -->
-    <filter>
+   	<filter>
         <filter-name>xssFilter</filter-name>
         <filter-class>com.key.common.plugs.xss.XssFilter</filter-class>
     </filter>
