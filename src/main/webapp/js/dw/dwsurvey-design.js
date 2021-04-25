@@ -1527,6 +1527,12 @@ function showDialog(thDialogObj){
 		$("#dwCommonDialog .dwQuDialogLoad").show();
 	}else if(thObjClass.indexOf("dwFbMenuBtn")>=0){
 		$("#dwCommonDialog .dwQuFillDataTypeOption").show();
+		var checkType_val=quItemBody.find("input[name='checkType']").val();
+		if(checkType_val==""){
+			checkType_val="NO";
+		}
+		var checkType=$("#dwCommonDialog select[name='quFill_checkType']");
+		checkType.val(checkType_val);
 	}else if(thObjClass.indexOf("quCoOptionEdit")>=0){
 		$("#dwCommonDialog .dwQuRadioCheckboxOption").show();
 		var quOption_isNote=$("#dwCommonDialog input[name='quOption_isNote']");

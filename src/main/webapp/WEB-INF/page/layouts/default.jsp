@@ -32,7 +32,7 @@
 		<!-- 必须保留声明 start -->
 		<div class="footer-copyright" style="color: gray;padding-top: 0px;font-size: 16px;padding-bottom: 16px;">
 			Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: gray;"> <%=VersionInfo.getVersionInfo()%> </a>
-			&nbsp;&nbsp;&nbsp;Copyright © 2012-2017
+			&nbsp;&nbsp;&nbsp;Copyright © 2012-2021
 			<a href="http://www.diaowen.net" style="text-decoration: none;color: rgb(53, 117, 136);">调问网</a>
 		</div>
 		<!-- 必须保留声明 end -->

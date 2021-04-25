@@ -753,6 +753,7 @@
 									<input type="hidden" name="hv" value="2">
 									<input type="hidden" name="randOrder" value="0">
 									<input type="hidden" name="cellCount" value="0">
+									<input type="hidden" name="checkType" value="DATE">
 
 									<input type="hidden" name="answerInputWidth" value="300">
 									<input type="hidden" name="answerInputRow" value="1">
@@ -2378,6 +2379,23 @@
 					</li>
 					<li><label>输入框高：</label>
 					<input type="text" name="qu_inputRow" value="1"><span>&nbsp;行</span>
+					</li>
+					<li class="checkTypeLi" ><label>数据类型：</label>
+						<select class="option_range" name="quFill_checkType"  style="width:158px;">
+							<option value="NO">无验证</option>
+							<option value="EMAIL">Email</option>
+							<option value="NUM">数字</option>
+							<option value="DIGITS">整数</option>
+							<option value="TELE_PHONE_NUM">手机或电话</option>
+							<option value="ZIPCODE">邮政编码</option>
+							<option value="TELENUM">电话号码</option>
+							<option value="PHONENUM">手机号码</option>
+							<option value="IDENTCODE">身份证号</option>
+							<option value="URL">网址</option>
+							<option value="UNSTRCN">禁止中文</option>
+							<option value="STRCN">仅许中文</option>
+						</select>
+						<span class="option_range_3" style="display:none;">&nbsp;列</span>
 					</li>
 					<li class="option_range_date_li" style="display: list-item;"><label>日期格式：</label>
 						<select class="option_range_date">
