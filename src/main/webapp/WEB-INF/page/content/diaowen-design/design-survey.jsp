@@ -2387,6 +2387,7 @@
 							<option value="NUM">数字</option>
 							<option value="DIGITS">整数</option>
 							<option value="TELE_PHONE_NUM">手机或电话</option>
+							<option value="DATE">日期</option>
 							<option value="ZIPCODE">邮政编码</option>
 							<option value="TELENUM">电话号码</option>
 							<option value="PHONENUM">手机号码</option>

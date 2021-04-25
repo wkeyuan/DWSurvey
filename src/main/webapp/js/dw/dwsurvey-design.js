@@ -545,6 +545,7 @@ $(document).ready(function(){
 
 	$("#dwDialogQuFillOptionSave").click(function(){
 		var quItemBody=$(dwDialogObj).parents(".surveyQuItemBody");
+		var quFill_checkType=$("#modelUIDialog select[name='quFill_checkType']");
 		var qu_inputWidth=$("#modelUIDialog input[name='qu_inputWidth']");
 		var qu_inputRow=$("#modelUIDialog input[name='qu_inputRow']");
 		var option_range_date=$("#modelUIDialog select.option_range_date");
@@ -554,12 +555,17 @@ $(document).ready(function(){
 		var answerInputRow=quItemBody.find("input[name='answerInputRow']");
 		var paramInt01=quItemBody.find("input[name='paramInt01']");
 
-		if(answerInputWidth.val()!=qu_inputWidth.val() || answerInputRow.val()!=qu_inputRow.val()){
+		if(answerInputWidth.val()!=qu_inputWidth.val() || answerInputRow.val()!=qu_inputRow.val() || (checkType[0] && checkType.val()!=quFill_checkType.val())){
 			quItemBody.find("input[name='saveTag']").val(0);
 		}
 
+		var checkTypeVal = quFill_checkType.val();
+		if(checkTypeVal == ""){
+			checkTypeVal="NO";
+		}
+
 		if(checkType[0]){
-			var checkTypeVal = checkType.val();
+			checkType.val(checkTypeVal);
 			if(checkTypeVal=="DATE"){
 				if(paramInt01[0]){
 					paramInt01.val(option_range_date.val());
@@ -1397,6 +1403,7 @@ function showUIDialog(thDialogObj){
 		}
 		var qu_inputWidth=$("#modelUIDialog input[name='qu_inputWidth']");
 		var qu_inputRow=$("#modelUIDialog input[name='qu_inputRow']");
+		var quFill_checkType=$("#modelUIDialog select[name='quFill_checkType']");
 		if(answerInputWidth_val==""){
 			answerInputWidth_val="300";
 		}
@@ -1405,6 +1412,7 @@ function showUIDialog(thDialogObj){
 		}
 		qu_inputWidth.val(answerInputWidth_val);
 		qu_inputRow.val(answerInputRow_val);
+		quFill_checkType.val(checkType_val);
 
 		$("#modelUIDialog .dwQuFillDataTypeOption .option_range_date_li").hide();
 		if(checkType_val==="DATE"){
@@ -1415,7 +1423,7 @@ function showUIDialog(thDialogObj){
 		}
 		resetQuItemHover(quItemBody);
 		$(thDialogObj).parents(".quCoItemUlLi").addClass("menuBtnClick");
-		$("#modelUIDialog").dialog("option","height",220);
+		$("#modelUIDialog").dialog("option","height",260);
 	}else if(thObjClass.indexOf("quCoOptionEdit")>=0) {
 		$("#modelUIDialog .dwQuRadioCheckboxOption").show();
 		//设置回显值 isNote checkType

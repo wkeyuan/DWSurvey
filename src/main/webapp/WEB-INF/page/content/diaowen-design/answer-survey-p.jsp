@@ -351,13 +351,13 @@ label.error{
 														<%-- <input type="text" name="qu_${en.quType }_${en.id }" style="width:200px;padding:5px;" class="inputSytle_1 fillblankInput"> --%>
 													<c:choose>
 														<c:when test="${en.checkType eq 'DATE'}">
-															<input type="text" name="qu_${en.quType }_${en.id }" style="width: 300px;padding: 6px 10px 5px;border: 1px solid #83ABCB;outline: none;" class=" fillblankInput" >
+															<input type="text" name="qu_${en.quType }_${en.id }" style="width: 300px;padding: 6px 10px 5px;border: 1px solid #83ABCB;outline: none;" class=" fillblankInput" placeholder="请选择日期时间" >
 														</c:when>
 														<c:when test="${en.answerInputRow > 1 }">
 															<textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;"class="inputSytle_2 fillblankInput" ></textarea>
 														</c:when>
 														<c:otherwise>
-															<input type="text" name="qu_${en.quType }_${en.id }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;" class="inputSytle_1 fillblankInput" >
+															<input type="text" name="qu_${en.quType }_${en.id }" style="width:${empty(en.answerInputWidth)?'300':en.answerInputWidth}px;" class="inputSytle_1 fillblankInput"  placeholder="请输入${(en.checkType eq null || en.checkType eq 'NO') ? '内容':en.checkType.name}，为${en.isRequired eq  0?'选填':'必填'}"  >
 														</c:otherwise>
 													</c:choose>
 													<div class="dwComEditMenuBtn" ></div>
