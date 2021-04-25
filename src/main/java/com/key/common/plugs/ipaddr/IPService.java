@@ -14,7 +14,7 @@ public class IPService {
 	private IPSeeker ipSeeker;
 
 	public String getIp(HttpServletRequest request) {
-		
+
 		//Http Header:X-Forwarded-For
 		String ip = request.getHeader("X-Forwarded-For");
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -44,27 +44,26 @@ public class IPService {
 			 try {
 					InetAddress inetAddress = InetAddress.getLocalHost();
 					ip=inetAddress.getHostAddress();
-					
+
 					 if(ip!=null && ip.length()>15){ //"***.***.***.***".length() = 15
 				         if(ip.indexOf(",")>0){
 				        	 ip = ip.substring(0,ip.indexOf(","));
 				         }
 				     }
-					 System.out.println(ip);
 			} catch (UnknownHostException e) {
 //				e.printStackTrace();
 			}
 		}
 		return ip;
 	}
-	
+
 	public String replaceIPv6LocalIp(String ip){
 		if("0:0:0:0:0:0:0:1".equals(ip)){
 			ip="127.0.0.1";
 		}
 		return ip;
 	}
-	
+
 	public String getCountry(String ip) {
 		if(ip==null){
 			return "";
@@ -74,7 +73,7 @@ public class IPService {
 
 	/**
 	 * 根据IP，查出此ip所在的城市
-	 * 
+	 *
 	 * @param ip
 	 * @return
 	 */
@@ -87,7 +86,7 @@ public class IPService {
 
 	/**
 	 * 根据 getCountry(ip);得到的地址得到城市
-	 * 
+	 *
 	 * @param country
 	 * @return
 	 */
@@ -109,7 +108,7 @@ public class IPService {
 
 	/**
 	 * 根据 request对象得到数据请求者所在的城市
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -121,7 +120,7 @@ public class IPService {
 		city = city.replaceAll("清华大学.*", "北京");
 		return city;
 	}
-	
+
 	public static void main(String[] args) {
 		String ip="111.206.20.59, 123.151.42.46, 121.42.17.215，";
 		System.out.println(ip.substring(0,ip.indexOf(",")));

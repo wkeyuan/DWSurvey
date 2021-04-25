@@ -43,13 +43,12 @@ public class LoginAction extends ActionSupport {
 	private FormAuthenticationWithLockFilter formAuthFilter;
 	@Autowired
 	protected AccountManager accountManager;
-	
+
 	public String login() throws Exception {
-		
-		System.out.println("username1-1");
+
 		HttpServletRequest request = Struts2Utils.getRequest();
 		HttpServletResponse response = Struts2Utils.getResponse();
-		
+
 		Subject subject = SecurityUtils.getSubject();
 		boolean isAuth = subject.isAuthenticated();
 		// 返回成功与否
@@ -80,7 +79,7 @@ public class LoginAction extends ActionSupport {
 				 error="ExcessiveAttemptsException";
 			}
 		}
-		//PrintWriter writer = response.getWriter();    
+		//PrintWriter writer = response.getWriter();
 		//writer.write(isAuth + ","+error);//此种方式，在$.getJson()进行仿问时会出现不执行回调函数
 //		System.out.println(isAuth+","+error);
 		response.setContentType("text/plain");// 1.设置返回响应的类型
@@ -100,7 +99,7 @@ public class LoginAction extends ActionSupport {
 		return "login";
 	}
 	/* 给某个锁定的账号开锁,管理员使用 */
-	
+
 	public String lockout() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
@@ -108,7 +107,7 @@ public class LoginAction extends ActionSupport {
 		//确认有没账号
 		boolean isup=false;
 		String error="用户不存在";
-		
+
 		if(username!=null){
 //			User user=accountManager.findUserByLoginName(username);
 			User user = accountManager.findUserByLoginNameOrEmail(username);
@@ -120,9 +119,9 @@ public class LoginAction extends ActionSupport {
 		response.getWriter().write(isup?username+"解锁成功":username+"，"+error);
 		return null;
 	}
-	
+
 	public String register() throws Exception {
-		
+
 		return "";
 	}
 
