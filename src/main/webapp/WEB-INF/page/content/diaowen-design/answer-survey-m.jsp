@@ -201,13 +201,13 @@
 
 										 <c:choose>
 											 <c:when test="${en.checkType eq 'DATE'}">
-												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" readonly style="margin-top: 10px;"  >
+												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" readonly style="margin-top: 10px;" placeholder="请选择日期时间" >
 											 </c:when>
 											 <c:when test="${en.answerInputRow > 1 }">
 												 <textarea name="qu_${en.quType }_${en.id }" rows="${en.answerInputRow }" class="inputSytle_2 fillblankInput" style="margin-top: 10px;"  > ></textarea>
 											 </c:when>
 											 <c:otherwise>
-												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" style="margin-top: 10px;" >
+												 <input type="text" name="qu_${en.quType }_${en.id }" class="inputSytle_1 fillblankInput" style="margin-top: 10px;"  placeholder="请输入${(en.checkType eq null || en.checkType eq 'NO') ? '内容':en.checkType.name}，为${en.isRequired eq  0?'选填':'必填'}"  >
 											 </c:otherwise>
 										 </c:choose>
 

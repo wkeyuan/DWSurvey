@@ -154,6 +154,7 @@ $(document).ready(function(){
             var quType=quItemBody.find(".quType").val();
             var isRequired=quItemBody.find(".isRequired").val();
             var validateStatus=false;
+            var checkType = "";
             if(isRequired==="0"){
                 validateStatus = true;
                 return true;
@@ -173,7 +174,12 @@ $(document).ready(function(){
             }else if(quType==="CHECKBOX"){
                 validateStatus=quItemBody.find("input[type='checkbox']:checked")[0];
             }else if(quType==="FILLBLANK"){
-                validateStatus=quItemBody.find(".fillblankInput").val()!="";
+                var value = quItemBody.find(".fillblankInput").val();
+                validateStatus=value!="";
+                checkType = quItemBody.find(".checkType").val();
+                if(validateStatus){
+                    validateStatus = checkoutData(checkType, value);
+                }
             }else if(quType==="ORDERQU"){
                 //quItemBody.find(".quOrderByLeftUl label");
                 validateStatus=!quItemBody.find(".quOrderItemHidInput[value=0]")[0];
@@ -229,8 +235,37 @@ $(document).ready(function(){
         if(validateStatus){
             quItemBody.find(".errorItem").remove();
         }else{
-            if(isSubForm && !quItemBody.find(".errorItem")[0]){
+            if(isSubForm){
+                if(quItemBody.find(".errorItem")[0]){
+                    quItemBody.find(".errorItem").remove();
+                }
                 var errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请检查题目答案，为必答项！</label></div>";
+                if(checkType=="EMAIL"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入Email，为必答项！</label></div>";
+                }else if(checkType=="UNSTRCN"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入非中文字符，为必答项！</label></div>";
+                }else if(checkType=="STRCN"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入中文字符，为必答项！</label></div>";
+                }else if(checkType=="NUM"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入数字，为必答项！</label></div>";
+                }else if(checkType == "DIGITS"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入整数，为必答项！</label></div>";
+                }else if(checkType == "TELENUM"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入电话，为必答项！</label></div>";
+                }else if(checkType == "PHONENUM"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入手机，为必答项！</label></div>";
+                }else if(checkType == "TELE_PHONE_NUM"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入电话或手机，为必答项！</label></div>";
+                }else if(checkType == "DATE"){
+                    //2014-01-01 12:00:00
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入如：2014-01-01，为必答项！</label></div>";
+                }else if(checkType == "IDENTCODE"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入身份证号，为必答项！</label></div>";
+                }else if(checkType == "ZIPCODE"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入邮编，为必答项！</label></div>";
+                }else if(checkType == "URL"){
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入URL，为必答项！</label></div>";
+                }
                 quItemBody.find(".surveyQuItemContent").append(errorHtml);
             }
         }
@@ -309,7 +344,7 @@ $(document).ready(function(){
     //填空题
     $(".fillblankInput,.dwMFillblankInput,.dwChenMFillblankInput").blur(function(){
         lgcommon($(this));
-        validateCheck($(this).parents(".li_surveyQuItemBody"),false);
+        validateCheck($(this).parents(".li_surveyQuItemBody"),true);
     });
 
     function resetQuNum(){
