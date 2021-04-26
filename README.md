@@ -26,7 +26,7 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 ### 安装说明
 
-	服务器必须安装由 JAVA 1.6+、MySQL、Apache Tomcat 8.0 构成的环境
+	服务器必须安装由 JAVA 1.6+、MySQL、Apache Tomcat  构成的环境
 
 	由于引用的外部jar在你本地maven仓库中可能没有，这时只要您本地有maven环境，执行下bin目录下面的文件就可以自动导入。
 
@@ -57,9 +57,9 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
 最新的war包下载可以前往交流QQ ```群1：635994795(满)```，```群2：301105635(满)```, 群3：811287103(可加) （加群时请说明来由）
 
-下载最新的diaowen.war，再考到tomcat wabapps下
+下载最新的dwsurvey-oss-v***.zip（注意看后面的版本号），解压后得到diaowen.war，再考到tomcat wabapps下
 
-打包环境版本：jdk1.8, tomcat8.0
+打包环境版本：jdk1.8, tomcat8.5.59
 
 外部解压命令：jar xvf diaowen.war
 
