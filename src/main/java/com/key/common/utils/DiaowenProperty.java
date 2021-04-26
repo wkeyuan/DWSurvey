@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.key.common.plugs.version.VersionInfo;
 import com.key.common.utils.web.Struts2Utils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.BeansException;
@@ -19,7 +20,7 @@ import com.sun.org.apache.xml.internal.security.Init;
 import javax.servlet.ServletContext;
 
 /**
- * 
+ *
  * @author keyuan
  *
  */
@@ -36,7 +37,7 @@ public class DiaowenProperty extends
 			ConfigurableListableBeanFactory beanFactoryToProcess,
 			Properties props) throws BeansException {
 		super.processProperties(beanFactoryToProcess, props);
-		
+
 		/*
 		ctxPropertiesMap = new HashMap<String, String>();
 		for (Object key : props.keySet()) {
@@ -45,6 +46,7 @@ public class DiaowenProperty extends
 			ctxPropertiesMap.put(keyStr, value);
 		}
 		*/
+		VersionInfo.initVersionInfo(props);
 	}
 /*
 	public static String getContextProperty(String name) {
@@ -54,5 +56,6 @@ public class DiaowenProperty extends
 	public void diaowenInit(){
 		System.out.println(ServletActionContext.getContext());
 	}
+
 
 }

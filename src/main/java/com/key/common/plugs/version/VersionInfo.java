@@ -7,40 +7,30 @@ import java.util.Properties;
 public class VersionInfo {
 
 
-    private static final String versionInfo;
+    private static String versionInfo;
 
-    private static final String versionBuilt;
+    private static String versionBuilt;
 
-    private static final String versionNumber;
+    private static String versionNumber;
 
-    static {
+    public static void initVersionInfo (Properties props) {
 
         String info = null;
         String built = null;
         String number = null;
 
-        Properties props = new Properties();
-
-        try {
-            InputStream is = VersionInfo.class.getResourceAsStream("/com/key/common/plugs/version/VersionInfo.properties");
-
-            if(is!=null){
-                props.load(is);
-                info = props.getProperty("version.info");
-                built = props.getProperty("version.built");
-                number = props.getProperty("version.number");
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(props!=null){
+            info = props.getProperty("dw.version.info");
+            built = props.getProperty("dw.version.built");
+            number = props.getProperty("dw.version.number");
         }
 
         if (info == null || info.equals("DWSurvey OSS @VERSION@"))
-            info = "DWSurvey OSS V3.1.0-dev";
+            info = "DWSurvey OSS V3.2.0-dev";
         if (built == null || built.equals("@VERSION_BUILT@"))
             built = "unknown";
         if (number == null || number.equals("@VERSION_NUMBER@"))
-            number = "3.1.x";
+            number = "3.2.x";
 
         versionInfo = info;
         versionBuilt = built;
