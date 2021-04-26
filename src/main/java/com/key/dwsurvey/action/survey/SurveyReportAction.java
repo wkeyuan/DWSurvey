@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.key.dwsurvey.entity.Question;
 import com.key.dwsurvey.entity.SurveyStats;
+import com.key.dwsurvey.service.SurveyAnswerManager;
 import com.key.dwsurvey.service.SurveyDirectoryManager;
 import com.key.dwsurvey.service.SurveyStatsManager;
 import com.key.dwsurvey.entity.SurveyDirectory;
@@ -35,27 +36,30 @@ import com.opensymphony.xwork2.ActionSupport;
 })
 @AllowedMethods({"defaultReport","lineChart","pieChart","chartData"})
 public class SurveyReportAction extends ActionSupport{
-	
+
 	protected final static String DEFAULT_REPORT="default_report";
 	protected final static String LINE_CHART="line_chart";
 	protected final static String PIE_CHART="pie_chart";
-	
+
 	@Autowired
 	private SurveyStatsManager surveyStatsManager;
 	@Autowired
 	private SurveyDirectoryManager directoryManager;
 	@Autowired
 	private AccountManager accountManager;
-	
+	@Autowired
+	private SurveyAnswerManager surveyAnswerManager;
+
 	private SurveyStats surveyStats = new SurveyStats();
 	private SurveyDirectory directory = new SurveyDirectory();
-	
+
 	private String surveyId;
-	
+
 	public String defaultReport() throws Exception {
 		// 得到频数分析数据
 		User user = accountManager.getCurUser();
 		if(user!=null){
+			surveyAnswerManager.upAnCount(surveyId);
 			directory=directoryManager.getSurveyByUser(surveyId, user.getId());
 			if(directory!=null){
 				List<Question> questions = surveyStatsManager.findFrequency(directory);
@@ -64,7 +68,7 @@ public class SurveyReportAction extends ActionSupport{
 		}
 		return DEFAULT_REPORT;
 	}
-	
+
 	public String lineChart() throws Exception {
 		User user = accountManager.getCurUser();
 		if(user!=null){
@@ -76,7 +80,7 @@ public class SurveyReportAction extends ActionSupport{
 		}
 		return LINE_CHART;
 	}
-	
+
 	public String pieChart() throws Exception {
 		User user = accountManager.getCurUser();
 		if(user!=null){
@@ -88,7 +92,7 @@ public class SurveyReportAction extends ActionSupport{
 		}
 		return PIE_CHART;
 	}
-	
+
 	//取得某一题的统计数据
 	public String chartData() throws Exception {
 		HttpServletResponse response=Struts2Utils.getResponse();
@@ -103,11 +107,11 @@ public class SurveyReportAction extends ActionSupport{
 		}
 		return null;
 	}
-	
+
 	public SurveyStats getSurveyStats() {
 		return surveyStats;
 	}
-	
+
 	public SurveyDirectory getDirectory() {
 		return directory;
 	}
@@ -119,5 +123,5 @@ public class SurveyReportAction extends ActionSupport{
 	public void setSurveyId(String surveyId) {
 	    this.surveyId = surveyId;
 	}
-	
+
 }

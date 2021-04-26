@@ -6,6 +6,7 @@ import com.key.common.base.service.AccountManager;
 import com.key.common.utils.web.JsonDateValueProcessor;
 import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.entity.SurveyDirectory;
+import com.key.dwsurvey.service.SurveyAnswerManager;
 import com.key.dwsurvey.service.SurveyDirectoryManager;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 我的问卷 action
@@ -37,6 +39,8 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 	private SurveyDirectoryManager surveyDirectoryManager;
 	@Autowired
 	private AccountManager accountManager;
+	@Autowired
+	private SurveyAnswerManager surveyAnswerManager;
 
 	@Override
 	public String list() throws Exception {
@@ -45,7 +49,8 @@ public class MySurveyAction extends CrudActionSupport<SurveyDirectory, String>{
 		if(surveyState==null||"".equals(surveyState)){
 			entity.setSurveyState(null);
 		}
-	    page=surveyDirectoryManager.findByUser(page,entity);
+	    page = surveyDirectoryManager.findByUser(page,entity);
+		page.setResult(surveyAnswerManager.upAnCounts(page.getResult()));
 	    return SUCCESS;
 	}
 

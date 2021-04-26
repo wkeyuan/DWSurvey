@@ -41,27 +41,28 @@ public class MySurveyAnswerAction extends ActionSupport{
 	private SurveyDirectoryManager directoryManager;
 	@Autowired
 	private AccountManager accountManager;
-	
+
 	protected final static String RESPONSE_ANSWER = "responseAnswer";
-	
+
 	private Page<SurveyAnswer> page=new Page<SurveyAnswer>();
 	private String surveyId;
-	
+
 	@Override
 	public String execute() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		User user=accountManager.getCurUser();
     	if(user!=null){
+			surveyAnswerManager.upAnCount(surveyId);
     		SurveyDirectory survey=directoryManager.getSurveyByUser(surveyId, user.getId());
     		if(survey!=null){
     			page=surveyAnswerManager.answerPage(page, surveyId);
     			request.setAttribute("survey", survey);
     		}
     	}
-		
+
 		return SUCCESS;
 	}
-	
+
 	public String responseAnswer() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		String answerId=request.getParameter("answerId");
@@ -85,8 +86,8 @@ public class MySurveyAnswerAction extends ActionSupport{
 		}
 		return RESPONSE_ANSWER;
 	}
-	
-	
+
+
 	public String delete() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
@@ -115,7 +116,7 @@ public class MySurveyAnswerAction extends ActionSupport{
 		response.getWriter().write(result);
 		return null;
 	}
-	
+
 	public String exportXLS() throws Exception{
 		HttpServletRequest request=Struts2Utils.getRequest();
 		HttpServletResponse response=Struts2Utils.getResponse();
@@ -134,7 +135,7 @@ public class MySurveyAnswerAction extends ActionSupport{
 		}
 		return null;
 	}
-	
+
 	public Page<SurveyAnswer> getPage() {
 		return page;
 	}
@@ -150,5 +151,5 @@ public class MySurveyAnswerAction extends ActionSupport{
 	public void setSurveyId(String surveyId) {
 		this.surveyId = surveyId;
 	}
-	
+
 }

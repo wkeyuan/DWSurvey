@@ -833,5 +833,35 @@ public class SurveyAnswerManagerImpl extends
 		super.delete(t);
 	}
 
+	@Transactional
+	public List<SurveyDirectory> upAnCounts(List<SurveyDirectory> result) {
+		if(result!=null){
+			for (SurveyDirectory survey:result) {
+				upAnCount(survey);
+			}
+		}
+		return result;
+	}
 
+	@Transactional
+	public Integer upAnCount(SurveyDirectory directory) {
+		if(directory!=null){
+			Long answerCount = surveyAnswerDao.countResult(directory.getId());
+			if(answerCount!=null){
+				directory.setAnswerNum(answerCount.intValue());
+				directoryManager.saveByAdmin(directory);
+				return directory.getAnswerNum();
+			}
+		}
+		return 0;
+	}
+
+	@Transactional
+	public Integer upAnCount(String directoryId) {
+		if(directoryId!=null){
+			SurveyDirectory surveyDirectory = directoryManager.get(directoryId);
+			return upAnCount(surveyDirectory);
+		}
+		return 0;
+	}
 }

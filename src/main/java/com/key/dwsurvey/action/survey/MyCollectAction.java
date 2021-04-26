@@ -4,6 +4,7 @@ import com.key.common.base.entity.User;
 import com.key.common.base.service.AccountManager;
 import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.entity.SurveyDirectory;
+import com.key.dwsurvey.service.SurveyAnswerManager;
 import com.key.dwsurvey.service.SurveyDirectoryManager;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.*;
@@ -29,27 +30,29 @@ import javax.servlet.http.HttpServletRequest;
 	@Result(name=MyCollectAction.SHARE,location="/WEB-INF/page/content/diaowen-collect/collect_2.jsp",type=Struts2Utils.DISPATCHER)
 })
 public class MyCollectAction extends ActionSupport{
-	
+
 	protected final static String COLLECT1="collect1";
 	protected final static String IFRAME="iframe";
 	protected final static String SITECOMP="sitecomp";
 	protected final static String WEIXIN="weixin";
 	protected final static String SHARE="share";
-	
+
 	private String surveyId;
 	@Autowired
 	private SurveyDirectoryManager surveyDirectoryManager;
 	@Autowired
 	private AccountManager accountManager;
+	@Autowired
+	private SurveyAnswerManager surveyAnswerManager;
 
-	
+
 	@Override
 	public String execute() throws Exception {
 		HttpServletRequest request=Struts2Utils.getRequest();
 		String tabId=request.getParameter("tabId");
 
 		String baseUrl = "";
-		baseUrl = request.getScheme() +"://" + request.getServerName()  
+		baseUrl = request.getScheme() +"://" + request.getServerName()
 						+ (request.getServerPort() == 80 ? "" : ":" +request.getServerPort())
                         + request.getContextPath();
 
@@ -57,6 +60,7 @@ public class MyCollectAction extends ActionSupport{
 
 		User user=accountManager.getCurUser();
     	if(user!=null){
+			surveyAnswerManager.upAnCount(surveyId);
     		SurveyDirectory surveyDirectory=surveyDirectoryManager.getSurveyByUser(surveyId, user.getId());
     		if(surveyDirectory!=null){
     			request.setAttribute("survey", surveyDirectory);
@@ -74,7 +78,7 @@ public class MyCollectAction extends ActionSupport{
     	}
 		return null;
 	}
-	
+
 	public String getSurveyId() {
 		return surveyId;
 	}
@@ -82,6 +86,6 @@ public class MyCollectAction extends ActionSupport{
 	public void setSurveyId(String surveyId) {
 		this.surveyId = surveyId;
 	}
-	
-	
+
+
 }
