@@ -8,16 +8,24 @@
   <name>diaowen Maven Webapp</name>
   <url>https://github.com/wkeyuan/DWSurvey</url>
 
-<!--	<repositories>
-		<repository>
+<repositories>
+		<!--<repository>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
 			<id>DWSurveyRepostiory</id>
 			<name>DWSurveyRepostiory</name>
 			<url>http://maven.dwsurvey.net:8081/repository/maven-public/</url>
-		</repository>
-	</repositories>-->
+		</repository>-->
+		<repository>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>DWSurveyRepostiory</id>
+      <name>DWSurveyRepostiory</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </repository>
+	</repositories>
 
 	<dependencies>
 
@@ -57,11 +65,11 @@
 		<version>1.1</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
-	<dependency>
+	<!--<dependency>
 		<groupId>com.lowagie</groupId>
 		<artifactId>itext</artifactId>
 		<version>2.0.8</version>
-	</dependency>
+	</dependency>-->
 
 	<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 	<dependency>
@@ -110,8 +118,8 @@
 	<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
-		<version>8.0.19</version>
-		<!-- 5.1.6 , 5.1.49, 8.0.17-->
+		<version>5.1.49</version>
+		<!-- 5.1.6 , 5.1.49, 8.0.19-->
 	</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
@@ -203,11 +211,11 @@
 
 
 		<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/core-renderer -->
-<dependency>
+<!--<dependency>
     <groupId>org.xhtmlrenderer</groupId>
     <artifactId>core-renderer</artifactId>
     <version>R8</version>
-</dependency>
+</dependency>-->
 
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
 <dependency>
