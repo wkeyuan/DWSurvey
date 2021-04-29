@@ -320,6 +320,10 @@ $(document).ready(function(){
 		if(selVal==3){
 			$(this).next().show();
 			validateGen();
+		}else if(selVal=="DATE"){
+			$(this).parents("ul").find(".option_range_date_li").show();
+		}else{
+			$(this).parents("ul").find(".option_range_date_li").hide();
 		}
 	});
 	$(".dwQuDialogAddLogic").click(function(){
