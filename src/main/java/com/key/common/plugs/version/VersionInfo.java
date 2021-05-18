@@ -26,11 +26,11 @@ public class VersionInfo {
         }
 
         if (info == null || info.equals("DWSurvey OSS @VERSION@"))
-            info = "DWSurvey OSS V3.2.0-dev";
+            info = "DWSurvey OSS V3.3.0-dev";
         if (built == null || built.equals("@VERSION_BUILT@"))
             built = "unknown";
         if (number == null || number.equals("@VERSION_NUMBER@"))
-            number = "3.2.x";
+            number = "3.3.x";
 
         versionInfo = info;
         versionBuilt = built;
