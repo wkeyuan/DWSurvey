@@ -575,8 +575,8 @@ public class SurveyAnswerManagerImpl extends
 				for (QuRadio quRadio : quRadios) {
 					if(quRadio.getIsNote()==1){
 						isNote = true;
+						break;
 					}
-					break;
 				}
 
 				exportUtil.setCell(cellIndex++, titleName);
