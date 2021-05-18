@@ -459,46 +459,58 @@ $(document).ready(function(){
                 var radioSelectVal = quItemBody.find(".radioSelect").val();
                 if(radioSelectVal!=""){
                     quItemBody.find(".answerTag").val(1);
+                    quItemBody.find(".answerTag").attr("value",1);
                 }else{
                     quItemBody.find(".answerTag").val(0);
+                    quItemBody.find(".answerTag").attr("value",0);
                 }
             }else{
                 //quItemBody.find(".answerTag").val(1);
                 var checks=quItemBody.find("input[type='radio']:checked");
                 if(checks[0]){
                     quItemBody.find(".answerTag").val(1);
+                    quItemBody.find(".answerTag").attr("value",1);
                 }else{
                     quItemBody.find(".answerTag").val(0);
+                    quItemBody.find(".answerTag").attr("value",0);
                 }
             }
         }else if(quType=="CHECKBOX"){
             var checks=quItemBody.find("input[type='checkbox']:checked");
             if(checks[0]){
                 quItemBody.find(".answerTag").val(1);
+                quItemBody.find(".answerTag").attr("value",1);
             }else{
                 quItemBody.find(".answerTag").val(0);
+                quItemBody.find(".answerTag").attr("value",0);
             }
         }else if(quType==="FILLBLANK"){
             var thVal=thObj.val();
             if(thVal!=""){
                 quItemBody.find(".answerTag").val(1);
+                quItemBody.find(".answerTag").attr("value",1);
             }else{
                 quItemBody.find(".answerTag").val(0);
+                quItemBody.find(".answerTag").attr("value",0);
             }
         }else if(quType==="ORDERQU"){
             //quOrderByLeftUl
             var orderByLabels=quItemBody.find(".quOrderByLeftUl label");
             if(!orderByLabels[0]){
                 quItemBody.find(".answerTag").val(1);
+                quItemBody.find(".answerTag").attr("value",1);
             }else{
                 quItemBody.find(".answerTag").val(0);
+                quItemBody.find(".answerTag").attr("value",0);
             }
         }else if(quType==="MULTIFILLBLANK"){
             var mFillblankTableTr=thObj.parents(".mFillblankTableTr");
             if(thObj.val()!=""){
                 mFillblankTableTr.find(".answerTag").val(1);
+                mFillblankTableTr.find(".answerTag").attr("value",1);
             }else{
                 mFillblankTableTr.find(".answerTag").val(0);
+                mFillblankTableTr.find(".answerTag").attr("value",0);
             }
         }else if( quType==="SCORE" ){
             //<input type="hidden" class="answerTag" value="0" >
@@ -506,8 +518,10 @@ $(document).ready(function(){
             var scoreNumInput=quScoreOptionTr.find(".scoreNumInput");
             if(scoreNumInput.val()!=""){
                 quScoreOptionTr.find(".answerTag").val(1);
+                quScoreOptionTr.find(".answerTag").attr("value",1);
             }else{
                 quScoreOptionTr.find(".answerTag").val(0);
+                quScoreOptionTr.find(".answerTag").attr("value",0);
             }
         }
 
