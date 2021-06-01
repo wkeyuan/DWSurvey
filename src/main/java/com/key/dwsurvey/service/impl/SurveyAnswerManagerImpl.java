@@ -445,6 +445,21 @@ public class SurveyAnswerManagerImpl extends
 					answerOptionName = answerOptionName.replace("&nbsp;"," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 				}
+			} else if (quType == QuType.ORDERQU) {// 评分题
+				List<QuOrderby> quOrderbys = question.getQuOrderbys();
+				List<AnOrder> anOrders=question.getAnOrders();
+				for (QuOrderby quOrderby : quOrderbys) {
+					String quOrderbyId=quOrderby.getId();
+					String answerOptionName="";
+					for (AnOrder anOrder : anOrders) {
+						if(quOrderbyId.equals(anOrder.getQuRowId())){
+							answerOptionName=anOrder.getOrderyNum();
+							break;
+						}
+					}
+					answerOptionName = answerOptionName.replace("&nbsp;"," ");
+					exportUtil.setCell(cellIndex++, answerOptionName);
+				}
 			} else if (quType == QuType.SCORE) {// 评分题
 				List<QuScore> quScores = question.getQuScores();
 				List<AnScore> anScores=question.getAnScores();
@@ -627,6 +642,13 @@ public class SurveyAnswerManagerImpl extends
 					optionName=HtmlUtil.removeTagFromText(optionName);
 					exportUtil.setCell(cellIndex++, titleName + "－"
 							+ optionName);
+				}
+			} else if (quType == QuType.ORDERQU) {// 评分题
+				List<QuOrderby> quOrderbys = question.getQuOrderbys();
+				for (QuOrderby quOrderby : quOrderbys) {
+					String optionName = quOrderby.getOptionName();
+					optionName=HtmlUtil.removeTagFromText(optionName);
+					exportUtil.setCell(cellIndex++, titleName+"_"+optionName);
 				}
 			} else if (quType == QuType.SCORE) {// 评分题
 				List<QuScore> quScores = question.getQuScores();
