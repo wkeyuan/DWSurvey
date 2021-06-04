@@ -27,7 +27,7 @@ function bindDateEvent(){
                 dateType="time";
             }
         }
-        console.debug("dateType:"+dateType);
+       // console.debug("dateType:"+dateType);
        laydate.render({
             elem: surveyQuItemBody.find("input.fillblankInput")[0] //指定元素
             ,type: 'datetime'

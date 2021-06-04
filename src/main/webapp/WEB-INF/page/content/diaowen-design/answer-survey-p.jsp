@@ -13,7 +13,7 @@
 <link href="${ctx }/js/plugs/uploadify-v3.1/uploadify.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx }/js/plugs/uploadify-v3.1/jquery.uploadify-3.1.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/uploadify.js"></script>
-<%--<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/laydate/laydate.js"></script>--%>
+<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/laydate/laydate.js"></script>
 <script type="text/javascript" src="${ctx }/js/common/ans-common.js"></script>
 <script type="text/javascript" src="${ctx }/js/common/common.js"></script><script type="text/javascript" src="${ctx }/js/common/ans-p.js"></script>
 <%--<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/My97DatePickerBeta/My97DatePicker/WdatePicker.js"></script>--%>
