@@ -28,6 +28,7 @@ function bindDateEvent(){
             }
         }
        // console.debug("dateType:"+dateType);
+       //  validateCheck($(this).parents(".li_surveyQuItemBody"),true);
        laydate.render({
             elem: surveyQuItemBody.find("input.fillblankInput")[0] //指定元素
             ,type: 'datetime'
@@ -98,20 +99,20 @@ function checkoutData(checkType, value) {
     } else if (checkType == "DATE") {
 
         //日期的正则表达式
-        /*var reg1 = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;//2014-01-01
+        var reg1 = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;//2014-01-01
                      var regExp1 = new RegExp(reg1);
                      var reg2 = /^(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/;//12:00:00
                      var regExp2 = new RegExp(reg2);
                      var reg3 = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])\s+(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/;//2014-01-01 12:00:00
                      var regExp3 = new RegExp(reg3);
-                     if(!(regExp1.test(value) || regExp3.test(value))){
+                     if(!(regExp1.test(value) || regExp2.test(value) || regExp3.test(value) )){
                      //						alert("日期格式不正确，正确格式为：2014-01-01");
                      errorType = "DATE";
                      validateStatus = false;
-                     }*/
-        if (/Invalid|NaN/.test(new Date(value).toString())) {
+                     }
+        /*if (/Invalid|NaN/.test(new Date(value).toString())) {
             validateStatus = false;
-        }
+        }*/
 
 
     } else if (checkType == "IDENTCODE") {

@@ -234,7 +234,6 @@ $(document).ready(function(){
         return result;
     }
 
-
     function validateCheck(quItemBody,isSubForm){
         if(quItemBody.is(":visible")){
 
@@ -349,7 +348,7 @@ $(document).ready(function(){
                     errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入电话或手机，为必答项！</label></div>";
                 }else if(checkType == "DATE"){
                     //2014-01-01 12:00:00
-                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入如：2014-01-01，为必答项！</label></div>";
+                    errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入日期或时间，为必答项！</label></div>";
                 }else if(checkType == "IDENTCODE"){
                     errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入身份证号，为必答项！</label></div>";
                 }else if(checkType == "ZIPCODE"){
@@ -433,7 +432,10 @@ $(document).ready(function(){
     $(".fillblankInput,.dwMFillblankInput").blur(function(){
         lgcommon($(this));
         answerProgressbar($(this));
-        validateCheck($(this).parents(".li_surveyQuItemBody"),true);
+        var checkType = $(this).parents(".li_surveyQuItemBody").find(".checkType").val();
+        if(checkType!="DATE"){
+            validateCheck($(this).parents(".li_surveyQuItemBody"),true);
+        }
     });
 
 

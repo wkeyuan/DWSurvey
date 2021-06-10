@@ -344,7 +344,9 @@ $(document).ready(function(){
     //填空题
     $(".fillblankInput,.dwMFillblankInput,.dwChenMFillblankInput").blur(function(){
         lgcommon($(this));
-        validateCheck($(this).parents(".li_surveyQuItemBody"),true);
+        if(checkType!="DATE"){
+            validateCheck($(this).parents(".li_surveyQuItemBody"),true);
+        }
     });
 
     function resetQuNum(){
