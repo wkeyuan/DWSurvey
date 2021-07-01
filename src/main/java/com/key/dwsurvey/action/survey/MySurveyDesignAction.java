@@ -91,13 +91,13 @@ public class MySurveyDesignAction extends ActionSupport{
 			String url="/survey!answerSurvey.action?surveyId="+surveyId;
 			String filePath="WEB-INF/wjHtml/"+dateFormat.format(createDate);
 			String fileName=surveyId+".html";
-			new JspToHtml().postJspToHtml(url, filePath, fileName);
+			new JspToHtml().postJspToHtml(url, filePath, fileName,"p",surveyId);
 			survey.setHtmlPath(filePath+fileName);
 
 			url="/survey!answerSurveryMobile.action?surveyId="+surveyId;
 			filePath="WEB-INF/wjHtml/"+dateFormat.format(createDate);
 			fileName="m_"+surveyId+".html";
-			new JspToHtml().postJspToHtml(url, filePath, fileName);
+			new JspToHtml().postJspToHtml(url, filePath, fileName,"m",surveyId);
 
 			List<Question> questions=questionManager.find(surveyId, "2");
 			survey.setSurveyQuNum(questions.size());

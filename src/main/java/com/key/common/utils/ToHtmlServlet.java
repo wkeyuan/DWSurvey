@@ -18,20 +18,22 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class ToHtmlServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = -9118659583515649615L;
 	private static String contentCopyright = null;
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext sc = getServletContext();
-		String url=request.getParameter("url");
+		String type=request.getParameter("sType");
+		String surveyId=request.getParameter("surId");
 		String filePath=request.getParameter("filePath");
 		String fileName=request.getParameter("fileName");
-		//url = "/design/my-survey-design!previewDev.action?surveyId=402880ea4675ac62014675ac7b3a0000";
-		// 这是生成的html文件名,如index.htm
 		filePath = filePath.replace("/", File.separator);
 		filePath = filePath.replace("\\", File.separator);
 		String fileRealPath = sc.getRealPath("/") +File.separator+ filePath;
-
+		String url = "/survey!answerSurvey.action?surveyId="+surveyId.trim();
+		if("m".equals(type)){
+			url = "/survey!answerSurveryMobile.action?surveyId="+surveyId.trim();
+		}
 		RequestDispatcher rd = sc.getRequestDispatcher(url);
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 		final ServletOutputStream stream = new ServletOutputStream() {

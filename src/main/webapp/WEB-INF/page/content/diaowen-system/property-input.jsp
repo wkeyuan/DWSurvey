@@ -16,28 +16,28 @@ $(document).ready(function(){
 	currentMenu("systemset");
 
 	binduploadImg("loginBgfile","loginBgfileQueueid","loginBgfileImgPath","上传");
-	
+
 	$("#login_bg_div img").hover(function(){
 		$(this).addClass("active_img_hover");
 	},function(){
 		$(this).removeClass("active_img_hover");
 	});
-	
+
 	$("#login_bg_div img").click(function(){
 		$("#login_bg_div img").removeClass("active_img");
 		$(this).addClass("active_img");
 		$("input[name='loginBgImg']").val($(this).attr("src").replace("${ctx}",""));
 	});
-	
+
 	/* $("#useLogo_checked").change(function(){
 		return false;
 	}); */
-	
+
 	$("#login_bg_div img").removeClass("active_img");
 	$("#login_bg_div img[src='${ctx}${loginBgImg}']").addClass("active_img");
 });
 
-	
+
 </script>
 <style type="text/css">
 .ac-input-td input,.ac-input-td select{
@@ -60,20 +60,20 @@ $(document).ready(function(){
 </head>
 <body>
 	<input type="hidden" id="id" name="id" value="${survey.id }">
-	
+
 	<div style="margin-top: 15px;">
 	</div>
 	<div style="clear: both;"></div>
 	<div id="dwBody" >
 		<div id="dwBodyContent" class="bodyCenter" style="">
-		
+
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-				
+
 				<form id="inputForm" action="${ctx }/sy/system/sys-property!save.action" method="post" >
 				<div class="surveyCollectMiddleContent">
 					<div style="padding: 25px 45px;overflow: auto;padding-top: 12px;">
-							
+
 							<div style="padding: 5px;color: #666565;letter-spacing: 2px;font-size: 18px;">
 								系统设置
 							<%--&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -85,10 +85,10 @@ $(document).ready(function(){
 								&nbsp;&nbsp;|&nbsp;&nbsp;
 								<a href="${ctx }/sy/user/user-admin.action" class="a-style-1" title="新用户">激活</a> --%>
 							</div>
-							
+
 							<div style="padding: 5px;color:#666565;border: 1px solid #DFDFDF;border-radius: 5px;margin-top: 15px;">
-								
-								
+
+
 								<table width="100%">
 									<tr>
 										<td valign="top" align="left" width="500">
@@ -118,13 +118,6 @@ $(document).ready(function(){
 												<tr>
 												<td width="80" align="right" valign="top">登录背景图</td>
 													<td class="ac-input-td">
-														<div class="upResImg">
-					                                	<%-- <input type="hidden" name="loginBgImgPath" value="${fileImgPath }" /> --%>
-					                                	<span id="loginBgimgfilename"></span>
-					                                	<input type="file" id="loginBgfile" name="loginBgfile" />
-					                                	<span class="uploadifySpan" style="line-height:26px;"><br/>请上传超清1024*968图片！</span>
-					                                	<div id="loginBgfileQueueid" ></div>
-														</div>
 														<div>点击选择背景图或上传自定义的背景图</div>
 														<div id="login_bg_div">
 															<img class="active_img" src="${ctx }/images/style-model/login_bg/1.jpg" style="opacity: 1;" width="60" >
@@ -144,7 +137,7 @@ $(document).ready(function(){
 														</div>
 													</td>
 												</tr>
-												
+
 											</table>
 										</td>
 									</tr>
@@ -157,13 +150,13 @@ $(document).ready(function(){
 									</tr>
 								</table>
 							</div>
-							
+
 					</div>
 				</div>
 				</form>
-				
+
 			</div>
-			
+
 		</div>
 		</div>
 	</div>

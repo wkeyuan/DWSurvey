@@ -24,23 +24,24 @@ import org.jsoup.nodes.Document;
 import com.key.common.utils.web.Struts2Utils;
 
 public class JspToHtml {
-	
-	public void postJspToHtml(String postUrl, String filePath,String fileName) throws Exception{
+
+	public void postJspToHtml(String postUrl, String filePath,String fileName, String sType, String surveyId) throws Exception{
 		HttpServletRequest request=Struts2Utils.getRequest();
 		//${pageContext.request.scheme}://${pageContext.request.serverName }:${pageContext.request.serverPort} pageContext.request.contextPath
 		String reqTarget = request.getScheme()+"://"+request.getServerName()+(request.getServerPort()==80?"":":"+request.getServerPort())+request.getContextPath();
 		reqTarget =reqTarget+"/toHtml";
 		//?url="+postUrl+"&filePath="+filePath+"&fileName="+fileName;
 		Map<String, String> map=new HashMap<String, String>();
-		map.put("url", postUrl);
 		map.put("filePath", filePath);
 		map.put("fileName", fileName);
+		map.put("sType", sType);
+		map.put("surId", surveyId);
 		Connection connection = Jsoup.connect(reqTarget);
 		connection.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31");
 		connection.data(map);
 		Document doc=connection.timeout(8000).get();
 	}
-	
+
 	public void jspWriteToHtml(String url, String filePath,String fileName) throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		HttpServletResponse response = Struts2Utils.getResponse();
