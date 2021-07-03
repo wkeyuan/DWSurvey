@@ -17,7 +17,7 @@ DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JA
 
  地址：[http://www.diaowen.net](http://www.diaowen.net)
 
-企业版在线服务，功能更丰富，不需要部署，可直接发布问卷进行数据收集。
+在线开放平台，提供标准API，可快速集成到自己应用中，功能更丰富，不需要部署，可直接发布问卷进行数据收集。
 
  地址：[https://www.surveyform.cn](https://www.surveyform.cn)
 
