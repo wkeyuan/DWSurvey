@@ -590,7 +590,13 @@ label.error{
 															<input type="hidden" class="answerTag" value="0" >
 														</td>
 														<td class="quCoItemTableTd">
-															<table class="scoreNumTable" border="0" cellspacing="0" cellpadding="1" ><tr><td style="background-color: white;">1</td><td style="background-color: white;">2</td><td style="background-color: white;">3</td><td style="background-color: white;">4</td><td style="background-color: white;">5</td></tr></table>
+															<table class="scoreNumTable" border="0" cellspacing="0" cellpadding="1" >
+																<tr>
+																<c:forEach begin="1" end="${en.paramInt02}" var="scoreNum">
+																	<td style="background-color: white;">${scoreNum}</td>
+																</c:forEach>
+																</tr>
+															</table>
 															<input name="item_qu_${en.quType }_${en.id }_${item.id }" value=""  type="hidden" class="scoreNumInput" >
 														</td>
 														<td class="quCoItemTableTd scoreNumText">分</td>
