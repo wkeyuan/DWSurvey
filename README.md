@@ -3,17 +3,17 @@
 [![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
 [![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
 
-### 即将发布 Spring Boot、前后端分离全新版本，敬请期待。
+### Vue、Spring Boot 版本正在研发中，敬请期待。
 
 关注我们更新，记得Star一下哦。 
 
-DWSurvey是一款方便、高效、实用的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
+DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0416/132431_5d99a296_1401416.gif "dwsurvey-2.gif")
 
 ## 演示地址
 
-开源版服务，开放源代码，可独立部署。
+社区版服务，源码全量开源，可独立部署，可二次开发。
 
  地址：[http://www.diaowen.net](http://www.diaowen.net)
 
