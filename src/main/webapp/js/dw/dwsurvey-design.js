@@ -1678,24 +1678,29 @@ function resizeWrapSize(){
 }
 function saveQus(quItemBody,callback){
 	if(quItemBody[0]){
-		var quType=quItemBody.find("input[name='quType']").val();
-		if(quType=="RADIO"){
-			//保存单选
-			saveRadio(quItemBody,callback);
-		}else if(quType=="CHECKBOX"){
-			saveCheckbox(quItemBody, callback);
-		}else if(quType=="FILLBLANK"){
-			saveFillblank(quItemBody, callback);
-		}else if(quType=="ORDERQU"){
-			saveOrderqu(quItemBody, callback);
-		}else if(quType=="PAGETAG"){
-			savePagetag(quItemBody, callback);
-		}else if(quType=="PARAGRAPH"){
-			saveParagraph(quItemBody, callback);
-		}else if(quType=="MULTIFILLBLANK"){
-			saveMultiFillblank(quItemBody, callback);
-		}else if(quType=="SCORE"){
-			saveScore(quItemBody, callback);
+		var quTypeObj = quItemBody.find("input[name='quType']");
+		if(quTypeObj[0]){
+			var quType=quTypeObj.val();
+			if(quType=="RADIO"){
+				//保存单选
+				saveRadio(quItemBody,callback);
+			}else if(quType=="CHECKBOX"){
+				saveCheckbox(quItemBody, callback);
+			}else if(quType=="FILLBLANK"){
+				saveFillblank(quItemBody, callback);
+			}else if(quType=="ORDERQU"){
+				saveOrderqu(quItemBody, callback);
+			}else if(quType=="PAGETAG"){
+				savePagetag(quItemBody, callback);
+			}else if(quType=="PARAGRAPH"){
+				saveParagraph(quItemBody, callback);
+			}else if(quType=="MULTIFILLBLANK"){
+				saveMultiFillblank(quItemBody, callback);
+			}else if(quType=="SCORE"){
+				saveScore(quItemBody, callback);
+			}else{
+				callback();
+			}
 		}else{
 			callback();
 		}

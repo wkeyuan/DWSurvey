@@ -2181,6 +2181,29 @@
 					</div>
 					</c:when>
 
+					<c:otherwise>
+						<div class="surveyQuItemBody">
+							<div class="initLine"></div>
+							<div class="quInputCase" style="display: none;">
+								<input type="hidden" name="quType" value="${en.quType}">
+								<input type="hidden" name="quId" value="${en.id }">
+								<input type="hidden" name="orderById" value="${en.orderById }"/>
+								<input type="hidden" name="saveTag" value="1">
+								<input type="hidden" name="hoverTag" value="0">
+								<input type="hidden" name="isRequired" value="${en.isRequired }">
+								<input type="hidden" name="hv" value="${en.hv }">
+								<input type="hidden" name="randOrder" value="${en.randOrder }">
+								<input type="hidden" name="cellCount" value="${en.cellCount }">
+								<div class="quLogicInputCase">
+									<input type="hidden" name="quLogicItemNum" value="${fn:length(en.questionLogics) }">
+								</div>
+							</div>
+							<div class="surveyQuItem">
+
+							</div>
+						</div>
+					</c:otherwise>
+
 				</c:choose>
 				</li>
 	</c:forEach>
