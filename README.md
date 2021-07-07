@@ -101,7 +101,7 @@ github: https://github.com/wkeyuan/DWSurvey
 
 ## 开源协议
 
-DWSurvey以通用公共许可证AGPL3.0为开源协议，需要更的服务可以购买我们的商业版与企业版！
+DWSurvey以通用公共许可证AGPL3.0为开源协议，需要更优质的服务可以购买我们的商业版与企业版！
 
 - - -
 
