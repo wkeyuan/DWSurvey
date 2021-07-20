@@ -3,7 +3,9 @@
 [![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
 [![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
 
-### Vue、Spring Boot 版本正在研发中，敬请期待。
+### 全新的企业版已经发布，前后端分别采用 Ant design、Spring Boot，详情可参考官网。
+
+其它版本也在更新计划中，敬请期待。
 
 关注我们更新，记得Star一下哦。 
 
