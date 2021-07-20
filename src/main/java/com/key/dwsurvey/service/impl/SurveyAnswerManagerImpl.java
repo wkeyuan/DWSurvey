@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.key.common.QuType;
+import com.key.common.utils.excel.XLSXExportUtil;
 import com.key.common.utils.web.Struts2Utils;
 import com.key.dwsurvey.dao.SurveyAnswerDao;
 import com.key.dwsurvey.entity.*;
@@ -253,19 +254,16 @@ public class SurveyAnswerManagerImpl extends
 		String basepath = surveyId + "";
 		String urlPath = "/file/" + basepath + "/";// 下载所用的地址
 		String path = urlPath.replace("/", File.separator);// 文件系统路径
-		// File.separator +
-		// "file" +
-		// File.separator+basepath
-		// + File.separator;
 		savePath = savePath + path;
 		File file = new File(savePath);
 		if (!file.exists())
 			file.mkdirs();
 
 		SurveyDirectory surveyDirectory = directoryManager.getSurvey(surveyId);
-		String fileName = surveyId + "_exportSurvey.xls";
+		String fileName = surveyId + "_exportSurvey.xlsx";
 
-		XLSExportUtil exportUtil = new XLSExportUtil(fileName, savePath);
+//		XLSExportUtil exportUtil = new XLSExportUtil(fileName, savePath);
+		XLSXExportUtil exportUtil = new XLSXExportUtil(fileName, savePath);
 		Criterion cri1 = Restrictions.eq("surveyId",surveyId);
 		Page<SurveyAnswer> page = new Page<SurveyAnswer>();
 		page.setPageSize(5000);
@@ -290,7 +288,7 @@ public class SurveyAnswerManagerImpl extends
 		return urlPath + fileName;
 	}
 
-	private void exportXLSRow(XLSExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer) {
+	private void exportXLSRow(XLSXExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer) {
 		int cellIndex = 0;
 		for (Question question : questions) {
 
@@ -567,7 +565,7 @@ public class SurveyAnswerManagerImpl extends
 
 	}
 
-	private void exportXLSTitle(XLSExportUtil exportUtil,
+	private void exportXLSTitle(XLSXExportUtil exportUtil,
 								List<Question> questions) {
 		exportUtil.createRow(0);
 		int cellIndex = 0;
