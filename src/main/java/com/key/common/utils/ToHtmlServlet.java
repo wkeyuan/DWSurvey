@@ -147,7 +147,9 @@ public class ToHtmlServlet extends HttpServlet {
 		FileOutputStream out=null;
 		OutputStreamWriter osw = null;
 		try {
-			out=new FileOutputStream(savePath+File.separator+fileName);
+			String filePath = savePath+File.separator+fileName;
+			System.out.println("生成："+filePath);
+			out=new FileOutputStream(filePath);
 			osw = new OutputStreamWriter(out,"UTF-8");
 			osw.write(content);
 			osw.close();

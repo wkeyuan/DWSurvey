@@ -28,7 +28,10 @@ public class JspToHtml {
 	public void postJspToHtml(String postUrl, String filePath,String fileName, String sType, String surveyId) throws Exception{
 		HttpServletRequest request=Struts2Utils.getRequest();
 		//${pageContext.request.scheme}://${pageContext.request.serverName }:${pageContext.request.serverPort} pageContext.request.contextPath
-		String reqTarget = request.getScheme()+"://"+request.getServerName()+(request.getServerPort()==80?"":":"+request.getServerPort())+request.getContextPath();
+		String reqTarget = DiaowenProperty.DW_SERVER_WEBSITE_URL;
+		if(reqTarget==null) {
+			reqTarget = request.getScheme()+"://"+request.getServerName()+(request.getServerPort()==80?"":":"+request.getServerPort())+request.getContextPath();
+		}
 		reqTarget =reqTarget+"/toHtml";
 		//?url="+postUrl+"&filePath="+filePath+"&fileName="+fileName;
 		Map<String, String> map=new HashMap<String, String>();

@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import com.key.common.plugs.version.VersionInfo;
 import com.key.common.utils.web.Struts2Utils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -28,6 +29,7 @@ public class DiaowenProperty extends
 		PropertyPlaceholderConfigurer {
 
 	public static String STORAGE_URL_PREFIX = null;
+	public static String DW_SERVER_WEBSITE_URL = null;
 
 
 //	private static Map<String, String> ctxPropertiesMap;
@@ -37,6 +39,9 @@ public class DiaowenProperty extends
 			ConfigurableListableBeanFactory beanFactoryToProcess,
 			Properties props) throws BeansException {
 		super.processProperties(beanFactoryToProcess, props);
+
+		String serverUrl = props.getProperty("dw.server.website.url");
+		if(StringUtils.isNotEmpty(serverUrl)) DW_SERVER_WEBSITE_URL  = serverUrl;
 
 		/*
 		ctxPropertiesMap = new HashMap<String, String>();
