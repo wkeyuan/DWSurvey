@@ -70,7 +70,7 @@ public class ToHtmlServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.print("<p align=center><font size=3 color=red>首页已经成功生成！Andrew</font></p>");
+		out.print("<p align=center><font size=3 color=red>首页已经成功生成！</font></p>");
 	}
 
 	private void flushDo(String fileRealPath,String fileName,final ByteArrayOutputStream os) throws Exception{
