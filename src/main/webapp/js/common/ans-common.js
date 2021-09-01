@@ -99,6 +99,7 @@ function checkoutData(checkType, value) {
     } else if (checkType == "DATE") {
 
         //日期的正则表达式
+        /*
         var reg1 = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;//2014-01-01
                      var regExp1 = new RegExp(reg1);
                      var reg2 = /^(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/;//12:00:00
@@ -110,9 +111,11 @@ function checkoutData(checkType, value) {
                      errorType = "DATE";
                      validateStatus = false;
                      }
+         */
         /*if (/Invalid|NaN/.test(new Date(value).toString())) {
             validateStatus = false;
         }*/
+        validateStatus = true;
 
 
     } else if (checkType == "IDENTCODE") {

@@ -344,9 +344,7 @@ $(document).ready(function(){
     //填空题
     $(".fillblankInput,.dwMFillblankInput,.dwChenMFillblankInput").blur(function(){
         lgcommon($(this));
-        if(checkType!="DATE"){
-            validateCheck($(this).parents(".li_surveyQuItemBody"),true);
-        }
+        validateCheck($(this).parents(".li_surveyQuItemBody"),true);
     });
 
     function resetQuNum(){
@@ -373,10 +371,6 @@ $(document).ready(function(){
 
 
     var ctx = $("#ctx").val();
-    function refreshAutoCode(codeImgId){
-        $("#"+codeImgId).attr("src",ctx+"/jcaptcha.action");
-    }
-
 //判则判断
     var url= ctx + "/dws-answer!ajaxCheckSurvey.action";
     var surveyId = $("#surveyId").val();
@@ -422,4 +416,8 @@ $(document).ready(function(){
     bindDateEvent();
 });
 
+function refreshAutoCode(codeImgId){
+    var ctx = $("#ctx").val();
+    $("#"+codeImgId).attr("src",ctx+"/jcaptcha.action");
+}
 
