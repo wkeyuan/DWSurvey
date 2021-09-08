@@ -21,8 +21,8 @@ public enum CheckType {
 	IDENTCODE("身份证号", 9),
 	ZIPCODE("邮政编码", 10),
 	URL("网址", 11),
-	TELE_PHONE_NUM("电话或手机号", 12);
-
+	TELE_PHONE_NUM("电话或手机号", 12),
+	DIGITS("整数", 13);
 
 	private String name;
 	private int index;
