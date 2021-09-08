@@ -9,9 +9,9 @@ package com.key.common;
  *
  */
 public enum CheckType {
-	NO("无验证", 0), 
-	EMAIL("Email", 1), 
-	STRLEN("字符长度", 2), 
+	NO("无验证", 0),
+	EMAIL("Email", 1),
+	STRLEN("字符长度", 2),
 	UNSTRCN("禁止中文", 3),
 	STRCN("仅许中文", 4),
 	NUM("数值", 5),
@@ -22,7 +22,8 @@ public enum CheckType {
 	ZIPCODE("邮政编码", 10),
 	URL("网址", 11),
 	TELE_PHONE_NUM("电话或手机号", 12);
-	
+
+
 	private String name;
 	private int index;
 	private CheckType(String name,int index){
@@ -41,6 +42,6 @@ public enum CheckType {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-	
-	
+
+
 }
