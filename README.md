@@ -2,6 +2,7 @@
 
 [![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
 [![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
+![GitHub Repo stars](https://img.shields.io/github/stars/wkeyuan/DWSurvey?style=social)
 
 ### 全新的企业版已经发布，前后端分别采用 Ant design、Spring Boot，详情可参考官网。
 
