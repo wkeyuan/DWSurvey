@@ -3,6 +3,7 @@
 [![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
 [![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
 ![GitHub Repo stars](https://img.shields.io/github/stars/wkeyuan/DWSurvey?style=social)
+![GitHub forks](https://img.shields.io/github/forks/wkeyuan/DWSurvey?style=social)
 
 ### 全新的企业版已经发布，前后端分别采用 Ant design、Spring Boot，详情可参考官网。
 
@@ -18,11 +19,15 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 
 社区版服务，源码全量开源，可独立部署，可二次开发。
 
- 地址：[http://www.diaowen.net](http://www.diaowen.net)
+ 官网地址：[http://www.diaowen.net](http://www.diaowen.net)
+
+企业版体验地址，源码全量开源，前后端分离，可独立部署，可二次开发。
+
+企业版地址：[http://ent.surveyform.cn](http://ent.surveyform.cn)
 
 在线开放平台，提供标准API，可快速集成到自己应用中，功能更丰富，不需要部署，可直接发布问卷进行数据收集。
 
- 地址：[https://www.surveyform.cn](https://www.surveyform.cn)
+在线服务地址：[https://www.surveyform.cn](https://www.surveyform.cn)
 
 
 ## 安装
