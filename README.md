@@ -1,4 +1,4 @@
-# DWSurvey 调问表单问卷系统
+# DWSurvey 调问表单问卷系统（Spring Boot 版本）
 
 [![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
 [![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
@@ -7,7 +7,7 @@
 
 ### 全新的企业版已经发布，前后端分别采用 Ant design、Spring Boot，详情可参考官网。
 
-### 社区版已经升级到 Spring Boot
+### 社区版已经升级到Spring Boot
 
 其它版本也在更新计划中，敬请期待。
 
