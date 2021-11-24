@@ -45,7 +45,7 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 
 4、浏览器访问 localhost:8080
 
-## 数据库脚本
+## 数据库脚本、数据初始化
 
 数据库脚本在resources/sql/目录下的dwsurvey.sql数据库脚本文件
 
@@ -58,10 +58,6 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 ```bash
 mvn package
 ```
-
-### 配置说明、数据初始化
-
-    先在您mysql导入/src/main/resources/conf/sql/目录下的dwsurvey.sql数据库脚本文件
 
 配置文件地址
 
