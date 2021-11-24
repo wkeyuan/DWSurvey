@@ -37,7 +37,7 @@ $(document).ready(function(){
 		if(amchartdivId!=null){
 			var amchartdivObj=$("#"+amchartdivId);
 			if(!amchartdivObj[0]){
-				var url="${ctx}/da/survey-report!chartData.action";
+				var url="${ctx}/da/survey-report/chartData.do";
 				var data="quId="+quId;
 				$.ajax({
 					url:url,
@@ -770,54 +770,8 @@ function substring(json) {
 <body>
 	<input type="hidden" id="id" name="id" value="${surveyId }">
 
-	<div class="creatgeSurveyStepBody">
-		<div class="creatgeSurveyStepContent bodyCenter">
-				<ul class="createSsUl">
-					<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-					<div class="a-w-sel">
-		            	<div class="w-sel" style="margin-top: 4px;">
-		                	<div class="selc">
-		                    	<div class="selcc tbtag">
-		                            <div class="seli"><a class="nx-1 sur_collectSet" href="#collectSet">收集规则</a></div>
-		                            <div class="seli"><a class="nx-6 sur_edit" href="${ctx }/design/my-survey-design.action?surveyId=${surveyId}">问卷编辑</a></div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-				</li>
-				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-					<div class="a-w-sel">
-		            	<div class="w-sel" style="margin-top: 4px;">
-		                	<div class="selc">
-		                    	<div class="selcc tbtag">
-		                            <div class="seli"><a class="nx-1" href="${ctx }/design/my-collect.action?surveyId=${surveyId}">答卷地址</a></div>
-		                            <div class="seli"><a class="nx-2" href="">社交分享</a></div>
-		                            <div class="seli"><a class="nx-3" href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp">网站组件</a></div>
-		                            <div class="seli"><a class="nx-3" href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin">微信收集</a></div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-				</li>
-				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6 active"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<jsp:include page="menu.jsp"></jsp:include>
 
-	<div style="">
-		<div class="main-tabs-content bodyCenter">
-			<div class="tab-content">
-				<div class="tab-content-collectTab">
-					<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}" class="collectTab tabItem_1 active">  <i class="fa fa-area-chart" aria-hidden="true"></i>  <span>默认报告</span></a>
-					<a href="${ctx }/da/my-survey-answer.action?surveyId=${surveyId}" class="collectTab tabItem_3"> <i class="fa fa-database" aria-hidden="true"></i> <span>原始数据</span></a>
-					<a href="#" class="collectTab tabItem_3" style="display: none;"><span class="collectTabItemLeft">&nbsp;</span><span>问卷日志</span></a>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div style="clear: both;"></div>
 	<div id="dwBody" >
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
@@ -829,12 +783,23 @@ function substring(json) {
 					<div class="surveyCollectTitleDiv">
 						<span class="surveyCollectTitle">${directory.surveyName }</span>
 						<div class="scmTabRight" >
-							<a href="" class="sbtn25 sbtn25_2">停止收集</a>
+							<c:choose>
+								<c:when test="${directory.surveyState eq 0 }">
+									<a href="" class="surveyStateBtn sbtn25 sbtn25_2" style="color: #599fd1;">发布问卷</a>
+								</c:when>
+								<c:when test="${directory.surveyState eq 1 }">
+									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">停止收集</a>
+								</c:when>
+								<c:when test="${directory.surveyState eq 2 }">
+									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">重新打开收集</a>
+								</c:when>
+							</c:choose>
+
 						</div>
 					</div>
 					<div class="surveyCollectInfoDiv">
 						<span class="surveyCollectInfoLeft">
-						状态：<span class="collectInfoSpan">收集中</span>&nbsp;&nbsp;&nbsp;&nbsp;
+						状态：<span class="collectInfoSpan surveyStateText">${directory.surveyState eq 0 ? '设计中':directory.surveyState eq 1?'收集中':directory.surveyState eq 2?'收集完成':'' }</span>&nbsp;&nbsp;&nbsp;&nbsp;
 						参与人数：<span class="collectInfoSpan">${directory.answerNum }</span>
 						</span>
 						<span class="surveyCollectInfoRight">
@@ -847,12 +812,12 @@ function substring(json) {
 					<div style="padding: 15px 25px;overflow: auto;">
 							<div style="overflow: auto;">
 								<div style="float: left;" >
-									<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId }" class="dw_btn025 tabpic active"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+									<a href="${ctx }/da/survey-report/defaultReport.do?surveyId=${surveyId }" class="dw_btn025 tabpic active"><i class="fa fa-tasks"></i>&nbsp;报表</a>
 									<%-- <a href="${ctx }/da/survey-report!lineChart.action?surveyId=${surveyId }" class="dw_btn025 linepic" style="margin-left: 10px;"><i class="fa fa-bar-chart"></i>&nbsp;柱状图</a>
 									<a href="${ctx }/da/survey-report!pieChart.action?surveyId=${surveyId }" class="dw_btn025 piepic " style="margin-left: 10px;"><i class="fa fa-pie-chart"></i>&nbsp;饼状图</a> --%>
 								</div>
 								<div style="float: right;" >
-									<a href="${ctx }/da/my-survey-answer!exportXLS.action?surveyId=${surveyId }" class="dw_btn025"><i class="fa fa-download"></i>下载数据</a>
+									<a href="${ctx }/da/my-survey-answer/exportXLS.do?surveyId=${surveyId }" class="dw_btn025"><i class="fa fa-download"></i>下载数据</a>
 									<!-- <a href="" class="dw_btn025"><i class="fa fa-share"></i>分享</a>-->
 									</div>
 							</div>
@@ -966,7 +931,7 @@ function substring(json) {
 											<table class="suQuTable" border="0" cellpadding="0" cellspacing="0" style="border: none! important;margin-top: 8px;">
 													<tr>
 														<td width="15px">&nbsp;</td>
-														<td class="bfbTd">回答数：${en.anCount }条&nbsp;&nbsp;<a href="${ctx}/design/qu-fillblank!answers.action?quId=${en.id}&surveyId=${surveyId}" class="fb_answer" >查看</a></td>
+														<td class="bfbTd">回答数：${en.anCount }条&nbsp;&nbsp;<a href="${ctx}/design/qu-fillblank/answers.do?quId=${en.id}&surveyId=${directory.id}" class="fb_answer" >查看</a></td>
 														<td colspan="4">&nbsp;</td>
 													</tr>
 												</table>
@@ -1061,7 +1026,7 @@ function substring(json) {
 													<tr class="quTrOptions">
 														<td width="15px">&nbsp;</td>
 														<td width="520px">${quEn.optionName }</td>
-														<td class="bfbTd">回答数：${quEn.anCount }条&nbsp;&nbsp;<a href="${ctx}/design/qu-multi-fillblank!answers.action?quItemId=${quEn.id}&surveyId=${surveyId}">查看</a></td></td>
+														<td class="bfbTd">回答数：${quEn.anCount }条&nbsp;&nbsp;<a href="${ctx}/design/qu-multi-fillblank/answers.do?quItemId=${quEn.id}&surveyId=${directory.id}">查看</a></td></td>
 														<td colspan="4"></td>
 													</tr>
 												</c:forEach>
@@ -1112,289 +1077,6 @@ function substring(json) {
 												<div style="clear: both;"></div>
 												<div id="amchart_${en.id }" ></div>
 											</div>
-											<div style="clear:both;"></div>
-										</c:when>
-										<%--矩阵单选题 --%>
-										<c:when test="${en.quType eq 'CHENRADIO' }">
-													<table class="suQuTable" border="0" cellpadding="0" cellspacing="0">
-
-														<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
-														<tr class="rowItemTr">
-															<td width="15px">&nbsp;
-																<%-- <input type="hidden" name="rowItemOptionName" value="${rowItem.optionName }"> --%>
-																<div class="rowItemOptionName" style="display: none;">${rowItem.optionName }</div>
-																<input type="hidden" name="rowItemAnCount" value="${rowItem.anCount }">
-															</td>
-															<td class="quChenRowTd" colspan="5"><label class="editAble quCoOptionEdit" style="font-size: 14px;">${rowI.count}、${rowItem.optionName }</label></td>
-														</tr>
-														<tr class="columnItemTr">
-															<td colspan="6">
-															<table class="anColumnTable">
-																<c:forEach items="${en.columns }" var="columnItem" varStatus="colI">
-														<tr class="columnItemTr">
-															<td width="15px">&nbsp;</td>
-															<td width="520" class="quChenRowTd" style="padding-left: 15px;"><label class="editAble quCoOptionEdit">${columnItem.optionName }</label></td>
-															<td width="180px"><div id="bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }" class="progressbarDiv progress${rowI.index }"></div></td>
-															<td width="50px" align="right" id="bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}" class="bfbTd">0%</td>
-															<td align="left" id="bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}" class="tdAnCount">&nbsp;0次</td>
-															<td>
-																<%-- <input type="hidden" name="columnItemOptionName" value="${columnItem.optionName }"> --%>
-																	<div class="columnItemOptionName" style="display: none;">${columnItem.optionName }</div>
-																	<input type="hidden" name="columnItemAnCount" value="0" id="coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}">
-															<c:forEach items="${en.anChenRadios }" var="anItem">
-																<c:if test="${anItem.quRowId eq rowItem.id && anItem.quColId eq columnItem.id }">
-																	<script type="text/javascript">
-																		var count=parseInt("${rowItem.anCount }");
-																		var anCount=parseInt("${anItem.anCount }");
-																		var bfbFloat=anCount/count*100;
-																		var bfbVal = bfbFloat.toFixed(2);
-																		if(bfbVal==="NaN"){
-																			bfbVal="0.00";
-																		}
-																		$("#bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}").html(bfbVal+"%");
-																		$("#bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").html("&nbsp;&nbsp;"+anCount+"次");
-																		$("#bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }").progressbar({value: bfbFloat});
-
-																		$("#coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").val(anCount);
-
-																	</script>
-																</c:if>
-															</c:forEach>
-															</td>
-														</tr>
-														</c:forEach>
-															</table>
-															</td>
-														</tr>
-														</c:forEach>
-													</table>
-											<div class="reportPic">
-												<div class="chartBtnEvent">
-												<a href="#" class="dw_btn026 columnchart_pic"><i class="fa fa-bar-chart"></i>柱状图</a>
-												<a href="#" class="dw_btn026 piechart_pic"><i class="fa fa-pie-chart"></i>饼图</a>
-												<a href="#" class="dw_btn026 barchart_pic"><i class="fa fa-tasks"></i>条形图</a>
-												<a href="#" class="dw_btn026 linechart_pic"><i class="fa fa-line-chart"></i>折线图</a>
-												</div>
-												<div style="clear: both;"></div>
-												<div id="amchart_${en.id }" ></div>
-											</div>
-											<div style="clear:both;"></div>
-										</c:when>
-										<%--矩阵多选题 --%>
-										<c:when test="${en.quType eq 'CHENCHECKBOX' }">
-											<table class="suQuTable" border="0" cellpadding="0" cellspacing="0">
-
-													<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
-													<tr class="rowItemTr">
-														<td width="15px">&nbsp;
-															<%-- <input type="hidden" name="rowItemOptionName" value="${rowItem.optionName }"> --%>
-															<div class="rowItemOptionName" style="display: none;">${rowItem.optionName }</div>
-															<input type="hidden" name="rowItemAnCount" value="${rowItem.anCount }">
-														</td>
-														<td class="quChenRowTd" colspan="5"><label class="editAble quCoOptionEdit" style="font-size: 14px;">${rowI.count}、${rowItem.optionName }</label></td>
-													</tr>
-													<tr class="columnItemTr">
-														<td colspan="6">
-														<table class="anColumnTable" style="width: 100%;">
-															<c:forEach items="${en.columns }" var="columnItem" varStatus="colI">
-															<tr class="columnItemTr">
-																<td width="15px">&nbsp;</td>
-																<td width="520" class="quChenRowTd" style="padding-left: 15px;"><label class="editAble quCoOptionEdit">${columnItem.optionName }</label></td>
-																<td width="180px"><div id="bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }" class="progressbarDiv progress${rowI.index }"></div></td>
-																<td width="50px" align="right" id="bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}" class="bfbTd">0%</td>
-																<td align="left" id="bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}" class="tdAnCount">&nbsp;0次</td>
-																<td>
-																			<%-- <input type="hidden" name="columnItemOptionName" value="${columnItem.optionName }"> --%>
-																			<div class="columnItemOptionName" style="display: none;">${columnItem.optionName }</div>
-																			<input type="hidden" name="columnItemAnCount" value="0" id="coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}">
-																<c:forEach items="${en.anChenCheckboxs }" var="anItem">
-																	<c:if test="${anItem.quRowId eq rowItem.id && anItem.quColId eq columnItem.id }">
-																		<script type="text/javascript">
-																			var count=parseInt("${rowItem.anCount }");
-																			var anCount=parseInt("${anItem.anCount }");
-																			var bfbFloat=anCount/count*100;
-																			var bfbVal = bfbFloat.toFixed(2);
-																			if(bfbVal==="NaN"){
-																				bfbVal="0.00";
-																			}
-																			$("#bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}").html(bfbVal+"%");
-																			$("#bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").html("&nbsp;&nbsp;"+anCount+"次");
-																			$("#bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }").progressbar({value: bfbFloat});
-
-																			$("#coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").val(anCount);
-																		</script>
-																	</c:if>
-																</c:forEach>
-																</td>
-															</tr>
-															</c:forEach>
-														</table>
-														</td>
-													</tr>
-													</c:forEach>
-
-													</table>
-											<div class="reportPic">
-												<div class="chartBtnEvent">
-												<a href="#" class="dw_btn026 columnchart_pic"><i class="fa fa-bar-chart"></i>柱状图</a>
-												<a href="#" class="dw_btn026 piechart_pic"><i class="fa fa-pie-chart"></i>饼图</a>
-												<a href="#" class="dw_btn026 barchart_pic"><i class="fa fa-tasks"></i>条形图</a>
-												<a href="#" class="dw_btn026 linechart_pic"><i class="fa fa-line-chart"></i>折线图</a>
-												</div>
-												<div style="clear: both;"></div>
-												<div id="amchart_${en.id }" ></div>
-											</div>
-											<div style="clear:both;"></div>
-										</c:when>
-										<%--矩阵评分题 --%>
-										<c:when test="${en.quType eq 'CHENSCORE' }">
-											<table class="suQuTable" border="0" cellpadding="0" cellspacing="0">
-
-														<%--
-														<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
-														<tr class="rowItemTr">
-															<td width="15px">&nbsp;
-																<div class="rowItemOptionName" style="display: none;">${rowItem.optionName }</div>
-																<input type="hidden" name="rowItemAnCount" value="${rowItem.anCount }">
-															</td>
-															<td class="quChenRowTd" colspan="5"><label class="editAble quCoOptionEdit" style="font-size: 14px;">${rowI.count}、${rowItem.optionName }</label></td>
-														</tr>
-														<tr class="columnItemTr">
-															<td colspan="6">
-															<table class="anColumnTable">
-																<c:forEach items="${en.columns }" var="columnItem" varStatus="colI">
-														<tr class="columnItemTr">
-															<td width="15px">&nbsp;</td>
-															<td width="520" class="quChenRowTd" style="padding-left: 15px;"><label class="editAble quCoOptionEdit">${columnItem.optionName }</label></td>
-															<td width="180px"><div id="bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }" class="progressbarDiv progress${rowI.index }"></div></td>
-															<td width="50px" align="right" id="bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}" class="bfbTd">0%</td>
-															<td align="left" id="bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}" class="tdAnCount">&nbsp;0次</td>
-															<td>
-																	<div class="columnItemOptionName" style="display: none;">${columnItem.optionName }</div>
-																	<input type="hidden" name="columnItemAnCount" value="0" id="coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}">
-															 --%>
-
-
-													<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
-													<tr class="rowItemTr">
-															<td width="15px">&nbsp;
-																<div class="rowItemOptionName" style="display: none;">${rowItem.optionName }</div>
-																<input type="hidden" name="rowItemAnCount" value="${rowItem.anCount }">
-															</td>
-															<td class="quChenRowTd" colspan="5"><label class="editAble quCoOptionEdit" style="font-size: 14px;">${rowI.count}、${rowItem.optionName }</label></td>
-													</tr>
-													<tr class="columnItemTr">
-															<td colspan="6">
-															<table class="anColumnTable">
-													<c:forEach items="${en.columns }" var="columnItem" varStatus="colI">
-													<tr class="columnItemTr">
-														<td width="15px">&nbsp;</td>
-														<td width="520" class="quChenRowTd" style="padding-left: 15px;"><label class="editAble quCoOptionEdit">${columnItem.optionName }</label></td>
-														<td width="180px"><div id="bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }" class="progressbarDiv progress${rowI.index }"></div></td>
-														<td width="60px" align="right" id="bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}" class="bfbTd">0%</td>
-														<%-- <td align="left" id="bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}" class="tdAnCount">&nbsp;0次</td> --%>
-														<td align="left" class="tdAnCount">&nbsp;&nbsp;平均</td>
-														<td width="40px">&nbsp;</td>
-														<td>
-																<div class="columnItemOptionName" style="display: none;">${columnItem.optionName }</div>
-																<input type="hidden" name="columnItemAnCount" value="0" id="coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}">
-
-														<c:forEach items="${en.anChenScores }" var="anItem">
-															<c:if test="${anItem.quRowId eq rowItem.id && anItem.quColId eq columnItem.id }">
-																<!-- <script type="text/javascript">
-																	var count=parseInt("${rowItem.anCount }");
-																	var anCount=parseInt("${anItem.anCount }");
-																	var bfbFloat=anCount/count*100;
-																	var bfbVal = bfbFloat.toFixed(2);
-																	$("#bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}").html(bfbVal+"%");
-																	$("#bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").html("&nbsp;&nbsp;"+anCount+"次");
-																	$("#bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }").progressbar({value: bfbFloat});
-																</script> -->
-																<script type="text/javascript">
-																	var avgScore=parseFloat("${anItem.avgScore}");
-																	//var bfbFloat=avgScore/"${en.paramInt02}"*100;
-																	var bfbFloat=avgScore/5*100;
-																	var bfbVal = bfbFloat.toFixed(2);
-																	//平均分 setAvgScore
-																	avgScore=avgScore.toFixed(2);
-																	if(avgScore==="NaN"){
-																		avgScore="0.00";
-																	}
-																	$("#bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}").html(avgScore+"分");
-																	$("#bfbTd${en.quType }${i.count }_${rowI.count}_${colI.count }").progressbar({value: bfbFloat});
-
-																	$("#coumneItemAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").val(avgScore);
-																</script>
-															</c:if>
-														</c:forEach>
-														</td>
-													</tr>
-													</c:forEach>
-													</table>
-													</td>
-													</c:forEach>
-
-													</table>
-											<div class="reportPic">
-												<div class="chartBtnEvent">
-												<a href="#" class="dw_btn026 columnchart_pic"><i class="fa fa-bar-chart"></i>柱状图</a>
-												<a href="#" class="dw_btn026 piechart_pic"><i class="fa fa-pie-chart"></i>饼图</a>
-												<a href="#" class="dw_btn026 barchart_pic"><i class="fa fa-tasks"></i>条形图</a>
-												<a href="#" class="dw_btn026 linechart_pic"><i class="fa fa-line-chart"></i>折线图</a>
-												</div>
-												<div style="clear: both;"></div>
-												<div id="amchart_${en.id }" ></div>
-											</div>
-											<div style="clear:both;"></div>
-										</c:when>
-										<%--矩阵填空题 --%>
-										<c:when test="${en.quType eq 'CHENFBK' }">
-												<table class="suQuTable" border="0" cellpadding="0" cellspacing="0" >
-													<c:forEach items="${en.rows }" var="rowItem" varStatus="rowI">
-													<tr class="rowItemTr">
-														<td width="15px">&nbsp;</td>
-														<td class="quChenRowTd" colspan="4"><label class="editAble quCoOptionEdit" style="font-size: 14px;">${rowI.count}、${rowItem.optionName }</label></td>
-													</tr>
-													<c:forEach items="${en.columns }" var="columnItem" varStatus="colI">
-													<tr class="columnItemTr">
-														<td width="15px">&nbsp;</td>
-														<td width="520" class="quChenRowTd" style="padding-left: 15px;"><label class="editAble quCoOptionEdit">${columnItem.optionName }</label></td>
-														<td width="120px" align="left" id="bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}" class="bfbTd">0%</td>
-														<td align="left" id="bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}" class="tdAnCount">&nbsp;0次</td>
-														<td width="40px">&nbsp;</td>
-														<td>
-														<c:forEach items="${en.anChenFbks }" var="anItem">
-															<c:if test="${anItem.quRowId eq rowItem.id && anItem.quColId eq columnItem.id }">
-																<script type="text/javascript">
-																	$("#bfbNum${en.quType }${i.count }_${rowI.count}_${colI.count}").html("回答数：${anItem.anCount}条");
-																	$("#bfbAnCount${en.quType }${i.count }_${rowI.count}_${colI.count}").html("&nbsp;&nbsp;<a href=\"#\">查看</a>");
-																</script>
-															</c:if>
-														</c:forEach>
-														</td>
-													</tr>
-													</c:forEach>
-													</c:forEach>
-													<%-- <tr>
-														<td width="15px">&nbsp;</td>
-														<td class="bfbTd">回答数：${en.anCount }</td>
-														<td colspan="4"></td>
-													</tr> --%>
-												</table>
-											<div class="reportPic"></div>
-											<div style="clear:both;"></div>
-											<div class="quItemNote">${en.quNote }</div>
-										</c:when>
-										<%--复合矩阵单选题 --%>
-										<c:when test="${en.quType eq 'COMPCHENRADIO' }">
-											<table class="suQuTable" border="0" cellpadding="0" cellspacing="0">
-												<tr>
-														<td width="15px">&nbsp;</td>
-														<td class="bfbTd">回答数：${en.anCount }</td>
-														<td colspan="4"></td>
-													</tr>
-											</table>
-										<div class="reportPic"></div>
 											<div style="clear:both;"></div>
 										</c:when>
 										<c:when test="${en.quType eq 'ORDERQU' }">
@@ -1449,7 +1131,6 @@ function substring(json) {
 <script type="text/javascript">
 $(document).ready(function(){
 	//.quTrOptions  td
-	currentMenu("mysurvey");
 });
 </script>
 </body>

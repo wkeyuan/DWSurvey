@@ -1,8 +1,10 @@
+<%@ page import="net.diaowen.common.plugs.footer.FooterInfo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<div class="dw_footcopy" style="font-size: 16px;color: gray;">
+		 pageEncoding="UTF-8"%>
+<div class="dw_footcopy" style="font-size: 13px;color: gray;text-align: center;">
     	<p style="margin-bottom: 6px;">
-    		邮箱：keyuan258@gmail.net&nbsp;&nbsp;&nbsp;
-    		<a href="/" style="color: gray;font-size: 16px;">京ICP备13050030号-3</a>
+			<a href="<%=FooterInfo.getWebInfoSiteUrl() %>" style="text-decoration: none;color: #333;"><strong><%=FooterInfo.getWebInfoSiteName() %></strong></a>
+			<a href="/" style="text-decoration: none;color: #333;"><%=FooterInfo.getWebInfoSiteICP() %></a>
+			<%=FooterInfo.getWebInfoSiteMail() %>
     	</p>
     </div>

@@ -7,6 +7,10 @@
 
 ### 全新的企业版已经发布，前后端分别采用 Ant design、Spring Boot，详情可参考官网。
 
+### 社区版已经升级到 Spring Boot
+
+打包 `mvn package` 
+
 其它版本也在更新计划中，敬请期待。
 
 关注我们更新，记得Star一下哦。 

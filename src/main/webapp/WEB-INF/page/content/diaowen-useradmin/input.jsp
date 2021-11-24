@@ -19,11 +19,11 @@ $(document).ready(function(){
 			loginName:{
 				required:true,
 				remote:{
-					url: "${ctx}/sy/user/user-admin!checkLoginNamelUn.action",     //后台处理程序
+					url: "${ctx}/sy/user/user-admin/checkLoginNamelUn.do",     //后台处理程序
 					type: "post",  //数据发送方式
 					data: {   //要传递的数据
-						loginName: function() { return $("input[name='loginName']").val(); },
-						id:function(){ return $("input[name='id']").val(); }
+						id:function(){ return $("input[name='id']").val(); },
+						loginName: function() { return $("input[name='loginName']").val(); }
 					}
 				}
 			},
@@ -32,16 +32,16 @@ $(document).ready(function(){
 				email:true,
 				//remote:'${ctx}/sy/yb/yang-ben!checkEmailUn.action'
 				remote:{
-						url: "${ctx}/sy/user/user-admin!checkEmailUn.action",     //后台处理程序
+						url: "${ctx}/sy/user/user-admin/checkEmailUn.do",     //后台处理程序
 						type: "post",  //数据发送方式
 						data: {   //要传递的数据
-							email: function() { return $("input[name='email']").val(); },
-							id:function(){ return $("input[name='id']").val(); }
+							id: function(){ return $("input[name='id']").val(); },
+							email: function() { return $("input[name='email']").val(); }
 						}
 					}
 			},
 			name:{required:true},
-			pwd:{required:true,minlength:6,maxlength:40},
+			pwd:{required:true,minlength:6,maxlength:40}
 		},
 		errorPlacement: function(error, element) {
 		    //error.appendTo(element.parent().parent());
@@ -81,8 +81,8 @@ $(document).ready(function(){
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
 				
-				<form id="inputForm" action="${ctx }/sy/user/nosm/user-admin!save.action" method="post" >
-				<input type="hidden" name="id" value="${id }" >
+				<form id="inputForm" action="${ctx }/sy/user/user-admin/save.do" method="post" >
+				<input type="hidden" name="id" value="${entity.id }" >
 				<div class="surveyCollectMiddleContent">
 					<div style="padding: 25px 45px;overflow: auto;padding-top: 35px;">
 							<div style="border-bottom: 1px solid #DFDFDF;padding: 5px;color: #666565;">账号信息</div>
@@ -91,27 +91,36 @@ $(document).ready(function(){
 									<tr>
 										<td valign="top" align="left" >
 											<table class="ac-form-table">
+
 												<tr>
 													<td width="80" align="right"><span class="red-color">*&nbsp;</span>登录名</td>
-													<td class="ac-input-td"><input type="text"  name="loginName" value="${loginName }"  > </td>
+													<c:choose>
+														<c:when test="${!empty(id) }">
+															<td class="ac-input-td"><input type="text"  name="loginName" value="${entity.loginName }" disabled style="background: #bfbfbf;"  > </td>
+														</c:when>
+														<c:otherwise>
+															<td class="ac-input-td"><input type="text"  name="loginName" value=""  > </td>
+														</c:otherwise>
+													</c:choose>
 												</tr>
+
 												<tr>
 													<td width="80" align="right"><span class="red-color">*&nbsp;</span>昵称</td>
-													<td class="ac-input-td"><input type="text"  name="name" value="${name }"  > </td>
+													<td class="ac-input-td"><input type="text"  name="name" value="${entity.name }"  > </td>
 												</tr>
 												<tr>
 													<td width="80" align="right"><span class="red-color">*&nbsp;</span>邮箱</td>
-													<td class="ac-input-td"><input type="text"  name="email" value="${email }" > </td>
+													<td class="ac-input-td"><input type="text"  name="email" value="${entity.email }" > </td>
 												</tr>
 
-												<c:if test="${empty(id) }">
+												<c:if test="${empty(entity.id) }">
 												<tr>
 													<td width="80" align="right"><span class="red-color">*&nbsp;</span>登录密码</td>
 													<td class="ac-input-td"><input type="password" name="pwd" value="" id="pwd">
 													</td>
 												</tr>
 												</c:if>
-												<c:if test="${!empty(id) }">
+												<c:if test="${!empty(entity.id) }">
 													<tr>
 														<td width="80" align="right"><span class="red-color">*&nbsp;</span>状态</td>
 														<td class="ac-input-td">
@@ -126,6 +135,13 @@ $(document).ready(function(){
 														</td>
 													</tr>
 												</c:if>
+												<%--<tr>
+													<td width="80" align="right"><span class="red-color">*&nbsp;</span>角色</td>
+													<td class="ac-input-td">
+														<input type="radio" name="roleId" value="1" >超级管理员&nbsp;&nbsp;&nbsp;
+														<input type="radio" name="roleId" value="2" >问卷管理员
+													</td>
+												</tr>--%>
 											</table>
 										</td>
 									</tr>
@@ -140,7 +156,7 @@ $(document).ready(function(){
 										</td>
 									</tr> -->
 									<tr>
-										<td height="50"><input type="submit" value="保存修改" class="sbtn25 sbtn25_1" style="margin-left: 125px;"> </td>
+										<td height="50"><input type="submit" value="${empty(entity.id) ? '新建':'保存修改'}" class="sbtn25 sbtn25_1" style="margin-left: 125px;"> </td>
 										<td class="ac-input-td"> </td>
 									</tr>
 								</table>
@@ -156,7 +172,7 @@ $(document).ready(function(){
 		</div>
 	</div>
 <script type="text/javascript">
-$("input[name='status'][value='${status}']").prop("checked",true);
+$("input[name='status'][value='${entity.status}']").prop("checked",true);
 </script>
 </body>
 </html>

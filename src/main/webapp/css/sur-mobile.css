@@ -4,7 +4,6 @@
 	padding: 0px;
 }
 .sbtn24{
-	background: url(../images/btn24.png) no-repeat 999px 999px;
 	width: 88px;
 	height: 30px;
 	color: #777;
@@ -98,7 +97,7 @@ select option{
 	font-family: "微软雅黑";
 	color: #444;
 	display: none;
-	
+
 	filter:alpha(opacity=92); /*IE滤镜，透明度50%*/
 	-moz-opacity:0.92; /*Firefox私有，透明度50%*/
 	opacity:0.92;/*其他，透明度50%*/
@@ -285,11 +284,10 @@ select option{
 	width: 100%;
 	margin: 0px;
 	top:0px;
-	background: #eee url(../images/x.png) 0 -160px repeat-x;
 	box-shadow:  4px 1px 3px rgba(224, 229, 233, 0.44);
 }
 .leftTabbar{
-	
+
 }
 .leftTabbar ul{
 	padding: 0px;
@@ -333,7 +331,7 @@ select option{
 .centerTabbarBtn{
 	text-decoration: none;
 	color: #6E6E6E;
-	/* color: #8DB800; */
+	/* color: #0887d2; */
 	height: 30px;
 	line-height: 30px;
 	padding: 5px 5px;
@@ -346,12 +344,12 @@ select option{
 	/* color: #fff; */
 	/* border:1px solid #A2A2A2; */
 	color: #222222;
-	color:#8DB800;
+	color:#0887d2;
 	font-weight: bold;
 }
 a.centerTabbarBtn:hover{
 	color: #222222;
-	color:#8DB800;
+	color:#0887d2;
 }
 .rightTabbar{
 	float: right;
@@ -359,8 +357,6 @@ a.centerTabbarBtn:hover{
 	margin-right: 20px;
 }
 #dwSurveyHeader{
-	/* background: url("../images/1351833968D86W5x.jpg") 30px;
-	background: url("../images/1279780388A5rVCG.jpg"); */
 }
 #dwSurveyLogo{
 	height: 70px;
@@ -502,10 +498,10 @@ a.centerTabbarBtn:hover{
 	/* background: white; */
 	/* padding: 20px 30px; */
 	padding-top: 5px;
-/* 	
+/*
 	filter:alpha(opacity=90); IE滤镜，透明度50%
 	-moz-opacity:0.9; Firefox私有，透明度50%
-	opacity:0.9;其他，透明度50% 
+	opacity:0.9;其他，透明度50%
 */
 }
 #dwSurveyQuContentAppUl{
@@ -693,7 +689,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	margin-bottom: 6px;
 }
 .quCoNum{
-	
+
 }
 .quCoTitle .quCoNum{
 	float: left;
@@ -703,7 +699,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	float: left;
 	padding: 5px 3px ;
 	cursor: text;
-	table-layout:fixed; 
+	table-layout:fixed;
 	word-break: break-all;
 	width: 90%;
 }
@@ -715,7 +711,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	padding: 0px;
 	margin: 0px;
 	list-style: none;
-	
+
 	font-size: 14px;
 	display: inline-block;
 	width: 100%;
@@ -761,7 +757,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	padding:3px 0px;
 	vertical-align: middle;
 	cursor: text;
-	
+
 	display: inline-block;
 	max-width: 600px;
 	table-layout:fixed; word-break: break-all;
@@ -925,7 +921,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	color: #333333;
 	font-family: "微软雅黑";
 	line-height: 1.4em;
-	
+
 	table-layout:fixed; word-break: break-all;
 }
 /** 编辑题目标题时样式  **/
@@ -959,7 +955,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	right:-25px;
 }
 #dwCommonEditRoot.quOptionEdit  .dwComEditOptionUl{
-	
+
 }
 #dwCommonEditRoot.quOptionEdit .dwComEditMenuBtn{
 	width: 23px;
@@ -1137,7 +1133,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 .dwQuDialogLogic{
 	padding: 0px 30px;
 	margin: 0px;
-	overflow: auto;	
+	overflow: auto;
 }
 .dwQuDialogLogicTitle{
 	font-size: 12px;
@@ -1191,7 +1187,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	text-align: center;
 }
 .dwQuDialogLoad img{
-	
+
 }
 
 .surveyQuItemBody.hover .quFillblankItem .dwComEditMenuBtn{
@@ -1341,7 +1337,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 }
 /**多项填空题**/
 .mFillblankTable{
-	
+
 }
 .mFillblankTable tr td{
 	padding: 5px 8px;

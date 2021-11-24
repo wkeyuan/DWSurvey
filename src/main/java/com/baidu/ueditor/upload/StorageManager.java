@@ -6,7 +6,8 @@ import com.baidu.ueditor.define.State;
 
 import java.io.*;
 
-import com.key.common.plugs.file.FileMagicUtils;
+import net.diaowen.common.plugs.file.FileMagic;
+import net.diaowen.common.plugs.file.FileMagicUtils;
 import org.apache.commons.io.FileUtils;
 
 public class StorageManager {

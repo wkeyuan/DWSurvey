@@ -29,7 +29,8 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: URL + "jsp/controller.jsp"
+        // , serverUrl: URL + "jsp/controller.jsp"
+        , serverUrl:  "/ueditor/config.do"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         /*, toolbars: [[
@@ -46,7 +47,7 @@
             'print', 'preview', 'searchreplace', 'help', 'drafts'
         ]]*/
     	,toolbars:[
-               ['Bold','Underline','StrikeThrough','removeformat','|','InsertUnorderedList','InsertOrderedList','|','Link','Unlink','|','simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map','|','Source','FullScreen']
+               ['fontfamily', 'fontsize','forecolor', 'Bold','Underline','StrikeThrough','removeformat','|','InsertUnorderedList','InsertOrderedList','|','Link','Unlink','|','simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'attachment', 'map','|','Source','FullScreen']
          ]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
@@ -277,7 +278,7 @@
         //,maxUndoCount:20
         //当输入的字符数超过该值时，保存一次现场
         //,maxInputCount:1
-        
+
         //autoHeightEnabled
         // 是否自动长高,默认true
         //,autoHeightEnabled:false

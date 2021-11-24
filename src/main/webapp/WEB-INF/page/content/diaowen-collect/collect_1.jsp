@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%-- <script type="text/javascript" src="${ctx }/js/plugs/zero-clipboard/ZeroClipboard.js"></script> --%>
 <script type="text/javascript" src="${ctx }/js/plugs/clipboard.js/clipboard.min.js"></script>
 <script type="text/javascript" src="${ctx }/js/dw/collect.js"></script>
 <title>答案地址 数据收集</title>
@@ -13,58 +14,14 @@
 	<input type="hidden" id="id" name="id" value="${surveyId }">
 	<input type="hidden" id="surveyState" name="surveyState" value="${survey.surveyState }">
 
-	<div class="creatgeSurveyStepBody" >
-		<div class="creatgeSurveyStepContent bodyCenter">
-			<ul class="createSsUl">
-				<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-					<div class="a-w-sel">
-		            	<div class="w-sel" style="margin-top: 4px;">
-		                	<div class="selc">
-		                    	<div class="selcc tbtag">
-		                            <div class="seli"><a class="nx-1 sur_collectSet" href="#collectSet">收集规则</a></div>
-		                            <div class="seli"><a class="nx-6 sur_edit" href="${ctx }/design/my-survey-design.action?surveyId=${surveyId}">问卷编辑</a></div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-				</li>
-				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5 active"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-				</li>
-				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-					<div class="a-w-sel">
-		            	<div class="w-sel" style="margin-top: 4px;margin-left: 15px;">
-		                	<div class="selc">
-		                    	<div class="selcc tbtag">
-		                            <div class="seli"><a class="nx-1" href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}">统计表格</a></div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<jsp:include page="menu.jsp"></jsp:include>
 
-	<div style="">
-		<div class="main-tabs-content bodyCenter">
-			<div class="tab-content">
-				<div class="tab-content-collectTab">
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1 active"> <i class="fa fa-chain" aria-hidden="true"></i> <span>答卷地址</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4 " > <i class="fa fa-share-alt" aria-hidden="true"></i> <span>社交分享</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5 "> <i class="fa fa-paperclip" aria-hidden="true"></i> <span>网站组件</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2 ">  <i class="fa fa-weixin" aria-hidden="true"></i> <span>微信收集</span></a>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div style="clear: both;"></div>
 	<div id="dwBody" >
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-
+				
 				<!-- <div class="surveyCollectMiddleTab">
 					<div class="scmTabLeft">
 						<div class="scmTabLeftItem"><a href="">问卷设计</a>&nbsp;&nbsp;&gt;</div>
@@ -96,7 +53,7 @@
 									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">重新打开收集</a>
 								</c:when>
 							</c:choose>
-
+							
 						</div>
 					</div>
 					<div class="surveyCollectInfoDiv">
@@ -109,9 +66,9 @@
 						</span>
 					</div>
 				</div>
-
+				
 				<div class="surveyCollectMiddleContent">
-
+					
 					<div class="collect_1_content">
 					<div style="padding:0px 60px;">
 						<div style="" >
@@ -121,7 +78,6 @@
 									<!-- <span  id="clipLinkSpan"   style="display: none;font-size:16px;color:#80AA00;">复制成功</span> -->
 									</div>
 									<div class="scmcRightTopLeftNote">复制下面的问卷链接到QQ，Email等工具中直接发给被用户</div>
-									<div><span style="color: #d15985;line-height: 36px;">找不到人填问卷？加QQ群：457647860 互填互助快速完成调研</span></div>
 								</div>
 							</div>
 							<div style="clear: both;"></div>
@@ -129,11 +85,12 @@
 								<div class="scmcSurveyLink">
 									<span class="scmcSurveyLinkLeft">&nbsp;</span>
 									<span class="scmcSurveyLinkCenter"  id="linkTextarea" >
-									${baseUrl }/dwsurvey/${survey.sid }.html
+									<%-- http://www.diaowen.net/wenjuan/${survey.sid }.html --%>
+									${baseUrl }/diaowen/${survey.sid }.html
 									</span>
 									<span class="scmcSurveyLinkRight"><span id="clipLinkSpan" style="display: none;">复制成功</span></span>
-									<a href="#" style="display: block;" class="clipLink" id="clipLink" data-clipboard-text="${baseUrl }/dwsurvey/${survey.sid }.html">复制链接</a>
-									<a target="_blank" href="${baseUrl }/dwsurvey/${survey.sid }.html" style="margin-left: 12px;background: rgb(130, 144, 154);width: 95px;height: 50px;text-align: center;border-radius: 3px;color: #ffffff;" >打开</a>
+									<a href="#" style="display: block;" class="clipLink" id="clipLink" data-clipboard-text="${baseUrl }/diaowen/${survey.sid }.html">复制链接</a>
+									<a target="_blank" href="${baseUrl }/diaowen/${survey.sid }.html" style="margin-left: 12px;background: rgb(130, 144, 154);width: 110px;height: 50px;text-align: center;border-radius: 3px;color: #ffffff;" >打开</a>
 								</div>
 							</div>
 						</div>
@@ -146,10 +103,10 @@
 								<div style="padding-top: 15px;overflow: auto;clear: both;">
 								<div class="scmcSurveyTdCode">
 									<%-- <img alt="" src="${ctx }/images/style-model/secode.png" height="130" > --%>
-									<img alt="" src="${ctx }/survey!answerTD.action?sid=${survey.sid}" height="130" >
+									<img alt="" src="${ctx }/survey/answerTD.do?surveyId=${survey.id}" height="130" >
 								</div>
 								<div class="scmcRightTopRight" style="float: left ;padding-left: 30px;">
-									<a href="${ctx }/survey!answerTD.action?sid=${survey.sid}&down" class="sbtn25 sbtn25_1">下载二维码</a>
+									<a href="${ctx }/survey/answerTD.do?surveyId=${survey.id}&down" class="sbtn25 sbtn25_1">下载二维码</a>
 									<div class="scmcRightTopLeftNote" style="width: 100px;padding-top: 25px;">复制下面的问卷链接到QQ，Email等工具中直接发给被用户</div>
 								</div>
 								</div>
@@ -157,29 +114,38 @@
 						</div>
 						</div>
 					</div>
+					
 
-
-
+					
 				</div>
 			</div>
-
+			
 		</div>
 		</div>
 	</div>
-
+	
 <script type="text/javascript">
 
-	currentMenu("mysurvey");
-/*var client = new ZeroClipboard( document.getElementById("clipLink") );
-client.on( "ready", function( readyEvent ) {
-  	 alert( "ZeroClipboard SWF is ready!" );
-	  client.on( "aftercopy", function( event ) {
-	    // `this` === `client`
-	    // `event.target` === the element that was clicked
-	    // event.target.style.display = "none";
-		  $("#clipLinkSpan").show().delay(5000).fadeOut("slow");
-	  } );
-});*/
+/*
+ZeroClipboard.setMoviePath( "${ctx}/js/plugs/zero-clipboard/ZeroClipboard.swf" );
+function bindClipBoard(textareaId,clipBtn,clipSpanId){
+	var clip = new ZeroClipboard.Client();
+	clip.setHandCursor( true );
+	clip.setCSSEffects( true );
+	var clipText=$("#"+textareaId).text();
+	clip.setText(clipText); // 设置要复制的文本。
+	//这个 button 不一定要求是一个 input 按钮，也可以是其他 DOM 元素。 
+	clip.glue(clipBtn); // 和上一句位置不可调换 
+	clip.addEventListener('complete', function (client, text) {
+		//alert(text+":复成功");//notify("复制成功!");
+		$("#"+clipSpanId).show().delay(5000).fadeOut("slow");
+		//$("#"+textareaId).select();
+	});
+	clip.reposition(clipBtn); 
+}
+bindClipBoard("linkTextarea","clipLink","clipLinkSpan");
+*/
+
 
 var clipboard = new ClipboardJS('.clipLink');
 

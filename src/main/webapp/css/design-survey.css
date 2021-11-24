@@ -11,16 +11,12 @@ body{
 		position: fixed;
 		display: inline-block;
 		padding: .5em 5em;
-		/* box-shadow: 2px 2px 5px -2px rgba(0,0,0,0.5); */
 		background:#589FD3;
 		color: white;
 		z-index: 1000;
 		font-family: "微软雅黑";
 		text-align: center;
 		letter-spacing:5px;
-		/* filter:alpha(opacity=50); IE滤镜，透明度50%
-		-moz-opacity:0.5; Firefox私有，透明度50%
-		opacity:0.5;其他，透明度50% */
 }
 .ellipsis{
 	overflow:hidden;
@@ -33,9 +29,6 @@ body{
 	-webkit-text-overflow:ellipsis;
 }
  input[type='checkbox'],input[type='radio']{
-	/* _vertical-align:-1px;
-	vertical-align:-2px;
-	margin-right: 5px; */
 	vertical-align: middle!important;
 	line-height: normal;
 	cursor: pointer;
@@ -50,8 +43,6 @@ textarea{
 	padding: 5px;
 }
 #wrap{
-	/*如果浏览器小于1200，则设置wrap为1200*/
-	/* width: 1200px; */
 	margin: 0px auto;
 }
 #header{
@@ -97,13 +88,10 @@ textarea{
 
 #tools_wrap{
 	background: #D6DCE4;
-	/* margin-bottom: 15px; */
-	/* border-top: 2px solid #ED6C00; */
 	padding-top:1px;
 	position: fixed;
 	z-index:200;
 	width: 100%;
-	/* overflow:auto; */
 	box-shadow:  4px 1px 3px rgba(224, 229, 233, 0.44);
 }
 
@@ -113,7 +101,6 @@ textarea{
 #tools .tools_tabs{
 	overflow: auto;
 	zoom: 1;
-	/* height: 25px; */
 }
 #tools .tools_tabs ul{
 	padding: 0px;
@@ -189,13 +176,13 @@ textarea{
 	display: inline;
 }
 #toolsBashQu{
-	width: 431px;
+	width: 370px;
 }
 #toolsChenQu{
 	width: 251px;
 }
 #toolsEvent{
-	width: 131px;
+
 }
 .tools_contents .toolbars{
 	background: #F7F7F7;
@@ -230,7 +217,7 @@ textarea{
 	/* border: 1px solid #cc3333; */
 }
 .toolbars ul li .dwToolbar_icon{
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	width: 50px;
 	height: 60px;
 	margin: 0px;
@@ -267,19 +254,6 @@ textarea{
 }
 #scoreQuModel:hover .dwToolbar_icon,#scoreQuModel.hover .dwToolbar_icon{
 	background-position: -170px -74px;
-}
-
-#selectQuModel .dwToolbar_icon{
-	background-position: -908px -6px;
-}
-#selectQuModel:hover .dwToolbar_icon,#selectQuModel.hover .dwToolbar_icon{
-	background-position: -908px -74px;
-}
-#timeQuModel .dwToolbar_icon{
-	background-position: -850px -6px;
-}
-#timeQuModel:hover .dwToolbar_icon,#selectQuModel.hover .dwToolbar_icon{
-	background-position: -850px -74px;
 }
 
 #orderQuModel .dwToolbar_icon{
@@ -446,10 +420,10 @@ textarea{
 	background-position: -511px -320px;
 }
 #dateQuModel .dwToolbar_icon{
-	background-position: -626px -250px;
+	background-position: -630px -250px;
 }
 #dateQuModel:hover .dwToolbar_icon,#dateQuModel.hover .dwToolbar_icon{
-	background-position: -626px -320px;
+	background-position: -630px -320px;
 }
 
 #publishBtn .dwToolbar_icon{
@@ -494,6 +468,18 @@ textarea{
 	height:39px;
 	background-position: -0px -199px;
 }
+#selectQuModel .dwToolbar_icon{
+	background-position: -908px -6px;
+}
+#selectQuModel:hover .dwToolbar_icon,#selectQuModel.hover .dwToolbar_icon{
+	background-position: -908px -74px;
+}
+#timeQuModel .dwToolbar_icon{
+	background-position: -850px -6px;
+}
+#timeQuModel:hover .dwToolbar_icon,#selectQuModel.hover .dwToolbar_icon{
+	background-position: -850px -74px;
+}
 
 #toolsPubBtn{
 	position:absolute;
@@ -525,6 +511,7 @@ textarea{
 	color: #333;
 }
 #dwBodyLeftContent h2 {
+	background: url(/static/editor/img/catalog-h1-icon_72e0d273.png) 0 9px no-repeat;
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
@@ -539,6 +526,7 @@ textarea{
 }
 #dwBodyLeftContent h3 {
 	padding: 0 8px 0 25px;
+	background: url(/static/editor/img/catalog-h2-icon_ddc25a3d.png) 12px 11px no-repeat;
 }
 #dwBodyLeftContent a {
 	text-decoration: none;
@@ -596,7 +584,7 @@ textarea{
 #dwSurveyName{
 	text-align: center;
 	outline-style: none;
-	font-weight: normal;
+	font-weight: none;
 	font-family:"微软雅黑";
 	font-size: 21px;
 	letter-spacing:1px;
@@ -769,7 +757,7 @@ textarea{
 	width: 40px;
 }
 .surveyQuItemLeftToolsUl li .dwQuIcon{
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	width: 23px;
 	height: 23px;
 	margin: 0px auto;
@@ -813,7 +801,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	display: none;
 }
 .quLogicData .dwQuIcon{
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	background-position: -279px -178px;
 	width: 23px;
 	height: 23px;
@@ -854,7 +842,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	margin:0px;
 }
 .surveyQuItemRightToolsUl li .dwQuIcon{
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	width: 23px;
 	height: 23px;
 }
@@ -929,6 +917,10 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 .surveyQuItemContent .quCoItem ul.transverse li{
 	float: left;
 }
+.surveyQuItemContent .quCoItem ul.transverse li.trannoteLi{
+	clear: both;
+	width: 100%;
+}
 .quInputCase,.quItemInputCase{
 	display: none;
 }
@@ -947,7 +939,8 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	width: 100%;
 }
 .surveyQuItemContent .quCoItem table.tableQuColItem tr td{
-	vertical-align: middle;
+	/*vertical-align: middle;*/
+	vertical-align: top;
 	padding:5px 0px;
 	font-size: 14px;
 	font-family: "微软雅黑";
@@ -988,17 +981,17 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	width: 40px;
 }
 .surveyQuItemContent .quCoBottomTools ul li .dwQuIcon{
-	/* background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat; */
+	/* background: transparent url("../images/toolbar.png") 0px 0px no-repeat; */
 	width: 25px;
 	height: 25px;
 	margin: 0px auto;
 }
 li.addOption .dwQuIcon,li.addColumnOption .dwQuIcon,li.addRowOption .dwQuIcon{
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	background-position: -620px -153px;
 }
 li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption .dwQuIcon{
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	background-position: -658px -153px;
 }
 .surveyQuItemContent .quCoBottomTools ul li:hover{
@@ -1038,7 +1031,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	list-style: none;
 }
 .editMenuRoot .editMenuList ul li{
-	font-size: 12px;
+	font: 12px;
 	background: #E0E6E9;
 	padding: 5px;
 	border: 1px solid #98C5C3;
@@ -1096,7 +1089,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 .dwComEditOptionUl li .dwQuIcon{
 	width: 30px;
 	height: 26px;
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 }
 .dwComEditOptionUl li.dwOptionUp .dwQuIcon{
 	background-position:-468px -150px;
@@ -1113,7 +1106,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	right: -32px;
 	top:-1px;
 	border: 1px solid #98C5C3;
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	cursor: pointer;
 	background-color: #DBE5F1;
 }
@@ -1129,7 +1122,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 #dwCommonEditRoot.svyName #dwComEditContent{
 	text-align: center;
 	outline-style: none;
-	font-weight: normal;
+	font-weight: none;
 	font-size: 21px;
 	letter-spacing:1px;
 	color:#222222;
@@ -1233,7 +1226,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 .dwCommonInputMenu .dwComEditMenuBtn{
 	position: absolute;
 	border: 1px solid #98C5C3;
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	cursor: pointer;
 	background-color: #DBE5F1;
 }
@@ -1325,7 +1318,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	float:right;
 	width: 28px;
 	height: 28px;
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	background-position:-494px -150px;
 	cursor: pointer;
 }
@@ -1440,14 +1433,14 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 		width: 25px;
 		height: 25px;
 		margin: 0px auto;
-		background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+		background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 		background-position: -620px -153px;
 }
 .dialogRemoveLogic{
 		width: 23px;
 		height: 23px;
 		margin: 0px auto;
-		background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+		background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 		background-position: -690px -152px;
 		cursor: pointer;
 }
@@ -1491,7 +1484,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 .quFillblankItem .dwFbMenuBtn{
 	position: absolute;
 	border: 1px solid #98C5C3;
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
 	cursor: pointer;
 	background-color: #DBE5F1;
 	display: none;
@@ -1598,7 +1591,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 }
 /**jquery ui dialog**/
 .ui-icon-closethick {
-	background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat! important;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat! important;
 	background-position: -502px -155px! important;
 }
 #editDialogCenter{
@@ -1672,7 +1665,7 @@ table.quCoChenTable tr td label{
 	text-align: center;
 }
 .surveyQuItemContent .quCoRightTools ul li .dwQuIcon{
-	/* background: transparent url("../images/toolbar-oss@1x.png") 0px 0px no-repeat; */
+	/* background: transparent url("../images/toolbar.png") 0px 0px no-repeat; */
 	width: 25px;
 	height: 25px;
 	margin: 0px auto;
@@ -1736,7 +1729,29 @@ select option{
 .tabbarDialogContent{
 	visibility: visible;
 }
-.selectRadioUl{
-	border: 1px solid #d6dce4;
-	margin-top: 6px!important;
+.quFillblankAnswerInput{
+	border: 1px solid #d0cfcf;
+}
+
+
+table.quCoChenTable tr td {
+	vertical-align: middle;
+	padding: 3px 0px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #333333;
+	/* line-height: 1.4em; */
+	text-align: center;
+	border-left: 1px solid #DDDDDD;
+	border-top: 1px solid #DDDDDD;
+	/* border-bottom: 1px solid #DDDDDD; */
+}
+
+.quChenRowTr td input[type='text']{
+	width: 80%;
+}
+select {
+	border: 1px solid #cecad2;
+	outline: none;
+	height: 40px;
 }

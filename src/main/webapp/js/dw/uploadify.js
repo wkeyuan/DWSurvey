@@ -3,7 +3,8 @@ function binduploadImg(tImageId,fileQueueid,hiddenpath,buttonText){
 	$("#"+tImageId).unbind();
 	$("#"+tImageId).uploadify({
 		swf: ctx+'/js/plugs/uploadify-v3.1/uploadify.swf',//[必须设置]swf的路径
-		uploader: ctx+'/up/upload!saveimage.action;',//[必须设置]上传文件触发的url
+		//uploader: ctx+'/up/upload!saveimage.action;',//[必须设置]上传文件触发的url
+		uploader: ctx+'/up/up-file.do',//[必须设置]上传文件触发的url
 		queueID: fileQueueid,
 		method: 'post',//和后台交互的方式：post/get
 		formData: {"basepath":"edu"},//和后台交互时，附加的参数
@@ -28,7 +29,7 @@ function binduploadImg(tImageId,fileQueueid,hiddenpath,buttonText){
 				//alert("成功"+ctx+ datatemp.location);
 		  //处理回显
 		 // var datatemp={"success":"true","filename":"Tulips.jpg  ","location":"/file/images/8o70tffwwhbhzjv.jpg"};
-			alert(data);
+			// alert(data);
 		  var datatemp=eval("("+data+")");
 		  if(datatemp.success=="true"){
 			var themeParam=$("#"+tImageId).parents(".theme_param");

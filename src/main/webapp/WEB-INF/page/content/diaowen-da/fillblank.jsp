@@ -64,50 +64,64 @@
 <body>
 	<input type="hidden" id="id" name="id" value="${surveyId }">
 	
+	<c:if test="${empty(param.tag)}">
 	<div class="creatgeSurveyStepBody">
 		<div class="creatgeSurveyStepContent bodyCenter" >
-				<ul class="createSsUl">
+			<ul class="createSsUl">
 				<li><a href=""  class="clickHideMenu csscStep csscStep4"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">设计问卷</span><span class="csscStepRight">&nbsp;</span></a>
 					<div class="a-w-sel">
-		            	<div class="w-sel" style="margin-top: 4px;">
-		                	<div class="selc">
-		                    	<div class="selcc tbtag">
-		                            <div class="seli"><a class="nx-1 sur_collectSet" href="#collectSet">收集规则</a></div>
-		                            <div class="seli"><a class="nx-6 sur_edit" href="${ctx }/design/my-survey-design.action?surveyId=${surveyId}">问卷编辑</a></div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
+						<div class="w-sel" style="margin-top: 4px;">
+							<div class="selc">
+								<div class="selcc tbtag">
+									<div class="seli"><a class="nx-1 sur_collectSet" href="#collectSet">收集规则</a></div>
+									<div class="seli"><a class="nx-2" href="${ctx }/design/my-survey-design/previewDev.do?surveyId=${surveyId}">样式设置</a></div>
+									<div class="seli"><a class="nx-6 sur_edit" href="${ctx }/design/my-survey-design/survey.do?surveyId=${surveyId}">问卷编辑</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据收集</span><span class="csscStepRight" >&nbsp;</span></a>
+				<li><a href="${ctx }/design/my-collect.do?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据收集</span><span class="csscStepRight" >&nbsp;</span></a>
 					<div class="a-w-sel">
-		            	<div class="w-sel" style="margin-top: 4px;">
-		                	<div class="selc">
-		                    	<div class="selcc tbtag">
-		                            <div class="seli"><a class="nx-1" href="${ctx }/design/my-collect.action?surveyId=${surveyId}">答卷地址</a></div>
-		                            <div class="seli"><a class="nx-2" href="">社交分享</a></div>
-		                            <div class="seli"><a class="nx-3" href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp">网站组件</a></div>
-		                            <div class="seli"><a class="nx-3" href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin">微信收集</a></div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
+						<div class="w-sel" style="margin-top: 4px;">
+							<div class="selc">
+								<div class="selcc tbtag">
+									<div class="seli"><a class="nx-1" href="${ctx }/collect/my-collect/collect.do?surveyId=${surveyId}">答卷地址</a></div>
+									<div class="seli"><a class="nx-2" href="">社交分享</a></div>
+									<div class="seli"><a class="nx-3" href="${ctx }/collect/my-collect/collect.do?surveyId=${surveyId}&tabId=sitecomp">网站组件</a></div>
+									<div class="seli"><a class="nx-3" href="${ctx }/collect/my-collect/collect.do?surveyId=${surveyId}&tabId=weixin">微信收集</a></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</li>
 				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6 active"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据分析</span><span class="csscStepRight">&nbsp;</span></a>
+				<li><a href="${ctx }/da/survey-report/defaultReport.do?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6 active"><span class="csscStepLeft">&nbsp;</span><span class="csscStepCenter">数据分析</span><span class="csscStepRight">&nbsp;</span></a>
 				</li>
 			</ul>
 		</div>
 	</div>
-	
+
+	</c:if>
+
 	<div style="">
 		<div class="main-tabs-content bodyCenter">
 			<div class="tab-content">
 				<div class="tab-content-collectTab">
-					<a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}" class="collectTab tabItem_1 active"><span class="collectTabItemLeft">&nbsp;</span><span>默认报告</span></a>
-					<a href="${ctx }/da/my-survey-answer.action?surveyId=${surveyId}" class="collectTab tabItem_3"><span class="collectTabItemLeft">&nbsp;</span><span>原始数据</span></a>
-					<a href="#" class="collectTab tabItem_3" style="display: none;"><span class="collectTabItemLeft">&nbsp;</span><span>问卷日志</span></a>
+					<c:choose>
+						<c:when test="${empty(param.tag)}">
+							<a href="${ctx }/da/survey-report/defaultReport.do?surveyId=${surveyId}" class="collectTab tabItem_1 active"><span class="collectTabItemLeft">&nbsp;</span><span>默认报告</span></a>
+							<a href="${ctx }/da/my-survey-answer/answer.do?surveyId=${surveyId}" class="collectTab tabItem_3"><span class="collectTabItemLeft">&nbsp;</span><span>原始数据</span></a>
+							<a href="#" class="collectTab tabItem_3" style="display: none;"><span class="collectTabItemLeft">&nbsp;</span><span>问卷日志</span></a>
+						</c:when>
+						<c:otherwise>
+							<a href="${ctx }/sy/user/survey-admin/defaultReport.do?surveyId=${surveyId}" class="collectTab tabItem_1 active"><span class="collectTabItemLeft">&nbsp;</span><span>默认报告</span></a>
+							<a href="${ctx }/sy/user/survey-admin/answer.do?surveyId=${surveyId}" class="collectTab tabItem_3"><span class="collectTabItemLeft">&nbsp;</span><span>原始数据</span></a>
+							<a href="#" class="collectTab tabItem_3" style="display: none;"><span class="collectTabItemLeft">&nbsp;</span><span>问卷日志</span></a>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
 			</div>
 		</div>
@@ -122,14 +136,16 @@
 				<div class="surveyCollectTop">
 					<div class="surveyCollectTitleDiv">
 						<span class="surveyCollectTitle">${directory.surveyName }</span>
+						<c:if test="${empty(param.tag)}">
 						<div class="scmTabRight" >
 							<a href="" class="sbtn25 sbtn25_2">停止收集</a>
 						</div>
+						</c:if>
 					</div>
 					<div class="surveyCollectInfoDiv">
 						<span class="surveyCollectInfoLeft">
 						状态：<span class="collectInfoSpan">收集中</span>&nbsp;&nbsp;&nbsp;&nbsp;
-						参与人数：<span class="collectInfoSpan">${fn:length(anPage.result)}${directory.answerNum }</span>
+						参与人数：<span class="collectInfoSpan">${anPage.totalItems }</span>
 						</span>
 						<span class="surveyCollectInfoRight">
 						创建时间：<span class="collectInfoSpan"><fmt:formatDate value="${directory.createDate }" pattern="yyyy年MM月dd日 HH:mm"/></span>
@@ -155,10 +171,21 @@
 									<table id="content-tableList" width="100%"  cellpadding="0" cellspacing="0">
 
 								<c:forEach items="${anPage.result}" var="en" varStatus="i">
-								<tr id="quTr_${en.id }" >
-									<td style="height: 32px;text-align: center;" width="30">${i.count}</td>
-									<td>${en.answer}</td>
-								</tr>
+								<c:choose>
+									<c:when test="${anPageType eq 'anChenFbk' }">
+										<tr id="quTr_${en.id }" >
+											<td style="height: 32px;text-align: center;" width="30">${i.count}</td>
+											<td>${en.answerValue}</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<tr id="quTr_${en.id }" >
+											<td style="height: 32px;text-align: center;" width="30">${i.count}</td>
+											<td>${en.answer}</td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
+
 								</c:forEach>
 								</table>
 									

@@ -36,7 +36,7 @@ public final class ConfigManager {
 	/*
 	 * 通过一个给定的路径构建一个配置管理器， 该管理器要求地址路径所在目录下必须存在config.properties文件
 	 */
-	private ConfigManager ( String rootPath, String contextPath, String uri ) throws FileNotFoundException, IOException {
+	private ConfigManager ( String rootPath, String contextPath, String uri, String userId ) throws FileNotFoundException, IOException {
 
 		rootPath = rootPath.replace( "\\", "/" );
 
@@ -50,6 +50,7 @@ public final class ConfigManager {
 		}
 
 		this.initEnv();
+		this.jsonConfig.put("userId",userId);
 
 	}
 
@@ -60,10 +61,10 @@ public final class ConfigManager {
 	 * @param uri 当前访问的uri
 	 * @return 配置管理器实例或者null
 	 */
-	public static ConfigManager getInstance ( String rootPath, String contextPath, String uri) {
+	public static ConfigManager getInstance ( String rootPath, String contextPath, String uri, String userId ) {
 
 		try {
-			return new ConfigManager(rootPath, contextPath, uri);
+			return new ConfigManager(rootPath, contextPath, uri, userId);
 		} catch ( Exception e ) {
 			e.printStackTrace();
 			return null;
@@ -166,6 +167,7 @@ public final class ConfigManager {
 		}
 
 		this.parentPath = file.getParent();
+		//		String configContent = this.filter(this.getClass().getClassLoader().getResourceAsStream("static/ueditor/config.json"));
 		String configContent = this.readFile( this.getConfigPath() );
 		try{
 			JSONObject jsonConfig = new JSONObject( configContent );
@@ -177,6 +179,16 @@ public final class ConfigManager {
 	}
 
 	private String getConfigPath ()  {
+//		return this.parentPath + File.separator + ConfigManager.configFileName;
+		try{
+//			File confFile = ResourceUtils.getFile("classpath:conf/ue/config.json");
+//			String path = confFile.getPath();
+			ClassPathResource classPathResource =  new ClassPathResource("conf/ue/config.json");
+			String path = classPathResource.getURI().getPath();
+			return path;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return this.parentPath + File.separator + ConfigManager.configFileName;
 	}
 

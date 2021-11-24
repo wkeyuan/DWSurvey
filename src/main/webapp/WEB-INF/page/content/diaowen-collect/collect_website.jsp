@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="${ctx }/js/plugs/zero-clipboard/ZeroClipboard.js"></script>
 <script type="text/javascript" src="${ctx }/js/plugs/colpick-jQuery/js/colpick.js"></script>
 <link rel="stylesheet" href="${ctx }/js/plugs/colpick-jQuery/css/colpick.css" type="text/css"/>
 <script type="text/javascript" src="${ctx }/js/dw/collect.js"></script>
-<script type="text/javascript" src="${ctx }/js/plugs/clipboard.js/clipboard.min.js"></script>
+
 <title>网站组件</title>
 <style type="text/css">
 .colpick{
@@ -29,60 +30,17 @@
 </head>
 <body>
 	<input type="hidden" id="id" name="id" value="${surveyId }">
-<input type="hidden" id="surveyState" name="surveyState" value="${survey.surveyState }">
+	<input type="hidden" id="surveyState" name="surveyState" value="${survey.surveyState }">
 
-	<div class="creatgeSurveyStepBody">
-		<div class="creatgeSurveyStepContent bodyCenter">
-			<ul class="createSsUl">
-				<li><a href=""  class="clickHideMenu csscStep csscStep4"><i class="fa fa-magic" aria-hidden="true"></i><span class="csscStepCenter">设计问卷</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-					<div class="a-w-sel">
-		            	<div class="w-sel" style="margin-top: 4px;">
-		                	<div class="selc">
-		                    	<div class="selcc tbtag">
-		                            <div class="seli"><a class="nx-1 sur_collectSet" href="#collectSet">收集规则</a></div>
-		                            <div class="seli"><a class="nx-6 sur_edit" href="${ctx }/design/my-survey-design.action?surveyId=${surveyId}">问卷编辑</a></div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-				</li>
-				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/design/my-collect.action?surveyId=${surveyId }"  class="clickHideMenu csscStep csscStep5 active"><i class="fa fa-chain" aria-hidden="true"></i> <span class="csscStepCenter">数据收集</span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-				<li><span class="csscStep csscStepLine"><span class="csscStepLeft">&nbsp;</span><span class="csscStepRight">&nbsp;</span></span></li>
-				<li><a href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}"  class="clickHideMenu csscStep csscStep6"> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="csscStepCenter">数据分析</span> <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-					<div class="a-w-sel">
-		            	<div class="w-sel" style="margin-top: 4px;margin-left: 15px;">
-		                	<div class="selc">
-		                    	<div class="selcc tbtag">
-		                            <div class="seli"><a class="nx-1" href="${ctx }/da/survey-report!defaultReport.action?surveyId=${surveyId}">统计表格</a></div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<jsp:include page="menu.jsp"></jsp:include>
 
-	<div style="">
-		<div class="main-tabs-content bodyCenter">
-			<div class="tab-content">
-				<div class="tab-content-collectTab">
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}" class="collectTab tabItem_1"> <i class="fa fa-chain" aria-hidden="true"></i> <span>答卷地址</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=share" class="collectTab tabItem_4" > <i class="fa fa-share-alt" aria-hidden="true"></i> <span>社交分享</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=sitecomp" class="collectTab tabItem_5 active"> <i class="fa fa-paperclip" aria-hidden="true"></i> <span>网站组件</span></a>
-					<a href="${ctx }/design/my-collect.action?surveyId=${surveyId}&tabId=weixin" class="collectTab tabItem_2 ">  <i class="fa fa-weixin" aria-hidden="true"></i> <span>微信收集</span></a>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div style="clear: both;"></div>
 	<div id="dwBody" >
 		<div id="dwBodyContent" class="bodyCenter" style="border:1px solid #C1DAEC;">
 		<div id="dwBodyUser">
 			<div class="surveyCollectMiddle">
-
-
+				
+				
 				<div class="surveyCollectTop">
 					<div class="surveyCollectTitleDiv">
 						<span class="surveyCollectTitle">${survey.surveyName }</span>
@@ -98,7 +56,7 @@
 									<a href="" class="surveyStateBtn sbtn25 sbtn25_2">重新打开收集</a>
 								</c:when>
 							</c:choose>
-
+							
 						</div>
 					</div>
 					<div class="surveyCollectInfoDiv">
@@ -111,9 +69,9 @@
 						</span>
 					</div>
 				</div>
-
+				
 				<div class="surveyCollectMiddleContent">
-
+					
 					<div class="collect_1_content">
 					<div style="margin: 0px auto; width: 950px;">
 						<div style="clear: both;"></div>
@@ -123,7 +81,7 @@
 									<div class="scmcRightTopLeftTitle">通过您的网站收集问卷</div>
 								</div>
 								<div style="padding-top: 15px;overflow: auto;clear: both;">
-
+								
 								<div class="scmcsiteLeft">
 									<div class="scmcsiteTitle">1、风格选择</div>
 									<div class="scmcsiteLeftContent">
@@ -158,55 +116,74 @@
 									</div>
 									<div style="clear: both;"></div>
 									<div style="color: #9B9B9B;font-size: 14px;padding-top: 10px;">高度与背景色可自动调节，请从页面左右侧预览实际效果。</div>
-
+									
 								</div>
 								<div class="scmcsiteRight">
 									<div class="scmcsiteTitle">2、代码复制</div>
 									<div class="scmcsiteRightContent">
 										<textarea id="compCodeText" rows="" cols="" class="scmcsiteRCEdit" readonly="readonly">
-
+										
 										</textarea>
 										<div style="text-align: center;padding-top: 8px;">
 										<span id="compCopyMsg" style="display:none;color: #7BA400;font-size: 22px;position: absolute;margin-left: -120px;">复制成功！</span>
-										<a href="#" class="sbtn25 sbtn25_1" id="compTextareaCodeBtn" data-clipboard-target="#compCodeText" >复制代码</a>
+										<a href="#" class="sbtn25 sbtn25_1" id="compTextareaCodeBtn">复制代码</a>
 										</div>
 									</div>
 									<div style="clear: both;"></div>
 									<div style="color: #9B9B9B;font-size: 14px;padding-top: 10px;">高度与背景色可自动调节，请从页面左右侧预览实际效果。</div>
 								</div>
-
+								
 								</div>
 							</div>
 						</div>
 						</div>
 					</div>
-
-
+					
+					
 				</div>
 			</div>
-
+			
 		</div>
 		</div>
 	</div>
-
-<div id="compStyle1" style="display: none;"><!-- DIAOWEN.NET Button BEGIN --><div style="position: fixed;right: 0px;top: 100px;z-index: 9999;"><a href="${baseUrl }/dwsurvey/${survey.sid }.html" style="background: #1C658B;width: 15px;height: 100px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;font-weight: bold;color: white! important;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;-khtml-border-top-left-radius: 5px;border-top-left-radius: 5px;-moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px;-khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;">问卷调查</a></div><!-- DIAOWEN.NET Button END --></div>
-
+	
+<div id="compStyle1" style="display: none;"><!-- DIAOWEN.NET Button BEGIN --><div style="position: fixed;right: 0px;top: 100px;z-index: 9999;"><a href="http://www.diaowen.net/wenjuan/${survey.sid }.html" style="background: #1C658B;width: 15px;height: 100px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;font-weight: bold;color: white! important;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;-khtml-border-top-left-radius: 5px;border-top-left-radius: 5px;-moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px;-khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;">问卷调查</a></div><!-- DIAOWEN.NET Button END --></div>
+	
 <div id="priviewContent" class="priviewContentFixed">
 	<div id="webSiteLeftCode">
 	<div id="webSiteFixedLeft" class="websiteFixed" style="position: fixed;left: 0px;top: 520px;z-index: 9999;display: none;">
-		<a class="websiteAId" href="${baseUrl }/dwsurvey/${survey.sid }.html" style="background: #1C658B;width: 15px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;padding-bottom:10px;font-weight: bold;color: white;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topright: 5px;-webkit-border-top-right-radius: 5px;-khtml-border-top-right-radius: 5px;border-top-right-radius: 5px;-moz-border-radius-bottomright: 5px;-webkit-border-bottom-right-radius: 5px;-khtml-border-bottom-right-radius: 5px;border-bottom-right-radius: 5px;">问卷调查</a>
+		<a class="websiteAId" href="http://www.diaowen.net/wenjuan/${survey.sid }.html" style="background: #1C658B;width: 15px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;padding-bottom:10px;font-weight: bold;color: white;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topright: 5px;-webkit-border-top-right-radius: 5px;-khtml-border-top-right-radius: 5px;border-top-right-radius: 5px;-moz-border-radius-bottomright: 5px;-webkit-border-bottom-right-radius: 5px;-khtml-border-bottom-right-radius: 5px;border-bottom-right-radius: 5px;">问卷调查</a>
 	</div>
 	</div>
-
+	
 	<div id="webSiteRightCode">
 	<div id="webSiteFixedRight" class="websiteFixed" style="position: fixed;right: 0px;top: 520px;z-index: 9999;">
-		<a class="websiteAId" href="${baseUrl }/dwsurvey/${survey.sid }.html" style="background: #1C658B;width: 15px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;padding-bottom:10px;font-weight: bold;color: white;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;-khtml-border-top-left-radius: 5px;border-top-left-radius: 5px;-moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px;-khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;">问卷调查</a>
+		<a class="websiteAId" href="http://www.diaowen.net/wenjuan/${survey.sid }.html" style="background: #1C658B;width: 15px;background: #8CBCD1;display: block;padding: 5px;padding-top: 10px;padding-bottom:10px;font-weight: bold;color: white;cursor: pointer;float: right;vertical-align: middle;text-decoration: none;font-size: 12px;-moz-border-radius-topleft: 5px; -webkit-border-top-left-radius: 5px;-khtml-border-top-left-radius: 5px;border-top-left-radius: 5px;-moz-border-radius-bottomleft: 5px; -webkit-border-bottom-left-radius: 5px;-khtml-border-bottom-left-radius: 5px; border-bottom-left-radius: 5px;">问卷调查</a>
 	</div>
 	</div>
-</div>
+</div>	
 <script type="text/javascript">
 
-	currentMenu("mysurvey");
+ZeroClipboard.setMoviePath( "${ctx}/js/plugs/zero-clipboard/ZeroClipboard.swf" );
+
+function bindClipBoard(textareaId,clipBtn,clipSpanId){
+	var clip = new ZeroClipboard.Client();
+	clip.setHandCursor( true );
+	clip.setCSSEffects( true ); 
+	var clipText=$("#"+textareaId).text();
+	clip.setText(clipText); // 设置要复制的文本。 
+	//这个 button 不一定要求是一个 input 按钮，也可以是其他 DOM 元素。 
+	clip.glue(clipBtn); // 和上一句位置不可调换
+	clip.addEventListener('complete', function (client, text) {
+		//notify("复制成功!"); alert("复制成功！");
+		$("#compCodeText").select();
+		$("#"+clipSpanId).show().delay(5000).fadeOut("slow");
+	});
+}
+
+//$("#compCodeText").text($("#compStyle1").html());
+
+bindClipBoard("compCodeText","compTextareaCodeBtn","compCopyMsg");
 
 $("#compCodeText").click(function(){
 	$(this).select();
@@ -243,7 +220,7 @@ $("#site_color_box").colpick({
 		updateCode();
 	},
 	onSubmit:function(hsb,hex,rgb,el) {
-
+		
 	}
 });
 
@@ -275,20 +252,9 @@ function updateCode(){
 		copyCode=$("#webSiteRightCode").html();
 	}
 	$("#compCodeText").text("<!-- Diaowen.net Button BEGIN -->"+copyCode+"<!-- Diaowen.net Button END -->");
+	bindClipBoard("compCodeText","compTextareaCodeBtn","compCopyMsg");
 }
 updateCode();
-
-var clipboard = new ClipboardJS('#compTextareaCodeBtn');
-
-clipboard.on('success', function(e) {
-	$("#compCopyMsg").show().delay(5000).fadeOut("slow");
-});
-
-clipboard.on('error', function(e) {
-	$("#compCopyMsg").text("浏览器不支持！");
-	$("#compCopyMsg").show().delay(5000).fadeOut("slow");
-});
-
 </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
  */
 jQuery.extend(jQuery.validator.messages, {
         required: "不能为空",
-		remote: "请修正该字段",
+		remote: "重复的值，请修正该字段",
 		email: "请输入正确格式的电子邮件",
 		url: "请输入合法的网址",
 		date: "请输入合法的日期",
@@ -18,6 +18,6 @@ jQuery.extend(jQuery.validator.messages, {
 		minlength: jQuery.validator.format("请输入一个长度最少是 {0} 的字符串"),
 		rangelength: jQuery.validator.format("请输入一个长度介于 {0} 和 {1} 之间的字符串"),
 		range: jQuery.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
-		max: jQuery.validator.format("最大值为 {0} "),
-		min: jQuery.validator.format("最小值为 {0} ")
+		max: jQuery.validator.format("请输入一个最大为 {0} 的值"),
+		min: jQuery.validator.format("请输入一个最小为 {0} 的值")
 });

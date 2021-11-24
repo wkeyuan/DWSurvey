@@ -61,7 +61,7 @@ $(document).ready(function(){
 		<div id="dwBodyContent" class="bodyCenter" style="">
 		<div class="tab-content" style="background: #D9D9D9;padding: 0px 5px;">
 				<div class="tab-content-collectTab icTab" style="text-align: left;">
-					<a href="${ctx }/ic/user!myaccount.action" class="collectTab tabItem_1 active"><span class="collectTabItemLeft">&nbsp;</span><span>我的账号</span></a>
+					<a href="${ctx }/ic/user/myaccount.do" class="collectTab tabItem_1 active"><span class="collectTabItemLeft">&nbsp;</span><span>我的账号</span></a>
 				</div>
 		</div>
 		<div id="dwBodyUser">
@@ -71,7 +71,7 @@ $(document).ready(function(){
 					<div style="padding: 25px 45px;overflow: auto;padding-top: 35px;">
 							<div style="border-bottom: 1px solid #DFDFDF;padding: 5px;color: #666565;">账号信息</div>
 							<div style="padding: 5px;color:#666565; ">
-								<form id="input_form" action="${ctx }/ic/user!save.action" method="post" >
+								<form id="input_form" action="${ctx }/ic/user/save.do" method="post" >
 								<table class="ac-form-table">
 									<tr>
 										<td width="80" align="right">账号</td>
@@ -91,7 +91,7 @@ $(document).ready(function(){
 									</tr>
 									<tr>
 										<td width="80" align="right">密码</td>
-										<td class="ac-input-td"><a href="${ctx}/ic/user!pwd.action" >修改密码</a> </td>
+										<td class="ac-input-td"><a href="${ctx}/ic/user/pwd.do" >修改密码</a> </td>
 									</tr>
 									<tr>
 										<td></td>

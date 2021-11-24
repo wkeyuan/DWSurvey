@@ -19,7 +19,7 @@
 		opacity:0.5;其他，透明度50% */
 }
 .sbtn24{
-	background: url(../images/btn24.png) no-repeat 999px 999px;
+	background: #0887d2;
 	width: 88px;
 	height: 30px;
 	color: #777;
@@ -43,13 +43,14 @@
 	color: #fff;
 }
 .sbtn24_1{
-	color: #333333;
+	/*color: #333333;*/
+	color: white;
 }
 .sbtn24_0:hover{
-	background-position: -98px -200px;
+	background: #1171a9;
 }
 .sbtn24_1:hover{
-	background-position: -98px -240px;
+	background: #1171a9;
 }
 
 .sbtn26{
@@ -116,7 +117,7 @@ select option{
 	font-family: "微软雅黑";
 	color: #444;
 	display: none;
-	
+
 	filter:alpha(opacity=92); /*IE滤镜，透明度50%*/
 	-moz-opacity:0.92; /*Firefox私有，透明度50%*/
 	opacity:0.92;/*其他，透明度50%*/
@@ -306,11 +307,10 @@ body{
 	width: 100%;
 	margin: 0px;
 	top:0px;
-	background: #eee url(../images/x.png) 0 -160px repeat-x;
 	box-shadow:  4px 1px 3px rgba(224, 229, 233, 0.44);
 }
 .leftTabbar{
-	
+
 }
 .leftTabbar ul{
 	padding: 0px;
@@ -354,7 +354,7 @@ body{
 .centerTabbarBtn{
 	text-decoration: none;
 	color: #6E6E6E;
-	/* color: #8DB800; */
+	/* color: #0887d2; */
 	height: 30px;
 	line-height: 30px;
 	padding: 5px 5px;
@@ -368,13 +368,13 @@ body{
 	/* color: #fff; */
 	/* border:1px solid #A2A2A2; */
 	color: #222222;
-	color:#8DB800;
+	color:#0887d2;
 	font-weight: bold;
 	font-size: 24px;
 }
 a.centerTabbarBtn:hover{
 	color: #222222;
-	color:#8DB800;
+	color:#0887d2;
 	font-size: 24px;
 }
 .rightTabbar{
@@ -528,10 +528,10 @@ a.centerTabbarBtn:hover{
 	background: white;
 	padding: 20px 30px;
 	padding-top: 5px;
-/* 	
+/*
 	filter:alpha(opacity=90); IE滤镜，透明度50%
 	-moz-opacity:0.9; Firefox私有，透明度50%
-	opacity:0.9;其他，透明度50% 
+	opacity:0.9;其他，透明度50%
 */
 }
 #dwSurveyQuContentAppUl{
@@ -719,7 +719,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	margin-bottom: 0px;
 }
 .quCoNum{
-	
+
 }
 .quCoTitle .quCoNum{
 	float: left;
@@ -729,7 +729,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	float: left;
 	padding: 5px 3px ;
 	cursor: text;
-	table-layout:fixed; 
+	table-layout:fixed;
 	word-break: break-all;
 	width: 90%;
 }
@@ -741,7 +741,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	padding: 0px;
 	margin: 0px;
 	list-style: none;
-	
+
 	font-size: 14px;
 	display: inline-block;
 	width: 100%;
@@ -758,6 +758,10 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 }
 .surveyQuItemContent .quCoItem ul.transverse li{
 	float: left;
+}
+.surveyQuItemContent .quCoItem ul.transverse li.trannoteLi{
+	clear: both;
+	width: 90%;
 }
 .quInputCase,.quItemInputCase{
 	display: none;
@@ -776,7 +780,8 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	width: 100%;
 }
 .surveyQuItemContent .quCoItem table.tableQuColItem tr td{
-	vertical-align: middle;
+	/*vertical-align: middle;*/
+	vertical-align: top;
 	padding:5px 0px;
 	font-size: 14px;
 	font-family: "微软雅黑";
@@ -787,7 +792,7 @@ li.dwQuLogic  .dwQuIcon  .quLogicInfo{
 	/* padding:3px 0px; */
 	vertical-align: middle;
 	cursor: text;
-	
+
 	display: inline-block;
 	max-width: 600px;
 	table-layout:fixed; word-break: break-all;
@@ -951,7 +956,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	color: #333333;
 	font-family: "微软雅黑";
 	line-height: 1.4em;
-	
+
 	table-layout:fixed; word-break: break-all;
 }
 /** 编辑题目标题时样式  **/
@@ -985,7 +990,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	right:-25px;
 }
 #dwCommonEditRoot.quOptionEdit  .dwComEditOptionUl{
-	
+
 }
 #dwCommonEditRoot.quOptionEdit .dwComEditMenuBtn{
 	width: 23px;
@@ -1163,7 +1168,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 .dwQuDialogLogic{
 	padding: 0px 30px;
 	margin: 0px;
-	overflow: auto;	
+	overflow: auto;
 }
 .dwQuDialogLogicTitle{
 	font-size: 12px;
@@ -1217,7 +1222,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	text-align: center;
 }
 .dwQuDialogLoad img{
-	
+
 }
 
 .surveyQuItemBody.hover .quFillblankItem .dwComEditMenuBtn{
@@ -1240,7 +1245,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 	display: none;
 }
  */
- 
+
 .quFillblankItem{
 	position: relative;
 }
@@ -1370,7 +1375,7 @@ li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption 
 }
 /**多项填空题**/
 .mFillblankTable{
-	
+
 }
 .mFillblankTable tr td{
 	padding: 5px 8px;
@@ -1673,24 +1678,24 @@ table.quCoChenTable tr td label{
 	padding: 8px! important;
 	outline:0;
 	vertical-align: middle;
-} 
+}
 .auth-code img,  .auth-code a{
 	vertical-align: middle;
 }
 .auth-code img{
 	margin: 0px;
 	margin-left: 3px;
-	
-	-moz-border-radius-topright: 4px; 
-	-webkit-border-top-right-radius: 4px; 
-	-khtml-border-top-right-radius: 4px; 
+
+	-moz-border-radius-topright: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-khtml-border-top-right-radius: 4px;
 	border-top-right-radius: 4px;
-	
-	-moz-border-radius-bottomright: 4px; 
-	-webkit-border-bottom-right-radius: 4px; 
-	-khtml-border-bottom-right-radius: 4px; 
+
+	-moz-border-radius-bottomright: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-khtml-border-bottom-right-radius: 4px;
 	border-bottom-right-radius: 4px;
-	
+
 	border-left: 1px solid #CCCCCC;
 	padding-left: 4px;
 }
@@ -1705,6 +1710,14 @@ table.quCoChenTable tr td label{
 	background: url("../images/iphone.png") no-repeat;
 	width: 404px;
 	height: 701px;
+	margin: 0px auto;
+	margin-top:40px;
+	position: relative;
+}
+#dwPad{
+	background-size:cover;
+	width: 910px;
+	height: 630px;
 	margin: 0px auto;
 	margin-top:40px;
 	position: relative;
@@ -1762,4 +1775,17 @@ table.quCoChenTable tr td label{
 	width: 100%;
 	height: 30px;
 	text-align: center;
+}
+.dwQuCoChenRowTr td input[type='text']{
+	width: 80%;
+	padding: 5px 0px;
+}
+#dwPad{
+	background: url("../images/ipad.jpeg") no-repeat;
+	background-size:cover;
+	width: 910px;
+	height: 630px;
+	margin: 0px auto;
+	margin-top:40px;
+	position: relative;
 }

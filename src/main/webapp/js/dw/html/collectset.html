@@ -7,17 +7,21 @@
 								<div class="p_DialogContentItem"><label><input type="checkbox" name="effective" value="4"> 每台电脑或手机只能答一次</label></div>
 								<div class="p_DialogContentItem"><label><input type="checkbox" name="effectiveIp" value="1"> 每个IP只能答一次</label></div>
 								<div class="p_DialogContentItem"><label><input type="checkbox" name="rule" value="3"> 启用访问密码</label>
-								&nbsp;&nbsp;&nbsp;设置密码：<input type="text" size="10"  name="ruleCode" class="inputSytle_1" style="padding: 6px;" >
+								&nbsp;&nbsp;&nbsp;设置密码：<input type="text" size="10"  name="ruleCode" class="inputSytle_1">
 								</div>
 								<div class="p_DialogContentItem"><label><input type="checkbox" name="refresh" value="1"> 有重复回答启用验证码</label></div>
 								<div class="p_DialogContentItem mailOnlyItem"><label><input type="checkbox" name="mailOnly" value="1"> 只有邮件邀请唯一链接的受访者可回答</label></div>
 						</div>
 					</div>
 					<div class="p_DialogContent" >
+						<div class="p_DialogContentTitle">何时开始</div>
+						<div class="p_DialogContentRoot">
+							<div class="p_DialogContentItem"><label><input type="checkbox" name="ynStartTime" value="1"> 到&nbsp;<input type="text" size="20"  class="inputSytle_1 Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="startTime">&nbsp;时开始 </label></div>
+						</div>
 						<div class="p_DialogContentTitle">何时结束</div>
 						<div class="p_DialogContentRoot">
-								<div class="p_DialogContentItem"><label><input type="checkbox" name="ynEndNum" value="1"> 收集到&nbsp;<input type="text" size="12"  class="inputSytle_1" name="endNum"  style="padding: 6px;" >&nbsp;份答卷时结束</label></div>
-								<div class="p_DialogContentItem"><label><input type="checkbox" name="ynEndTime" value="1"> 到&nbsp;<input type="text" size="20"  class="inputSytle_1" name="endTime"  id="surveyEndTime" style="padding: 6px;" >&nbsp;时结束 </label></div>
+								<div class="p_DialogContentItem"><label><input type="checkbox" name="ynEndNum" value="1"> 收集到&nbsp;<input type="text" size="12"  class="inputSytle_1" name="endNum">&nbsp;份答卷时结束</label></div>
+								<div class="p_DialogContentItem"><label><input type="checkbox" name="ynEndTime" value="1"> 到&nbsp;<input type="text" size="20"  class="inputSytle_1 Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="endTime">&nbsp;时结束 </label></div>
 						</div>
 					</div>
 					<div style="clear: both;"></div>
@@ -29,4 +33,5 @@
 						</div>
 					</div>
 				</div>
+				<input type="hidden" name="dwlVs" value="dwclousy2019000MA6TG48K700" />
 		</div>

@@ -322,7 +322,7 @@ function getSeriesAndCategories () {
         tmp = [],
         tableData = getTableData();
 
-    //反转数据
+    //反转数据 MA006KFJ5978G15b79
     if ( getTableDataFormat() === "-1" ) {
 
         for ( var i = 0, len = tableData.length; i < len; i++ ) {
