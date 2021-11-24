@@ -9,8 +9,6 @@
 
 ### 社区版已经升级到 Spring Boot
 
-打包 `mvn package` 
-
 其它版本也在更新计划中，敬请期待。
 
 关注我们更新，记得Star一下哦。 
@@ -25,24 +23,41 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 
  官网地址：[http://www.diaowen.net](http://www.diaowen.net)
 
-企业版体验地址，源码全量开源，前后端分离，可独立部署，可二次开发。
+企业版服务，源码全量开源，前后端分离，可独立部署，可二次开发。
 
 企业版地址：[http://ent.surveyform.cn](http://ent.surveyform.cn)
 
-在线开放平台，提供标准API，可快速集成到自己应用中，功能更丰富，不需要部署，可直接发布问卷进行数据收集。
+在线平台服务，提供标准API，可快速集成到自己应用中，功能更丰富，不需要部署，可直接发布问卷进行数据收集。
 
 在线服务地址：[https://www.surveyform.cn](https://www.surveyform.cn)
 
 
-## 安装
 
-因为DWSurvey是基于JAVA WEB实现，所以安装与一般的JAVA WEB程序无异，配置好数据库地址就可以正常使用。
+这是基于Spring Boot开发的实现. Struts2老方案在master_struts2分支.
 
-### 安装说明
+下面是如何使用Spring Boot方案的快速指南。
 
-	服务器必须安装由 JAVA 1.6+、MySQL、Apache Tomcat  构成的环境
+## 本地开发
 
-	由于引用的外部jar在你本地maven仓库中可能没有，这时只要您本地有maven环境，执行下bin目录下面的文件就可以自动导入。
+1、下载代码后，用IDEA打开。
+
+2、然后在idea里面可以直接启动。
+
+4、浏览器访问 localhost:8080
+
+## 数据库脚本
+
+数据库脚本在resources/sql/目录下的dwsurvey.sql数据库脚本文件
+
+说明：升级后的数据库与老版本兼容
+
+## 编译发布
+
+进入 `cd DWSurvey`:
+
+```bash
+mvn package
+```
 
 ### 配置说明、数据初始化
 
@@ -50,18 +65,19 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 
 配置文件地址
 
-    conf/application.properties
+    resources/application.yml
 
 	#database settings
-	jdbc.url=jdbc:mysql://localhost:3306/dwsurvey?useUnicode=true&characterEncoding=utf8
-	jdbc.username=root
-	jdbc.password=123456,.
+	datasource:
+    url: jdbc:mysql://localhost:3306/dwsurvey_21test?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456,.
 
-    分别修改```jdbc.url、jdbc.username、jdbc.password```
+    分别修改```url、username、password```
 
 ### 启动访问
 
-配置完成后，启动服务在浏览器中输入如```localhost:8080/diaowen```相应的地址看到登录页面，表示已经安装成功。
+配置完成后，启动服务在浏览器中输入如```localhost:8080```相应的地址看到登录页面，表示已经安装成功。
 
 初始账号：```service@diaowen.net``` 密码：```123456```
 
