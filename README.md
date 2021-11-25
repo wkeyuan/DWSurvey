@@ -1,4 +1,4 @@
-# DWSurvey 调问表单问卷系统（Spring Boot 版本）
+# DWSurvey 调问表单问卷系统（Spring Boot的实现）
 
 [![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
 [![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
