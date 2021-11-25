@@ -398,8 +398,10 @@ $(document).ready(function(){
 			$(this).next().show();
 		}else if(selVal=="DATE"){
 			$(this).parents("ul").find(".option_range_date_li").show();
+			$("#modelUIDialog").dialog("option","height",280);
 		}else{
 			$(this).parents("ul").find(".option_range_date_li").hide();
+			$("#modelUIDialog").dialog("option","height",230);
 		}
 	});
 
@@ -1760,7 +1762,7 @@ function showUIDialog(thDialogObj){
 		resetQuItemHover(quItemBody);
 		$(thDialogObj).parents(".quCoItemUlLi").addClass("menuBtnClick");
 
-		$("#modelUIDialog").dialog("option","height",220);
+		$("#modelUIDialog").dialog("option","height",230);
 
 		$("#modelUIDialog .dwQuFillDataTypeOption .option_range_date_li").hide();
 		if(checkType_val==="DATE"){
