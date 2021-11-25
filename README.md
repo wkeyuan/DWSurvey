@@ -17,6 +17,12 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0416/132431_5d99a296_1401416.gif "dwsurvey-2.gif")
 
+## 浏览器兼容
+###现代浏览器和IE6
+| IE / Edge | Firefox | Chrome | Safari | Opera |
+| :-----| ----: | :----: | :----: | :----: | 
+| IE6+,Edge | 支持 | 支持 | 支持 | 支持 | 
+
 ## 演示地址
 
 社区版服务，源码全量开源，可独立部署，可二次开发。
@@ -30,8 +36,6 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 在线平台服务，提供标准API，可快速集成到自己应用中，功能更丰富，不需要部署，可直接发布问卷进行数据收集。
 
 在线服务地址：[https://www.surveyform.cn](https://www.surveyform.cn)
-
-
 
 这是基于Spring Boot开发的实现. Struts2老方案在master_struts2分支.
 
