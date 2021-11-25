@@ -1,7 +1,7 @@
 dwsurvey:
   site: 'local'
   web:
-    file-path: ~/Documents/target/
+    file-path: /Documents/target/
     back-site:
       mode: auto
       url: http://localhost:8282/dwsurvey

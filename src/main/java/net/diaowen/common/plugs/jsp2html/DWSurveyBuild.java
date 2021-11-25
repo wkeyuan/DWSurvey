@@ -72,7 +72,8 @@ public class DWSurveyBuild {
 		try{
 			filePath = filePath.replace("/", File.separator);
 			filePath = filePath.replace("\\", File.separator);
-			String fileRealPath = sc.getRealPath("/") +File.separator+ filePath;
+//			String fileRealPath = sc.getRealPath("/") + File.separator + filePath;
+			String fileRealPath = filePath;
 			RequestDispatcher rd = sc.getRequestDispatcher(url);
 			final ByteArrayOutputStream os = new ByteArrayOutputStream();
 
