@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 import net.diaowen.dwsurvey.dao.SurveyAnswerDao;
-import net.diaowen.dwsurvey.service.SurveyStatsManager;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import net.diaowen.common.dao.BaseDaoImpl;
@@ -33,9 +31,6 @@ import net.diaowen.dwsurvey.entity.SurveyStats;
 
 @Repository
 public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> implements SurveyAnswerDao {
-
-	@Autowired
-	private SurveyStatsManager surveyStatsManager;
 
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,
@@ -119,21 +114,6 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		}
 		surveyAnswer.setIsEffective(isEffective);
 		session.save(surveyAnswer);
-
-		//更新统计状态
-		SurveyStats surveyStats=surveyStatsManager.findBySurvey(surveyId);
-		if(surveyStats!=null){
-			int isNewData = surveyStats.getIsNewData();
-			if(isNewData==1){
-				surveyStats.setIsNewData(0);
-				surveyStatsManager.save(surveyStats);
-			}
-		}else{
-			surveyStats=new SurveyStats();
-			surveyStats.setSurveyId(surveyId);
-			surveyStatsManager.save(surveyStats);
-		}
-
 	}
 
 

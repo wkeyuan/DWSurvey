@@ -51,7 +51,7 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 
 说明：升级后的数据库与老版本兼容
 
-## 编译发布
+## 编译打包
 
 进入 `cd DWSurvey`:
 
@@ -61,7 +61,7 @@ mvn package
 
 配置文件地址
 
-    resources/application.yml
+    resources/application-***.yml
 
 	#database settings
 	datasource:
@@ -72,6 +72,10 @@ mvn package
     分别修改```url、username、password```
 
 ### 启动访问
+
+打成jar包后，输入以下启动命令，注意提前配置好对应环境的配置 
+
+`java -jar -Dspring.profiles.active=prod target/dwsurvey-oss-v.4.0.jar`
 
 配置完成后，启动服务在浏览器中输入如```localhost:8080```相应的地址看到登录页面，表示已经安装成功。
 
