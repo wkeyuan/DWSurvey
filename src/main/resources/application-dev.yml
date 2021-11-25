@@ -1,7 +1,7 @@
 dwsurvey:
   site: 'local'
   web:
-    file-path: /Documents/target/
+    file-path: ~/Documents/target/
     back-site:
       mode: auto
       url: http://localhost:8282/dwsurvey
@@ -16,8 +16,8 @@ dwsurvey:
       site-mail: service@diaowen.net
       site-phone: 18888888888
   version:
-    info: DWSurvey OSS V5.0 Spring Boot
-    number: OSS V5.0
+    info: DWSurvey OSS V4.0 Spring Boot
+    number: OSS V4.0
     built: 2021/11/21
 # mysql
 server:
@@ -34,7 +34,7 @@ spring:
       suffix: .jsp
   datasource:
     #type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/dwsurvey_21test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/dwsurvey?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456,.
   jpa:

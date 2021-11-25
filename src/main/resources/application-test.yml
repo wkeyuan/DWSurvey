@@ -16,8 +16,8 @@ dwsurvey:
       site-mail: service@diaowen.net
       site-phone: 18888888888
   version:
-    info: DWSurvey OSS V5.0 Spring Boot
-    number: OSS V5.0
+    info: DWSurvey OSS V4.0 Spring Boot
+    number: OSS V4.0
     built: 2021/11/21
 # mysql
 server:

@@ -85,12 +85,38 @@ mvn package
 
 初始账号：```service@diaowen.net``` 密码：```123456```
 
-### war包下载
+### 快速部署安装
+### 1、下载jar或war包
 
-如果不想自己编译可以直接使用我们已经编译好的war包安装
+如果不想自己编译可以直接使用我们已经编译好的jar,war包安装
 
-最新的war包下载可以前往交流QQ ```群1：635994795(满)```，```群2：301105635(满)```, 群3：811287103(可加) （加群时请说明来由）
+最新的jar、war包下载可以前往交流QQ ```群1：635994795(满)```，```群2：301105635(满)```, 群3：811287103(可加) （加群时请说明来由）
 
+### 2、创建数据库 
+
+创建数据库，并初始化数据库。
+
+    数据库名：dwsurvey
+
+初始化脚本下载地址：
+
+    https://gitee.com/wkeyuan/DWSurvey/blob/master/src/main/resources/conf/sql/
+
+#### 3.1、启动 spring boot jar
+
+    `java -jar dwsurvey-oss-v.4.0.jar --dwsurvey.web.file-path=/home/dwsurvey-file/ --spring.datasource.username=root --spring.datasource.password=123456`
+
+命令参数说命：
+
+    --dwsurvey.web.file-path 生成的文件公共存储目录，必须是存在的目录。
+    --spring.datasource.username 数据库账号
+    --spring.datasource.password 数据库密码
+    
+正常启动后在浏览器输入 
+
+    localhost:8080  
+
+#### 3.2 war 包安装
 下载最新的dwsurvey-oss-v***.zip（注意看后面的版本号），解压后得到diaowen.war，再考到tomcat wabapps下
 
 打包环境版本：jdk1.8, tomcat8.5.59
