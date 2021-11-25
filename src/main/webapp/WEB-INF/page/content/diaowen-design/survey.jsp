@@ -2161,7 +2161,7 @@
 		<li class="dwOptionDel"><div class=dwQuIcon></div></li>
 	</ul>
 	<div class="dwComEditMenuBtn"></div>
-	<div id="dwComEditContent" contenteditable="true" >请问你的年级是？</div>
+	<div id="dwComEditContent" contenteditable="plaintext-only" >请问你的年级是？</div>
 	</div>
 </div>
 

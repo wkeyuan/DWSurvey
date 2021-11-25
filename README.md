@@ -18,7 +18,7 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0416/132431_5d99a296_1401416.gif "dwsurvey-2.gif")
 
 ## 浏览器兼容
-###现代浏览器和IE6
+### 支持现代浏览器和IE6
 | IE / Edge | Firefox | Chrome | Safari | Opera |
 | :-----| ----: | :----: | :----: | :----: | 
 | IE6+,Edge | 支持 | 支持 | 支持 | 支持 | 
