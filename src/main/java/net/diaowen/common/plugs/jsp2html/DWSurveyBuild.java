@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import net.diaowen.common.utils.DiaowenProperty;
 import net.diaowen.common.utils.DwWriteFile;
 import net.diaowen.common.utils.SpringContextHolder;
+import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
 import net.diaowen.dwsurvey.service.impl.SurveyDirectoryManagerImpl;
 import org.jsoup.Connection;
@@ -26,8 +27,8 @@ public class DWSurveyBuild {
 
 	public void devSurvey(HttpServletRequest request,String surveyId,String type) throws Exception{
 		String reqTarget = request.getScheme()+"://"+request.getServerName()+(request.getServerPort()==80?"":":"+request.getServerPort())+request.getContextPath();
-		if("custom".equals(DiaowenProperty.SURVEYURL_MODE)){
-			reqTarget = DiaowenProperty.WEBSITE_URL;
+		if("custom".equals(DWSurveyConfig.DWSURVEY_WEB_BACK_SITE_MODE)){
+			reqTarget = DWSurveyConfig.DWSURVEY_WEB_BACK_SITE_URL;
 		}
 		reqTarget =reqTarget+"/toHtml";
 		Map<String, String> map=new HashMap<String, String>();
