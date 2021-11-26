@@ -11,7 +11,7 @@
     <groupId>net.diaowen</groupId>
     <artifactId>dwsurvey-oss</artifactId>
     <version>v.4.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>dwsurvey</name>
     <description>DWSurvey project for Spring Boot</description>
     <properties>
@@ -29,20 +29,19 @@
         </dependency>
 
         <!--war 模式添加-->
-        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
-        -->
+
         <!--jar模式开启热部署，便于修改后自动发布，生产环境推荐关掉此项配置-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
-        </dependency>
+        </dependency>-->
 
         <!-- 添加servlet依赖模块 -->
         <dependency>
@@ -54,11 +53,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
-        <!--添加tomcat依赖模块.-->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-        </dependency>-->
         <!-- 使用jsp引擎，springboot内置tomcat没有此依赖 -->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -238,12 +232,6 @@
             <classifier>jdk15</classifier>
         </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
@@ -314,7 +302,6 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.1</version>
         </dependency>
-
 
 
     </dependencies>

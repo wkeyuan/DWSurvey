@@ -1310,7 +1310,7 @@
 </div>
 </div>
 
-<div id="dw_body">
+<div id="dw_body" style="padding-bottom: 20px;">
 	<div id="dw_body_left">
 		<div class="dw_body_title" style="text-align: center;">设计目录</div>
 		<div id="dwBodyLeftContent">
@@ -2425,13 +2425,15 @@
 </script>
 <%@ include file="../../layouts/other.jsp"%>
 <div style="text-align: center;">
-<div class="dw_foot" style="padding-bottom: 30px;">
-	<div class="footer-copyright" style="color: gray;padding-top: 0px;font-size: 16px;">
-		Powered by <a href="http://www.diaowen.net" target="_blank" style="text-decoration: none;color: gray;"> <%=FooterInfo.getVersionInfo()%></a>
-		Copyright © 2012-2017
-		<a href="http://www.diaowen.net" target="_blank" style="text-decoration: none;color: rgb(53, 117, 136);">调问网</a>
+	<div class="dw_foot" style="padding-bottom: 20px;">
+		<%@ include file="../../layouts/footer-1.jsp" %>
+		<!-- 必须保留声明 start -->
+		<div class="footer-copyright" style="color: #666;padding-top: 0px;font-size: 13px;padding-bottom: 16px;text-align: center;">
+			Powered by <a href="http://www.diaowen.net" style="text-decoration: none;color: #333;"><strong>DWSurvey</strong></a>
+			<%=FooterInfo.getVersionNumber()%> © 2012-2022 <a href="http://www.diaowen.net" style="text-decoration: none;color: #333;"><strong>调问网</strong></a>
+		</div>
+		<!-- 必须保留声明 end -->
 	</div>
-</div>
 </div>
 
 </body>

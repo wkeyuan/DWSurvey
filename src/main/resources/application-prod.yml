@@ -56,3 +56,10 @@ spring:
         cache:
           use_second_level_cache: false
           use_query_cache: false
+logging:
+  level:
+    net:
+      diaowen: INFO
+    org:
+      hibernate: ERROR
+      apache: ERROR
