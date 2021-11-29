@@ -65,7 +65,11 @@ mvn package
 
 配置文件地址
 
+    源码配置文件地址
     resources/application-***.yml
+
+    war包配置文件地址
+    /dwsurvey-oss-v.4.0/WEB-INF/classes/application-dev.yml
 
 	#database settings
 	datasource:
