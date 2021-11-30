@@ -59,11 +59,11 @@ public class DWSurveyBuild {
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd/");
 		Date createDate=surveyDirectory.getCreateDate();
 		String url="/survey/answerSurvey.do?surveyId="+surveyId;
-		String filePath="WEB-INF/wjHtml/"+dateFormat.format(createDate);
+		String filePath="/wjHtml/"+dateFormat.format(createDate);
 		String fileName=surveyId+".html";
 		if(btype!=null && "m".equals(btype)){
 			url="/survey/answerSurveryMobile.do?surveyId="+surveyId;
-			filePath="WEB-INF/wjHtml/"+dateFormat.format(createDate);
+			filePath="/wjHtml/"+dateFormat.format(createDate);
 			fileName="m_"+surveyId+".html";
 		}
 		executeBuildSurvey( request,response,sc,url,filePath,fileName);
