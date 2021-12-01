@@ -10,7 +10,7 @@
     </parent>
     <groupId>net.diaowen</groupId>
     <artifactId>dwsurvey-oss</artifactId>
-    <version>v.4.0</version>
+    <version>v.4.1</version>
     <packaging>war</packaging>
     <name>dwsurvey</name>
     <description>DWSurvey project for Spring Boot</description>
@@ -307,6 +307,7 @@
     </dependencies>
 
     <build>
+        <finalName>dwsurvey</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
