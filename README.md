@@ -7,7 +7,15 @@
 
 ### 全新的企业版已经发布，前后端分别采用 Ant design、Spring Boot，详情可参考官网。
 
-### 社区版已经升级到Spring Boot
+### 社区版已经完成前后端分离，前端基于Vue ElementUI开发，后面基于Spring Boot。
+
+前端仓库地址 
+
+https://gitee.com/wkeyuan/dwsurvey-vue
+
+后端仓库地址
+
+https://gitee.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot/
 
 其它版本也在更新计划中，敬请期待。
 
