@@ -13,22 +13,25 @@
 
 从2013年至今已经积累多种技术方案，具体如下：
 
-| 方案A | 前后端分离 ： Vue + Element ui + Spring Boot  |
-| :-----| :----: | 
-| 前端仓库 | GITEE：https://gitee.com/wkeyuan/dwsurvey-vue |
-|  | GITHUB ：https://github.com/wkeyuan/DWSurvey_Vue |
-| 后端仓库 | GITEE ：https://gitee.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot |
-|  | GITHUB： https://github.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot |
-| 方案特性 | 基于VU、前后分离开发更容易，部署维护更简单 |
+<table>
+<tr><td><strong>方案A</strong></td><td><strong>前后端分离，基于 Vue + Element ui + Spring Boot</strong></td></tr>
+<tr><td colspan="2" align="center">前端仓库</td></tr>
+<tr><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/dwsurvey-vue">https://gitee.com/wkeyuan/dwsurvey-vue</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey_Vue">https://github.com/wkeyuan/DWSurvey_Vue</a></td></tr>
+<tr><td colspan="2" align="center">后端仓库</td></tr>
+<tr><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot">https://gitee.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot">https://github.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot</a></td></tr>
+<tr><td colspan="2">方案特性：基于VUE、前后分离开发更容易，部署维护更简单</td></tr>
+</table>
 
-| 方案B | 未前后分离 ： Spring Boot + JSP |
+| 方案B |   Spring Boot + JSP |
 | :-----| :----: |
-| 仓库地址 | GITEE ：https://gitee.com/wkeyuan/dwsurvey-springboot-jsp |
+| Gitee | https://gitee.com/wkeyuan/dwsurvey-springboot-jsp |
 | 方案特性 | 原生JS+HTML技术，支持更多浏览器，如IE6 |
 
-| 方案C | 未前后分离： Struts2 + JSP |
+| 方案C |  Struts2 + JSP |
 | :-----| :----: |
-| 仓库地址 | GITEE：https://gitee.com/wkeyuan/dwsurvey-struts2-jsp |
+| Gitee | https://gitee.com/wkeyuan/dwsurvey-struts2-jsp |
 | 方案特性 | 原生JS+HTML技术，支持更多浏览器，如IE6 |
 
 更多功能更多版本持续迭代专人维护，敬请关注，记得要点下右上角Star关注，方便下次查找。
@@ -61,8 +64,8 @@ DWSurvey是一款方便、高效、**稳定**的调研问卷系统，一款基�
 
 ## 本地快速部署社区版
 
-提示：假设您之前已经配置有名称为dwsurvey的数据库，并且完成了数据库初始化。
-如果之前没有安装，则需要在mysql中创建名称`dwsurvey`的数据库，然后用数据脚本进行初始化。
+提示：如果您之前已经配置有名称为dwsurvey的数据库，并且完成了数据库初始化，则可以直接输入命令安装。
+如果之前没有安装数据库，则需要在mysql中创建名称`dwsurvey`的数据库，然后用dwsurvey数据库脚本进行初始化。
 
 ###### 1、下载JAR包
 
@@ -70,19 +73,23 @@ DWSurvey是一款方便、高效、**稳定**的调研问卷系统，一款基�
 
 ###### 2、输入启动命令，进入CMD输入如下命令，完成部署安装。
 
-    java -jar dwsurvey-oss-vue-v.5.0.1-Alpha.jar --server.port=8083 --spring.datasource.username=root --spring.datasource.password=123456
+    java -jar dwsurvey-oss-vue-v.5.0.1-Alpha.jar --server.port=8080 --spring.datasource.username=root --spring.datasource.password=123456
 
 参数说明 
 
-`--server.port=8083` 端口
+`--server.port=8080` 端口
 
 `--spring.datasource.username=root` 数据库账号
 
 `--spring.datasource.password=123456` 数据库账密码
 
-下面是如何使用Spring Boot方案的快速指南。
+###### 3、开始使用 
 
-## 下载代码本地开发指南
+待应用启动完成后，在浏览器输入localhost:8080 即可访问DWSurvey问卷系统。
+
+### 下载代码本地开发指南
+
+下面是如何使用Spring Boot方案的快速指南。
 
 1、下载代码后，用IDEA打开。
 
