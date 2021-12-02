@@ -57,6 +57,11 @@ public abstract class BaseServiceImpl<T extends IdEntity, ID extends Serializabl
 	};
 
 	@Override
+	public T findById(ID id) {
+		return getBaseDao().findUniqueBy("id",id);
+	}
+
+	@Override
 	public List<T> findList(Criterion... criterions) {
 		return getBaseDao().find(criterions);
 	}
@@ -69,4 +74,5 @@ public abstract class BaseServiceImpl<T extends IdEntity, ID extends Serializabl
 	public Page<T> findPageByCri(Page<T> page, List<Criterion> criterions) {
 		return getBaseDao().findPageByCri(page, criterions);
 	}
+
 }

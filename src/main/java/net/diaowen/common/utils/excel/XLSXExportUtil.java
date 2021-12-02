@@ -1,11 +1,15 @@
 package net.diaowen.common.utils.excel;
 
-import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.xssf.usermodel.*;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 
 /**
@@ -32,7 +36,7 @@ public class XLSXExportUtil {
 	 * @param fileName
 	 *            导出文件名
 	 */
-	public XLSXExportUtil(String fileName,String path) {
+	public XLSXExportUtil(String fileName, String path) {
 		this.xlsFileName = fileName;
 		this.path=path;
 		this.workbook = new XSSFWorkbook();

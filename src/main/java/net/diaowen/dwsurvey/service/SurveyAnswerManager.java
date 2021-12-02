@@ -6,10 +6,8 @@ import java.util.Map;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.service.BaseService;
-import net.diaowen.dwsurvey.entity.Question;
-import net.diaowen.dwsurvey.entity.SurveyAnswer;
-import net.diaowen.dwsurvey.entity.SurveyDetail;
-import net.diaowen.dwsurvey.entity.SurveyStats;
+import net.diaowen.dwsurvey.entity.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,19 +23,18 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	public void saveAnswer(SurveyAnswer surveyAnswer, Map<String, Map<String, Object>> quMaps);
 
 	public List<Question> findAnswerDetail(SurveyAnswer answer);
-	
+
 	public List<SurveyAnswer> answersByIp(String surveyId, String ip);
-	
+
 	public SurveyAnswer getTimeInByIp(SurveyDetail surveyDetail, String ip);
-	
+
 	public Long getCountByIp(String surveyId, String ip);
 
 	public String exportXLS(String surveyId, String savePath);
-	
+
 	public SurveyStats surveyStatsData(SurveyStats surveyStats);
-	
-	public Page<SurveyAnswer> joinSurvey(Page<SurveyAnswer> page, User user) ;
-	
+
+
 	/**
 	 * 取出某份问卷的答卷数据
 	 * @param page
@@ -46,4 +43,5 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	 */
 	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page, String surveyId);
 
+	public void deleteData(String[] ids);
 }

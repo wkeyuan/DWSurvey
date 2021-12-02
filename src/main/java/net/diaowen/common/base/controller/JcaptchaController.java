@@ -13,37 +13,38 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
 @Controller
-@RequestMapping("/jcap")
+//@RequestMapping("/jcap")
+@RequestMapping("/api/dwsurvey/anon/jcap")
 public class JcaptchaController {
-	
-	@Autowired  
+
+	@Autowired
     private ImageCaptchaService imageCaptchaService;
 
     @RequestMapping("/jcaptcha.do")
 	public String execute(HttpServletRequest request,HttpServletResponse response) throws Exception {
-        byte[] captchaChallengeAsJpeg = null;  
-        // the output stream to render the captcha image as jpeg into  
-        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  
-        try {  
-            // get the session id that will identify the generated captcha.  
-            // the same id must be used to validate the response, the session id  
-            // is a good candidate!  
+        byte[] captchaChallengeAsJpeg = null;
+        // the output stream to render the captcha image as jpeg into
+        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+        try {
+            // get the session id that will identify the generated captcha.
+            // the same id must be used to validate the response, the session id
+            // is a good candidate!
             String captchaId = request.getSession().getId();
-            // call the ImageCaptchaService getChallenge method  
+            // call the ImageCaptchaService getChallenge method
             BufferedImage challenge = imageCaptchaService.getImageChallengeForID(captchaId, request.getLocale());
-            // a jpeg encoder  
+            // a jpeg encoder
             /*
             JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
             jpegEncoder.encode(challenge);
             */
             jpegOutputStream = new ByteArrayOutputStream();
             ImageIO.write(challenge,"jpg",jpegOutputStream);
-        } catch (Exception e) {  
-            // TODO Auto-generated catch block  
-            e.printStackTrace();  
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        captchaChallengeAsJpeg = jpegOutputStream.toByteArray();    
-        // flush it in the response    
+        captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
+        // flush it in the response
         response.setHeader("Cache-Control", "no-store");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);

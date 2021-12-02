@@ -32,9 +32,9 @@ public class QuRadio extends IdEntity{
 	private Integer isRequiredFill=0;
 	//排序ID
 	private Integer orderById;
-	//是否显示  0不显示 
+	//是否显示  0不显示
 	private Integer visibility=1;
-	
+
 	public String getQuId() {
 		return quId;
 	}
@@ -71,7 +71,7 @@ public class QuRadio extends IdEntity{
 	public void setCheckType(CheckType checkType) {
 		this.checkType = checkType;
 	}
-	
+
 	public Integer getVisibility() {
 		return visibility;
 	}
@@ -94,5 +94,5 @@ public class QuRadio extends IdEntity{
 	public void setAnCount(Integer anCount) {
 		this.anCount = anCount;
 	}
-	
+
 }

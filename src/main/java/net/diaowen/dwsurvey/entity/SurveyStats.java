@@ -21,10 +21,10 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_survey_stats")
 public class SurveyStats extends IdEntity{
-	
+
 	//所属的surveyId
 	private String surveyId;
-	
+
 	/**************************************************统计信息 ************************************************/
 	/** 时间信息 **/
 	//第一条回答数据时间
@@ -37,19 +37,19 @@ public class SurveyStats extends IdEntity{
 	private Integer anMinTime=0;
 	//回复平均用时 秒
 	private Integer anAvgTime=0;
-	
+
 	/** 数据--完成情况    是否全部题都回答  **/
 	//未完成的数据
-	private  Integer unCompleteNum=0; 
-	//完成的数据 
+	private  Integer unCompleteNum=0;
+	//完成的数据
 	private Integer completeNum=0;
-	
+
 	/** 数据--有效情况   根据设计问卷时指定的必填项 **/
 	//无效数据
 	private Integer unEffectiveNum=0;
 	//有效数据
 	private Integer 	effectiveNum=0;
-	
+
 	/** 数据--审核情况  **/
 	//未处理
 	private Integer unHandleNum=0;
@@ -57,7 +57,7 @@ public class SurveyStats extends IdEntity{
 	private Integer handlePassNum=0;
 	//未通过
 	private Integer handleUnPassNum=0;
-	
+
 	/** 不同来源数据 **/
 	//网调数据
 	private Integer onlineNum=0;
@@ -67,10 +67,10 @@ public class SurveyStats extends IdEntity{
 	private Integer mobileNum=0;
 	//导入数据
 	private Integer importNum=0;
-	
+
 	//标识是否是最新数据  0不是 1是
 	private Integer isNewData=0;
-	
+
 	public String getSurveyId() {
 		return surveyId;
 	}
@@ -179,8 +179,8 @@ public class SurveyStats extends IdEntity{
 	public void setIsNewData(Integer isNewData) {
 		this.isNewData = isNewData;
 	}
-	
-	
+
+
 	private List<Question> questions=new ArrayList<Question>();
 	@Transient
 	public List<Question> getQuestions() {
@@ -189,6 +189,6 @@ public class SurveyStats extends IdEntity{
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
-	
-	
+
+
 }

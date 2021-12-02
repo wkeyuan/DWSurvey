@@ -17,6 +17,7 @@ public class DwWriteFile {
 	public static File writeOS(String fileName, String fileRealPath, final ByteArrayOutputStream os) throws IOException,
 			FileNotFoundException {
 		fileRealPath = fileRealPath.substring(fileRealPath.lastIndexOf("/wjHtml")+1);
+//		fileRealPath = "/Users/xiajunlanna/IdeaProjects/dwsurvey/target/"+fileRealPath;
 		fileRealPath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH+fileRealPath;
 		File file = new File(fileRealPath);
 		if (!file.isDirectory() || !file.exists()) {

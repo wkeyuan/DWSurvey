@@ -18,36 +18,36 @@ public class SurveyMailInvite extends IdEntity{
 	//所对应的联系
 	private String surveyId;
 	private String userId;
-	
+
 	private String subject;
 	//问卷名称
 	private String dwSurveyName;
 	//问卷答卷地址
 	private String dwSurveyLink;
-	//发件人名称 
+	//发件人名称
 	private String dwSendUserName;
 	//发件人邮箱
 	private String dwSendUserMail;
-	
+
 	private Date createDate=new Date();
-	
-	
+
+
 	private String sendcloudMsgId;
 	//审核 0未审核  1审核通过
 	private Integer audit;
 	//状态 0未发送 1正在发送 2发送完成 3发送失败  4发送异常
 	private Integer status=0;
 	private String errorMsg;
-	
+
 	//总收件人数
-	private Integer inboxNum; 
+	private Integer inboxNum;
 	//已经发送的数
 	private Integer sendNum;
 	//发送中成功的数
 	private Integer successNum;
 	//发送中失败的数
 	private Integer failNum;
-	
+
 	public String getSurveyId() {
 	    return surveyId;
 	}
@@ -144,5 +144,5 @@ public class SurveyMailInvite extends IdEntity{
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
-	
+
 }

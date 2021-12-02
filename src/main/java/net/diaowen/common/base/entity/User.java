@@ -38,6 +38,8 @@ public class User extends IdEntity {
 	private Integer eduQuali;
 	//性别
 	private Integer sex;
+	//
+	private String avatar;
 
 	//2激活 1未激活 0不可用
 	private Integer status=1;// 账号状态
@@ -60,6 +62,10 @@ public class User extends IdEntity {
 	private Integer visibility = 1;
 
 //	private Date tokenTime;
+	private String shaPasswordTemp;
+
+	private String wxOpenId;
+	private String sessionId;
 
 	// Hibernate自动维护的Version字段
 	// @Version
@@ -218,6 +224,38 @@ public class User extends IdEntity {
 		this.visibility = visibility;
 	}
 
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getShaPasswordTemp() {
+		return shaPasswordTemp;
+	}
+
+	public void setShaPasswordTemp(String shaPasswordTemp) {
+		this.shaPasswordTemp = shaPasswordTemp;
+	}
+
+	public String getWxOpenId() {
+		return wxOpenId;
+	}
+
+	public void setWxOpenId(String wxOpenId) {
+		this.wxOpenId = wxOpenId;
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+
 	private String plainPassword;
 	@Transient
 	public String getPlainPassword() {
@@ -260,4 +298,6 @@ public class User extends IdEntity {
 	public void setWwwooo(String wwwooo) {
 		this.wwwooo = wwwooo;
 	}
+
+
 }

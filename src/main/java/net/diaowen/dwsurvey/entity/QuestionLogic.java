@@ -35,7 +35,7 @@ public class QuestionLogic extends IdEntity{
 	private Date createDate=new Date();
 	//是否显示  1显示 0不显示
 	private Integer visibility=1;
-	
+
 	public String getCkQuId() {
 		return ckQuId;
 	}
@@ -72,7 +72,7 @@ public class QuestionLogic extends IdEntity{
 	public void setVisibility(Integer visibility) {
 		this.visibility = visibility;
 	}
-	
+
 	public String getGeLe() {
 	    return geLe;
 	}
@@ -94,5 +94,5 @@ public class QuestionLogic extends IdEntity{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 }

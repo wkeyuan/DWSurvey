@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"net.diaowen.common","net.diaowen.dwsurvey"})

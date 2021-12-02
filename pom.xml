@@ -9,38 +9,43 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.diaowen</groupId>
-    <artifactId>dwsurvey-oss</artifactId>
-    <version>v.4.1</version>
-    <packaging>war</packaging>
+    <artifactId>dwsurvey-oss-vue</artifactId>
+    <version>v.5.0.1-Alpha</version>
+    <packaging>jar</packaging>
     <name>dwsurvey</name>
     <description>DWSurvey project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>DWSurveyRepostiory</id>
+            <name>DWSurveyRepostiory</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!--war 模式添加-->
-        <dependency>
+        <!--添加tomcat依赖模块.-->
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <!--jar模式开启热部署，便于修改后自动发布，生产环境推荐关掉此项配置-->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
         </dependency>-->
 
         <!-- 添加servlet依赖模块 -->
@@ -53,11 +58,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
-        <!-- 使用jsp引擎，springboot内置tomcat没有此依赖 -->
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.tuckey</groupId>
             <artifactId>urlrewritefilter</artifactId>
@@ -71,7 +72,6 @@
 
 
         <!--        项目JAR包-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -138,18 +138,46 @@
             <version>1.7.1</version>
         </dependency>
 
-
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
             <version>2.2.2</version>
         </dependency>
 
-
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-cache</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore-nio</artifactId>
+            <version>4.4.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.5.2</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
@@ -178,8 +206,6 @@
             <version>2.6</version>
         </dependency>
 
-
-
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -200,7 +226,6 @@
             <version>1.7.2</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
@@ -218,7 +243,6 @@
             <version>2.1.0</version>
         </dependency>
 
-
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
@@ -232,14 +256,20 @@
             <classifier>jdk15</classifier>
         </dependency>
 
+        <!-- 冲突去掉       -->
+        <!--
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+-->
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20210307</version>
         </dependency>
-
-
 
         <!-- https://mvnrepository.com/artifact/com.octo.captcha/jcaptcha-all -->
         <dependency>
@@ -261,7 +291,6 @@
             <version>0.7.2</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/antlr/antlr -->
         <dependency>
             <groupId>antlr</groupId>
@@ -274,7 +303,6 @@
             <artifactId>antlr-runtime</artifactId>
             <version>3.0.1</version>
         </dependency>
-
 
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
@@ -289,7 +317,6 @@
             <version>2.4</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -303,11 +330,16 @@
             <version>1.3.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/eu.bitwalker/UserAgentUtils -->
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.21</version>
+        </dependency>
 
     </dependencies>
 
     <build>
-        <finalName>dwsurvey</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

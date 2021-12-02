@@ -3,7 +3,9 @@ package net.diaowen.dwsurvey.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.dwsurvey.service.UserManager;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.util.SystemOutLogger;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -37,9 +39,11 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 	}
 
 	@Override
-	public void adminSave(User entity, String[] userRoleIds) {
+	public User adminSave(User entity) {
 		if(entity!=null){
-
+			if(StringUtils.isNotEmpty(entity.getId())){
+				entity.setId(null);
+			}
 			String pwd=entity.getPwd();
 			if(pwd!=null && !"".equals(pwd)){
 				//加点盐
@@ -48,8 +52,10 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 				entity.setShaPassword(shaPassword);
 //				entity.setSalt(salt);
 			}
-			save(entity);
+			super.save(entity);
+			return entity;
 		}
+		return null;
 	}
 
 	public Page<User> findPage(Page<User> page, User entity) {
@@ -85,7 +91,7 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 	}
 
 	/**
-	 * 禁用账号
+	 * 删除账号
 	 */
 	@Transactional
 	@Override
@@ -139,6 +145,67 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 //		Criterion cri2=Restrictions.like("pinyin", "%"+keyword+"%");
 //		Criterion cri3 = Restrictions.or(cri1,cri2);
 		return userDao.findPage(page,cri1);
+	}
+
+	public Page<User> findPage(Page<User> page, Integer status, String loginName, String name, String email,String cellphone) {
+		List<Criterion> criterions=new ArrayList<Criterion>();
+		if(status!=null){
+			criterions.add(Restrictions.eq("status", status));
+		}
+		if(StringUtils.isNotEmpty(loginName)){
+			criterions.add(Restrictions.like("loginName", "%"+loginName+"%"));
+		}
+		if(StringUtils.isNotEmpty(name)){
+			criterions.add(Restrictions.like("name", "%"+name+"%"));
+		}
+		if(StringUtils.isNotEmpty(email)){
+			criterions.add(Restrictions.like("email", "%"+email+"%"));
+		}
+		if(StringUtils.isNotEmpty(cellphone)){
+			criterions.add(Restrictions.like("cellphone", "%"+cellphone+"%"));
+		}
+		criterions.add(Restrictions.disjunction().add(Restrictions.eq("visibility", 1)).add(Restrictions.isNull("visibility")));
+		if(StringUtils.isEmpty(page.getOrderBy())){
+			page.setOrderBy("createTime");
+			page.setOrderDir("desc");
+		}
+		return super.findPageByCri(page, criterions);
+	}
+
+
+	@Transactional
+	@Override
+	public HttpResult upData(User user) {
+		if(user!=null){
+			String id = user.getId();
+			if(id!=null){
+				User dbUser = getModel(id);
+				dbUser.setLoginName(user.getLoginName());
+				/*
+				dbUser.setName(user.getName());
+				dbUser.setEmail(user.getEmail());
+				dbUser.setCellphone(user.getCellphone());
+				*/
+				dbUser.setStatus(user.getStatus());
+				String pwd = user.getPwd();
+				if(StringUtils.isNotEmpty(pwd)) {
+					//加点盐
+					String shaPassword = DigestUtils.sha1Hex(pwd);
+					dbUser.setShaPassword(shaPassword);
+				}
+				super.save(dbUser);
+				return HttpResult.SUCCESS();
+			}
+		}
+		return HttpResult.FAILURE("user为null");
+	}
+
+	@Transactional
+	@Override
+	public void deleteData(String[] ids) {
+		for (String id:ids) {
+			userDao.delete(id);
+		}
 	}
 
 }

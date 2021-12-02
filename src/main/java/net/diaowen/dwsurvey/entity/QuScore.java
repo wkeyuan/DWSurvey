@@ -8,7 +8,7 @@ import net.diaowen.common.base.entity.IdEntity;
 
 /**
  * 评分题 行选项
- * 
+ *
  * @author KeYuan
  * @date 2013下午12:14:26
  *
@@ -90,5 +90,5 @@ public class QuScore extends IdEntity {
 	public void setAvgScore(float avgScore) {
 		this.avgScore = avgScore;
 	}
-	
+
 }

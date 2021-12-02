@@ -18,22 +18,21 @@ public class DiaowenProperty extends
 
 	public static String STORAGE_URL_PREFIX = null;
 	public static String SURVEYURL_MODE = "auto";
-	public static String WEBSITE_URL = "http://localhost:8282/";
+	public static String WEBSITE_URL = "http://192.168.3.20:8080/#";
 //	private static Map<String, String> ctxPropertiesMap;
 
-	public static String LICENSE_DESC = "913205080884374764";
-	public static String LICENSE_ORGAN = "szqyzx";
-	public static String LICENSE_EMAIL = "huahuihai@szqyzx.com.cn";
-	public static String LICENSE_TYPENAME = "ENT";
-	public static String LICENSE_DOMAIN = "szqyzx.com.cn";
-	public static String LICENSE_CREATIONDATE = "2021-03-26 17:16:12";
-	public static String LICENSE_SERVERID = "e88c6551-8e13-11eb-9916-6c4008a0c140";
-	public static String LICENSE_ID = "e88c6552-8e13-11eb-9916-6c4008a0c140";
-	public static String LICENSE_VERSION = "1";
-	public static String LICENSE_EVALUATION = "0";
-	public static String LICENSE_PUBLICKEY = "MIIBuDCCASwGByqGSM44BAEwggEfAoGBAP1/U4EddRIpUt9KnC7s5Of2EbdSPO9EAMMeP4C2USZpRV1AIlH7WT2NWPq/xfW6MPbLm1Vs14E7gB00b/JmYLdrmVClpJ+f6AR7ECLCT7up1/63xhv4O1fnxqimFQ8E+4P208UewwI1VBNaFpEy9nXzrith1yrv8iIDGZ3RSAHHAhUAl2BQjxUjC8yykrmCouuEC/BYHPUCgYEA9+GghdabPd7LvKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKLZl6Ae1UlZAFMO/7PSSoDgYUAAoGBAIISoszjO8RSKvqhNhSAkrF/ZRFHZV4uCeFYXUl+NMT2V+UJFtc6kx9ZwrVd05SV/ZSFu894evMabnAM3pbRGcJEKTqk3k8eljUWWfoCfey8fJ4vHGMe6bnD7C4rxfoB+8J3ZDioGHaR+aM1G/FpEy37XjWup1gqhJgSCCtNWw5f";
-	public static String LICENSE_SIGN = "MCwCFHBf2HNS8pmeKx1dCpOCwi3rzjnkAhQMZFAOwSUt9cRupJ/3nJczGuKgWQ==";
-
+	public static String LICENSE_DESC = null;
+	public static String LICENSE_ORGAN = null;
+	public static String LICENSE_EMAIL = null;
+	public static String LICENSE_TYPENAME = null;
+	public static String LICENSE_DOMAIN = null;
+	public static String LICENSE_CREATIONDATE = null;
+	public static String LICENSE_SERVERID = null;
+	public static String LICENSE_ID = null;
+	public static String LICENSE_VERSION = null;
+	public static String LICENSE_EVALUATION = null;
+	public static String LICENSE_PUBLICKEY = null;
+	public static String LICENSE_SIGN = null;
 
 	@Override
 	protected void processProperties(

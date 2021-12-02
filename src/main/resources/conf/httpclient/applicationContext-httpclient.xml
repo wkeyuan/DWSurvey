@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
+
+	default-lazy-init="true">
+
+	<description>httpClient配置</description>
+
+	<!-- 定义连接管理器 -->
+	<bean id="httpClientConnectionManager"
+		class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager"
+		destroy-method="close">
+		<!-- 最大连接数 -->
+		<property name="maxTotal" value="10000" />
+		<!-- 设置每个主机地址的并发数 -->
+		<property name="defaultMaxPerRoute" value="300" />
+	</bean>
+
+ 	<bean id="redirectStrategy" class="org.apache.http.impl.client.LaxRedirectStrategy"></bean>
+
+	<!-- httpclient对象构建器 -->
+	<bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder">
+		<!-- 设置连接管理器 -->
+		<property name="connectionManager" ref="httpClientConnectionManager" />
+		<property name="redirectStrategy" ref="redirectStrategy"/>
+		<!--开启重试-->
+		<property name="retryHandler">
+			<bean class="org.apache.http.impl.client.DefaultHttpRequestRetryHandler">
+				<constructor-arg value="3"/> <constructor-arg value="true"/>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 定义Httpclient对象 -->
+	<bean id="httpClient" factory-bean="httpClientBuilder" factory-method="build" scope="prototype" />
+
+	<!-- 定义清理无效连接 -->
+	<bean class="net.diaowen.common.plugs.httpclient.IdleConnectionEvictor"
+		destroy-method="shutdown">
+		<constructor-arg index="0" ref="httpClientConnectionManager" />
+	</bean>
+
+	<bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig.Builder">
+		<!-- 创建连接的最长时间 -->
+		<property name="connectTimeout" value="10000" />
+		<!-- 从连接池中获取到连接的最长时间 -->
+		<property name="connectionRequestTimeout" value="10000" />
+		<!-- 数据传输的最长时间 -->
+		<property name="socketTimeout" value="10000" />
+		<!-- 提交请求前测试连接是否可用 -->
+		<property name="staleConnectionCheckEnabled" value="true" />
+	</bean>
+	<!-- 定义请求参数 -->
+	<bean id="requestConfig" class="org.apache.http.client.config.RequestConfig"
+		factory-bean="requestConfigBuilder" factory-method="build">
+	</bean>
+
+	<!-- -->
+	<bean id="clientHttpRequestFactory"
+		class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+		<constructor-arg ref="httpClient" />
+		<property name="connectTimeout" value="30000" />
+		<property name="readTimeout" value="30000" />
+	</bean>
+
+
+
+	<!-- 在applicationContext.xml中进行配置，使用定时器
+        ref : pojo类的名称
+        method : 调用的方式名称
+        cron : cronExpression表达式
+        cron="0/5 * * * * ?"  //表示五秒钟执行一次
+        cron="0 0/1 * * * ?" //每分种一次
+        cron="0 0/30 * * * ?"//每30分种一次
+        cron="0 0 * * * ? "//每小时一次
+        cron="0 0 1 * * ?" //每天晚上0点
+        0/10 * * * * ?
+     -->
+
+
+</beans>

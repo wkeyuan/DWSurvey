@@ -16,7 +16,7 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_an_dfillblank")
 public class AnDFillblank extends IdEntity{
-	
+
 	//所属问卷ID
 	private String belongId;
 	//对应的答卷信息表
@@ -27,11 +27,11 @@ public class AnDFillblank extends IdEntity{
 	private String quItemId;
 	//答案
 	private String answer;
-	
+
 	private Integer visibility=1;
-	
+
 	public AnDFillblank(){
-		
+
 	}
 	public AnDFillblank(String surveyId, String surveyAnswerId, String quId,
 			String quItemId, String answerValue) {
@@ -77,6 +77,6 @@ public class AnDFillblank extends IdEntity{
 	public void setVisibility(Integer visibility) {
 		this.visibility = visibility;
 	}
-	
-	
+
+
 }

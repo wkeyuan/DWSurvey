@@ -56,7 +56,6 @@ public class Question extends IdEntity{
 	private Integer paramInt01 = 3;
 	//评分题，最大分值
 	private Integer paramInt02 = 10;
-	private String paramStr01;
 	//是否显示 0不显示   1显示
 	private Integer visibility=1;
 
@@ -239,13 +238,7 @@ public class Question extends IdEntity{
 	public void setAnswerInputRow(Integer answerInputRow) {
 		this.answerInputRow = answerInputRow;
 	}
-	public String getParamStr01() {
-		return paramStr01;
-	}
 
-	public void setParamStr01(String paramStr01) {
-		this.paramStr01 = paramStr01;
-	}
 
 	/**
 	 * 附加属性，不作映射
@@ -407,15 +400,6 @@ public class Question extends IdEntity{
 		this.anScores = anScores;
 	}
 	@Transient
-	public List<AnOrder> getAnOrders() {
-		return anOrders;
-	}
-
-	public void setAnOrders(List<AnOrder> anOrders) {
-		this.anOrders = anOrders;
-	}
-
-	@Transient
 	public Integer getAnCount() {
 		return anCount;
 	}
@@ -428,6 +412,14 @@ public class Question extends IdEntity{
 	}
 	public void setQuestionLogics(List<QuestionLogic> questionLogics) {
 		this.questionLogics = questionLogics;
+	}
+	@Transient
+	public List<AnOrder> getAnOrders() {
+		return anOrders;
+	}
+
+	public void setAnOrders(List<AnOrder> anOrders) {
+		this.anOrders = anOrders;
 	}
 
 	//统计json

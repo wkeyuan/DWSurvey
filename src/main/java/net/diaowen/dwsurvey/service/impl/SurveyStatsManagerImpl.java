@@ -150,7 +150,7 @@ public class SurveyStatsManagerImpl extends
 				anEnumquManager.findGroupStats(question);
 			} else if (QuType.SCORE == quType) {// 评分题
 				anScoreManager.findGroupStats(question);
-			} else if (QuType.ORDERQU == quType) {
+			}  else if (QuType.ORDERQU == quType) {
 				anOrderManager.findGroupStats(question);
 			}
 		}

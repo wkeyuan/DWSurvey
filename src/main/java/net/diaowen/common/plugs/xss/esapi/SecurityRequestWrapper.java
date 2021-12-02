@@ -165,6 +165,8 @@ public class SecurityRequestWrapper extends HttpServletRequestWrapper {
 				MySQLCodec codec = new MySQLCodec(MySQLCodec.Mode.STANDARD);
 				value = ESAPI.encoder().encodeForSQL(codec, value );
 				// Avoid null characters
+				*/
+
 				/*
 				//注释编号：0001
 				value = value.replaceAll( "\0", "" );

@@ -7,7 +7,7 @@ import net.diaowen.common.base.entity.IdEntity;
 
 /**
  * 答卷 单选题保存表
- * 
+ *
  * @author keyuan
  * @date 2012-10-21下午9:26:43
  *
@@ -28,11 +28,11 @@ public class AnRadio extends IdEntity{
 	private String quItemId;
 	//复合题的其它项
 	private String otherText;
-	
+
 	private Integer visibility=1;
-	
+
 	public AnRadio(){
-		
+
 	}
 	public AnRadio(String surveyId, String surveyAnswerId, String quId,
 			String quItemId) {
@@ -77,5 +77,5 @@ public class AnRadio extends IdEntity{
 	public void setVisibility(Integer visibility) {
 		this.visibility = visibility;
 	}
-	
+
 }

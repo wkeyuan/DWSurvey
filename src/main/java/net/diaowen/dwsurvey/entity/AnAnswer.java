@@ -16,7 +16,7 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_an_answer")
 public class AnAnswer extends IdEntity{
-	
+
 	//所属问卷ID
 	private String belongId;
 	//对应的答卷信息表ID
@@ -25,9 +25,9 @@ public class AnAnswer extends IdEntity{
 	private String quId;
 	//结果
 	private String answer;
-	
+
 	private Integer visibility=1;
-	
+
 	public AnAnswer(){
 
 	}
@@ -38,7 +38,7 @@ public class AnAnswer extends IdEntity{
 		this.quId=quId;
 		this.answer=answerValue;
 	}
-	
+
 	public String getBelongId() {
 		return belongId;
 	}
@@ -69,6 +69,6 @@ public class AnAnswer extends IdEntity{
 	public void setVisibility(Integer visibility) {
 		this.visibility = visibility;
 	}
-	
-	
+
+
 }

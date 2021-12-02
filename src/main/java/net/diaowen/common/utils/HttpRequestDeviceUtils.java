@@ -103,7 +103,7 @@ public class HttpRequestDeviceUtils {
 
 	/**
 	 * 根据当前请求的特征，判断该请求是否来自手机终端，主要检测特殊的头信息，以及user-Agent这个header
-	 * 
+	 *
 	 * @param request
 	 *            http请求
 	 * @return 如果命中手机特征规则，则返回对应的特征字符串
@@ -139,6 +139,25 @@ public class HttpRequestDeviceUtils {
 			b = true;
 		}
 		return b;// false pc true shouji
+
+	}
+
+
+	/**
+	 * 是否微信浏览器
+	 * @Title: isWechat
+	 * @author: pk
+	 * @Description: TODO
+	 * @param request
+	 * @return
+	 * @return: boolean
+	 */
+	public static boolean isWechat(HttpServletRequest request) {
+		String ua = request.getHeader("User-Agent").toLowerCase();
+		if (ua!=null && ua.indexOf("micromessenger") > -1) {
+			return true;//微信
+		}
+		return false;//非微信手机浏览器
 
 	}
 

@@ -17,7 +17,7 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_qu_multi_fillblank")
 public class QuMultiFillblank extends IdEntity{
-	
+
 	//所属题
 	private String quId;
 	//选项标题
@@ -28,9 +28,9 @@ public class QuMultiFillblank extends IdEntity{
 	private CheckType checkType;
 	//排序ID
 	private Integer orderById;
-	//是否显示  0不显示 
+	//是否显示  0不显示
 	private Integer visibility=1;
-			
+
 	public String getQuId() {
 		return quId;
 	}
@@ -61,7 +61,7 @@ public class QuMultiFillblank extends IdEntity{
 	public void setCheckType(CheckType checkType) {
 		this.checkType = checkType;
 	}
-	
+
 	public Integer getVisibility() {
 		return visibility;
 	}

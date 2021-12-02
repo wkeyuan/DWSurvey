@@ -35,6 +35,8 @@ public class HttpRequest {
             // 建立实际的连接
             connection.connect();
 
+            // 获取所有响应头字段
+            Map<String, List<String>> map = connection.getHeaderFields();
             // 定义 BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(
                     connection.getInputStream()));

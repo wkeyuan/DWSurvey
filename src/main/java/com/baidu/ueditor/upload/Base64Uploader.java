@@ -8,18 +8,13 @@ import com.baidu.ueditor.define.State;
 
 import java.util.Map;
 
-import net.diaowen.common.plugs.file.FileMagic;
-import net.diaowen.common.plugs.file.FileMagicUtils;
 import org.apache.commons.codec.binary.Base64;
 
 public final class Base64Uploader {
 
 	public static State save(String content, Map<String, Object> conf) {
-
+		
 		byte[] data = decode(content);
-
-		FileMagic fileMagic = FileMagic.valueOf(data);
-		System.out.println("Base64Uploader - fileMagic:"+fileMagic.getFileType());
 
 		long maxSize = ((Long) conf.get("maxSize")).longValue();
 
@@ -31,7 +26,7 @@ public final class Base64Uploader {
 
 		String savePath = PathFormat.parse((String) conf.get("savePath"),
 				(String) conf.get("filename"));
-
+		
 		savePath = savePath + suffix;
 		String physicalPath = (String) conf.get("rootPath") + savePath;
 
@@ -53,5 +48,5 @@ public final class Base64Uploader {
 	private static boolean validSize(byte[] data, long length) {
 		return data.length <= length;
 	}
-
+	
 }

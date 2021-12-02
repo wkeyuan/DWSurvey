@@ -7,7 +7,7 @@ import net.diaowen.common.base.entity.IdEntity;
 
 /**
  * 答案 是非题结果保存表
- * 
+ *
  * @author keyuan
  * @date 2012-10-21下午9:26:10
  *
@@ -26,11 +26,11 @@ public class AnYesno extends IdEntity {
 	private String quId;
 	// 1 是 0非
 	private String yesnoAnswer;
-	
+
 	private Integer visibility=1;
-	
+
 	public AnYesno(){
-		
+
 	}
 	public AnYesno(String surveyId, String surveyAnswerId, String quId,
 			String yesnoAnswer) {
@@ -69,5 +69,5 @@ public class AnYesno extends IdEntity {
 	public void setVisibility(Integer visibility) {
 		this.visibility = visibility;
 	}
-	
+
 }

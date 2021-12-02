@@ -1,0 +1,1783 @@
+@CHARSET "UTF-8";
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.notification {
+		position: fixed;
+		display: inline-block;
+		padding: 1.5em 5em;
+		box-shadow: 2px 2px 5px -2px rgba(0,0,0,0.5);
+		background:#589FD3;
+		color: white;
+		z-index: 1000;
+		font-family: "微软雅黑";
+		text-align: center;
+		letter-spacing:5px;
+		/* filter:alpha(opacity=50); IE滤镜，透明度50%
+		-moz-opacity:0.5; Firefox私有，透明度50%
+		opacity:0.5;其他，透明度50% */
+}
+.sbtn24{
+	background: url(../images/btn24.png) no-repeat 999px 999px;
+	width: 88px;
+	height: 30px;
+	color: #777;
+	background-position: 0 -240px;
+	font-size: 12px;
+	border: 0;
+	cursor: pointer;
+	display: inline-block;
+	zoom: 1;
+	line-height: 30px;
+	text-align: center;
+	text-decoration: none;
+	font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+}
+.sbtn24{
+	margin-left: 10px;
+	letter-spacing: 3px;
+}
+.sbtn24_0{
+	background-position: 0 -200px;
+	color: #fff;
+}
+.sbtn24_1{
+	color: #333333;
+}
+.sbtn24_0:hover{
+	background-position: -98px -200px;
+}
+.sbtn24_1:hover{
+	background-position: -98px -240px;
+}
+
+.sbtn26{
+	background: url(../images/dw-icons1-24.png) no-repeat 999px 999px;
+	width: 95px;
+	height: 33px;
+	color: white;
+	font-size: 13px;
+	border: 0;
+	cursor: pointer;
+	display: inline-block;
+	zoom: 1;
+	letter-spacing: 1px;
+	line-height: 32px;
+	text-align: center;
+	text-decoration: none;
+	font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+}
+.sbtn26_0{
+	background-position: 0px -162px;
+}
+.sbtn26_0:hover{
+	background-position: 0px -273px;
+}
+body{
+	background: #E8E9EB;
+	/* background: url("../images/5629514927375932817.jpg") fixed 0px 0px;
+	background-size: cover; */
+}
+ input[type='checkbox'],input[type='radio']{
+	/* _vertical-align:-1px;
+	vertical-align:-2px;
+	margin-right: 5px; */
+	vertical-align: middle!important;
+	line-height: normal;
+	cursor: pointer;
+	margin: 0px 5px!important;
+	padding: initial;
+	background-color: initial;
+	border: initial;
+}
+
+select option{
+	padding: 5px;
+}
+
+.inputSytle_1{
+	background: #fff url(../images/shadow-in.png?020) no-repeat;
+	border: 1px solid #cececf;
+	border-color: #83ABCB;
+	outline: none;
+	height: 17px;
+	padding: 6px 10px 5px;
+	font-size: 12px;
+}
+.tabbarDialog{
+	position: fixed;
+	z-index:200;
+	border:1px solid #c0c0c0;
+	background: white;
+	top:40px;
+	padding: 15px;
+	line-height: 1.4em;
+	font-family: "微软雅黑";
+	color: #444;
+	display: none;
+
+	filter:alpha(opacity=92); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.92; /*Firefox私有，透明度50%*/
+	opacity:0.92;/*其他，透明度50%*/
+}
+.p_DialogContent{
+	margin: 5px;
+}
+.p_DialogContentTitle{
+	font-size: 16px;
+	padding: 5px;
+}
+.p_DialogContentRoot{
+	padding: 5px;
+	padding-left: 10px;
+}
+.p_DialogContentItem{
+	padding: 3px;
+}
+.tabbarDialogContent{
+	visibility: visible;
+}
+/**模板**/
+.pc_themeContentScorll{
+	width: 730px;
+	height: 460px;
+	overflow-y: scroll;
+}
+.pc_themeContent{
+	margin: -28px 0 0 -20px;
+}
+.tabbarDialog .themeitem{
+	display: inline;
+	margin: 28px 0 0 20px;
+	width: 220px;
+	overflow: hidden;
+	float: left;
+}
+.themeitem .themenail{
+	width: 200px;
+	height: 120px;
+	padding: 9px;
+	border: 1px solid #dfdfdf;
+	cursor: pointer;
+	background: #fff;
+}
+.themeitem .themenail img {
+	display: block;
+	width: 200px;
+	height: 120px;
+	border: none;
+}
+.themeitem h5{
+	padding: 8px 0 0;
+	font-size: 14px;
+	font-weight: normal;
+	background: url(../images/shadow.png?001) no-repeat center 0;
+	color: #444;
+	text-align: left;
+	line-height: 19px;
+}
+.theme_param_Group{
+	float: left;
+	margin: 0px;
+}
+.theme_param{
+	padding-right: 20px;
+	padding-left: 10px;
+}
+.theme_param.split .mainSplit{
+	height: 16px;
+	line-height: 16px;
+	margin-bottom: 16px;
+	border-bottom: 1px solid #efefef;
+	display: block;
+	clear: both;
+}
+.theme_param.image{
+	width: 350px;
+}
+.theme_param .image_box {
+	float: right;
+	width: 120px;
+	height: 30px;
+	margin-left: -60px;
+	border: none;
+}
+.image_box .image_box_img{
+	float: left;
+}
+.image_box_upload{
+	float: right;
+	padding-top: 2px;
+}
+.surveyUpImageQueueid{
+		position: absolute;
+}
+.theme_param.color {
+	height: 32px;
+	line-height: 32px;
+	padding: 6px 10px;
+	margin-right: 10px;
+}
+
+.theme_param .color_box {
+	float: right;
+	width: 50px;
+	height: 30px;
+	margin-left: -60px;
+	border: 1px solid #aaa;
+}
+
+.color .colorName {
+	margin-right: 60px;
+}
+.theme_param.color .isbgcolor .colorText {
+	height: 15px;
+	line-height: 15px;
+}
+.color .colorName .colorText {
+	width: 195px;
+}
+.thide {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	word-break: keep-all;
+}
+.theme_param.color .isbgcolor .bgcolortip {
+	display: block;
+	height: 15px;
+	line-height: 15px;
+	padding-top: 2px;
+	color: #aaa;
+	font-size: 12px;
+}
+.theme_param.image .bgcolortip{
+	margin-left: 8px;
+}
+
+.theme_param.if {
+	line-height: 24px;
+	margin-bottom: 10px;
+}
+.theme_param.fontStyle{
+	overflow: auto;
+}
+.theme_param.fontStyle .suveytextStyle{
+	overflow: auto;
+}
+.theme_param.fontStyle .suveytextStyle .suveytextStyleSelect{
+	float: left;
+	margin-top: 5px;
+}
+.tabbarDialog select{
+	padding: 5px;
+	outline: none;
+}
+.suveytextStyle{
+	padding: 5px;
+}
+.suveytextStyle label{
+	vertical-align: middle;
+}
+.suveytextStyle img{
+	vertical-align: middle;
+}
+body{
+	background-attachment: fixed;
+}
+#wrap{
+	/*如果浏览器小于1200，则设置wrap为1200*/
+	/* width: 1200px; */
+	margin: 0px auto;
+	padding: 0px;
+	height: 100%;
+	width: 100%;
+	background-attachment: fixed;
+	background-position: 0px 0px;
+}
+#preview_head{
+	zoom: 1;
+	height: 40px;
+	padding: 0px 10px;
+	position: fixed;
+	z-index:200;
+	width: 100%;
+	margin: 0px;
+	top:0px;
+	background: #eee url(../images/x.png) 0 -160px repeat-x;
+	box-shadow:  4px 1px 3px rgba(224, 229, 233, 0.44);
+}
+.leftTabbar{
+
+}
+.leftTabbar ul{
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+.leftTabbar ul li{
+	float: left;
+	display: block;
+	font-size: 14px;
+	font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+}
+.leftTabbar ul li .tabbarTitle{
+	height: 40px;
+	line-height: 40px;
+	padding: 0 16px;
+	cursor: pointer;
+	white-space: nowrap;
+}
+.leftTabbar ul li.js-tabselected .tabbarTitle{
+	background-color: #373D42;
+	color: #fff;
+}
+.leftTabbar ul li.hover .tabbarTitle{
+	background-color: #a2a2a2;
+	color: #fff;
+}
+.centerTabbar{
+	margin: 0px auto;
+	margin-top:5px;
+	width:260px;
+	/* background-color: #111;
+	background-color: rgba(17,17,17,0.5);
+	color: #fff;
+	color: rgba(255,255,255,0.5);
+	border-right: 1px solid #111;
+	border-right: 1px solid rgba(17,17,17,0.3); */
+	color:#6E6E6E;
+	margin-left: 30px;
+}
+.centerTabbarBtn{
+	text-decoration: none;
+	color: #6E6E6E;
+	/* color: #8DB800; */
+	height: 30px;
+	line-height: 30px;
+	padding: 5px 5px;
+	padding-right:10px;
+	cursor: pointer;
+	white-space: nowrap;
+	background: none;
+	font-size: 20px;
+}
+.centerTabbarBtn.active{
+	/* color: #fff; */
+	/* border:1px solid #A2A2A2; */
+	color: #222222;
+	color:#8DB800;
+	font-weight: bold;
+	font-size: 24px;
+}
+a.centerTabbarBtn:hover{
+	color: #222222;
+	color:#8DB800;
+	font-size: 24px;
+}
+.rightTabbar{
+	float: right;
+	margin-top: 5px;
+	margin-right: 20px;
+}
+#dwSurveyHeader{
+	/* background: url("../images/1351833968D86W5x.jpg") 30px;
+	background: url("../images/1279780388A5rVCG.jpg"); */
+	padding-top: 10px;
+}
+#dwSurveyLogo{
+	height: 70px;
+	padding: 15px 25px;
+	padding-bottom: 0px;
+	display: none;
+}
+#dwSurveyLogo img{
+	border: 1px dashed #DDDDDD;
+}
+#dw_body{
+	padding-top: 65px;
+}
+#dw_body .dw_body_title{
+	background: #F0F1F4;
+	border-bottom:1px solid #DDE1E7;
+	padding: 8px 10px;
+	color: #333;
+	font-family:"新宋体";
+	font-weight: normal;
+	text-decoration: none;
+	font-size: 14px;
+	letter-spacing:2px;
+}
+#dw_body_content{
+	background:white;
+	border: 1px solid #DDE1E7;
+	border: none;
+	/* height: 600px; */
+	position: relative;
+	z-index: 50;
+	width: 900px;
+	margin: 0px auto;
+	padding: 0px;
+}
+/* 编辑内容区 */
+#dwSurveyTitle{
+	text-align: center;
+	outline-style: none;
+	font-weight: none;
+	font-family:"微软雅黑";
+	font-size: 21px;
+	letter-spacing:1px;
+	color:#222222;
+	padding: 5px;
+}
+#dwSurveyTitle.noLogoImg{
+	padding-top: 15px;
+}
+#dwSurveyTitle{
+	margin: 0px 50px;
+	margin-top: 10px;
+}
+#dwSurveyName{
+	text-align: center;
+	outline-style: none;
+	font-weight: none;
+	font-family:"微软雅黑";
+	font-size: 21px;
+	letter-spacing:1px;
+	/* color:#222222; */
+	cursor:text;
+	overflow: auto;
+	width: 680px;
+	padding: 5px;
+	overflow: auto;
+}
+#dwSurveyNote{
+	/* border: 1px solid transparent; */
+	margin: 0px 20px;
+	padding-top:5px;
+	padding-bottom: 20px;
+}
+#dwSurveyNote.click{
+	border: 1px solid #98C5C3;
+	background: #FDF9CD;
+}
+#dwSurveyNote.click #dwSurveyNoteTools{
+	display: inline;
+}
+#dwSurveyNoteTools{
+	position: absolute;
+	width: 80px;
+	height: 25px;
+	/* background: #DDE1E7;
+	background: #D4E0E0; */
+	border: 1px solid #98C5C3;
+	right: 30px;
+	margin-top: -27px;
+	display: none;
+	font-size: 12px;
+	line-height: 25px;
+	text-align: center;
+	cursor: pointer;
+	color: #5D5D5D;
+}
+#dwSurveyNoteEdit{
+	font-size: 16px;
+	outline-style: none;
+	/* text-indent: 2em; */
+	line-height: 1.4em;
+	color: #333333;
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:5px;
+	cursor: text;
+	font-family: "微软雅黑";
+}
+.editAble{
+	outline-style: none;
+	font-family: "微软雅黑";
+	vertical-align: middle;
+	cursor: text;
+	display: inline-block;
+	/* max-width: 600px; */
+	table-layout: fixed;
+	word-break: break-all;
+}
+.editAble img,.editAble embed,.editAble object,
+#dwComEditContent img,#dwComEditContent embed,#dwComEditContent object{
+	max-width:95%;
+}
+.quDragBody{
+	border: 1px solid #299995;
+	background: white;
+	filter:alpha(opacity=80); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.8; /*Firefox私有，透明度50%*/
+	opacity:0.8;/*其他，透明度50%*/
+	width: 800px;
+	cursor: move! important;
+}
+.sortActiveclass{
+	border: 1px solid #C9C9C9;
+	background: #FAFAFA;
+}
+#dwSurveyQuContent{
+	/* background: url("../images/1351833968D86W5x.jpg"); */
+}
+#dwSurveyQuContentBg{
+	background: white;
+	padding: 20px 30px;
+	padding-top: 5px;
+/*
+	filter:alpha(opacity=90); IE滤镜，透明度50%
+	-moz-opacity:0.9; Firefox私有，透明度50%
+	opacity:0.9;其他，透明度50%
+*/
+}
+#dwSurveyQuContentAppUl{
+	list-style: none;
+}
+/**题目开始**/
+.surveyQuItemBody{
+	/* margin:0px;
+	padding:0px;
+	overflow: auto; */
+}
+#defaultAppQuObj.hover {
+ 	border: 1px solid transparent;
+ 	background: none;
+ 	border-left: none;
+	border-right: none;
+}
+.surveyQuItem{
+	overflow: auto;
+	margin-top: 0px;
+	border: 1px solid transparent;
+	/* border: 1px solid #C9C9C9; */
+	border-left: none;
+	border-right: none;
+	background: none;
+}
+.surveyQuItemBody.hover .surveyQuItem{
+/* 	background: #FAFAFA; */
+	border: 1px solid #C9C9C9;
+	border-left: none;
+	border-right: none;
+}
+.surveyQuItemBody .initLine{
+	width: 100%;
+	height: 8px;
+	background: #299995;
+	visibility: hidden;
+}
+.surveyQuItemBody.showLine .initLine{
+	visibility: visible;
+}
+/**jquery ui sort 实现  上面是老的实现 **/
+#dwSurveyQuContentAppUl li.showLine{
+	width: 100%;
+	height: 8px;
+	background: #299995;
+}
+/**题目功能区**/
+/** 题目左边 设置，逻辑，删除 **/
+.surveyQuItemLeftTools{
+	float: left;
+	width: 40px;
+	text-align: center;
+	margin-top: 10px;
+}
+.surveyQuItemLeftToolsUl{
+	padding: 0px;
+	margin: 0px auto;
+	list-style: none;
+	/* display: none; */
+	visibility: hidden;
+}
+
+.surveyQuItemLeftToolsUl li{
+	margin: 5px auto;
+	font-size: 12px;
+	color: #5D5D5D;
+	padding: 0px;
+	cursor: pointer;
+	width: 40px;
+}
+.surveyQuItemLeftToolsUl li .dwQuIcon{
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	width: 23px;
+	height: 23px;
+	margin: 0px auto;
+}
+li.dwQuSet .dwQuIcon{
+	background-position: -280px -153px;
+}
+li.dwQuLogic .dwQuIcon{
+	background-position: -279px -178px;
+}
+li.dwQuDelete .dwQuIcon{
+	background-position: -277px -205px;
+}
+li.dwQuLogic  .dwQuIcon  .quLogicInfo{
+	position:absolute;
+	text-align: right;
+	font-size: 8px;
+	margin-left: 20px;
+	margin-top: -4px;
+	font-family: "微软雅黑";
+	background: #E0761A;
+	border-radius: 2px;
+	padding:0px;
+	width:12px;
+	color: white;
+	text-align: center;
+}
+/**如果有逻辑题，显示的提示**/
+.quLogicData{
+	position: absolute;
+	background: white;
+	right: 5px;
+	margin-top: 5px;
+	cursor: pointer;
+	display: none;
+}
+.quLogicData .dwQuIcon{
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	background-position: -279px -178px;
+	width: 23px;
+	height: 23px;
+	float: left;
+}
+.quLogicData .quLogicInfo{
+	float: left;
+	background: #C2BAA7;
+	color: white;
+	font-weight:bold;
+	text-align: center;
+	padding: 2px 0px;
+	width: 16px;
+	border-radius: 2px;
+}
+/** 题目右边上移、下移  **/
+.surveyQuItemRightTools{
+	position: absolute;
+	background: white;
+	border: 1px solid #98C5C3;
+	border-right:none;
+	right: 0px;
+	margin-top: 40px;
+	font-size: 12px;
+	line-height: 25px;
+	text-align: center;
+	cursor: pointer;
+	color: #5D5D5D;
+	display: none;
+}
+.surveyQuItemRightToolsUl{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+.surveyQuItemRightToolsUl li{
+	font-size: 12px;
+	margin:0px;
+}
+.surveyQuItemRightToolsUl li .dwQuIcon{
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	width: 23px;
+	height: 23px;
+}
+.surveyQuItemRightToolsUl li.questionUp .dwQuIcon{
+	background-position:-471px -150px;
+}
+.surveyQuItemRightToolsUl li.questionDown .dwQuIcon{
+	background-position:-437px  -150px;
+}
+
+/** 题目内容区 **/
+.surveyQuItem .surveyQuItemContent{
+	padding: 0px;
+	border: none;
+	min-height: 50px;
+	width: 100%;
+}
+.surveyQuItemBody.hover .surveyQuItemContent{
+ 	border-left: 1px solid #DDE1E7;
+}
+.surveyQuItemContent{
+	padding: 2px 25px;
+	/* padding-bottom: 20px;
+	cursor: move; */
+	margin-bottom: 15px;
+}
+.surveyQuItemContent .quCoTitle{
+	font-size: 16px;
+	color: #333333;
+	font-family: "微软雅黑";
+	line-height: 1.4em;
+	overflow: auto;
+	margin-bottom: 0px;
+}
+.quCoNum{
+
+}
+.quCoTitle .quCoNum{
+	float: left;
+	padding: 5px 0px ;
+}
+.quCoTitle .quCoTitleEdit{
+	float: left;
+	padding: 5px 3px ;
+	cursor: text;
+	table-layout:fixed;
+	word-break: break-all;
+	width: 90%;
+}
+.surveyQuItemContent .quCoItem{
+	margin-top: 0px;
+	margin-left: 10px;
+}
+.surveyQuItemContent .quCoItem ul{
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+
+	font-size: 14px;
+	display: inline-block;
+	width: 100%;
+}
+.surveyQuItemContent .quCoItem ul li{
+	margin: 8px 5px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #333333;
+	line-height: 1.4em;
+	/* cursor: move; */
+	overflow: hidden;
+	display: list-item;
+}
+.surveyQuItemContent .quCoItem ul.transverse li{
+	float: left;
+}
+.quInputCase,.quItemInputCase{
+	display: none;
+}
+.surveyQuItemContent .quCoItem ul li label{
+	vertical-align: middle;
+	cursor: text;
+	display: inline-block;
+	/* max-width: 600px; */
+	table-layout:fixed; word-break: break-all;
+}
+/**按列的形式显示选项，使用表格**/
+.surveyQuItemContent .quCoItem table.tableQuColItem{
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+}
+.surveyQuItemContent .quCoItem table.tableQuColItem tr td{
+	vertical-align: middle;
+	padding:5px 0px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #333333;
+	line-height: 1.4em;
+}
+.surveyQuItemContent .quCoItem table.tableQuColItem tr td label{
+	/* padding:3px 0px; */
+	vertical-align: middle;
+	cursor: text;
+
+	display: inline-block;
+	max-width: 600px;
+	table-layout:fixed; word-break: break-all;
+}
+
+.surveyQuItemContent .quCoBottomTools{
+	visibility: hidden;
+	padding-top: 3px;
+	padding-bottom: 12px;
+	padding-left: 10px;
+	overflow: auto;
+}
+.surveyQuItemContent .quCoBottomTools ul{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+.surveyQuItemContent .quCoBottomTools ul li{
+	float: left;
+	/* padding: 3px 8px; */
+	padding:0px;
+	margin: 0px auto;
+	cursor: pointer;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	text-align: center;
+	width: 40px;
+}
+.surveyQuItemContent .quCoBottomTools ul li .dwQuIcon{
+	/* background: transparent url("../images/toolbar.png") 0px 0px no-repeat; */
+	width: 25px;
+	height: 25px;
+	margin: 0px auto;
+}
+li.addOption .dwQuIcon,li.addColumnOption .dwQuIcon,li.addRowOption .dwQuIcon{
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	background-position: -620px -153px;
+}
+li.addMoreOption .dwQuIcon,li.addMoreColumnOption .dwQuIcon,li.addMoreRowOption .dwQuIcon{
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	background-position: -658px -153px;
+}
+.surveyQuItemContent .quCoBottomTools ul li:hover{
+	/* background: #D6DCE4; */
+}
+/** 移入时显示左右功能按钮 **/
+.surveyQuItemBody.hover .surveyQuItemLeftToolsUl,
+.surveyQuItemBody.hover .quCoBottomTools,
+.surveyQuItemBody.hover .quCoRightTools{
+	visibility: visible;
+}
+.surveyQuItemBody.hover .surveyQuItemRightTools,.surveyQuItemBody.hover .quCoRightTools{
+	display: inline;
+}
+
+.editMenuRoot {
+	position: absolute;
+	width:100px;
+	right: 100px;
+}
+.editMenuRoot .editMenuBtn{
+	width: 30px;
+	height: 32px;
+	background: #E0E6E9;
+	border: 1px solid #98C5C3;
+	margin-left: -1px;
+	float: right;
+}
+.editMenuRoot .editMenuList{
+	width: 120px;
+	height: 100px;
+	margin-top:30px;
+}
+.editMenuRoot .editMenuList ul{
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+.editMenuRoot .editMenuList ul li{
+	font: 12px;
+	background: #E0E6E9;
+	padding: 5px;
+	border: 1px solid #98C5C3;
+}
+/** 公共编辑 **/
+#dwCommonEditRoot{
+	position: absolute;
+	display: none;
+	z-index: 102;
+}
+#dwCommonEditRoot .dwCommonEdit{
+	border: 1px solid #98C5C3;
+	background: #FDF9CD;
+	position: absolute;
+}
+.dwCommonEdit .dwComEditMenuUl{
+	position:absolute;
+	background: white;
+	border: 1px solid #98C5C3;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+.dwCommonEdit .dwComEditMenuUl li{
+	list-style: none;
+	padding: 5px;
+	margin: 0px;
+	font-size: 12px;
+	color: #333333;
+}
+.dwCommonEdit .dwComEditMenuUl li a{
+	color: #333333;
+	text-decoration: none;
+	font-size: 12px;
+}
+.dwCommonEdit .dwComEditOptionUl{
+	position:absolute;
+	background: white;
+	border: 1px solid #98C5C3;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+	list-style: none;
+	right: 0px;
+	top:-28px;
+}
+.dwCommonEdit .dwComEditOptionUl li{
+	padding: 0px;
+	margin: 0px;
+	font-size: 12px;
+	color: #333333;
+	float: left;
+	cursor: pointer;
+}
+.dwComEditOptionUl li .dwQuIcon{
+	width: 30px;
+	height: 26px;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+}
+.dwComEditOptionUl li.dwOptionUp .dwQuIcon{
+	background-position:-468px -150px;
+}
+.dwComEditOptionUl li.dwOptionDown .dwQuIcon{
+	background-position:-433px -150px;
+}
+.dwComEditOptionUl li.dwOptionDel .dwQuIcon{
+	background-position:-494px -150px;
+}
+
+.dwCommonEdit .dwComEditMenuBtn{
+	position: absolute;
+	right: -32px;
+	top:-1px;
+	border: 1px solid #98C5C3;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	cursor: pointer;
+	background-color: #DBE5F1;
+}
+#dwComEditContent{
+	outline-style: none;
+	color: #333333;
+	font-family: "微软雅黑";
+	line-height: 1.4em;
+
+	table-layout:fixed; word-break: break-all;
+}
+/** 编辑题目标题时样式  **/
+#dwCommonEditRoot.quEdit .dwCommonEdit{
+	width:600px;
+	padding: 0px;
+}
+#dwCommonEditRoot.quEdit .dwComEditMenuUl{
+	margin-top:32px;
+	right:-32px;
+}
+#dwCommonEditRoot.quEdit .dwComEditMenuBtn{
+	width: 30px;
+	height: 32px;
+	background-position:-392px -150px;
+}
+#dwCommonEditRoot.quEdit  #dwComEditContent{
+	padding: 5px;
+	font-size: 16px;
+}
+#dwCommonEditRoot.quEdit .dwComEditOptionUl{
+	display: none;
+}
+/**编辑题目选项是样式**/
+#dwCommonEditRoot.quOptionEdit .dwCommonEdit{
+	width: 200px;
+	padding:0px 0px 0px 0px;
+}
+#dwCommonEditRoot.quOptionEdit .dwComEditMenuUl{
+	margin-top:23px;
+	right:-25px;
+}
+#dwCommonEditRoot.quOptionEdit  .dwComEditOptionUl{
+
+}
+#dwCommonEditRoot.quOptionEdit .dwComEditMenuBtn{
+	width: 23px;
+	height: 23px;
+	right: -25px;
+	background-position:-392px -183px;
+}
+#dwCommonEditRoot.quOptionEdit  #dwComEditContent{
+	padding: 2px 0px;
+	font-size: 14px;
+}
+#dwCommonEditRoot.quOptionEdit .dwComEditOptionUl{
+	display: inline;
+}
+/**input menu菜单 **/
+#dwCommonInputMenuRoot{
+	position: absolute;
+	display: none;
+	z-index: 102;
+}
+#dwCommonInputMenuRoot .dwCommonInputMenu{
+	background: #FDF9CD;
+	position: absolute;
+}
+.dwCommonInputMenu .dwComEditMenuUl{
+	display: none;
+}
+.dwCommonInputMenu .dwComEditMenuBtn{
+	position: absolute;
+	border: 1px solid #98C5C3;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	cursor: pointer;
+	background-color: #DBE5F1;
+}
+.dwCommonInputMenu .dwComEditMenuBtn{
+	width: 23px;
+	height: 28px;
+	background-position:-392px -179px;
+}
+/** 弹出窗口代码 **/
+#dwCommonDialog{
+	position: absolute;
+	z-index: 99;
+	top: 200px;
+	left: 200px;
+	background: #FAFAFA;
+	display: none;
+}
+#dwCommonDialog .dwCommonRefIcon{
+	position: absolute;
+	font-size: 30px!important;
+	z-index: 99;
+	width: 30px;
+	border-bottom: none!important;
+	left: -14px;
+	top: 7px;
+}
+.dwCommonRefIcon .dwCommonRefIcon1{
+	border-width: 7px;
+	border-style: dashed solid dashed dashed;
+	border-color: transparent #EFEFEF transparent transparent;
+	z-index: 3;
+	left: 1px;
+	font: 0px/9999px serif;
+	overflow: hidden;
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	color: inherit;
+}
+.dwCommonRefIcon .dwCommonRefIcon2{
+	border-width: 7px;
+	border-style: dashed solid dashed dashed;
+	border-color: transparent #0D75AD transparent transparent;
+	font: 0px/9999px serif;
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	width: 0px;
+	height: 0px;
+	color: inherit;
+}
+#dwCommonDialog .dwCommonDialogBody{
+	border: 1px solid #62A3C6;
+	/* width: 500px;
+	height: 300px; */
+	box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+.dwCommonDialogBody .dwCommonDialogTitle{
+	height: 28px;
+	line-height: 28px;
+	color: #808080;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 8px;
+	background: #EFEFEF;
+}
+.dwCommonDialogBody .closeDialog{
+	float:right;
+	width: 28px;
+	height: 28px;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	background-position:-494px -150px;
+	cursor: pointer;
+}
+.modelHtml,.dialogContentModel{
+	display: none;
+}
+
+.dwQuSetCon{
+	width: 450px;
+	padding: 0px 30px;
+}
+.dwQuSetCon ul{
+	list-style: none;
+	padding: 10px 0px;
+	padding-bottom:0px;
+	margin: 0px;
+}
+.dwQuSetCon ul li{
+	font-size: 14px;
+	color: #333333;
+	font-family: "微软雅黑";
+	padding: 2px 5px;
+	margin: 2px;
+}
+.dwQuSetCon ul li select,.dwQuSetCon ul li input{
+	padding: 5px;
+	color: #333333;
+	border: 1px solid #98C5C3;
+}
+.dwQuDialogBtnCon{
+	padding: 0px;
+	padding-bottom: 8px;
+	overflow: auto;
+}
+.quDialogBtn{
+	background: #4AB048;
+	color: white;
+	font-size: 16px;
+	padding: 8px 15px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	float: right;
+}
+.quDialogBtn:hover{
+	background: #0AA5A0;
+}
+/** 批量添加选项 **/
+.dwQuAddMore{
+	padding: 0px 30px;
+	margin: 0px;
+	overflow: auto;
+}
+.dwQuAddMore textarea{
+	padding: 5px;
+	color: #333333;
+	border: 1px solid #98C5C3;
+	outline: none;
+	width:430px;
+	height: 150px;
+	margin-bottom: 10px;
+}
+.dwQuDialogCon{
+	display: none;
+}
+.dwQuAddMore .dwQuTextSpan{
+	font-size:12px;
+	color:#333;
+	padding:5px;
+	margin-top: 10px;
+}
+/**逻辑设置弹出窗口**/
+.dwQuDialogLogic{
+	padding: 0px 30px;
+	margin: 0px;
+	overflow: auto;
+}
+.dwQuDialogLogicTitle{
+	font-size: 12px;
+	line-height: 1.4em;
+	color: #213E5E;
+	margin-top: 15px;
+}
+.dwQuDialogLogic table{
+	font-size: 14px;
+	color: #333;
+	font-family: "微软雅黑";
+}
+.dwQuDialogLogic table tr td{
+	padding: 0px 2px;
+}
+.dwQuDialogLogic select{
+	width: 160px;
+	height: 30px;
+	border: 1px #77a5b4 solid;
+	padding: 2px;
+	vertical-align: middle;
+	outline: none;
+}
+.dwQuDialogBotEvent{
+	padding: 2px;
+}
+.dwQuDialogAddLogic{
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+.dwQuDialogAddLogic .dwQuIcon{
+		width: 25px;
+		height: 25px;
+		margin: 0px auto;
+		background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+		background-position: -620px -153px;
+}
+.dialogRemoveLogic{
+		width: 23px;
+		height: 23px;
+		margin: 0px auto;
+		background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+		background-position: -690px -152px;
+		cursor: pointer;
+}
+.dwQuDialogLoad{
+	width: 450px;
+	padding-top:80px;
+	padding-bottom:80px;
+	text-align: center;
+}
+.dwQuDialogLoad img{
+
+}
+
+.surveyQuItemBody.hover .quFillblankItem .dwComEditMenuBtn{
+/* 	display: inline; */
+}
+.quCoItemUlLi.hover .quFillblankItem .dwComEditMenuBtn{
+	display: inline;
+}
+
+
+
+/* .quCoItemUlLi label{
+	background: url("http://y0.ifengimg.com/b038735baea2cb5e/2013/0626/d07.gif") 0px 0px no-repeat;
+	background-position: -10px -14px;
+	padding-left: 30px;
+	padding-top: 3px;
+}
+
+.quCoItemUlLi input{
+	display: none;
+}
+ */
+
+.quFillblankItem{
+	position: relative;
+}
+.quFillblankItem .dwComEditMenuBtn{
+	position: absolute;
+	border: 1px solid #98C5C3;
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat;
+	cursor: pointer;
+	background-color: #DBE5F1;
+	display: none;
+	width: 23px;
+	height: 28px;
+	background-position:-392px -179px;
+	margin-left: -2px;
+}
+/**评分题**/
+.quCoItemTable{
+	color: #333333;
+	font-family: "微软雅黑";
+	font-size: 12px;
+}
+.quCoItemTableTd{
+	padding: 5px;
+}
+.scoreNumTable {
+	border: 1px solid #DDE1E7;
+	width: 300px;
+	margin-top: 2px;
+	background: url("../images/style-model/piont_lv.png");
+	background-repeat: repeat;
+}
+.scoreNumTable tr td{
+	text-align: center;
+	font-size: 12px;
+	padding: 0px;
+	border: solid 1px white;
+	cursor: pointer;
+}
+.quOptionEditTd .editAble{
+	width: 100%;
+	font-size: 14px;
+}
+/** 排序题 **/
+.quOrderByLeft{
+	float: left;
+	width: 300px;
+	overflow: auto;
+}
+.quOrderByLeft ul li{
+	margin: 0px! important;
+	padding: 7px 5px;
+}
+.quOrderByLeft ul li label{
+	background: white;
+	padding:0px 5px;
+	cursor: pointer! important;
+}
+.quOrderByLeft .quCoOptionEdit{
+	width: 280px;
+	border: 1px solid #CCCCCC;
+	padding-left: 3px;
+}
+.quOrderByRight{
+	float: left;
+	overflow: auto;
+}
+.quOrderByTable{
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 360px;
+}
+
+.quOrderByTable tr td{
+	padding: 8px;
+	border: 1px solid #dbdbdb;
+}
+.quOrderByTable tr td.quOrderyTableTd{
+	background: #efefef;
+	color: #666666;
+	font-size: 14px;
+	line-height: 1.4;
+	text-align: center;
+	padding: 8px;
+	border: 1px solid #dbdbdb;
+	border-right:none;
+	width: 30px;
+}
+.quOrderTabConnect .quCoOptionEdit{
+	display: none;
+}
+.quOrderItemLabel{
+	background: white;
+	padding: 0px 5px;
+	border: 1px solid #BCBCBC;
+	cursor: pointer;
+	font-size: 12px;
+	vertical-align: middle;
+	display: inline-block;
+	table-layout: fixed;
+	word-break: break-all;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #333333;
+	line-height: 1.4em;
+	/* width: 280px; */
+}
+.qu-order-highlight{
+	display: none;
+}
+
+/**分页题*/
+.pageQuContent{
+	text-align: right;
+	padding: 8px 15px;
+	font-family: "微软雅黑";
+	line-height: 1.4em;
+	color: #666666;
+	font-size: 14px;
+	/* border-top: 2px solid #BCBCBC; */
+}
+.pageBorderTop{
+	margin:0px 10px;
+	border-top: 3px solid transparent;
+}
+.pageBorderTop.nohover{
+	border-top: 3px solid #D6DCE4;
+}
+/**多项填空题**/
+.mFillblankTable{
+
+}
+.mFillblankTable tr td{
+	padding: 5px 8px;
+	vertical-align: middle;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #333333;
+	line-height: 1.4em;
+}
+.mFillblankTable tr td .editAble{
+	width: 100%;
+}
+.mFillblankTable .mFillblankTableEditTd{
+}
+/**jquery ui dialog**/
+.ui-icon-closethick {
+	background: transparent url("../images/toolbar.png") 0px 0px no-repeat! important;
+	background-position: -502px -155px! important;
+}
+#editDialogCenter{
+    width: 678px;
+    border-bottom: 1px solid #c8c9cc;
+    overflow: hidden;
+    margin: auto;
+    padding-top: 3px;
+    background-color: #fff;
+    text-align: left;
+}
+#dialogUeBottom{
+	padding: 5px 10px;
+}
+
+/**矩陈题**/
+.quCoItemLeftChenTableDiv{
+	overflow: auto;
+	padding-top: 6px;
+}
+table.quCoChenTable{
+	padding: 0px;
+	margin: 0px;
+	width:90%;
+	border: 1px solid #dddddd;
+	border-collapse: separate;
+	border-left: 0;
+	border-spacing: 0;
+}
+table.quCoChenTable tr td{
+	vertical-align: middle;
+	padding:3px 0px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #333333;
+	line-height: 1.4em;
+	text-align: center;
+	border-left: 1px solid #DDDDDD;
+	border-top: 1px solid #DDDDDD;
+}
+
+table.quCoChenTable tr td label{
+	padding:3px 0px;
+	vertical-align: middle;
+	cursor: text;
+	display: inline-block;
+	max-width: 600px;
+	table-layout:fixed; word-break: break-all;
+	width: 100%;
+}
+
+.surveyQuItemContent .quCoRightTools{
+	visibility: hidden;
+	overflow: auto;
+	float: right;
+	padding: 0px;
+}
+.surveyQuItemContent .quCoRightTools ul{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	margin-top: 12px;
+}
+.surveyQuItemContent .quCoRightTools ul li{
+	/* padding: 3px 8px; */
+	padding:0px;
+	margin: 8px auto;
+	cursor: pointer;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	text-align: center;
+}
+.surveyQuItemContent .quCoRightTools ul li .dwQuIcon{
+	/* background: transparent url("../images/toolbar.png") 0px 0px no-repeat; */
+	width: 25px;
+	height: 25px;
+	margin: 0px auto;
+}
+.surveyQuItemContent .quCoRightTools ul li.addMoreOption{
+	margin-left: 2px;
+}
+
+.dwTextStyleSet {
+	float: left;
+	margin-left: 20px;
+}
+.dwTextStyleSetItem {
+	display: none;
+	float: left;
+	margin-top: 5px;
+	position: relative;
+}
+.dwStyleSetComm{
+	display: inline-block;
+	float: left;
+}
+.dwStyleSetComm a{
+	display: inline-block;
+	float: left;
+	margin: 0 6px 5px 0;
+	border: 1px solid #a6a6a6;
+	border-bottom-color: #979797;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	-moz-box-shadow: 0 1px 0 rgba(255,255,255,.5),0 0 2px rgba(255,255,255,.15) inset,0 1px 0 rgba(255,255,255,.15) inset;
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5),0 0 2px rgba(255,255,255,.15) inset,0 1px 0 rgba(255,255,255,.15) inset;
+	box-shadow: 0 1px 0 rgba(255,255,255,.5),0 0 2px rgba(255,255,255,.15) inset,0 1px 0 rgba(255,255,255,.15) inset;
+	background: #e4e4e4;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e4e4e4));
+	background-image: -moz-linear-gradient(top,#fff,#e4e4e4);
+	background-image: -webkit-linear-gradient(top,#fff,#e4e4e4);
+	background-image: -o-linear-gradient(top,#fff,#e4e4e4);
+	background-image: -ms-linear-gradient(top,#fff,#e4e4e4);
+	background-image: linear-gradient(top,#fff,#e4e4e4);
+	filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#ffffff',endColorstr='#e4e4e4');
+}
+.dwStyleFontFamilyText{
+	max-width: 60px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 26px;
+	padding-left: 10px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	float: left;
+	cursor: default;
+	color: #474747;
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	width: 60px;
+	background-position:  0px 0px;
+	background-attachment: fixed;
+}
+.dwStyleFontSizeText{
+	line-height: 26px;
+	padding-left: 10px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	float: left;
+	cursor: default;
+	color: #474747;
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	width: 30px;
+	margin-bottom: -1px;
+	margin-top: 1px;
+}
+.dwStyleSelectOpen{
+	cursor: default;
+	display: inline-block;
+	font-size: 0;
+	height: 19px;
+	line-height: 17px;
+	margin: 1px 7px 1px;
+	width: 5px;
+}
+.dwStyleSelectOpenIcon{
+	margin: 11px 0 0;
+	float: left;
+	height: 0;
+	width: 0;
+	font-size: 0;
+	border-left: 3px solid transparent;
+	border-right: 3px solid transparent;
+	border-top: 3px solid #8D5858;
+}
+.dwStyleSetCommGroup{
+	float: left;
+	margin: 0 6px 5px 0;
+	border: 1px solid #a6a6a6;
+	border-bottom-color: #979797;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	-moz-box-shadow: 0 1px 0 rgba(255,255,255,.5),0 0 2px rgba(255,255,255,.15) inset,0 1px 0 rgba(255,255,255,.15) inset;
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.5),0 0 2px rgba(255,255,255,.15) inset,0 1px 0 rgba(255,255,255,.15) inset;
+	box-shadow: 0 1px 0 rgba(255,255,255,.5),0 0 2px rgba(255,255,255,.15) inset,0 1px 0 rgba(255,255,255,.15) inset;
+	background: #e4e4e4;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e4e4e4));
+	background-image: -moz-linear-gradient(top,#fff,#e4e4e4);
+	background-image: -webkit-linear-gradient(top,#fff,#e4e4e4);
+	background-image: -o-linear-gradient(top,#fff,#e4e4e4);
+	background-image: -ms-linear-gradient(top,#fff,#e4e4e4);
+	background-image: linear-gradient(top,#fff,#e4e4e4);
+	filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#ffffff',endColorstr='#e4e4e4');
+}
+
+.dwStyleSetCommGroupButton{
+	display: inline-block;
+	height: 18px;
+	padding: 4px 6px;
+	outline: 0;
+	cursor: default;
+	float: left;
+	border: 0;
+}
+
+.dwStyelSetButton_icon {
+	cursor: inherit;
+	margin-top: 1px;
+	width: 16px;
+	height: 16px;
+	float: left;
+	display: inline-block;
+	background: url('../images/icons16.png');
+}
+.dwButtonTextColor{
+	background-position:  0 -256px;
+	margin-right: .5em;
+	vertical-align: middle;
+}
+.dwButtonBold{
+	background-position:  0 -128px;
+}
+.dwButtonItalic{
+	background-position:  -33px -128px;
+}
+.dwButtonUnderline{
+	background-position:  -63px -128px;
+}
+.dwStyleSetCommGroup a:hover,.dwStyleSetComm a:hover{
+	background: #E9E9E9;
+}
+.dwButtonTextColorLine {
+	position: absolute;
+	height: 2px;
+	width: 17px;
+	top: 20px;
+	background: #000;
+}
+.dwStyleTextColorOpenIcon{
+	display: inline-block;
+	margin: 8px 0 0 1px;
+	width: 0;
+	height: 0;
+	cursor: default;
+	vertical-align: top;
+	border-left: 3px solid transparent;
+	border-right: 3px solid transparent;
+	border-top: 3px solid #474747;
+}
+
+.frmItem{
+	padding:12px 5px;
+}
+.frmItem a{
+	color: #5B9FD0;
+	text-decoration: none;
+}
+.frm_label{
+	text-align: left;
+	width: 65px;
+	cursor: default;
+	float: left;
+	margin-top: 12px;
+	font-size: 16px;
+	color: #777;
+}
+.frm_controls{
+	overflow: hidden;
+	font-size: 14px;
+}
+.frm_desc {
+	display: block;
+	color: #929292;
+	font-size: 14px;
+	margin-top: 3px;
+	display: none;
+}
+.auth-code {
+	display: inline-block;
+	border: 1px solid #9C94A9;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background: white;
+	padding-left: 3px;
+}
+.auth-code input{
+	border: none;
+	color: #666;
+	font-size:16px;
+	padding: 8px! important;
+	outline:0;
+	vertical-align: middle;
+}
+.auth-code img,  .auth-code a{
+	vertical-align: middle;
+}
+.auth-code img{
+	margin: 0px;
+	margin-left: 3px;
+
+	-moz-border-radius-topright: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-khtml-border-top-right-radius: 4px;
+	border-top-right-radius: 4px;
+
+	-moz-border-radius-bottomright: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-khtml-border-bottom-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+
+	border-left: 1px solid #CCCCCC;
+	padding-left: 4px;
+}
+.auth-code a{
+	margin-left: 16px;
+}
+
+/**
+样式设置页面
+**/
+#dw_phone,#dwPhone{
+  background: url("../images/iphone.png") no-repeat;
+  width: 404px;
+  height: 701px;
+  margin: 0px auto;
+  margin-top:40px;
+  position: relative;
+}
+#dwPad{
+  background: url("../images/ipad.jpg") no-repeat;
+  background-size:cover;
+  width: 910px;
+  height: 630px;
+  margin: 0px auto;
+  margin-top:40px;
+  position: relative;
+}
+#dwPc{
+  /*background: url("../images/pc.jpeg") no-repeat;*/
+  background-size:cover;
+  width: 100%;
+  height: 630px;
+  margin: 0px auto;
+  margin-top:20px;
+  position: relative;
+}
+
+
+
+/** 重新定义单选与多选样式 **/
+.dwQuOptionItemContent{
+	cursor: pointer!important;
+	font-size: 16px;
+	color: rgb(134, 128, 128);
+	display: inline;
+}
+.dwQuOptionItemContent label{
+	cursor: pointer!important;
+}
+/*.dwQuOptionItemContent input{
+	display: none;
+}*/
+.dwQuOptionItemContent input[type='radio'],.dwQuOptionItemContent input[type='checkbox']{
+	display: none;
+}
+.dwQuOptionItemContent .dwQuInputLabel{
+	padding: 0px! important;
+}
+/**  单选样式***/
+.dwQuOptionItemContent .dwRedioStyle {
+  background: transparent url(../images/answer-icon-1.png) no-repeat center top;
+  vertical-align: middle;
+  height: 22px;
+  width: 22px;
+  background-position: -2px -6px;
+}
+.dwQuOptionItemContent .dwRedioStyle.checked{
+  background-position: -2px -31px;
+}
+/**多选样式**/
+.dwQuOptionItemContent .dwCheckboxStyle {
+  background: transparent url(../images/answer-icon-1.png) no-repeat center top;
+  vertical-align: middle;
+  height: 22px;
+  width: 22px;
+  background-position: -2px -60px;
+}
+.dwQuOptionItemContent .dwCheckboxStyle.checked{
+  background-position: -2px -87px;
+}
+.dwQuOptionItemContent .quCoOptionPadding{
+	padding-top:1px;
+}
+
+.footer-copyright{
+	margin-top:20px;
+	width: 100%;
+	height: 30px;
+	text-align: center;
+}

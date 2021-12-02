@@ -17,21 +17,21 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_mail_invite_inbox")
 public class MailInviteInbox extends IdEntity{
-    
+
     private String surveyMailInviteId;
     private String userId;
-    
+
     private String usContactsId;
     private String email;
     private String name;
-    
+
     //sendclound返回的任务id
     private String sendcloudId;
-    //0未发送 1已提交 2请求＝投递 3发送 4打开 5点击 
+    //0未发送 1已提交 2请求＝投递 3发送 4打开 5点击
     //100发送失败
     //201取消订阅 202软退信 203垃圾举报 204无效邮件
     private Integer status=0;
-    
+
     public String getSurveyMailInviteId() {
         return surveyMailInviteId;
     }
@@ -74,6 +74,6 @@ public class MailInviteInbox extends IdEntity{
 	public void setSendcloudId(String sendcloudId) {
 		this.sendcloudId = sendcloudId;
 	}
-	
-    
+
+
 }

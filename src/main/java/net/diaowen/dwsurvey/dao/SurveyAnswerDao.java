@@ -12,4 +12,6 @@ public interface SurveyAnswerDao extends BaseDao<SurveyAnswer, String>{
                            Map<String, Map<String, Object>> quMaps);
 
 	public SurveyStats surveyStatsData(SurveyStats surveyStats);
+
+    Long countResult(String id);
 }

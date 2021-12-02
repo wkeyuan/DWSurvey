@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import net.diaowen.common.base.entity.IdEntity;
 
 /**
- * 
+ *
  * @author KeYuan
  * @date 2014下午8:41:44
  *
@@ -16,7 +16,7 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_surveyStyle")
 public class SurveyStyle extends IdEntity{
-	
+
 	private String surveyId;
 	//0属于某个问卷的 、1 样式模板
 	private Integer surveyStyleType;
@@ -24,16 +24,16 @@ public class SurveyStyle extends IdEntity{
 	//logo图片
 	private String surveyLogoImage;
 	private Integer showSurveyLogo=0;
-	
+
 	//背景色
 	private String bodyBgColor;
 	//背景图
 	private String bodyBgImage;
 	private Integer showBodyBi=0;
-	
+
 	//按钮背景色
 	private String surveyBtnBgColor;
-	
+
 	//问卷宽度
 	private Integer surveyWidth;
 	//问卷区背景色
@@ -41,13 +41,13 @@ public class SurveyStyle extends IdEntity{
 	//问卷区背景图
 	private String surveyBgImage;
 	private Integer showSurveyBi=0;
-	
+
 	//问卷内边距
 	private String surveyPaddingTop;
 	private String surveyPaddingBottom;
 	private String surveyPaddingLeft;
 	private String surveyPaddingRight;
-	
+
 	//是否显示问卷表头
 	private Integer showSurveyHaed;
 	//头部背景色
@@ -62,16 +62,16 @@ public class SurveyStyle extends IdEntity{
 	private Integer surveyHeadPaddingBottom;
 	private Integer surveyHeadPaddingLeft;
 	private Integer surveyHeadPaddingRight;
-	
+
 	//显示问卷标题
 	private Integer showSurTitle=1;
 	//显示问卷副标题
 	private Integer showSurNote=1;
-	
+
 	private String surveyContentBgColorTop;
 	private String surveyContentBgColorMiddle;
 	private String surveyContentBgColorBottom;
-	private String surveyContentBgImageTop; 
+	private String surveyContentBgImageTop;
 	private String surveyContentBgImageMiddle;
 	private Integer showSurveyCbim=0;
 	private String surveyContentBgImageBottom;
@@ -80,18 +80,18 @@ public class SurveyStyle extends IdEntity{
 	private Integer surveyContentPaddingBottom;
 	private Integer surveyContentPaddingLeft;
 	private Integer surveyContentPaddingRight;
-	
+
 	//文本样式
 	private String questionTitleTextColor="color: rgb(85, 87, 89)";
 	private String questionOptionTextColor="rgb(99, 101, 102)";
 	private String surveyTitleTextColor="rgb(34, 34, 34)";
 	private String surveyNoteTextColor="rgb(112, 114, 115)";
-	
+
 	//显示题序号
 	private Integer showTiNum=1;
 	//显示答题进度
 	private Integer showProgressbar=1;
-	
+
 	public String getSurveyId() {
 		return surveyId;
 	}
@@ -212,7 +212,7 @@ public class SurveyStyle extends IdEntity{
 	public void setSurveyHeadPaddingRight(Integer surveyHeadPaddingRight) {
 		this.surveyHeadPaddingRight = surveyHeadPaddingRight;
 	}
-	
+
 	public String getSurveyContentBgColorTop() {
 		return surveyContentBgColorTop;
 	}
@@ -369,6 +369,6 @@ public class SurveyStyle extends IdEntity{
 	public void setShowProgressbar(Integer showProgressbar) {
 		this.showProgressbar = showProgressbar;
 	}
-	
-	
+
+
 }

@@ -19,7 +19,7 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_importError")
 public class ImportError extends IdEntity{
-	
+
     	private String userId;
     	//对应的数据ID
     	private String dbId;
@@ -35,7 +35,7 @@ public class ImportError extends IdEntity{
 	private String cell2Value;
 	//时间
 	private Date createDate=new Date();
-	
+
 	public String getFileName() {
 		return fileName;
 	}
@@ -84,6 +84,6 @@ public class ImportError extends IdEntity{
 	public void setUserId(String userId) {
 	    this.userId = userId;
 	}
-	
-	
+
+
 }

@@ -21,6 +21,7 @@ public class InitAppliction implements ServletContextListener {
 		// TODO Auto-generated method stub
 		ServletContext servletContext = sce.getServletContext();
 		contextPath = servletContext.getContextPath();
+
 	}
 
 

@@ -33,9 +33,9 @@ public class QuCheckbox extends IdEntity{
 	private Integer isRequiredFill=0;
 	//排序ID
 	private Integer orderById;
-	//是否显示  0不显示 
+	//是否显示  0不显示
 	private Integer visibility=1;
-	
+
 	public String getQuId() {
 		return quId;
 	}
@@ -95,5 +95,5 @@ public class QuCheckbox extends IdEntity{
 	public void setAnCount(Integer anCount) {
 		this.anCount = anCount;
 	}
-	
+
 }
