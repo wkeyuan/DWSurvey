@@ -3,7 +3,8 @@ dwsurvey:
   web:
     file-path: diaowen/file/
     static-type: static
-    site-url: http://localhost:8081
+    site-url: http://localhost:8080
+    resource-url: http://localhost:8080
     #    site-url: http://ent82.surveyform.cn
     info:
       site-name: 调问网
@@ -22,7 +23,7 @@ dwsurvey:
     number: OSS V5.0
     built: 2021/11/21
 server:
-  port: 8081
+  port: 8080
 
 spring:
   jackson:

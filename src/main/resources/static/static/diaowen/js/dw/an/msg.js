@@ -4,9 +4,7 @@ $(document).ready(function(){
     var answerId = $.getUrlParam("answerId");
     var pwdCode = $.getUrlParam("pwdCode");
     resultStatus2Msg(respType,sid,pwdCode);
-    answerAfterData(respType,answerId,function(){
-      querySurveyData(respType,sid);
-    });
+    querySurveyData(respType,sid);
 });
 
 function resultStatus2Msg(resptype,sid,ruleCode) {
@@ -24,8 +22,7 @@ function resultStatus2Msg(resptype,sid,ruleCode) {
   }else if(resptype==='4'){
     tempMsg.resultNote = '验证码不正确，操作未成功!';
     tempMsg.resultColor = "#e70f0f";
-    // setReqUrl({reqUrl:'/#/diaowen/'+sid,urlText:'重新答卷'})
-    setReqUrl({reqUrl:'/static/diaowen/diaowen.html?sid='+sid,urlText:'重新答卷'})
+    setReqUrl({reqUrl:'/static/diaowen/answer-p.html?sid='+sid,urlText:'重新答卷'})
   }else if(resptype==='5'){
     tempMsg.resultNote = '发生未知异常，操作未成功!';
     tempMsg.resultColor = "#e70f0f";
@@ -83,24 +80,7 @@ function querySurveyData(respType,sid){
     querySurvey(sid,function(httpResult){
       if(httpResult!=null && httpResult.hasOwnProperty('resultCode') && httpResult.resultCode === 200 ){
         var resultData = httpResult.data;
-        // console.debug(resultData);
         $("#surveyName").html(resultData.surveyName);
-        if(resultData.hasOwnProperty("surveyDetail")) {
-          var surveyDetail = resultData.surveyDetail;
-          var reqUrlType = surveyDetail.reqUrlType;
-
-          if(respType==='6'){
-            clearSurveyStorage(resultData.id);
-          }
-
-          if(reqUrlType===1) {
-            window.location.href=surveyDetail.reqUrl;
-          }
-          if(reqUrlType===2 && respType==='6'){
-            // setReqUrl(surveyDetail.reqUrl);
-            setReqUrl({reqUrl:surveyDetail.reqUrl,urlText:surveyDetail.urlText})
-          }
-        }
       }
     });
   }
@@ -126,52 +106,4 @@ function setReqUrl(reqObj){
   var reqUrlDiv = $("#reqUrlDiv");
   reqUrlDiv.empty();
   reqUrlDiv.append("<a href=\""+reqObj.reqUrl+"\">"+reqObj.urlText+"</a>");
-}
-
-// AnserAfter
-function answerAfterData(respType,answerId,callback){
-  if (respType==='6' && answerId != null) {
-    // console.debug(answerId);
-    answerAfter(answerId,function(httpResult){
-      // console.debug(httpResult);
-      if(httpResult!=null && httpResult.hasOwnProperty('resultCode') && httpResult.resultCode === 200 ){
-        var resultData = httpResult.data;
-        if(resultData!=null) {
-          var surveyId = resultData.surveyId;
-          var totalScoreStatus = resultData.totalScoreStatus;
-          var totalScore = resultData.totalScore;
-          // /static/diaowen/answer-data.html?id=fd258239-4cc1-433b-abb1-aabd2f7198cc&surveyId=1a020ff9-0060-4cd3-aac7-7cbbb4a5de19&tag=1
-          var sssw = "<a href=\"/static/diaowen/answer-data.html?id="+answerId+"&surveyId="+surveyId+"&tag=1\" >总得分："+totalScore+"分，点击看详情</a>";
-          if(totalScoreStatus!=null && totalScoreStatus===1) setTotalScoreText(sssw);
-        }
-        if(callback!=null){
-          callback();
-        }
-      }
-    });
-  }else{
-    if(callback!=null){
-      callback();
-    }
-  }
-}
-
-function answerAfter(answerId,callback){
-  var url = '/api/dwsurvey/anon/response/answer-after.do';
-  var data = "answerId="+answerId;
-  $.ajax({
-    url:url,
-    data:data,
-    // type:"json",
-    success:function(httpResult){
-      console.debug(httpResult);
-      if(callback!=null){
-        callback(httpResult);
-      }
-    }
-  });
-}
-
-function setTotalScoreText(sssw){
-  $("#totalScore").html(sssw);
 }

@@ -490,10 +490,10 @@ public class ResponseController {
 //		String encoderContent= baseUrl+"/response/answerMobile.do?surveyId="+surveyId;
 		String encoderContent = null;
 		if(StringUtils.isNotEmpty(surveyId)){
-			encoderContent = baseUrl+"/survey/diaowen-m.html?surveyId="+surveyId;
+			encoderContent = baseUrl+"/static/diaowen/answer-m.html?surveyId="+surveyId;
 		}
 		if(StringUtils.isNotEmpty(sid)){
-			encoderContent = baseUrl+"/survey/diaowen-m.html?sid="+sid;
+			encoderContent = baseUrl+"/static/diaowen/answer-m.html?sid="+sid;
 		}
 		if(StringUtils.isNotEmpty(ruleCode)){
 			encoderContent+="&ruleCode="+ruleCode;

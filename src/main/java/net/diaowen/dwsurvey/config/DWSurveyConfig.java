@@ -9,6 +9,7 @@ public class DWSurveyConfig {
     public static String DWSURVEY_SITE = null;
     public static String DWSURVEY_WEB_FILE_PATH = null;
     public static String DWSURVEY_WEB_SITE_URL = null;
+    public static String DWSURVEY_WEB_RESOURCE_URL = null;
     public static String DWSURVEY_WEB_STATIC_TYPE = null;
     public static String DWSURVEY_WEIXIN_APP_ID = null;
     public static String DWSURVEY_WEIXIN_APP_SECRET = null;
@@ -33,6 +34,11 @@ public class DWSurveyConfig {
     @Value("${dwsurvey.web.site-url}")
     public void setWebSiteUrl(String webSiteUrl) {
         DWSurveyConfig.DWSURVEY_WEB_SITE_URL = webSiteUrl;
+    }
+
+    @Value("${dwsurvey.web.resource-url}")
+    public void setWebResourceUrl(String dwsurveyWebResourceUrl) {
+        DWSURVEY_WEB_RESOURCE_URL = dwsurveyWebResourceUrl;
     }
 
     @Value("${dwsurvey.web.static-type}")

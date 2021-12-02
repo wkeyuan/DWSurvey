@@ -10397,6 +10397,7 @@ $.widget( "ui.slider", $.ui.mouse, {
 		this._handleIndex = null;
 		this._detectOrientation();
 		this._mouseInit();
+		this._touchInit();
 
 		this.element
 			.addClass( "ui-slider" +
@@ -10409,6 +10410,73 @@ $.widget( "ui.slider", $.ui.mouse, {
 		this._setOption( "disabled", this.options.disabled );
 
 		this._animateOff = false;
+	},
+
+	_touchInit: function() {
+		var that = this;
+
+		this.element
+			.bind("touchstart."+this.widgetName, function(event) {
+				event.preventDefault();
+				// //console.debug(("touchstart."+event.type);
+				return that._touchStart(event);
+			})
+			.bind("touchmove."+this.widgetName, function(event) {
+				event.preventDefault();
+				// //console.debug(("touchmove."+event.type);
+				// var str = JSON.stringify(event);
+				// //console.debug((event.originalEvent.targetTouches);
+				// if(event.targetTouches.length > 1 || event.scale && event.scale !== 1) return;
+				var touch = event.originalEvent.targetTouches[0];
+				// endPos = {x:touch.pageX - startPos.x,y:touch.pageY - startPos.y};
+				var position = { x: touch.pageX, y: touch.pageY };
+					// //console.debug((position);
+				// var normValue = that._normValueFromMouse( position );
+				// //console.debug(("normValue");
+				// //console.debug((normValue);
+				// that.value( 90 );
+				that._touchMove(event);
+				// that._mouseDrag(event);
+				/*if (true === $.data(event.target, that.widgetName + ".preventClickEvent")) {
+					$.removeData(event.target, that.widgetName + ".preventClickEvent");
+					event.stopImmediatePropagation();
+					return false;
+				}*/
+			});
+		this.started = false;
+	},
+	_touchStart: function(event){
+		var that = this;
+		this.elementSize = {
+			width: this.element.outerWidth(),
+			height: this.element.outerHeight()
+		};
+		this.elementOffset = this.element.offset();
+		// this._mouseSliding = true;
+		var touch = event.originalEvent.targetTouches[0];
+		position = { x: touch.pageX, y: touch.pageY };
+		normValue = this._normValueFromMouse( position );
+		distance = this._valueMax() - this._valueMin() + 1;
+		// this._mouseSliding = true;
+		this._handleIndex = 0;
+		return false;
+	},
+
+	_touchMove: function(event){
+		var touch = event.originalEvent.targetTouches[0];
+		var position = { x: touch.pageX, y: touch.pageY },
+			normValue = this._normValueFromMouse( position );
+		// //console.debug(("normValue:");
+		// //console.debug((normValue);
+		// this.value( normValue );
+		this._slide( event, this._handleIndex, normValue );
+		/*
+		this.slide(event,{
+			handle: this.handles[ 0 ],
+			value: normValue
+		});
+		*/
+		return false;
 	},
 
 	_refresh: function() {

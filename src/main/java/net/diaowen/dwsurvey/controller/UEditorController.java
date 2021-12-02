@@ -32,8 +32,6 @@ public class UEditorController {
     @RequestMapping(value="/config")
     public void config(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("application/json");
-//        String rootPath = request.getSession().getServletContext().getRealPath("/");
-//        String rootPath = "/Users/xiajunlanna/IdeaProjects/dwsurvey/target/";
         String webFilePath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH;
         String rootPath = webFilePath;
         try {

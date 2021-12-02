@@ -46,17 +46,17 @@ function querySurveyAll(){
         // alert("数据获取失败！");
         notify(httpResult.resultMsg,10000);
         if(httpResult.resultCode===401){
-          window.location.href="/#/user/login";
+          window.location.href="/#/login";
         }else if(httpResult.resultCode===403){
-          window.location.href="/#/exception/403";
+          window.location.href="/#/403";
         }
       }
     },
     error: function(xmlHttpRequest, textStatus, errorThrown){
       if(xmlHttpRequest.status===401){
-        window.location.href="/#/user/login";
+        window.location.href="/#/login";
       }else if(xmlHttpRequest.status===403){
-        window.location.href="/#/exception/403";
+        window.location.href="/#/403";
       }
     }
   });

@@ -29,7 +29,8 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: URL + "jsp/controller.jsp"
+        // , serverUrl: URL + "jsp/controller.jsp"
+        , serverUrl: "/api/dwsurvey/anon/ueditor/config"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         /*, toolbars: [[
@@ -45,9 +46,23 @@
             'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
             'print', 'preview', 'searchreplace', 'help', 'drafts'
         ]]*/
-    	,toolbars:[
-               ['Bold','Underline','StrikeThrough','removeformat','|','InsertUnorderedList','InsertOrderedList','|','Link','Unlink','|','simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map','|','Source','FullScreen']
-         ]
+    	/*,toolbars:[
+               ['fontfamily', 'fontsize','forecolor', 'Bold','Underline','StrikeThrough','removeformat','|',
+                   'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify','|','InsertUnorderedList','InsertOrderedList','|','Link','Unlink','|','simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'attachment', 'map','|','Source','FullScreen']
+         ]*/
+        , toolbars: [[
+           'fullscreen', 'source', '|', 'undo', 'redo', '|',
+           'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+           'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+           'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+           'directionalityltr', 'directionalityrtl', 'indent', '|',
+           'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+           'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+           'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'pagebreak', 'template', 'background', '|',
+           'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+           // 'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+           'print', 'searchreplace', 'drafts']
+        ]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''
@@ -88,7 +103,7 @@
         		'.view{padding:0;word-wrap:break-word;word-break:break-all;cursor:text;height:100%;}' +
         		'body{color:#333;text-align:left;}'+
             	'li{clear:both}' +
-            	'*{line-height:1.4em;}' +
+            	'*{line-height:1.4em;padding: 0px;margin: 0px;}' +
             	'a{color:#7594b3;}' +
         		'img,embed,object{max-width:100%;}'
         //,iframeCssUrl: URL + '/themes/iframe.css' //给编辑器内部引入一个css文件
@@ -116,34 +131,34 @@
         //,autoSyncData:true //自动同步编辑器要提交的数据
         //,emotionLocalization:false //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
 
-        //,pasteplain:false  //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
-        //纯文本粘贴模式下的过滤规则
-        //'filterTxtRules' : function(){
-        //    function transP(node){
-        //        node.tagName = 'p';
-        //        node.setStyle();
-        //    }
-        //    return {
-        //        //直接删除及其字节点内容
-        //        '-' : 'script style object iframe embed input select',
-        //        'p': {$:{}},
-        //        'br':{$:{}},
-        //        'div':{'$':{}},
-        //        'li':{'$':{}},
-        //        'caption':transP,
-        //        'th':transP,
-        //        'tr':transP,
-        //        'h1':transP,'h2':transP,'h3':transP,'h4':transP,'h5':transP,'h6':transP,
-        //        'td':function(node){
-        //            //没有内容的td直接删掉
-        //            var txt = !!node.innerText();
-        //            if(txt){
-        //                node.parentNode.insertAfter(UE.uNode.createText(' &nbsp; &nbsp;'),node);
-        //            }
-        //            node.parentNode.removeChild(node,node.innerText())
-        //        }
-        //    }
-        //}()
+        ,pasteplain:true  //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+        // 纯文本粘贴模式下的过滤规则
+        ,'filterTxtRules' : function(){
+           function transP(node){
+               node.tagName = 'p';
+               node.setStyle();
+           }
+           return {
+               //直接删除及其字节点内容
+               '-' : 'script style object iframe embed input select',
+               'p': {$:{}},
+               'br':{$:{}},
+               'div':{'$':{}},
+               'li':{'$':{}},
+               'caption':transP,
+               'th':transP,
+               'tr':transP,
+               'h1':transP,'h2':transP,'h3':transP,'h4':transP,'h5':transP,'h6':transP,
+               'td':function(node){
+                   //没有内容的td直接删掉
+                   var txt = !!node.innerText();
+                   if(txt){
+                       node.parentNode.insertAfter(UE.uNode.createText(' &nbsp; &nbsp;'),node);
+                   }
+                   node.parentNode.removeChild(node,node.innerText())
+               }
+           }
+        }()
 
         //,allHtmlEnabled:false //提交到后台的数据是否包含整个html字符串
 
@@ -277,7 +292,7 @@
         //,maxUndoCount:20
         //当输入的字符数超过该值时，保存一次现场
         //,maxInputCount:1
-        
+
         //autoHeightEnabled
         // 是否自动长高,默认true
         //,autoHeightEnabled:false

@@ -3,6 +3,7 @@ target
 classes
 /src/main/webapp/dcpic/
 /src/main/resources/static/
+dwfile
 # eclipse ignore
 .settings/
 .project

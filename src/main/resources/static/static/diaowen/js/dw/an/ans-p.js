@@ -31,9 +31,6 @@ $(document).ready(function(){
       if(!$("#preview_head_top")[0]){
         checkAnswerSurvey(sid);
       }
-      // surveyLog();
-      // bindQuDateEvent();
-      // loadCommon();
     });
   });
 

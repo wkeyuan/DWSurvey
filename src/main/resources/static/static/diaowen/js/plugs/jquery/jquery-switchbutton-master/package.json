@@ -1,0 +1,39 @@
+{
+    "name": "jquery-switchbutton",
+    "version": "1.1",
+    "title": "jquery.switchbutton()",
+    "author": {
+        "name": "L. Stevenin"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "MIT-LICENSE.txt"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">=1.6.0",
+        "jquery-tmpl": ">=1.0.0pre",
+        "jquery.ui.widget": "*"
+    },
+    "description": "Enable switch mode button used on mobile devices for mode selection on your websites/webapps !",
+    "keywords": [
+        "switchbutton",
+        "iphone",
+        "android",
+        "checkbox"
+    ],
+    "homepage": "https://github.com/Naeka/jquery-switchbutton",
+    "maintainers": [
+        {
+            "name": "Naeka",
+            "url": "https://github.com/Naeka/"
+        }
+    ],
+    "files": [
+        "jquery.switchbutton.js",
+        "jquery.switchbutton.min.js",
+        "ui.switchbutton.css",
+        "ui.switchbutton.min.css"
+    ]
+}
