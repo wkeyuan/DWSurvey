@@ -1,6 +1,8 @@
 # diaowen.net maven ignore
 target
 classes
+dwfile
+src/main/resources/static/
 /src/main/webapp/dcpic/
 # eclipse ignore
 .settings/

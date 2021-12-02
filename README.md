@@ -7,21 +7,33 @@
 
 ### 全新的企业版已经发布，前后端分别采用 Ant design、Spring Boot，详情可参考官网。
 
-### 社区版已经完成前后端分离，前端基于Vue ElementUI开发，后面基于Spring Boot。
+### 社区版代码仓库矩阵与说明
 
-前端仓库地址 
+全新的社区版也已经发布，前后端分别采用 Vue + ElementUI + Spring Boot。
 
-https://gitee.com/wkeyuan/dwsurvey-vue
+从2013年至今已经积累多种技术方案，具体如下：
 
-后端仓库地址
+| 方案A | 前后端分离 ： Vue + Element ui + Spring Boot  |
+| :-----| :----: | 
+| 前端仓库 | GITEE：https://gitee.com/wkeyuan/dwsurvey-vue |
+|  | GITHUB ：https://github.com/wkeyuan/DWSurvey_Vue |
+| 后端仓库 | GITEE ：https://gitee.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot |
+|  | GITHUB： https://github.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot |
+| 方案特性 | 基于VU、前后分离开发更容易，部署维护更简单 |
 
-https://gitee.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot/
+| 方案B | 未前后分离 ： Spring Boot + JSP |
+| :-----| :----: |
+| 仓库地址 | GITEE ：https://gitee.com/wkeyuan/dwsurvey-springboot-jsp |
+| 方案特性 | 原生JS+HTML技术，支持更多浏览器，如IE6 |
 
-其它版本也在更新计划中，敬请期待。
+| 方案C | 未前后分离： Struts2 + JSP |
+| :-----| :----: |
+| 仓库地址 | GITEE：https://gitee.com/wkeyuan/dwsurvey-struts2-jsp |
+| 方案特性 | 原生JS+HTML技术，支持更多浏览器，如IE6 |
 
-关注我们更新，记得Star一下哦。 
+更多功能更多版本持续迭代专人维护，敬请关注，记得要点下右上角Star关注，方便下次查找。
 
-DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
+DWSurvey是一款方便、高效、**稳定**的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0416/132431_5d99a296_1401416.gif "dwsurvey-2.gif")
 
@@ -47,9 +59,30 @@ DWSurvey是一款方便、高效、稳定的调研问卷系统，一款基于 JA
 
 这是基于Spring Boot开发的实现. Struts2老方案在master_struts2分支.
 
+## 本地快速部署社区版
+
+提示：假设您之前已经配置有名称为dwsurvey的数据库，并且完成了数据库初始化。
+如果之前没有安装，则需要在mysql中创建名称`dwsurvey`的数据库，然后用数据脚本进行初始化。
+
+###### 1、下载JAR包
+
+可在QQ群下载，3群号811287103(可加)
+
+###### 2、输入启动命令，进入CMD输入如下命令，完成部署安装。
+
+    java -jar dwsurvey-oss-vue-v.5.0.1-Alpha.jar --server.port=8083 --spring.datasource.username=root --spring.datasource.password=123456
+
+参数说明 
+
+`--server.port=8083` 端口
+
+`--spring.datasource.username=root` 数据库账号
+
+`--spring.datasource.password=123456` 数据库账密码
+
 下面是如何使用Spring Boot方案的快速指南。
 
-## 本地开发
+## 下载代码本地开发指南
 
 1、下载代码后，用IDEA打开。
 
@@ -96,7 +129,6 @@ mvn package
 初始化脚本下载地址：
 
     https://gitee.com/wkeyuan/DWSurvey/blob/master/src/main/resources/conf/sql/
-
 
 ### 启动访问
 
