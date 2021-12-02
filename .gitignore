@@ -2,6 +2,7 @@
 target
 classes
 /src/main/webapp/dcpic/
+/src/main/resources/static/
 # eclipse ignore
 .settings/
 .project
