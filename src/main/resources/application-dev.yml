@@ -1,45 +1,67 @@
 dwsurvey:
+  # 用户模式切换，暂且保持默认 local
   site: 'local'
   web:
+    # 后端文件存储目录，默认即在安装包同级目录下
     file-path: dwfile/dwsurvey/
+    # 使用哪种部署模式，后期可能会去掉，可以先保持默认
     static-type: static
+    # 站点访问地址，如果配置有域名则为域名地址
     site-url: http://localhost:8081
+    # 资源访问地址，便于存储模式的切换，目前可以保持与site-url一样
     resource-url: http://localhost:8080
-    #    site-url: http://ent82.surveyform.cn
+    # 站点信息配置，会出现在底部footer区
     info:
+      # 站点名称
       site-name: 调问网
+      # 站点名称，对应的URL地址
       site-url: http://www.diaowen.net
+      # 站点备案号
       site-icp: 京ICP备13050030号-3
+      # 站点联系人邮箱
       site-mail: service@diaowen.net
+      # 站点联系人电话
       site-phone: 18888888888
+  # 用于微信集成相关，目前社区版还没未启用。
   weixin:
     app-id: xxx
     app-secret: xxx
     server:
       token: xxx
       encodingAESKey:
+  # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
     info: DWSurvey OSS V5.0 Boot
     number: OSS V5.0
     built: 2021/11/21
+# 服务占用的端口号
 server:
   port: 8080
 
+# Spring相关配置
 spring:
+  # json处理
   jackson:
+    # 时间编码格式
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  # spring web 配置
   web:
     resources:
+      # 静态资源目录配置，注意这里引用了上面的 dwsurvey.web.file-path 配置
       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${dwsurvey.web.file-path}
-  #       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/public/,file:${dwsurvey.web.file-path}
-
+  # 数据库配置
   datasource:
     #type: com.alibaba.druid.pool.DruidDataSource
+    # 连接URL
     url: jdbc:mysql://localhost:3306/dwsurvey?useUnicode=true&characterEncoding=utf8
+    # 连接账号
     username: root
+    # 连接密码
     password: 123456,.
+  # jpa配置
   jpa:
+    # 连接的数据库
     database: mysql
     generate-ddl: true
     show-sql: true
@@ -59,7 +81,9 @@ spring:
         cache:
           use_second_level_cache: false
           use_query_cache: false
+# 日志配置
 logging:
+  # 日志级别，具体大家可以根据实际情况来调整
   level:
     net:
       diaowen: INFO
