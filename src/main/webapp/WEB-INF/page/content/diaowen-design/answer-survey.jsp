@@ -23,7 +23,7 @@
 <script src="${ctx }/js/plugs/validate/jquery.metadata.js" type="text/javascript"></script>
 <script language="javascript" type="text/javascript" src="${ctx }/js/plugs/laydate/laydate.js"></script>
 <script type="text/javascript" src="${ctx }/js/common/ans-common.js"></script>
-<script type="text/javascript" src="${ctx }/js/common/ans-p.js"></script>
+<script type="text/javascript" src="${ctx }/js/dw/an/an-p.js"></script>
 <script type="text/javascript">
 
 </script>

@@ -18,7 +18,7 @@
 	<script language="javascript" type="text/javascript" src="${ctx }/js/plugs/laydate/laydate.js"></script>
 	<script type="text/javascript" src="${ctx }/js/common/ans-common.js"></script>
 	<link href="${ctx }/css/answer-m.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${ctx }/js/common/ans-m.js"></script>
+	<script type="text/javascript" src="${ctx }/js/dw/an/an-m.js"></script>
 	<script type="text/javascript">
 		var refCookieId = "back_${survey.id}";
 		var refCookieValue = $.cookie(refCookieId);
