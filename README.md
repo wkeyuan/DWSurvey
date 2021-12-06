@@ -23,7 +23,8 @@ DWSurvey是一款简单、高效、成熟、稳定、专业的开源问卷系统
 <div>
 ️ 全新的 <strong>社区版</strong> 也已经发布，前后端分别采用Vue、ElementUI、Spring Boot，详情可前往体验。
 <p>社区版文档地址：<a href="https://www.diaowen.net/docs">https://www.diaowen.net/docs</a></p>
-<p>社区版体验地址：<a href="https://oss.surveyform.cn">https://oss.surveyform.cn</a></p>
+
+[comment]: <> (<p>社区版体验地址：<a href="https://oss.surveyform.cn">https://oss.surveyform.cn</a></p>)
 </div>
 </div>
 
