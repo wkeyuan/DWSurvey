@@ -290,8 +290,12 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 			logger.error("不可能抛出的异常:{}", e.getMessage());
 		}
 		// 执行Count查询
+		Long totalCountObject = 0L;
+		Object uniResult = c.setProjection(Projections.rowCount()).uniqueResult();
+		if(uniResult!=null){
+			totalCountObject = (Long) uniResult;
+		}
 
-		Long totalCountObject = (Long) c.setProjection(Projections.rowCount()).uniqueResult();
 		long totalCount = (totalCountObject != null) ? totalCountObject : 0;
 
 		// 将之前的Projection,ResultTransformer和OrderBy条件重新设回去
@@ -438,6 +442,55 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 		}
 		setPageRequestToCriteria(c, pageRequest);
 
+		List result = c.list();
+		page.setResult(result);
+		return page;
+	}
+
+
+	public Page<T> findPageOderBy(Page<T> pageRequest,String orderByProperty, boolean isAsc, List<Criterion> criterions) {
+		Criteria c = createCriteria(criterions);
+		if (isAsc) {
+			c.addOrder(Order.asc(orderByProperty));
+		} else {
+			c.addOrder(Order.desc(orderByProperty));
+		}
+
+		Page<T> page = new Page<T>(pageRequest);
+		if (pageRequest.isCountTotal()) {
+			long totalCount = countCriteriaResult(c);
+			page.setTotalItems(totalCount);
+			pageRequest.setTotalPage(page.getTotalPage());
+		}
+		if(pageRequest.isIslastpage()){
+			pageRequest.setPageNo(pageRequest.getTotalPage());
+			page.setPageNo(pageRequest.getPageNo());
+		}
+		setPageRequestToCriteria(c, pageRequest);
+		List result = c.list();
+		page.setResult(result);
+		return page;
+	}
+
+	public Page<T> findPageOderBy(Page<T> pageRequest,String orderByProperty, boolean isAsc, Criterion... criterions) {
+		Criteria c = createCriteria(criterions);
+		if (isAsc) {
+			c.addOrder(Order.asc(orderByProperty));
+		} else {
+			c.addOrder(Order.desc(orderByProperty));
+		}
+
+		Page<T> page = new Page<T>(pageRequest);
+		if (pageRequest.isCountTotal()) {
+			long totalCount = countCriteriaResult(c);
+			page.setTotalItems(totalCount);
+			pageRequest.setTotalPage(page.getTotalPage());
+		}
+		if(pageRequest.isIslastpage()){
+			pageRequest.setPageNo(pageRequest.getTotalPage());
+			page.setPageNo(pageRequest.getPageNo());
+		}
+		setPageRequestToCriteria(c, pageRequest);
 		List result = c.list();
 		page.setResult(result);
 		return page;

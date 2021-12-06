@@ -11,14 +11,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class IPService {
 
+	@Autowired
+	private IPLocationService ipLocationService;
+
+	public IPLocation getIpLocation(String ip) {
+		if(ip==null){
+			return null;
+		}
+		try{
+			return ipLocationService.getLocationByIp(ip);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	/**
 	 * 根据ip取得所在地区
 	 * @param ip
 	 * @return
 	 */
 	public String getCountry(String ip) {
-		//空实现
-		return null;
+		if(ip==null){
+			return "";
+		}
+		return ipLocationService.getLocationByIp(ip).getProvince();
 	}
 
 	/**

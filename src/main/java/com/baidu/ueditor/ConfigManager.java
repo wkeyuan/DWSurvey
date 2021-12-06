@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonParser;
+import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -51,7 +52,8 @@ public final class ConfigManager {
 
 		this.initEnv();
 		this.jsonConfig.put("userId",userId);
-
+		// 修改resource路径 = DWSURVEY_WEB_RESOURCE_URL
+		resetUrlPrefix();
 	}
 
 	/**
@@ -167,8 +169,10 @@ public final class ConfigManager {
 		}
 
 		this.parentPath = file.getParent();
-		//		String configContent = this.filter(this.getClass().getClassLoader().getResourceAsStream("static/ueditor/config.json"));
-		String configContent = this.readFile( this.getConfigPath() );
+//		String configContent = this.filter(this.getClass().getClassLoader().getResourceAsStream("static/ueditor/config.json"));
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("conf/ue/config.json");
+		String configContent = this.readFile(inputStream);
+//		String configContent = this.readFile( this.getConfigPath() );
 		try{
 			JSONObject jsonConfig = new JSONObject( configContent );
 			this.jsonConfig = jsonConfig;
@@ -179,10 +183,7 @@ public final class ConfigManager {
 	}
 
 	private String getConfigPath ()  {
-//		return this.parentPath + File.separator + ConfigManager.configFileName;
 		try{
-//			File confFile = ResourceUtils.getFile("classpath:conf/ue/config.json");
-//			String path = confFile.getPath();
 			ClassPathResource classPathResource =  new ClassPathResource("conf/ue/config.json");
 			String path = classPathResource.getURI().getPath();
 			return path;
@@ -230,11 +231,49 @@ public final class ConfigManager {
 
 	}
 
+	private String readFile ( InputStream inputStream ) throws IOException {
+
+		StringBuilder builder = new StringBuilder();
+
+		try {
+
+			InputStreamReader reader = new InputStreamReader( inputStream, "UTF-8" );
+			BufferedReader bfReader = new BufferedReader( reader );
+
+			String tmpContent = null;
+
+			while ( ( tmpContent = bfReader.readLine() ) != null ) {
+				builder.append( tmpContent );
+			}
+
+			bfReader.close();
+
+		} catch ( UnsupportedEncodingException e ) {
+			// 忽略
+		}
+
+		return this.filter( builder.toString() );
+
+	}
+
 	// 过滤输入字符串, 剔除多行注释以及替换掉反斜杠
 	private String filter ( String input ) {
 
 		return input.replaceAll( "/\\*[\\s\\S]*?\\*/", "" );
 
+	}
+
+	private void resetUrlPrefix(){
+		String preFixUrl = DWSurveyConfig.DWSURVEY_WEB_RESOURCE_URL;
+		System.out.println("preFixUrl:"+preFixUrl);
+		this.jsonConfig.put("imageUrlPrefix", preFixUrl);
+		this.jsonConfig.put("scrawlUrlPrefix", preFixUrl);
+		this.jsonConfig.put("snapscreenUrlPrefix", preFixUrl);
+		this.jsonConfig.put("catcherUrlPrefix", preFixUrl);
+		this.jsonConfig.put("videoUrlPrefix", preFixUrl);
+		this.jsonConfig.put("fileUrlPrefix", preFixUrl);
+		this.jsonConfig.put("imageManagerUrlPrefix", preFixUrl);
+		this.jsonConfig.put("fileManagerUrlPrefix", preFixUrl);
 	}
 
 }

@@ -26,22 +26,20 @@ public class SurveyDetail extends IdEntity{
 	private Integer effectiveTime=5;
 	//每个IP只能答一次 1是 0否
 	private Integer effectiveIp=0;
-	
+
 	//防刷新  1启用 0不启用
 	private Integer refresh=1;
 	private Integer refreshNum=3;
-	
-	//调查规则  --------  1公开, 2私有, 3令牌 
+
+	//调查规则  --------  1公开, 2私有, 3令牌
 	//3 表示启用访问密码
 	private Integer rule=1;
 	private String ruleCode="令牌";
-	
+
 	//结束方式  ---------- 1手动结束   2依据结束时间  3依据收到的份数
 	private Integer endType=1;
 	//结束时间
 	private Date endTime;
-	//结束时间
-	private Date startTime;
 	//收到的份数
 	private Integer endNum=1000;
 	//问卷说明
@@ -50,23 +48,22 @@ public class SurveyDetail extends IdEntity{
 	//是否依据收到的份数结束
 	private Integer ynEndNum=0;
 	private Integer ynEndTime=0;
-	private Integer ynStartTime=0;
 
 	//问卷
-	//问卷下面有多少题目数  ---  
+	//问卷下面有多少题目数  ---
 	private Integer surveyQuNum=0;
-	//可以回答的最少选项数目 
+	//可以回答的最少选项数目
 	private Integer anItemLeastNum=0;
 	//可以回答的最多选项数目
 	private Integer anItemMostNum=0;
-	
+
 	//只有邮件邀请唯一链接的受访者可回答  1启用 0不启用
 	private Integer mailOnly=0;
-	
+
 	//显示分享
 	private Integer showShareSurvey=1;
 	private Integer showAnswerDa=0;
-	
+
 	public String getDirId() {
 		return dirId;
 	}
@@ -163,7 +160,7 @@ public class SurveyDetail extends IdEntity{
 	public void setEffectiveIp(Integer effectiveIp) {
 	    this.effectiveIp = effectiveIp;
 	}
-	
+
 	public Integer getYnEndNum() {
 	    return ynEndNum;
 	}
@@ -189,19 +186,4 @@ public class SurveyDetail extends IdEntity{
 	    this.showAnswerDa = showAnswerDa;
 	}
 
-	public Date getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public Integer getYnStartTime() {
-		return ynStartTime;
-	}
-
-	public void setYnStartTime(Integer ynStartTime) {
-		this.ynStartTime = ynStartTime;
-	}
 }

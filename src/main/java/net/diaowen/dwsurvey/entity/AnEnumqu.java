@@ -16,7 +16,7 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_an_enumqu")
 public class AnEnumqu extends IdEntity{
-	
+
 	//所属问卷ID
 	private String belongId;
 	//对应的答卷信息表
@@ -27,11 +27,11 @@ public class AnEnumqu extends IdEntity{
 	private Integer enumItem;
 	//结果
 	private String answer;
-	
+
 	private Integer visibility=1;
-	
+
 	public AnEnumqu(){
-		
+
 	}
 	public AnEnumqu(String surveyId, String surveyAnswerId, String quId,
 			Integer quItemNum, String answerValue) {
@@ -77,5 +77,5 @@ public class AnEnumqu extends IdEntity{
 	public void setVisibility(Integer visibility) {
 		this.visibility = visibility;
 	}
-	
+
 }

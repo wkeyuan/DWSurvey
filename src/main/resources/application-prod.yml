@@ -1,37 +1,39 @@
 dwsurvey:
   site: 'local'
   web:
-    file-path: ~/Documents/target/
-    back-site:
-      mode: auto
-      url: http://localhost:8282/dwsurvey
-    up:
-      file-type:
-        anon: JPEG,PNG,GIF
-        user: JPEG,PNG,GIF,XLS
+    file-path: diaowen/file/
+    static-type: static
+    site-url: http://localhost:8080
+    resource-url: http://localhost:8080
+    #    site-url: http://ent82.surveyform.cn
     info:
       site-name: 调问网
       site-url: http://www.diaowen.net
       site-icp: 京ICP备13050030号-3
       site-mail: service@diaowen.net
       site-phone: 18888888888
+  weixin:
+    app-id: xxx
+    app-secret: xxx
+    server:
+      token: xxx
+      encodingAESKey:
   version:
-    info: DWSurvey OSS V4.0 Spring Boot
-    number: OSS V4.0
+    info: DWSurvey OSS V5.0 Boot
+    number: OSS V5.0
     built: 2021/11/21
-# mysql
 server:
   port: 8080
 
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   web:
     resources:
       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${dwsurvey.web.file-path}
-  mvc:
-    static-path-pattern: /**
-    view:
-      prefix: /WEB-INF/page/content
-      suffix: .jsp
+  #       static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/public/,file:${dwsurvey.web.file-path}
+
   datasource:
     #type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/dwsurvey_21test?useUnicode=true&characterEncoding=utf8
@@ -43,16 +45,17 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-     # naming:
+      # naming:
       #  implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl #指定jpa的自动表生成策略，驼峰自动映射为下划线格式
     properties:
       hibernate:
         #是否自动打印hql对应的sql语句
-        show-sql: false
+        show_sql: false
         #是否格式化sql语句
-        format-sql: false
+        format_sql: false
         #事务交由spring管理
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        #        enable_lazy_load_no_trans: true
         cache:
           use_second_level_cache: false
           use_query_cache: false

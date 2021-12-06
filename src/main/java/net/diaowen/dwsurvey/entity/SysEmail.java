@@ -33,7 +33,7 @@ public class SysEmail extends IdEntity{
 	private Date createDate=new Date();
 	//state
 	private Integer state;
-	
+
 	public String getStmpServer() {
 		return stmpServer;
 	}
@@ -97,5 +97,5 @@ public class SysEmail extends IdEntity{
 	public void setState(Integer state) {
 		this.state = state;
 	}
-	
+
 }

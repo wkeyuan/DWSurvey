@@ -48,5 +48,5 @@ public class SysDbBackup extends IdEntity{
 	public void setDes(String des) {
 		this.des = des;
 	}
-	
+
 }

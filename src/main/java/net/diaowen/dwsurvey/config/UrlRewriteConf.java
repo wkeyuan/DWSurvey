@@ -11,7 +11,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-@Configuration
+// @Configuration
 public class UrlRewriteConf extends UrlRewriteFilter {
     private static final String URL_REWRITE = "classpath:conf/urlrewrite.xml";
 

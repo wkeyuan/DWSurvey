@@ -239,7 +239,6 @@ public abstract class ReflectionUtils {
 		Field[] fileds=fromObj.getClass().getDeclaredFields();
 		for (Field field : fileds) {
 			try {
-//				String fieldName=field.getName();
 				field.setAccessible(true);
 				Object value = field.get(fromObj);
 				field.set(copyObj, value);

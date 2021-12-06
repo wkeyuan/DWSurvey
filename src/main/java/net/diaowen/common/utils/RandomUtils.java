@@ -6,6 +6,10 @@ import java.util.Random;
 
 public class RandomUtils {
 
+	public static void main(String[] args) throws Exception{
+
+	}
+
 	public static String randomWord(int min,int max) {
 		String randomStr = "";
 		int ranNum = randomInt(min, max);
@@ -17,21 +21,16 @@ public class RandomUtils {
 		return randomStr;
 	}
 
-	public static String randomNum(int minSize,int maxSize){
-		String randNums="";
-		int temp=randomInt(minSize,maxSize);
-		for (int i = 0; i <temp ; i++) {
-			randNums+=random(0, 10);
-		}
-		return randNums;
-	}
-
 	public static String randomWordNum(int max) {
+
 		int ranNum = randomInt(1, max);
 		int ranWord=max-ranNum;
-		String randomNum=randomNum(ranNum, ranNum);
 		String randomWord=randomWord(ranWord, ranWord);
-		return randomNum+randomWord;
+		if(max>3){
+			String randomNum=random(ranNum-2, ranNum)+"";
+			return randomNum+randomWord;
+		}
+		return randomWord;
 	}
 
 	public static int randomInt(int minNum, int maxNum) {
@@ -60,13 +59,17 @@ public class RandomUtils {
 	       return null;
 	   }
 
-	   private static long random(long begin, long end) {
-	       long rtnn = begin + (long) (Math.random() * (end - begin));
-	       if (rtnn == begin || rtnn == end) {
-	           return random(begin, end);
-	       }
-	       return rtnn;
+	   public static long random(long begin, long end) {
+			if((begin+2)>=end){
+				begin = end-2;
+			}
+		   long rtnn = begin + (long) (Math.random() * (end - begin));
+		   if (rtnn == begin || rtnn == end) {
+			   return random(begin, end);
+		   }
+		   return rtnn;
 	   }
+
 
 	  public static String randomStr(int minLen,int maxLen){
 		String base = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -79,5 +82,58 @@ public class RandomUtils {
 		 }
 		 return sb.toString();
 	  }
+
+	public static String buildOrderCode(){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHsSSS");
+		String dateFormat = simpleDateFormat.format(new Date());
+//		return dateFormat+RandomUtils.randomNum(4,4);
+//		dateFormat = RandomUtils.randomWord(5,5).toUpperCase();
+		return dateFormat+"-"+RandomUtils.random(100000l,999999l);
+	}
+
+	public static long getVerifyCode() {
+		return random(100000l,999999l);
+	}
+
+	public static String buildCodeyyMMdd(){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmsSSS");
+		String dateFormat = simpleDateFormat.format(new Date());
+//		return dateFormat+RandomUtils.randomNum(4,4);
+//		dateFormat = RandomUtils.randomWord(5,5).toUpperCase();
+		return dateFormat+"-"+RandomUtils.getVerifyCode();
+//		20150806125346
+	}
+
+	public static String buildCodeyyMMdd32(){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmssSSS");
+		String dateFormat = simpleDateFormat.format(new Date());
+//		return dateFormat+RandomUtils.randomNum(4,4);
+//		dateFormat = RandomUtils.randomWord(5,5).toUpperCase();
+		return dateFormat+"-"+RandomUtils.getVerifyCode();
+//		yyMMdd HHmmss SSS 15
+	}
+
+	public static String buildOrderNo(){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmsSSS");
+		String dateFormat = simpleDateFormat.format(new Date());
+//		return dateFormat+RandomUtils.randomNum(4,4);
+//		dateFormat = RandomUtils.randomWord(5,5).toUpperCase();
+		return dateFormat+RandomUtils.getVerifyCode();
+//		20150806125346
+	}
+
+	public static String buildEntCode() {
+		return randomWord(4,6);
+	}
+
+	public static String buildAppKey() {
+		return randomWord(8,10)+randomStr(8,10);
+	}
+
+	public static String buildAppSecret() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmsSSS");
+		String dateFormat = simpleDateFormat.format(new Date());
+		return randomWord(8,10)+System.currentTimeMillis();
+	}
 
 }

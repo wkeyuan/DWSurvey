@@ -8,10 +8,14 @@ public class DWSurveyConfig {
 
     public static String DWSURVEY_SITE = null;
     public static String DWSURVEY_WEB_FILE_PATH = null;
-    public static String DWSURVEY_WEB_BACK_SITE_MODE = null;
-    public static String DWSURVEY_WEB_BACK_SITE_URL = null;
-    public static String DWSURVEY_WEB_UP_FILE_TYPE_ANON_ = null;
-    public static String DWSURVEY_WEB_UP_FILE_TYPE_USER = null;
+    public static String DWSURVEY_WEB_SITE_URL = null;
+    public static String DWSURVEY_WEB_RESOURCE_URL = null;
+    public static String DWSURVEY_WEB_STATIC_TYPE = null;
+    public static String DWSURVEY_WEIXIN_APP_ID = null;
+    public static String DWSURVEY_WEIXIN_APP_SECRET = null;
+    public static String DWSURVEY_WEIXIN_SERVER_TOKEN = null;
+    public static String DWSURVEY_WEIXIN_SERVER_AESKEY = null;
+
     public static String DWSURVEY_VERSION_INFO = null;
     public static String DWSURVEY_VERSION_NUMBER = null;
     public static String DWSURVEY_VERSION_BUILT = null;
@@ -21,34 +25,50 @@ public class DWSurveyConfig {
     public static String DWSURVEY_WEB_INFO_SITE_MAIL = null;
     public static String DWSURVEY_WEB_INFO_SITE_PHONE = null;
 
-    @Value("${dwsurvey.site}")
-    public void setDwsurveySite(String dwsurveySite) {
-        DWSurveyConfig.DWSURVEY_SITE = dwsurveySite;
-    }
 
     @Value("${dwsurvey.web.file-path}")
-    public void setDwsurveyWebFilePath(String dwsurveyWebFilePath) {
-        DWSurveyConfig.DWSURVEY_WEB_FILE_PATH = dwsurveyWebFilePath;
+    public void setWebFilePath(String webFilePath) {
+        DWSurveyConfig.DWSURVEY_WEB_FILE_PATH = webFilePath;
     }
 
-    @Value("${dwsurvey.web.back-site.mode}")
-    public void setDwsurveyWebBackSiteMode(String dwsurveyWebBackSiteMode) {
-        DWSurveyConfig.DWSURVEY_WEB_BACK_SITE_MODE = dwsurveyWebBackSiteMode;
+    @Value("${dwsurvey.web.site-url}")
+    public void setWebSiteUrl(String webSiteUrl) {
+        DWSurveyConfig.DWSURVEY_WEB_SITE_URL = webSiteUrl;
     }
 
-    @Value("${dwsurvey.web.back-site.url}")
-    public void setDwsurveyWebBackSiteUrl(String dwsurveyWebBackSiteUrl) {
-        DWSurveyConfig.DWSURVEY_WEB_BACK_SITE_URL = dwsurveyWebBackSiteUrl;
+    @Value("${dwsurvey.web.resource-url}")
+    public void setWebResourceUrl(String dwsurveyWebResourceUrl) {
+        DWSURVEY_WEB_RESOURCE_URL = dwsurveyWebResourceUrl;
     }
 
-    @Value("${dwsurvey.web.up.file-type.anon}")
-    public void setDwsurveyWebUpFileTypeAnon(String dwsurveyWebUpFileTypeAnon) {
-        DWSURVEY_WEB_UP_FILE_TYPE_ANON_ = dwsurveyWebUpFileTypeAnon;
+    @Value("${dwsurvey.web.static-type}")
+    public void setWebStaticType(String webStaticType) {
+        DWSurveyConfig.DWSURVEY_WEB_STATIC_TYPE = webStaticType;
     }
 
-    @Value("${dwsurvey.web.up.file-type.user}")
-    public void setDwsurveyWebUpFileTypeUser(String dwsurveyWebUpFileTypeUser) {
-        DWSURVEY_WEB_UP_FILE_TYPE_USER = dwsurveyWebUpFileTypeUser;
+    @Value("${dwsurvey.weixin.app-id}")
+    public void setWeixinAppId(String weixinAppId) {
+        DWSurveyConfig.DWSURVEY_WEIXIN_APP_ID = weixinAppId;
+    }
+
+    @Value("${dwsurvey.weixin.app-secret}")
+    public void setWeixinAppSecret(String weixinAppSecret) {
+        DWSurveyConfig.DWSURVEY_WEIXIN_APP_SECRET = weixinAppSecret;
+    }
+
+    @Value("${dwsurvey.weixin.server.token}")
+    public void setDwsurveyWeixinServerToken(String weixinServerToken) {
+        DWSurveyConfig.DWSURVEY_WEIXIN_SERVER_TOKEN = weixinServerToken;
+    }
+
+    @Value("${dwsurvey.weixin.server.encodingAESKey}")
+    public void setDwsurveyWeixinServerAeskey(String weixinAppSecret) {
+        DWSurveyConfig.DWSURVEY_WEIXIN_SERVER_AESKEY = weixinAppSecret;
+    }
+
+    @Value("${dwsurvey.site}")
+    public void setDwsurveyDemo(String dwsurveySite) {
+        DWSurveyConfig.DWSURVEY_SITE = dwsurveySite;
     }
 
 
@@ -58,9 +78,7 @@ public class DWSurveyConfig {
     }
 
     @Value("${dwsurvey.version.number}")
-    public void setDwsurveyVersionNumber(String dwsurveyVersionNumber) {
-        DWSURVEY_VERSION_NUMBER = dwsurveyVersionNumber;
-    }
+    public void setDwsurveyVersionNumber(String dwsurveyVersionNumber) { DWSURVEY_VERSION_NUMBER = dwsurveyVersionNumber; }
 
     @Value("${dwsurvey.version.built}")
     public void setDwsurveyVersionBuilt(String dwsurveyVersionBuilt) {
@@ -68,9 +86,7 @@ public class DWSurveyConfig {
     }
 
     @Value("${dwsurvey.web.info.site-name}")
-    public void setDwsurveyWebInfoName(String dwsurveyWebInfoName) {
-        DWSURVEY_WEB_INFO_SITE_NAME = dwsurveyWebInfoName;
-    }
+    public void setDwsurveyWebInfoName(String dwsurveyWebInfoName) { DWSURVEY_WEB_INFO_SITE_NAME = dwsurveyWebInfoName;}
 
     @Value("${dwsurvey.web.info.site-url}")
     public void setDwsurveyWebInfoUrl(String dwsurveyWebInfoName) {
@@ -83,12 +99,8 @@ public class DWSurveyConfig {
     }
 
     @Value("${dwsurvey.web.info.site-mail}")
-    public void setDwsurveyWebInfoMail(String dwsurveyWebInfoMail) {
-        DWSURVEY_WEB_INFO_SITE_MAIL = dwsurveyWebInfoMail;
-    }
+    public void setDwsurveyWebInfoMail(String dwsurveyWebInfoMail) { DWSURVEY_WEB_INFO_SITE_MAIL = dwsurveyWebInfoMail; }
 
     @Value("${dwsurvey.web.info.site-phone}")
-    public void setDwsurveyWebInfoSitePhone(String dwsurveyWebInfoSitePhone) {
-        DWSURVEY_WEB_INFO_SITE_PHONE = dwsurveyWebInfoSitePhone;
-    }
+    public void setDwsurveyWebInfoSitePhone(String dwsurveyWebInfoSitePhone) { DWSURVEY_WEB_INFO_SITE_PHONE = dwsurveyWebInfoSitePhone; }
 }

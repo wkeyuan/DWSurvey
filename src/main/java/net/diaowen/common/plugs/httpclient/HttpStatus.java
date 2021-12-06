@@ -15,6 +15,7 @@ public class HttpStatus {
 	public static HttpStatus SUCCESS = new HttpStatus(200,"执行成功");//200 全部成功
 	public static HttpStatus FAILURE = new HttpStatus(400,"执行失败");//200 执行失败
 	public static HttpStatus NOLOGIN = new HttpStatus(401,"未登录");//200 执行失败
+	public static HttpStatus SERVER_403 = new HttpStatus(403,"权限不够");//200 要失败
 	public static HttpStatus EXCEPTION = new HttpStatus(500,"服务端异常");
 
 //	业务返回

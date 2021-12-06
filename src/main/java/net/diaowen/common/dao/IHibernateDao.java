@@ -109,4 +109,8 @@ public interface IHibernateDao<T, ID extends Serializable> extends ISimpleHibern
 
 	public List<T> findAll(CriteriaQuery criteriaQuery);
 
+	public Page<T> findPageOderBy(Page<T> pageRequest,String orderByProperty, boolean isAsc, List<Criterion> criterions);
+	public Page<T> findPageOderBy(Page<T> pageRequest,String orderByProperty, boolean isAsc, Criterion... criterions);
+
+
 }

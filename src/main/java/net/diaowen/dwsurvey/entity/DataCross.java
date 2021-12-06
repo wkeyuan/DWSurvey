@@ -13,16 +13,16 @@ import java.util.List;
  * http://dwsurvey.net
  */
 public class DataCross {
-	
-	
+
+
 	private String optionName;
-	
+
 	private int count;
-	
+
 //	private int colCount;
-	
+
 //	private int rowCount;
-	
+
 	private List<DataCross> colDataCrosss=new ArrayList<DataCross>();
 
 	public int getCount() {
@@ -48,7 +48,7 @@ public class DataCross {
 	public void setColDataCrosss(List<DataCross> colDataCrosss) {
 		this.colDataCrosss = colDataCrosss;
 	}
-	
-	
-	
+
+
+
 }

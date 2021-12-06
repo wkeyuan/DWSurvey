@@ -25,13 +25,13 @@ public class AnOrder extends IdEntity{
 	private String quId;
 	//对应的行ID
 	private String quRowId;
-	//对应的结果，即分值 
+	//对应的结果，即分值
 	private String orderyNum;
-	
+
 	private Integer visibility=1;
-	
+
 	public AnOrder(){
-		
+
 	}
 	public AnOrder(String surveyId, String surveyAnswerId, String quId,String quRowId,String orderyNum) {
 		this.belongId=surveyId;

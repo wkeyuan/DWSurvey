@@ -29,6 +29,8 @@ public interface BaseService<T extends IdEntity,ID extends Serializable> {
 
 	public T getModel(ID id);
 
+	public T findById(ID id);
+
 	public List<T> findList(Criterion... criterions);
 
 	public Page<T> findPage(Page<T> page, Criterion... criterion);

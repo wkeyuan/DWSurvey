@@ -1,11 +1,11 @@
 package net.diaowen.dwsurvey.service.impl;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 import net.diaowen.common.QuType;
+import net.diaowen.common.base.entity.User;
+import net.diaowen.common.plugs.page.Page;
+import net.diaowen.common.service.BaseServiceImpl;
 import net.diaowen.common.utils.excel.XLSXExportUtil;
+import net.diaowen.common.utils.parsehtml.HtmlUtil;
 import net.diaowen.dwsurvey.dao.SurveyAnswerDao;
 import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.service.*;
@@ -15,14 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.diaowen.common.base.entity.User;
-import net.diaowen.common.plugs.page.Page;
-import net.diaowen.common.service.BaseServiceImpl;
-import net.diaowen.common.utils.excel.XLSExportUtil;
-import net.diaowen.common.utils.parsehtml.HtmlUtil;
-import org.springframework.web.util.WebUtils;
-
-import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -546,21 +541,6 @@ public class SurveyAnswerManagerImpl extends
 		return surveyAnswerDao.surveyStatsData(surveyStats);
 	}
 
-	@Override
-	public Page<SurveyAnswer> joinSurvey(Page<SurveyAnswer> page, User user) {
-		if(user!=null){
-			//查找所有参加过的问卷ID号
-			Criterion criterion=Restrictions.eq("userId", user.getId());
-			page.setOrderBy("endAnDate");
-			page.setOrderDir("desc");
-			page=findPage(page, criterion);
-			List<SurveyAnswer> answers=page.getResult();
-			for (SurveyAnswer surveyAnswer : answers) {
-				surveyAnswer.setSurveyDirectory(directoryManager.get(surveyAnswer.getSurveyId()));
-			}
-		}
-		return page;
-	}
 
 	/**
 	 * 取一份卷子回答的数据
@@ -584,6 +564,35 @@ public class SurveyAnswerManagerImpl extends
 		return surveyAnswerDao.findByOrder("endAnDate",false,cri1, cri2);
 	}
 
+
+
+	@Transactional
+	public SurveyDirectory upAnQuNum(String surveyId){
+		SurveyDirectory survey = directoryManager.get(surveyId);
+		upAnQuNum(survey);
+		return survey;
+	}
+
+	@Transactional
+	public SurveyDirectory upAnQuNum(SurveyDirectory survey){
+		Long answerCount = surveyAnswerDao.countResult(survey.getId());
+		if(answerCount!=null){
+			survey.setAnswerNum(answerCount.intValue());
+			directoryManager.saveByAdmin(survey);
+		}
+		return survey;
+	}
+
+	@Transactional
+	@Override
+	public void deleteData(String[] ids) {
+		String surveyId = null;
+		for (String id:ids) {
+			SurveyAnswer surveyAnswer = get(id);
+			surveyId = surveyAnswer.getSurveyId();
+			delete(surveyAnswer);
+		}
+	}
 
 	@Override
 	@Transactional

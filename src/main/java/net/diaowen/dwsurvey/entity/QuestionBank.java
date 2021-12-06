@@ -20,7 +20,7 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_question_bank")
 public class QuestionBank extends IdEntity{
-	
+
 	private String parentId="";
 	private String bankName;
 	//说明
@@ -31,7 +31,7 @@ public class QuestionBank extends IdEntity{
 	private Date createDate=new Date();
 	//是否显示  1显示 0不显示
 	private Integer visibility=1;
-	
+
 	//是用户共享题库还是官方问卷库
 	//共享题库 0 官方库   1用户共享
 	private Integer bankTag=0;
@@ -47,7 +47,7 @@ public class QuestionBank extends IdEntity{
 	private Integer quNum=0;
 	//引用次数
 	private Integer excerptNum=0;
-	
+
 	public String getParentId() {
 		return parentId;
 	}
@@ -126,7 +126,7 @@ public class QuestionBank extends IdEntity{
 	public void setExcerptNum(Integer excerptNum) {
 		this.excerptNum = excerptNum;
 	}
-	
+
 	//用户名
 	private String userName;
 	@Formula("(select o.name from t_user o where o.id = user_id)")

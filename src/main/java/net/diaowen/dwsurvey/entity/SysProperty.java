@@ -7,8 +7,8 @@ package net.diaowen.dwsurvey.entity;
  * http://dwsurvey.net
  */
 public class SysProperty {
-	
-	//站点名称 
+
+	//站点名称
 	private String siteName;
 	//LOGO地址
 	private String logoPath;
@@ -22,7 +22,7 @@ public class SysProperty {
 	private String icpCode;
 	//网站开关
 	private Integer state=1;
-	
+
 	public String getSiteName() {
 		return siteName;
 	}
@@ -65,5 +65,5 @@ public class SysProperty {
 	public void setAdminTelephone(String adminTelephone) {
 		this.adminTelephone = adminTelephone;
 	}
-	
+
 }

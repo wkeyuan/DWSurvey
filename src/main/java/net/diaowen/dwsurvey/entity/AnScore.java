@@ -25,13 +25,13 @@ public class AnScore extends IdEntity{
 	private String quId;
 	//对应的行ID
 	private String quRowId;
-	//对应的结果，即分值 
+	//对应的结果，即分值
 	private String answserScore;
-	
+
 	private Integer visibility=1;
-	
+
 	public AnScore(){
-		
+
 	}
 	public AnScore(String surveyId, String surveyAnswerId, String quId,String quRowId,String answserScore) {
 		this.belongId=surveyId;
@@ -76,5 +76,5 @@ public class AnScore extends IdEntity{
 	public void setVisibility(Integer visibility) {
 		this.visibility = visibility;
 	}
-	
+
 }

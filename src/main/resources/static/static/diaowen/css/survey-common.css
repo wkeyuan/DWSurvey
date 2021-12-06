@@ -1,0 +1,6 @@
+select {
+  border: 1px #ddd solid;
+  outline: none;
+  height: 40px;
+  color: #666;
+}

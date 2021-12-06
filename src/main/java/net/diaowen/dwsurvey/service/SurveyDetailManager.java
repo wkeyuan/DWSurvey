@@ -11,7 +11,8 @@ import net.diaowen.dwsurvey.entity.SurveyDetail;
  * http://dwsurvey.net
  */
 public interface SurveyDetailManager extends BaseService<SurveyDetail, String>{
-	
+
 	public SurveyDetail getBySurveyId(String surveyId);
-	
+
+	public void saveBaseUp(SurveyDetail t);
 }

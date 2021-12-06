@@ -1,9 +1,9 @@
 package net.diaowen.common.base.service;
 
+import java.util.Date;
 import java.util.List;
 
 import net.diaowen.common.base.entity.User;
-import net.diaowen.common.plugs.page.PageRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.diaowen.common.base.dao.UserDao;
 import net.diaowen.common.exception.ServiceException;
-import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.plugs.security.ShiroDbRealm;
 import net.diaowen.common.utils.security.DigestUtils;
 
@@ -31,7 +30,6 @@ public class AccountManager {
 
 	@Autowired
 	private UserDao userDao;
-
 
 //	@Autowired
 //	private NotifyMessageProducer notifyMessageProducer;//JMS消息推送
@@ -77,17 +75,21 @@ public class AccountManager {
 	}
 
 	@Transactional
-	public void updatePwd(String curpwd, String newPwd) {
+	public boolean updatePwd(String curpwd, String newPwd) {
 		User user = getCurUser();
 		if(user!=null){
-			//判断是否有重复用户
-			String curShaPassword = DigestUtils.sha1Hex(curpwd);
-			if(user.getShaPassword().equals(curShaPassword)){
-				String shaPassword = DigestUtils.sha1Hex(newPwd);
-				user.setShaPassword(shaPassword);
-				userDao.save(user);
+			if(curpwd!=null && newPwd!=null){
+				//判断是否有重复用户
+				String curShaPassword = DigestUtils.sha1Hex(curpwd);
+				if(user.getShaPassword().equals(curShaPassword)){
+					String shaPassword = DigestUtils.sha1Hex(newPwd);
+					user.setShaPassword(shaPassword);
+					userDao.save(user);
+					return true;
+				}
 			}
 		}
+		return false;
 	}
 	/*public User getByUid(String userSource,String uid){
 		Criterion cri1=Restrictions.eq("thirdSource", userSource);
@@ -167,6 +169,7 @@ public class AccountManager {
 		}
 		return null;
 	}
+
 
 
 }

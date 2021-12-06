@@ -6,8 +6,6 @@ import com.baidu.ueditor.define.State;
 
 import java.io.*;
 
-import net.diaowen.common.plugs.file.FileMagic;
-import net.diaowen.common.plugs.file.FileMagicUtils;
 import org.apache.commons.io.FileUtils;
 
 public class StorageManager {
@@ -17,11 +15,6 @@ public class StorageManager {
 	}
 
 	public static State saveBinaryFile(byte[] data, String path) {
-
-		if(!FileMagicUtils.isUserUpFileType(data)){
-			return new BaseState(false, AppInfo.NOT_ALLOW_FILE_TYPE);
-		}
-
 		File file = new File(path);
 
 		State state = valid(file);
@@ -71,11 +64,6 @@ public class StorageManager {
 				return new BaseState(false, AppInfo.MAX_SIZE);
 			}
 
-			if(!FileMagicUtils.isUserUpFileType(tmpFile)){
-				tmpFile.delete();
-				return new BaseState(false, AppInfo.NOT_ALLOW_FILE_TYPE);
-			}
-
 			state = saveTmpFile(tmpFile, path);
 
 			if (!state.isSuccess()) {
@@ -107,11 +95,6 @@ public class StorageManager {
 			}
 			bos.flush();
 			bos.close();
-
-			if(!FileMagicUtils.isUserUpFileType(tmpFile)) {
-				tmpFile.delete();
-				return new BaseState(false, AppInfo.NOT_ALLOW_FILE_TYPE);
-			}
 
 			state = saveTmpFile(tmpFile, path);
 

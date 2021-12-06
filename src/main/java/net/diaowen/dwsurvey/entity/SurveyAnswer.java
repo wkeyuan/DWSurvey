@@ -31,15 +31,15 @@ public class SurveyAnswer extends IdEntity{
 	private String ipAddr;
 	//回答者是详细地址
 	private String addr;
-	//回答者城市 
+	//回答者城市
 	private String city;
 	//回答者MAC
 	private String pcMac;
 	//回答的题数
 	private Integer quNum;
-	
+
 	/** 回复的此条数据统计信息 **/
-	
+
 	/** 数据--完成情况    是否全部题都回答  **/
 	//是否完成  1完成
 	private Integer isComplete;
@@ -47,20 +47,20 @@ public class SurveyAnswer extends IdEntity{
 	private Integer completeNum;
 	//回答的题项目数 ---- 表示有些题下面会有多重回答
 	private Integer completeItemNum;
-	
+
 	/** 数据--有效情况   根据设计问卷时指定的必填项 **/
 	//是否是有效数据  1有效
 	private Integer isEffective;
-	
+
 	/** 数据--审核情况  **/
 	//审核状态  0未处理 1通过 2不通过
 	private Integer handleState=0;
-	
+
 	/** 不同来源数据 **/
 	//数据来源  0网调  1录入数据 2移动数据 3导入数据
 	private Integer dataSource=0;
-	
-	
+
+
 	public String getSurveyId() {
 		return surveyId;
 	}
@@ -157,7 +157,7 @@ public class SurveyAnswer extends IdEntity{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+
 	private SurveyDirectory surveyDirectory;
 	@Transient
 	public SurveyDirectory getSurveyDirectory() {
@@ -166,8 +166,8 @@ public class SurveyAnswer extends IdEntity{
 	public void setSurveyDirectory(SurveyDirectory surveyDirectory) {
 		this.surveyDirectory = surveyDirectory;
 	}
-	
-	
-	
-	
+
+
+
+
 }

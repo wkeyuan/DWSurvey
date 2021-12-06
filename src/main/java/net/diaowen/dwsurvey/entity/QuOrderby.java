@@ -24,9 +24,9 @@ public class QuOrderby extends IdEntity {
 		private String optionName;
 		//排序号
 		private Integer orderById;
-		//是否显示  0不显示 
+		//是否显示  0不显示
 		private Integer visibility=1;
-		
+
 		public String getQuId() {
 			return quId;
 		}
@@ -57,7 +57,7 @@ public class QuOrderby extends IdEntity {
 		public void setVisibility(Integer visibility) {
 			this.visibility = visibility;
 		}
-		
+
 		private int anOrderSum;
 		@Transient
 		public int getAnOrderSum() {
@@ -66,6 +66,6 @@ public class QuOrderby extends IdEntity {
 		public void setAnOrderSum(int anOrderSum) {
 			this.anOrderSum = anOrderSum;
 		}
-		
-		
+
+
 }

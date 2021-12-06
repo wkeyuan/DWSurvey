@@ -24,15 +24,15 @@ import net.diaowen.dwsurvey.service.SurveyDetailManager;
  */
 @Service
 public class SurveyDetailManagerImpl extends BaseServiceImpl<SurveyDetail, String> implements SurveyDetailManager{
-	
+
 	@Autowired
 	private SurveyDetailDao surveyDetailDao;
-	
+
 	@Override
 	public void setBaseDao() {
 		this.baseDao=surveyDetailDao;
 	}
-	
+
 	@Transactional
 	@Override
 	public void save(SurveyDetail t) {
@@ -44,7 +44,7 @@ public class SurveyDetailManagerImpl extends BaseServiceImpl<SurveyDetail, Strin
 		ReflectionUtils.copyAttr(t,surveyDetail);
 		super.save(surveyDetail);
 	}
-	
+
 	private SurveyDetail findUn(String dirId){
 		Criterion criterion=Restrictions.eq("dirId", dirId);
 		 List<SurveyDetail> details=surveyDetailDao.find(criterion);
@@ -58,5 +58,26 @@ public class SurveyDetailManagerImpl extends BaseServiceImpl<SurveyDetail, Strin
 	public SurveyDetail getBySurveyId(String surveyId) {
 		 return findUn(surveyId);
 	}
-	
+
+	@Transactional
+	@Override
+	public void saveBaseUp(SurveyDetail t) {
+		//判断有无，有则更新
+		SurveyDetail surveyDetail=findUn(t.getDirId());
+		if(surveyDetail!=null){
+
+			surveyDetail.setEffective(t.getEffective());
+			surveyDetail.setEffectiveIp(t.getEffectiveIp());
+			surveyDetail.setRefresh(t.getRefresh());
+			surveyDetail.setRule(t.getRule());
+			surveyDetail.setRuleCode(t.getRuleCode());
+			surveyDetail.setYnEndTime(t.getYnEndTime());
+			surveyDetail.setYnEndNum(t.getYnEndNum());
+			surveyDetail.setEndTime(t.getEndTime());
+
+
+			super.save(surveyDetail);
+		}
+
+	}
 }

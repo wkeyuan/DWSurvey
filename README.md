@@ -1,109 +1,153 @@
-# DWSurvey 调问表单问卷系统（Spring Boot的实现）
+# 调问开源问卷系统（DWSurvey）
+
+    此代码仓库为基于 Spring Boot、Vue 实现的后端仓库
 
 [![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
 [![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
 ![GitHub Repo stars](https://img.shields.io/github/stars/wkeyuan/DWSurvey?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/wkeyuan/DWSurvey?style=social)
 
-### 全新的企业版已经发布，前后端分别采用 Ant design、Spring Boot，详情可参考官网。
+DWSurvey是一款简单、高效、成熟、稳定、专业的开源问卷系统，自2012年启动至今经过9年的积累，已经形成一套完善的基于 JAVA WEB 的开源问卷表单解决方案。
 
-### 社区版代码仓库矩阵与说明
+<div style="padding: 10px;border-left:solid 6px #278bee;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
+<div style="font-weight: 600;padding: 10px;"> 🎉🎉🎉  企业版 </div>
+<div>
+全新的 <strong>企业版</strong> 已经发布，前后端分别采用 React、Ant design、Spring Boot，详情可前往体验
+<p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
+<p><strong>企业版体验地址：<a href="https://ent.surveyform.cn">https://ent.surveyform.cn</a></strong></p>
+</div>
+</div>
+<hr/>
+<div style="padding: 10px;border-left:solid 6px #42b983;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
+<div style="font-weight: 600;padding: 10px;"> ☀️☀️☀️  社区版 </div>
+<div>
+️ 全新的 <strong>社区版</strong> 也已经发布，前后端分别采用Vue、ElementUI、Spring Boot，详情可前往体验。
+<p>社区版文档地址：<a href="https://www.diaowen.net/docs">https://www.diaowen.net/docs</a></p>
+<p>社区版体验地址：<a href="https://oss.surveyform.cn">https://oss.surveyform.cn</a></p>
+</div>
+</div>
 
-全新的社区版也已经发布，前后端分别采用 Vue + ElementUI + Spring Boot。
+<p style="color: #333;">后续我们将持续迭代更新，<strong>并有专人维护</strong>，敬请关注，别忘了<a href="https://gitee.com/wkeyuan/DWSurvey">点下源码仓库</a> 右上角Star关注，便于下次查找。</p>
 
-从2013年至今已经积累多种技术方案，具体如下：
+### 快速安装（一行命令完成）
 
-<table>
-<tr><td><strong>方案A</strong></td><td><strong>前后端分离，基于 Vue + Element ui + Spring Boot</strong></td></tr>
-<tr><td colspan="2" align="center">前端仓库</td></tr>
-<tr><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/dwsurvey-vue">https://gitee.com/wkeyuan/dwsurvey-vue</a></td></tr>
-<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey_Vue">https://github.com/wkeyuan/DWSurvey_Vue</a></td></tr>
-<tr><td colspan="2" align="center">后端仓库</td></tr>
-<tr><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot">https://gitee.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot</a></td></tr>
-<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot">https://github.com/wkeyuan/DWSurvey/tree/Vue_SpringBoot</a></td></tr>
-<tr><td colspan="2">方案特性：基于VUE、前后分离开发更容易，部署维护更简单</td></tr>
-</table>
+1､下载调问问卷社区版安装包
 
-| 方案B |   Spring Boot + JSP |
-| :-----| :----: |
-| Gitee | https://gitee.com/wkeyuan/dwsurvey-springboot-jsp |
-| 方案特性 | 原生JS+HTML技术，支持更多浏览器，如IE6 |
+最新的JAR包放在QQ群3（`811287103`），加群备注`安装包`。
 
-| 方案C |  Struts2 + JSP |
-| :-----| :----: |
-| Gitee | https://gitee.com/wkeyuan/dwsurvey-struts2-jsp |
-| 方案特性 | 原生JS+HTML技术，支持更多浏览器，如IE6 |
+2、输入启动命令
 
-更多功能更多版本持续迭代专人维护，敬请关注，记得要点下右上角Star关注，方便下次查找。
+``` cmd
+    java  -Dfile.encoding=utf-8 -jar dwsurvey-oss-vue-v.*.*.jar --server.port=8080 --spring.datasource.username=root --spring.datasource.password=123456
+```
+3、打开浏览器访问 http://localhost:8080，输入账号密码： service@diaowen.net/123456
 
-DWSurvey是一款方便、高效、**稳定**的调研问卷系统，一款基于 JAVA WEB 的开源问卷表单系统。
+
+``` js
+    //可选，文件编码，windows上如果有乱码则使用，linux一般不会出现
+    -Dfile.encoding=utf-8 
+    //必填，安装包名称， 后面的v.*.*.jar依据您下载的最新安装包来定。
+    dwsurvey-oss-vue-v.*.*.jar
+    //可选，指定启动服务占用的端口，默认值8080
+    --server.port=8080 
+    //可选，数据库账号，默认值为root
+    --spring.datasource.username=root 
+    //可选，数据库账密码，默认值123456,.
+    --spring.datasource.password=123456
+```
+
+更详细参数说明请查看[配置说明文档](http://www.diaowen.net/docs/)
+
+## 特性
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0416/132431_5d99a296_1401416.gif "dwsurvey-2.gif")
 
-## 浏览器兼容
-### 支持现代浏览器和IE6
+### 汇总
+
+* 多种技术方案，满足不同的技术选型需求
+* 完善的浏览器兼容、保证传统客户也能正常使用
+* 部署简单，一行命令完成部署
+* 更新方便，直接替换原安装文件不用担心数据被覆盖
+* 最高支持多达40多种题型，如单选题、多选题、填空题、评分题、排序题、分页、分段...
+* 可见即所得设计理念、所有内容支持快速富文本编辑
+* 多种端适配，不管是PC还是移动端同一个地址系统自动适配
+* 支持答卷密码、结束跳转、仅微信答卷限制等
+* 数据实时统计，答卷的数据以可视化的方案展现，不同的统计图表
+* 后端满足JPA规范，为未来支持更多数据库提供条件
+* 成熟稳定，经过多年技术发展，技术体系完善
+* 完善的支持服务，QQ群，微信群全天24小时技术服务
+
+### 完善的浏览器兼容
+
+**支持现代浏览器和IE6**
+
+在实际收集问卷过程中，不是所有用户都会安装最新的浏览器，DWSurvey在答卷端支持所有的浏览器环境，方案B、方案C更是全站完全支持
+
 | IE / Edge | Firefox | Chrome | Safari | Opera |
 | :-----| ----: | :----: | :----: | :----: | 
 | IE6+,Edge | 支持 | 支持 | 支持 | 支持 | 
 
-## 演示地址
 
-社区版服务，源码全量开源，可独立部署，可二次开发。
+### 各技术方案简介
 
- 官网地址：[http://www.diaowen.net](http://www.diaowen.net)
+<table>
+<tr><th><strong>方案A</strong></th><th colspan="2" align="left"><strong>前后端分离，基于 Vue、Element ui、Spring Boot</strong></th></tr>
+<tr><td colspan="3">方案特性：基于VUE、前后分离开发更容易，部署维护更简单</td></tr>
+<tr><td rowspan="2">前端</td><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/dwsurvey-vue">https://gitee.com/wkeyuan/dwsurvey-vue</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey_Vue">https://github.com/wkeyuan/DWSurvey_Vue</a></td></tr>
+<tr><td rowspan="2">后端</td><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/DWSurvey">https://gitee.com/wkeyuan/DWSurvey</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey">https://github.com/wkeyuan/DWSurvey</a></td></tr>
 
-企业版服务，源码全量开源，前后端分离，可独立部署，可二次开发。
+<tr><th><strong>方案B</strong></th><th colspan="2" align="left"><strong>Spring Boot + JSP</strong></th></tr>
+<tr><td colspan="3">方案特性: 原生JS+HTML技术，支持更多浏览器，如IE6</td></tr>
+<tr><td colspan="1">Gitee</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-springboot-jsp">https://gitee.com/wkeyuan/dwsurvey-springboot-jsp</a></td></tr>
+<tr><td colspan="1">GitHub</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-springboot-jsp">https://gitee.com/wkeyuan/dwsurvey-springboot-jsp</a></td></tr>
 
-企业版地址：[http://ent.surveyform.cn](http://ent.surveyform.cn)
+<tr><th><strong>方案C</strong></th><th colspan="2" align="left"><strong>Struts2 + JSP</strong></th></tr>
+<tr><td colspan="3">方案特性: 原生JS+HTML技术，支持更多浏览器，如IE6 |</td></tr>
+<tr><td colspan="1">Gitee</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-struts2-jsp">https://gitee.com/wkeyuan/dwsurvey-struts2-jsp</a></td></tr>
+<tr><td colspan="1">GitHub</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-struts2-jsp">https://gitee.com/wkeyuan/dwsurvey-struts2-jsp</a></td></tr>
+</table>
 
-在线平台服务，提供标准API，可快速集成到自己应用中，功能更丰富，不需要部署，可直接发布问卷进行数据收集。
 
-在线服务地址：[https://www.surveyform.cn](https://www.surveyform.cn)
+## 各版本简介
 
-这是基于Spring Boot开发的实现. Struts2老方案在master_struts2分支.
+我们提供各种不版本及服务，保证您不同场景的需求都得到满足
 
-## 本地快速部署社区版
-
-提示：如果您之前已经配置有名称为dwsurvey的数据库，并且完成了数据库初始化，则可以直接输入命令安装。
-如果之前没有安装数据库，则需要在mysql中创建名称`dwsurvey`的数据库，然后用dwsurvey数据库脚本进行初始化。
-
-###### 1、下载JAR包
-
-可在QQ群下载，3群号811287103(可加)
-
-###### 2、输入启动命令，进入CMD输入如下命令，完成部署安装。
-
-    java -jar dwsurvey-oss-vue-v.5.0.1-Alpha.jar --server.port=8080 --spring.datasource.username=root --spring.datasource.password=123456
-
-参数说明 
-
-`--server.port=8080` 端口
-
-`--spring.datasource.username=root` 数据库账号
-
-`--spring.datasource.password=123456` 数据库账密码
-
-###### 3、开始使用 
-
-待应用启动完成后，在浏览器输入localhost:8080 即可访问DWSurvey问卷系统。
-
-### 下载代码本地开发指南
+| 版本  | 特性及地址 |  
+| :-----| ---- |  
+| 社区版 | 源码全量开源，可独立部署，可二次开发 | 
+| 官网地址 | [http://www.diaowen.net](http://www.diaowen.net) |
+| 企业版 | 源码全量开源，前后端分离，可独立部署，可二次开发 |
+| 企业版地址 | [http://ent.surveyform.cn](http://ent.surveyform.cn) |
+| 在线平台 | 提供标准API，可快速集成到应用中，功能更丰富，不需要部署，可直接发布问卷收集 |
+| 平台地址 | [https://www.surveyform.cn](https://www.surveyform.cn) |
 
 下面是如何使用Spring Boot方案的快速指南。
 
-1、下载代码后，用IDEA打开。
+## 本地开发
 
-2、然后在idea里面可以直接启动。
+环境版本：jdk1.8, tomcat8.5.59
 
-4、浏览器访问 localhost:8080
+### 基本步骤
 
-## 数据库脚本、数据初始化
+1、下载代码后
 
-数据库脚本在resources/sql/目录下的dwsurvey.sql数据库脚本文件
+具体代码地址参考[多种技术方案](#多种技术方案)
+
+2、创建数据库进行初始化
+
+数据库脚本在resources/sql/目录下的dwsurvey.sql数据库脚本文件，如下：
+
+    https://gitee.com/wkeyuan/DWSurvey/blob/master/src/main/resources/conf/sql/
 
 说明：升级后的数据库与老版本兼容
 
-## 编译打包
+3、用IDEA打开，进行本地开发
+
+现在您可以进行本地开发了
+
+4、开发完成，编译打包
 
 进入 `cd DWSurvey`:
 
@@ -127,57 +171,33 @@ mvn package
 
     分别修改```url、username、password```
 
-### 部署前创建并初始化dwsurvey数据库
+5、启动浏览器访问
 
-创建数据库，并初始化数据库。
-
-    数据库名：dwsurvey
-
-初始化脚本下载地址：
-
-    https://gitee.com/wkeyuan/DWSurvey/blob/master/src/main/resources/conf/sql/
-
-### 启动访问
-
-打成包后，将war包放入tomcat的webapps
-
-配置完成后，启动服务在浏览器中输入如```localhost:8080```相应的地址看到登录页面，表示已经安装成功。
+输入 http://localhost:8080
 
 初始账号：```service@diaowen.net``` 密码：```123456```
-
-### 直接下载编译好的程序包 
-
-如果不想自己编译可以直接使用我们已经编译好的war包安装
-
-最新的war包下载可以前往交流QQ ```群1：635994795(满)```，```群2：301105635(满)```, 群3：811287103(可加) （加群时请说明来由）
-
-下载最新的dwsurvey-oss-v***.war（注意看后面的版本号），再考到tomcat wabapps下
-
-打包环境版本：jdk1.8, tomcat8.5.59
-
-外部解压命令：jar xvf dwsurvey-oss-v***.war 
-
-## Docker 方式部署 
-
-在项目wiki里面有docker部署操作说明，省去环境配置的问题，下载直接部署就可以使用。 
 
 ## 特色
 
 ### 全新体验、流程简单
 
-![pic](http://diaowenwebfile.oss-cn-shenzhen.aliyuncs.com/images/gif/newUi.png)
-
-以一种全新的设计体验，告别繁琐的设计流程，通过简单有趣的方式，轻轻松松完成问卷设计，多种问卷样式模板选择，只为显现更精美的表单问卷.
-
-### 丰富的题型 
+以一种全新的设计体验，告别繁琐的设计流程，通过简单有趣的方式，轻轻松松完成问卷设计，多种技术方案，只为呈现更精美的表单问卷.
 
 丰富的题型支持，通过拖拽即可完成题目选择，并可以随意拖动其位置，还可置入所需图片、企业LOGO、设置答题逻辑，一份优美的问卷就是这么简单。
 
-### 问卷表单静态化
+![我的问卷](src/main/resources/static/img/WX20211203-092339@2x.png)
 
-对于问卷表单系统，因为所有的表单字段都是后台数据库来维护，所以对于每一次答卷请求，如果都从后端数据库去取每一题及选项的话，必定会对性能造成不小影响。
+![问卷编辑](src/main/resources/static/img/WX20211203-092358@2x.png)
 
-所以在发布的表单问卷时会对数据进行的页面静态化，生成一个真实的表单存档。
+![问卷预览](src/main/resources/static/img/WX20211203-092406@2x.png)
+
+![答卷地址](src/main/resources/static/img/WX20211203-092416@2x.png)
+
+![答卷规则](src/main/resources/static/img/WX20211203-092427@2x.png)
+
+![数据统计](src/main/resources/static/img/WX20211203-092439@2x.png)
+
+![原始数据](src/main/resources/static/img/WX20211203-092458@2x.png)
 
 ## 有问题怎么办？
 
@@ -211,8 +231,8 @@ DWSurvey以通用公共许可证AGPL3.0为开源协议，需要更优质的服�
 
 ## 作者
 
- 柯远 ```keyuan258@gmail.com```
+柯远 ```keyuan258@gmail.com```
 
 ### 谢谢您的支持
 
- 觉得不错就点下右上角的star，随时关注我们的动态，非常感谢！
+觉得不错就点下右上角的star，随时关注我们的动态，非常感谢！

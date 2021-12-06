@@ -17,9 +17,9 @@ public class SysSendEmail extends IdEntity {
 	private Integer emailType;
 	//创建 时间
 	private Date createDate=new Date();
-	//状态 0未发送 1发送成功 2发送失败  
+	//状态 0未发送 1发送成功 2发送失败
 	private Integer status=0;
-	
+
 	public String getInboxUserId() {
 		return inboxUserId;
 	}
@@ -44,5 +44,5 @@ public class SysSendEmail extends IdEntity {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
+
 }

@@ -1,16 +1,14 @@
 package net.diaowen.dwsurvey.controller;
 
-import net.diaowen.common.base.service.AccountManager;
-import net.diaowen.common.plugs.file.FileMagic;
-import net.diaowen.common.plugs.file.FileMagicUtils;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.utils.RandomUtils;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
+import net.diaowen.dwsurvey.common.FileMeta;
 import net.diaowen.dwsurvey.common.UpFileResult;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -19,32 +17,33 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
-@RequestMapping("/up")
+@RequestMapping("/api/dwsurvey/up")
 public class UploadController {
 
-    @Autowired
-    private AccountManager accountManager;
-	/**
-	 * 上传文件数据，安全存储
-     *
-	 */
+    /**
+     * 上传文件数据，安全存储
+     * /WebRoot/WEB-INF/upfile
+     */
     @RequestMapping("/up-file.do")
     @ResponseBody
     public HttpResult uploadFile(HttpServletRequest request,HttpServletResponse response) {
-        String savePath = File.separator+"file" + File.separator + "images" + File.separator;
+        String savePath = File.separator+"file" + File.separator + "images"+ File.separator;
+
         return proUpfile((MultipartHttpServletRequest) request, savePath);
     }
 
 
     @RequestMapping("/up-file-wb.do")
     @ResponseBody
-    public HttpResult uploadFileWb(HttpServletRequest request,HttpServletResponse response) {
-//        String savePath = File.separator+"WEB-INF"+File.separator+"upload" + File.separator;
-        String savePath = File.separator+"webin"+File.separator+"upload" + File.separator;
-        return proUpfile((MultipartHttpServletRequest) request, savePath);
+    public HttpResult uploadFileWb(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String savePath = File.separator+"webin"+File.separator+"upload" + File.separator ;
+        HttpResult result = proUpfile((MultipartHttpServletRequest) request, savePath);
+        return result;
     }
 
 
@@ -80,11 +79,6 @@ public class UploadController {
                 //取得上传文件
                 MultipartFile file = multiRequest.getFile(iter.next());
                 if(file != null){
-
-                    FileMagic fileMagic = FileMagic.valueOf(file);
-                    if(!FileMagicUtils.isUserUpFileType(fileMagic)) {
-                        return HttpResult.FAILURE("不支持类型",fileMagic);
-                    }
 
                     //取得当前上传文件的文件名称
                     String myFileName = file.getOriginalFilename();
@@ -125,55 +119,94 @@ public class UploadController {
     }
 
 
+
     /**
-     * 根据类型判断，该后缀是否在白名单中。 允许上传的格式为白名单
-     *
-     * @param suffix
-     * @param type
-     * @return
+     * JUQERY UPLOAD file
+     * 调用到的地方：问卷设计中图片单选题，图片多选题。
      */
-    private static boolean whiteList(String suffix, String type) {
-        // 默认为黑名单
-        boolean i = false;
-        if (StringUtils.isEmpty(type)) {
-            // 没有上传类型
-            i = whiteList(suffix);
-        } else if (!StringUtils.isEmpty(type)) {
-            // 有上传类型
-            if ("image".equals(type)) {
-                i = imageWhiteList(suffix);
+    /***************************************************
+     * URL: /rest/controller/upload
+     * upload(): receives files
+     * @param request : MultipartHttpServletRequest auto passed
+     * @param response : HttpServletResponse auto passed
+     * @return LinkedList<FileMeta> as json format
+     ****************************************************/
+    @RequestMapping(value="/ajax/upload.do",method = {RequestMethod.POST})
+    public @ResponseBody
+    LinkedList<FileMeta> upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+        LinkedList<FileMeta> files = new LinkedList<FileMeta>();
+        FileMeta fileMeta = null;
+        //创建目录
+//        String rootPath = request.getServletContext().getRealPath("/");
+        String rootPath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH;
+//        String savePath = File.separator+"WEB-INF"+File.separator+"upload" + File.separator;
+
+        String savePath = File.separator+"file"+File.separator+"upload" + File.separator ;
+        File dirFile = new File(rootPath + savePath);
+        if (!dirFile.exists() && !dirFile.isDirectory()) {
+            dirFile.mkdirs();
+        }
+
+        //1. build an iterator
+        Iterator<String> itr =  request.getFileNames();
+        MultipartFile mpf = null;
+
+        //2. get each file
+        while(itr.hasNext()){
+
+            //2.1 get next MultipartFile
+            mpf = request.getFile(itr.next());
+
+            //2.2 if files > 10 remove the first from the list
+            if(files.size() >= 10)
+                files.pop();
+
+            String fileName = mpf.getOriginalFilename();
+            fileName = fileName.toLowerCase();//6S兼容
+            String newFileName = rendomFileName(mpf);
+
+            //2.3 create new fileMeta
+            fileMeta = new FileMeta();
+            fileMeta.setFileName(fileName);
+            fileMeta.setNewFileName(newFileName);
+            fileMeta.setFileSize(mpf.getSize()/1024+" Kb");
+            fileMeta.setFileType(mpf.getContentType());
+
+            try {
+//                fileMeta.setBytes(mpf.getBytes());
+                String filePath = savePath + newFileName;
+                fileMeta.setFilePath(filePath);
+                // copy file to local disk (make sure the path "e.g. D:/temp/files" exists)
+                FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(rootPath+filePath));
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
+            //2.4 add to files
+            files.add(fileMeta);
         }
-        return i;
+        // result will be like this
+        // [{"fileName":"app_engine-85x77.png","fileSize":"8 Kb","fileType":"image/png"},...]
+        return files;
     }
 
 
-    /**
-     * 判断文件后缀是否满足条件
-     */
-    private static boolean whiteList(String suffix) {
-        // 白名单 允许出现的文件后缀
-        List<String> whiteList = Arrays.asList("JAR");
-        if (whiteList.contains(suffix.toUpperCase())) {
-            // 白名单中存在
-            return true;
+    public String rendomFileName(MultipartFile file){
+        char[] str = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+                'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4',
+                '5', '6', '7', '8', '9' };
+        StringBuffer fileName = new StringBuffer("");
+        Random r = new Random();
+        int pos = -1;
+        for (int i = 0; i < 15; i++) {
+            pos = Math.abs(r.nextInt(36));
+            fileName.append(str[pos]);
         }
-        // 白名单中不存在
-        return false;
-    }
-
-
-    /**
-     * 图片后缀 白名单
-     * @param suffix
-     * @return
-     */
-    static boolean imageWhiteList(String suffix) {
-        List<String> list = Arrays.asList("JPG", "PNG");
-        if (!StringUtils.isEmpty(suffix) && list.contains(suffix.toUpperCase())) {
-            return true;
-        }
-        return false;
+        String extName = file.getOriginalFilename().substring(
+                file.getOriginalFilename().lastIndexOf(".") + 1);
+        return fileName.toString().trim() + "." + extName;
     }
 
 

@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.utils.security.DigestUtils;
+import net.diaowen.dwsurvey.common.RoleCode;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -34,6 +35,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -56,14 +58,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 //		User user = accountManager.findUserByLoginName(token.getUsername());
-		
+
 		//根据loginToken 看能不查到当前token token有效期就1分钟
-		
+
 		String tokenPassword=new String(token.getPassword());
 
 		User user = accountManager.findUserByLoginNameOrEmail(token.getUsername());
 
-		//user.getStandardLock()==1 
+		//user.getStandardLock()==1
 		if (user != null && user.getStatus().intValue()!=0 && (user.getVisibility()==null || user.getVisibility()==1 )) {
 			 return new SimpleAuthenticationInfo(user.getLoginName(), user.getShaPassword() , getName());
 		} else {
@@ -79,13 +81,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		String username = (String) principals.fromRealm(getName()).iterator().next();
 //		User user = accountManager.findUserByLoginName(username);
 		User user = accountManager.findUserByLoginNameOrEmail(username);
-		if (user != null && "1".equals(user.getId())) {
+		if(user!=null){
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-			info.addRole("admin");
+			if ("1".equals(user.getId())) {
+				info.addRole(RoleCode.SUPER_ADMIN);
+			}
 			return info;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	/**
@@ -95,5 +98,5 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
 		clearCachedAuthorizationInfo(principals);
 	}
-	
+
 }

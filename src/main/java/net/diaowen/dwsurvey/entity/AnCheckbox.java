@@ -16,7 +16,7 @@ import net.diaowen.common.base.entity.IdEntity;
 @Entity
 @Table(name="t_an_checkbox")
 public class AnCheckbox extends IdEntity {
-	
+
 	//所属问卷ID
 	private String belongId;
 	//对应的答卷信息表
@@ -27,11 +27,11 @@ public class AnCheckbox extends IdEntity {
 	private String quItemId;
 	//复合的说明
 	private String otherText;
-	
+
 	private Integer visibility=1;
-	
+
 	public AnCheckbox(){
-		
+
 	}
 	public AnCheckbox(String surveyId, String surveyAnswerId, String quId,
 			String quItemId) {

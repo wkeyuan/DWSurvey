@@ -47,7 +47,7 @@ public class HttpResult<T> {
 		this.resultCode = resultCode;
 	}
 
-	public HttpResult(int resultCode, String resultMsg){
+	public HttpResult(int resultCode,String resultMsg){
 		this.resultCode = resultCode;
 		this.resultMsg = resultMsg;
 	}

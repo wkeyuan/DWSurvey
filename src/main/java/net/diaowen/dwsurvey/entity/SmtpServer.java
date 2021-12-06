@@ -59,5 +59,5 @@ public class SmtpServer extends IdEntity{
 	public void setSmtpPassword(String smtpPassword) {
 		this.smtpPassword = smtpPassword;
 	}
-	
+
 }

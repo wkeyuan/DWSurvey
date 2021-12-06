@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Formula;
 
 import net.diaowen.common.base.entity.IdEntity;
@@ -20,8 +21,9 @@ import net.diaowen.common.base.entity.IdEntity;
  */
 @Entity
 @Table(name="t_survey_directory")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class SurveyDirectory extends IdEntity{
-	
+
 	//用于短链接的ID
 	private String sid;
 	private String parentId="";
@@ -34,12 +36,11 @@ public class SurveyDirectory extends IdEntity{
 	private String surveyDetailId;
 	//创建时间
 	private Date createDate=new Date();
-	private Date editDate=new Date();
-	//问卷状态  0默认设计状态  1执行中 2结束 
+	//问卷状态  0默认设计状态  1执行中 2结束
 	private Integer surveyState=0;
-	//问卷下面有多少题目数 
+	//问卷下面有多少题目数
 	private Integer surveyQuNum=0;
-	//可以回答的最少选项数目 
+	//可以回答的最少选项数目
 	private Integer anItemLeastNum=0;
 	//回答次数
 	private Integer answerNum;
@@ -50,15 +51,16 @@ public class SurveyDirectory extends IdEntity{
 	private Integer surveyModel=1;
 	//是否公开结果  0不  1公开
 	private Integer viewAnswer=0;
-	//是否共享问卷  0不共享 1共享 
+	//是否共享问卷  0不共享 1共享
 	private Integer isShare=1;
 	//引用次数
 	private Integer excerptNum=0;
 	//问卷标识 默认 0待审核  1审核通过  2审核未通过
 	private Integer surveyTag=1;
-	
+
 	//静态HTML保存路径
 	private String htmlPath;
+	private String jsonPath;
 
 	public String getParentId() {
 		return parentId;
@@ -198,12 +200,12 @@ public class SurveyDirectory extends IdEntity{
 		this.sid = sid;
 	}
 
-	public Date getEditDate() {
-		return editDate;
+	public String getJsonPath() {
+		return jsonPath;
 	}
 
-	public void setEditDate(Date editDate) {
-		this.editDate = editDate;
+	public void setJsonPath(String jsonPath) {
+		this.jsonPath = jsonPath;
 	}
 
 	public String groupName;
@@ -226,7 +228,7 @@ public class SurveyDirectory extends IdEntity{
 	public void setSurveyDetail(SurveyDetail surveyDetail) {
 		this.surveyDetail = surveyDetail;
 	}
-	
+
 	public Integer getExcerptNum() {
 		return excerptNum;
 	}
@@ -234,6 +236,7 @@ public class SurveyDirectory extends IdEntity{
 	public void setExcerptNum(Integer excerptNum) {
 		this.excerptNum = excerptNum;
 	}
+
 
 	//用户名
 	private String userName;
@@ -244,7 +247,7 @@ public class SurveyDirectory extends IdEntity{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	private List<Question> questions=null;
 	@Transient
 	public List<Question> getQuestions() {
@@ -254,5 +257,15 @@ public class SurveyDirectory extends IdEntity{
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
-	
+
+	private SurveyAnswer surveyAnswer;
+	@Transient
+	public SurveyAnswer getSurveyAnswer() {
+		return surveyAnswer;
+	}
+
+	public void setSurveyAnswer(SurveyAnswer surveyAnswer) {
+		this.surveyAnswer = surveyAnswer;
+	}
+
 }

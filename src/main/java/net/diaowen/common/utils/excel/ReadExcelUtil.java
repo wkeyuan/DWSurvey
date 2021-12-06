@@ -1,44 +1,47 @@
 package net.diaowen.common.utils.excel;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.DecimalFormat;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class ReadExcelUtil {
-	public static HSSFWorkbook getWorkBook(String filePath){
+	public static Workbook getWorkBook(String filePath){
 		POIFSFileSystem fs;
+		Workbook wb = null;
 		try {
-			fs = new POIFSFileSystem(new FileInputStream(filePath));
-		HSSFWorkbook wb = new HSSFWorkbook(fs);
-		return wb;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			wb = new XSSFWorkbook(filePath);
+		} catch (Exception e) {
+			try {
+				fs = new POIFSFileSystem(new FileInputStream(filePath));
+				wb = new HSSFWorkbook(fs);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
-		return null;
+		return wb;
 	}
+
 
 	public static HSSFSheet getHSSFSheet(HSSFWorkbook wb, int index) {
 		HSSFSheet sheet = wb.getSheetAt(0);
 		return sheet;
 	}
-	public static String getValueByRowCol(HSSFRow sfrow,int col){
-		HSSFCell cell = sfrow.getCell((short)col);
+	public static String getValueByRowCol(Row sfrow, int col){
+		Cell cell = sfrow.getCell((short)col);
 		if (cell == null)
 			return "";
 		String msg = getCellStringValue(cell);
 		return msg;
 	}
-	public static String getValueByCol(HSSFCell sfCell){
+	public static String getValueByCol(Cell sfCell){
 		String msg = getCellStringValue(sfCell);
 		return msg;
 	}
@@ -49,48 +52,49 @@ public class ReadExcelUtil {
 			HSSFWorkbook wb = new HSSFWorkbook(fs);
 			HSSFSheet sheet = wb.getSheetAt(0);
 			HSSFRow row = sheet.getRow(3);
-			HSSFCell cell = row.getCell((short) 0);
-			CellType type = cell.getCellType();
-			String msg = getCellStringValue(cell);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static String getCellStringValue(HSSFCell cell) {
+	public static String getCellStringValue(Cell cell) {
 		String cellValue = "";
 		switch (cell.getCellType()) {
 			case STRING:
-			cellValue = cell.getStringCellValue();
-			if (cellValue.trim().equals("") || cellValue.trim().length() <= 0) {
-				cellValue = " ";
-			}
-			break;
+				cellValue = cell.getStringCellValue();
+				if (cellValue.trim().equals("") || cellValue.trim().length() <= 0) {
+					cellValue = " ";
+				}
+				break;
 			case NUMERIC:
-			// cellValue = String.valueOf(cell.getNumericCellValue());
-			DecimalFormat formatter = new DecimalFormat("######");
-			cellValue = formatter.format(cell.getNumericCellValue());
-			break;
+				// cellValue = String.valueOf(cell.getNumericCellValue());
+				DecimalFormat formatter = new DecimalFormat("######");
+				cellValue = formatter.format(cell.getNumericCellValue());
+				break;
 			case FORMULA:
-			cell.setCellType(CellType.NUMERIC);
-			cellValue = String.valueOf(cell.getNumericCellValue());
-			break;
+				cell.setCellType(CellType.NUMERIC);
+				cellValue = String.valueOf(cell.getNumericCellValue());
+				break;
 			case BLANK:
-			cellValue = " ";
-			break;
+				cellValue = " ";
+				break;
 			case BOOLEAN:
-			break;
+				break;
 			case ERROR:
-			break;
-		default:
-			break;
+				break;
+			default:
+				break;
 		}
 		return cellValue;
 	}
-	public static int getRowSize(HSSFSheet sheet){
+	public static int getRowSize(Sheet sheet){
 		return sheet.getLastRowNum();
 	}
 	public static int getCellSize(HSSFRow sfRow){
 		return sfRow.getLastCellNum();
+	}
+	public static void main(String[] args) {
+		reader("F://terchers.xls");
 	}
 }
