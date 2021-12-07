@@ -762,9 +762,7 @@ $(document).ready(function(){
     resetQuItemHover(null);
     saveSurvey(function(){
       isSaveProgress=false;
-      saveQuOrder(function(){
-        window.location.href="/static/diaowen/preview.html?surveyId="+questionBelongId;
-      });
+      window.location.href="/static/diaowen/preview.html?surveyId="+questionBelongId;
     });
     return false;
   });
@@ -2998,6 +2996,7 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 			dwQuOptionSel.append("<option value='0'>回答完成</option>");
 			lastTr.find(".ifSpanText1").text("如果本题");
 		}
+    logicQuSel.append("<option value='1'>正常结束（计入结果）</option>");
 		if(autoClass){
 			logicQuSel.prepend("<option value=''>-请选择题目-</option>");
 			dwQuOptionSel.prepend("<option value=''>-请选择选项-</option>");
