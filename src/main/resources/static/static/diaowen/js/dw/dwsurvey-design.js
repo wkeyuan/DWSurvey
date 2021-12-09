@@ -797,6 +797,9 @@ $(document).ready(function(){
 				var dwSurveyName=$("#dwSurveyName").html();
 				dwSurveyName=escape(encodeURIComponent(dwSurveyName));
 				data+="&svyName="+dwSurveyName;
+        var dwSurveyNameText=$("#dwSurveyName").text();
+        dwSurveyNameText=escape(encodeURIComponent(dwSurveyNameText));
+        data+="&svyNameText="+dwSurveyNameText;
 			}
 			if(svyNoteSaveTag==="0"){
 				var dwSurveyNoteEdit=$("#dwSurveyNoteEdit").html();
