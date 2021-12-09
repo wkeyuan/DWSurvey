@@ -592,6 +592,7 @@ public class SurveyAnswerManagerImpl extends
 			surveyId = surveyAnswer.getSurveyId();
 			delete(surveyAnswer);
 		}
+		if(surveyId!=null) upAnQuNum(surveyId);
 	}
 
 	@Override

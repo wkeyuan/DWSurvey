@@ -80,6 +80,7 @@ public class SurveyDesignController {
 	@RequestMapping("/ajaxSave.do")
 	public String ajaxSave(HttpServletRequest request,HttpServletResponse response,String surveyId) throws Exception {
 		String svyName=request.getParameter("svyName");
+		String svyNameText=request.getParameter("svyNameText");
 		String svyNote=request.getParameter("svyNote");
 		//属性
 		String effective=request.getParameter("effective");
@@ -109,6 +110,9 @@ public class SurveyDesignController {
 				if(svyName!=null && !"".equals(svyName)){
 					svyName=URLDecoder.decode(svyName,"utf-8");
 					survey.setSurveyName(svyName);
+				}
+				if(StringUtils.isNotEmpty(svyNameText)){
+					survey.setSurveyNameText(svyNameText);
 				}
 
 				//保存属性

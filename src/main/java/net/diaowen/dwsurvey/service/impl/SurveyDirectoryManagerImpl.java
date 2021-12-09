@@ -550,7 +550,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 										  String tag) {//new
 		SurveyDirectory surveyDirectory = buildCopyObj(fromBankId, surveyName,
 				tag);
-
 		saveUserSurvey(surveyDirectory);
 		String belongId=surveyDirectory.getId();
 		List<Question> questions=questionManager.find(fromBankId, tag);
@@ -561,6 +560,7 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
 	private SurveyDirectory buildCopyObj(String fromBankId, String surveyName,String tag) {
 		SurveyDirectory surveyDirectory=new SurveyDirectory();
 		surveyDirectory.setSurveyName(surveyName);
+		surveyDirectory.setSurveyNameText(surveyName);
 		surveyDirectory.setDirType(2);
 		surveyDirectory.setSurveyDetail(new SurveyDetail());
 		SurveyDirectory directory=getSurvey(fromBankId);

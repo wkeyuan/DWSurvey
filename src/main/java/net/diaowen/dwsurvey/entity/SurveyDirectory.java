@@ -28,6 +28,7 @@ public class SurveyDirectory extends IdEntity{
 	private String sid;
 	private String parentId="";
 	private String surveyName;
+	private String surveyNameText;
 	//创建者ID
 	private String userId;
 	//1目录，2问卷
@@ -206,6 +207,14 @@ public class SurveyDirectory extends IdEntity{
 
 	public void setJsonPath(String jsonPath) {
 		this.jsonPath = jsonPath;
+	}
+
+	public String getSurveyNameText() {
+		return surveyNameText;
+	}
+
+	public void setSurveyNameText(String surveyNameText) {
+		this.surveyNameText = surveyNameText;
 	}
 
 	public String groupName;

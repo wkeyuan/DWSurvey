@@ -91,6 +91,7 @@ public class MySurveyController {
     public HttpResult add(@RequestBody SurveyDirectory surveyDirectory) {
         try{
             surveyDirectory.setDirType(2);
+            surveyDirectory.setSurveyNameText(surveyDirectory.getSurveyName());
             surveyDirectoryManager.save(surveyDirectory);
             return HttpResult.SUCCESS(surveyDirectory);
         }catch (Exception e){
