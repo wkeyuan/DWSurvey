@@ -93,10 +93,10 @@ body{
   padding-bottom: 20px;
 }
 #dwSurveyQuContentAppUl > li .surveyQuItemContent legend{
-  font-weight: bold;
+  /*font-weight: bold;*/
   color: black;
   font-size: 16px;
-  font-weight: bold;
+  /*font-weight: bold;*/
   line-height: 26px;
 }
 

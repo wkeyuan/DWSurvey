@@ -77,10 +77,10 @@ $(document).ready(function(){
       urlParams="&ruleCode="+ruleCode;
     }
     if(browser.isMobile && pageName==="p"){
-      window.location.href="/static/diaowen/diaowen-m.html?sid="+sid+urlParams;
+      window.location.href="/static/diaowen/answer-m.html?sid="+sid+urlParams;
     }
     if(!browser.isMobile && pageName==="m" ){
-      window.location.href="/static/diaowen/diaowen.html?sid="+sid+urlParams;
+      window.location.href="/static/diaowen/answer-p.html?sid="+sid+urlParams;
     }
     if(callback!=null){
       callback();

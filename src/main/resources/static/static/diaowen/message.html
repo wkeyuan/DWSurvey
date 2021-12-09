@@ -7,10 +7,23 @@
   <script type="text/javascript" src="js/plugs/jquery-ui-1.10.3.custom/js/jquery-1.10.1.js"></script>
   <script type="text/javascript" src="js/common/common.js" ></script>
   <script type="text/javascript" src="js/dw/an/msg.js" ></script>
+  <style type="text/css">
+    #dw_body_answer_msg{
+      padding: 0px 60px;
+    }
+    @media only screen and (max-width: 500px) {
+      #dw_body_answer_msg{
+        padding: 0px;
+      }
+      #surveyName img{
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body style="padding: 0px;margin: 0px;">
 
-<div style="padding: 0px 60px;">
+<div id="dw_body_answer_msg" >
   <div style="padding: 50px 10px;background: rgb(240, 240, 240);text-align: center;padding-bottom: 80px;">
       <h3 style="color: #333;" id="surveyName">...</h3>
       <div style="font-size: 14px;color: rgb(24, 144, 255);" id="resultNote">参数不完整</div>
