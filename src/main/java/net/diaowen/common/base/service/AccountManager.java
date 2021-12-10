@@ -123,15 +123,15 @@ public class AccountManager {
 
 	@Transactional(readOnly = true)
 	public User findUserByLoginNameOrEmail(String loginName) {
+		User user = null;
 		if(loginName!=null){
-			if(loginName.contains("@")){
+			user = userDao.findUniqueBy("loginName", loginName);
+			if(user==null && loginName.contains("@")){
 				//是邮箱账号
-				return userDao.findUniqueBy("email", loginName);
-			}else{
-				return userDao.findUniqueBy("loginName", loginName);
+				user = userDao.findUniqueBy("email", loginName);
 			}
 		}
-		return null;
+		return user;
 	}
 
 	/*验证邮箱是否存在*/
