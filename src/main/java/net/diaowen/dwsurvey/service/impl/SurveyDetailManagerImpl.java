@@ -73,6 +73,7 @@ public class SurveyDetailManagerImpl extends BaseServiceImpl<SurveyDetail, Strin
 			surveyDetail.setRuleCode(t.getRuleCode());
 			surveyDetail.setYnEndTime(t.getYnEndTime());
 			surveyDetail.setYnEndNum(t.getYnEndNum());
+			surveyDetail.setEndNum(t.getEndNum());
 			surveyDetail.setEndTime(t.getEndTime());
 
 
