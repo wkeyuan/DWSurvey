@@ -112,6 +112,7 @@ public class SurveyDesignController {
 					survey.setSurveyName(svyName);
 				}
 				if(StringUtils.isNotEmpty(svyNameText)){
+					svyNameText=URLDecoder.decode(svyNameText,"utf-8");
 					survey.setSurveyNameText(svyNameText);
 				}
 
