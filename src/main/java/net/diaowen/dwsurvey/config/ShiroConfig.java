@@ -86,7 +86,7 @@ public class ShiroConfig {
         map.put("/design/**", "user");
         map.put("/da/**", "user");
         map.put("/api/dwsurvey/app/**", "user");
-        map.put("/api/dwsurvey/admin/**", "roles["+ RoleCode.SUPER_ADMIN +"]");
+        map.put("/api/dwsurvey/admin/**", "roles["+ RoleCode.DWSURVEY_SUPER_ADMIN +"]");
         //登录
 //        shiroFilterFactoryBean.setLoginUrl("/login.do");
         //首页

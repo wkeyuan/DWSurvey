@@ -59,7 +59,7 @@ public class SecurityController {
             User user = accountManager.getCurUser();
             if(user!=null){
                 String[] authed = new String[]{};
-                if("1".equals(user.getId())) authed = new String[]{RoleCode.SUPER_ADMIN};
+                if("1".equals(user.getId())) authed = new String[]{RoleCode.DWSURVEY_SUPER_ADMIN};
                 return LoginRegisterResult.SUCCESS(authed);
             }
         }
@@ -70,26 +70,26 @@ public class SecurityController {
 
     @RequestMapping("/login-pwd.do")
     @ResponseBody
-    public LoginRegisterResult loginPwd(HttpServletRequest request, HttpServletResponse response, @RequestParam String username, @RequestParam String password) {
+    public LoginRegisterResult loginPwd(HttpServletRequest request, HttpServletResponse response, @RequestParam String userName, @RequestParam String password) {
         Subject subject = SecurityUtils.getSubject();
         boolean isAuth = subject.isAuthenticated();
         String error="账号或密码错误";
         String[] authed = null;
         try{
             if(isAuth) subject.logout();
-            if(StringUtils.isNotEmpty(username)){
-                User user = accountManager.findUserByLoginNameOrEmail(username);
+            if(StringUtils.isNotEmpty(userName)){
+                User user = accountManager.findUserByLoginNameOrEmail(userName);
                 if(user!=null){
-                    UsernamePasswordToken loginToken = new UsernamePasswordToken(username, password);
-                    request.setAttribute("username",username);
+                    UsernamePasswordToken loginToken = new UsernamePasswordToken(userName, password);
+                    request.setAttribute("username",userName);
                     if (!formAuthFilter.checkIfAccountLocked(request)) {
                         try {
                             subject.login(loginToken);
-                            formAuthFilter.resetAccountLock(username);
-                            subject.getSession().setAttribute("loginUserName", username);
+                            formAuthFilter.resetAccountLock(userName);
+                            subject.getSession().setAttribute("loginUserName", userName);
                             user.setLastLoginTime(new Date());
                             accountManager.saveUp(user);
-                            if("1".equals(user.getId())) authed = new String[]{RoleCode.SUPER_ADMIN};
+                            if("1".equals(user.getId())) authed = new String[]{RoleCode.DWSURVEY_SUPER_ADMIN};
                             return LoginRegisterResult.SUCCESS(authed);
                         } catch (IncorrectCredentialsException e) {
                             formAuthFilter.decreaseAccountLoginAttempts(request);

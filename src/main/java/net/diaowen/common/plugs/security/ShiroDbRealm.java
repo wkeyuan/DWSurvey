@@ -84,7 +84,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		if(user!=null){
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			if ("1".equals(user.getId())) {
-				info.addRole(RoleCode.SUPER_ADMIN);
+				info.addRole(RoleCode.DWSURVEY_SUPER_ADMIN);
 			}
 			return info;
 		}
