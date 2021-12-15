@@ -265,7 +265,6 @@ public final class ConfigManager {
 
 	private void resetUrlPrefix(){
 		String preFixUrl = DWSurveyConfig.DWSURVEY_WEB_RESOURCE_URL;
-		System.out.println("preFixUrl:"+preFixUrl);
 		this.jsonConfig.put("imageUrlPrefix", preFixUrl);
 		this.jsonConfig.put("scrawlUrlPrefix", preFixUrl);
 		this.jsonConfig.put("snapscreenUrlPrefix", preFixUrl);
