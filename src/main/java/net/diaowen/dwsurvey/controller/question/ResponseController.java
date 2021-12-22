@@ -443,6 +443,7 @@ public class ResponseController {
 				sid = surveyDirectory.getSid();
 			}
 			String jsonPath = "/file/survey/"+sid+"/"+sid+".json";
+			surveyJsonExists(sid, jsonPath);
 			request.getRequestDispatcher(jsonPath).forward(request,response);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -457,16 +458,7 @@ public class ResponseController {
 	public String surveyInfo(HttpServletRequest request, HttpServletResponse response, String sid) {
 		String jsonPath = "/file/survey/"+sid+"/"+sid+"_info.json";
 		try {
-			//判断有无没有则生成一个
-			String filePath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH+jsonPath;
-			filePath = filePath.replace("/",File.separator);
-			filePath = filePath.replace("\\",File.separator);
-			File file = new File(filePath);
-			if(!file.exists()){
-				//不存在则生成一个
-				SurveyDirectory directory = directoryManager.getSurveyBySid(sid);
-				directoryManager.devSurveyJson(directory.getId());
-			}
+			surveyJsonExists(sid, jsonPath);
 			request.getRequestDispatcher(jsonPath).forward(request,response);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -474,6 +466,19 @@ public class ResponseController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private void surveyJsonExists(String sid, String jsonPath) {
+		//判断有无没有则生成一个
+		String filePath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH+ jsonPath;
+		filePath = filePath.replace("/",File.separator);
+		filePath = filePath.replace("\\",File.separator);
+		File file = new File(filePath);
+		if(!file.exists()){
+			//不存在则生成一个
+			SurveyDirectory directory = directoryManager.getSurveyBySid(sid);
+			directoryManager.devSurveyJson(directory.getId());
+		}
 	}
 
 	//回答问卷的二维码
