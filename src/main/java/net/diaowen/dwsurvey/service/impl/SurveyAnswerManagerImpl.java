@@ -4,6 +4,7 @@ import net.diaowen.common.QuType;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.service.BaseServiceImpl;
+import net.diaowen.common.utils.RunAnswerUtil;
 import net.diaowen.common.utils.excel.XLSXExportUtil;
 import net.diaowen.common.utils.parsehtml.HtmlUtil;
 import net.diaowen.dwsurvey.dao.SurveyAnswerDao;
@@ -86,7 +87,7 @@ public class SurveyAnswerManagerImpl extends
 	 * @param question
 	 * @return
 	 */
-	private int getquestionAnswer(String surveyAnswerId, Question question) {
+	public int getquestionAnswer(String surveyAnswerId, Question question) {
 		int score = 0;
 		String quId = question.getId();
 		// 查询每一题的答案,如果是主观题，则判断是否答对
@@ -245,13 +246,13 @@ public class SurveyAnswerManagerImpl extends
 	}
 
 	private void exportXLSRow(XLSXExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer) {
+		new RunAnswerUtil().getQuestionMap(questions,surveyAnswerId);
 		int cellIndex = 0;
 		for (Question question : questions) {
 			QuType quType = question.getQuType();
 			if(quType==QuType.PAGETAG || quType==QuType.PARAGRAPH){
 				continue;
 			}
-			getquestionAnswer(surveyAnswerId, question);
 			String quName = question.getQuName();
 			String titleName = quType.getCnName();
 			if (quType == QuType.YESNO) {// 是非题

@@ -44,4 +44,6 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page, String surveyId);
 
 	public void deleteData(String[] ids);
+
+	public int getquestionAnswer(String surveyAnswerId, Question question);
 }
