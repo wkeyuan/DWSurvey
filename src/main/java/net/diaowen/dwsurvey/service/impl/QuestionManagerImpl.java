@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.diaowen.common.base.entity.User;
+import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.dwsurvey.dao.QuestionDao;
 import net.diaowen.common.QuType;
-import net.diaowen.dwsurvey.service.QuScoreManager;
-import net.diaowen.dwsurvey.service.QuestionLogicManager;
+import net.diaowen.dwsurvey.service.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,6 @@ import net.diaowen.dwsurvey.entity.QuScore;
 import net.diaowen.dwsurvey.entity.Question;
 import net.diaowen.dwsurvey.entity.QuestionLogic;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
-import net.diaowen.dwsurvey.service.QuCheckboxManager;
-import net.diaowen.dwsurvey.service.QuMultiFillblankManager;
-import net.diaowen.dwsurvey.service.QuOrderbyManager;
-import net.diaowen.dwsurvey.service.QuRadioManager;
-import net.diaowen.dwsurvey.service.QuestionManager;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -60,6 +56,10 @@ public class QuestionManagerImpl extends BaseServiceImpl<Question, String> imple
 	private QuOrderbyManager quOrderbyManager;
 	@Autowired
 	private QuestionLogicManager questionLogicManager;
+	@Autowired
+	private AccountManager accountManager;
+	@Autowired
+	private SurveyDirectoryManager surveyDirectoryManager;
 
 	@Override
 	public void setBaseDao() {
@@ -74,15 +74,18 @@ public class QuestionManagerImpl extends BaseServiceImpl<Question, String> imple
 	@Transactional
 	@Override
 	public void save(Question question){
-//		User user=accountManager.getCurUser();
-//		if(user!=null){
-			String uuid=question.getId();
-			if(uuid==null || "".equals(uuid)){
-				question.setId(null);
+		User user=accountManager.getCurUser();
+		if(user!=null){
+			SurveyDirectory survey = surveyDirectoryManager.getSurvey(question.getBelongId());
+			if(user.getId().equals(survey.getUserId())){
+				String uuid=question.getId();
+				if(uuid==null || "".equals(uuid)){
+					question.setId(null);
+				}
+//				question.setUserUuid(user.getId());
+				questionDao.save(question);
 			}
-//			question.setUserUuid(user.getId());
-			questionDao.save(question);
-//		}
+		}
 	}
 
 
