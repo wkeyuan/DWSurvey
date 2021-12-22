@@ -1003,20 +1003,29 @@ function sww(){
 
         validateStatus=true;
         var quScoreOptionTrs=quItemBody.find(".mFillblankTableTr");
-        $.each(quScoreOptionTrs,function(){
-          var scoreNumInput=$(this).find(".dwMFillblankInput");
-          if(scoreNumInput.val()===""){
-            validateStatus=false;
+        var paramInt01 = 0;
+        if(quItemBody.find(".paramInt01")[0]){
+          paramInt01 = quItemBody.find(".paramInt01").val();
+        }
+        var anNum = 0;
+        $.each(quScoreOptionTrs,function() {
+          var scoreNumInput = $(this).find(".dwMFillblankInput");
+          if (scoreNumInput.val() != "") {
+            anNum++;
           }
-          if(validateStatus){
-            var curTextValue = scoreNumInput.val();
-            checkType = $(this).parents(".mFillblankTableTr").find(".checkType").val();
-            validateStatus = checkoutData(checkType, curTextValue);
+        })
+
+        if(validateStatus){
+          if(paramInt01!=0){
+            if(anNum<paramInt01){
+              validateStatus=false;
+            }
+          }else{
+            if(anNum<quScoreOptionTrs.size()){
+              validateStatus=false;
+            }
           }
-          if(!validateStatus){
-            return false;
-          }
-        });
+        }
 
       }else if(quType==="submitSurveyBtn" || quType==="PARAGRAPH" || quType==="PAGETAG"){
         return true;
