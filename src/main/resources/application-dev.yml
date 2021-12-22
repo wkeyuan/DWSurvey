@@ -59,6 +59,33 @@ spring:
     username: root
     # 连接密码
     password: 123456,.
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 50
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      remove-abandoned-timeout-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      stat-view-servlet:
+        enabled: false
+        reset-enable: false
+        #         访问黑名单
+        deny: 192.168.0.3
+        #          白名单
+        allow: 'localhost'
+        url-pattern: /druid/*
+        # 上生产环境一定要改账号与密码！
+        login-username: admin
+        login-password: dwsdb123456
   # jpa配置
   jpa:
     # 连接的数据库
