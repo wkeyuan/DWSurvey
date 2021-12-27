@@ -101,7 +101,11 @@ public class SecurityController {
                         // ExcessiveAttemptsException超过登录次数
                         error = "超过登录次数限制";
                     }
+                }else{
+                    error = "未找到userName对应用户";
                 }
+            }else{
+                error = "登录名userName不能为空";
             }
         }catch (Exception e) {
             e.printStackTrace();
