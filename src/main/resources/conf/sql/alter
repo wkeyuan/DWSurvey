@@ -1,0 +1,25 @@
+
+ALTER TABLE dwsurvey.t_question
+CHANGE COLUMN qu_note qu_note TEXT NULL DEFAULT NULL ,
+CHANGE COLUMN qu_title qu_title TEXT NULL DEFAULT NULL ;
+
+ALTER TABLE dwsurvey.t_survey_detail
+CHANGE COLUMN survey_note survey_note TEXT NULL DEFAULT NULL ;
+
+ALTER TABLE dwsurvey.t_qu_radio
+CHANGE COLUMN option_name option_name TEXT NULL DEFAULT NULL ;
+
+ALTER TABLE dwsurvey.t_qu_checkbox
+CHANGE COLUMN option_name option_name TEXT NULL DEFAULT NULL ;
+
+ALTER TABLE dwsurvey.t_qu_score
+CHANGE COLUMN option_name option_name TEXT NULL DEFAULT NULL ;
+
+ALTER TABLE dwsurvey.t_qu_orderby
+CHANGE COLUMN option_name option_name TEXT NULL DEFAULT NULL ;
+
+ALTER TABLE dwsurvey.t_qu_chen_row
+CHANGE COLUMN option_name option_name TEXT NULL DEFAULT NULL ;
+
+ALTER TABLE dwsurvey.t_qu_chen_column
+CHANGE COLUMN option_name option_name TEXT NULL DEFAULT NULL ;
