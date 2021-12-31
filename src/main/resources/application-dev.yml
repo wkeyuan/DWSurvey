@@ -31,9 +31,9 @@ dwsurvey:
       encodingAESKey:
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
-    info: DWSurvey OSS V5.0 Boot
-    number: OSS V5.0
-    built: 2021/11/21
+    info: DWSurvey OSS V5.2.1 Boot
+    number: OSS V5.2.1
+    built: 2021/12/31
 # 服务占用的端口号
 server:
   port: 8080
