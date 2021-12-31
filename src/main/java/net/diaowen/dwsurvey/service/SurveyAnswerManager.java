@@ -46,4 +46,10 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	public void deleteData(String[] ids);
 
 	public int getquestionAnswer(String surveyAnswerId, Question question);
+
+	public SurveyDirectory upAnQuNum(String surveyId);
+
+	public SurveyDirectory upAnQuNum(SurveyDirectory surveyDirectory);
+
+	public List<SurveyDirectory> upAnQuNum(List<SurveyDirectory> result);
 }

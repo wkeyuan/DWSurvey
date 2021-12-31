@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,14 +35,13 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		Session session=this.getSession();
 		//保存答案信息
 		String surveyId=surveyAnswer.getSurveyId();
-//		Survey survey=(Survey) session.get(Survey.class, surveyId);
 		SurveyDirectory survey=(SurveyDirectory) session.get(SurveyDirectory.class, surveyId);
-		Integer answerNum = survey.getAnswerNum();
-		if(answerNum==null){
-			answerNum=0;
-		}
-		survey.setAnswerNum(answerNum+1);
-		session.update(survey);//更新回答数
+//		Integer answerNum = survey.getAnswerNum();
+//		if(answerNum==null){
+//			answerNum=0;
+//		}
+//		survey.setAnswerNum(answerNum+1);
+//		session.update(survey);//更新回答数
 		int surveyQuAnItemNum=survey.getAnItemLeastNum();//可以回答的最少项目数
 
 //		surveyAnswer.setBgAnDate(curDate);
@@ -457,4 +457,5 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		}
 		return countCriteriaResult(c);
 	}
+
 }

@@ -575,13 +575,23 @@ public class SurveyAnswerManagerImpl extends
 	}
 
 	@Transactional
-	public SurveyDirectory upAnQuNum(SurveyDirectory survey){
+	public SurveyDirectory upAnQuNum(SurveyDirectory survey) {
 		Long answerCount = surveyAnswerDao.countResult(survey.getId());
 		if(answerCount!=null){
 			survey.setAnswerNum(answerCount.intValue());
 			directoryManager.saveByAdmin(survey);
 		}
 		return survey;
+	}
+
+	@Override
+	public List<SurveyDirectory> upAnQuNum(List<SurveyDirectory> result) {
+		if(result!=null){
+			for (SurveyDirectory survey:result) {
+				upAnQuNum(survey);
+			}
+		}
+		return result;
 	}
 
 	@Transactional
@@ -678,6 +688,5 @@ public class SurveyAnswerManagerImpl extends
 		}
 		super.delete(t);
 	}
-
 
 }

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -50,7 +52,7 @@ public class MySurveyController {
         if(user!=null){
             Page page = ResultUtils.getPageByPageResult(pageResult);
             page = surveyDirectoryManager.findByUser(page,surveyName, surveyState);
-//            page.setResult(surveyAnswerManager.upAnCounts(page.getResult()));
+            page.setResult(surveyAnswerManager.upAnQuNum(page.getResult()));
             pageResult = ResultUtils.getPageResultByPage(page,pageResult);
         }
         return pageResult;
@@ -70,6 +72,7 @@ public class MySurveyController {
             if(user!=null){
                 surveyStatsManager.findBySurvey(id);
                 SurveyDirectory survey = surveyDirectoryManager.findUniqueBy(id);
+                survey = surveyAnswerManager.upAnQuNum(survey);
                 return HttpResult.SUCCESS(survey);
             }else{
                 return HttpResult.buildResult(HttpStatus.NOLOGIN);
