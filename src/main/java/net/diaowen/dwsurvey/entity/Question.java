@@ -268,6 +268,7 @@ public class Question extends IdEntity{
 	private List<AnScore> anScores=new ArrayList<AnScore>();
 	private Integer anCount=0;
 	private List<AnOrder> anOrders = new ArrayList<AnOrder>();
+	private List<AnUplodFile> anUplodFiles=new ArrayList<AnUplodFile>();
 
 	//逻辑设置
 	private List<QuestionLogic> questionLogics;
@@ -420,6 +421,15 @@ public class Question extends IdEntity{
 
 	public void setAnOrders(List<AnOrder> anOrders) {
 		this.anOrders = anOrders;
+	}
+
+	@Transient
+	public List<AnUplodFile> getAnUplodFiles() {
+		return anUplodFiles;
+	}
+
+	public void setAnUplodFiles(List<AnUplodFile> anUplodFiles) {
+		this.anUplodFiles = anUplodFiles;
 	}
 
 	//统计json

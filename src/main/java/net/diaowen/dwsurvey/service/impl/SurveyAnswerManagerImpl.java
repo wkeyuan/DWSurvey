@@ -7,9 +7,11 @@ import net.diaowen.common.service.BaseServiceImpl;
 import net.diaowen.common.utils.RunAnswerUtil;
 import net.diaowen.common.utils.excel.XLSXExportUtil;
 import net.diaowen.common.utils.parsehtml.HtmlUtil;
+import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.dao.SurveyAnswerDao;
 import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.service.*;
+import org.aspectj.util.FileUtil;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -205,7 +208,7 @@ public class SurveyAnswerManagerImpl extends
 
 
 	@Override
-	public String exportXLS(String surveyId, String savePath) {
+	public String exportXLS(String surveyId, String savePath, boolean isExpUpQu) {
 		String basepath = surveyId + "";
 		String urlPath = "/webin/expfile/" + basepath + "/";// 下载所用的地址
 		String path = urlPath.replace("/", File.separator);// 文件系统路径
@@ -236,7 +239,7 @@ public class SurveyAnswerManagerImpl extends
 				SurveyAnswer surveyAnswer = answers.get(j);
 				String surveyAnswerId = surveyAnswer.getId();
 				exportUtil.createRow(j+1);
-				exportXLSRow(exportUtil, surveyAnswerId, questions, surveyAnswer);
+				exportXLSRow(exportUtil, surveyAnswerId, questions, surveyAnswer, (j+1), savePath, isExpUpQu);
 			}
 			exportUtil.exportXLS();
 		} catch (Exception e) {
@@ -245,14 +248,16 @@ public class SurveyAnswerManagerImpl extends
 		return urlPath + fileName;
 	}
 
-	private void exportXLSRow(XLSXExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer) {
+	private void exportXLSRow(XLSXExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer,int orderNum, String savePath, boolean isExpUpQu) {
 		new RunAnswerUtil().getQuestionMap(questions,surveyAnswerId);
 		int cellIndex = 0;
+		int quNum=0;
 		for (Question question : questions) {
 			QuType quType = question.getQuType();
 			if(quType==QuType.PAGETAG || quType==QuType.PARAGRAPH){
 				continue;
 			}
+			quNum++;
 			String quName = question.getQuName();
 			String titleName = quType.getCnName();
 			if (quType == QuType.YESNO) {// 是非题
@@ -422,6 +427,36 @@ public class SurveyAnswerManagerImpl extends
 					}
 					exportUtil.setCell(cellIndex++, answerScore);
 				}
+			}else if (quType == QuType.UPLOADFILE) {
+				//为导出文件
+				String upFilePath = File.separator + "webin" + File.separator + "upload" + File.separator;
+				List<AnUplodFile> anUplodFiles = question.getAnUplodFiles();
+				String answerBuf = "";
+
+				String toFilePath = "";
+				if(isExpUpQu){
+//					String toFilePath = savePath+File.separator+orderNum+File.separator+HtmlUtil.removeTagFromText(titleName);
+//					String toFilePath = savePath + File.separator + orderNum + File.separator + quNum + "_" + HtmlUtil.removeTagFromText(titleName);
+					toFilePath = savePath + File.separator + orderNum + File.separator + "Q_" + quNum;
+					File file = new File(toFilePath);
+					if (!file.exists()) file.mkdirs();
+				}
+				for (AnUplodFile anUplodFile : anUplodFiles) {
+					answerBuf += anUplodFile.getFileName() + "      ";
+					if(isExpUpQu){
+						File fromFile = new File(DWSurveyConfig.DWSURVEY_WEB_FILE_PATH + anUplodFile.getFilePath());
+						if (fromFile.exists()) {
+							File toFile = new File(toFilePath + File.separator + anUplodFile.getFileName());
+							try {
+								FileUtil.copyFile(fromFile, toFile);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+//				answerBuf=answerBuf.substring(0,answerBuf.lastIndexOf("      "));
+				exportUtil.setCell(cellIndex++, answerBuf);
 			}
 		}
 

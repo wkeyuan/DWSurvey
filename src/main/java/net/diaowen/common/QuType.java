@@ -29,9 +29,11 @@ public enum QuType {
 	CHENCHECKBOX("矩阵多选题","chen-checkbox", 13),
 	COMPCHENRADIO("复合矩阵单选题","comp-chen-radio", 14),
 
+	UPLOADFILE("文件上传题","sendfile",15),
 	PAGETAG("分页标记","pagetag",16),
 	PARAGRAPH("段落说明","paragraph",17),
 	CHENSCORE("矩阵评分题","chen-score", 18);
+
 
 
 	private String cnName;

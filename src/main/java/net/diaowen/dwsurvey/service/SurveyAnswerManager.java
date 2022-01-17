@@ -30,7 +30,7 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 
 	public Long getCountByIp(String surveyId, String ip);
 
-	public String exportXLS(String surveyId, String savePath);
+	public String exportXLS(String surveyId, String savePath, boolean isExpUpQu);
 
 	public SurveyStats surveyStatsData(SurveyStats surveyStats);
 

@@ -7,10 +7,13 @@ import net.diaowen.common.plugs.httpclient.PageResult;
 import net.diaowen.common.plugs.httpclient.ResultUtils;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.utils.UserAgentUtils;
+import net.diaowen.common.utils.ZipUtil;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
+import net.diaowen.dwsurvey.entity.AnUplodFile;
 import net.diaowen.dwsurvey.entity.Question;
 import net.diaowen.dwsurvey.entity.SurveyAnswer;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
+import net.diaowen.dwsurvey.service.AnUploadFileManager;
 import net.diaowen.dwsurvey.service.SurveyAnswerManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +40,8 @@ public class MySurveyAnswerController {
     private SurveyAnswerManager surveyAnswerManager;
     @Autowired
     private AccountManager accountManager;
+    @Autowired
+    private AnUploadFileManager anUploadFileManager;
     /**
      * 获取答卷列表
      * @return
@@ -127,10 +133,30 @@ public class MySurveyAnswerController {
                     if(!user.getId().equals(survey.getUserId())){
                         return "没有相应数据权限";
                     }
-                    //直接导出excel
-                    savePath=surveyAnswerManager.exportXLS(surveyId,savePath);
-                    response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("dwsurvey_"+survey.getSid()+".xlsx", "UTF-8"));
-                    request.getRequestDispatcher(savePath).forward(request,response);
+                    List<AnUplodFile> anUplodFiles = anUploadFileManager.findAnswer(surveyId);
+                    if(anUplodFiles!=null && anUplodFiles.size()>0 && expUpQu!=null && "1".equals(expUpQu)){
+                        //直接导出excel，不存在上传文件的问题
+                        savePath = surveyAnswerManager.exportXLS(surveyId,savePath,true);
+                        //启用压缩导出
+                        String fromPath =DWSurveyConfig.DWSURVEY_WEB_FILE_PATH+"/webin/expfile/"+surveyId;
+                        fromPath = fromPath.replace("/", File.separator);
+
+                        String zipPath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH+"/webin/zip/".replace("/", File.separator);
+                        File file = new File(zipPath);
+                        if (!file.exists())
+                            file.mkdirs();
+
+                        String toPath = zipPath+surveyId + ".zip";
+                        toPath = toPath.replace("/",File.separator);
+                        ZipUtil.createZip(fromPath, toPath, false);
+                        response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("dwsurvey_"+survey.getSid()+".zip", "UTF-8"));
+                        request.getRequestDispatcher("/webin/zip/"+ surveyId + ".zip").forward(request,response);
+                    }else{
+                        //直接导出excel，不存在上传文件的问题
+                        savePath=surveyAnswerManager.exportXLS(surveyId,savePath, false);
+                        response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("dwsurvey_"+survey.getSid()+".xlsx", "UTF-8"));
+                        request.getRequestDispatcher(savePath).forward(request,response);
+                    }
                 }
             }
         }catch (Exception e) {
