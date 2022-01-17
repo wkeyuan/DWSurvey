@@ -408,7 +408,6 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 			String answerValue=fillMaps.get(key).toString();
 			String[] answerValues = answerValue.split("___");
 			String randomCode = RandomUtils.randomWordNum(6);
-//			String randomCode = null;
 			AnUplodFile anUplodFile=new AnUplodFile(surveyId,surveyAnswerId,quId,answerValues[0],answerValues[1],randomCode);
 			session.save(anUplodFile);
 		}
