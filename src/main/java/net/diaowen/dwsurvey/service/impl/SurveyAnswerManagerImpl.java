@@ -58,6 +58,8 @@ public class SurveyAnswerManagerImpl extends
 	@Autowired
 	private AnOrderManager anOrderManager;
 	@Autowired
+	private AnUploadFileManager anUploadFileManager;
+	@Autowired
 	private SurveyDirectoryManager directoryManager;
 
 	@Override
@@ -166,6 +168,9 @@ public class SurveyAnswerManagerImpl extends
 			if(anOrders!=null){
 				question.setAnOrders(anOrders);
 			}
+		} else if (quType == QuType.UPLOADFILE) {
+			List<AnUplodFile> anUplodFiles = anUploadFileManager.findAnswer(surveyAnswerId,quId);
+			question.setAnUplodFiles(anUplodFiles);
 		}
 		return score;
 	}
@@ -559,6 +564,8 @@ public class SurveyAnswerManagerImpl extends
 					optionName=HtmlUtil.removeTagFromText(optionName);
 					exportUtil.setCell(cellIndex++, titleName+"－"+optionName);
 				}
+			} else if (quType == QuType.UPLOADFILE) {
+				exportUtil.setCell(cellIndex++, titleName);
 			}
 		}
 

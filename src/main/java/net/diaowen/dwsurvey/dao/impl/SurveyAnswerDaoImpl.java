@@ -1,6 +1,7 @@
 package net.diaowen.dwsurvey.dao.impl;
 
 import net.diaowen.common.dao.BaseDaoImpl;
+import net.diaowen.common.utils.RandomUtils;
 import net.diaowen.dwsurvey.dao.SurveyAnswerDao;
 import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.service.SurveyStatsManager;
@@ -93,6 +94,9 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		//排序题 quOrderMaps
 		Map<String,Object> quOrderMaps=quMaps.get("quOrderMaps");
 		anCount+=saveQuOrderMaps(surveyAnswer,quOrderMaps,session);
+
+		Map<String,Object> uploadFileMaps=quMaps.get("uploadFileMaps");
+		anCount+=saveUploadFileMaps(surveyAnswer,uploadFileMaps,session);
 
 		//保存anCount
 		surveyAnswer.setCompleteItemNum(anCount);
@@ -389,6 +393,24 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 			String yesnoAnswer=yesnoMaps.get(key).toString();
 			AnYesno anYesno=new AnYesno(surveyId,surveyAnswerId,quId,yesnoAnswer);
 			session.save(anYesno);
+		}
+		return answerQuCount;
+	}
+
+	private int saveUploadFileMaps(SurveyAnswer surveyAnswer,
+								   Map<String, Object> fillMaps,Session session) {
+		String surveyId=surveyAnswer.getSurveyId();
+		String surveyAnswerId=surveyAnswer.getId();
+		int answerQuCount=0;
+		for (String key : fillMaps.keySet()) {
+			answerQuCount++;
+			String quId=key.split("_")[0];
+			String answerValue=fillMaps.get(key).toString();
+			String[] answerValues = answerValue.split("___");
+			String randomCode = RandomUtils.randomWordNum(6);
+//			String randomCode = null;
+			AnUplodFile anUplodFile=new AnUplodFile(surveyId,surveyAnswerId,quId,answerValues[0],answerValues[1],randomCode);
+			session.save(anUplodFile);
 		}
 		return answerQuCount;
 	}

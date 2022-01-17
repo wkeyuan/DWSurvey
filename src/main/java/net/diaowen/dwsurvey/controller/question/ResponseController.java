@@ -386,6 +386,11 @@ public class ResponseController {
 			checkboxMaps.put(key, map);
 		}
 		quMaps.put("compCheckboxMaps", checkboxMaps);
+
+		Map<String, Object> uploadFileMaps = WebUtils.getParametersStartingWith(
+				request, "qu_" + QuType.UPLOADFILE + "_");//填空
+		quMaps.put("uploadFileMaps", uploadFileMaps);
+
 		return quMaps;
 	}
 
