@@ -62,6 +62,8 @@ public class QuCheckboxController {
 		String cellCount=request.getParameter("cellCount");
 		String contactsAttr=request.getParameter("contactsAttr");
 		String contactsField=request.getParameter("contactsField");
+		String paramInt01=request.getParameter("paramInt01");//最小分
+		String paramInt02=request.getParameter("paramInt02");//最大分
 		if("".equals(quId)){
 			quId=null;
 		}
@@ -79,12 +81,16 @@ public class QuCheckboxController {
 		randOrder=(randOrder==null || "".equals(randOrder))?"0":randOrder;
 		cellCount=(cellCount==null || "".equals(cellCount))?"0":cellCount;
 		contactsAttr=(contactsAttr==null || "".equals(contactsAttr))?"0":contactsAttr;
+		paramInt01=(paramInt01==null || "".equals(paramInt01))?"0":paramInt01;
+		paramInt02=(paramInt02==null || "".equals(paramInt02))?"0":paramInt02;
 		entity.setContactsAttr(Integer.parseInt(contactsAttr));
 		entity.setContactsField(contactsField);
 		entity.setIsRequired(Integer.parseInt(isRequired));
 		entity.setHv(Integer.parseInt(hv));
 		entity.setRandOrder(Integer.parseInt(randOrder));
 		entity.setCellCount(Integer.parseInt(cellCount));
+		entity.setParamInt01(Integer.parseInt(paramInt01));
+		entity.setParamInt02(Integer.parseInt(paramInt02));
 		Map<String, Object> optionNameMap=WebUtils.getParametersStartingWith(request, "optionValue_");
 		List<QuCheckbox> quCheckboxs=new ArrayList<QuCheckbox>();
 		for (String key : optionNameMap.keySet()) {

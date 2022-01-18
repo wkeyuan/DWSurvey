@@ -9,7 +9,7 @@ import net.diaowen.dwsurvey.entity.DataCross;
 import net.diaowen.dwsurvey.entity.Question;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
 import net.diaowen.dwsurvey.entity.SurveyStats;
-import net.diaowen.dwsurvey.service.AnScoreManager;
+import net.diaowen.dwsurvey.service.*;
 import net.sf.json.JSONArray;
 
 import org.hibernate.criterion.Criterion;
@@ -19,17 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.diaowen.common.service.BaseServiceImpl;
-import net.diaowen.dwsurvey.service.AnAnswerManager;
-import net.diaowen.dwsurvey.service.AnCheckboxManager;
-import net.diaowen.dwsurvey.service.AnDFillblankManager;
-import net.diaowen.dwsurvey.service.AnEnumquManager;
-import net.diaowen.dwsurvey.service.AnFillblankManager;
-import net.diaowen.dwsurvey.service.AnOrderManager;
-import net.diaowen.dwsurvey.service.AnRadioManager;
-import net.diaowen.dwsurvey.service.AnYesnoManager;
-import net.diaowen.dwsurvey.service.QuestionManager;
-import net.diaowen.dwsurvey.service.SurveyAnswerManager;
-import net.diaowen.dwsurvey.service.SurveyStatsManager;
 
 
 /**
@@ -67,6 +56,8 @@ public class SurveyStatsManagerImpl extends
 	private AnScoreManager anScoreManager;
 	@Autowired
 	private AnOrderManager anOrderManager;
+	@Autowired
+	private AnUploadFileManager anUploadFileManager;
 
 	@Override
 	public void setBaseDao() {
@@ -135,7 +126,6 @@ public class SurveyStatsManagerImpl extends
 			if (QuType.YESNO == quType) {// 是非题
 				anYesnoManager.findGroupStats(question);
 			} else if (QuType.RADIO == quType || QuType.COMPRADIO == quType) {// 单选
-																				// 复合单选
 				anRadioManager.findGroupStats(question);
 			} else if (QuType.CHECKBOX == quType
 					|| QuType.COMPCHECKBOX == quType) {// 多选 复合多选
@@ -150,8 +140,10 @@ public class SurveyStatsManagerImpl extends
 				anEnumquManager.findGroupStats(question);
 			} else if (QuType.SCORE == quType) {// 评分题
 				anScoreManager.findGroupStats(question);
-			}  else if (QuType.ORDERQU == quType) {
+			} else if (QuType.ORDERQU == quType) {
 				anOrderManager.findGroupStats(question);
+			} else if (QuType.UPLOADFILE == quType) {
+				anUploadFileManager.findGroupStats(question);
 			}
 		}
 

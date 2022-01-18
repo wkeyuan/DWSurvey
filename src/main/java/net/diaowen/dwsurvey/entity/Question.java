@@ -53,9 +53,9 @@ public class Question extends IdEntity{
 	//说明的验证方式
 	private CheckType checkType;
 	// 枚举题 枚举项数目 ,评分题起始分值
-	private Integer paramInt01 = 3;
+	private Integer paramInt01 = 0;
 	//评分题，最大分值
-	private Integer paramInt02 = 10;
+	private Integer paramInt02 = 0;
 	//是否显示 0不显示   1显示
 	private Integer visibility=1;
 
