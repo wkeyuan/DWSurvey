@@ -34,6 +34,8 @@ function querySurveyAll(){
                parsePage(item);
              }else if(quType==="PARAGRAPH"){
                parseParagraph(item);
+             }else if(quType == "UPLOADFILE"){
+               parseUploadfile(item);
              }
            });
            resetQuItem();
@@ -387,3 +389,19 @@ function parseParagraph(item){
 
 }
 
+function parseUploadfile(item){
+  var quModel = $("#uploadFileQuModel .dwQuTypeModel").html();
+  $("#dwSurveyQuContentAppUl").append("<li class=\"li_surveyQuItemBody\">"+quModel+"</li>");
+  var lastQuItemBody = $("#dwSurveyQuContentAppUl .li_surveyQuItemBody").last()
+  lastQuItemBody.find(".quDragBody").removeClass("quDragBody");
+  var quInputCase = lastQuItemBody.find(".quInputCase");
+  parseExtracted(quInputCase, item);
+  quInputCase.find("input[name='contactsAttr']").val(item.contactsAttr);
+  quInputCase.find("input[name='contactsField']").val(item.contactsField);
+  quInputCase.find("input[name='checkType']").val(item.checkType);
+  quInputCase.find("input[name='answerInputWidth']").val(item.answerInputWidth);
+  quInputCase.find("input[name='answerInputRow']").val(item.answerInputRow);
+  quInputCase.find("input[name='paramStr01']").val(item.paramStr01);
+  quLogicExtracted(lastQuItemBody, item);
+
+}

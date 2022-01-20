@@ -28,6 +28,7 @@ $(document).ready(function(){
   $.answerPage("p",sid,function(){
     querySurveyAll(function(){
       sww();
+      wwwUpload();
       if(!$("#preview_head_top")[0]){
         checkAnswerSurvey(sid);
       }
@@ -953,13 +954,13 @@ function validateCheck(quItemBody,isSubForm){
       var paramInt01 = quItemBody.find(".paramInt01").val();
 
       if(paramInt01>0){
-        /*var checkeds = quItemBody.find("input[type='checkbox']:checked");
+        var checkeds = quItemBody.find("input[type='checkbox']:checked");
         if(checkeds[0]&&checkeds.size()<paramInt01){
           quItemBody.find(".quCoItem").append("<div class=\"errorItem\"><label class=\"error\">请保证最少选择"+paramInt01+"项内容</label></div>");
           validateStatus = false;
         }else{
           quItemBody.find(".quCoItem .errorItem").remove();
-        }*/
+        }
       }
       if(validateStatus){
 //					isNote checkType isRequiredFill
@@ -1029,6 +1030,8 @@ function validateCheck(quItemBody,isSubForm){
           }
         }
       }
+    }else if(quType === "UPLOADFILE"){
+      validateStatus=quItemBody.find(".fileuploadSaveValue")[0];
     }else if(quType==="submitSurveyBtn" || quType==="PARAGRAPH" || quType==="PAGETAG"){
       return true;
     }

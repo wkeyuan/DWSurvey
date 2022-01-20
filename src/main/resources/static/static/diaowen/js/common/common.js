@@ -66,7 +66,7 @@ $(document).ready(function(){
       type: btypeInfo,
       pc: pc,
       prefix: prefix,
-      isMobile: pc !== "pc",
+      isMobile: pc !== "pc"
     };
   };
   $.answerPage = function(pageName,sid,callback) {

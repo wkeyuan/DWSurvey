@@ -152,7 +152,8 @@
 
                         <input type="hidden" name="contactsAttr" value="0">
                         <input type="hidden" name="contactsField" value="0">
-
+                        <input type="hidden" name="paramInt01" value="0">
+                        <input type="hidden" name="paramInt02" value="0">
                         <div class="quLogicInputCase">
                           <input type="hidden" name="quLogicItemNum" value="0">
                         </div>
@@ -584,6 +585,74 @@
                               <li class="addOption" title="添加"><div class="dwQuIcon"></div></li>
                               <li class="addMoreOption" title="批量添加"><div class="dwQuIcon" ></div></li>
                             </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li id="uploadFileQuModel">
+                  <div class="dwToolbar_icon dwsurveyfont icon-dwsurvey-shangchuan"></div>
+                  <div class="dwQuTypeModel">
+                    <div class="surveyQuItemBody quDragBody">
+                      <div class="initLine"></div>
+                      <div class="quInputCase" style="display: none;">
+                        <input type="hidden" name="quType" value="UPLOADFILE" >
+                        <input type="hidden" name="quId" value="">
+                        <input type="hidden" name="orderById" value="0"/>
+                        <input type="hidden" name="saveTag" value="0">
+                        <input type="hidden" name="hoverTag" value="0">
+                        <input type="hidden" name="isRequired" value="1">
+                        <input type="hidden" name="hv" value="2">
+                        <input type="hidden" name="randOrder" value="0">
+                        <input type="hidden" name="cellCount" value="0">
+                        <input type="hidden" name="checkType" value="NO">
+
+                        <input type="hidden" name="answerInputWidth" value="300">
+                        <input type="hidden" name="answerInputRow" value="1">
+
+                        <input type="hidden" name="contactsAttr" value="0">
+                        <input type="hidden" name="contactsField" value="0">
+
+                        <input type="hidden" name="paramInt01" value="1">
+                        <input type="hidden" name="paramInt02" value="10">
+
+                        <div class="quLogicInputCase">
+                          <input type="hidden" name="quLogicItemNum" value="0">
+                        </div>
+                      </div>
+                      <div class="surveyQuItem">
+                        <div class="surveyQuItemLeftTools">
+                          <ul class="surveyQuItemLeftToolsUl">
+                            <li title="移动排序" class="dwQuMove"><div class="dwQuIcon"></div></li>
+                            <li title="设置" class="dwQuSet"><div class=dwQuIcon></div></li>
+                            <li title="逻辑" class="dwQuLogic"><div class="dwQuIcon"><div class="quLogicInfo"></div></div></li>
+                            <li title="删除" class="dwQuDelete"><div class="dwQuIcon"></div></li>
+                          </ul>
+                        </div>
+                        <div class="surveyQuItemRightTools">
+                          <ul class="surveyQuItemRightToolsUl">
+                            <li class="questionUp"><div class="dwQuIcon"></div></li>
+                            <li class="questionDown"><div class="dwQuIcon"></div></li>
+                          </ul>
+                        </div>
+                        <div class="surveyQuItemContent">
+                          <div class="quCoTitle">
+                            <div class="quCoNum">1、</div>
+                            <div class="editAble quCoTitleEdit" >请上传文件？</div>
+                            <input type="hidden" name="quTitleSaveTag" value="0">
+                          </div>
+                          <div class="quCoQuNote">
+                            <div class="editAble quCoNoteEdit" ></div>
+                          </div>
+                          <div class="quCoItem"><ul>
+                            <li class="quCoItemUlLi">
+                              <!-- <input type="text" style="width:200px;padding:5px;"> -->
+                              <div class="quFillblankItem">
+                                <input type="file" >
+                              </div>
+                            </li>
+                          </ul>
                           </div>
                         </div>
                       </div>
@@ -1508,13 +1577,20 @@
               </select>
               <span class="option_range_3" style="display:none;"><input type="text" name="setCellCount"  size="2" value="3" class="" >&nbsp;列</span>
             </li>
-            <!-- <li class="minNumLi">最少选&nbsp;<input type="text" size="3" name="minNum">&nbsp;项 </li>
-            <li class="maxNumLi">最多选&nbsp;<input type="text" size="3" name="maxNum">&nbsp;项 </li> -->
+            <li class="minNumLi">最少选&nbsp;<input type="text" size="3" name="minNum" value="0">&nbsp;项 </li>
+            <li class="maxNumLi">最多选&nbsp;<input type="text" size="3" name="maxNum" value="0">&nbsp;项 </li>
             <li class="minMaxLi">
               <span class="minSpan"><label class="lgleftLabel">&nbsp;最低分</label>&nbsp;<input class="minNum" value="1"  type="text" size="2" >&nbsp; <label class="lgRightLabel">分</label></span>&nbsp;&nbsp;
               <span class="maxSpan"><label class="lgLeftLabel">最高分</label>&nbsp;<input class="maxNum"  value="5"  type="text" size="2" >&nbsp;<label class="lgRightLabel">分</label> </span>
             </li>
             <li class="scoreMinMax">&nbsp;&nbsp;<label>最高分</label>&nbsp;<select class="maxScore"  ><option value="5">5分</option><option value="10">10分</option></select>&nbsp; </li>
+            <li class="fileTypeExtsLi">
+              <div><label>&nbsp;上传文件类型</label>&nbsp;
+                <select class="fileTypeExts"  ><option value="0">不限</option><option value="1">图片文件</option><option value="2">文本文件</option></select>&nbsp;<br/>
+              </div>
+              <div style="margin-top: 8px;"><label>&nbsp;上传附件数</label>&nbsp;&nbsp;<label><input type="text" class="uploadNum" size="5" value="0"  >&nbsp;&nbsp;0&nbsp;表示不限制</label></div>
+              <div style="margin-top: 8px;"><label>&nbsp;单个文件最大支持</label>&nbsp;&nbsp; <input class="maxSize"  value="10"  type="text" size="5" ><label>&nbsp;M</label></div>
+            </li>
           </ul>
           <div class="dwQuDialogBtnCon" ><input type="button" value="保存" class="quDialogBtn" id="dwDialogQuSetSave"/></div>
         </div>

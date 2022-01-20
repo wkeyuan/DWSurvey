@@ -437,6 +437,12 @@ $(document).ready(function(){
 			if(quType=="RADIO" || quType=="CHECKBOX" || quType=="FILLBLANK"){
 				quItemBody.find("input[name='contactsAttr']").val(setAutoContacts[0]?1:0);
 				quItemBody.find("input[name='contactsField']").val(setContactsField);
+        if(quType=="CHECKBOX"){
+          var minNum = $("#dwCommonDialog .minNumLi input[name='minNum']").val();
+          var maxNum = $("#dwCommonDialog .maxNumLi input[name='maxNum']").val();
+          quItemBody.find("input[name='paramInt01']").val(minNum);
+          quItemBody.find("input[name='paramInt02']").val(maxNum);
+        }
 			}else if(quType==="MULTIFILLBLANK"){
 				var paramInt01=$("#dwCommonDialog .minMaxLi .minNum");
 				if(paramInt01[0]){
@@ -459,7 +465,14 @@ $(document).ready(function(){
 						$(this).append("<td>"+i+"</td>");
 					}
 				});
-			}
+			}else if(quType==="UPLOADFILE"){
+        var fileTypeExtsField=$("#dwCommonDialog .fileTypeExts");
+        var maxSizeField=$("#dwCommonDialog .maxSize");
+        var uploadNumField=$("#dwCommonDialog .uploadNum");
+        quItemBody.find("input[name='paramInt01']").val(fileTypeExtsField.val());
+        quItemBody.find("input[name='paramInt02']").val(maxSizeField.val());
+        quItemBody.find("input[name='randOrder']").val(uploadNumField.val());
+      }
 
 			var selVal=$(".option_range").val();
 			if(selVal==1){
@@ -1473,6 +1486,8 @@ function showDialog(thDialogObj){
 		$("#dwCommonDialog .optionRangeHv").hide();
 		$("#dwCommonDialog .scoreMinMax").hide();
 		$("#dwCommonDialog .minMaxLi").hide();
+    $("#dwCommonDialog .minNumLi").hide();
+    $("#dwCommonDialog .maxNumLi").hide();
 		if(isRequired==1){
 			$("#dwCommonDialog input[name='setIsRequired']").prop("checked",true);
 		}
@@ -1507,6 +1522,7 @@ function showDialog(thDialogObj){
 			}
 		}
 
+    $("#dwCommonDialog .fileTypeExtsLi").hide();
 		//单选，多选，填空题情况下才启用关联到联系设置项
 		if((quType=="RADIO" || quType=="CHECKBOX" || quType=="FILLBLANK")){
 			if( contactsAttr==1){
@@ -1514,7 +1530,22 @@ function showDialog(thDialogObj){
 				$("#dwCommonDialog .contactsFieldLi").show();
 				$("#dwCommonDialog select[name='setContactsField']").val(contactsField);
 			}
-		}
+      if(quType == "CHECKBOX"){
+        $("#dwCommonDialog .minNumLi").show();
+        $("#dwCommonDialog .maxNumLi").show();
+        $("#dwCommonDialog .minNumLi input[name='minNum']").val(paramInt01.val());
+        $("#dwCommonDialog .maxNumLi input[name='maxNum']").val(paramInt02.val());
+      }
+    } else if(quType==="UPLOADFILE"){
+      // fileTypeExtsLi
+      if(paramInt01[0]){
+        $("#dwCommonDialog .fileTypeExts").val(paramInt01.val());
+        $("#dwCommonDialog .maxSize").val(paramInt02.val());
+        $("#dwCommonDialog .uploadNum").val(randOrder);
+      }
+      $("#dwCommonDialog .fileTypeExtsLi").show();
+      $("#dwCommonDialog .minMaxNumLi").hide();
+    }
 	}else if(thObjClass.indexOf("dwQuLogic")>=0){
 		$("#dwCommonDialog .dwQuDialogLoad").show();
 	}else if(thObjClass.indexOf("dwFbMenuBtn")>=0){
@@ -1677,7 +1708,9 @@ function saveQus(quItemBody,callback){
 				saveMultiFillblank(quItemBody, callback);
 			}else if(quType=="SCORE"){
 				saveScore(quItemBody, callback);
-			}else{
+			}else if(quType == "UPLOADFILE"){
+        saveUploadFile(quItemBody, callback);
+      }else{
 				callback();
 			}
 		}else{
@@ -1907,10 +1940,13 @@ function saveCheckbox(quItemBody,callback){
 		var cellCount=quItemBody.find("input[name='cellCount']").val();
 		var contactsAttr=quItemBody.find("input[name='contactsAttr']").val();
 		var contactsField=quItemBody.find("input[name='contactsField']").val();
+    var paramInt01=quItemBody.find("input[name='paramInt01']").val();
+    var paramInt02=quItemBody.find("input[name='paramInt02']").val();
 
 		var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quId="+quId;
 		data+="&isRequired="+isRequired+"&hv="+hv+"&randOrder="+randOrder+"&cellCount="+cellCount;
 		data+="&contactsAttr="+contactsAttr+"&contactsField="+contactsField;
+    data+="&paramInt01="+paramInt01+"&paramInt02="+paramInt02;
 
 		var quTitleSaveTag=quItemBody.find("input[name='quTitleSaveTag']").val();
 		if(quTitleSaveTag==0){
@@ -2902,6 +2938,110 @@ function deleteMultiFillblankOption(){
 	}else{
 		delQuOptionCallBack(optionParent);
 	}
+}
+
+/**
+ * 文件上传题
+ * @param quItemBody
+ * @param callback
+ */
+function saveUploadFile(quItemBody,callback){
+  var saveTag=quItemBody.find("input[name='saveTag']").val();
+  if(saveTag==0){
+    var url=ctx+"/design/qu-upload-file/ajaxSave.do";
+    var quType=quItemBody.find("input[name='quType']").val();
+    var quId=quItemBody.find("input[name='quId']").val();
+    var orderById=quItemBody.find("input[name='orderById']").val();;
+    var isRequired=quItemBody.find("input[name='isRequired']").val();
+    var hv=quItemBody.find("input[name='hv']").val();
+    var randOrder=quItemBody.find("input[name='randOrder']").val();
+    var cellCount=quItemBody.find("input[name='cellCount']").val();
+
+    var answerInputWidth=quItemBody.find("input[name='answerInputWidth']").val();
+    var answerInputRow=quItemBody.find("input[name='answerInputRow']").val();
+
+    var contactsAttr=quItemBody.find("input[name='contactsAttr']").val();
+    var contactsField=quItemBody.find("input[name='contactsField']").val();
+
+    var checkType=quItemBody.find("input[name='checkType']").val();
+    var paramInt01=quItemBody.find("input[name='paramInt01']").val();
+    var paramInt02=quItemBody.find("input[name='paramInt02']").val();
+
+    var data="belongId="+questionBelongId+"&orderById="+orderById+"&tag="+svTag+"&quType="+quType+"&quId="+quId;
+    data+="&isRequired="+isRequired+"&hv="+hv+"&randOrder="+randOrder+"&cellCount="+cellCount;
+    data+="&answerInputWidth="+answerInputWidth+"&answerInputRow="+answerInputRow;
+    data+="&contactsAttr="+contactsAttr+"&contactsField="+contactsField+"&checkType="+checkType;
+    data+="&paramInt01="+paramInt01;
+    data+="&paramInt02="+paramInt02;
+
+    var quTitleSaveTag=quItemBody.find("input[name='quTitleSaveTag']").val();
+    if(quTitleSaveTag==0){
+      var quTitle=quItemBody.find(".quCoTitleEdit").html();
+      quTitle=escape(encodeURIComponent(quTitle));
+      data+="&quTitle="+quTitle;
+    }
+
+    //逻辑选项
+    var quLogicItems=quItemBody.find(".quLogicItem");
+    $.each(quLogicItems,function(i){
+      var thClass=$(this).attr("class");
+      thClass=thClass.replace("quLogicItem quLogicItem_","");
+
+      var quLogicId=$(this).find("input[name='quLogicId']").val();
+      var cgQuItemId=$(this).find("input[name='cgQuItemId']").val();
+      var skQuId=$(this).find("input[name='skQuId']").val();
+      var logicSaveTag=$(this).find("input[name='logicSaveTag']").val();
+      var visibility=$(this).find("input[name='visibility']").val();
+      var logicType=$(this).find("input[name='logicType']").val();
+      var itemIndex=thClass;
+      if(logicSaveTag==0){
+        data+="&quLogicId_"+itemIndex+"="+quLogicId;
+        data+="&cgQuItemId_"+itemIndex+"="+cgQuItemId;
+        data+="&skQuId_"+itemIndex+"="+skQuId;
+        data+="&visibility_"+itemIndex+"="+visibility;
+        data+="&logicType_"+itemIndex+"="+logicType;
+      }
+
+    });
+
+    // alert(data);
+    $.ajax({
+      url:url,
+      data:data,
+      type:'post',
+      success:function(msg){
+        //alert(msg);// resultJson quItemId
+        if(msg!="error"){
+          var jsons=eval("("+msg+")");
+          //alert(jsons);
+          var quId=jsons.id;
+          quItemBody.find("input[name='quId']").val(quId);
+
+          //同步logic Id信息
+          var quLogics=jsons.quLogics;
+          $.each(quLogics,function(i,item){
+            var logicItem=quItemBody.find(".quLogicItem_"+item.title);
+            logicItem.find("input[name='quLogicId']").val(item.id);
+            logicItem.find("input[name='logicSaveTag']").val(1);
+          });
+
+          quItemBody.find("input[name='saveTag']").val(1);
+          quItemBody.find(".quCoTitle input[name='quTitleSaveTag']").val(1);
+
+          quItemBody.removeClass("saveError");
+        }else{
+          quItemBody.addClass("saveError");
+        }
+        //执行保存下一题
+        saveQus(quItemBody.next(),callback);
+        //同步-更新题目排序号
+        quCBNum2++;
+        exeQuCBNum();
+      }
+    });
+  }else{
+    saveQus(quItemBody.next(),callback);
+  }
 }
 
 

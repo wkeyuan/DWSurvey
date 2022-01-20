@@ -12,6 +12,11 @@
   <link rel="stylesheet" type="text/css" href="css/answer-m.css" />
   <script type="text/javascript" src="js/plugs/jquery-ui-1.10.3.custom/js/jquery-1.10.1.js"></script>
   <script type="text/javascript" src="js/plugs/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js"></script>
+  <link rel="stylesheet" href="js/plugs/jQuery-File-Upload-9.19.2/css/jquery.fileupload.css">
+  <link rel="stylesheet" href="js/plugs/jQuery-File-Upload-9.19.2/css/jquery.fileupload-ui.css">
+  <script src="js/plugs/jQuery-File-Upload-9.19.2/js/vendor/jquery.ui.widget.js"></script>
+  <script src="js/plugs/jQuery-File-Upload-9.19.2/js/jquery.fileupload.js"></script>
+  <script src="js/plugs/jQuery-File-Upload-9.19.2/js/jquery.iframe-transport.js"></script>
   <script type="text/javascript" src="js/plugs/laydate/laydate.js"></script>
   <script type="text/javascript" src="js/common/ans-common.js"></script>
   <script type="text/javascript" src="js/common/common.js"></script>
@@ -292,6 +297,65 @@
               </legend>
               <div class="quCoItem"></div>
             </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <ul id="uploadFileQuModel">
+      <li class="li_surveyQuItemBody" >
+        <div class="surveyQuItemBody">
+          <div class="initLine"></div>
+          <div class="quInputCase" style="display: none;">
+            <input type="hidden" class="quType" value="UPLOADFILE">
+            <input type="hidden" class="quId" value="${en.id }">
+            <input type="hidden" class="orderById" value="${en.orderById }"/>
+            <input type="hidden" class="isRequired" value="${en.isRequired }">
+            <input type="hidden" class="checkType" value="${en.checkType }">
+            <input type="hidden" class="answerTag" value="0" >
+            <input type="hidden" class="paramInt01" value="${en.paramInt01 }">
+            <input type="hidden" class="paramInt02" value="${en.paramInt02 }">
+            <input type="hidden" class="randOrder" value="${en.randOrder }">
+            <div class="quLogicInputCase"></div>
+          </div>
+          <div class="surveyQuItem">
+            <div class="surveyQuItemContent">
+              <div class="quCoTitle">
+                <span class="quTitleNum">${i.count }、</span>
+                <span class="quTitleText">${en.quTitle}</span>
+              </div>
+              <div class="quCoItem"><ul>
+                <li class="quCoItemUlLi">
+                  <div class="quFillblankItem">
+                    <div class="uploadFileTypeNoteSpan" style="color: grey;line-height: 23px;padding-bottom: 5px;font-size: 12px;">
+                      <span class="uploadFileTypeNote" ></span>
+                      <span>单个文件最大支持 <label class="uploadFileMaxSize">${en.paramInt02}</label> M</span>
+                    </div>
+                    <div class="upFileDiv">
+
+                    </div>
+
+                    <div>
+                      <!-- The fileinput-button span is used to style the file input field as button -->
+                      <span class="sbtn sbtn_0 fileinput-button">
+																	<span>上传文件</span>
+																	<input class="fileupload" type="file" name="file" multiple>
+																	<input class="fileuploadPath" type="hidden" uphidinputname="qu_${en.quType }_${en.id }" >
+																</span>
+                      <!-- The global progress bar -->
+                      <div class="progress" style="display: none;margin-top: 10px;">
+                        <div class="progress-bar progress-bar-success"></div>
+                      </div>
+                      <!-- The container for the uploaded files -->
+                      <div class="files"></div>
+                    </div>
+                    <input type="hidden" class="answerTag" value="0" >
+                    <div class="dwComEditMenuBtn" ></div>
+                  </div>
+                </li>
+              </ul>
+              </div>
+            </div>
+
           </div>
         </div>
       </li>

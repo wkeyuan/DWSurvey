@@ -4,3 +4,40 @@ select {
   height: 40px;
   color: #666;
 }
+.upFileDiv .upAppend {
+  margin-bottom: 8px;
+  border: 1px solid grey;
+  padding: 6px;
+}
+.upFileDiv .upAppend a {
+  float: right;
+  margin-right: 10px;
+}
+.sbtn{
+  background: #0887d2;
+  width: 88px;
+  height: 30px;
+  color: #777;
+  background-position: 0 -240px;
+  font-size: 12px;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  zoom: 1;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+  background: rgb(79, 139, 255);
+}
+.sbtn_0{
+  background-position: 0 -200px;
+  background: white;
+  border: 1px dashed grey;
+}
+.sbtn_0:hover{
+  background-position: 0 -200px;
+  color: #fff;
+  background: dodgerblue;
+  border-color: dodgerblue;
+}

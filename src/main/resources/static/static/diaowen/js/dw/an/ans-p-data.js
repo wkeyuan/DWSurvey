@@ -42,6 +42,8 @@ function querySurveyAll(callback) {
               pageNo+=1;
             }else if(quType==="PARAGRAPH"){
               parseParagraph(item,pageNo);
+            }else if(quType === "UPLOADFILE"){
+              parseUploadfile(item,pageNo);
             }
           });
           parseSubmit(pageNo);
@@ -81,9 +83,13 @@ function parseSurvey(data,tag){
   $("#id").val(data.id);
   $("#surveyId").val(data.id);
   $("#dwSurveyName").html(data.surveyName);
-  $("title").text($("#dwSurveyName").text());
   $("#dwSurveyNoteEdit").html(data.surveyDetail.surveyNote);
   $("#breakpoint1").val(data.surveyDetail.breakpoint1);
+  try{
+    $("title").text($("#dwSurveyName").text());
+  }catch (err){
+    document.title = $("#dwSurveyName").text();
+  }
 }
 
 
@@ -440,6 +446,24 @@ function parseParagraph(item,pageNo){
   var quInputCase = lastQuItemBody.find(".quInputCase");
   parseExtracted(quInputCase, item);
   quLogicExtracted(lastQuItemBody, item, pageNo);
+}
+
+function parseUploadfile(item,pageNo){
+  var quModel = $("#uploadFileQuModel").html();
+  $("#dwSurveyQuContentAppUl").append(quModel);
+  var lastQuItemBody = $("#dwSurveyQuContentAppUl .li_surveyQuItemBody").last()
+  lastQuItemBody.find(".quDragBody").removeClass("quDragBody");
+  var quInputCase = lastQuItemBody.find(".quInputCase");
+  parseExtracted(quInputCase, item);
+  quLogicExtracted(lastQuItemBody, item, pageNo);
+  if(item.paramInt01===1){
+    lastQuItemBody.find(".uploadFileTypeNote").text("请上传后缀为.gif,.jpe,.jpeg,.png的图片");
+  }else if(item.paramInt01===2){
+    lastQuItemBody.find(".uploadFileTypeNote").text("请上传后缀为.txt,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf,.xml的文件");
+  }
+  lastQuItemBody.find(".uploadFileMaxSize").text(item.paramInt02);
+  var fileuploadPath = lastQuItemBody.find("input.fileuploadPath");
+  fileuploadPath.attr("uphidinputname","qu_"+item.quType+"_"+item.id);
 }
 
 function parseSubmit(pageNo){
