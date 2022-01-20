@@ -1,7 +1,7 @@
 package net.diaowen.common.dao;
 
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.http.Header;
+import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
