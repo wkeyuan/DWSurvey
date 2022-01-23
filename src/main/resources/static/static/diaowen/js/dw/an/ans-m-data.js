@@ -15,7 +15,7 @@ function querySurveyAll(callback) {
     // type:"post",
     cache: false,
     success:function(httpResult){
-      console.debug(httpResult);
+      // console.debug(httpResult);
       if(httpResult.resultCode==200){
         var resultData = httpResult.data;
         parseSurvey(resultData,tag);

@@ -4,13 +4,13 @@ function querySurveyAll(){
   var url = ctx+"/design/survey-design/surveyAll.do";
   var surveyId = $("#id").val();
   var data = "surveyId="+surveyId+"&sid=";
-  console.debug(data);
+  // console.debug(data);
   $.ajax({
     url:url,
     data:data,
     type:"post",
     success:function(httpResult){
-      console.debug(httpResult);
+      // console.debug(httpResult);
       if(httpResult.resultCode==200){
          var resultData = httpResult.data;
          parseSurvey(resultData);

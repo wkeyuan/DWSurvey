@@ -9,7 +9,7 @@ function checkAnswerSurvey(sid){
     data:data,
     type:"post",
     success:function(httpResult){
-      console.debug(httpResult);
+      // console.debug(httpResult);
       if(httpResult.resultCode==200){
         var data = httpResult.data;
         var answerCheck=data.answerCheck;
