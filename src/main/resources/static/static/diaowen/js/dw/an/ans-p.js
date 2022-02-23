@@ -533,6 +533,7 @@ function sww() {
     }
     var thObj = $(this);
     var quItemBody = $(this).parents(".li_surveyQuItemBody");
+    runlogic(thObj);
     answerProgressbar(thObj);
     validateCheck(quItemBody,false);
     return false;
@@ -563,6 +564,11 @@ function sww() {
 
         var quOptionItems=null;
         quOptionItems=quItemBody.find(".dwQuOptionItemContent");
+        if(quType==="RADIO"){
+          if(quItemBody.find("select")[0]){
+            quOptionItems=quItemBody.find("select option");
+          }
+        }
 
         $.each(quLogicItems,function(){
           var loginItem=$(this);
@@ -578,9 +584,14 @@ function sww() {
             var logicStatus=false;
             var curQuItemId=null;
             if(quType==="RADIO"){
-              quInput=quCoItem.find("input[type='radio']");
-              logicStatus=quInput.prop("checked");
-              curQuItemId=quInput.val();
+              if(quItemBody.find("select")[0]){
+                curQuItemId=$(this).val();
+                logicStatus=quItemBody.find("select").val()==curQuItemId;
+              }else{
+                quInput=quCoItem.find("input[type='radio']");
+                logicStatus=quInput.prop("checked");
+                curQuItemId=quInput.val();
+              }
             }else if(quType==="CHECKBOX"){
               quInput=quCoItem.find("input[type='checkbox']");
               logicStatus=quInput.prop("checked");
