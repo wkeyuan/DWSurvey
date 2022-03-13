@@ -3095,13 +3095,14 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 					return false;
 				}
 			});
+      eachTag = true;
 			if(eachTag){
 				dwQuOptionSel.append("<option value='"+optionId+"'>"+optionText+"</option>");
 			}
 		});
 
 		if(logicQuOptionSels.size()==0){
-			dwQuOptionSel.append("<option value='0'>任意选项</option>");
+			// dwQuOptionSel.append("<option value='0'>任意选项</option>");
 		}else{
 			$("#dwQuLogicTable").find(".logicQuOptionSel option[value='0']").remove();
 		}

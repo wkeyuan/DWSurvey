@@ -207,7 +207,8 @@ function parseRadio(item,pageNo){
     quCoItem.append("<ul></ul>");
     var quCoItemUl = quCoItem.find("ul");
     $.each(quRadios,function(i,item_2){
-      quCoItemUl.append("<li class='quCoItemUlLi'>"+quRadioItemHtml+"</li>");
+      // quCoItemUl.append("<li class='quCoItemUlLi'>"+quRadioItemHtml+"</li>");
+      quCoItemUl.append(quRadioItemHtml);
       var itemLast = quCoItemUl.find("li:last");
       itemLast.find(".editAble").html(item_2.optionName);
       if(item_2.isNote === 1) itemLast.find(".optionInpText").show();
