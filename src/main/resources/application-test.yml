@@ -19,8 +19,8 @@ dwsurvey:
       token: xxx
       encodingAESKey:
   version:
-    info: DWSurvey OSS V5.0 Boot
-    number: OSS V5.0
+    info: DWSurvey OSS V5.2.5 Boot
+    number: OSS V5.2.5
     built: 2021/11/21
 server:
   port: 8080

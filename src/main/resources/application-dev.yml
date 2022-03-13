@@ -31,8 +31,8 @@ dwsurvey:
       encodingAESKey:
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
-    info: DWSurvey OSS V5.2.2 Boot
-    number: OSS V5.2.2
+    info: DWSurvey OSS V5.2.5 Boot
+    number: OSS V5.2.5
     built: 2022/01/20
 # 服务占用的端口号
 server:
