@@ -10,7 +10,7 @@
     </parent>
     <groupId>net.diaowen</groupId>
     <artifactId>dwsurvey-oss-vue</artifactId>
-    <version>v.5.2.5-Beta</version>
+    <version>v.5.2.6-Beta</version>
     <packaging>jar</packaging>
     <name>dwsurvey</name>
     <description>DWSurvey project for Spring Boot</description>
