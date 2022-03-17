@@ -161,11 +161,7 @@ public class ResponseController {
 		if(rule!=null && rule==3){
 			boolean isPwdCode = false;
 			if(StringUtils.isNotEmpty(ruleCode)) {
-				System.out.println("isPwdCode:"+isPwdCode);
-				if(isPwdCode){
-					//检查是否已经有记录^M
-
-				}else{
+				if(!ruleCode.equals(surveyDetail.getRuleCode())){
 					//code不正确
 //					modelAndView.addObject("redType", 302);//code不正确
 					answerCheckData.setAnswerCheck(false);
@@ -175,7 +171,7 @@ public class ResponseController {
 			}
 			if(StringUtils.isEmpty(ruleCode)) {
 				answerCheckData.setAnswerCheck(false);
-				answerCheckData.setAnswerCheckCode(303);//口令错误
+				answerCheckData.setAnswerCheckCode(303);//口令为空
 				return answerCheckData;
 			}
 		}
