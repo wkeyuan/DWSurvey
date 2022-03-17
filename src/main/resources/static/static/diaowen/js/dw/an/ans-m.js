@@ -851,267 +851,266 @@ function sww(){
 
   });
 
-
-  /**********************处理答题进度条************************/
+}
+/**********************处理答题进度条************************/
 //$("#resultProgress").progressbar({value: bfbFloat});
-  function answerProgressbar(thObj){
-    var quItemBody=thObj.parents(".li_surveyQuItemBody ");
-    var quType=quItemBody.find(".quType").val();
+function answerProgressbar(thObj){
+  var quItemBody=thObj.parents(".li_surveyQuItemBody ");
+  var quType=quItemBody.find(".quType").val();
 
-    if(quType==="RADIO"){
-      //quItemBody.find(".answerTag").val(1);
-      var checks=quItemBody.find("input[type='radio']:checked");
-      if(checks[0]){
-        quItemBody.find(".answerTag").val(1);
-      }else{
-        quItemBody.find(".answerTag").val(0);
-      }
-    }else if(quType=="CHECKBOX"){
-      var checks=quItemBody.find("input[type='checkbox']:checked");
-      if(checks[0]){
-        quItemBody.find(".answerTag").val(1);
-      }else{
-        quItemBody.find(".answerTag").val(0);
-      }
-    }else if(quType==="FILLBLANK"){
-      var thVal=thObj.val();
-      if(thVal!=""){
-        quItemBody.find(".answerTag").val(1);
-      }else{
-        quItemBody.find(".answerTag").val(0);
-      }
-    }else if(quType==="ORDERQU"){
-      //quOrderByLeftUl
-      var orderByLabels=quItemBody.find(".quOrderByLeftUl label");
-      if(!orderByLabels[0]){
-        quItemBody.find(".answerTag").val(1);
-      }else{
-        quItemBody.find(".answerTag").val(0);
-      }
-    }else if( quType==="SCORE" ){
-      var quScoreOptionTr=thObj.parents(".quScoreOptionTr");
-      var scoreNumInput=quScoreOptionTr.find(".scoreNumInput");
-      if(scoreNumInput.val()!=""){
-        quScoreOptionTr.find(".answerTag").val(1);
-      }else{
-        quScoreOptionTr.find(".answerTag").val(0);
-      }
-    }else if(quType==="MULTIFILLBLANK"){
-      var mFillblankTableTr=thObj.parents(".mFillblankTableTr");
-      if(thObj.val()!=""){
-        mFillblankTableTr.find(".answerTag").val(1);
-      }else{
-        mFillblankTableTr.find(".answerTag").val(0);
-      }
+  if(quType==="RADIO"){
+    //quItemBody.find(".answerTag").val(1);
+    var checks=quItemBody.find("input[type='radio']:checked");
+    if(checks[0]){
+      quItemBody.find(".answerTag").val(1);
+    }else{
+      quItemBody.find(".answerTag").val(0);
     }
-
-    var totalQuSize=$("#dwSurveyQuContent .answerTag:enabled").size();
-    var answerTag1=$("#dwSurveyQuContent .answerTag[value='1']:enabled");
-    var answerQuSize=0;
-    if(answerTag1[0]){
-      answerQuSize=answerTag1.size();
+  }else if(quType=="CHECKBOX"){
+    var checks=quItemBody.find("input[type='checkbox']:checked");
+    if(checks[0]){
+      quItemBody.find(".answerTag").val(1);
+    }else{
+      quItemBody.find(".answerTag").val(0);
     }
-    var newValue = parseInt(answerQuSize/totalQuSize*100);
-    $("#resultProgressRoot .progress-label").text("完成度："+newValue+"%");
-    $("#resultProgress").progressbar("option", "value", newValue);
+  }else if(quType==="FILLBLANK"){
+    var thVal=thObj.val();
+    if(thVal!=""){
+      quItemBody.find(".answerTag").val(1);
+    }else{
+      quItemBody.find(".answerTag").val(0);
+    }
+  }else if(quType==="ORDERQU"){
+    //quOrderByLeftUl
+    var orderByLabels=quItemBody.find(".quOrderByLeftUl label");
+    if(!orderByLabels[0]){
+      quItemBody.find(".answerTag").val(1);
+    }else{
+      quItemBody.find(".answerTag").val(0);
+    }
+  }else if( quType==="SCORE" ){
+    var quScoreOptionTr=thObj.parents(".quScoreOptionTr");
+    var scoreNumInput=quScoreOptionTr.find(".scoreNumInput");
+    if(scoreNumInput.val()!=""){
+      quScoreOptionTr.find(".answerTag").val(1);
+    }else{
+      quScoreOptionTr.find(".answerTag").val(0);
+    }
+  }else if(quType==="MULTIFILLBLANK"){
+    var mFillblankTableTr=thObj.parents(".mFillblankTableTr");
+    if(thObj.val()!=""){
+      mFillblankTableTr.find(".answerTag").val(1);
+    }else{
+      mFillblankTableTr.find(".answerTag").val(0);
+    }
   }
 
-  function validateCheck(quItemBody,isSubForm){
-    if(quItemBody.is(":visible")){
+  var totalQuSize=$("#dwSurveyQuContent .answerTag:enabled").size();
+  var answerTag1=$("#dwSurveyQuContent .answerTag[value='1']:enabled");
+  var answerQuSize=0;
+  if(answerTag1[0]){
+    answerQuSize=answerTag1.size();
+  }
+  var newValue = parseInt(answerQuSize/totalQuSize*100);
+  $("#resultProgressRoot .progress-label").text("完成度："+newValue+"%");
+  $("#resultProgress").progressbar("option", "value", newValue);
+}
 
-      var quId=quItemBody.find(".quId").val();
-      var quType=quItemBody.find(".quType").val();
-      var isRequired=quItemBody.find(".isRequired").val();
+function validateCheck(quItemBody,isSubForm){
+  if(quItemBody.is(":visible")){
 
-      var validateStatus=false;
-      var checkType = "";
-      var errorMsg = null;
+    var quId=quItemBody.find(".quId").val();
+    var quType=quItemBody.find(".quType").val();
+    var isRequired=quItemBody.find(".isRequired").val();
 
-      if(isRequired==="0"){
-        validateStatus = true;
-        return true;
-      }
+    var validateStatus=false;
+    var checkType = "";
+    var errorMsg = null;
 
-      if(quType==="RADIO"){
-        var hv = quItemBody.find(".hv").val();
-        if(hv=="4"){
-          var radioSelectVal = quItemBody.find("select.radioSelect").val();
-          if(radioSelectVal!="" && radioSelectVal!="0"){
-            var radioSelect = quItemBody.find(".radioSelect");
-            var radioSelectVal = radioSelect.val();
-            var radioSelectName = radioSelect.attr("name");
-            var quCoItemUlLi = radioSelect.parents("li.quCoItemUlLi");
-            var quItemInputCase= quCoItemUlLi.find(".quItemInputCase[itemid='"+radioSelectVal+"']");
-            var isNote = quItemInputCase.find(".isNote").val();
-            if(isNote=="1"){
-              var curText = quCoItemUlLi.find(".dwQuOptionItemNote[name='text_"+radioSelectName+"_"+radioSelectVal+"']");
-              var curTextValue = curText.val();
-              var checkType = quItemInputCase.find(".checkType").val();
-              var isRequiredFill = quItemInputCase.find(".isRequiredFill").val();
+    if(isRequired==="0"){
+      validateStatus = true;
+      return true;
+    }
 
-              if(isRequiredFill=="1" || curTextValue!="") {
-                validateStatus = checkoutData(checkType, curText);
-              }else{
-                validateStatus = true;
-              }
+    if(quType==="RADIO"){
+      var hv = quItemBody.find(".hv").val();
+      if(hv=="4"){
+        var radioSelectVal = quItemBody.find("select.radioSelect").val();
+        if(radioSelectVal!="" && radioSelectVal!="0"){
+          var radioSelect = quItemBody.find(".radioSelect");
+          var radioSelectVal = radioSelect.val();
+          var radioSelectName = radioSelect.attr("name");
+          var quCoItemUlLi = radioSelect.parents("li.quCoItemUlLi");
+          var quItemInputCase= quCoItemUlLi.find(".quItemInputCase[itemid='"+radioSelectVal+"']");
+          var isNote = quItemInputCase.find(".isNote").val();
+          if(isNote=="1"){
+            var curText = quCoItemUlLi.find(".dwQuOptionItemNote[name='text_"+radioSelectName+"_"+radioSelectVal+"']");
+            var curTextValue = curText.val();
+            var checkType = quItemInputCase.find(".checkType").val();
+            var isRequiredFill = quItemInputCase.find(".isRequiredFill").val();
+
+            if(isRequiredFill=="1" || curTextValue!="") {
+              validateStatus = checkoutData(checkType, curText);
             }else{
               validateStatus = true;
             }
+          }else{
+            validateStatus = true;
           }
-        }else{
-          validateStatus=quItemBody.find("input[type='radio']:checked")[0];
-          if(validateStatus){
-            var curRadio = quItemBody.find("input[type='radio']:checked");
-            var curText = curRadio.parents(".dwQuOptionItemContent").find("input[type='text']:visible");
-            if(curText[0]){
-              var curTextValue = curText.val();
-              checkType = curRadio.parents(".dwQuOptionItemContent").find(".checkType").val();
-              var isRequiredFill = curRadio.parents(".dwQuOptionItemContent").find(".isRequiredFill").val();
-              if(isRequiredFill!="1"){
-                validateStatus = checkoutData(checkType, curTextValue);
-              }
+        }
+      }else{
+        validateStatus=quItemBody.find("input[type='radio']:checked")[0];
+        if(validateStatus){
+          var curRadio = quItemBody.find("input[type='radio']:checked");
+          var curText = curRadio.parents(".dwQuOptionItemContent").find("input[type='text']:visible");
+          if(curText[0]){
+            var curTextValue = curText.val();
+            checkType = curRadio.parents(".dwQuOptionItemContent").find(".checkType").val();
+            var isRequiredFill = curRadio.parents(".dwQuOptionItemContent").find(".isRequiredFill").val();
+            if(isRequiredFill!="1"){
+              validateStatus = checkoutData(checkType, curTextValue);
             }
           }
         }
+      }
 
-      }else if(quType==="CHECKBOX"){
-        validateStatus=quItemBody.find("input[type='checkbox']:checked")[0];
-        var paramInt01 = quItemBody.find(".paramInt01").val();
-        if(paramInt01>0){
-          var checkeds = quItemBody.find("input[type='checkbox']:checked");
-          if(checkeds[0]&&checkeds.size()<paramInt01){
-            errorMsg = "请保证最少选择"+paramInt01+"项内容";
-            validateStatus = false;
-          }
+    }else if(quType==="CHECKBOX"){
+      validateStatus=quItemBody.find("input[type='checkbox']:checked")[0];
+      var paramInt01 = quItemBody.find(".paramInt01").val();
+      if(paramInt01>0){
+        var checkeds = quItemBody.find("input[type='checkbox']:checked");
+        if(checkeds[0]&&checkeds.size()<paramInt01){
+          errorMsg = "请保证最少选择"+paramInt01+"项内容";
+          validateStatus = false;
         }
-        if(validateStatus){
+      }
+      if(validateStatus){
 //					isNote checkType isRequiredFill
-          var curCheckboxs = quItemBody.find("input[type='checkbox']:checked");
-          $.each(curCheckboxs,function(){
-            var curText = $(this).parents(".dwQuOptionItemContent").find("input[type='text']:visible");
-            if(curText[0]){
-              var curTextValue = curText.val();
-              checkType = $(this).parents(".dwQuOptionItemContent").find(".checkType").val();
-              var isRequiredFill = $(this).parents(".dwQuOptionItemContent").find(".isRequiredFill").val();
-              if(isRequiredFill!="1"){
-                validateStatus = checkoutData(checkType, curTextValue);
-              }
+        var curCheckboxs = quItemBody.find("input[type='checkbox']:checked");
+        $.each(curCheckboxs,function(){
+          var curText = $(this).parents(".dwQuOptionItemContent").find("input[type='text']:visible");
+          if(curText[0]){
+            var curTextValue = curText.val();
+            checkType = $(this).parents(".dwQuOptionItemContent").find(".checkType").val();
+            var isRequiredFill = $(this).parents(".dwQuOptionItemContent").find(".isRequiredFill").val();
+            if(isRequiredFill!="1"){
+              validateStatus = checkoutData(checkType, curTextValue);
             }
-            if(!validateStatus){
-              return false;
-            }
-          });
-        }
-      }else if(quType==="FILLBLANK"){
-        var value = quItemBody.find(".fillblankInput").val();
-        validateStatus = value!="";
-        checkType = quItemBody.find(".checkType").val();
-        if(validateStatus){
-          validateStatus = checkoutData(checkType, value);
-        }
-      }else if(quType==="ORDERQU"){
-        //quItemBody.find(".quOrderByLeftUl label");
-        validateStatus=!quItemBody.find(".quOrderItemHidInput[value='']")[0];
-      }else if(quType==="SCORE"){
-
-        validateStatus=true;
-        var quScoreOptionTrs=quItemBody.find(".quScoreOptionTr");
-        $.each(quScoreOptionTrs,function(){
-          var scoreNumInput=$(this).find(".scoreNumInput");
-          if(scoreNumInput.val()===""){
-            validateStatus=false;
+          }
+          if(!validateStatus){
             return false;
           }
         });
-
-      }else if(quType==="MULTIFILLBLANK"){
-
-        validateStatus=true;
-        var quScoreOptionTrs=quItemBody.find(".mFillblankTableTr");
-        var paramInt01 = 0;
-        if(quItemBody.find(".paramInt01")[0]){
-          paramInt01 = quItemBody.find(".paramInt01").val();
-        }
-        var anNum = 0;
-        $.each(quScoreOptionTrs,function() {
-          var scoreNumInput = $(this).find(".dwMFillblankInput");
-          if (scoreNumInput.val() != "") {
-            anNum++;
-          }
-        })
-
-        if(validateStatus){
-          if(paramInt01!=0){
-            if(anNum<paramInt01){
-              validateStatus=false;
-            }
-          }else{
-            if(anNum<quScoreOptionTrs.size()){
-              validateStatus=false;
-            }
-          }
-        }
-
-      }else if(quType === "UPLOADFILE"){
-        validateStatus=quItemBody.find(".fileuploadSaveValue")[0];
-      }else if(quType==="submitSurveyBtn" || quType==="PARAGRAPH" || quType==="PAGETAG"){
-        return true;
       }
+    }else if(quType==="FILLBLANK"){
+      var value = quItemBody.find(".fillblankInput").val();
+      validateStatus = value!="";
+      checkType = quItemBody.find(".checkType").val();
+      if(validateStatus){
+        validateStatus = checkoutData(checkType, value);
+      }
+    }else if(quType==="ORDERQU"){
+      //quItemBody.find(".quOrderByLeftUl label");
+      validateStatus=!quItemBody.find(".quOrderItemHidInput[value='']")[0];
+    }else if(quType==="SCORE"){
 
-    }else{
       validateStatus=true;
-    }
-
-    if(validateStatus){
-      quItemBody.find(".errorItem").remove();
-    }else{
-      /*if(isSubForm && !quItemBody.find(".errorItem")[0]){
-       var errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请检查题目答案，为必答项！</label></div>";
-       quItemBody.find(".surveyQuItemContent").append(errorHtml);
-       }*/
-      if(isSubForm){
-        if(quItemBody.find(".errorItem")[0]){
-          quItemBody.find(".errorItem").remove();
+      var quScoreOptionTrs=quItemBody.find(".quScoreOptionTr");
+      $.each(quScoreOptionTrs,function(){
+        var scoreNumInput=$(this).find(".scoreNumInput");
+        if(scoreNumInput.val()===""){
+          validateStatus=false;
+          return false;
         }
+      });
 
-        var errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请检查题目答案，为必答项！</label></div>";
-        if(errorMsg!=null){
-          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">"+errorMsg+"</label></div>";
+    }else if(quType==="MULTIFILLBLANK"){
+
+      validateStatus=true;
+      var quScoreOptionTrs=quItemBody.find(".mFillblankTableTr");
+      var paramInt01 = 0;
+      if(quItemBody.find(".paramInt01")[0]){
+        paramInt01 = quItemBody.find(".paramInt01").val();
+      }
+      var anNum = 0;
+      $.each(quScoreOptionTrs,function() {
+        var scoreNumInput = $(this).find(".dwMFillblankInput");
+        if (scoreNumInput.val() != "") {
+          anNum++;
+        }
+      })
+
+      if(validateStatus){
+        if(paramInt01!=0){
+          if(anNum<paramInt01){
+            validateStatus=false;
+          }
         }else{
-          if(checkType=="EMAIL"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入Email，为必答项！</label></div>";
-          }else if(checkType=="UNSTRCN"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入非中文字符，为必答项！</label></div>";
-          }else if(checkType=="STRCN"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入中文字符，为必答项！</label></div>";
-          }else if(checkType=="NUM"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入数字，为必答项！</label></div>";
-          }else if(checkType == "DIGITS"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入整数，为必答项！</label></div>";
-          }else if(checkType == "TELENUM"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入电话，为必答项！</label></div>";
-          }else if(checkType == "PHONENUM"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入手机，为必答项！</label></div>";
-          }else if(checkType == "TELE_PHONE_NUM"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入电话或手机，为必答项！</label></div>";
-          }else if(checkType == "DATE"){
-            //2014-01-01 12:00:00
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入日期时间类型，为必答项！</label></div>";
-          }else if(checkType == "IDENTCODE"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入身份证号，为必答项！</label></div>";
-          }else if(checkType == "ZIPCODE"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入邮编，为必答项！</label></div>";
-          }else if(checkType == "URL"){
-            errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入URL，为必答项！</label></div>";
+          if(anNum<quScoreOptionTrs.size()){
+            validateStatus=false;
           }
         }
-        quItemBody.find(".surveyQuItemContent").append(errorHtml);
       }
+
+    }else if(quType === "UPLOADFILE"){
+      validateStatus=quItemBody.find(".fileuploadSaveValue")[0];
+    }else if(quType==="submitSurveyBtn" || quType==="PARAGRAPH" || quType==="PAGETAG"){
+      return true;
     }
-    return validateStatus;
+
+  }else{
+    validateStatus=true;
   }
 
+  if(validateStatus){
+    quItemBody.find(".errorItem").remove();
+  }else{
+    /*if(isSubForm && !quItemBody.find(".errorItem")[0]){
+     var errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请检查题目答案，为必答项！</label></div>";
+     quItemBody.find(".surveyQuItemContent").append(errorHtml);
+     }*/
+    if(isSubForm){
+      if(quItemBody.find(".errorItem")[0]){
+        quItemBody.find(".errorItem").remove();
+      }
+
+      var errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请检查题目答案，为必答项！</label></div>";
+      if(errorMsg!=null){
+        errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">"+errorMsg+"</label></div>";
+      }else{
+        if(checkType=="EMAIL"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入Email，为必答项！</label></div>";
+        }else if(checkType=="UNSTRCN"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入非中文字符，为必答项！</label></div>";
+        }else if(checkType=="STRCN"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入中文字符，为必答项！</label></div>";
+        }else if(checkType=="NUM"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入数字，为必答项！</label></div>";
+        }else if(checkType == "DIGITS"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入整数，为必答项！</label></div>";
+        }else if(checkType == "TELENUM"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入电话，为必答项！</label></div>";
+        }else if(checkType == "PHONENUM"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入手机，为必答项！</label></div>";
+        }else if(checkType == "TELE_PHONE_NUM"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入电话或手机，为必答项！</label></div>";
+        }else if(checkType == "DATE"){
+          //2014-01-01 12:00:00
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入日期时间类型，为必答项！</label></div>";
+        }else if(checkType == "IDENTCODE"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入身份证号，为必答项！</label></div>";
+        }else if(checkType == "ZIPCODE"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入邮编，为必答项！</label></div>";
+        }else if(checkType == "URL"){
+          errorHtml="<div class=\"errorItem\"><label for=\"\" class=\"error\">请输入URL，为必答项！</label></div>";
+        }
+      }
+      quItemBody.find(".surveyQuItemContent").append(errorHtml);
+    }
+  }
+  return validateStatus;
 }
+
 function refreshAutoCode(codeImgId){
     var ctx = $("#ctx").val();
     $("#"+codeImgId).attr("src",ctx+"/jcaptcha.action");

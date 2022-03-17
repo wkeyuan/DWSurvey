@@ -3130,6 +3130,7 @@ function addQuDialogLogicTr(autoClass,trueCallback,falseCallback){
 						}
 					});
 				}
+        eachTag = true;
 				if(eachTag){
 					logicQuSel.append("<option value='"+quId+"'>"+quCoNumText+quTitleText+"</option>");
 				}

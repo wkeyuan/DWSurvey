@@ -34,6 +34,12 @@ function bindDateEvent(){
             ,type: 'datetime'
             ,format: dateFmt
             ,type: dateType
+             ,done: function(value, date, endDate){
+                $(this.elem).val(value);
+                var quItemBody = $(this.elem).parents(".li_surveyQuItemBody");
+                answerProgressbar($(this.elem));
+                validateCheck($(this.elem).parents(".li_surveyQuItemBody"),false);
+              }
         });
     });
 }

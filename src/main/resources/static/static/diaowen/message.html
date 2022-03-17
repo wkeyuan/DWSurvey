@@ -19,6 +19,24 @@
         width: 100%;
       }
     }
+    .sbtn24 {
+      background: #0887d2;
+      background: #4F8BFF;
+      width: 88px;
+      height: 30px;
+      color: #777;
+      background-position: 0 -240px;
+      font-size: 12px;
+      border: 0;
+      cursor: pointer;
+      display: inline-block;
+      zoom: 1;
+      line-height: 30px;
+      text-align: center;
+      text-decoration: none;
+      font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+      color: white;
+    }
   </style>
 </head>
 <body style="padding: 0px;margin: 0px;">
@@ -31,6 +49,13 @@
       <div style="font-size: 14px;color: rgb(24, 144, 255);" id="totalScore"></div>
       <div style="textAlign:'center'" id="reqUrlDiv" >
         <a href="#" ></a>
+      </div>
+      <div id="ruleCodeDiv" style="padding: 10px;">
+        <form action="/static/diaowen/answer-p.html" method="get">
+          <input type="hidden" name="sid" value="">
+          <input type="text" name="ruleCode" value="" style="padding: 6px;border: 1px solid lightgrey;" placeholder="请输入口令码">
+          <input type="submit" value="确 认" class="sbtn24">
+        </form>
       </div>
   </div>
 </div>

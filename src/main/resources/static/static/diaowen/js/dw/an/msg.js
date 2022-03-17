@@ -51,9 +51,15 @@ function resultStatus2Msg(resptype,sid,ruleCode) {
   }else if(resptype==='106'){
     tempMsg.resultNote = '口令超过使用次数!';
     tempMsg.resultColor = "#e70f0f";
-  }else if(resptype==='303'){
-    tempMsg.resultNote = '需要口令才可以回答问卷!';
+  }else if(resptype==='302' || resptype==='303'){
+    if(resptype==='302') {
+      tempMsg.resultNote = '口令码错误!';
+    }else{
+      tempMsg.resultNote = '需要口令才可以回答问卷!';
+    }
     tempMsg.resultColor = "#e70f0f";
+    $("input[name='sid']").val(sid);
+    $("#ruleCodeDiv").show();
   }else if(resptype==='201'){
     var qrSrc = "/api/dwsurvey/anon/response/answerTD.do?sid="+sid;
     if(ruleCode!==undefined && ruleCode!==""){
