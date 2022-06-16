@@ -86,6 +86,11 @@ spring:
         cache:
           use_second_level_cache: false
           use_query_cache: false
+  main:
+    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 logging:
   level:
     net:

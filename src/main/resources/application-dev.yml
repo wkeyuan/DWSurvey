@@ -108,6 +108,11 @@ spring:
         cache:
           use_second_level_cache: false
           use_query_cache: false
+  main:
+    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 # 日志配置
 logging:
   # 日志级别，具体大家可以根据实际情况来调整
