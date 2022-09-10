@@ -6,7 +6,6 @@ import java.util.List;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.dwsurvey.service.UserManager;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.util.SystemOutLogger;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
