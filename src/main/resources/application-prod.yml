@@ -22,6 +22,8 @@ dwsurvey:
     info: DWSurvey OSS V5.2.6 Boot
     number: OSS V5.2.6
     built: 2022/03/17
+  oath:
+    type: built-in
 server:
   port: 8080
 
@@ -98,3 +100,11 @@ logging:
     org:
       hibernate: ERROR
       apache: ERROR
+# Casdoor SSO 配置
+casdoor:
+  endpoint:
+  client-id:
+  client-secret:
+  certificate:
+  organization-name:
+  application-name:
