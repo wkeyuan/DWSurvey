@@ -22,7 +22,7 @@ dwsurvey:
     info: DWSurvey OSS V5.2.5 Boot
     number: OSS V5.2.5
     built: 2021/11/21
-  oath:
+  oauth:
     type: built-in
 server:
   port: 8080

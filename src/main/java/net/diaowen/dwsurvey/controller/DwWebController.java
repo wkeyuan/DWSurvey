@@ -3,18 +3,16 @@ package net.diaowen.dwsurvey.controller;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.httpclient.HttpResult;
-import net.diaowen.common.plugs.httpclient.HttpStatus;
 import net.diaowen.dwsurvey.common.FooterInfo;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -57,5 +55,9 @@ public class DwWebController {
         return HttpResult.FAILURE();
     }
 
-
+    @GetMapping("/oauth-type.do")
+    @ResponseBody
+    public HttpResult<String> oauthType() {
+        return HttpResult.SUCCESS(DWSurveyConfig.DWSURVEY_OAUTH_TYPE);
+    }
 }

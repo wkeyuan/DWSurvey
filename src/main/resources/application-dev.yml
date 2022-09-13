@@ -34,7 +34,7 @@ dwsurvey:
     info: DWSurvey OSS V5.2.6 Boot
     number: OSS V5.2.6
     built: 2022/03/17
-  oath:
+  oauth:
     type: built-in
 # 服务占用的端口号
 server:
