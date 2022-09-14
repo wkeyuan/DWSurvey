@@ -104,6 +104,6 @@ public class DWSurveyConfig {
     @Value("${dwsurvey.web.info.site-phone}")
     public void setDwsurveyWebInfoSitePhone(String dwsurveyWebInfoSitePhone) { DWSURVEY_WEB_INFO_SITE_PHONE = dwsurveyWebInfoSitePhone; }
 
-    @Value("${dwsurvey.oauth.type}")
+    @Value("${dwsurvey.oauth.type:built-in}")
     public void setDwsurveyOathType(String dwsurveyOathType) { DWSURVEY_OAUTH_TYPE = dwsurveyOathType; }
 }

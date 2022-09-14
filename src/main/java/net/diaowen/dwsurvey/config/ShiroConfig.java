@@ -12,9 +12,13 @@ import org.apache.shiro.web.filter.authc.UserFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.casbin.casdoor.config.CasdoorConfig;
+import org.casbin.casdoor.shiro.CasdoorShiroRealm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -23,21 +27,36 @@ import java.util.Map;
 @Configuration
 //@ImportResource(locations= {"classpath:conf/security/applicationContext-shiro.xml"})
 public class ShiroConfig {
-
-
+    @Resource
+    private CasdoorConfig casdoorConfig;
 
     @Bean
-    public ShiroDbRealm myShiroRealm() {
-        ShiroDbRealm customRealm = new ShiroDbRealm();
-        return customRealm;
+    public CasdoorShiroRealm casdoorShiroRealm() {
+        return new CasdoorShiroRealm(
+                casdoorConfig.getEndpoint(),
+                casdoorConfig.getClientId(),
+                casdoorConfig.getClientSecret(),
+                casdoorConfig.getCertificate(),
+                casdoorConfig.getOrganizationName(),
+                casdoorConfig.getApplicationName()
+        );
+    }
+
+    @Bean
+    public ShiroDbRealm shiroDbRealm() {
+        return new ShiroDbRealm();
     }
 
     //权限管理，配置主要是Realm的管理认证  SecurityManager
     @Bean
-    public DefaultWebSecurityManager securityManager() {
+    public DefaultWebSecurityManager securityManager(@Value("${dwsurvey.oauth.type:built-in}") String oauthType) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
-        securityManager.setRememberMeManager(rememberMeManager());
+        if (oauthType.equals("casdoor")) {
+            securityManager.setRealm(casdoorShiroRealm());
+        } else {
+            securityManager.setRealm(shiroDbRealm());
+            securityManager.setRememberMeManager(rememberMeManager());
+        }
         return securityManager;
     }
 

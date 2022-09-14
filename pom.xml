@@ -336,6 +336,11 @@
             <artifactId>casdoor-spring-boot-starter</artifactId>
             <version>1.3.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.casbin</groupId>
+            <artifactId>shiro-casdoor</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
