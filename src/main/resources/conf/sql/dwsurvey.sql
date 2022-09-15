@@ -788,6 +788,7 @@ CREATE TABLE `t_user` (
   `visibility` int(11) DEFAULT NULL,
   `wwwooo` varchar(255) DEFAULT NULL,
   `wx_open_id` varchar(255) DEFAULT NULL,
+  `casdoor_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_name` (`login_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -796,7 +797,7 @@ CREATE TABLE `t_user` (
 --  Records of `t_user`
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_user` VALUES ('1', null, '2013-03-21 21:15:21', null, null, '2013-03-21 21:15:21', '1', 'service@diaowen.net', null, null, '2021-12-31 09:46:37', 'dwsurvey', '柯远', null, '1', '7c4a8d09ca3762af61e59520943dc26494f8941b', '2', '1', null, null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('1', null, '2013-03-21 21:15:21', null, null, '2013-03-21 21:15:21', '1', 'service@diaowen.net', null, null, '2021-12-31 09:46:37', 'dwsurvey', '柯远', null, '1', '7c4a8d09ca3762af61e59520943dc26494f8941b', '2', '1', null, null, null, null, null, null, null);
 COMMIT;
 
 -- ----------------------------
