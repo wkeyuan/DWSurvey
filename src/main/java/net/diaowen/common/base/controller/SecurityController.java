@@ -12,6 +12,11 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.casbin.casdoor.entity.CasdoorUser;
+import org.casbin.casdoor.exception.CasdoorAuthException;
+import org.casbin.casdoor.service.CasdoorAuthService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +30,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("/api/dwsurvey/anon/security")
 public class SecurityController {
+    private final Logger logger = LoggerFactory.getLogger(SecurityController.class);
 
     @Autowired
     private AccountManager accountManager;
@@ -32,6 +38,8 @@ public class SecurityController {
     private UserManager userManager;
     @Autowired
     private FormAuthenticationWithLockFilter formAuthFilter;
+    @Autowired
+    private CasdoorAuthService casdoorAuthService;
 
     @RequestMapping("/logout.do")
     @ResponseBody
@@ -60,7 +68,7 @@ public class SecurityController {
             if(user!=null){
                 String[] authed = new String[]{};
                 if("1".equals(user.getId())) authed = new String[]{RoleCode.DWSURVEY_SUPER_ADMIN};
-                return LoginRegisterResult.SUCCESS(authed);
+                return LoginRegisterResult.SUCCESS(authed, userName);
             }
         }
         //账号密码
@@ -90,7 +98,7 @@ public class SecurityController {
                             user.setLastLoginTime(new Date());
                             accountManager.saveUp(user);
                             if("1".equals(user.getId())) authed = new String[]{RoleCode.DWSURVEY_SUPER_ADMIN};
-                            return LoginRegisterResult.SUCCESS(authed);
+                            return LoginRegisterResult.SUCCESS(authed, userName);
                         } catch (IncorrectCredentialsException e) {
                             formAuthFilter.decreaseAccountLoginAttempts(request);
                             error = "密码不正确";
@@ -139,8 +147,38 @@ public class SecurityController {
         return result;
     }
 
-
-
-
-
+    @RequestMapping("/callback/casdoor.do")
+    @ResponseBody
+    public LoginRegisterResult casdoorCallback(HttpServletRequest request, HttpServletResponse response, @RequestParam String code, @RequestParam String state) {
+        String tk;
+        CasdoorUser casdoorUser;
+        try {
+            tk = casdoorAuthService.getOAuthToken(code, state);
+            casdoorUser = casdoorAuthService.parseJwtToken(tk);
+        } catch (CasdoorAuthException e) {
+            return LoginRegisterResult.FAILURE(HttpResult.FAILURE_MSG(e.getMessage()));
+        }
+        if (casdoorUser == null) {
+            return LoginRegisterResult.FAILURE(HttpResult.FAILURE_MSG("casdoor callback failed"));
+        }
+        String casdoorUserId = casdoorUser.getId();
+        if (accountManager.findUserByCasdoorId(casdoorUserId) == null) {
+            // 创建用户
+            User user = new User();
+            user.setLoginName(casdoorUser.getEmail());
+            user.setStatus(2);
+            user.setPwd("casdoor_user");
+            user.setCasdoorId(casdoorUserId);
+            user.setName(casdoorUser.getDisplayName());
+            user.setAvatar(casdoorUser.getAvatar());
+            user.setEmail(casdoorUser.getEmail());
+            user.setCreateTime(new Date());
+            User u = userManager.adminSave(user);
+            if (u == null) {
+                return LoginRegisterResult.FAILURE(HttpResult.FAILURE_MSG("casdoor callback failed"));
+            }
+        }
+        // 登录
+        return loginPwd(request, response, casdoorUser.getEmail(), "casdoor_user");
+    }
 }

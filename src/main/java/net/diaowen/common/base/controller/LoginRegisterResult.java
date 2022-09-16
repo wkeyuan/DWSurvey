@@ -1,7 +1,6 @@
 package net.diaowen.common.base.controller;
 
 import net.diaowen.common.plugs.httpclient.HttpResult;
-import net.sf.json.JSON;
 
 public class LoginRegisterResult {
 
@@ -9,6 +8,7 @@ public class LoginRegisterResult {
     private String type;
     private String[] currentAuthority;
     private HttpResult httpResult;
+    private String username;
 
     public String getStatus() {
         return status;
@@ -42,7 +42,15 @@ public class LoginRegisterResult {
         this.httpResult = httpResult;
     }
 
-    public static LoginRegisterResult RESULT(String status,String type){
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public static LoginRegisterResult RESULT(String status, String type){
         LoginRegisterResult loginResult = new LoginRegisterResult();
         loginResult.setStatus(status);
         loginResult.setType(type);
@@ -50,19 +58,21 @@ public class LoginRegisterResult {
         return loginResult;
     }
 
-    public static LoginRegisterResult SUCCESS(String currentAuthority){
+    public static LoginRegisterResult SUCCESS(String currentAuthority, String username) {
         LoginRegisterResult loginResult = new LoginRegisterResult();
         loginResult.setStatus("ok");
         loginResult.setType("account");
+        loginResult.setUsername(username);
 //        loginResult.setCurrentAuthority("admin");
         loginResult.setCurrentAuthority(new String[]{currentAuthority});
         return loginResult;
     }
 
-    public static LoginRegisterResult SUCCESS(String[] currentAuthority){
+    public static LoginRegisterResult SUCCESS(String[] currentAuthority, String username) {
         LoginRegisterResult loginResult = new LoginRegisterResult();
         loginResult.setStatus("ok");
         loginResult.setType("account");
+        loginResult.setUsername(username);
 //        loginResult.setCurrentAuthority("admin");
         loginResult.setCurrentAuthority(currentAuthority);
         return loginResult;

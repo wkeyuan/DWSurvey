@@ -49,14 +49,10 @@ public class ShiroConfig {
 
     //权限管理，配置主要是Realm的管理认证  SecurityManager
     @Bean
-    public DefaultWebSecurityManager securityManager(@Value("${dwsurvey.oauth.type:built-in}") String oauthType) {
+    public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        if (oauthType.equals("casdoor")) {
-            securityManager.setRealm(casdoorShiroRealm());
-        } else {
-            securityManager.setRealm(shiroDbRealm());
-            securityManager.setRememberMeManager(rememberMeManager());
-        }
+        securityManager.setRealm(shiroDbRealm());
+        securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;
     }
 
