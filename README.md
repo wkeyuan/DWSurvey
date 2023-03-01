@@ -14,7 +14,9 @@ DWSurvey是一款简单、高效、成熟、稳定、专业的开源问卷系统
 <div>
 全新的 <strong>企业版</strong> 已经发布，前后端分别采用 React、Ant design、Spring Boot，详情可前往体验
 <p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
-<p><strong>企业版体验地址：<a href="https://ent.surveyform.cn">https://ent.surveyform.cn</a></strong></p>
+<p><strong>企业版体验地址</strong></p>
+<p><strong>新版本：<a href="https://element-ent.surveyform.cn">https://element-ent.surveyform.cn</a></strong></p>
+<p><strong>原版本：<a href="https://ent.surveyform.cn">https://ent.surveyform.cn</a></strong></p>
 </div>
 </div>
 <hr/>
