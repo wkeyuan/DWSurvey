@@ -134,6 +134,11 @@ public class AccountManager {
 		return user;
 	}
 
+	@Transactional(readOnly = true)
+	public User findUserByCasdoorId(String casdoorId) {
+		return userDao.findUniqueBy("casdoorId", casdoorId);
+	}
+
 	/*验证邮箱是否存在*/
 	@Transactional(readOnly = true)
 	public User findUserByEmail(String email){

@@ -1,21 +1,10 @@
 package net.diaowen.common.base.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-
-import net.diaowen.common.plugs.mapper.CollectionMapper;
+import java.util.Date;
 
 /**
  *
@@ -66,6 +55,7 @@ public class User extends IdEntity {
 
 	private String wxOpenId;
 	private String sessionId;
+	private String casdoorId;
 
 	// Hibernate自动维护的Version字段
 	// @Version
@@ -256,7 +246,16 @@ public class User extends IdEntity {
 		this.sessionId = sessionId;
 	}
 
+	public String getCasdoorId() {
+		return casdoorId;
+	}
+
+	public void setCasdoorId(String casdoorId) {
+		this.casdoorId = casdoorId;
+	}
+
 	private String plainPassword;
+
 	@Transient
 	public String getPlainPassword() {
 		return plainPassword;
