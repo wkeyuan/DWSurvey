@@ -10,7 +10,7 @@
     </parent>
     <groupId>net.diaowen</groupId>
     <artifactId>dwsurvey-oss-vue</artifactId>
-    <version>v.5.3.0-Beta</version>
+    <version>v.5.4.0-Beta</version>
     <packaging>jar</packaging>
     <name>dwsurvey</name>
     <description>DWSurvey project for Spring Boot</description>
@@ -329,6 +329,13 @@
             <groupId>eu.bitwalker</groupId>
             <artifactId>UserAgentUtils</artifactId>
             <version>1.21</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>2.4.1</version>
         </dependency>
 
     </dependencies>

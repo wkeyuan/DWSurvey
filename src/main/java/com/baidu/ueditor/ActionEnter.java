@@ -91,6 +91,7 @@ public class ActionEnter {
 				break;
 
 		}
+		System.out.println("upload state:"+state.toJSONString());
 
 		return state.toJSONString();
 

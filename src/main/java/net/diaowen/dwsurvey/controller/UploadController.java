@@ -1,10 +1,15 @@
 package net.diaowen.dwsurvey.controller;
 
+import net.diaowen.common.plugs.file.FileMagic;
+import net.diaowen.common.plugs.file.FileMagicUtils;
+import net.diaowen.common.plugs.file.TikaFileUtils;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.utils.RandomUtils;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.common.FileMeta;
 import net.diaowen.dwsurvey.common.UpFileResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +29,7 @@ import java.util.*;
 @Controller
 @RequestMapping("/api/dwsurvey/up")
 public class UploadController {
-
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     /**
      * 上传文件数据，安全存储
      * /WebRoot/WEB-INF/upfile
@@ -79,6 +84,12 @@ public class UploadController {
                 //取得上传文件
                 MultipartFile file = multiRequest.getFile(iter.next());
                 if(file != null){
+
+                    FileMagic fileMagic = FileMagicUtils.getFileMagic(file.getInputStream(),file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
+                    if(!FileMagicUtils.isUserUpFileMagic(fileMagic)) {
+                        logger.warn("不支持类型 {} {}", fileMagic, file.getOriginalFilename());
+                        return HttpResult.FAILURE_MSG("不支持类型或类型不一致，实际类型为"+ TikaFileUtils.getMimeType(file.getInputStream(),file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."))));
+                    }
 
                     //取得当前上传文件的文件名称
                     String myFileName = file.getOriginalFilename();
@@ -147,44 +158,55 @@ public class UploadController {
             dirFile.mkdirs();
         }
 
-        //1. build an iterator
-        Iterator<String> itr =  request.getFileNames();
-        MultipartFile mpf = null;
+        try{
+            //1. build an iterator
+            Iterator<String> itr =  request.getFileNames();
+            MultipartFile mpf = null;
 
-        //2. get each file
-        while(itr.hasNext()){
+            //2. get each file
+            while(itr.hasNext()){
 
-            //2.1 get next MultipartFile
-            mpf = request.getFile(itr.next());
+                //2.1 get next MultipartFile
+                mpf = request.getFile(itr.next());
 
-            //2.2 if files > 10 remove the first from the list
-            if(files.size() >= 10)
-                files.pop();
+                FileMagic fileMagic = FileMagicUtils.getFileMagic(mpf.getInputStream(),mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf(".")));
+                if(!FileMagicUtils.isUserUpFileMagic(fileMagic)) {
+                    logger.warn("不支持类型 {} {}", fileMagic, mpf.getOriginalFilename());
+//                    return HttpResult.FAILURE_MSG("不支持类型或类型不一致，实际类型为"+ TikaFileUtils.getMimeType(mpf.getInputStream(),mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."))));
+                    return files;
+                }
 
-            String fileName = mpf.getOriginalFilename();
-            fileName = fileName.toLowerCase();//6S兼容
-            String newFileName = rendomFileName(mpf);
+                //2.2 if files > 10 remove the first from the list
+                if(files.size() >= 10)
+                    files.pop();
 
-            //2.3 create new fileMeta
-            fileMeta = new FileMeta();
-            fileMeta.setFileName(fileName);
-            fileMeta.setNewFileName(newFileName);
-            fileMeta.setFileSize(mpf.getSize()/1024+" Kb");
-            fileMeta.setFileType(mpf.getContentType());
+                String fileName = mpf.getOriginalFilename();
+                fileName = fileName.toLowerCase();//6S兼容
+                String newFileName = rendomFileName(mpf);
 
-            try {
+                //2.3 create new fileMeta
+                fileMeta = new FileMeta();
+                fileMeta.setFileName(fileName);
+                fileMeta.setNewFileName(newFileName);
+                fileMeta.setFileSize(mpf.getSize()/1024+" Kb");
+                fileMeta.setFileType(mpf.getContentType());
+
+                try {
 //                fileMeta.setBytes(mpf.getBytes());
-                String filePath = savePath + newFileName;
-                fileMeta.setFilePath(filePath);
-                // copy file to local disk (make sure the path "e.g. D:/temp/files" exists)
-                FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(rootPath+filePath));
+                    String filePath = savePath + newFileName;
+                    fileMeta.setFilePath(filePath);
+                    // copy file to local disk (make sure the path "e.g. D:/temp/files" exists)
+                    FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(rootPath+filePath));
 
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                //2.4 add to files
+                files.add(fileMeta);
             }
-            //2.4 add to files
-            files.add(fileMeta);
+        }catch (Exception e){
+            e.printStackTrace();
         }
         // result will be like this
         // [{"fileName":"app_engine-85x77.png","fileSize":"8 Kb","fileType":"image/png"},...]

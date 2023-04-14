@@ -6,6 +6,7 @@ import com.baidu.ueditor.define.State;
 
 import java.io.*;
 
+import net.diaowen.common.plugs.file.FileMagicUtils;
 import org.apache.commons.io.FileUtils;
 
 public class StorageManager {
@@ -15,6 +16,11 @@ public class StorageManager {
 	}
 
 	public static State saveBinaryFile(byte[] data, String path) {
+
+		if(!FileMagicUtils.isUserUpFileType(data,path.substring(path.lastIndexOf(".")))){
+			return new BaseState(false, AppInfo.NOT_ALLOW_FILE_TYPE);
+		}
+
 		File file = new File(path);
 
 		State state = valid(file);
@@ -30,6 +36,7 @@ public class StorageManager {
 			bos.flush();
 			bos.close();
 		} catch (IOException ioe) {
+			ioe.printStackTrace();
 			return new BaseState(false, AppInfo.IO_ERROR);
 		}
 
@@ -41,71 +48,28 @@ public class StorageManager {
 
 	public static State saveFileByInputStream(InputStream is, String path,
 			long maxSize) {
-		State state = null;
-
-		File tmpFile = getTmpFile();
-
-		byte[] dataBuf = new byte[ 2048 ];
-		BufferedInputStream bis = new BufferedInputStream(is, StorageManager.BUFFER_SIZE);
-
-		try {
-			BufferedOutputStream bos = new BufferedOutputStream(
-					new FileOutputStream(tmpFile), StorageManager.BUFFER_SIZE);
-
-			int count = 0;
-			while ((count = bis.read(dataBuf)) != -1) {
-				bos.write(dataBuf, 0, count);
-			}
-			bos.flush();
-			bos.close();
-
-			if (tmpFile.length() > maxSize) {
-				tmpFile.delete();
-				return new BaseState(false, AppInfo.MAX_SIZE);
-			}
-
+		BaseState validateState = isUserUpFileType(is,path.substring(path.lastIndexOf(".")));
+		if(!validateState.isSuccess()) return validateState;
+		State state = new BaseState(false, AppInfo.IO_ERROR);
+		File tmpFile = validateState.getTmpFile();
+		if(tmpFile!=null){
 			state = saveTmpFile(tmpFile, path);
-
-			if (!state.isSuccess()) {
-				tmpFile.delete();
-			}
-
+			tmpFile.delete();
 			return state;
-
-		} catch (IOException e) {
 		}
-		return new BaseState(false, AppInfo.IO_ERROR);
+		return state;
 	}
 
 	public static State saveFileByInputStream(InputStream is, String path) {
-		State state = null;
-
-		File tmpFile = getTmpFile();
-
-		byte[] dataBuf = new byte[ 2048 ];
-		BufferedInputStream bis = new BufferedInputStream(is, StorageManager.BUFFER_SIZE);
-
-		try {
-			BufferedOutputStream bos = new BufferedOutputStream(
-					new FileOutputStream(tmpFile), StorageManager.BUFFER_SIZE);
-
-			int count = 0;
-			while ((count = bis.read(dataBuf)) != -1) {
-				bos.write(dataBuf, 0, count);
-			}
-			bos.flush();
-			bos.close();
-
+		BaseState validateState = isUserUpFileType(is,path.substring(path.lastIndexOf(".")));
+		if(!validateState.isSuccess()) return validateState;
+		State state = new BaseState(false, AppInfo.IO_ERROR);
+		File tmpFile = validateState.getTmpFile();
+		if(tmpFile!=null){
 			state = saveTmpFile(tmpFile, path);
-
-			if (!state.isSuccess()) {
-				tmpFile.delete();
-			}
-
 			return state;
-		} catch (IOException e) {
 		}
-		return new BaseState(false, AppInfo.IO_ERROR);
+		return state;
 	}
 
 	private static File getTmpFile() {
@@ -124,6 +88,7 @@ public class StorageManager {
 		try {
 			FileUtils.moveFile(tmpFile, targetFile);
 		} catch (IOException e) {
+			e.printStackTrace();
 			return new BaseState(false, AppInfo.IO_ERROR);
 		}
 
@@ -148,4 +113,29 @@ public class StorageManager {
 		return new BaseState(true);
 	}
 
+	public static BaseState isUserUpFileType(InputStream is,String fileSuffix) {
+		File tmpFile = getTmpFile();
+		byte[] dataBuf = new byte[ 2048 ];
+		BufferedInputStream bis = new BufferedInputStream(is, StorageManager.BUFFER_SIZE);
+		try {
+			BufferedOutputStream bos = new BufferedOutputStream(
+					new FileOutputStream(tmpFile), StorageManager.BUFFER_SIZE);
+			int count = 0;
+			while ((count = bis.read(dataBuf)) != -1) {
+				bos.write(dataBuf, 0, count);
+			}
+			bis.close();
+			bos.flush();
+			bos.close();
+			if(!FileMagicUtils.isUserUpFileType(tmpFile,fileSuffix)){
+				tmpFile.delete();
+				return new BaseState(false, AppInfo.NOT_ALLOW_FILE_TYPE);
+			}
+//			tmpFile.delete();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new BaseState(false, AppInfo.IO_ERROR);
+		}
+		return new BaseState(true, AppInfo.SUCCESS, tmpFile);
+	}
 }
