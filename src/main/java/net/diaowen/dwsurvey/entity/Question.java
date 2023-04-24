@@ -26,7 +26,7 @@ public class Question extends IdEntity{
 
 	//所属问卷或题库
 	private String belongId;
-	//题目名称
+	//题目名称(text)
 	private String quName;
 	// 题干
 	private String quTitle;
@@ -79,6 +79,14 @@ public class Question extends IdEntity{
 	//填空的input
 	private Integer answerInputWidth;
 	private Integer answerInputRow;
+
+	public  Question() {
+
+	}
+
+	public  Question(QuType quType) {
+		this.quType = quType;
+	}
 
 	public String getBelongId() {
 		return belongId;
@@ -441,5 +449,6 @@ public class Question extends IdEntity{
 	public void setStatJson(String statJson) {
 		this.statJson = statJson;
 	}
+
 
 }
