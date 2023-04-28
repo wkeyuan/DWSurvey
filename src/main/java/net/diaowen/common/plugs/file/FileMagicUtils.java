@@ -26,8 +26,17 @@ public class FileMagicUtils {
 
     //根据文件获取对应的文件类型
     public static FileMagic getFileMagic(File inp, String fileSuffix) throws Exception {
-        FileInputStream fis = new FileInputStream(inp);
-        return getFileMagic(fis,fileSuffix);
+        FileMagic fileMagic = null;
+        FileInputStream fis = null;
+        try{
+            fis = new FileInputStream(inp);
+            fileMagic = getFileMagic(fis,fileSuffix);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (fis!=null) fis.close();
+        }
+        return fileMagic;
     }
 
     //切换到使用最新的tika验测

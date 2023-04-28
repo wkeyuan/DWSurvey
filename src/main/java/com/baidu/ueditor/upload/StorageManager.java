@@ -48,7 +48,6 @@ public class StorageManager {
 
 	public static State saveFileByInputStream(InputStream is, String path,
 			long maxSize) {
-		System.out.println("saveFileByInputStream");
 		BaseState validateState = isUserUpFileType(is,path.substring(path.lastIndexOf(".")));
 		if(!validateState.isSuccess()) return validateState;
 		State state = new BaseState(false, AppInfo.IO_ERROR);
