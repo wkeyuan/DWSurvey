@@ -6,7 +6,11 @@ import net.diaowen.common.plugs.httpclient.PageResult;
 import net.diaowen.dwsurvey.entity.QuRadio;
 import net.diaowen.dwsurvey.entity.Question;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
+import net.diaowen.dwsurvey.entity.SurveyJson;
+import net.diaowen.dwsurvey.service.SurveyJsonManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +21,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/dwsurvey/app/dw-design-survey")
 public class DwDeisgnSurveyController {
+
+    @Autowired
+    private SurveyJsonManager surveyJsonManager;
 
     /**
      * 拉取问卷支持的题型
@@ -50,6 +57,14 @@ public class DwDeisgnSurveyController {
         questions.add(textareaQuestion);
         questions.add(new Question(QuType.UPLOADFILE));
         return HttpResult.SUCCESS(questions);
+    }
+
+
+    @RequestMapping(value = "/save-survey-json.do",method = RequestMethod.POST)
+    @ResponseBody
+    public HttpResult saveSurveyJson(@RequestBody SurveyJson surveyJson){
+        surveyJsonManager.saveNew(surveyJson);
+        return HttpResult.SUCCESS();
     }
 
 }
