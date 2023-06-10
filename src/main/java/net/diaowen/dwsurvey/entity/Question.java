@@ -84,8 +84,10 @@ public class Question extends IdEntity{
 
 	}
 
-	public  Question(QuType quType) {
+	public  Question(QuType quType, String quTitle, String quName) {
 		this.quType = quType;
+		this.quTitle = quTitle;
+		this.quName = quName;
 	}
 
 	public String getBelongId() {
@@ -450,5 +452,13 @@ public class Question extends IdEntity{
 		this.statJson = statJson;
 	}
 
+	private String dwsurveyfont = null;
+	@Transient
+	public String getDwsurveyfont() {
+		return dwsurveyfont;
+	}
 
+	public void setDwsurveyfont(String dwsurveyfont) {
+		this.dwsurveyfont = dwsurveyfont;
+	}
 }
