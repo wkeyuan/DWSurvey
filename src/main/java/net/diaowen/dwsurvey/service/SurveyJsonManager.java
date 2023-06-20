@@ -16,4 +16,6 @@ import net.diaowen.dwsurvey.entity.SurveyJson;
 public interface SurveyJsonManager extends BaseService<SurveyJson, String> {
 
     void saveNew(SurveyJson surveyJson);
+
+    SurveyJson findBySurveyId(String surveyId);
 }

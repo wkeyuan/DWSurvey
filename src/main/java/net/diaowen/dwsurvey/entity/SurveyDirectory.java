@@ -277,4 +277,13 @@ public class SurveyDirectory extends IdEntity{
 		this.surveyAnswer = surveyAnswer;
 	}
 
+	private SurveyJson surveyJson;
+	@Transient
+	public SurveyJson getSurveyJson() {
+		return surveyJson;
+	}
+
+	public void setSurveyJson(SurveyJson surveyJson) {
+		this.surveyJson = surveyJson;
+	}
 }

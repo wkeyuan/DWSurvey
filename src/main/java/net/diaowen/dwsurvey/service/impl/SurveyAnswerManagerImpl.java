@@ -426,7 +426,7 @@ public class SurveyAnswerManagerImpl extends
 					String answerScore="";
 					for (AnScore anScore : anScores) {
 						if(quScoreId.equals(anScore.getQuRowId())){
-							answerScore=anScore.getAnswserScore();
+							answerScore=anScore.getAnswerScore();
 							break;
 						}
 					}

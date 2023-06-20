@@ -9,10 +9,7 @@ import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.service.SurveyJsonManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -173,6 +170,13 @@ public class DwDeisgnSurveyController {
         return HttpResult.SUCCESS(tabQus1);
     }
 
+
+    @RequestMapping(value = "/survey-json-by-survey-id.do",method = RequestMethod.GET)
+    @ResponseBody
+    public HttpResult surveyJsonBySurveyId(@RequestParam String surveyId){
+        SurveyJson surveyJson = surveyJsonManager.findBySurveyId(surveyId);
+        return HttpResult.SUCCESS(surveyJson);
+    }
 
     @RequestMapping(value = "/save-survey-json.do",method = RequestMethod.POST)
     @ResponseBody
