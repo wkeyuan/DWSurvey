@@ -171,13 +171,6 @@ public class DwDeisgnSurveyController {
     }
 
 
-    @RequestMapping(value = "/survey-json-by-survey-id.do",method = RequestMethod.GET)
-    @ResponseBody
-    public HttpResult surveyJsonBySurveyId(@RequestParam String surveyId){
-        SurveyJson surveyJson = surveyJsonManager.findBySurveyId(surveyId);
-        return HttpResult.SUCCESS(surveyJson);
-    }
-
     @RequestMapping(value = "/save-survey-json.do",method = RequestMethod.POST)
     @ResponseBody
     public HttpResult saveSurveyJson(@RequestBody SurveyJson surveyJson){

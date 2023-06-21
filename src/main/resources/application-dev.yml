@@ -37,6 +37,8 @@ dwsurvey:
 # 服务占用的端口号
 server:
   port: 8080
+  tomcat:
+    max-http-form-post-size: -1
 
 # Spring相关配置
 spring:
