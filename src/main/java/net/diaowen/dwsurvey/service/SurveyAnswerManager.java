@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 
+	public void saveAnswer(SurveyAnswer surveyAnswer, SurveyAnswerJson surveyAnswerJson);
+
 	public void saveAnswer(SurveyAnswer surveyAnswer, Map<String, Map<String, Object>> quMaps);
 
 	public List<Question> findAnswerDetail(SurveyAnswer answer);

@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,16 @@ import java.util.Map;
 @Repository
 public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> implements SurveyAnswerDao {
 
+
+	@Transactional
+	@Override
+	public void saveAnswer(SurveyAnswer surveyAnswer, SurveyAnswerJson surveyAnswerJson) {
+		Session session=this.getSession();
+		surveyAnswer.setEndAnDate(new Date());
+		session.save(surveyAnswer);
+		surveyAnswerJson.setAnswerId(surveyAnswer.getId());
+		session.save(surveyAnswerJson);
+	}
 
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,

@@ -67,6 +67,11 @@ public class SurveyAnswerManagerImpl extends
 		this.baseDao = surveyAnswerDao;
 	}
 
+	public void saveAnswer(SurveyAnswer surveyAnswer,
+						   SurveyAnswerJson surveyAnswerJson) {
+		surveyAnswerDao.saveAnswer(surveyAnswer, surveyAnswerJson);
+	}
+
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,
 			Map<String, Map<String, Object>> quMaps) {

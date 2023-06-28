@@ -124,3 +124,9 @@ logging:
     org:
       hibernate: ERROR
       apache: ERROR
+elasticsearch:
+  username: elastic
+  passwd: 19s=RlYKWJXRfJI=k1z0
+  apikey: ==
+  hosts: 127.0.0.1:9200 # 多个IP逗号隔开
+#  cert-name: http_ca.crt
