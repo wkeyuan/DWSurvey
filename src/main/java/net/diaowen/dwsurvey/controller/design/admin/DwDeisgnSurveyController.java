@@ -1,4 +1,4 @@
-package net.diaowen.dwsurvey.controller.design;
+package net.diaowen.dwsurvey.controller.design.admin;
 
 import net.diaowen.common.QuType;
 import net.diaowen.common.plugs.httpclient.HttpResult;

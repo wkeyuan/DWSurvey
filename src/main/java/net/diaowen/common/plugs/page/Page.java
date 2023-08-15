@@ -7,6 +7,7 @@
  */
 package net.diaowen.common.plugs.page;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -201,10 +202,17 @@ public class Page<T> extends PageRequest implements Iterable<T> {
 	public void setEndpage(int endpage) {
 		this.endpage = endpage;
 	}
-	
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
-	
+
+
+	public void addResult(T resultItem){
+		if (this.result==null) {
+			this.result = new ArrayList<>();
+		}
+		this.result.add(resultItem);
+	}
 }

@@ -120,17 +120,19 @@ public class PageRequest {
 	 * 获得排序参数.
 	 */
 	public List<Sort> getSort() {
-		String[] orderBys = StringUtils.split(orderBy, ',');
-		String[] orderDirs = StringUtils.split(orderDir, ',');
-		AssertUtils.isTrue(orderBys.length == orderDirs.length,
-				"分页多重排序参数中,排序字段与排序方向的个数不相等");
+		if (isOrderBySetted()) {
+			String[] orderBys = StringUtils.split(orderBy, ',');
+			String[] orderDirs = StringUtils.split(orderDir, ',');
+			AssertUtils.isTrue(orderBys.length == orderDirs.length,
+					"分页多重排序参数中,排序字段与排序方向的个数不相等");
 
-		List<Sort> orders = Lists.newArrayList();
-		for (int i = 0; i < orderBys.length; i++) {
-			orders.add(new Sort(orderBys[i], orderDirs[i]));
+			List<Sort> orders = Lists.newArrayList();
+			for (int i = 0; i < orderBys.length; i++) {
+				orders.add(new Sort(orderBys[i], orderDirs[i]));
+			}
+			return orders;
 		}
-
-		return orders;
+		return null;
 	}
 
 	/**

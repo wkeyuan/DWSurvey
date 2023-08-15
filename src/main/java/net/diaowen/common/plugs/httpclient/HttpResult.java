@@ -70,7 +70,7 @@ public class HttpResult<T> {
 		return new HttpResult(HttpStatus.SUCCESS,null);
 	}
 
-	public static <T> HttpResult SUCCESS(T data) {
+	public static <T> HttpResult<T> SUCCESS(T data) {
 		return new HttpResult(HttpStatus.SUCCESS,data);
 	}
 

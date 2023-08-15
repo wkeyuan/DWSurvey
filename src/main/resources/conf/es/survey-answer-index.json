@@ -1,0 +1,197 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 3,
+      "number_of_replicas": 1
+    }
+  },
+  "mappings": {
+    "properties": {
+      "anIp": {
+        "properties": {
+          "addr": {
+            "analyzer": "ik_max_word",
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "city": {
+            "analyzer": "ik_max_word",
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "ip": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          }
+        }
+      },
+      "anQuestions": {
+        "properties": {
+          "anCheckboxs": {
+            "properties": {
+              "optionDwId": {
+                "type": "keyword"
+              },
+              "otherText": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "anFbk": {
+            "properties": {
+              "answer": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "anMFbks": {
+            "properties": {
+              "answer": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "optionDwId": {
+                "type": "keyword"
+              }
+            }
+          },
+          "anOrders": {
+            "properties": {
+              "optionDwId": {
+                "type": "keyword"
+              },
+              "orderNum": {
+                "type": "long"
+              }
+            }
+          },
+          "anRadio": {
+            "properties": {
+              "optionDwId": {
+                "type": "keyword"
+              },
+              "otherText": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "anScores": {
+            "properties": {
+              "answerScore": {
+                "type": "long"
+              },
+              "optionDwId": {
+                "type": "keyword"
+              }
+            }
+          },
+          "anUploadFiles": {
+            "properties": {
+              "fileName": {
+                "type": "keyword"
+              },
+              "filePath": {
+                "type": "keyword"
+              }
+            }
+          },
+          "quDwId": {
+            "type": "keyword"
+          },
+          "quType": {
+            "type": "keyword"
+          }
+        }
+      },
+      "anState": {
+        "properties": {
+          "anQuNum": {
+            "type": "long"
+          },
+          "handleState": {
+            "type": "long"
+          },
+          "isEff": {
+            "type": "long"
+          }
+        }
+      },
+      "anTime": {
+        "properties": {
+          "bgAnDate": {
+            "type":   "date",
+            "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+          },
+          "endAnDate": {
+            "type":   "date",
+            "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+          },
+          "totalTime": {
+            "type": "long"
+          }
+        }
+      },
+      "anUser": {
+        "properties": {
+          "userId": {
+            "type": "keyword"
+          },
+          "userName": {
+            "type": "keyword"
+          }
+        }
+      },
+      "surveyDwId": {
+        "type": "keyword"
+      },
+      "answerDwId": {
+        "type": "keyword"
+      },
+      "surveyId": {
+        "type": "keyword"
+      }
+    }
+  }
+}
