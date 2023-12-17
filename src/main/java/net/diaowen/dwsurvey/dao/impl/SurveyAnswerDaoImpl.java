@@ -4,16 +4,12 @@ import net.diaowen.common.dao.BaseDaoImpl;
 import net.diaowen.common.utils.RandomUtils;
 import net.diaowen.dwsurvey.dao.SurveyAnswerDao;
 import net.diaowen.dwsurvey.entity.*;
-import net.diaowen.dwsurvey.service.SurveyStatsManager;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,25 +23,27 @@ import java.util.Map;
 @Repository
 public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> implements SurveyAnswerDao {
 
-
+	/**
+	 * 保存回答
+	 * @param surveyAnswer
+	 * @param quMaps
+	 */
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,
 			Map<String, Map<String, Object>> quMaps) {
-		Date curDate=new Date();
 
 		Session session=this.getSession();
 		//保存答案信息
 		String surveyId=surveyAnswer.getSurveyId();
-		SurveyDirectory survey=(SurveyDirectory) session.get(SurveyDirectory.class, surveyId);
-//		Integer answerNum = survey.getAnswerNum();
-//		if(answerNum==null){
-//			answerNum=0;
-//		}
-//		survey.setAnswerNum(answerNum+1);
-//		session.update(survey);//更新回答数
+		SurveyDirectory survey=session.get(SurveyDirectory.class, surveyId);
+		Integer answerNum = survey.getAnswerNum();
+		if(answerNum==null){
+			answerNum=0;
+		}
+		survey.setAnswerNum(answerNum+1);
+		session.update(survey);//更新回答数
 		int surveyQuAnItemNum=survey.getAnItemLeastNum();//可以回答的最少项目数
 
-//		surveyAnswer.setBgAnDate(curDate);
 		surveyAnswer.setEndAnDate(new Date());
 
 		Date endAnDate = surveyAnswer.getEndAnDate();
@@ -114,6 +112,13 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 
 	}
 
+	/**
+	 * 保存评分题答案
+	 * @param surveyAnswer
+	 * @param quOrderMaps
+	 * @param session
+	 * @return
+	 */
 	private int saveQuOrderMaps(SurveyAnswer surveyAnswer,
 			Map<String, Object> quOrderMaps, Session session) {
 		String surveyId=surveyAnswer.getSurveyId();
@@ -121,16 +126,13 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 
 		int answerQuCount=0;
 		if(quOrderMaps!=null){
-			for (String key : quOrderMaps.keySet()) {
-				String quId=key;
+			for (String quId : quOrderMaps.keySet()) {
 				boolean isAn = false;
-				Map<String,Object> mapRows=(Map<String, Object>) quOrderMaps.get(key);
-				for (String keyRow : mapRows.keySet()) {
-					String rowId=keyRow;
-					String orderNumValue=mapRows.get(keyRow).toString();
-					if(orderNumValue!=null && !"".equals(orderNumValue)){
-						AnOrder anScore=new AnOrder(surveyId,surveyAnswerId,quId,rowId,orderNumValue);
-						session.save(anScore);
+				Map<String,Object> mapRows=(Map<String, Object>) quOrderMaps.get(quId);
+				for (String rowId : mapRows.keySet()) {
+					String orderNumValue=mapRows.get(rowId).toString();
+					if(orderNumValue!=null && !orderNumValue.isEmpty()){
+						session.save(new AnOrder(surveyId, surveyAnswerId, quId, rowId, orderNumValue));
 						isAn = true;
 					}
 				}
@@ -253,15 +255,16 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		String surveyAnswerId=surveyAnswer.getId();
 
 		int answerQuCount=0;
-		if (checkboxMaps!=null)
-		for (String key : checkboxMaps.keySet()) {
-			String quId=key;
-			Map<String, Object> map=(Map<String, Object>) checkboxMaps.get(key);
-			for (String keyMap : map.keySet()) {
-				answerQuCount++;
-				String quItemId=map.get(keyMap).toString();
-				AnCheckbox anCheckbox=new AnCheckbox(surveyId,surveyAnswerId,quId,quItemId);
-				session.save(anCheckbox);
+		if (checkboxMaps!=null) {
+			for (String key : checkboxMaps.keySet()) {
+				String quId = key;
+				Map<String, Object> map = (Map<String, Object>) checkboxMaps.get(key);
+				for (String keyMap : map.keySet()) {
+					answerQuCount++;
+					String quItemId = map.get(keyMap).toString();
+					AnCheckbox anCheckbox = new AnCheckbox(surveyId, surveyAnswerId, quId, quItemId);
+					session.save(anCheckbox);
+				}
 			}
 		}
 		return answerQuCount;
@@ -281,7 +284,6 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 				boolean isAn = false;
 				Map<String, Object> map=(Map<String, Object>) compCheckboxMaps.get(key);
 				for (String keyMap : map.keySet()) {
-//				String quItemId=map.get(keyMap).toString();
 					AnCheckbox tempAnCheckbox=(AnCheckbox) map.get(keyMap);
 					String quItemId=tempAnCheckbox.getQuItemId();
 					String otherText=tempAnCheckbox.getOtherText();
@@ -313,9 +315,8 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 			String quId=key;
 			boolean isAn = false;
 			Map<String, Object> map=(Map<String, Object>) dfillMaps.get(key);
-			if(map!=null && map.size()>0){
+			if(map!=null && !map.isEmpty()){
 				for (String keyMap : map.keySet()) {
-					//answerValue+=keyMap+Question.splitTag1+map.get(keyMap)+Question.splitTag;
 					String quItemId=keyMap;
 					String answerValue=map.get(keyMap).toString();
 					if(answerValue!=null && !"".equals(answerValue)){
@@ -340,13 +341,14 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		String surveyId=surveyAnswer.getSurveyId();
 		String surveyAnswerId=surveyAnswer.getId();
 		int answerQuCount=0;
-		if (radioMaps!=null)
-		for (String key : radioMaps.keySet()) {
-			answerQuCount++;
-			String quId=key;
-			String quItemId=radioMaps.get(key).toString();
-			AnRadio anRadio=new AnRadio(surveyId,surveyAnswerId,quId,quItemId);
-			session.save(anRadio);
+		if (radioMaps!=null) {
+			for (String key : radioMaps.keySet()) {
+				answerQuCount++;
+				String quId = key;
+				String quItemId = radioMaps.get(key).toString();
+				AnRadio anRadio = new AnRadio(surveyId, surveyAnswerId, quId, quItemId);
+				session.save(anRadio);
+			}
 		}
 		return answerQuCount;
 	}
@@ -366,7 +368,6 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 			for (String key : compRadioMaps.keySet()) {
 				answerQuCount++;
 				String quId=key;
-				//String quItemId=compRadioMaps.get(key).toString();
 				AnRadio tempAnRadio=(AnRadio) compRadioMaps.get(key);
 				String quItemId=tempAnRadio.getQuItemId();
 				String othertext=tempAnRadio.getOtherText();
@@ -397,6 +398,13 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		return answerQuCount;
 	}
 
+	/**
+	 * 保存填空题答案
+	 * @param surveyAnswer
+	 * @param fillMaps
+	 * @param session
+	 * @return
+	 */
 	private int saveUploadFileMaps(SurveyAnswer surveyAnswer,
 								   Map<String, Object> fillMaps,Session session) {
 		String surveyId=surveyAnswer.getSurveyId();
@@ -414,21 +422,25 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		return answerQuCount;
 	}
 
+	/**
+	 * 获取单个问卷的全局统计信息
+	 * @param surveyStats
+	 * @return
+	 */
 	public SurveyStats surveyStatsData(SurveyStats surveyStats){
 		try{
-			StringBuffer sqlBuf=new StringBuffer("select MIN(bg_an_date) firstDate,MAX(bg_an_date) lastDate,count(id) anCount,min(total_time) minTime,avg(total_time) avgTime, ");
-			sqlBuf.append("count(case when is_complete =1 then is_complete end) complete1, ");
-			sqlBuf.append("count(case when is_effective =1 then is_effective end) effective1, ");
-			sqlBuf.append("count(case when handle_state =0 then handle_state end) handle0, ");
-			sqlBuf.append("count(case when handle_state =1 then handle_state end) handle1, ");
-			sqlBuf.append("count(case when handle_state =2 then handle_state end) handle2, ");
-			sqlBuf.append("count(case when data_source =0 then data_source end) datasource0, ");
-			sqlBuf.append("count(case when data_source =1 then data_source end) datasource1, ");
 
-			sqlBuf.append("count(case when data_source =2 then data_source end) datasource2, ");
-			sqlBuf.append("count(case when data_source =3 then data_source end) datasource3 ");
-			sqlBuf.append("from t_survey_answer where survey_id=? ");
-			Object[] objects = (Object[]) this.getSession().createSQLQuery(sqlBuf.toString()).setParameter(1, surveyStats.getSurveyId()).uniqueResult();
+			String sqlBuf = "select MIN(bg_an_date) firstDate,MAX(bg_an_date) lastDate,count(id) anCount,min(total_time) minTime,avg(total_time) avgTime, " + "count(case when is_complete =1 then is_complete end) complete1, " +
+					"count(case when is_effective =1 then is_effective end) effective1, " +
+					"count(case when handle_state =0 then handle_state end) handle0, " +
+					"count(case when handle_state =1 then handle_state end) handle1, " +
+					"count(case when handle_state =2 then handle_state end) handle2, " +
+					"count(case when data_source =0 then data_source end) datasource0, " +
+					"count(case when data_source =1 then data_source end) datasource1, " +
+					"count(case when data_source =2 then data_source end) datasource2, " +
+					"count(case when data_source =3 then data_source end) datasource3 " +
+					"from t_survey_answer where survey_id=? ";
+			Object[] objects = (Object[]) this.getSession().createSQLQuery(sqlBuf).setParameter(1, surveyStats.getSurveyId()).uniqueResult();
 
 			surveyStats.setFirstAnswer((Date)objects[0]);
 			surveyStats.setLastAnswer((Date)objects[1]);
@@ -465,6 +477,11 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 		return surveyStats;
 	}
 
+	/**
+	 * count 结果数量
+	 * @param surveyId
+	 * @return
+	 */
 	@Override
 	public Long countResult(String surveyId) {
 		Criterion cri2= Restrictions.lt("handleState", 3);

@@ -1,7 +1,6 @@
 package net.diaowen.dwsurvey.service.impl;
 
 import net.diaowen.common.QuType;
-import net.diaowen.common.base.entity.User;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.service.BaseServiceImpl;
 import net.diaowen.common.utils.RunAnswerUtil;
@@ -18,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -34,50 +34,69 @@ import java.util.*;
 @Service
 public class SurveyAnswerManagerImpl extends
 		BaseServiceImpl<SurveyAnswer, String> implements SurveyAnswerManager {
+	@Resource
+	private SurveyAnswerManagerImpl surveyAnswerManagerImpl;
 
 	@Autowired
 	private SurveyAnswerDao surveyAnswerDao;
 	@Autowired
 	private QuestionManager questionManager;
 	@Autowired
-	private AnYesnoManager anYesnoManager;
-	@Autowired
-	private AnRadioManager anRadioManager;
-	@Autowired
-	private AnFillblankManager anFillblankManager;
-	@Autowired
-	private AnEnumquManager anEnumquManager;
-	@Autowired
-	private AnDFillblankManager anDFillblankManager;
-	@Autowired
-	private AnCheckboxManager anCheckboxManager;
-	@Autowired
-	private AnAnswerManager anAnswerManager;
-	@Autowired
-	private AnScoreManager anScoreManager;
-	@Autowired
-	private AnOrderManager anOrderManager;
-	@Autowired
-	private AnUploadFileManager anUploadFileManager;
-	@Autowired
 	private SurveyDirectoryManager directoryManager;
+	private final AnYesnoManager anYesnoManager;
+	private final AnRadioManager anRadioManager;
+	private final AnFillblankManager anFillblankManager;
+	private final AnEnumquManager anEnumquManager;
+	private final AnDFillblankManager anDFillblankManager;
+	private final AnCheckboxManager anCheckboxManager;
+	private final AnAnswerManager anAnswerManager;
+	private final AnScoreManager anScoreManager;
+	private final AnOrderManager anOrderManager;
+	private final AnUploadFileManager anUploadFileManager;
+
+	private static final String SURVEYID = "surveyId";
+	private static final String ENDANDATE = "endAnDate";
+	private static final String NBSP = "&nbsp;";
+
+	@Autowired
+	public SurveyAnswerManagerImpl(AnYesnoManager anYesnoManager, AnRadioManager anRadioManager, AnFillblankManager anFillblankManager, AnEnumquManager anEnumquManager, AnDFillblankManager anDFillblankManager, AnCheckboxManager anCheckboxManager, AnAnswerManager anAnswerManager, AnScoreManager anScoreManager, AnOrderManager anOrderManager, AnUploadFileManager anUploadFileManager) {
+		this.anYesnoManager = anYesnoManager;
+		this.anRadioManager = anRadioManager;
+		this.anFillblankManager = anFillblankManager;
+		this.anEnumquManager = anEnumquManager;
+		this.anDFillblankManager = anDFillblankManager;
+		this.anCheckboxManager = anCheckboxManager;
+		this.anAnswerManager = anAnswerManager;
+		this.anScoreManager = anScoreManager;
+		this.anOrderManager = anOrderManager;
+		this.anUploadFileManager = anUploadFileManager;
+	}
 
 	@Override
 	public void setBaseDao() {
 		this.baseDao = surveyAnswerDao;
 	}
 
+	/**
+	 * 保存答案
+	 * @param surveyAnswer
+	 * @param quMaps
+	 */
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,
 			Map<String, Map<String, Object>> quMaps) {
 		surveyAnswerDao.saveAnswer(surveyAnswer, quMaps);
 	}
 
+	/**
+	 * 获取问卷回答细节
+	 * @param answer
+	 * @return
+	 */
 	@Override
 	public List<Question> findAnswerDetail(SurveyAnswer answer) {
-		String surveyId = answer.getSurveyId();
 		String surveyAnswerId = answer.getId();
-		List<Question> questions = questionManager.findDetails(surveyId, "2");
+		List<Question> questions = questionManager.findDetails(answer.getSurveyId(), "2");
 		for (Question question : questions) {
 			getquestionAnswer(surveyAnswerId, question);
 		}
@@ -86,7 +105,7 @@ public class SurveyAnswerManagerImpl extends
 
 
 	/**
-	 * 取问卷值方式
+	 * 判断题目类型，并取值
 	 *
 	 * @param surveyAnswerId
 	 * @param question
@@ -100,14 +119,14 @@ public class SurveyAnswerManagerImpl extends
 
 		//重置导出
 		question.setAnAnswer(new AnAnswer());
-		question.setAnCheckboxs(new ArrayList<AnCheckbox>());
-		question.setAnDFillblanks(new ArrayList<AnDFillblank>());
-		question.setAnEnumqus(new ArrayList<AnEnumqu>());
+		question.setAnCheckboxs(new ArrayList<>());
+		question.setAnDFillblanks(new ArrayList<>());
+		question.setAnEnumqus(new ArrayList<>());
 		question.setAnFillblank(new AnFillblank());
 		question.setAnRadio(new AnRadio());
 		question.setAnYesno(new AnYesno());
-		question.setAnScores(new ArrayList<AnScore>());
-		question.setAnOrders(new ArrayList<AnOrder>());
+		question.setAnScores(new ArrayList<>());
+		question.setAnOrders(new ArrayList<>());
 
 		if (quType == QuType.YESNO) {// 是非题答案
 			AnYesno anYesno = anYesnoManager.findAnswer(surveyAnswerId, quId);
@@ -147,10 +166,10 @@ public class SurveyAnswerManagerImpl extends
 				question.setAnAnswer(anAnswer);
 			}
 		} else if (quType == QuType.BIGQU) {// 大题答案
-			// List<Question> childQuestions=question.getQuestions();
-			// for (Question childQuestion : childQuestions) {
-			// score=getquestionAnswer(surveyAnswerId, childQuestion);
-			// }
+			 List<Question> childQuestions=question.getQuestions();
+			 for (Question childQuestion : childQuestions) {
+			 	score=getquestionAnswer(surveyAnswerId, childQuestion);
+			 }
 		} else if (quType == QuType.ENUMQU) {
 			List<AnEnumqu> anEnumqus = anEnumquManager.findAnswer(
 					surveyAnswerId, quId);
@@ -175,67 +194,74 @@ public class SurveyAnswerManagerImpl extends
 		return score;
 	}
 
+	/**
+	 * 根据ip地址。。。。。。
+	 * @param surveyDetail
+	 * @param ip
+	 * @return
+	 */
 	@Override
 	public SurveyAnswer getTimeInByIp(SurveyDetail surveyDetail, String ip) {
-		String surveyId = surveyDetail.getDirId();
-		Criterion eqSurveyId = Restrictions.eq("surveyId", surveyId);
-		Criterion eqIp = Restrictions.eq("ipAddr", ip);
 
-		int minute = surveyDetail.getEffectiveTime();
-		Date curdate = new Date();
 		Calendar calendarDate = Calendar.getInstance();
-		calendarDate.setTime(curdate);
+		calendarDate.setTime(new Date());
 		calendarDate.set(Calendar.MINUTE, calendarDate.get(Calendar.MINUTE)
-				- minute);
-		Date date = calendarDate.getTime();
+				- surveyDetail.getEffectiveTime());
 
-		Criterion gtEndDate = Restrictions.gt("endAnDate", date);
-		return surveyAnswerDao.findFirst("endAnDate", true, eqSurveyId, eqIp,
-				gtEndDate);
+		return surveyAnswerDao.findFirst(ENDANDATE, true
+				, Restrictions.eq(SURVEYID, surveyDetail.getDirId())
+				, Restrictions.eq("ipAddr", ip)
+				, Restrictions.gt(ENDANDATE, calendarDate.getTime()));
 
 	}
 
+	/**
+	 * 根据ip获取答案数量
+	 * @param surveyId
+	 * @param ip
+	 * @return
+	 */
 	@Override
 	public Long getCountByIp(String surveyId, String ip) {
 		String hql = "select count(*) from SurveyAnswer x where x.surveyId=?1 and x.ipAddr=?2";
-		Long count = (Long) surveyAnswerDao.findUniObjs(hql, surveyId, ip);
-		return count;
+        return (Long) surveyAnswerDao.findUniObjs(hql, surveyId, ip);
 	}
 
+	/**
+	 * 根据ip获取回答？？
+	 * @param surveyId
+	 * @param ip
+	 * @return
+	 */
 	@Override
 	public List<SurveyAnswer> answersByIp(String surveyId, String ip) {
-		Criterion criterionSurveyId = Restrictions.eq("surveyId", surveyId);
-		Criterion criterionIp = Restrictions.eq("ipAddr", ip);
-		List<SurveyAnswer> answers = surveyAnswerDao.find(criterionSurveyId,
-				criterionIp);
-		return answers;
+        return surveyAnswerDao.find(
+				Restrictions.eq(SURVEYID, surveyId)
+				, Restrictions.eq("ipAddr", ip));
 	}
 
 
+	/**
+	 * 将问卷结果导出为xls
+	 * @param surveyId
+	 * @param savePath
+	 * @param isExpUpQu
+	 * @return
+	 */
 	@Override
 	public String exportXLS(String surveyId, String savePath, boolean isExpUpQu) {
-		String basepath = surveyId + "";
-		String urlPath = "/webin/expfile/" + basepath + "/";// 下载所用的地址
+		String urlPath = "/webin/expfile/" + surveyId + "/";// 下载所用的地址
 		String path = urlPath.replace("/", File.separator);// 文件系统路径
-		// File.separator +
-		// "file" +
-		// File.separator+basepath
-		// + File.separator;
+
 		savePath = savePath + path;
 		File file = new File(savePath);
 		if (!file.exists())
 			file.mkdirs();
 
-		SurveyDirectory surveyDirectory = directoryManager.getSurvey(surveyId);
 		String fileName = "DWSurvey-"+surveyId + ".xlsx";
 
 		XLSXExportUtil exportUtil = new XLSXExportUtil(fileName, savePath);
-//		Criterion cri1 = Restrictions.eq("surveyId",surveyId);
-//		Page<SurveyAnswer> page = new Page<SurveyAnswer>();
-//		page.setPageSize(5000);
 		try {
-//			page = findPage(page,cri1);
-//			int totalPage = page.getTotalPage();
 			List<SurveyAnswer> answers = answerList(surveyId, 1);
 			List<Question> questions = questionManager.findDetails(surveyId,"2");
 			exportXLSTitle(exportUtil, questions);
@@ -253,6 +279,16 @@ public class SurveyAnswerManagerImpl extends
 		return urlPath + fileName;
 	}
 
+	/**
+	 * 导出某个问卷结果为XLS格式的行
+	 * @param exportUtil
+	 * @param surveyAnswerId
+	 * @param questions
+	 * @param surveyAnswer
+	 * @param orderNum
+	 * @param savePath
+	 * @param isExpUpQu
+	 */
 	private void exportXLSRow(XLSXExportUtil exportUtil,String surveyAnswerId, List<Question> questions,SurveyAnswer surveyAnswer,int orderNum, String savePath, boolean isExpUpQu) {
 		new RunAnswerUtil().getQuestionMap(questions,surveyAnswerId);
 		int cellIndex = 0;
@@ -263,8 +299,6 @@ public class SurveyAnswerManagerImpl extends
 				continue;
 			}
 			quNum++;
-			String quName = question.getQuName();
-			String titleName = quType.getCnName();
 			if (quType == QuType.YESNO) {// 是非题
 				String yesnoAnswer = question.getAnYesno().getYesnoAnswer();
 				if("1".equals(yesnoAnswer)){
@@ -299,7 +333,7 @@ public class SurveyAnswerManagerImpl extends
 					}
 				}
 				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
-				answerOptionName = answerOptionName.replace("&nbsp;"," ");
+				answerOptionName = answerOptionName.replace(NBSP," ");
 				exportUtil.setCell(cellIndex++, answerOptionName);
 				if(isNote) exportUtil.setCell(cellIndex++, answerOtherText);
 			} else if (quType == QuType.CHECKBOX) {// 多选题
@@ -313,7 +347,6 @@ public class SurveyAnswerManagerImpl extends
 						String anQuItemId=anCheckbox.getQuItemId();
 						if(quCkId.equals(anQuItemId)){
 							answerOptionName=quCheckbox.getOptionName();
-							answerOptionName="1";
 							if(quCheckbox.getIsNote() == 1){
 								answerOtherText = anCheckbox.getOtherText();
 							}
@@ -321,7 +354,7 @@ public class SurveyAnswerManagerImpl extends
 						}
 					}
 					answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
-					answerOptionName = answerOptionName.replace("&nbsp;"," ");
+					answerOptionName = answerOptionName.replace(NBSP," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 					if(quCheckbox.getIsNote() == 1)
 						exportUtil.setCell(cellIndex++, answerOtherText);
@@ -348,7 +381,7 @@ public class SurveyAnswerManagerImpl extends
 				}
 				answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
 				answerOtherText=HtmlUtil.removeTagFromText(answerOtherText);
-				answerOptionName = answerOptionName.replace("&nbsp;"," ");
+				answerOptionName = answerOptionName.replace(NBSP," ");
 				exportUtil.setCell(cellIndex++, answerOptionName);
 				exportUtil.setCell(cellIndex++, answerOtherText);
 			} else if (quType == QuType.COMPCHECKBOX) {// 复合多选题
@@ -362,13 +395,12 @@ public class SurveyAnswerManagerImpl extends
 						String anQuItemId=anCheckbox.getQuItemId();
 						if(quCkId.equals(anQuItemId)){
 							answerOptionName=quCheckbox.getOptionName();
-							answerOptionName="1";
 							answerOtherText=anCheckbox.getOtherText();
 							break;
 						}
 					}
 					answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
-					answerOptionName = answerOptionName.replace("&nbsp;"," ");
+					answerOptionName = answerOptionName.replace(NBSP," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 					if(1==quCheckbox.getIsNote()){
 						answerOtherText=HtmlUtil.removeTagFromText(answerOtherText);
@@ -400,7 +432,7 @@ public class SurveyAnswerManagerImpl extends
 							break;
 						}
 					}
-					answerOptionName = answerOptionName.replace("&nbsp;"," ");
+					answerOptionName = answerOptionName.replace(NBSP," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 				}
 			} else if (quType == QuType.MULTIFILLBLANK) {// 组合填空题
@@ -415,7 +447,7 @@ public class SurveyAnswerManagerImpl extends
 							break;
 						}
 					}
-					answerOptionName = answerOptionName.replace("&nbsp;"," ");
+					answerOptionName = answerOptionName.replace(NBSP," ");
 					exportUtil.setCell(cellIndex++, answerOptionName);
 				}
 			} else if (quType == QuType.SCORE) {// 评分题
@@ -434,20 +466,17 @@ public class SurveyAnswerManagerImpl extends
 				}
 			}else if (quType == QuType.UPLOADFILE) {
 				//为导出文件
-				String upFilePath = File.separator + "webin" + File.separator + "upload" + File.separator;
 				List<AnUplodFile> anUplodFiles = question.getAnUplodFiles();
-				String answerBuf = "";
+				StringBuilder answerBuf = new StringBuilder();
 
 				String toFilePath = "";
 				if(isExpUpQu){
-//					String toFilePath = savePath+File.separator+orderNum+File.separator+HtmlUtil.removeTagFromText(titleName);
-//					String toFilePath = savePath + File.separator + orderNum + File.separator + quNum + "_" + HtmlUtil.removeTagFromText(titleName);
 					toFilePath = savePath + File.separator + orderNum + File.separator + "Q_" + quNum;
 					File file = new File(toFilePath);
 					if (!file.exists()) file.mkdirs();
 				}
 				for (AnUplodFile anUplodFile : anUplodFiles) {
-					answerBuf += anUplodFile.getFileName() + "      ";
+					answerBuf.append(anUplodFile.getFileName()).append("      ");
 					if(isExpUpQu){
 						File fromFile = new File(DWSurveyConfig.DWSURVEY_WEB_FILE_PATH + anUplodFile.getFilePath());
 						if (fromFile.exists()) {
@@ -460,18 +489,22 @@ public class SurveyAnswerManagerImpl extends
 						}
 					}
 				}
-//				answerBuf=answerBuf.substring(0,answerBuf.lastIndexOf("      "));
-				exportUtil.setCell(cellIndex++, answerBuf);
+				exportUtil.setCell(cellIndex++, answerBuf.toString());
 			}
 		}
 
 		exportUtil.setCell(cellIndex++,  surveyAnswer.getIpAddr());
 		exportUtil.setCell(cellIndex++,  surveyAnswer.getCity());
-		exportUtil.setCell(cellIndex++,  new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(surveyAnswer.getEndAnDate()));
+		exportUtil.setCell(cellIndex,  new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(surveyAnswer.getEndAnDate()));
 
 
 	}
 
+	/**
+	 * 以xls 导出问题标题
+	 * @param exportUtil
+	 * @param questions
+	 */
 	private void exportXLSTitle(XLSXExportUtil exportUtil,
 								List<Question> questions) {
 		exportUtil.createRow(0);
@@ -486,7 +519,6 @@ public class SurveyAnswerManagerImpl extends
 			}
 			quNum++;
 
-//			String quName = question.getQuName();
 			String quName = question.getQuTitle();
 			quName=HtmlUtil.removeTagFromText(quName);
 			String titleName =quNum +"、" + quName + "[" + quType.getCnName() + "]";
@@ -571,14 +603,23 @@ public class SurveyAnswerManagerImpl extends
 
 		exportUtil.setCell(cellIndex++,  "回答者IP");
 		exportUtil.setCell(cellIndex++,  "IP所在地");
-		exportUtil.setCell(cellIndex++,  "回答时间");
+		exportUtil.setCell(cellIndex,  "回答时间");
 
 	}
 
+	/**
+	 * not implemented yet
+	 */
 	public void writeToXLS() {
-
+		//not implement
 	}
 
+
+	/**
+	 * 获取单个问卷的全局统计信息
+	 * @param surveyStats
+	 * @return
+	 */
 	@Override
 	public SurveyStats surveyStatsData(SurveyStats surveyStats) {
 		return surveyAnswerDao.surveyStatsData(surveyStats);
@@ -589,33 +630,47 @@ public class SurveyAnswerManagerImpl extends
 	 * 取一份卷子回答的数据
 	 */
 	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page,String surveyId){
-		Criterion cri1=Restrictions.eq("surveyId", surveyId);
+		Criterion cri1=Restrictions.eq(SURVEYID, surveyId);
 		Criterion cri2=Restrictions.lt("handleState", 2);
-		page.setOrderBy("endAnDate");
+		page.setOrderBy(ENDANDATE);
 		page.setOrderDir("desc");
 		page=findPage(page, cri1, cri2);
 		return page;
 	}
 
+	/**
+	 * 返回答案列表
+	 * @param surveyId
+	 * @param isEff
+	 * @return
+	 */
 	public List<SurveyAnswer> answerList(String surveyId,Integer isEff) {
-		Criterion cri1=Restrictions.eq("surveyId", surveyId);
+		Criterion cri1=Restrictions.eq(SURVEYID, surveyId);
 		Criterion cri2=Restrictions.lt("handleState", 2);
-		Criterion cri3=Restrictions.eq("isEffective", 1);
-		if(isEff!=null){
-			cri3=Restrictions.eq("isEffective", isEff);
-		}
-		return surveyAnswerDao.findByOrder("endAnDate",false,cri1, cri2);
+			Criterion cri3 = isEff!=null
+					? Restrictions.eq("isEffective", isEff)
+					: Restrictions.eq("isEffective", 1);
+		return surveyAnswerDao.findByOrder(ENDANDATE,false, cri1, cri2, cri3);
 	}
 
 
-
+	/**
+	 * 根据id更新回答数量
+	 * @param surveyId
+	 * @return
+	 */
 	@Transactional
 	public SurveyDirectory upAnQuNum(String surveyId){
 		SurveyDirectory survey = directoryManager.get(surveyId);
-		upAnQuNum(survey);
+		surveyAnswerManagerImpl.upAnQuNum(survey);
 		return survey;
 	}
 
+	/**
+	 * 根据 surveyDirectory 对象更新回答数量
+	 * @param survey
+	 * @return
+	 */
 	@Transactional
 	public SurveyDirectory upAnQuNum(SurveyDirectory survey) {
 		Long answerCount = surveyAnswerDao.countResult(survey.getId());
@@ -626,16 +681,25 @@ public class SurveyAnswerManagerImpl extends
 		return survey;
 	}
 
+	/**
+	 * 为一组 surveyDirectory 对象更新回答数量
+	 * @param result
+	 * @return
+	 */
 	@Override
 	public List<SurveyDirectory> upAnQuNum(List<SurveyDirectory> result) {
 		if(result!=null){
 			for (SurveyDirectory survey:result) {
-				upAnQuNum(survey);
+				surveyAnswerManagerImpl.upAnQuNum(survey);
 			}
 		}
 		return result;
 	}
 
+	/**
+	 * 删除指定id 的数据
+	 * @param ids
+	 */
 	@Transactional
 	@Override
 	public void deleteData(String[] ids) {
@@ -643,11 +707,15 @@ public class SurveyAnswerManagerImpl extends
 		for (String id:ids) {
 			SurveyAnswer surveyAnswer = get(id);
 			surveyId = surveyAnswer.getSurveyId();
-			delete(surveyAnswer);
+			surveyAnswerManagerImpl.delete(surveyAnswer);
 		}
-		if(surveyId!=null) upAnQuNum(surveyId);
+		if(surveyId!=null) surveyAnswerManagerImpl.upAnQuNum(surveyId);
 	}
 
+	/**
+	 * 删除回答
+	 * @param t
+	 */
 	@Override
 	@Transactional
 	public void delete(SurveyAnswer t) {
@@ -697,7 +765,6 @@ public class SurveyAnswerManagerImpl extends
 					}
 
 				} else if (quType == QuType.COMPRADIO) {// 复合单选题
-
 
 				} else if (quType == QuType.COMPCHECKBOX) {// 复合多选题
 

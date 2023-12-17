@@ -25,14 +25,21 @@ import net.diaowen.dwsurvey.service.SurveyDetailManager;
 @Service
 public class SurveyDetailManagerImpl extends BaseServiceImpl<SurveyDetail, String> implements SurveyDetailManager{
 
+	private final SurveyDetailDao surveyDetailDao;
 	@Autowired
-	private SurveyDetailDao surveyDetailDao;
+	public SurveyDetailManagerImpl(SurveyDetailDao surveyDetailDao) {
+		this.surveyDetailDao = surveyDetailDao;
+	}
 
 	@Override
 	public void setBaseDao() {
 		this.baseDao=surveyDetailDao;
 	}
 
+	/**
+	 * 保存问卷配置的详细信息
+	 * @param t
+	 */
 	@Transactional
 	@Override
 	public void save(SurveyDetail t) {
@@ -45,20 +52,34 @@ public class SurveyDetailManagerImpl extends BaseServiceImpl<SurveyDetail, Strin
 		super.save(surveyDetail);
 	}
 
+	/**
+	 * 根据 id 获取配置的详细信息
+	 * @param dirId
+	 * @return
+	 */
 	private SurveyDetail findUn(String dirId){
 		Criterion criterion=Restrictions.eq("dirId", dirId);
 		 List<SurveyDetail> details=surveyDetailDao.find(criterion);
-		 if(details!=null && details.size()>0){
+		 if(details!=null && !details.isEmpty()){
 			 return details.get(0);
 		 }
 		 return null;
 	}
 
+	/**
+	 * 根据问卷id获取配置的详细信息
+	 * @param surveyId
+	 * @return
+	 */
 	@Override
 	public SurveyDetail getBySurveyId(String surveyId) {
 		 return findUn(surveyId);
 	}
 
+	/**
+	 * 保存问卷配置的详细信息
+	 * @param t
+	 */
 	@Transactional
 	@Override
 	public void saveBaseUp(SurveyDetail t) {
