@@ -38,39 +38,54 @@ public class SurveyStatsManagerImpl extends
 	private SurveyAnswerManager surveyAnswerManager;
 	@Autowired
 	private QuestionManager questionManager;
+	private final AnYesnoManager anYesnoManager;
+	private final AnRadioManager anRadioManager;
+	private final AnFillblankManager anFillblankManager;
+	private final AnEnumquManager anEnumquManager;
+	private final AnDFillblankManager anDFillblankManager;
+	private final AnCheckboxManager anCheckboxManager;
+	private final AnAnswerManager anAnswerManager;
+	private final AnScoreManager anScoreManager;
+	private final AnOrderManager anOrderManager;
+	private final AnUploadFileManager anUploadFileManager;
+
 	@Autowired
-	private AnYesnoManager anYesnoManager;
-	@Autowired
-	private AnRadioManager anRadioManager;
-	@Autowired
-	private AnFillblankManager anFillblankManager;
-	@Autowired
-	private AnEnumquManager anEnumquManager;
-	@Autowired
-	private AnDFillblankManager anDFillblankManager;
-	@Autowired
-	private AnCheckboxManager anCheckboxManager;
-	@Autowired
-	private AnAnswerManager anAnswerManager;
-	@Autowired
-	private AnScoreManager anScoreManager;
-	@Autowired
-	private AnOrderManager anOrderManager;
-	@Autowired
-	private AnUploadFileManager anUploadFileManager;
+	public SurveyStatsManagerImpl(AnYesnoManager anYesnoManager, AnRadioManager anRadioManager, AnFillblankManager anFillblankManager, AnEnumquManager anEnumquManager, AnDFillblankManager anDFillblankManager, AnCheckboxManager anCheckboxManager, AnAnswerManager anAnswerManager, AnScoreManager anScoreManager, AnOrderManager anOrderManager, AnUploadFileManager anUploadFileManager) {
+		this.anYesnoManager = anYesnoManager;
+		this.anRadioManager = anRadioManager;
+		this.anFillblankManager = anFillblankManager;
+		this.anEnumquManager = anEnumquManager;
+		this.anDFillblankManager = anDFillblankManager;
+		this.anCheckboxManager = anCheckboxManager;
+		this.anAnswerManager = anAnswerManager;
+		this.anScoreManager = anScoreManager;
+		this.anOrderManager = anOrderManager;
+		this.anUploadFileManager = anUploadFileManager;
+	}
+
+
 
 	@Override
 	public void setBaseDao() {
 		this.baseDao = surveyStatsDao;
 	}
 
+	/**
+	 * 根据 surveyid 获取全局统计信息
+	 * @param surveyId
+	 * @return
+	 */
 	@Override
 	public SurveyStats findBySurvey(String surveyId) {
-		// return surveyStatsDao.findUniqueBy("surveyId", surveyId);
 		Criterion criterion = Restrictions.eq("surveyId", surveyId);
 		return surveyStatsDao.findFirst(criterion);
 	}
 
+	/**
+	 * 根据 问卷 获取全局统计信息
+	 * @param surveyDirectory
+	 * @return
+	 */
 	@Override
 	public SurveyStats findBySurvey(SurveyDirectory surveyDirectory) {
 		if (surveyDirectory != null && surveyDirectory.getId() != null) {
@@ -79,12 +94,16 @@ public class SurveyStatsManagerImpl extends
 		return null;
 	}
 
+	/**
+	 * 获取最新全局统计信息
+	 * @param surveyDirectory
+	 * @return
+	 */
 	@Override
 	public SurveyStats findNewStatsData(SurveyDirectory surveyDirectory) {
 		SurveyStats surveyStats = null;
 		if (surveyDirectory != null && surveyDirectory.getId() != null) {
-			String surveyId = surveyDirectory.getId();
-			surveyStats = findBySurvey(surveyId);
+			surveyStats = findBySurvey(surveyDirectory.getId());
 			if (surveyStats != null) {
 				int isNew = surveyStats.getIsNewData();
 				if (isNew != 1) {
@@ -96,6 +115,11 @@ public class SurveyStatsManagerImpl extends
 		return surveyStats;
 	}
 
+	/**
+	 * 更新全局统计信息
+	 * @param surveyStats
+	 * @return
+	 */
 	private void upStats(SurveyStats surveyStats) {
 		surveyAnswerManager.surveyStatsData(surveyStats);
 		// 更新stats
@@ -150,11 +174,21 @@ public class SurveyStatsManagerImpl extends
 		return questions;
 	}
 
+	/**
+	 * 访问行状态参数
+	 * @param survey
+	 * @return
+	 */
 	@Override
 	public List<Question> findRowVarQus(SurveyDirectory survey) {
 		return questionManager.findStatsRowVarQus(survey);
 	}
 
+	/**
+	 * 访问列状态参数
+	 * @param survey
+	 * @return
+	 */
 	@Override
 	public List<Question> findColVarQus(SurveyDirectory survey) {
 		return questionManager.findStatsColVarQus(survey);
@@ -184,12 +218,14 @@ public class SurveyStatsManagerImpl extends
 						colQuestion);
 			}
 		}
-		// surveyStatsDao.findStatsDataCross(rowQuestion,colQuestion);
 		return null;
 	}
 
 
-
+	/**
+	 * 保存状态参数
+	 * @param t
+	 */
 	@Override
 	public void save(SurveyStats t) {
 		String surveyId = t.getSurveyId();
@@ -201,6 +237,11 @@ public class SurveyStatsManagerImpl extends
 		}
 	}
 
+	/**
+	 * 访问结果保存表
+	 * @param quId
+	 * @return
+	 */
 	@Override
 	public List<DataCross> findDataChart(String quId) {
 		if (quId != null && !"".equals(quId)) {
@@ -256,34 +297,26 @@ public class SurveyStatsManagerImpl extends
 		return questions;
 	}
 
+	/**
+	 * 将问卷所有结果保存表状态参数json保存到问题
+	 * @param survey
+	 * @return
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public List<Question> dataChart1s(SurveyDirectory survey) {
 		List<Question> questions = questionManager.findDetails(survey.getId(),
 				"2");
 		for (Question question : questions) {
-			List<DataCross> crosses = findDataChart(question.getId());
-			if(crosses!=null){
-				for (DataCross dataCross : crosses) {
-					// 去掉optionName中的html
-					String optionName = dataCross.getOptionName();
-					if(optionName==null){
-							optionName="";
-					}
-					optionName = removeTagFromText(optionName);
-					if(optionName.length()>15){
-						optionName=optionName.substring(0, 15)+"...";
-					}
-					dataCross.setOptionName(optionName);
-				}
-				String statJson = JSONArray.fromObject(crosses).toString();
-				question.setStatJson(statJson);
-			}
+			questionDateCross(question);
 		}
 		return questions;
 	}
 
-
+	/**
+	 * 将结果保存表状态参数json保存到问题
+	 * @param question
+	 */
 	public void questionDateCross(Question question) {
 		List<DataCross> crosses = findDataChart(question.getId());
 		if(crosses!=null){
@@ -304,6 +337,11 @@ public class SurveyStatsManagerImpl extends
 		}
 	}
 
+	/**
+	 * 过滤 html 字符串中的标签，返回 raw text
+	 * @param htmlStr
+	 * @return
+	 */
 	public String removeTagFromText(String htmlStr) {
 		if (htmlStr == null || "".equals(htmlStr))
 			return "";
@@ -314,11 +352,9 @@ public class SurveyStatsManagerImpl extends
 		try {
 			String regEx_remark = "<!--.+?-->";
 			// 定义script的正则表达式{或<script[^>]*?>[\\s\\S]*?<\\/script>
-			// }
 			String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>";
 
 			// 定义style的正则表达式{或<style[^>]*?>[\\s\\S]*?<\\/style>
-			// }
 			String regEx_style = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>";
 
 			String regEx_html = "<[^>]+>"; // 定义HTML标签的正则表达式

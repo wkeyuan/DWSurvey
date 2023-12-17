@@ -6,34 +6,37 @@ import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.dwsurvey.entity.Question;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
 import net.diaowen.dwsurvey.entity.SurveyStats;
-import net.diaowen.dwsurvey.service.SurveyAnswerManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.SurveyStatsManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/dwsurvey/app/stats")
 public class MySurveyStatsController {
 
-    @Autowired
-    private SurveyStatsManager surveyStatsManager;
-    @Autowired
-    private SurveyAnswerManager surveyAnswerManager;
-    @Autowired
-    private AccountManager accountManager;
-    @Autowired
-    private SurveyDirectoryManager surveyDirectoryManager;
+    private final SurveyStatsManager surveyStatsManager;
+    private final AccountManager accountManager;
+    private final SurveyDirectoryManager surveyDirectoryManager;
 
+    @Autowired
+    public MySurveyStatsController(SurveyStatsManager surveyStatsManager, AccountManager accountManager, SurveyDirectoryManager surveyDirectoryManager) {
+        this.surveyStatsManager = surveyStatsManager;
+        this.accountManager = accountManager;
+        this.surveyDirectoryManager = surveyDirectoryManager;
+    }
+
+    /**
+     * 获取频数分析数据
+     * @param surveyId 问卷id
+     * @return
+     */
     @RequestMapping("/report.do")
-    @ResponseBody
     public HttpResult report(String surveyId) {
 
-        // 得到频数分析数据
         User user = accountManager.getCurUser();
         if(user!=null){
             SurveyDirectory survey = surveyDirectoryManager.findUniqueBy(surveyId);

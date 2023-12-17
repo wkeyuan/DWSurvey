@@ -11,8 +11,15 @@ import net.diaowen.dwsurvey.entity.SurveyDetail;
  * http://dwsurvey.net
  */
 public interface SurveyDetailManager extends BaseService<SurveyDetail, String>{
-
+	/**
+	 * 根据问卷id获取配置的详细信息
+	 * @param surveyId
+	 * @return
+	 */
 	public SurveyDetail getBySurveyId(String surveyId);
-
+	/**
+	 * 保存问卷配置的详细信息
+	 * @param t
+	 */
 	public void saveBaseUp(SurveyDetail t);
 }

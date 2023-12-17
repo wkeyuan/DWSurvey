@@ -14,43 +14,39 @@ import net.diaowen.dwsurvey.service.SurveyDetailManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.SurveyStatsManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/api/dwsurvey/app/survey")
 public class MySurveyController {
 
+    private final AccountManager accountManager;
+    private final SurveyDirectoryManager surveyDirectoryManager;
+    private final SurveyDetailManager surveyDetailManager;
+    private final SurveyAnswerManager surveyAnswerManager;
+    private final SurveyStatsManager surveyStatsManager;
+
     @Autowired
-    private AccountManager accountManager;
-    @Autowired
-    private SurveyDirectoryManager surveyDirectoryManager;
-    @Autowired
-    private SurveyDetailManager surveyDetailManager;
-    @Autowired
-    private SurveyAnswerManager surveyAnswerManager;
-    @Autowired
-    private SurveyStatsManager surveyStatsManager;
+    public MySurveyController(AccountManager accountManager, SurveyDirectoryManager surveyDirectoryManager, SurveyDetailManager surveyDetailManager, SurveyAnswerManager surveyAnswerManager, SurveyStatsManager surveyStatsManager) {
+        this.accountManager = accountManager;
+        this.surveyDirectoryManager = surveyDirectoryManager;
+        this.surveyDetailManager = surveyDetailManager;
+        this.surveyAnswerManager = surveyAnswerManager;
+        this.surveyStatsManager = surveyStatsManager;
+    }
 
     /**
      * 拉取问卷列表
      * @param pageResult
      * @return
      */
-    @RequestMapping(value = "/list.do",method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(path = "/list.do")
     public PageResult<SurveyDirectory> list(PageResult<SurveyDirectory> pageResult, String surveyName, Integer surveyState) {
 
         User user = accountManager.getCurUser();
         if(user!=null){
-            Page page = ResultUtils.getPageByPageResult(pageResult);
+            Page<SurveyDirectory> page = ResultUtils.getPageByPageResult(pageResult);
             page = surveyDirectoryManager.findByUser(page,surveyName, surveyState);
             page.setResult(surveyAnswerManager.upAnQuNum(page.getResult()));
             pageResult = ResultUtils.getPageResultByPage(page,pageResult);
@@ -64,8 +60,7 @@ public class MySurveyController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/info.do",method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(path = "/info.do")
     public HttpResult<SurveyDirectory> info(String id) {
         try{
             User user = accountManager.getCurUser();
@@ -88,8 +83,7 @@ public class MySurveyController {
      * @param surveyDirectory
      * @return
      */
-    @RequestMapping(value = "/add.do",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/add.do")
     // @RequiresRoles(value = "PROJECT_ADMIN,DEPT_ADMIN,ENT_ADMIN,SUPER_ADMIN,QT_SURVEY_LIST")
     public HttpResult add(@RequestBody SurveyDirectory surveyDirectory) {
         try{
@@ -104,13 +98,18 @@ public class MySurveyController {
     }
 
 
-    //引用问卷
-    @RequestMapping(value = "/copy.do",method = RequestMethod.POST)
-    @ResponseBody
-    public HttpResult copy(String fromSurveyId, String surveyName, String tag) throws Exception {
+    /**
+     * 引用问卷
+     * @param fromSurveyId
+     * @param surveyName
+     * @param tag
+     * @return
+     * @throws Exception
+     */
+    @PostMapping(value = "/copy.do")
+    public HttpResult copy(String fromSurveyId, String surveyName, String tag) {
         tag="2";
         SurveyDirectory directory=surveyDirectoryManager.createBySurvey(fromSurveyId,surveyName,tag);
-        String surveyId=directory.getId();
         return HttpResult.SUCCESS(directory);
     }
 
@@ -121,22 +120,18 @@ public class MySurveyController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/delete.do",method = RequestMethod.DELETE)
-    @ResponseBody
-    public HttpResult delete(@RequestBody Map<String, String[]> map) throws Exception {
+    @DeleteMapping(value = "/delete.do")
+    public HttpResult delete(@RequestBody Map<String, String[]> map) {
         String result = null;
         try{
             User curUser = accountManager.getCurUser();
-            if(curUser!=null){
-                if(map!=null){
-                    if(map.containsKey("id")){
+            if(curUser!=null && map!=null && map.containsKey("id")){
+
                         String[] ids = map.get("id");
                         if(ids!=null){
                             surveyDirectoryManager.delete(ids);
                             return HttpResult.SUCCESS();
                         }
-                    }
-                }
             }
         }catch (Exception e) {
             result=e.getMessage();
@@ -149,8 +144,7 @@ public class MySurveyController {
      * 修改状态
      * @return
      */
-    @RequestMapping(value = "/up-survey-status.do",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(path = "/up-survey-status.do")
     public HttpResult<SurveyDirectory> upSurveyState(String surveyId, Integer surveyState) {
         try{
             surveyDirectoryManager.upSurveyState(surveyId,surveyState);
@@ -167,8 +161,7 @@ public class MySurveyController {
      * @param surveyDetail
      * @return
      */
-    @RequestMapping(value = "/survey-base-attr.do",method = RequestMethod.PUT)
-    @ResponseBody
+    @PutMapping(path = "/survey-base-attr.do")
     public HttpResult<SurveyDirectory> saveBaseAttr(@RequestBody SurveyDetail surveyDetail) {
         try{
             surveyDetailManager.saveBaseUp(surveyDetail);
