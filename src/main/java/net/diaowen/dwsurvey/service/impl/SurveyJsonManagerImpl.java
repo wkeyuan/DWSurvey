@@ -34,7 +34,7 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 
 	@Override
 	public void saveNew(SurveyJson surveyJson) {
-		String surveyId = surveyJson.getSurveyId();
+		/*String surveyId = surveyJson.getSurveyId();
 		SurveyJson surveyJsonDb = findBySurveyId(surveyId);
 		if(surveyJsonDb!=null){
 			surveyJsonDb.setSurveyJsonText(surveyJson.getSurveyJsonText());
@@ -43,11 +43,16 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 		}else{
 			surveyJson.setSaveDate(new Date());
 			super.save(surveyJson);
-		}
+		}*/
+		//如果这样直接保存，则需要考虑库中保存的历史数据可能过多，需要定量清除
+		surveyJson.setSaveDate(new Date());
+		super.save(surveyJson);
+		//每份问卷仅保留最近的1000次操作记录
+		//前端每30秒检查下问卷是否有变动，如果有变动则自动保存一次并生成一次历史记录
 	}
 
 	public SurveyJson findBySurveyId(String surveyId) {
 		Criterion cri1 = Restrictions.eq("surveyId",surveyId);
-		return surveyJsonDao.findFirst("saveDate",false,cri1);
+		return surveyJsonDao.findFirst("saveDate",false, cri1);
 	}
 }
