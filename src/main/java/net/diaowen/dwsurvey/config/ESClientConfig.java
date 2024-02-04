@@ -61,6 +61,7 @@ public class ESClientConfig {
 //        CERT_NAME = certName;
         CERT_NAME = "http_ca.crt";
         logger.info("CERT_NAME {}", CERT_NAME);
+        logger.info("passwd {}", passwd);
     }
 
     /**
