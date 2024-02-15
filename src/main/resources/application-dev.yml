@@ -126,7 +126,7 @@ logging:
       apache: ERROR
 elasticsearch:
   username: elastic
-  passwd: KWAkyvx0ewXTY3Cqv0H2
-  apikey: ==
-  hosts: 127.0.0.1:9200 # 多个IP逗号隔开
+  passwd: rKFY7=i-QgCu*Rufbu2H
+  apikey: eyJ2ZXIiOiI4LjguMSIsImFkciI6WyIxOTIuMTY4LjUuMjo5MjAwIl0sImZnciI6ImZmMTQ0YTlhMDI4YzM3MjYwMjc5NWVhOTA0ZDYwMzM5ODg0MTEwNzZlOTMzNTU2YzcxMGE2OWFjNGYyZDAzNDgiLCJrZXkiOiJDUDBQQVlrQi1qQXBIU3E2Vk1CMDpDXzdLTk9odVJtcWVKWjgwUEkwdWVRIn0=
+  hosts: localhost:9200 # 多个IP逗号隔开
 #  cert-name: http_ca.crt

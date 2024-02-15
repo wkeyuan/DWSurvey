@@ -1,5 +1,6 @@
 package net.diaowen.dwsurvey.controller.design.admin;
 
+import co.elastic.clients.elasticsearch.nodes.Http;
 import net.diaowen.common.QuType;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.httpclient.PageResult;
@@ -176,6 +177,14 @@ public class DwDeisgnSurveyController {
     public HttpResult saveSurveyJson(@RequestBody SurveyJson surveyJson){
         surveyJsonManager.saveNew(surveyJson);
         return HttpResult.SUCCESS();
+    }
+
+    @RequestMapping(value = "/dev-survey.do",method = RequestMethod.POST)
+    @ResponseBody
+    public HttpResult devSurvey(@RequestParam String surveyId){
+        String jsonPath = surveyJsonManager.devSurvey(surveyId);
+        if (jsonPath!=null) return HttpResult.SUCCESS();
+        return HttpResult.FAILURE();
     }
 
 }
