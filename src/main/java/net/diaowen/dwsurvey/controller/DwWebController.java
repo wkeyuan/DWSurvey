@@ -30,7 +30,7 @@ public class DwWebController {
      */
     @RequestMapping(value = "/footer-info.do",method = RequestMethod.GET)
     @ResponseBody
-    public HttpResult<SurveyDirectory> footerInfo() {
+    public HttpResult<FooterInfo> footerInfo() {
         try{
             FooterInfo footerInfo = new FooterInfo();
             footerInfo.setVersionInfo(DWSurveyConfig.DWSURVEY_VERSION_INFO);

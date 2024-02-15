@@ -18,4 +18,6 @@ public interface SurveyJsonManager extends BaseService<SurveyJson, String> {
     void saveNew(SurveyJson surveyJson);
 
     SurveyJson findBySurveyId(String surveyId);
+
+    String devSurvey(String surveyId);
 }
