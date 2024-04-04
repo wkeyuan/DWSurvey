@@ -1,6 +1,9 @@
 package net.diaowen.dwsurvey.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.service.BaseServiceImpl;
 import net.diaowen.common.utils.DwSurveyUtils;
@@ -15,6 +18,8 @@ import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.SurveyJsonManager;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author keyuan
@@ -31,6 +37,8 @@ import java.util.List;
 
 @Service
 public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> implements SurveyJsonManager {
+
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private SurveyJsonDao surveyJsonDao;
@@ -54,7 +62,7 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 			surveyJson.setSaveDate(new Date());
 			super.save(surveyJson);
 		}*/
-		//如果这样直接保存，则需要考虑库中保存的历史数据可能过多，需要定量清除
+        //如果这样直接保存，则需要考虑库中保存的历史数据可能过多，需要定量清除
 		surveyJson.setSaveDate(new Date());
 		super.save(surveyJson);
 		//每份问卷仅保留最近的1000次操作记录
@@ -73,19 +81,38 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 
 	public String devSurveyJson(String surveyId) {
 		try {
+			Date date = new Date();
+			Long dateTime = date.getTime();
+			ObjectMapper objectMapper = new ObjectMapper();
+			// 发布时生成版本号
 			SurveyDirectory survey = surveyManager.findUniqueBy(surveyId);
 			SurveyJson surveyJson = findBySurveyId(surveyId);
 			String sId = survey.getSid();
 			ObjectMapper mapper = new ObjectMapper();
+			String surveyJsonSimple = surveyJson.getSurveyJsonSimple();
+			String surveyJsonText = surveyJson.getSurveyJsonText();
+			JsonNode surveyJsonSimpleNode = objectMapper.readTree(surveyJsonSimple);
+			JsonNode surveyJsonTextNode = objectMapper.readTree(surveyJsonText);
+			((ObjectNode) surveyJsonSimpleNode).put("dwVersion", dateTime);
+			((ObjectNode) surveyJsonTextNode).put("dwVersion", dateTime);
 
-			String infoJsonString = mapper.writeValueAsString(HttpResult.SUCCESS(survey));
+			// 继续完善发布到答卷使用缓存方法
+			String infoJsonString = mapper.writeValueAsString(surveyJsonSimpleNode);
 			String savePath = File.separator+"v6"+File.separator+"file"+File.separator+"survey"+File.separator+sId+File.separator;;
 			DwSurveyUtils.writerJson(infoJsonString, savePath, sId+"_info.json");
 
-			String jsonString = mapper.writeValueAsString(HttpResult.SUCCESS(surveyJson));
+			String jsonString = mapper.writeValueAsString(surveyJsonTextNode);
 			String fileName = sId+".json";
 			DwSurveyUtils.writerJson(jsonString, savePath, fileName);
 
+
+			// 同步更新到数据库中
+			surveyJson.setSurveyJsonSimple(infoJsonString);
+			surveyJson.setSurveyJsonText(jsonString);
+
+			logger.info("savePath {}", savePath);
+			surveyJson.setSaveDate(new Date());
+			super.save(surveyJson);
 			return savePath+fileName;
 		} catch (IOException e) {
 			e.printStackTrace();

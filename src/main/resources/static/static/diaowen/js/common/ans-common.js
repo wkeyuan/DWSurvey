@@ -255,38 +255,41 @@ function wwwUpload(){
           location = item.location;
           fileName = item.filename;
         });
-      }
-
-      //如果是图片，则取回进行显示
-      var surveyQuItemBody = $(this).parents(".surveyQuItemBody");
-      var paramInt01 = surveyQuItemBody.find(".paramInt01").val();
-      if(false){
+        //如果是图片，则取回进行显示
+        var surveyQuItemBody = $(this).parents(".surveyQuItemBody");
+        var paramInt01 = surveyQuItemBody.find(".paramInt01").val();
+        if(false){
 //      surveyQuItemBody.find(".quFillblankItem .upAppend").remove();
 //      <label class='upImgLabel' ><img class='upAppend' src='' height='150' ><a href='' ><i class='fa fa-times' aria-hidden='true'></i></a></label>
 //             surveyQuItemBody.find(".quFillblankItem").prepend("<img class='upAppend' src='${ctx}"+location+"' height='150' style='margin-bottom:8px;border:1px solid grey;padding:6px;' />");
-        surveyQuItemBody.find(".quFillblankItem").prepend("<label class='upImgLabel' ><img class='upAppend' src='"+ctx+location+"' height='150' >&nbsp;<a href='' ><i class='fa fa-times' aria-hidden='true'></i></a></label>");
-        surveyQuItemBody.find("span.fileinput-button span").text("继续上传");
-        surveyQuItemBody.find(".fileuploadPath").val(location+"___"+fileName);
-      }else{
-        var fileuploadPathName = surveyQuItemBody.find(".fileuploadPath").attr("uphidinputname")+"_"+(upEventIndex++);
-        var fileSaveValue = location+"___"+fileName;
+          surveyQuItemBody.find(".quFillblankItem").prepend("<label class='upImgLabel' ><img class='upAppend' src='"+ctx+location+"' height='150' >&nbsp;<a href='' ><i class='fa fa-times' aria-hidden='true'></i></a></label>");
+          surveyQuItemBody.find("span.fileinput-button span").text("继续上传");
+          surveyQuItemBody.find(".fileuploadPath").val(location+"___"+fileName);
+        }else{
+          var fileuploadPathName = surveyQuItemBody.find(".fileuploadPath").attr("uphidinputname")+"_"+(upEventIndex++);
+          var fileSaveValue = location+"___"+fileName;
 //      surveyQuItemBody.find(".quFillblankItem .upAppend").remove();
 //      surveyQuItemBody.find(".quFillblankItem").prepend("<div class='upAppend' style='margin-bottom:8px;border:1px solid grey;padding:6px;' > 文件名称："+fileName+" </div>");
-        surveyQuItemBody.find(".quFillblankItem .upFileDiv").prepend('<div class="upAppend" ><label style="overflow: auto;width: 95%;">文件名称：'+fileName+'</label><a href="#" class="removeUpFile" ><i class="fa fa-times" aria-hidden="true"></i></a>' +
-          '<input type="hidden" class="fileuploadSaveValue" name="'+fileuploadPathName+'" value="'+fileSaveValue+'" />' +
-          '</div>');
-        surveyQuItemBody.find("span.fileinput-button span").text("继续上传");
+          surveyQuItemBody.find(".quFillblankItem .upFileDiv").prepend('<div class="upAppend" ><label style="overflow: auto;width: 95%;">文件名称：'+fileName+'</label><a href="#" class="removeUpFile" ><i class="fa fa-times" aria-hidden="true"></i></a>' +
+            '<input type="hidden" class="fileuploadSaveValue" name="'+fileuploadPathName+'" value="'+fileSaveValue+'" />' +
+            '</div>');
+          surveyQuItemBody.find("span.fileinput-button span").text("继续上传");
 //      surveyQuItemBody.find(".fileuploadPath").val(fileSaveValue);
+        }
+        bindUpEvent();
+        surveyQuItemBody.find(".answerTag").val(1);
+        var quCoItemUlLi = $(this).parents(".quCoItemUlLi");
+        quCoItemUlLi.find('.progress').fadeOut(3000);
+        //保存路径
+        var li_surveyQuItemBody = $(this).parents(".li_surveyQuItemBody");
+        runlogic(li_surveyQuItemBody,$(this));
+        validateCheck(surveyQuItemBody,false);
+        answerProgressbar(surveyQuItemBody);
+      }else{
+        var thObj = $(this);
+        //显示错误信息
+        showUpFileMsg(thObj,httpResult.resultMsg);
       }
-      bindUpEvent();
-      surveyQuItemBody.find(".answerTag").val(1);
-      var quCoItemUlLi = $(this).parents(".quCoItemUlLi");
-      quCoItemUlLi.find('.progress').fadeOut(3000);
-      //保存路径
-      var li_surveyQuItemBody = $(this).parents(".li_surveyQuItemBody");
-      runlogic(li_surveyQuItemBody,$(this));
-      validateCheck(surveyQuItemBody,false);
-      answerProgressbar(surveyQuItemBody);
     },
     progressall: function (e, data) {
       var quCoItemUlLi = $(this).parents(".quCoItemUlLi");

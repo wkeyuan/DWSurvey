@@ -1,0 +1,124 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 3,
+      "number_of_replicas": 1
+    }
+  },
+  "mappings": {
+    "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "addr": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "city": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "ip": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "anState": {
+            "properties": {
+              "anQuNum": {
+                "type": "long"
+              },
+              "handleState": {
+                "type": "long"
+              },
+              "isEff": {
+                "type": "long"
+              }
+            }
+          },
+          "anTime": {
+            "properties": {
+              "bgAnDate": {
+                "type":   "date",
+                "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+              },
+              "endAnDate": {
+                "type":   "date",
+                "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+              },
+              "totalTime": {
+                "type": "long"
+              }
+            }
+          },
+          "anUser": {
+            "properties": {
+              "userId": {
+                "type": "keyword"
+              },
+              "userName": {
+                "type": "keyword"
+              }
+            }
+          },
+          "surveyDwId": {
+            "type": "keyword"
+          },
+          "answerDwId": {
+            "type": "keyword"
+          },
+          "surveyId": {
+            "type": "keyword"
+          }
+        }
+      },
+      "answerOptionDwId": {
+        "type": "keyword"
+      },
+      "answerNum": {
+        "type": "long"
+      },
+      "answerText": {
+        "analyzer": "ik_max_word",
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "quDwId": {
+        "type": "keyword"
+      },
+      "quType": {
+        "type": "keyword"
+      },
+      "relateDwIds": {
+        "type": "keyword"
+      },
+      "relateAnswerResponseId": {
+        "type": "keyword"
+      }
+    }
+  }
+}

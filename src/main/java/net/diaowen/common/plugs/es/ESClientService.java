@@ -1,30 +1,24 @@
 package net.diaowen.common.plugs.es;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch._types.FieldValue;
 import co.elastic.clients.elasticsearch._types.SortOptions;
-import co.elastic.clients.elasticsearch._types.SortOrder;
+import co.elastic.clients.elasticsearch._types.Time;
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
-import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
+import co.elastic.clients.elasticsearch._types.aggregations.AggregationBuilders;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
-import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.TermQuery;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.json.JsonData;
-import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.diaowen.dwsurvey.config.ESClientConfig;
-import net.diaowen.dwsurvey.entity.es.DwEsSurveyAnswer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -93,7 +87,7 @@ public class ESClientService {
         SearchResponse<ObjectNode> searchResponse = elasticsearchClient.search(s -> s.index("products").query(q -> q.bool(b -> b.must(byName).must(byMaxPrice))), ObjectNode.class);
         */
         int maxResultNum = 10000;
-        if ((from+size)>maxResultNum) from = maxResultNum-size;
+        if ((from+size)>maxResultNum) from = maxResultNum-size; // 防止超过1万
         int queryFrom = from;
         SearchResponse<TDocument> response = elasticsearchClient.search(s -> s.index(indexName).query(query).from(queryFrom).size(size).sort(sortOptions), tDocumentClass);
 //        response.took() //用时
@@ -108,7 +102,7 @@ public class ESClientService {
         return response;
     }
 
-    public  <TDocument> SearchResponse<TDocument> findPageByScroll(String indexName, Query query, int from, int size, Class<TDocument> tDocumentClass) throws IOException {
+    public  <TDocument> SearchResponse<TDocument> findPageByScroll(String indexName, Query query, int size, Class<TDocument> tDocumentClass) throws IOException {
        /*
        SearchRequest.Builder searchRequest = new SearchRequest.Builder();
         searchRequest.query(q -> q.matchAll(m -> m));
@@ -131,10 +125,7 @@ public class ESClientService {
         Query byMaxPrice = RangeQuery.of(r -> r.field("price").gte(JsonData.of(maxPrice)))._toQuery();
         SearchResponse<ObjectNode> searchResponse = elasticsearchClient.search(s -> s.index("products").query(q -> q.bool(b -> b.must(byName).must(byMaxPrice))), ObjectNode.class);
         */
-        int maxResultNum = 10000;
-        if ((from+size)>maxResultNum) from = maxResultNum-size;
-        int queryFrom = from;
-        SearchResponse<TDocument> response = elasticsearchClient.search(s -> s.index(indexName).query(query).from(queryFrom).size(size), tDocumentClass);
+        SearchResponse<TDocument> response = elasticsearchClient.search(s -> s.index(indexName).query(query).size(size).scroll(Time.of(t -> t.time("5m"))), tDocumentClass);
 //        response.took() //用时
         List<Hit<TDocument>> hits = response.hits().hits();
         /*for (Hit<TDocument> hit: hits) {
@@ -147,10 +138,32 @@ public class ESClientService {
         return response;
     }
 
+    public  <TDocument> SearchResponse<TDocument> findPageByScrollId(String scrollId, Class<TDocument> tDocumentClass) throws IOException {
+//        SearchResponse<TDocument> response = elasticsearchClient.search(s -> s.index(indexName).query(query).size(size).scroll(Time.of(t -> t.time("5m"))), tDocumentClass);
+        SearchResponse<TDocument> response = elasticsearchClient.scroll(s->s.scrollId(scrollId), tDocumentClass);
+        return response;
+    }
+
     public <TDocument> GetResponse<TDocument> getDocById(String indexName, String id, Class<TDocument> tDocumentClass) throws IOException {
 //        Reader input = new StringReader(docJson);
         return elasticsearchClient.get(g -> g.index(indexName).id(id), tDocumentClass);
     }
 
+
+    public long getCount(String indexName, Query query) throws IOException {
+        CountRequest request = CountRequest.of(i -> i.index(indexName).query(query));
+        return elasticsearchClient.count(request).count();
+    }
+
+    public Map<String, Aggregate> aggregationSearch(String indexName, Query query, Map<String, Aggregation> aggKeyMaps) {
+        try {
+//            "count_level", a -> a.terms(t -> t.field(aggFieldName)
+            SearchResponse<Void> response = elasticsearchClient.search(s -> s.index(indexName).query(query).aggregations(aggKeyMaps), Void.class);
+            logger.debug("response.hits().total().value() {}", response.hits().total().value());
+            return response.aggregations();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

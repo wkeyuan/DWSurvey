@@ -7,6 +7,7 @@ import net.diaowen.common.plugs.httpclient.PageResult;
 import net.diaowen.dwsurvey.common.DesignSurveyToolbarTab;
 import net.diaowen.dwsurvey.common.DesignSurveyToolbarTabQu;
 import net.diaowen.dwsurvey.entity.*;
+import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.SurveyJsonManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class DwDeisgnSurveyController {
 
     @Autowired
     private SurveyJsonManager surveyJsonManager;
+    @Autowired
+    private SurveyDirectoryManager surveyDirectoryManager;
 
     /**
      * 拉取问卷支持的题型
@@ -171,6 +174,24 @@ public class DwDeisgnSurveyController {
         return HttpResult.SUCCESS(tabQus1);
     }
 
+
+    /**
+     * 获取问卷
+     * @param surveyId
+     * @return
+     */
+    @RequestMapping(value = "/survey-json-by-survey-id.do",method = RequestMethod.GET)
+    @ResponseBody
+    public HttpResult surveyJsonBySurveyId(@RequestParam String surveyId){
+        // 针对答卷场景需要考虑这些数据通过静态缓存获取。
+        SurveyJson surveyJson = surveyJsonManager.findBySurveyId(surveyId);
+        if (surveyJson==null) {
+            SurveyDirectory survey = surveyDirectoryManager.getSurveyBySid(surveyId);
+            if (survey!=null) surveyId = survey.getId();
+            surveyJson = surveyJsonManager.findBySurveyId(surveyId);
+        }
+        return HttpResult.SUCCESS(surveyJson);
+    }
 
     @RequestMapping(value = "/save-survey-json.do",method = RequestMethod.POST)
     @ResponseBody

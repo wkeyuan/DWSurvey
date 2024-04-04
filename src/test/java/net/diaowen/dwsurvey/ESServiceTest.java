@@ -6,7 +6,7 @@ import net.diaowen.common.plugs.es.DwAnswerEsClientService;
 import net.diaowen.common.plugs.es.ESService;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.dwsurvey.config.ESClientConfig;
-import net.diaowen.dwsurvey.entity.es.DwEsSurveyAnswer;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

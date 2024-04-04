@@ -25,7 +25,7 @@ import net.diaowen.common.utils.ReflectionUtils;
  * 2.封装Apache Commons BeanUtils, 将字符串转换为对象.
  *
  */
-public abstract class ObjectMapper {
+public class ObjectMapper {
 
 	/**
 	 * 持有Dozer单例, 避免重复创建DozerMapper消耗资源.

@@ -54,7 +54,7 @@ public class ESClientConfig {
     private String apikey;
 //    @Setter
 //    private String certName;
-    private static String CERT_NAME = "dw-es01.crt";
+    private static String CERT_NAME = "http_ca.crt";
 
     @PostConstruct
     private void init() {

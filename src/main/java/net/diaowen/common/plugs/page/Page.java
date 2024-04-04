@@ -215,4 +215,14 @@ public class Page<T> extends PageRequest implements Iterable<T> {
 		}
 		this.result.add(resultItem);
 	}
+
+	private String scrollId;
+
+	public String getScrollId() {
+		return scrollId;
+	}
+
+	public void setScrollId(String scrollId) {
+		this.scrollId = scrollId;
+	}
 }

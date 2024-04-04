@@ -29,6 +29,9 @@ dwsurvey:
     server:
       token: xxx
       encodingAESKey:
+  file-storage:
+    prefix:  #路径前缀，方便给所有资源加上统一的路径，如：/dws-storage
+    type: local #存储方式 local=本地存储（会存储在dwsurvey.web.file-path），yun=使用云存储（默认提供阿里云存储实现,注意配置OSS BUCKET 跨域访问）
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
     info: DWSurvey OSS V5.2.6 Boot
@@ -120,13 +123,13 @@ logging:
   # 日志级别，具体大家可以根据实际情况来调整
   level:
     net:
-      diaowen: INFO
+      diaowen: DEBUG
     org:
       hibernate: ERROR
       apache: ERROR
 elasticsearch:
   username: elastic
-  passwd: rKFY7=i-QgCu*Rufbu2H
-  apikey: eyJ2ZXIiOiI4LjguMSIsImFkciI6WyIxOTIuMTY4LjUuMjo5MjAwIl0sImZnciI6ImZmMTQ0YTlhMDI4YzM3MjYwMjc5NWVhOTA0ZDYwMzM5ODg0MTEwNzZlOTMzNTU2YzcxMGE2OWFjNGYyZDAzNDgiLCJrZXkiOiJDUDBQQVlrQi1qQXBIU3E2Vk1CMDpDXzdLTk9odVJtcWVKWjgwUEkwdWVRIn0=
-  hosts: localhost:9200 # 多个IP逗号隔开
+  passwd: KWAkyvx0ewXTY3Cqv0H2
+  apikey: ==
+  hosts: 127.0.0.1:9200 # 多个IP逗号隔开
 #  cert-name: http_ca.crt

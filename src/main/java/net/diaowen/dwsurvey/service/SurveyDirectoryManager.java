@@ -7,6 +7,7 @@ import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.service.BaseService;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 问卷处理
@@ -91,5 +92,9 @@ public interface SurveyDirectoryManager extends BaseService<SurveyDirectory, Str
 	public void delete(String[] id);
 
 	void upSurveyState(String surveyId, Integer surveyState) throws IOException;
+
+    public List<SurveyDirectory> upAnQuNum(List<SurveyDirectory> surveyDirectoryList);
+
+    public SurveyDirectory upAnQuNum(SurveyDirectory survey);
 
 }

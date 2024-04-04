@@ -25,6 +25,9 @@ public class DWSurveyConfig {
     public static String DWSURVEY_WEB_INFO_SITE_MAIL = null;
     public static String DWSURVEY_WEB_INFO_SITE_PHONE = null;
 
+    public static String DWSURVEY_FILE_STORAGE_PREFIX = null;
+
+    public static String DWSURVEY_FILE_STORAGE_TYPE = null;
 
     @Value("${dwsurvey.web.file-path}")
     public void setWebFilePath(String webFilePath) {
@@ -103,4 +106,15 @@ public class DWSurveyConfig {
 
     @Value("${dwsurvey.web.info.site-phone}")
     public void setDwsurveyWebInfoSitePhone(String dwsurveyWebInfoSitePhone) { DWSURVEY_WEB_INFO_SITE_PHONE = dwsurveyWebInfoSitePhone; }
+
+
+    @Value("${dwsurvey.file-storage.prefix}")
+    public void setDwsurveyFileStoragePrefix(String dwsurveyFileStoragePrefix) {
+        DWSURVEY_FILE_STORAGE_PREFIX = dwsurveyFileStoragePrefix;
+    }
+
+    @Value("${dwsurvey.file-storage.type}")
+    public void setDwsurveyFileStorageType(String dwsurveyFileStorageType) {
+        DWSURVEY_FILE_STORAGE_TYPE = dwsurveyFileStorageType;
+    }
 }

@@ -11,6 +11,7 @@ public class SurveyAnswerJson extends IdEntity {
 
     //问卷ID
     private String surveyId;
+    private String sid;
     //所属答卷ID
     private String answerId;
     //text-答卷JSON信息
@@ -77,5 +78,13 @@ public class SurveyAnswerJson extends IdEntity {
 
     public void setJsonVersion(Integer jsonVersion) {
         this.jsonVersion = jsonVersion;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 }
