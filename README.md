@@ -19,6 +19,15 @@ DWSurvey是一款简单、高效、成熟、稳定、专业的开源问卷系统
 <p><strong>原版本：<a href="https://ent.surveyform.cn">https://ent.surveyform.cn</a></strong></p>
 </div>
 </div>
+
+<div style="padding: 10px;border-left:solid 6px #278bee;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
+<div style="font-weight: 600;padding: 10px;"> 🎉🎉🎉  专业版 </div>
+<div>
+新一代的 <strong>专业版</strong> 即将发布，前端采用<strong>纯VUE实现</strong>（Element）、后端使用 Spring Boot、Elasticsearch，敬请关注
+<p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
+</div>
+</div>
+
 <hr/>
 <div style="padding: 10px;border-left:solid 6px #42b983;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
 <div style="font-weight: 600;padding: 10px;"> ☀️☀️☀️  社区版 </div>
