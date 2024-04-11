@@ -10,22 +10,22 @@
 DWSurvey是一款简单、高效、成熟、稳定、专业的开源问卷系统，自2012年启动至今经过9年的积累，已经形成一套完善的基于 JAVA WEB 的开源问卷表单解决方案。
 
 <div style="padding: 10px;border-left:solid 6px #278bee;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
-<div style="font-weight: 600;padding: 10px;"> 🎉🎉🎉  企业版 </div>
+<div style="font-weight: 600;padding: 10px;color: #278bee;"> 🎉🎉🎉  企业版 </div>
 <div>
 全新的 <strong>企业版</strong> 已经发布，前后端分别采用 React（Ant design）、VUE（Element）、Spring Boot，详情可前往体验
 <p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
 <p><strong>企业版体验地址</strong></p>
 <p><strong>新版本：<a href="https://element-ent.surveyform.cn">https://element-ent.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
-<p><strong>原版本：<a href="https://ent.surveyform.cn">https://ent.surveyform.cn</a></strong></p>
 </div>
 </div>
 <hr/>
 
-<div style="padding: 10px;border-left:solid 6px #278bee;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
-<div style="font-weight: 600;padding: 10px;"> 🎉🎉🎉  专业版 </div>
+<div style="padding: 10px;border-left:solid 6px #9211dc;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
+<div style="font-weight: 600;padding: 10px;color: #9211dc;"> 🎉🎉🎉  专业版 </div>
 <div>
-新一代的 <strong>专业版</strong> 即将发布，前端采用<strong>纯VUE实现</strong>（Element）、后端使用 Spring Boot、Elasticsearch，敬请关注
+新一代的 <strong>专业版</strong> 已经发布，前端采用<strong>纯VUE实现</strong>（ElementUI）、后端使用 Spring Boot、Elasticsearch，敬请关注
 <p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
+<p><strong>新版本：<a href="https://pro.surveyform.cn">https://pro.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
 </div>
 </div>
 
