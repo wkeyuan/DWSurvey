@@ -7,9 +7,9 @@ dwsurvey:
     # 使用哪种部署模式，后期可能会去掉，可以先保持默认
     static-type: static
     # 站点访问地址，如果配置有域名则为域名地址
-    site-url: http://localhost:8081
+    site-url: http://192.168.3.32:8081
     # 资源访问地址，便于存储模式的切换，目前可以保持与site-url一样
-    resource-url: http://localhost:8080
+    resource-url: http://192.168.3.32:8080
     # 站点信息配置，会出现在底部footer区
     info:
       # 站点名称
@@ -34,9 +34,9 @@ dwsurvey:
     type: local #存储方式 local=本地存储（会存储在dwsurvey.web.file-path），yun=使用云存储（默认提供阿里云存储实现,注意配置OSS BUCKET 跨域访问）
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
-    info: DWSurvey OSS V5.2.6 Boot
-    number: OSS V5.2.6
-    built: 2022/03/17
+    info: DWSurvey Pro V6.0 202404
+    number: OSS V6.0 202404
+    built: 2024/04/11
 # 服务占用的端口号
 server:
   port: 8080

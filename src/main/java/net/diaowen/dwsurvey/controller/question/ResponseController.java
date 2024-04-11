@@ -484,7 +484,7 @@ public class ResponseController {
 
 	//回答问卷的二维码
 	@RequestMapping("/answerTD.do")
-	public String answerTD(HttpServletRequest request,HttpServletResponse response,String surveyId,String sid) throws Exception{
+	public String answerTD(HttpServletRequest request,HttpServletResponse response,String surveyId,String sid, String version) throws Exception{
 		String WEB_SITE_URL = DWSurveyConfig.DWSURVEY_WEB_SITE_URL;
 		String down=request.getParameter("down");
 		String ruleCode = request.getParameter("ruleCode");
@@ -501,9 +501,13 @@ public class ResponseController {
 		if(StringUtils.isNotEmpty(sid)){
 			encoderContent = baseUrl+"/static/diaowen/answer-m.html?sid="+sid;
 		}
+		if ("v6".equals(version)) {
+			encoderContent = baseUrl + "/#/dw-v6/diaowen/"+sid;
+		}
 		if(StringUtils.isNotEmpty(ruleCode)){
 			encoderContent+="&ruleCode="+ruleCode;
 		}
+		System.out.println("encoderContent:"+encoderContent);
 		ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
 		BufferedImage twoDimensionImg = ZxingUtil.qRCodeCommon(encoderContent, "jpg", 16);
 		ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);

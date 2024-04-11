@@ -3,27 +3,31 @@ dwsurvey:
   web:
     file-path: diaowen/file/
     static-type: static
-    site-url: http://localhost:8080
-    resource-url: http://localhost:8080
+    site-url: https://pro.surveyform.cn
+    resource-url: https://pro.surveyform.cn
     #    site-url: http://ent82.surveyform.cn
     info:
       site-name: 调问网
-      site-url: http://www.diaowen.net
+      site-url: https://www.diaowen.net
       site-icp: 京ICP备13050030号-3
       site-mail: service@diaowen.net
-      site-phone: 18888888888
+      site-phone: 158 0152 6771
   weixin:
     app-id: xxx
     app-secret: xxx
     server:
       token: xxx
       encodingAESKey:
+  file-storage:
+    prefix:  #路径前缀，方便给所有资源加上统一的路径，如：/dws-storage
+    type: local #存储方式 local=本地存储（会存储在dwsurvey.web.file-path），yun=使用云存储（默认提供阿里云存储实现,注意配置OSS BUCKET 跨域访问）
+  # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
-    info: DWSurvey OSS V5.2.6 Boot
-    number: OSS V5.2.6
-    built: 2022/03/17
+    info: DWSurvey Pro V6.0 202404
+    number: OSS V6.0 202404
+    built: 2024/04/11
 server:
-  port: 8080
+  port: 80
 
 spring:
   jackson:
@@ -36,7 +40,7 @@ spring:
 
   datasource:
     #type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/dwsurvey_21test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/dwsurvey_pro?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456,.
     type: com.alibaba.druid.pool.DruidDataSource
@@ -98,3 +102,8 @@ logging:
     org:
       hibernate: ERROR
       apache: ERROR
+elasticsearch:
+  username: elastic
+  passwd: KWAkyvx0ewXTY3Cqv0H2
+  apikey: ==
+  hosts: 127.0.0.1:9200 # 多个IP逗号隔开
