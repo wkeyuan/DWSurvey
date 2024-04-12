@@ -166,4 +166,13 @@ public class ESClientService {
         }
     }
 
+    public DeleteResponse deleteById(String indexName, String esId) throws IOException {
+        DeleteRequest request = DeleteRequest.of(i -> i.index(indexName).id(esId));
+        return elasticsearchClient.delete(request);
+    }
+
+    public DeleteByQueryResponse deleteByQuery(String indexName, Query query) throws IOException {
+        DeleteByQueryRequest deleteByQueryRequest = DeleteByQueryRequest.of(i -> i.index(indexName).query(query));
+        return elasticsearchClient.deleteByQuery(deleteByQueryRequest);
+    }
 }

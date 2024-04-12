@@ -348,4 +348,20 @@ public class DwAnswerEsClientService {
         }
         return dwEsSurveyAnswerAnOptionList;
     }
+
+    public void deleteById(String esId) throws IOException {
+        esClientService.deleteById(ANSWER_INDEX_NAME, esId);
+        List<Query> queryList = new ArrayList<>();
+        queryList.add(TermQuery.of(b -> b.field("relateAnswerResponseId").value(esId))._toQuery());
+        Query query = Query.of(b -> b.bool(c -> c.must(queryList)));
+        esClientService.deleteByQuery(ANSWER_INDEX_NAME_AGG, query);
+    }
+
+    public void deleteByIds(String[] ids) throws IOException {
+        if (ids!=null) {
+            for (int i=0; i<ids.length; i++) {
+                deleteById(ids[i]);
+            }
+        }
+    }
 }

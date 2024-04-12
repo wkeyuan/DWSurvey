@@ -1,6 +1,9 @@
 package net.diaowen.dwsurvey.controller.design.admin;
 
 import co.elastic.clients.elasticsearch.nodes.Http;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.diaowen.common.CheckType;
 import net.diaowen.common.QuType;
 import net.diaowen.common.base.entity.User;
@@ -267,6 +270,18 @@ public class DwDeisgnSurveyController {
             String surveyId = surveyJson.getSurveyId();
             SurveyDirectory survey = surveyDirectoryManager.getSurvey(surveyId);
             if(!userId.equals(survey.getUserId())) return HttpResult.FAILURE_MSG("未登录或没有相应数据权限");
+            // 同步更新问卷标题
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                JsonNode surveyJsonSimpleNode = objectMapper.readTree(surveyJson.getSurveyJsonSimple());
+                if (surveyJsonSimpleNode.has("surveyNameObj")){
+                    String surveyText = surveyJsonSimpleNode.get("surveyNameObj").get("dwText").asText();
+                    survey.setSurveyName(surveyText);
+                    surveyDirectoryManager.save(survey);
+                }
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
             surveyJsonManager.saveNew(surveyJson);
             return HttpResult.SUCCESS();
         }

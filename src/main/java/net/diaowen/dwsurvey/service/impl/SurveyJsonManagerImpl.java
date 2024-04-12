@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,6 +80,7 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 		return devSurveyJson(surveyId);
 	}
 
+	@Transactional
 	public String devSurveyJson(String surveyId) {
 		try {
 			Date date = new Date();
@@ -86,6 +88,8 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 			ObjectMapper objectMapper = new ObjectMapper();
 			// 发布时生成版本号
 			SurveyDirectory survey = surveyManager.findUniqueBy(surveyId);
+			survey.setSurveyState(1);
+			surveyManager.save(survey);
 			SurveyJson surveyJson = findBySurveyId(surveyId);
 			String sId = survey.getSid();
 			ObjectMapper mapper = new ObjectMapper();

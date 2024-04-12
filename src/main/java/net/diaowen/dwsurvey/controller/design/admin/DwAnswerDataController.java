@@ -27,6 +27,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -87,5 +88,23 @@ public class DwAnswerDataController {
             return HttpResult.FAILURE_MSG(e.getMessage());
         }
         return null;
+    }
+
+    @RequestMapping(value = "/delete-answer.do",method = RequestMethod.DELETE)
+    @ResponseBody
+    public HttpResult deleteAnswer(@RequestBody Map<String, String[]> map){
+        try {
+            if (map!=null && map.containsKey("id")) {
+                String[] ids = map.get("id");
+                logger.debug("deleteAnswer esid {}", ids);
+                dwAnswerEsClientService.deleteByIds(ids);
+                return HttpResult.SUCCESS();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            return HttpResult.EXCEPTION(e.getMessage());
+        }
+        return HttpResult.FAILURE();
     }
 }
