@@ -234,7 +234,7 @@ public class DwAnswerEsClientService {
                 if (StringUtils.isNotEmpty(ipAddr)) queryList.add(Query.of(b -> b.term( c -> c.field("answerCommon.anIp.ip").value(ipAddr))));
                 Query query = Query.of(b -> b.bool(c -> c.must(queryList)));
                 long count = esClientService.getCount(ANSWER_INDEX_NAME,query);
-                logger.info("getCount surveyId {} {} {}", surveyId, ipAddr, count);
+//                logger.info("getCount surveyId {} {} {}", surveyId, ipAddr, count);
                 return count;
             }
         } catch (IOException e) {

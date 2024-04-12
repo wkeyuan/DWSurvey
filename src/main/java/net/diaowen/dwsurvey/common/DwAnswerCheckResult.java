@@ -123,6 +123,9 @@ public class DwAnswerCheckResult {
     public static DwAnswerCheckResult CHECK401 = new DwAnswerCheckResult(false, 401,"已经答过，请不要重复作答", "超过单个终端限制次数");//终端答卷次数
     public static DwAnswerCheckResult CHECK402 = new DwAnswerCheckResult(false, 402,"超过答卷次数限制", "超过单个IP限制次数");//
     public static DwAnswerCheckResult CHECK403 = new DwAnswerCheckResult(false, 403,"答卷密码错误", "答卷密码错误");//
+    public static DwAnswerCheckResult CHECK404 = new DwAnswerCheckResult(false, 404,"问卷已经删除", "问卷已经删除");//
+    public static DwAnswerCheckResult CHECK405 = new DwAnswerCheckResult(false, 404,"问卷未开启", "问卷未开启");//
+
 
     // >=500 错误级别
     public static DwAnswerCheckResult CHECK500 = new DwAnswerCheckResult(false, 500,"没有对应的问卷", "没有在数据库中找到您需要的问卷信息，请确认更正后再访问");//

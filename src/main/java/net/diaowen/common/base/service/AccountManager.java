@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.diaowen.common.base.entity.User;
+import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -78,6 +79,8 @@ public class AccountManager {
 	public boolean updatePwd(String curpwd, String newPwd) {
 		User user = getCurUser();
 		if(user!=null){
+			// demo模式不可以修改
+			if ("demo".equals(DWSurveyConfig.DWSURVEY_SITE) && user.getId().equals("1"))  return false;
 			if(curpwd!=null && newPwd!=null){
 				//判断是否有重复用户
 				String curShaPassword = DigestUtils.sha1Hex(curpwd);

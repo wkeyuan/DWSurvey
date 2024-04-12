@@ -98,7 +98,6 @@ public class SimpleHibernateDao<T, ID extends Serializable> implements ISimpleHi
 		try {
 			AssertUtils.notNull(entity, "entity不能为空");
 			getSession().saveOrUpdate(entity);
-			logger.debug("save entity: {}", entity);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

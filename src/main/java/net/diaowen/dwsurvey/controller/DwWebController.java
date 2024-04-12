@@ -42,6 +42,7 @@ public class DwWebController {
             footerInfo.setSiteMail(DWSurveyConfig.DWSURVEY_WEB_INFO_SITE_MAIL);
             footerInfo.setSitePhone(DWSurveyConfig.DWSURVEY_WEB_INFO_SITE_PHONE);
             footerInfo.setYears("2012-"+new SimpleDateFormat("yyyy").format(new Date()));
+            footerInfo.setSiteStatus(DWSurveyConfig.DWSURVEY_SITE);
             User user = accountManager.getCurUser();
             if(user!=null){
                 //登录用户返回带版本号

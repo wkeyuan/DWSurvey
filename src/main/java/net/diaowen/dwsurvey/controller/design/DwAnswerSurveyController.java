@@ -249,6 +249,18 @@ public class DwAnswerSurveyController {
         ObjectMapper objectMapper = new ObjectMapper();
         DwAnswerCheckResult answerCheckResult = new DwAnswerCheckResult();
         try {
+            SurveyDirectory survey = surveyDirectoryManager.getSurvey(surveyId);
+
+            if(survey==null || survey.getVisibility()!=1){
+                answerCheckResult.buildResult(DwAnswerCheckResult.CHECK404);
+                return answerCheckResult;
+            }
+
+            if (survey.getSurveyState() != 1 ) {
+                answerCheckResult.buildResult(DwAnswerCheckResult.CHECK405);
+                return answerCheckResult;
+            }
+
             logger.debug("surveyJsonSimple {}", JSON.toJSONString(surveyJsonSimple));
             JsonNode surveyJsonNode = objectMapper.readTree(surveyJsonSimple);
             logger.debug(JSON.toJSONString(surveyJsonNode));
