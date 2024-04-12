@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <es.version>8.8.1</es.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <repositories>

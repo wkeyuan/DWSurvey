@@ -142,7 +142,7 @@ public class DwDeisgnSurveyController {
 
         List<Question> questions13 = new ArrayList<Question>();
         questions13.add(new Question(QuType.PAGETAG,null, null));
-        questions13.add(new Question(QuType.PARAGRAPH, null, null));
+        questions13.add(new Question(QuType.PARAGRAPH, "请输入段落标题", "请输入段落标题"));
 
         List<DesignSurveyToolbarTab> tabs = new ArrayList<>();
         List<DesignSurveyToolbarTabQu> tabQus1 = new ArrayList<>();
