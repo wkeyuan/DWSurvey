@@ -63,8 +63,8 @@ public class SurveyDirectory extends IdEntity{
 	private String htmlPath;
 	private String jsonPath;
 
-	// 问卷=null或survey
-	private String surveyType;
+	// 问卷=null或0,360测评=1
+	private Integer surveyType;
 
 	public String getParentId() {
 		return parentId;
@@ -249,11 +249,11 @@ public class SurveyDirectory extends IdEntity{
 		this.excerptNum = excerptNum;
 	}
 
-	public String getSurveyType() {
+	public Integer getSurveyType() {
 		return surveyType;
 	}
 
-	public void setSurveyType(String surveyType) {
+	public void setSurveyType(Integer surveyType) {
 		this.surveyType = surveyType;
 	}
 
