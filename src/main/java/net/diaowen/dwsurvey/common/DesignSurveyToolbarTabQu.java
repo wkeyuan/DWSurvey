@@ -14,8 +14,6 @@ public class DesignSurveyToolbarTabQu {
     // 默认drag 或 click，
     private String eventType;
 
-    private String dwBtnIconClass;
-
     public DesignSurveyToolbarTabQu() {
 
     }
@@ -25,11 +23,10 @@ public class DesignSurveyToolbarTabQu {
         this.questions = questions;
     }
 
-    public DesignSurveyToolbarTabQu(String tabQuName, List<Question> questions, String eventType, String dwBtnIconClass) {
+    public DesignSurveyToolbarTabQu(String tabQuName, List<Question> questions, String eventType) {
         this.tabQuName = tabQuName;
         this.questions = questions;
         this.eventType = eventType;
-        this.dwBtnIconClass = dwBtnIconClass;
     }
 
     public List<Question> getQuestions() {
@@ -54,14 +51,6 @@ public class DesignSurveyToolbarTabQu {
 
     public void setEventType(String eventType) {
         this.eventType = eventType;
-    }
-
-    public String getDwBtnIconClass() {
-        return dwBtnIconClass;
-    }
-
-    public void setDwBtnIconClass(String dwBtnIconClass) {
-        this.dwBtnIconClass = dwBtnIconClass;
     }
 
 }

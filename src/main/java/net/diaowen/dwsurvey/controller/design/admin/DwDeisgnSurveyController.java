@@ -153,9 +153,9 @@ public class DwDeisgnSurveyController {
         tabQus1.add(new DesignSurveyToolbarTabQu("常用题",questions12));
         tabQus1.add(new DesignSurveyToolbarTabQu("辅助组件",questions13));
 
-//        List<Question> questionsClick = new ArrayList<Question>();
+        List<Question> questionsClick = new ArrayList<Question>();
 //        questions13.add(new Question());
-//        tabQus1.add(new DesignSurveyToolbarTabQu("功能配置",questionsClick, "", ""));
+        tabQus1.add(new DesignSurveyToolbarTabQu("功能配置",questionsClick, ""));
 
         List<DesignSurveyToolbarTabQu> tabQus2 = new ArrayList<>();
         tabQus2.add(new DesignSurveyToolbarTabQu("基本题型",questions11));
