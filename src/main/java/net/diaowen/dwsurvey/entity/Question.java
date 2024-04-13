@@ -454,11 +454,21 @@ public class Question extends IdEntity{
 
 	private String dwsurveyfont = null;
 	@Transient
+	private String eventName = null;
+	@Transient
 	public String getDwsurveyfont() {
 		return dwsurveyfont;
 	}
 
 	public void setDwsurveyfont(String dwsurveyfont) {
 		this.dwsurveyfont = dwsurveyfont;
+	}
+
+	public String getEventName() {
+		return eventName;
+	}
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 }
