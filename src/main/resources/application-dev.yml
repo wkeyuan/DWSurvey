@@ -34,8 +34,8 @@ dwsurvey:
     type: local #存储方式 local=本地存储（会存储在dwsurvey.web.file-path），yun=使用云存储（默认提供阿里云存储实现,注意配置OSS BUCKET 跨域访问）
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
-    info: DWSurvey Pro V6.0.20240411
-    number: Pro V6.0.20240411
+    info: DWSurvey Pro V6.1.20240411
+    number: Pro V6.1.20240411
     built: 2024/04/11
 # 服务占用的端口号
 server:
