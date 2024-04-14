@@ -17,6 +17,8 @@ public class FooterInfo {
 
     private String siteStatus;
 
+    private String layoutType;
+
     public String getVersionInfo() {
         return versionInfo;
     }
@@ -95,5 +97,13 @@ public class FooterInfo {
 
     public void setSiteStatus(String siteStatus) {
         this.siteStatus = siteStatus;
+    }
+
+    public String getLayoutType() {
+        return layoutType;
+    }
+
+    public void setLayoutType(String layoutType) {
+        this.layoutType = layoutType;
     }
 }
