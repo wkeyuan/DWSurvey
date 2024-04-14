@@ -79,9 +79,11 @@ public class DwAnswerSurveyController {
         DwSurveyAnswerResult dwSurveyAnswerResult = new DwSurveyAnswerResult();
         DwAnswerCheckResult dwAnswerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd);
         surveyJson = getSurveyJsonResult(dwAnswerCheckResult, surveyJson);
-        dwSurveyAnswerResult.setSurveyJson(surveyJson);
+        if (surveyJson!=null) {
+            dwSurveyAnswerResult.setSurveyJson(surveyJson);
+            surveyBgTimeInit(request,response,sid);
+        }
         dwSurveyAnswerResult.setAnswerCheckResult(dwAnswerCheckResult);
-        surveyBgTimeInit(request,response,sid);
         return HttpResult.SUCCESS(dwSurveyAnswerResult);
     }
 
@@ -211,31 +213,35 @@ public class DwAnswerSurveyController {
 
     private SurveyJson getSurveyJsonResult(DwAnswerCheckResult answerCheckResult, SurveyJson surveyJson) {
         // 返回的时候处理一下anPwdCode
-        String surveyJsonSimple = surveyJson.getSurveyJsonSimple();
-        String surveyJsonText = surveyJson.getSurveyJsonText();
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            JsonNode surveyJsonSimpleNode = objectMapper.readTree(surveyJsonSimple);
-            JsonNode surveyJsonTextNode = objectMapper.readTree(surveyJsonText);
-            if (surveyJsonSimpleNode.has("surveyAttrs")) {
-                if (surveyJsonSimpleNode.get("surveyAttrs").has("anPwdAttr")) {
-                    JsonNode anPwdAttr1 = surveyJsonSimpleNode.get("surveyAttrs").get("anPwdAttr");
-                    ((ObjectNode) anPwdAttr1).put("anPwdCode", "");
-                    JsonNode anPwdAttr2 = surveyJsonTextNode.get("surveyAttrs").get("anPwdAttr");
-                    ((ObjectNode) anPwdAttr2).put("anPwdCode", "");
+        if (surveyJson!=null) {
+            String surveyJsonSimple = surveyJson.getSurveyJsonSimple();
+            String surveyJsonText = surveyJson.getSurveyJsonText();
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                JsonNode surveyJsonSimpleNode = objectMapper.readTree(surveyJsonSimple);
+                JsonNode surveyJsonTextNode = objectMapper.readTree(surveyJsonText);
+                if (surveyJsonSimpleNode.has("surveyAttrs")) {
+                    if (surveyJsonSimpleNode.get("surveyAttrs").has("anPwdAttr")) {
+                        JsonNode anPwdAttr1 = surveyJsonSimpleNode.get("surveyAttrs").get("anPwdAttr");
+                        ((ObjectNode) anPwdAttr1).put("anPwdCode", "");
+                        JsonNode anPwdAttr2 = surveyJsonTextNode.get("surveyAttrs").get("anPwdAttr");
+                        ((ObjectNode) anPwdAttr2).put("anPwdCode", "");
+                    }
                 }
+                surveyJson.setSurveyJsonSimple(objectMapper.writeValueAsString(surveyJsonSimpleNode));
+                surveyJson.setSurveyJsonText(objectMapper.writeValueAsString(surveyJsonTextNode));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
             }
-            surveyJson.setSurveyJsonSimple(objectMapper.writeValueAsString(surveyJsonSimpleNode));
-            surveyJson.setSurveyJsonText(objectMapper.writeValueAsString(surveyJsonTextNode));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
 
-        if (!answerCheckResult.isAnCheckIsPass() && answerCheckResult.getAnCheckResultCode()!=403) {
-            SurveyJson tempSurveyJson = new SurveyJson();
-            tempSurveyJson.setSurveyJsonText(surveyJson.getSurveyJsonSimple());
-            tempSurveyJson.setSurveyId(surveyJson.getSurveyId());
-            return tempSurveyJson;
+            if (!answerCheckResult.isAnCheckIsPass() && answerCheckResult.getAnCheckResultCode()!=403) {
+                SurveyJson tempSurveyJson = new SurveyJson();
+                tempSurveyJson.setSurveyJsonText(surveyJson.getSurveyJsonSimple());
+                tempSurveyJson.setSurveyId(surveyJson.getSurveyId());
+                return tempSurveyJson;
+            }
+        } else {
+            answerCheckResult.buildResult(DwAnswerCheckResult.CHECK406);
         }
         return surveyJson;
     }

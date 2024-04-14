@@ -124,7 +124,8 @@ public class DwAnswerCheckResult {
     public static DwAnswerCheckResult CHECK402 = new DwAnswerCheckResult(false, 402,"超过答卷次数限制", "超过单个IP限制次数");//
     public static DwAnswerCheckResult CHECK403 = new DwAnswerCheckResult(false, 403,"答卷密码错误", "答卷密码错误");//
     public static DwAnswerCheckResult CHECK404 = new DwAnswerCheckResult(false, 404,"问卷已经删除", "问卷已经删除");//
-    public static DwAnswerCheckResult CHECK405 = new DwAnswerCheckResult(false, 404,"问卷未开启", "问卷未开启");//
+    public static DwAnswerCheckResult CHECK405 = new DwAnswerCheckResult(false, 405,"问卷未开启", "问卷未开启");//
+    public static DwAnswerCheckResult CHECK406 = new DwAnswerCheckResult(false, 406,"没有问卷的发布数据", "没有问卷的发布数据");//
 
 
     // >=500 错误级别
