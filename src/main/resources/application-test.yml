@@ -29,6 +29,17 @@ dwsurvey:
     server:
       token: xxx
       encodingAESKey:
+  file-storage:
+    prefix:  #路径前缀，方便给所有资源加上统一的路径，如：/dws-storage
+    type: local #存储方式 local=本地存储（会存储在dwsurvey.web.file-path），yun=使用云存储（默认提供阿里云存储实现,注意配置OSS BUCKET 跨域访问）
+    aliyun:
+      endpoint: https://oss-cn-beijing.aliyuncs.com
+      access-keyid:
+      secret-accesskey:
+      bucket: # 注意打开云存方案的跨域权限
+        prefix: dwsurvey
+        web-pub: web-pub
+        web-pri: web-pri
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
     info: DWSurvey OSS V5.2.6 Boot

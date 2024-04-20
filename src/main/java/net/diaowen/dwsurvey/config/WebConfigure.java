@@ -1,5 +1,6 @@
 package net.diaowen.dwsurvey.config;
 
+import net.diaowen.common.plugs.filter.DwWebResourceFilter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -72,6 +73,15 @@ public class WebConfigure implements WebMvcConfigurer {
         return filterRegistrationBean;
     }
     */
+
+    @Bean
+    public FilterRegistrationBean registerWebFilterBean() {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        DwWebResourceFilter filter = new DwWebResourceFilter();
+        registrationBean.setFilter(filter);
+        registrationBean.addUrlPatterns("/webin/*");
+        return registrationBean;
+    }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //文件磁盘图片url 映射

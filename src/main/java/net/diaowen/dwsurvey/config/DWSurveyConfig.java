@@ -26,8 +26,17 @@ public class DWSurveyConfig {
     public static String DWSURVEY_WEB_INFO_SITE_PHONE = null;
 
     public static String DWSURVEY_FILE_STORAGE_PREFIX = null;
-
     public static String DWSURVEY_FILE_STORAGE_TYPE = null;
+
+    //云存储
+    public static String DWSURVEY_ALIYUN_ENDPOINT = "";
+    public static String DWSURVEY_ALIYUN_ACCESS_KEY_ID = "";
+    public static String DWSURVEY_ALIYUN_SECRET_ACCESS_KEY = "";
+    public static String DWSURVEY_ALIYUN_BUCKET_PREFIX = "";
+
+
+    public static String DWSURVEY_ALIYUN_WEB_PUBLIC_BUCKET = "web-pub";
+    public static String DWSURVEY_ALIYUN_WEB_PRIVATE_BUCKET  = "web-pri";
 
     @Value("${dwsurvey.web.file-path}")
     public void setWebFilePath(String webFilePath) {
@@ -116,5 +125,35 @@ public class DWSurveyConfig {
     @Value("${dwsurvey.file-storage.type}")
     public void setDwsurveyFileStorageType(String dwsurveyFileStorageType) {
         DWSURVEY_FILE_STORAGE_TYPE = dwsurveyFileStorageType;
+    }
+
+    @Value("${dwsurvey.file-storage.aliyun.endpoint}")
+    public void setDwsurveyAliyunEndpoint(String dwsurveyAliyunEndpoint) {
+        DWSURVEY_ALIYUN_ENDPOINT = dwsurveyAliyunEndpoint;
+    }
+
+    @Value("${dwsurvey.file-storage.aliyun.access-keyid}")
+    public void setDwsurveyAliyunAccessKeyId(String dwsurveyAliyunAccessKeyId) {
+        DWSURVEY_ALIYUN_ACCESS_KEY_ID = dwsurveyAliyunAccessKeyId;
+    }
+
+    @Value("${dwsurvey.file-storage.aliyun.secret-accesskey}")
+    public void setDwsurveyAliyunSecretAccessKey(String dwsurveyAliyunSecretAccessKey) {
+        DWSURVEY_ALIYUN_SECRET_ACCESS_KEY = dwsurveyAliyunSecretAccessKey;
+    }
+
+    @Value("${dwsurvey.file-storage.aliyun.bucket.prefix}")
+    public void setDwsurveyAliyunBucketPrefix(String dwsurveyAliyunBucketPrefix) {
+        DWSURVEY_ALIYUN_BUCKET_PREFIX = dwsurveyAliyunBucketPrefix;
+    }
+
+    @Value("${dwsurvey.file-storage.aliyun.bucket.web-pub}")
+    public void setDwsurveyAliyunWebPublicBucket(String dwsurveyAliyunWebPublicBucket) {
+        DWSURVEY_ALIYUN_WEB_PUBLIC_BUCKET = dwsurveyAliyunWebPublicBucket;
+    }
+
+    @Value("${dwsurvey.file-storage.aliyun.bucket.web-pri}")
+    public void setDwsurveyAliyunWebPrivateBucket(String dwsurveyAliyunWebPrivateBucket) {
+        DWSURVEY_ALIYUN_WEB_PRIVATE_BUCKET = dwsurveyAliyunWebPrivateBucket;
     }
 }
