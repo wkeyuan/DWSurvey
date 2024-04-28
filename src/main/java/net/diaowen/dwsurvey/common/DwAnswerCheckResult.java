@@ -126,6 +126,8 @@ public class DwAnswerCheckResult {
     public static DwAnswerCheckResult CHECK404 = new DwAnswerCheckResult(false, 404,"问卷已经删除", "问卷已经删除");//
     public static DwAnswerCheckResult CHECK405 = new DwAnswerCheckResult(false, 405,"问卷未开启", "问卷未开启");//
     public static DwAnswerCheckResult CHECK406 = new DwAnswerCheckResult(false, 406,"没有问卷的发布数据", "没有问卷的发布数据");//
+    public static DwAnswerCheckResult CHECK407 = new DwAnswerCheckResult(false, 407,"已经达到收集上限", "已经达到收集次数上限，截止答卷");//
+    public static DwAnswerCheckResult CHECK408 = new DwAnswerCheckResult(false, 408,"已经达到最后截止时间", "已经达到最后截止时间，截止答卷");//
 
 
     // >=500 错误级别

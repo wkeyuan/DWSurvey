@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -316,13 +317,32 @@ public class DwAnswerSurveyController {
                         JsonNode anEndNumAttr = surveyAttrs.get("anEndNumAttr");
                         boolean enabled = anEndNumAttr.get("enabled").asBoolean();
                         int endNum = anEndNumAttr.get("endNum").asInt();
+                        long answerCount = dwAnswerEsClientService.getCount(surveyId, null);
+                        if (enabled && answerCount>=endNum) {
+                            answerCheckResult.buildResult(DwAnswerCheckResult.CHECK407);
+                            return answerCheckResult;
+                        }
                     }
 
 //                 截止时间检查
                     if (surveyAttrs.has("anEndTimeAttr")) {
                         JsonNode anEndTimeAttr = surveyAttrs.get("anEndTimeAttr");
                         boolean enabled = anEndTimeAttr.get("enabled").asBoolean();
-                        String endNum = anEndTimeAttr.get("endTime").asText();
+                        String anEndTimeStr = anEndTimeAttr.get("endTime").asText();
+                        if (enabled && anEndTimeStr!=null) {
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            try {
+                                Date anEndDate = simpleDateFormat.parse(anEndTimeStr);
+                                long anEndDateTime = anEndDate.getTime();
+                                Date curDate = new Date();
+                                if (curDate.getTime()>anEndDateTime) {
+                                    answerCheckResult.buildResult(DwAnswerCheckResult.CHECK408);
+                                    return answerCheckResult;
+                                }
+                            } catch (ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
                     }
 //                anRefreshAttr.randomCode   // 重复回答启用验证码, 客户端判断
                 }
