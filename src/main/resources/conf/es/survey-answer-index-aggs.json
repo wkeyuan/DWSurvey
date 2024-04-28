@@ -1,3 +1,4 @@
+// PUT dwsurvey_answer_index_aggs
 {
   "settings": {
     "index": {
