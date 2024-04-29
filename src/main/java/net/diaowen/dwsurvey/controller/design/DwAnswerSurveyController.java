@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.octo.captcha.service.image.ImageCaptchaService;
 import net.diaowen.common.plugs.es.DwAnswerEsClientService;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.ipaddr.IPLocation;
@@ -59,6 +60,8 @@ public class DwAnswerSurveyController {
     private SurveyDirectoryManager surveyDirectoryManager;
     @Autowired
     private IPService ipService;
+    @Autowired
+    private ImageCaptchaService imageCaptchaService;
 
     @RequestMapping(value = "/survey-json-by-sid.do",method = RequestMethod.GET)
     @ResponseBody
@@ -121,6 +124,15 @@ public class DwAnswerSurveyController {
             calcAnQuQum(dwEsSurveyAnswer);
             //执行前置检查
             DwAnswerCheckResult dwAnswerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd);
+            if (!dwAnswerCheckResult.isAnCheckIsPass() && dwAnswerCheckResult.getAnCheckResultCode()==409) {
+                String anRandomCode = surveyAnswerJson.getAnRandomCode();
+                if (!imageCaptchaService.validateResponseForID(request.getSession().getId(), anRandomCode)) {
+                    dwAnswerCheckResult.buildResult(DwAnswerCheckResult.CHECK410);
+                    return HttpResult.SUCCESS(dwAnswerCheckResult);
+                } else {
+                    dwAnswerCheckResult.setAnCheckIsPass(true);
+                }
+            }
             if (!dwAnswerCheckResult.isAnCheckIsPass()) return HttpResult.SUCCESS(dwAnswerCheckResult);
             //检查通过继续执行
             IndexResponse indexResponse = dwAnswerEsClientService.createAnswerDocByObj(dwEsSurveyAnswer);
@@ -235,7 +247,7 @@ public class DwAnswerSurveyController {
                 throw new RuntimeException(e);
             }
 
-            if (!answerCheckResult.isAnCheckIsPass() && answerCheckResult.getAnCheckResultCode()!=403) {
+            if (!answerCheckResult.isAnCheckIsPass() && answerCheckResult.getAnCheckResultCode()!=403 && answerCheckResult.getAnCheckResultCode()!=409) {
                 SurveyJson tempSurveyJson = new SurveyJson();
                 tempSurveyJson.setSurveyJsonText(surveyJson.getSurveyJsonSimple());
                 tempSurveyJson.setSurveyId(surveyJson.getSurveyId());
@@ -290,12 +302,12 @@ public class DwAnswerSurveyController {
                     }
 
                     // IP回答限制检查
+                    String ipAddr = ipService.getIp(request);
+                    long ipAnCount = dwAnswerEsClientService.getCount(surveyId,ipAddr);
                     if (surveyAttrs.has("anIpAttr")) {
                         JsonNode anIpAttr = surveyAttrs.get("anIpAttr");
                         boolean enabled = anIpAttr.get("enabled").asBoolean();
                         int anNum = anIpAttr.get("anNum").intValue();
-                        String ipAddr = ipService.getIp(request);
-                        long ipAnCount = dwAnswerEsClientService.getCount(surveyId,ipAddr);
                         if (enabled && ipAnCount>=anNum) {
                             answerCheckResult.buildResult(DwAnswerCheckResult.CHECK402);
                             return answerCheckResult;
@@ -345,6 +357,15 @@ public class DwAnswerSurveyController {
                         }
                     }
 //                anRefreshAttr.randomCode   // 重复回答启用验证码, 客户端判断
+                    if (surveyAttrs.has("anRefreshAttr")) {
+                        JsonNode anRefreshAttr = surveyAttrs.get("anRefreshAttr");
+                        boolean randomCode = anRefreshAttr.get("randomCode").asBoolean();
+                        if (randomCode && ipAnCount>3) {
+                            // 大于3次启用验证码
+                            answerCheckResult.buildResult(DwAnswerCheckResult.CHECK409);
+                            return answerCheckResult;
+                        }
+                    }
                 }
             }
             // 通过

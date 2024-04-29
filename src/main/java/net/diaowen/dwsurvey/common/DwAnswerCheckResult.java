@@ -128,6 +128,8 @@ public class DwAnswerCheckResult {
     public static DwAnswerCheckResult CHECK406 = new DwAnswerCheckResult(false, 406,"没有问卷的发布数据", "没有问卷的发布数据");//
     public static DwAnswerCheckResult CHECK407 = new DwAnswerCheckResult(false, 407,"已经达到收集上限", "已经达到收集次数上限，截止答卷");//
     public static DwAnswerCheckResult CHECK408 = new DwAnswerCheckResult(false, 408,"已经达到最后截止时间", "已经达到最后截止时间，截止答卷");//
+    public static DwAnswerCheckResult CHECK409 = new DwAnswerCheckResult(false, 409,"需要显示验证码", "重复请求请输入验证码");//
+    public static DwAnswerCheckResult CHECK410 = new DwAnswerCheckResult(false, 410,"验证码不正确，请输入正确验证码", "重复请求请输入验证码");//
 
 
     // >=500 错误级别

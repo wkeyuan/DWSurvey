@@ -24,6 +24,9 @@ public class SurveyAnswerJson extends IdEntity {
     //JSON结构版本，null或0为默认V5版本，6=V6
     private Integer jsonVersion;
 
+    // 验证码
+    private String anRandomCode;
+
     public String getSurveyId() {
         return surveyId;
     }
@@ -86,5 +89,13 @@ public class SurveyAnswerJson extends IdEntity {
 
     public void setSid(String sid) {
         this.sid = sid;
+    }
+
+    public String getAnRandomCode() {
+        return anRandomCode;
+    }
+
+    public void setAnRandomCode(String anRandomCode) {
+        this.anRandomCode = anRandomCode;
     }
 }
