@@ -502,7 +502,7 @@ public class ResponseController {
 			encoderContent = baseUrl+"/static/diaowen/answer-m.html?sid="+sid;
 		}
 		if ("v6".equals(version)) {
-			encoderContent = baseUrl + "/#/v6/diaowen/"+sid;
+			encoderContent = baseUrl + "/#/v6/diaowen/an/"+sid;
 		}
 		if(StringUtils.isNotEmpty(ruleCode)){
 			encoderContent+="&ruleCode="+ruleCode;
