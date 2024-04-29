@@ -162,7 +162,7 @@ public class DwDeisgnSurveyController {
         tabQus2.add(new DesignSurveyToolbarTabQu("常用题型",questions11));
 
         tabs.add(new DesignSurveyToolbarTab("常用题型",tabQus1));
-        tabs.add(new DesignSurveyToolbarTab("扩展题型",tabQus2));
+//        tabs.add(new DesignSurveyToolbarTab("扩展题型",tabQus2));
 
         return HttpResult.SUCCESS(tabs);
     }
