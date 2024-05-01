@@ -41,7 +41,7 @@ import java.util.*;
 
 @Service
 public class DwAnswerEsClientService {
-    private static Logger logger = LoggerFactory.getLogger(ESClientConfig.class);
+    private Logger logger = LoggerFactory.getLogger(getClass());
     //答卷索引名称
     private final static String ANSWER_INDEX_NAME = "dwsurvey_answer_index";
     private final static String ANSWER_INDEX_NAME_AGG = "dwsurvey_answer_index_aggs";

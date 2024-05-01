@@ -17,6 +17,7 @@ import net.diaowen.common.utils.CookieUtils;
 import net.diaowen.common.utils.NumberUtils;
 import net.diaowen.dwsurvey.common.AnswerCheckData;
 import net.diaowen.dwsurvey.common.DwAnswerCheckResult;
+import net.diaowen.dwsurvey.common.DwAnswerEsUtils;
 import net.diaowen.dwsurvey.common.DwSurveyAnswerResult;
 import net.diaowen.dwsurvey.entity.SurveyAnswer;
 import net.diaowen.dwsurvey.entity.SurveyAnswerJson;
@@ -94,13 +95,6 @@ public class DwAnswerSurveyController {
     @RequestMapping("/save-survey-answer.do")
     @ResponseBody
     public HttpResult<DwAnswerCheckResult> saveAnswer(HttpServletRequest request, HttpServletResponse response, @RequestBody SurveyAnswerJson surveyAnswerJson) {
-        /**
-        SurveyAnswer surveyAnswer = new SurveyAnswer();
-        surveyAnswer.setSurveyId(surveyAnswerJson.getSurveyId());
-        surveyAnswer.setBgAnDate(new Date());
-        surveyAnswer.setEndAnDate(new Date());
-        surveyAnswerManager.saveAnswer(surveyAnswer, surveyAnswerJson);
-        */
         try {
             String surveyId = surveyAnswerJson.getSurveyId();
             String sid = surveyAnswerJson.getSid();
@@ -135,6 +129,8 @@ public class DwAnswerSurveyController {
             }
             if (!dwAnswerCheckResult.isAnCheckIsPass()) return HttpResult.SUCCESS(dwAnswerCheckResult);
             //检查通过继续执行
+            //计算分数
+            DwAnswerEsUtils.calcSumScore(surveyJson, dwEsSurveyAnswer);
             IndexResponse indexResponse = dwAnswerEsClientService.createAnswerDocByObj(dwEsSurveyAnswer);
             if (indexResponse!=null && indexResponse.id()!=null) {
                 String indexResponseId = indexResponse.id();
