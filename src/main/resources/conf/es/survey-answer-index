@@ -1,4 +1,4 @@
- PUT dwsurvey_answer_index
+PUT dwsurvey_answer_index
 {
   "settings": {
     "index": {
@@ -89,6 +89,9 @@
           },
           "surveyId": {
             "type": "keyword"
+          },
+          "sumScore": {
+            "type": "double"
           }
         }
       },
@@ -194,6 +197,9 @@
           },
           "quType": {
             "type": "keyword"
+          },
+          "quAnScore": {
+            "type": "double"
           }
         }
       }
