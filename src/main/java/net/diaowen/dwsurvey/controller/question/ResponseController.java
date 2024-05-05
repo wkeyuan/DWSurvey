@@ -507,7 +507,6 @@ public class ResponseController {
 		if(StringUtils.isNotEmpty(ruleCode)){
 			encoderContent+="&ruleCode="+ruleCode;
 		}
-		System.out.println("encoderContent:"+encoderContent);
 		ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
 		BufferedImage twoDimensionImg = ZxingUtil.qRCodeCommon(encoderContent, "jpg", 16);
 		ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);

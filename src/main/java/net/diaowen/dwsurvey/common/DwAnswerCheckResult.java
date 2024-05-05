@@ -2,6 +2,7 @@ package net.diaowen.dwsurvey.common;
 
 import net.diaowen.common.plugs.httpclient.HttpStatus;
 import net.diaowen.dwsurvey.entity.SurveyJson;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 
 public class DwAnswerCheckResult {
 
@@ -20,6 +21,8 @@ public class DwAnswerCheckResult {
 
     //答卷ID
     private String indexResponseId = null;
+    private Double sumScore = null; // 总得分
+    private DwEsSurveyAnswer dwEsSurveyAnswer = null;
 
     // 重定向到某个地址
     private String redirectUrl;
@@ -100,6 +103,22 @@ public class DwAnswerCheckResult {
 
     public void setIndexResponseId(String indexResponseId) {
         this.indexResponseId = indexResponseId;
+    }
+
+    public DwEsSurveyAnswer getDwEsSurveyAnswer() {
+        return dwEsSurveyAnswer;
+    }
+
+    public void setDwEsSurveyAnswer(DwEsSurveyAnswer dwEsSurveyAnswer) {
+        this.dwEsSurveyAnswer = dwEsSurveyAnswer;
+    }
+
+    public Double getSumScore() {
+        return sumScore;
+    }
+
+    public void setSumScore(Double sumScore) {
+        this.sumScore = sumScore;
     }
 
     public void buildResult(DwAnswerCheckResult dwAnswerCheckResult){

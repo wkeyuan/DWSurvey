@@ -138,6 +138,9 @@ public class DwAnswerSurveyController {
                 // 保存成功
                 dwAnswerCheckResult.buildResult(DwAnswerCheckResult.SUCCESS201);
                 dwAnswerCheckResult.setIndexResponseId(indexResponseId);
+                // 如果需要返回答卷结果
+//                dwAnswerCheckResult.setDwEsSurveyAnswer(dwEsSurveyAnswer);
+                dwAnswerCheckResult.setSumScore(dwEsSurveyAnswer.getAnswerCommon().getSumScore());
                 addAnswerNumCookie(request, response, sid);
                 return HttpResult.SUCCESS(dwAnswerCheckResult);
             } else {

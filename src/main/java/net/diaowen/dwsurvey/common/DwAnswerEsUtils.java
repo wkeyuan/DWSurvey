@@ -11,6 +11,8 @@ import net.diaowen.dwsurvey.entity.SurveyJson;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnCheckbox;
+import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnScore;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +62,14 @@ public class DwAnswerEsUtils {
                                         break;
                                     }
                                 }
+                            }
+                        }
+                    } else if ("SCORE".equals(quType)) {
+                        List<EsAnScore> anScores = esAnQu.getAnScores();
+                        for (EsAnScore anScore: anScores) {
+                            String answerScore = anScore.getAnswerScore();
+                            if (NumberUtils.isNumber(answerScore)) {
+                                quAnScoreNum+= Double.parseDouble(answerScore);
                             }
                         }
                     }
