@@ -42,9 +42,9 @@ dwsurvey:
         web-pri: web-pri
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
-    info: DWSurvey OSS V5.2.6 Boot
-    number: OSS V5.2.6
-    built: 2022/03/17
+    info: DWSurvey Pro V6.2.20240505
+    number: Pro V6.2.240505
+    built: 2024/05/05
 # 服务占用的端口号
 server:
   port: 8080
