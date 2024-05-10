@@ -195,6 +195,83 @@ PUT dwsurvey_answer_index
               }
             }
           },
+          "anMatrixRadios": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "colDwId": {
+                "type": "keyword"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixCheckboxes": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnCheckboxs": {
+                "properties": {
+                  "optionDwId": {
+                    "type": "keyword"
+                  },
+                  "otherText": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixFbks": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnFbks": {
+                "properties": {
+                  "answer": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "optionDwId": {
+                    "type": "keyword"
+                  }
+                }
+              }
+            }
+          },
+          "anMatrixScales": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "answerScore": {
+                "type": "float"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
           "quDwId": {
             "type": "keyword"
           },

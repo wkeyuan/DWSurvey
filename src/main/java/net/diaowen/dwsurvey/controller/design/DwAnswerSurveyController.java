@@ -103,6 +103,7 @@ public class DwAnswerSurveyController {
             logger.debug("save SurveyAnswerJson {}", JSON.toJSONString(surveyAnswerJson));
             String answerJson = surveyAnswerJson.getAnswerJson();
             DwEsSurveyAnswer dwEsSurveyAnswer = JSON.parseObject(answerJson, DwEsSurveyAnswer.class);
+//            dwEsSurveyAnswer.getAnswerCommon().setSid(sid);
             EsAnIp esAnIp = dwEsSurveyAnswer.getAnswerCommon().getAnIp();
             String ipAddr = ipService.getIp(request);
             IPLocation ipLocation = ipService.getIpLocation(ipAddr);
