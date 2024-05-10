@@ -29,6 +29,12 @@ public class EsAnQuestion {
     //排序题
     private List<EsAnOrder> anOrders;
 
+    private List<EsAnMatrixRadio> anMatrixRadios;
+    private List<EsAnMatrixCheckbox> anMatrixCheckboxes;
+    private List<EsAnMatrixFbk> anMatrixFbks;
+    //量表与滑块共用
+    private List<EsAnMatrixScale> anMatrixScales;
+
     public String getQuDwId() {
         return quDwId;
     }
@@ -101,6 +107,47 @@ public class EsAnQuestion {
         this.anOrders = anOrders;
     }
 
+    public Double getQuAnScore() {
+        return quAnScore;
+    }
+
+    public void setQuAnScore(Double quAnScore) {
+        this.quAnScore = quAnScore;
+    }
+
+    public List<EsAnMatrixRadio> getAnMatrixRadios() {
+        return anMatrixRadios;
+    }
+
+    public void setAnMatrixRadios(List<EsAnMatrixRadio> anMatrixRadios) {
+        this.anMatrixRadios = anMatrixRadios;
+    }
+
+    public List<EsAnMatrixCheckbox> getAnMatrixCheckboxes() {
+        return anMatrixCheckboxes;
+    }
+
+    public void setAnMatrixCheckboxes(List<EsAnMatrixCheckbox> anMatrixCheckboxes) {
+        this.anMatrixCheckboxes = anMatrixCheckboxes;
+    }
+
+    public List<EsAnMatrixFbk> getAnMatrixFbks() {
+        return anMatrixFbks;
+    }
+
+    public void setAnMatrixFbks(List<EsAnMatrixFbk> anMatrixFbks) {
+        this.anMatrixFbks = anMatrixFbks;
+    }
+
+    public List<EsAnMatrixScale> getAnMatrixScales() {
+        return anMatrixScales;
+    }
+
+    public void setAnMatrixScales(List<EsAnMatrixScale> anMatrixScales) {
+        this.anMatrixScales = anMatrixScales;
+    }
+
+    /** 以下为未持久化字段 **/
     private Map<String, Object> anOtherMaps;
 
     public Map<String, Object> getAnOtherMaps() {
@@ -109,13 +156,5 @@ public class EsAnQuestion {
 
     public void setAnOtherMaps(Map<String, Object> anOtherMaps) {
         this.anOtherMaps = anOtherMaps;
-    }
-
-    public Double getQuAnScore() {
-        return quAnScore;
-    }
-
-    public void setQuAnScore(Double quAnScore) {
-        this.quAnScore = quAnScore;
     }
 }
