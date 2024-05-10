@@ -1,4 +1,8 @@
-// 如果打开问卷页面慢，且请求后端问卷数据慢，则可以在数据库给t_survey_json的surveyId与sid加上普通index索引
+// 如果打开问卷页面慢且请求后端问卷数据慢，则可以在数据库给t_survey_json的surveyId与sid加上普通index索引
+ALTER TABLE `dwsurvey_pro`.`t_survey_json`
+ADD INDEX `sid_index` (`sid` ASC) VISIBLE;
+ALTER TABLE `dwsurvey_pro`.`t_survey_json`
+ADD INDEX `survey_index` (`survey_id` ASC) VISIBLE;
 // 新增评分字段更新
 PUT dwsurvey_answer_index/_mapping
 {
