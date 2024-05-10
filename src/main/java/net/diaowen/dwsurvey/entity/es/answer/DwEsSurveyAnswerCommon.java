@@ -26,7 +26,7 @@ public class DwEsSurveyAnswerCommon implements Serializable {
     //是否删除：0未删除；1删除状态
     private Integer isDelete;
     // 总分
-    private Double sumScore;
+    private Float sumScore;
 
     public String getSurveyId() {
         return surveyId;
@@ -92,11 +92,11 @@ public class DwEsSurveyAnswerCommon implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public Double getSumScore() {
+    public Float getSumScore() {
         return sumScore;
     }
 
-    public void setSumScore(Double sumScore) {
+    public void setSumScore(Float sumScore) {
         this.sumScore = sumScore;
     }
 }

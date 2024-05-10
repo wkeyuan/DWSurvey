@@ -322,7 +322,7 @@ public class DwAnswerEsClientService {
                 for (EsAnScore esAnScore: esAnScores) {
                     DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
                     dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
-                    dwEsSurveyAnswerAnOption.setAnswerNum(Double.parseDouble(esAnScore.getAnswerScore()));
+                    dwEsSurveyAnswerAnOption.setAnswerNum(Float.parseFloat(esAnScore.getAnswerScore()));
                     dwEsSurveyAnswerAnOption.setAnswerOptionDwId(esAnScore.getOptionDwId());
                     dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
                     dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
@@ -336,7 +336,7 @@ public class DwAnswerEsClientService {
                 for (EsAnOrder esAnOrder: esAnOrders) {
                     DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
                     dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
-                    dwEsSurveyAnswerAnOption.setAnswerNum(Double.parseDouble(esAnOrder.getOrderNum()));
+                    dwEsSurveyAnswerAnOption.setAnswerNum(Float.parseFloat(esAnOrder.getOrderNum()));
                     dwEsSurveyAnswerAnOption.setAnswerOptionDwId(esAnOrder.getOptionDwId());
                     dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
                     dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());

@@ -13,7 +13,7 @@ public class DwEsSurveyAnswerAnOption implements Serializable {
 
     private String answerOptionDwId;
     // 回答选项数值
-    private Double answerNum;
+    private Float answerNum;
     // 回答选项文本值
     private String answerText;
     private String quDwId;
@@ -33,11 +33,11 @@ public class DwEsSurveyAnswerAnOption implements Serializable {
         this.answerOptionDwId = answerOptionDwId;
     }
 
-    public Double getAnswerNum() {
+    public Float getAnswerNum() {
         return answerNum;
     }
 
-    public void setAnswerNum(Double answerNum) {
+    public void setAnswerNum(Float answerNum) {
         this.answerNum = answerNum;
     }
 

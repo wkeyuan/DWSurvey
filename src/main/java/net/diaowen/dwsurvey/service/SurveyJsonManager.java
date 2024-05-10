@@ -19,5 +19,7 @@ public interface SurveyJsonManager extends BaseService<SurveyJson, String> {
 
     SurveyJson findBySurveyId(String surveyId);
 
+    public SurveyJson findBySid(String sid);
+
     String devSurvey(String surveyId);
 }
