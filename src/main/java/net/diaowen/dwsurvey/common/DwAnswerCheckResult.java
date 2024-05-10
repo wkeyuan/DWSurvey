@@ -21,7 +21,7 @@ public class DwAnswerCheckResult {
 
     //答卷ID
     private String indexResponseId = null;
-    private Double sumScore = null; // 总得分
+    private Float sumScore = null; // 总得分
     private DwEsSurveyAnswer dwEsSurveyAnswer = null;
 
     // 重定向到某个地址
@@ -113,11 +113,11 @@ public class DwAnswerCheckResult {
         this.dwEsSurveyAnswer = dwEsSurveyAnswer;
     }
 
-    public Double getSumScore() {
+    public Float getSumScore() {
         return sumScore;
     }
 
-    public void setSumScore(Double sumScore) {
+    public void setSumScore(Float sumScore) {
         this.sumScore = sumScore;
     }
 
