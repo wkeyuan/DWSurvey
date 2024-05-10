@@ -90,6 +90,9 @@ PUT dwsurvey_answer_index
           "surveyId": {
             "type": "keyword"
           },
+          "sid": {
+            "type": "keyword"
+          },
           "sumScore": {
             "type": "float"
           }

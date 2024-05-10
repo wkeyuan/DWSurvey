@@ -8,7 +8,7 @@ public class EsAnMatrixScale {
     private String rowDwId;
     private String answerScore;
 
-    private Double rowAnScore; // 得分
+    private float rowAnScore; // 得分
 
     public String getRowDwId() {
         return rowDwId;
@@ -26,11 +26,11 @@ public class EsAnMatrixScale {
         this.answerScore = answerScore;
     }
 
-    public Double getRowAnScore() {
+    public float getRowAnScore() {
         return rowAnScore;
     }
 
-    public void setRowAnScore(Double rowAnScore) {
+    public void setRowAnScore(float rowAnScore) {
         this.rowAnScore = rowAnScore;
     }
 }

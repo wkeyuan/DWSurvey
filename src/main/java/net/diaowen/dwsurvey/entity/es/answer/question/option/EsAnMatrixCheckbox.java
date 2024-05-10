@@ -6,7 +6,7 @@ public class EsAnMatrixCheckbox {
 
     private String rowDwId;
     private List<EsAnCheckbox> rowAnCheckboxs;
-    private Double rowAnScore; // 得分
+    private float rowAnScore; // 得分
 
     public String getRowDwId() {
         return rowDwId;
@@ -24,11 +24,11 @@ public class EsAnMatrixCheckbox {
         this.rowAnCheckboxs = rowAnCheckboxs;
     }
 
-    public Double getRowAnScore() {
+    public float getRowAnScore() {
         return rowAnScore;
     }
 
-    public void setRowAnScore(Double rowAnScore) {
+    public void setRowAnScore(float rowAnScore) {
         this.rowAnScore = rowAnScore;
     }
 }

@@ -7,7 +7,7 @@ public class EsAnMatrixRadio {
     private String rowDwId;
     private String colDwId;
 
-    private Double rowAnScore; // 得分
+    private Float rowAnScore; // 得分
 
     public String getRowDwId() {
         return rowDwId;
@@ -25,11 +25,11 @@ public class EsAnMatrixRadio {
         this.colDwId = colDwId;
     }
 
-    public Double getRowAnScore() {
+    public Float getRowAnScore() {
         return rowAnScore;
     }
 
-    public void setRowAnScore(Double rowAnScore) {
+    public void setRowAnScore(Float rowAnScore) {
         this.rowAnScore = rowAnScore;
     }
 }

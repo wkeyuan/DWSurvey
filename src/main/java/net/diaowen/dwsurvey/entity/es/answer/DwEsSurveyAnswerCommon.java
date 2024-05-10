@@ -12,6 +12,7 @@ import java.util.List;
 public class DwEsSurveyAnswerCommon implements Serializable {
 
     private String surveyId;
+    private String sid;
     //前端生成的答卷ID
     private String answerDwId;
     //问卷ID
@@ -98,5 +99,13 @@ public class DwEsSurveyAnswerCommon implements Serializable {
 
     public void setSumScore(Float sumScore) {
         this.sumScore = sumScore;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 }

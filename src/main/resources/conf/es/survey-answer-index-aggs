@@ -90,6 +90,9 @@
           "surveyId": {
             "type": "keyword"
           },
+          "sid": {
+            "type": "keyword"
+          },
           "sumScore": {
             "type": "float"
           }

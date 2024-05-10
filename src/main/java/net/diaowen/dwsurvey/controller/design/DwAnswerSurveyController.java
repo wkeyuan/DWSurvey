@@ -78,9 +78,9 @@ public class DwAnswerSurveyController {
      */
     @RequestMapping(value = "/survey-json-by-survey-id.do",method = RequestMethod.GET)
     @ResponseBody
-    public HttpResult<DwSurveyAnswerResult> surveyJsonBySurveyId(HttpServletRequest request, HttpServletResponse response, @RequestParam String sid, @RequestParam(required = false) String anPwd){
+    public HttpResult<DwSurveyAnswerResult> surveyJsonBySurveyId(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false) String surveyId, @RequestParam(required = false) String sid, @RequestParam(required = false) String anPwd){
         // 针对答卷场景需要考虑这些数据通过静态缓存获取。
-        SurveyJson surveyJson = getSurveyJson(null, sid);
+        SurveyJson surveyJson = getSurveyJson(surveyId, sid);
         DwSurveyAnswerResult dwSurveyAnswerResult = new DwSurveyAnswerResult();
         DwAnswerCheckResult dwAnswerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd);
         surveyJson = getSurveyJsonResult(dwAnswerCheckResult, surveyJson);
