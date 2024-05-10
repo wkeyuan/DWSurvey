@@ -46,13 +46,13 @@ PUT dwsurvey_answer_index
           "anState": {
             "properties": {
               "anQuNum": {
-                "type": "long"
+                "type": "int"
               },
               "handleState": {
-                "type": "long"
+                "type": "int"
               },
               "isEff": {
-                "type": "long"
+                "type": "int"
               }
             }
           },
@@ -91,7 +91,7 @@ PUT dwsurvey_answer_index
             "type": "keyword"
           },
           "sumScore": {
-            "type": "double"
+            "type": "float"
           }
         }
       },
@@ -151,7 +151,7 @@ PUT dwsurvey_answer_index
                 "type": "keyword"
               },
               "orderNum": {
-                "type": "long"
+                "type": "int"
               }
             }
           },
@@ -175,7 +175,7 @@ PUT dwsurvey_answer_index
           "anScores": {
             "properties": {
               "answerScore": {
-                "type": "long"
+                "type": "float"
               },
               "optionDwId": {
                 "type": "keyword"
@@ -199,7 +199,7 @@ PUT dwsurvey_answer_index
             "type": "keyword"
           },
           "quAnScore": {
-            "type": "double"
+            "type": "float"
           }
         }
       }

@@ -1,0 +1,33 @@
+// 新增评分字段更新
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sumScore": {
+          "type": "float"
+        }
+      }
+    },
+    "anQuestions": {
+        "properties": {
+          "quAnScore": {
+            "type": "float"
+          }
+        }
+    }
+  }
+}
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sumScore": {
+          "type": "float"
+        }
+      }
+    }
+  }
+}
+// 新增矩阵题字段索引
