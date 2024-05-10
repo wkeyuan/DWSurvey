@@ -32,8 +32,17 @@ public enum QuType {
 	UPLOADFILE("文件上传题","sendfile",15),
 	PAGETAG("分页标记","pagetag",16),
 	PARAGRAPH("段落说明","paragraph",17),
-	CHENSCORE("矩阵评分题","chen-score", 18);
+	CHENSCORE("矩阵评分题","chen-score", 18),
 
+	// 新版使用
+	MATRIX_RADIO("矩阵单选","chen-score", 18),
+	MATRIX_CHECKBOX("矩阵多选","chen-score", 18),
+	MATRIX_INPUT("矩阵填空","chen-score", 18),
+	MATRIX_NUMBER("矩阵数值","chen-score", 18),
+	MATRIX_SCALE("矩阵量表","chen-score", 18),
+	MATRIX_SLIDER("矩阵滑块","chen-score", 18),
+	MATRIX_SELECT("矩阵下拉","chen-score", 18),
+	MATRIX_GROUP("矩阵组合","chen-score", 18);
 
 
 	private String cnName;
