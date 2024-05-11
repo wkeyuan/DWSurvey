@@ -86,7 +86,7 @@ public class UploadController {
                     FileMagic fileMagic = FileMagicUtils.getFileMagic(file.getInputStream(),file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
                     if(!FileMagicUtils.isUserUpFileMagic(fileMagic)) {
                         logger.warn("不支持类型 {} {}", fileMagic, file.getOriginalFilename());
-                        return HttpResult.FAILURE_MSG("不支持类型或类型不一致，实际类型为"+ TikaFileUtils.getMimeType(file.getInputStream(),file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."))));
+                        return HttpResult.FAILURE_MSG("不支持类型或类型不一致，可能类型为"+ TikaFileUtils.getMimeType(file.getInputStream(),file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."))));
                     }
                     //取得当前上传文件的文件名称
                     String myFileName = file.getOriginalFilename();
