@@ -5,25 +5,34 @@ import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnUser;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
+import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnCheckbox;
+import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnMatrixCheckbox;
+import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnMatrixRadio;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class DwEsSurveyAnswerAnOption implements Serializable {
 
+    private String quDwId;
+    private String quType;
+    private DwEsSurveyAnswerCommon answerCommon;
     private String answerOptionDwId;
     // 回答选项数值
     private Float answerNum;
     // 回答选项文本值
     private String answerText;
-    private String quDwId;
-    private String quType;
+
     // 所有与之有关联的dwId;
     private List<String> relateDwIds;
     // 关联的 DwEsSurveyAnswer 索引ID
     private String relateAnswerResponseId;
 
-    private DwEsSurveyAnswerCommon answerCommon;
+    // 矩阵单选题，只取行列
+    private EsAnMatrixRadio esAnMatrixRadio;
+
+    // 矩阵多选题，取行与列集合
+    private EsAnMatrixCheckbox esAnMatrixCheckbox;
 
     public String getAnswerOptionDwId() {
         return answerOptionDwId;
@@ -87,5 +96,21 @@ public class DwEsSurveyAnswerAnOption implements Serializable {
 
     public void setAnswerCommon(DwEsSurveyAnswerCommon answerCommon) {
         this.answerCommon = answerCommon;
+    }
+
+    public EsAnMatrixRadio getEsAnMatrixRadio() {
+        return esAnMatrixRadio;
+    }
+
+    public void setEsAnMatrixRadio(EsAnMatrixRadio esAnMatrixRadio) {
+        this.esAnMatrixRadio = esAnMatrixRadio;
+    }
+
+    public EsAnMatrixCheckbox getEsAnMatrixCheckbox() {
+        return esAnMatrixCheckbox;
+    }
+
+    public void setEsAnMatrixCheckbox(EsAnMatrixCheckbox esAnMatrixCheckbox) {
+        this.esAnMatrixCheckbox = esAnMatrixCheckbox;
     }
 }

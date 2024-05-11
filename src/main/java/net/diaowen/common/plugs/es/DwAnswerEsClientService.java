@@ -27,6 +27,8 @@ import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnIp;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
+import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnMatrixCheckbox;
+import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnMatrixRadio;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnOrder;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnScore;
 import org.apache.commons.lang.StringUtils;
@@ -275,6 +277,11 @@ public class DwAnswerEsClientService {
 
         aggKeyMaps = new HashMap<>();
         aggKeyMaps.put("optionStats", Aggregation.of(a -> a.terms(t -> t.field("answerOptionDwId").size(2000)).aggregations("optionStatsIn", s -> s.stats(v -> v.field("answerNum")))));
+//        aggKeyMaps.put("count_matrix_radio", Aggregation.of(a -> a.terms(t -> t.field("esAnMatrixRadio.rowDwId").field("esAnMatrixRadio.colDwId").size(2000))));
+//        aggKeyMaps.put("count_matrix_checkbox", Aggregation.of(a -> a.terms(t -> t.field("esAnMatrixCheckbox.rowDwId").field("esAnMatrixCheckbox.rowAnCheckboxs.optionDwId").size(2000))));
+        aggKeyMaps.put("count_matrix_radio", Aggregation.of(a -> a.terms(t -> t.field("esAnMatrixRadio.rowDwId").size(2000)).aggregations("col_count", s -> s.terms(t -> t.field("esAnMatrixRadio.colDwId").size(2000)))));
+        aggKeyMaps.put("count_matrix_checkbox", Aggregation.of(a -> a.terms(t -> t.field("esAnMatrixCheckbox.rowDwId").size(2000)).aggregations("col_count",s -> s.terms(t -> t.field("esAnMatrixCheckbox.rowAnCheckboxs.optionDwId").size(2000)))));
+
         Map<String, Aggregate> anAggNum = esClientService.aggregationSearch(ANSWER_INDEX_NAME_AGG, mq, aggKeyMaps);
         logger.debug("anAggNum {}", anAggNum.size());
         Aggregate aggregateTemp = anAggNum.get("optionStats");
@@ -291,15 +298,17 @@ public class DwAnswerEsClientService {
                 logger.debug("key {}, value {}", stringTermsBucket.key(), stringTermsBucket.docCount());
                 AggregationResultItem aggregationResultItem = new AggregationResultItem(stringTermsBucket.docCount());
                 Aggregate  optionStatsIn = stringTermsBucket.aggregations().get("optionStatsIn");
-                if (optionStatsIn.isStats()) {
-                    double avg = optionStatsIn.stats().avg();
-                    long count = optionStatsIn.stats().count();
-                    double max = optionStatsIn.stats().max();
-                    double min = optionStatsIn.stats().min();
-                    double sum = optionStatsIn.stats().sum();
-                    aggregationResultItem = new AggregationResultItem(stringTermsBucket.docCount(), avg, count, max, min, sum);
+                if (optionStatsIn!=null) {
+                    if (optionStatsIn.isStats()) {
+                        double avg = optionStatsIn.stats().avg();
+                        long count = optionStatsIn.stats().count();
+                        double max = optionStatsIn.stats().max();
+                        double min = optionStatsIn.stats().min();
+                        double sum = optionStatsIn.stats().sum();
+                        aggregationResultItem = new AggregationResultItem(stringTermsBucket.docCount(), avg, count, max, min, sum);
+                    }
+                    anAggMap.put(stringTermsBucket.key(), aggregationResultItem);
                 }
-                anAggMap.put(stringTermsBucket.key(), aggregationResultItem);
             }
             AggregationResult aggregationResult = new AggregationResult();
             aggregationResult.setAggMap(anAggMap);
@@ -341,6 +350,30 @@ public class DwAnswerEsClientService {
                     dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
                     dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
 //                    dwEsSurveyAnswerAnOption.setRelateDwIds();
+                    dwEsSurveyAnswerAnOption.setRelateAnswerResponseId(responseId);
+                    dwEsSurveyAnswerAnOptionList.add(dwEsSurveyAnswerAnOption);
+                }
+            } else if ("MATRIX_RADIO".equals(quType)) {
+                List<EsAnMatrixRadio> esAnMatrixRadios = esAnQuestion.getAnMatrixRadios();
+                for (EsAnMatrixRadio esMatrixRadio:esAnMatrixRadios) {
+                    // 单独存储起来
+                    DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
+                    dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
+                    dwEsSurveyAnswerAnOption.setEsAnMatrixRadio(esMatrixRadio);
+                    dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
+                    dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
+                    dwEsSurveyAnswerAnOption.setRelateAnswerResponseId(responseId);
+                    dwEsSurveyAnswerAnOptionList.add(dwEsSurveyAnswerAnOption);
+                }
+            } else if ("MATRIX_CHECKBOX".equals(quType)) {
+                List<EsAnMatrixCheckbox> esAnMatrixCheckboxes = esAnQuestion.getAnMatrixCheckboxes();
+                for (EsAnMatrixCheckbox esAnMatrixCheckbox:esAnMatrixCheckboxes) {
+                    // 单独存储起来
+                    DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
+                    dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
+                    dwEsSurveyAnswerAnOption.setEsAnMatrixCheckbox(esAnMatrixCheckbox);
+                    dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
+                    dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
                     dwEsSurveyAnswerAnOption.setRelateAnswerResponseId(responseId);
                     dwEsSurveyAnswerAnOptionList.add(dwEsSurveyAnswerAnOption);
                 }
