@@ -125,6 +125,46 @@ PUT dwsurvey_answer_index_aggs
       },
       "relateAnswerResponseId": {
         "type": "keyword"
+      },
+      "esAnMatrixRadio": {
+        "properties": {
+          "rowDwId": {
+            "type": "keyword"
+          },
+          "colDwId": {
+            "type": "keyword"
+          },
+          "rowAnScore": {
+            "type": "float"
+          }
+        }
+      },
+      "esAnMatrixCheckbox": {
+        "properties": {
+          "rowDwId": {
+            "type": "keyword"
+          },
+          "rowAnCheckboxs": {
+            "properties": {
+              "optionDwId": {
+                "type": "keyword"
+              },
+              "otherText": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "rowAnScore": {
+            "type": "float"
+          }
+      }
       }
     }
   }

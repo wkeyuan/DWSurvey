@@ -308,6 +308,62 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
                     }
                 } else if (Objects.equals(quType, "UPLOADFILE")) {// 评分题
                     exportUtil.setCell(cellIndex++, titleName);
+                } else if (Objects.equals(quType, "MATRIX_RADIO")) {// 评分题
+                    JsonNode jsonQuOptions=jsonQuestion.get("quRows");
+                    int optionSize = jsonQuOptions.size();
+                    for (int j=0; j<optionSize; j++) {
+                        JsonNode jsonQuOption = jsonQuOptions.get(j);
+                        String optionName = jsonQuOption.get("optionTitleObj").get("dwText").asText();
+                        optionName=HtmlUtil.removeTagFromText(optionName);
+                        exportUtil.setCell(cellIndex++, titleName+ "-" + optionName );
+                    }
+                } else if (Objects.equals(quType, "MATRIX_CHECKBOX")) {// 矩阵单选题
+                    JsonNode jsonQuOptions=jsonQuestion.get("quRows");
+                    JsonNode jsonQuOptionCols=jsonQuestion.get("quCols");
+                    int optionSize = jsonQuOptions.size();
+                    int optionColSize = jsonQuOptionCols.size();
+                    for (int j=0; j<optionSize; j++) {
+                        JsonNode jsonQuOption = jsonQuOptions.get(j);
+                        String optionName = jsonQuOption.get("optionTitleObj").get("dwText").asText();
+                        optionName=HtmlUtil.removeTagFromText(optionName);
+
+                        for (int k=0; k<optionColSize; k++) {
+                            JsonNode jsonQuOptionCol = jsonQuOptionCols.get(k);
+                            if (!jsonQuOptionCol.has("tempEmptyOption")  || (jsonQuOptionCol.has("tempEmptyOption") && !jsonQuOptionCol.get("tempEmptyOption").asBoolean())) {
+                                String colName = jsonQuOptionCol.get("optionTitleObj").get("dwText").asText();
+                                colName=HtmlUtil.removeTagFromText(colName);
+                                exportUtil.setCell(cellIndex++, titleName + "-"+ optionName + "-"+ colName );
+                            }
+                        }
+                    }
+                } else if (Objects.equals(quType, "MATRIX_INPUT")) {
+                    JsonNode jsonQuOptions=jsonQuestion.get("quRows");
+                    JsonNode jsonQuOptionCols=jsonQuestion.get("quCols");
+                    int optionSize = jsonQuOptions.size();
+                    int optionColSize = jsonQuOptionCols.size();
+                    for (int j=0; j<optionSize; j++) {
+                        JsonNode jsonQuOption = jsonQuOptions.get(j);
+                        String optionName = jsonQuOption.get("optionTitleObj").get("dwText").asText();
+                        optionName=HtmlUtil.removeTagFromText(optionName);
+
+                        for (int k=0; k<optionColSize; k++) {
+                            JsonNode jsonQuOptionCol = jsonQuOptionCols.get(k);
+                            if (!jsonQuOptionCol.has("tempEmptyOption")  || (jsonQuOptionCol.has("tempEmptyOption") && !jsonQuOptionCol.get("tempEmptyOption").asBoolean())) {
+                                String colName = jsonQuOptionCol.get("optionTitleObj").get("dwText").asText();
+                                colName=HtmlUtil.removeTagFromText(colName);
+                                exportUtil.setCell(cellIndex++, titleName + "-"+ optionName + "-"+ colName );
+                            }
+                        }
+                    }
+                } else if (Objects.equals(quType, "MATRIX_SCALE") || Objects.equals(quType, "MATRIX_SLIDER")) {
+                    JsonNode jsonQuOptions=jsonQuestion.get("quRows");
+                    int optionSize = jsonQuOptions.size();
+                    for (int j=0; j<optionSize; j++) {
+                        JsonNode jsonQuOption = jsonQuOptions.get(j);
+                        String optionName = jsonQuOption.get("optionTitleObj").get("dwText").asText();
+                        optionName=HtmlUtil.removeTagFromText(optionName);
+                        exportUtil.setCell(cellIndex++, titleName+ "-" + optionName );
+                    }
                 }
             }
 
