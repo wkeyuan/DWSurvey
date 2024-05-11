@@ -306,6 +306,8 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
                         optionName=HtmlUtil.removeTagFromText(optionName);
                         exportUtil.setCell(cellIndex++, titleName + "－" + optionName);
                     }
+                } else if (Objects.equals(quType, "UPLOADFILE")) {// 评分题
+                    exportUtil.setCell(cellIndex++, titleName);
                 }
             }
 
