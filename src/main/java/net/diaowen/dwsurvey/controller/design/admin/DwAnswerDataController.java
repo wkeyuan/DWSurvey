@@ -76,6 +76,8 @@ public class DwAnswerDataController {
                     boolean isExpUpQu = false;
 //                    List<AnUplodFile> anUplodFiles = anUploadFileManager.findAnswer(surveyId);
 //                    if(anUplodFiles!=null && anUplodFiles.size()>0 && expUpQu!=null && "1".equals(expUpQu)) isExpUpQu = true;
+                    if (!user.getId().equals(survey.getUserId())) return HttpResult.FAILURE_MSG("没有权限");
+                    if ("1".equals(expUpQu)) isExpUpQu = true;
                     ExportLog exportLog = esSurveyAnswerManager.buildExportXls(surveyId,savePath,threadMax,isExpUpQu?1:0, expDataContent);
                     String exportLogId = exportLog.getId();
                     esSurveyAnswerManager.exportLogXLS(surveyId,exportLogId,savePath,isExpUpQu,isEff,handleState);
