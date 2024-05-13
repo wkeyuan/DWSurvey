@@ -471,4 +471,34 @@ public class Question extends IdEntity{
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
+
+
+	private List<QuOption> quOptions = null;
+	private List<QuOption> quRows = null;
+	private List<QuOption> quCols = null;
+
+	@Transient
+	public List<QuOption> getQuOptions() {
+		return quOptions;
+	}
+
+	public void setQuOptions(List<QuOption> quOptions) {
+		this.quOptions = quOptions;
+	}
+	@Transient
+	public List<QuOption> getQuRows() {
+		return quRows;
+	}
+
+	public void setQuRows(List<QuOption> quRows) {
+		this.quRows = quRows;
+	}
+	@Transient
+	public List<QuOption> getQuCols() {
+		return quCols;
+	}
+
+	public void setQuCols(List<QuOption> quCols) {
+		this.quCols = quCols;
+	}
 }

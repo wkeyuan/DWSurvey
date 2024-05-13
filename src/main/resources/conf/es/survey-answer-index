@@ -46,13 +46,13 @@ PUT dwsurvey_answer_index
           "anState": {
             "properties": {
               "anQuNum": {
-                "type": "long"
+                "type": "integer"
               },
               "handleState": {
-                "type": "long"
+                "type": "integer"
               },
               "isEff": {
-                "type": "long"
+                "type": "integer"
               }
             }
           },
@@ -90,8 +90,11 @@ PUT dwsurvey_answer_index
           "surveyId": {
             "type": "keyword"
           },
+          "sid": {
+            "type": "keyword"
+          },
           "sumScore": {
-            "type": "double"
+            "type": "float"
           }
         }
       },
@@ -151,7 +154,7 @@ PUT dwsurvey_answer_index
                 "type": "keyword"
               },
               "orderNum": {
-                "type": "long"
+                "type": "integer"
               }
             }
           },
@@ -175,7 +178,7 @@ PUT dwsurvey_answer_index
           "anScores": {
             "properties": {
               "answerScore": {
-                "type": "long"
+                "type": "float"
               },
               "optionDwId": {
                 "type": "keyword"
@@ -192,6 +195,83 @@ PUT dwsurvey_answer_index
               }
             }
           },
+          "anMatrixRadios": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "colDwId": {
+                "type": "keyword"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixCheckboxes": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnCheckboxs": {
+                "properties": {
+                  "optionDwId": {
+                    "type": "keyword"
+                  },
+                  "otherText": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixFbks": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnFbks": {
+                "properties": {
+                  "answer": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "optionDwId": {
+                    "type": "keyword"
+                  }
+                }
+              }
+            }
+          },
+          "anMatrixScales": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "answerScore": {
+                "type": "float"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
           "quDwId": {
             "type": "keyword"
           },
@@ -199,7 +279,7 @@ PUT dwsurvey_answer_index
             "type": "keyword"
           },
           "quAnScore": {
-            "type": "double"
+            "type": "float"
           }
         }
       }

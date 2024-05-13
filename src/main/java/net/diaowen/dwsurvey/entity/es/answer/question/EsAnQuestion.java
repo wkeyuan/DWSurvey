@@ -13,7 +13,7 @@ public class EsAnQuestion {
     //题型，使用QuType类名称来标识(全大写)
     private String quType;
     //题目答卷JSON，注意针对不同题型答卷JSON结构可能不一样。
-    private Double quAnScore; // 得分
+    private float quAnScore; // 得分
     //单选题
     private EsAnRadio anRadio;
     //多选题
@@ -28,6 +28,12 @@ public class EsAnQuestion {
     private List<EsAnScore> anScores;
     //排序题
     private List<EsAnOrder> anOrders;
+
+    private List<EsAnMatrixRadio> anMatrixRadios;
+    private List<EsAnMatrixCheckbox> anMatrixCheckboxes;
+    private List<EsAnMatrixFbk> anMatrixFbks;
+    //量表与滑块共用
+    private List<EsAnMatrixScale> anMatrixScales;
 
     public String getQuDwId() {
         return quDwId;
@@ -101,6 +107,47 @@ public class EsAnQuestion {
         this.anOrders = anOrders;
     }
 
+    public List<EsAnMatrixRadio> getAnMatrixRadios() {
+        return anMatrixRadios;
+    }
+
+    public void setAnMatrixRadios(List<EsAnMatrixRadio> anMatrixRadios) {
+        this.anMatrixRadios = anMatrixRadios;
+    }
+
+    public List<EsAnMatrixCheckbox> getAnMatrixCheckboxes() {
+        return anMatrixCheckboxes;
+    }
+
+    public void setAnMatrixCheckboxes(List<EsAnMatrixCheckbox> anMatrixCheckboxes) {
+        this.anMatrixCheckboxes = anMatrixCheckboxes;
+    }
+
+    public List<EsAnMatrixFbk> getAnMatrixFbks() {
+        return anMatrixFbks;
+    }
+
+    public void setAnMatrixFbks(List<EsAnMatrixFbk> anMatrixFbks) {
+        this.anMatrixFbks = anMatrixFbks;
+    }
+
+    public List<EsAnMatrixScale> getAnMatrixScales() {
+        return anMatrixScales;
+    }
+
+    public void setAnMatrixScales(List<EsAnMatrixScale> anMatrixScales) {
+        this.anMatrixScales = anMatrixScales;
+    }
+
+    public float getQuAnScore() {
+        return quAnScore;
+    }
+
+    public void setQuAnScore(float quAnScore) {
+        this.quAnScore = quAnScore;
+    }
+
+    /** 以下为未持久化字段 **/
     private Map<String, Object> anOtherMaps;
 
     public Map<String, Object> getAnOtherMaps() {
@@ -111,11 +158,4 @@ public class EsAnQuestion {
         this.anOtherMaps = anOtherMaps;
     }
 
-    public Double getQuAnScore() {
-        return quAnScore;
-    }
-
-    public void setQuAnScore(Double quAnScore) {
-        this.quAnScore = quAnScore;
-    }
 }

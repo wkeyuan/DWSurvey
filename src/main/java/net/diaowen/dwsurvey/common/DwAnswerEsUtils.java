@@ -23,12 +23,12 @@ public class DwAnswerEsUtils {
     private static Logger logger = LoggerFactory.getLogger(DwAnswerEsUtils.class);
 
     public static void calcSumScore(SurveyJson surveyJson, DwEsSurveyAnswer dwEsSurveyAnswer) {
-        double surveyAnScoreNum = 0;
+        float surveyAnScoreNum = 0;
         JsonNode jsonNodeQus = jsonNodeQus(surveyJson);
         if (jsonNodeQus!=null) {
             List<EsAnQuestion> esAnQuestionList = dwEsSurveyAnswer.getAnQuestions();
             for (EsAnQuestion esAnQu:esAnQuestionList) {
-                double quAnScoreNum = 0;
+                float quAnScoreNum = 0;
                 JsonNode jsonQuestion = jsonNodeQu(jsonNodeQus, esAnQu.getQuDwId());
                 if (jsonQuestion!=null) {
                     String quType = esAnQu.getQuType();
@@ -42,8 +42,10 @@ public class DwAnswerEsUtils {
                                 JsonNode jsonOption = jsonQuRadios.get(i);
                                 String jsonOptionDwId = jsonOption.get("dwId").asText();
                                 if (optionDwId.equals(jsonOptionDwId)) {
-                                    quAnScoreNum = jsonOption.get("scoreNum").asDouble();
-                                    break;
+                                    if (jsonOption.get("scoreNum").isFloat()) {
+                                        quAnScoreNum = jsonOption.get("scoreNum").floatValue();
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -69,7 +71,7 @@ public class DwAnswerEsUtils {
                         for (EsAnScore anScore: anScores) {
                             String answerScore = anScore.getAnswerScore();
                             if (NumberUtils.isNumber(answerScore)) {
-                                quAnScoreNum+= Double.parseDouble(answerScore);
+                                quAnScoreNum+= Float.parseFloat(answerScore);
                             }
                         }
                     }

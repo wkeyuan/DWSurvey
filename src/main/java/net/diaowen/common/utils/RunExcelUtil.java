@@ -262,6 +262,131 @@ public class RunExcelUtil extends Thread {
                 }
 //				answerBuf=answerBuf.substring(0,answerBuf.lastIndexOf("      "));
                 exportUtil.setCell(row, cellIndex++, answerBuf.toString());
+            } else if (Objects.equals(quType, "MATRIX_RADIO")) {// 评分题
+                List<EsAnMatrixRadio> anMatrixRadios = null;
+                if (esAnQuestion!=null) anMatrixRadios = esAnQuestion.getAnMatrixRadios();
+                JsonNode jsonQuOptions=jsonQuestion.get("quRows");
+                JsonNode jsonQuOptionCols=jsonQuestion.get("quCols");
+                int optionSize = jsonQuOptions.size();
+                int optionColSize = jsonQuOptionCols.size();
+                for (int j=0; j<optionSize; j++) {
+                    JsonNode jsonQuOption = jsonQuOptions.get(j);
+                    String quChenRowId=jsonQuOption.get("dwId").asText();
+                    String answerColOptionName="";
+                    boolean breakTag=false;
+                    for (int k=0; k<optionColSize; k++) {
+                        JsonNode jsonQuOptionCol = jsonQuOptionCols.get(k);
+                        String quChenColumnId=jsonQuOptionCol.get("dwId").asText();
+                        String colName = jsonQuOptionCol.get("optionTitleObj").get("dwText").asText();
+                        if (anMatrixRadios!=null) {
+                            for (EsAnMatrixRadio esAnMatrixRadio:anMatrixRadios) {
+                                String anQuRowId=esAnMatrixRadio.getRowDwId();
+                                String anQuColId=esAnMatrixRadio.getColDwId();
+                                if(quChenRowId.equals(anQuRowId) && quChenColumnId.equals(anQuColId)){
+                                    breakTag=true;
+                                    break;
+                                }
+                            }
+                            if(breakTag){
+                                answerColOptionName = colName;
+                                break;
+                            }
+                        }
+                    }
+                    answerColOptionName=HtmlUtil.removeTagFromText(answerColOptionName);
+                    answerColOptionName = answerColOptionName.replace("&nbsp;"," ");
+                    exportUtil.setCell(row, cellIndex++, answerColOptionName);
+                }
+            } else if (Objects.equals(quType, "MATRIX_CHECKBOX")) {// 矩阵单选题
+                List<EsAnMatrixCheckbox> anMatrixCheckboxes = null;
+                if (esAnQuestion!=null) anMatrixCheckboxes = esAnQuestion.getAnMatrixCheckboxes();
+                JsonNode jsonQuOptions=jsonQuestion.get("quRows");
+                JsonNode jsonQuOptionCols=jsonQuestion.get("quCols");
+                int optionSize = jsonQuOptions.size();
+                int optionColSize = jsonQuOptionCols.size();
+                for (int j=0; j<optionSize; j++) {
+                    JsonNode jsonQuOption = jsonQuOptions.get(j);
+                    String quChenRowId=jsonQuOption.get("dwId").asText();
+                    for (int k=0; k<optionColSize; k++) {
+                        JsonNode jsonQuOptionCol = jsonQuOptionCols.get(k);
+                        if (!jsonQuOptionCol.has("tempEmptyOption")  || (jsonQuOptionCol.has("tempEmptyOption") && !jsonQuOptionCol.get("tempEmptyOption").asBoolean())) {
+                            String quChenColumnId=jsonQuOptionCol.get("dwId").asText();
+                            String colName = jsonQuOptionCol.get("optionTitleObj").get("dwText").asText();
+                            String answerOptionName = "";
+                            if (anMatrixCheckboxes!=null) {
+                                for (EsAnMatrixCheckbox esAnMatrixCheckbox:anMatrixCheckboxes) {
+                                    String anQuRowId=esAnMatrixCheckbox.getRowDwId();
+                                    List<EsAnCheckbox> rowAnCheckboxs=esAnMatrixCheckbox.getRowAnCheckboxs();
+                                    for (EsAnCheckbox esAnCheckbox: rowAnCheckboxs) {
+                                        String anQuColId = esAnCheckbox.getOptionDwId();
+                                        if (quChenRowId.equals(anQuRowId) && quChenColumnId.equals(anQuColId)) {
+                                            answerOptionName = colName;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
+                            answerOptionName = answerOptionName.replace("&nbsp;"," ");
+                            exportUtil.setCell(row, cellIndex++, answerOptionName);
+                        }
+                    }
+                }
+            } else if (Objects.equals(quType, "MATRIX_INPUT")) {
+                List<EsAnMatrixFbk> esAnMatrixFbks = null;
+                if (esAnQuestion!=null) esAnMatrixFbks = esAnQuestion.getAnMatrixFbks();
+                JsonNode jsonQuOptions=jsonQuestion.get("quRows");
+                JsonNode jsonQuOptionCols=jsonQuestion.get("quCols");
+                int optionSize = jsonQuOptions.size();
+                int optionColSize = jsonQuOptionCols.size();
+                for (int j=0; j<optionSize; j++) {
+                    JsonNode jsonQuOption = jsonQuOptions.get(j);
+                    String quChenRowId=jsonQuOption.get("dwId").asText();
+                    for (int k=0; k<optionColSize; k++) {
+                        JsonNode jsonQuOptionCol = jsonQuOptionCols.get(k);
+                        if (!jsonQuOptionCol.has("tempEmptyOption")  || (jsonQuOptionCol.has("tempEmptyOption") && !jsonQuOptionCol.get("tempEmptyOption").asBoolean())) {
+                            String quChenColumnId=jsonQuOptionCol.get("dwId").asText();
+                            String colName = jsonQuOptionCol.get("optionTitleObj").get("dwText").asText();
+                            String answerOptionName = "";
+                            if (esAnMatrixFbks!=null) {
+                                for (EsAnMatrixFbk esAnMatrixFbk: esAnMatrixFbks) {
+                                    String anQuRowId=esAnMatrixFbk.getRowDwId();
+                                    List<EsAnFbk> rowAnCheckboxs=esAnMatrixFbk.getRowAnFbks();
+                                    for (EsAnFbk esAnFbk: rowAnCheckboxs) {
+                                        String anQuColId = esAnFbk.getOptionDwId();
+                                        if (quChenRowId.equals(anQuRowId) && quChenColumnId.equals(anQuColId)) {
+                                            answerOptionName = colName;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
+                            answerOptionName = answerOptionName.replace("&nbsp;"," ");
+                            exportUtil.setCell(row, cellIndex++, answerOptionName);
+                        }
+                    }
+                }
+            } else if (Objects.equals(quType, "MATRIX_SCALE") || Objects.equals(quType, "MATRIX_SLIDER")) {
+                List<EsAnMatrixScale> esAnMatrixScales = null;
+                if (esAnQuestion!=null) esAnMatrixScales = esAnQuestion.getAnMatrixScales();
+                JsonNode jsonQuOptions=jsonQuestion.get("quRows");
+                int optionSize = jsonQuOptions.size();
+                for (int j=0; j<optionSize; j++) {
+                    JsonNode jsonQuOption = jsonQuOptions.get(j);
+                    String quChenRowId=jsonQuOption.get("dwId").asText();
+                    String answerColOptionName="";
+                    if (esAnMatrixScales!=null) {
+                        for (EsAnMatrixScale anScale:esAnMatrixScales) {
+                            String quItemId = anScale.getRowDwId();
+                            if(quChenRowId.equals(quItemId)){
+                                answerColOptionName = anScale.getAnswerScore();
+                                break;
+                            }
+                        }
+                    }
+                    exportUtil.setCell(row, cellIndex++, answerColOptionName);
+                }
             }
 
         }

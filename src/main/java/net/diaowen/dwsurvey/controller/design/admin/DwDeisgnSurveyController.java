@@ -155,14 +155,55 @@ public class DwDeisgnSurveyController {
 
         List<Question> questionsClick = new ArrayList<Question>();
 //        questions13.add(new Question());
-        tabQus1.add(new DesignSurveyToolbarTabQu("功能配置",questionsClick, ""));
+        Question dimSet = new Question(null, "维度配置", null);
+        dimSet.setEventName("DimensionSetEvent");
+        dimSet.setDwsurveyfont("icon-dwsurvey-daoru");
+        questionsClick.add(dimSet);
+
+        Question importIndicators = new Question(null, "指标库", null);
+        importIndicators.setEventName("ImportIndicator");
+        importIndicators.setDwsurveyfont("icon-dwsurvey-daoru");
+        questionsClick.add(importIndicators);
+
+        Question importQus = new Question(null, "导入题目", null);
+        importQus.setEventName("ImportQuEvent");
+        importQus.setDwsurveyfont("icon-dwsurvey-daoru");
+        questionsClick.add(importQus);
+
+//        tabQus1.add(new DesignSurveyToolbarTabQu("功能配置",questionsClick, "click"));
+        tabs.add(new DesignSurveyToolbarTab("常用题型",tabQus1));
+
 
         List<DesignSurveyToolbarTabQu> tabQus2 = new ArrayList<>();
-        tabQus2.add(new DesignSurveyToolbarTabQu("基本题型",questions11));
-        tabQus2.add(new DesignSurveyToolbarTabQu("常用题型",questions11));
-
-        tabs.add(new DesignSurveyToolbarTab("常用题型",tabQus1));
-//        tabs.add(new DesignSurveyToolbarTab("扩展题型",tabQus2));
+        List<Question> questionsMatrix = new ArrayList<Question>();
+        Question matrixRadio = new Question(QuType.MATRIX_RADIO, "矩阵单选", null);
+        Question matrixCheckbox = new Question(QuType.MATRIX_CHECKBOX, "矩阵多选", null);
+        Question matrixInput = new Question(QuType.MATRIX_INPUT, "矩阵填空", null);
+        Question matrixNumber = new Question(QuType.MATRIX_NUMBER, "矩阵单选", null);
+        Question matrixSelect = new Question(QuType.MATRIX_SELECT, "矩阵单选", null);
+        Question matrixScale = new Question(QuType.MATRIX_SCALE, "矩阵量表", null);
+        Question matrixSlider = new Question(QuType.MATRIX_SLIDER, "矩阵滑块", null);
+        Question matrixGroup = new Question(QuType.MATRIX_GROUP, "矩阵单选", null);
+        matrixRadio.setDwsurveyfont("icon-dwsurvey-juzhendanxuan");
+        matrixCheckbox.setDwsurveyfont("icon-dwsurvey-juzhenduoxuan");
+        matrixInput.setDwsurveyfont("icon-dwsurvey-juzhentiankong");
+        matrixNumber.setDwsurveyfont("icon-dwsurvey-juzhenshuzhi");
+        matrixSelect.setDwsurveyfont("icon-dwsurvey-juzhenxiala");
+        matrixScale.setDwsurveyfont("icon-dwsurvey-juzhenliangbiao");
+        matrixSlider.setDwsurveyfont("icon-dwsurvey-juzhenhuakuai");
+        matrixGroup.setDwsurveyfont("icon-dwsurvey-juzhenzuhe");
+        questionsMatrix.add(matrixRadio);
+        questionsMatrix.add(matrixCheckbox);
+        questionsMatrix.add(matrixInput);
+        questionsMatrix.add(matrixScale);
+        questionsMatrix.add(matrixSlider);
+//        questionsMatrix.add(matrixNumber);
+//        questionsMatrix.add(matrixSelect);
+//        questionsMatrix.add(matrixGroup);
+        tabQus2.add(new DesignSurveyToolbarTabQu("矩阵题型", questionsMatrix));
+        tabQus2.add(new DesignSurveyToolbarTabQu("辅助组件",questions13));
+//        tabQus2.add(new DesignSurveyToolbarTabQu("功能配置",questionsClick, "click"));
+        tabs.add(new DesignSurveyToolbarTab("矩阵扩展",tabQus2));
 
         return HttpResult.SUCCESS(tabs);
     }

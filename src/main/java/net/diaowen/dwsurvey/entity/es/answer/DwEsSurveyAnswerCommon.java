@@ -12,6 +12,7 @@ import java.util.List;
 public class DwEsSurveyAnswerCommon implements Serializable {
 
     private String surveyId;
+    private String sid;
     //前端生成的答卷ID
     private String answerDwId;
     //问卷ID
@@ -26,7 +27,7 @@ public class DwEsSurveyAnswerCommon implements Serializable {
     //是否删除：0未删除；1删除状态
     private Integer isDelete;
     // 总分
-    private Double sumScore;
+    private Float sumScore;
 
     public String getSurveyId() {
         return surveyId;
@@ -92,11 +93,19 @@ public class DwEsSurveyAnswerCommon implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public Double getSumScore() {
+    public Float getSumScore() {
         return sumScore;
     }
 
-    public void setSumScore(Double sumScore) {
+    public void setSumScore(Float sumScore) {
         this.sumScore = sumScore;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 }

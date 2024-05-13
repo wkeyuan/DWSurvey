@@ -27,9 +27,9 @@ import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnIp;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
-import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnOrder;
-import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnScore;
+import net.diaowen.dwsurvey.entity.es.answer.question.option.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -274,7 +274,13 @@ public class DwAnswerEsClientService {
         }
 
         aggKeyMaps = new HashMap<>();
+        // 包含 QuScore,QuOrder,QuMatrixSlider,QuMatrixScale
         aggKeyMaps.put("optionStats", Aggregation.of(a -> a.terms(t -> t.field("answerOptionDwId").size(2000)).aggregations("optionStatsIn", s -> s.stats(v -> v.field("answerNum")))));
+        // matrix_radio
+        aggKeyMaps.put("count_matrix_radio", Aggregation.of(a -> a.terms(t -> t.field("esAnMatrixRadio.rowDwId").size(2000)).aggregations("col_count", s -> s.terms(t -> t.field("esAnMatrixRadio.colDwId").size(2000)))));
+        // matrix_checkbox
+        aggKeyMaps.put("count_matrix_checkbox", Aggregation.of(a -> a.terms(t -> t.field("esAnMatrixCheckbox.rowDwId").size(2000)).aggregations("col_count",s -> s.terms(t -> t.field("esAnMatrixCheckbox.rowAnCheckboxs.optionDwId").size(2000)))));
+
         Map<String, Aggregate> anAggNum = esClientService.aggregationSearch(ANSWER_INDEX_NAME_AGG, mq, aggKeyMaps);
         logger.debug("anAggNum {}", anAggNum.size());
         Aggregate aggregateTemp = anAggNum.get("optionStats");
@@ -287,19 +293,36 @@ public class DwAnswerEsClientService {
             Map<String, AggregationResultItem> anAggMap = new HashMap<>();
             List<StringTermsBucket> termsBucketList = stringTermsAggregate.buckets().array();
             logger.debug("termsBucketList size {}", termsBucketList.size());
-            for (StringTermsBucket stringTermsBucket : termsBucketList) {
-                logger.debug("key {}, value {}", stringTermsBucket.key(), stringTermsBucket.docCount());
-                AggregationResultItem aggregationResultItem = new AggregationResultItem(stringTermsBucket.docCount());
-                Aggregate  optionStatsIn = stringTermsBucket.aggregations().get("optionStatsIn");
-                if (optionStatsIn.isStats()) {
-                    double avg = optionStatsIn.stats().avg();
-                    long count = optionStatsIn.stats().count();
-                    double max = optionStatsIn.stats().max();
-                    double min = optionStatsIn.stats().min();
-                    double sum = optionStatsIn.stats().sum();
-                    aggregationResultItem = new AggregationResultItem(stringTermsBucket.docCount(), avg, count, max, min, sum);
+            for (StringTermsBucket rowTermsBucket : termsBucketList) {
+                logger.debug("key {}, value {}", rowTermsBucket.key(), rowTermsBucket.docCount());
+                AggregationResultItem aggregationResultItem = new AggregationResultItem(rowTermsBucket.docCount());
+                Aggregate  optionStatsIn = rowTermsBucket.aggregations().get("optionStatsIn");
+                if (optionStatsIn!=null) {
+                    if (optionStatsIn.isStats()) {
+                        double avg = optionStatsIn.stats().avg();
+                        long count = optionStatsIn.stats().count();
+                        double max = optionStatsIn.stats().max();
+                        double min = optionStatsIn.stats().min();
+                        double sum = optionStatsIn.stats().sum();
+                        aggregationResultItem = new AggregationResultItem(rowTermsBucket.docCount(), avg, count, max, min, sum);
+                    }
+                    anAggMap.put(rowTermsBucket.key(), aggregationResultItem);
                 }
-                anAggMap.put(stringTermsBucket.key(), aggregationResultItem);
+                // 查询子聚合，矩阵单选与多选题
+                if (rowTermsBucket.aggregations().containsKey("col_count")) {
+                    aggregationResultItem.setDocCount(rowTermsBucket.docCount());
+                    Map<String, AggregationResultItem> rowAnAggMap = new HashMap<>();
+                    Aggregate  colCountAgg = rowTermsBucket.aggregations().get("col_count");
+                    if (colCountAgg!=null) {
+                        List<StringTermsBucket> colTermsBucketList = colCountAgg.sterms().buckets().array();
+                        for (StringTermsBucket colTermsBucket : colTermsBucketList) {
+                            logger.debug("row {}, col key {}, value {}", rowTermsBucket.key(), colTermsBucket.key(), colTermsBucket.docCount());
+                            rowAnAggMap.put(colTermsBucket.key(), new AggregationResultItem(colTermsBucket.docCount()));
+                        }
+                    }
+                    aggregationResultItem.setRowAnAggMap(rowAnAggMap);
+                    anAggMap.put(rowTermsBucket.key(), aggregationResultItem);
+                }
             }
             AggregationResult aggregationResult = new AggregationResult();
             aggregationResult.setAggMap(anAggMap);
@@ -322,7 +345,8 @@ public class DwAnswerEsClientService {
                 for (EsAnScore esAnScore: esAnScores) {
                     DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
                     dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
-                    dwEsSurveyAnswerAnOption.setAnswerNum(Double.parseDouble(esAnScore.getAnswerScore()));
+                    String answerScore = esAnScore.getAnswerScore();
+                    if (NumberUtils.isNumber(answerScore)) dwEsSurveyAnswerAnOption.setAnswerNum(Float.parseFloat(answerScore));
                     dwEsSurveyAnswerAnOption.setAnswerOptionDwId(esAnScore.getOptionDwId());
                     dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
                     dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
@@ -336,11 +360,50 @@ public class DwAnswerEsClientService {
                 for (EsAnOrder esAnOrder: esAnOrders) {
                     DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
                     dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
-                    dwEsSurveyAnswerAnOption.setAnswerNum(Double.parseDouble(esAnOrder.getOrderNum()));
+                    String orderNum = esAnOrder.getOrderNum();
+                    if (NumberUtils.isNumber(orderNum)) dwEsSurveyAnswerAnOption.setAnswerNum(Float.parseFloat(orderNum));
                     dwEsSurveyAnswerAnOption.setAnswerOptionDwId(esAnOrder.getOptionDwId());
                     dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
                     dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
 //                    dwEsSurveyAnswerAnOption.setRelateDwIds();
+                    dwEsSurveyAnswerAnOption.setRelateAnswerResponseId(responseId);
+                    dwEsSurveyAnswerAnOptionList.add(dwEsSurveyAnswerAnOption);
+                }
+            } else if ("MATRIX_RADIO".equals(quType)) {
+                List<EsAnMatrixRadio> esAnMatrixRadios = esAnQuestion.getAnMatrixRadios();
+                for (EsAnMatrixRadio esMatrixRadio:esAnMatrixRadios) {
+                    // 单独存储起来
+                    DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
+                    dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
+                    dwEsSurveyAnswerAnOption.setEsAnMatrixRadio(esMatrixRadio);
+                    dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
+                    dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
+                    dwEsSurveyAnswerAnOption.setRelateAnswerResponseId(responseId);
+                    dwEsSurveyAnswerAnOptionList.add(dwEsSurveyAnswerAnOption);
+                }
+            } else if ("MATRIX_CHECKBOX".equals(quType)) {
+                List<EsAnMatrixCheckbox> esAnMatrixCheckboxes = esAnQuestion.getAnMatrixCheckboxes();
+                for (EsAnMatrixCheckbox esAnMatrixCheckbox:esAnMatrixCheckboxes) {
+                    // 单独存储起来
+                    DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
+                    dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
+                    dwEsSurveyAnswerAnOption.setEsAnMatrixCheckbox(esAnMatrixCheckbox);
+                    dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
+                    dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
+                    dwEsSurveyAnswerAnOption.setRelateAnswerResponseId(responseId);
+                    dwEsSurveyAnswerAnOptionList.add(dwEsSurveyAnswerAnOption);
+                }
+            } else if ("MATRIX_SCALE".equals(quType) || "MATRIX_SLIDER".equals(quType)) {
+                List<EsAnMatrixScale> esAnMatrixScales = esAnQuestion.getAnMatrixScales();
+                for (EsAnMatrixScale esAnMatrixScale:esAnMatrixScales) {
+                    DwEsSurveyAnswerAnOption dwEsSurveyAnswerAnOption = new DwEsSurveyAnswerAnOption();
+                    dwEsSurveyAnswerAnOption.setAnswerCommon(dwEsSurveyAnswer.getAnswerCommon());
+                    String answerScore = esAnMatrixScale.getAnswerScore();
+                    if (NumberUtils.isNumber(answerScore)) dwEsSurveyAnswerAnOption.setAnswerNum(Float.parseFloat(answerScore));
+                    dwEsSurveyAnswerAnOption.setAnswerOptionDwId(esAnMatrixScale.getRowDwId());
+                    dwEsSurveyAnswerAnOption.setQuDwId(esAnQuestion.getQuDwId());
+                    dwEsSurveyAnswerAnOption.setQuType(esAnQuestion.getQuType());
+                    //                    dwEsSurveyAnswerAnOption.setRelateDwIds();
                     dwEsSurveyAnswerAnOption.setRelateAnswerResponseId(responseId);
                     dwEsSurveyAnswerAnOptionList.add(dwEsSurveyAnswerAnOption);
                 }

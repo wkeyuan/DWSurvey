@@ -78,9 +78,9 @@ public class DwAnswerSurveyController {
      */
     @RequestMapping(value = "/survey-json-by-survey-id.do",method = RequestMethod.GET)
     @ResponseBody
-    public HttpResult<DwSurveyAnswerResult> surveyJsonBySurveyId(HttpServletRequest request, HttpServletResponse response, @RequestParam String sid, @RequestParam(required = false) String anPwd){
+    public HttpResult<DwSurveyAnswerResult> surveyJsonBySurveyId(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false) String surveyId, @RequestParam(required = false) String sid, @RequestParam(required = false) String anPwd){
         // 针对答卷场景需要考虑这些数据通过静态缓存获取。
-        SurveyJson surveyJson = getSurveyJson(sid);
+        SurveyJson surveyJson = getSurveyJson(surveyId, sid);
         DwSurveyAnswerResult dwSurveyAnswerResult = new DwSurveyAnswerResult();
         DwAnswerCheckResult dwAnswerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd);
         surveyJson = getSurveyJsonResult(dwAnswerCheckResult, surveyJson);
@@ -98,11 +98,12 @@ public class DwAnswerSurveyController {
         try {
             String surveyId = surveyAnswerJson.getSurveyId();
             String sid = surveyAnswerJson.getSid();
-            SurveyJson surveyJson = getSurveyJson(surveyId);
+            SurveyJson surveyJson = getSurveyJson(surveyId, sid);
             //构建答卷数据
             logger.debug("save SurveyAnswerJson {}", JSON.toJSONString(surveyAnswerJson));
             String answerJson = surveyAnswerJson.getAnswerJson();
             DwEsSurveyAnswer dwEsSurveyAnswer = JSON.parseObject(answerJson, DwEsSurveyAnswer.class);
+//            dwEsSurveyAnswer.getAnswerCommon().setSid(sid);
             EsAnIp esAnIp = dwEsSurveyAnswer.getAnswerCommon().getAnIp();
             String ipAddr = ipService.getIp(request);
             IPLocation ipLocation = ipService.getIpLocation(ipAddr);
@@ -166,7 +167,7 @@ public class DwAnswerSurveyController {
     @ResponseBody
     public HttpResult<DwEsSurveyAnswer> checkAnswerPwd(@RequestParam String sid, @RequestParam String anPwd){
         // 要先做安全验证
-        SurveyJson surveyJson = getSurveyJson(sid);
+        SurveyJson surveyJson = getSurveyJson(null, sid);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode surveyJsonSimpleNode = objectMapper.readTree(surveyJson.getSurveyJsonSimple());
@@ -189,15 +190,13 @@ public class DwAnswerSurveyController {
      * @param surveyId or sid
      * @return SurveyJson
      */
-    private SurveyJson getSurveyJson(String surveyId) {
+    private SurveyJson getSurveyJson(String surveyId, String sid) {
         SurveyJson surveyJson = null;
         if (StringUtils.isNotEmpty(surveyId)) {
             surveyJson = surveyJsonManager.findBySurveyId(surveyId);
-            if (surveyJson==null) {
-                SurveyDirectory survey = surveyDirectoryManager.getSurveyBySid(surveyId);
-                if (survey!=null) surveyId = survey.getId();
-                surveyJson = surveyJsonManager.findBySurveyId(surveyId);
-            }
+        }
+        if (surveyJson==null && StringUtils.isNotEmpty(sid)) {
+            surveyJson = surveyJsonManager.findBySid(sid);
         }
         return surveyJson;
     }
@@ -278,10 +277,7 @@ public class DwAnswerSurveyController {
                 answerCheckResult.buildResult(DwAnswerCheckResult.CHECK405);
                 return answerCheckResult;
             }
-
-            logger.debug("surveyJsonSimple {}", JSON.toJSONString(surveyJsonSimple));
             JsonNode surveyJsonNode = objectMapper.readTree(surveyJsonSimple);
-            logger.debug(JSON.toJSONString(surveyJsonNode));
             if (surveyJsonNode!=null) {
                 if (surveyJsonNode.has("surveyAttrs")) {
                     JsonNode surveyAttrs = surveyJsonNode.get("surveyAttrs");
@@ -317,7 +313,6 @@ public class DwAnswerSurveyController {
                         JsonNode anPwdAttr = surveyAttrs.get("anPwdAttr");
                         boolean enabled = anPwdAttr.get("enabled").asBoolean();
                         String anPwdCode = anPwdAttr.get("anPwdCode").asText();
-                        logger.debug("anPwdCode {}", anPwdCode);
                         if (enabled && StringUtils.isNotEmpty(anPwdCode) && StringUtils.isNotEmpty(anPwd) && !anPwdCode.equals(anPwd)) {
                             answerCheckResult.buildResult(DwAnswerCheckResult.CHECK403);
                             return answerCheckResult;

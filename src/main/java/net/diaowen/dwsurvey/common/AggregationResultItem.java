@@ -12,6 +12,8 @@ public class AggregationResultItem {
     private double statsMin;
     private double statsSum;
 
+    Map<String, AggregationResultItem> rowAnAggMap;
+
     AggregationResultItem(){
 
     }
@@ -75,5 +77,13 @@ public class AggregationResultItem {
 
     public void setStatsSum(double statsSum) {
         this.statsSum = statsSum;
+    }
+
+    public Map<String, AggregationResultItem> getRowAnAggMap() {
+        return rowAnAggMap;
+    }
+
+    public void setRowAnAggMap(Map<String, AggregationResultItem> rowAnAggMap) {
+        this.rowAnAggMap = rowAnAggMap;
     }
 }

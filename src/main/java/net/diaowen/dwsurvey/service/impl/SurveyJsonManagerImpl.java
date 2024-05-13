@@ -75,6 +75,11 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 		return surveyJsonDao.findFirst("saveDate",false, cri1);
 	}
 
+	public SurveyJson findBySid(String sid) {
+		Criterion cri1 = Restrictions.eq("sid",sid);
+		return surveyJsonDao.findFirst("saveDate",false, cri1);
+	}
+
 	@Override
 	public String devSurvey(String surveyId) {
 		return devSurveyJson(surveyId);

@@ -1,0 +1,199 @@
+// 如果打开问卷页面慢且请求后端问卷数据慢，则可以在数据库给t_survey_json的surveyId与sid加上普通index索引
+ALTER TABLE `dwsurvey_pro`.`t_survey_json`
+ADD INDEX `sid_index` (`sid` ASC) VISIBLE;
+ALTER TABLE `dwsurvey_pro`.`t_survey_json`
+ADD INDEX `survey_index` (`survey_id` ASC) VISIBLE;
+// 新增评分字段更新
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sumScore": {
+          "type": "float"
+        }
+      }
+    },
+    "anQuestions": {
+        "properties": {
+          "quAnScore": {
+            "type": "float"
+          }
+        }
+    }
+  }
+}
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sumScore": {
+          "type": "float"
+        }
+      }
+    }
+  }
+}
+// 新增矩阵题字段索引
+// 加矩阵字段
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anMatrixRadios": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "colDwId": {
+                "type": "keyword"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixCheckboxes": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnCheckboxs": {
+                "properties": {
+                  "optionDwId": {
+                    "type": "keyword"
+                  },
+                  "otherText": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixFbks": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnFbks": {
+                "properties": {
+                  "answer": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "optionDwId": {
+                    "type": "keyword"
+                  }
+                }
+              }
+            }
+          },
+          "anMatrixScales": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "answerScore": {
+                "type": "float"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          }
+        }
+    }
+  }
+}
+// 加sid
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sid": {
+            "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sid": {
+            "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+
+// 加矩阵辅助统计字段
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "esAnMatrixRadio": {
+      "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "colDwId": {
+                "type": "keyword"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+    },
+    "esAnMatrixCheckbox": {
+      "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnCheckboxs": {
+                "properties": {
+                  "optionDwId": {
+                    "type": "keyword"
+                  },
+                  "otherText": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+    }
+  }
+}
