@@ -31,9 +31,9 @@ dwsurvey:
         web-pri: web-pri
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
-    info: DWSurvey Pro V6.2.20240505
-    number: Pro V6.2.240505
-    built: 2024/05/05
+    info: DWSurvey Pro V6.3.2405013
+    number: Pro V6.3.2405013
+    built: 2024/05/13
 server:
   port: 80
 
