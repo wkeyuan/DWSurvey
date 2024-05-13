@@ -42,7 +42,6 @@ public class DesignSurveyBankUtils {
         questions12.add(genderRadio);
         questions12.add(codeFbk);
         questions12.add(ageFbk);
-        tabQus1.add(new DesignSurveyToolbarTabQu("个人信息",questions12));
 
         List<Question> questions13 = new ArrayList<Question>();
 
@@ -88,6 +87,7 @@ public class DesignSurveyBankUtils {
         questions13.add(radio4);
 
         tabQus1.add(new DesignSurveyToolbarTabQu("满意度",questions13));
+        tabQus1.add(new DesignSurveyToolbarTabQu("个人信息",questions12));
         return tabQus1;
     }
 }

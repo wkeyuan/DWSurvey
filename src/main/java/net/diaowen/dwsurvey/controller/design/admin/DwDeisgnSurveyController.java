@@ -45,7 +45,8 @@ public class DwDeisgnSurveyController {
     @ResponseBody
     public HttpResult<List<DesignSurveyToolbarTab>> toolbarQuestions() {
         // 标准问卷的Tabs
-        List<DesignSurveyToolbarTab> tabs = DesignSurveyToolbarUtils.surveyToolbarTabs();
+//        List<DesignSurveyToolbarTab> tabs = DesignSurveyToolbarUtils.surveyToolbarTabs();
+        List<DesignSurveyToolbarTab> tabs = DesignSurveyToolbarUtils.surveyToolbarTabsV1();
         return HttpResult.SUCCESS(tabs);
     }
 
