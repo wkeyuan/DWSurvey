@@ -90,6 +90,13 @@ public class Question extends IdEntity{
 		this.quName = quName;
 	}
 
+	public  Question(QuType quType, String quTitle, String quName, String dwQuIcon) {
+		this.quType = quType;
+		this.quTitle = quTitle;
+		this.quName = quName;
+		this.dwQuIcon = dwQuIcon;
+	}
+
 	public String getBelongId() {
 		return belongId;
 	}
@@ -455,6 +462,7 @@ public class Question extends IdEntity{
 	private String dwsurveyfont = null;
 	@Transient
 	private String eventName = null;
+	private String dwQuIcon = "<i class=\"fa-regular fa-circle-dot\"></i>";//用于左右布局图标
 	@Transient
 	public String getDwsurveyfont() {
 		return dwsurveyfont;
@@ -470,5 +478,14 @@ public class Question extends IdEntity{
 
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
+	}
+
+	@Transient
+	public String getDwQuIcon() {
+		return dwQuIcon;
+	}
+
+	public void setDwQuIcon(String dwQuIcon) {
+		this.dwQuIcon = dwQuIcon;
 	}
 }
