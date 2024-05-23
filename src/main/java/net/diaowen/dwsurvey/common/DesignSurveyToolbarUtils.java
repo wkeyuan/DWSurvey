@@ -51,10 +51,36 @@ public class DesignSurveyToolbarUtils {
     public static List<Question> commonQus () {
         List<Question> questions12 = new ArrayList<Question>();
         //日期 时间 邮箱 性别 学历 收入
-        Question dataFbk = new Question(QuType.FILLBLANK, "请输入日期", null);
+        Question dataFbk = new Question(QuType.FILLBLANK, "请输入日期", "日期题", "<i class=\"fa-solid fa-calendar-days\"></i>");
         dataFbk.setCheckType(CheckType.DATE);
-        Question timeFbk = new Question(QuType.FILLBLANK, "请输入时间", null);
+        Question timeFbk = new Question(QuType.FILLBLANK, "请输入时间", "时间题","<i class=\"fa-regular fa-clock\"></i>");
         timeFbk.setCheckType(CheckType.TIME);
+        Question emailFbk = new Question(QuType.FILLBLANK, "请输入邮箱", "邮箱题","<i class=\"fa-regular fa-envelope\"></i>");
+        emailFbk.setCheckType(CheckType.EMAIL);
+
+        Question genderRadio = new Question(QuType.RADIO, "请选择性别", "性别题", "<i class=\"fa-solid fa-venus-mars\"></i>");
+        List<QuRadio> genderRadios = new ArrayList<>();
+        genderRadios.add(new QuRadio("男",null));
+        genderRadios.add(new QuRadio("女", null));
+        genderRadio.setQuRadios(genderRadios);
+
+        Question eduRadio = new Question(QuType.RADIO, "请选择学历", "学历题", "<i class=\"fa-solid fa-user-graduate\"></i>");
+        List<QuRadio> eduRadios = new ArrayList<>();
+        eduRadios.add(new QuRadio("博士","博士"));
+        eduRadios.add(new QuRadio("硕士", "硕士"));
+        eduRadios.add(new QuRadio("本科", "本科"));
+        eduRadios.add(new QuRadio("专科", "专科"));
+        eduRadios.add(new QuRadio("其它", "其它"));
+        eduRadio.setQuRadios(eduRadios);
+
+        Question incomeRadio = new Question(QuType.RADIO, "请选择月收入", "月收入", "<i class=\"fa-solid fa-coins\"></i>");
+        List<QuRadio> incomeRadios = new ArrayList<>();
+        incomeRadios.add(new QuRadio("3000元以下","3000元以下"));
+        incomeRadios.add(new QuRadio("3000-5000元", "3000-5000元"));
+        incomeRadios.add(new QuRadio("5000-10000元", "5000-10000元"));
+        incomeRadios.add(new QuRadio("10000-20000元", "10000-20000元"));
+        incomeRadios.add(new QuRadio("20000元以上", "20000元以上"));
+        incomeRadio.setQuRadios(incomeRadios);
 
         dataFbk.setDwsurveyfont("icon-dwsurvey-riqi");
         timeFbk.setDwsurveyfont("icon-dwsurvey-shijian");
@@ -76,18 +102,18 @@ public class DesignSurveyToolbarUtils {
     public static List<Question> userQus() {
         List<Question> questions12 = new ArrayList<Question>();
         //日期 时间 邮箱 性别 学历 收入
-        Question nameFbk = new Question(QuType.FILLBLANK, "请输入姓名", "姓名");
-        Question phoneFbk = new Question(QuType.FILLBLANK, "请输入手机号", "手机号");
-        Question emailFbk = new Question(QuType.FILLBLANK, "请输入邮箱", "邮箱");
-        Question genderRadio = new Question(QuType.RADIO, "请选择性别", "性别");
+        Question nameFbk = new Question(QuType.FILLBLANK, "请输入姓名", "姓名", "<i class=\"fa-regular fa-user\"></i>");
+        Question phoneFbk = new Question(QuType.FILLBLANK, "请输入手机号", "手机号", "<i class=\"fa-solid fa-mobile-screen\"></i>");
+        Question emailFbk = new Question(QuType.FILLBLANK, "请输入邮箱", "邮箱", "<i class=\"fa-regular fa-envelope\"></i>");
+        Question genderRadio = new Question(QuType.RADIO, "请选择性别", "性别", "<i class=\"fa-solid fa-venus-mars\"></i>");
         List<QuRadio> genderRadios = new ArrayList<>();
         genderRadios.add(new QuRadio("男", null));
         genderRadios.add(new QuRadio("女", null));
         genderRadio.setQuRadios(genderRadios);
-        Question codeFbk = new Question(QuType.FILLBLANK, "请输入身份证号", "身份证");
-        Question ageFbk = new Question(QuType.FILLBLANK, "请输入年龄", "年龄");
+        Question codeFbk = new Question(QuType.FILLBLANK, "请输入身份证号", "身份证", "<i class=\"fa-solid fa-id-card\"></i>");
+        Question ageFbk = new Question(QuType.FILLBLANK, "请输入年龄", "年龄", "<i class=\"fa-regular fa-moon\"></i>");
 
-        Question eduRadio = new Question(QuType.RADIO, "请选择学历", null);
+        Question eduRadio = new Question(QuType.RADIO, "请选择学历", "学历", "<i class=\"fa-solid fa-user-graduate\"></i>");
         List<QuRadio> eduRadios = new ArrayList<>();
         eduRadios.add(new QuRadio("博士","博士"));
         eduRadios.add(new QuRadio("硕士", "硕士"));
@@ -95,7 +121,7 @@ public class DesignSurveyToolbarUtils {
         eduRadios.add(new QuRadio("专科", "专科"));
         eduRadios.add(new QuRadio("其它", "其它"));
         eduRadio.setQuRadios(eduRadios);
-        Question incomeRadio = new Question(QuType.RADIO, "请选择月收入", null);
+        Question incomeRadio = new Question(QuType.RADIO, "请选择月收入", "月收入", "<i class=\"fa-solid fa-coins\"></i>");
         List<QuRadio> incomeRadios = new ArrayList<>();
         incomeRadios.add(new QuRadio("3000元以下","3000元以下"));
         incomeRadios.add(new QuRadio("3000-5000元", "3000-5000元"));
@@ -145,8 +171,8 @@ public class DesignSurveyToolbarUtils {
      */
     public static List<Question> ppQus() {
         List<Question> questions13 = new ArrayList<Question>();
-        questions13.add(new Question(QuType.PAGETAG,null, null));
-        questions13.add(new Question(QuType.PARAGRAPH, "请输入段落标题", "请输入段落标题"));
+        questions13.add(new Question(QuType.PAGETAG,null, "分页题", "<i class=\"fa-solid fa-pager\"></i>"));
+        questions13.add(new Question(QuType.PARAGRAPH, "请输入段落标题", "分段题", "<i class=\"fa-solid fa-indent\"></i>"));
         return questions13;
     }
 
@@ -181,14 +207,14 @@ public class DesignSurveyToolbarUtils {
 
     public static List<Question> matrixQus() {
         List<Question> questionsMatrix = new ArrayList<Question>();
-        Question matrixRadio = new Question(QuType.MATRIX_RADIO, "矩阵单选", null);
-        Question matrixCheckbox = new Question(QuType.MATRIX_CHECKBOX, "矩阵多选", null);
-        Question matrixInput = new Question(QuType.MATRIX_INPUT, "矩阵填空", null);
-        Question matrixNumber = new Question(QuType.MATRIX_NUMBER, "矩阵单选", null);
-        Question matrixSelect = new Question(QuType.MATRIX_SELECT, "矩阵单选", null);
-        Question matrixScale = new Question(QuType.MATRIX_SCALE, "矩阵量表", null);
-        Question matrixSlider = new Question(QuType.MATRIX_SLIDER, "矩阵滑块", null);
-        Question matrixGroup = new Question(QuType.MATRIX_GROUP, "矩阵单选", null);
+        Question matrixRadio = new Question(QuType.MATRIX_RADIO, "矩阵单选", "矩阵单选", "<i class=\"fa-solid fa-list-check\"></i>");
+        Question matrixCheckbox = new Question(QuType.MATRIX_CHECKBOX, "矩阵多选", "矩阵多选", "<i class=\"fa-solid fa-table-cells\"></i>");
+        Question matrixInput = new Question(QuType.MATRIX_INPUT, "矩阵填空", "矩阵填空", "<i class=\"fa-solid fa-grip\"></i>");
+        Question matrixNumber = new Question(QuType.MATRIX_NUMBER, "矩阵单选", "矩阵数值", "<i class=\"fa-solid fa-border-all\"></i>");
+        Question matrixSelect = new Question(QuType.MATRIX_SELECT, "矩阵单选", "矩阵下拉", "<i class=\"fa-solid fa-rectangle-list\"></i>");
+        Question matrixScale = new Question(QuType.MATRIX_SCALE, "矩阵量表", "矩阵量表", "<i class=\"fa-solid fa-ruler-combined\"></i>");
+        Question matrixSlider = new Question(QuType.MATRIX_SLIDER, "矩阵滑块", "矩阵滑块", "<i class=\"fa-solid fa-sliders\"></i>");
+        Question matrixGroup = new Question(QuType.MATRIX_GROUP, "矩阵单选", "矩阵组合", "<i class=\"fa-solid fa-object-group\"></i>");
         matrixRadio.setDwsurveyfont("icon-dwsurvey-juzhendanxuan");
         matrixCheckbox.setDwsurveyfont("icon-dwsurvey-juzhenduoxuan");
         matrixInput.setDwsurveyfont("icon-dwsurvey-juzhentiankong");

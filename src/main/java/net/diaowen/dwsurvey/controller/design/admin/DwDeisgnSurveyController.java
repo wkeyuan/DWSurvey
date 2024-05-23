@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/api/dwsurvey/app/dw-design-survey")
+@RequestMapping("/api/dwsurvey/app/v6/dw-design-survey")
 public class DwDeisgnSurveyController {
 
     @Autowired
