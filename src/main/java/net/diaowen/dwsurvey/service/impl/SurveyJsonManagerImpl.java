@@ -46,20 +46,26 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 
 	@Override
 	public void saveNew(SurveyJson surveyJson) {
-        /*String surveyId = surveyJson.getSurveyId();
+        String surveyId = surveyJson.getSurveyId();
 		SurveyJson surveyJsonDb = findBySurveyId(surveyId);
 		if(surveyJsonDb!=null){
 			surveyJsonDb.setSurveyJsonText(surveyJson.getSurveyJsonText());
+			surveyJsonDb.setSurveyJsonSimple(surveyJson.getSurveyJsonSimple());
+			surveyJsonDb.setSid(surveyJson.getSid());
 			surveyJsonDb.setSaveDate(new Date());
-			super.save(surveyJson);
+			super.save(surveyJsonDb);
 		}else{
 			surveyJson.setSaveDate(new Date());
 			super.save(surveyJson);
-		}*/
+		}
         //如果这样直接保存，则需要考虑库中保存的历史数据可能过多，需要定量清除
-		// 保存最新的
+		/*
+		// 清除缓存
+        surveyJsonManager.clearHistoryJson(surveyId);
+        // 保存最新的
 		surveyJson.setSaveDate(new Date());
 		super.save(surveyJson);
+		*/
 		//每份问卷仅保留最近的1000次操作记录
 		//前端每30秒检查下问卷是否有变动，如果有变动则自动保存一次并生成一次历史记录
 	}
@@ -72,8 +78,8 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 		if (surveyJsons!=null && surveyJsons.size()> 100) {
 			int size = surveyJsons.size();
 			for (int i = 100; i<size; i++) {
-//				String surveyJsonId = surveyJsons.get(i).getId();
-				surveyJsonDao.delete(surveyJsons.get(i));
+				String surveyJsonId = surveyJsons.get(i).getId();
+				surveyJsonDao.delete(surveyJsonId);
 			}
 		}
 	}
