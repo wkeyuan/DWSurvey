@@ -22,4 +22,6 @@ public interface SurveyJsonManager extends BaseService<SurveyJson, String> {
     public SurveyJson findBySid(String sid);
 
     String devSurvey(String surveyId);
+
+    void clearHistoryJson(String surveyId);
 }

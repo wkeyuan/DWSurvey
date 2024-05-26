@@ -33,7 +33,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/api/dwsurvey/app/answer/export-log")
+@RequestMapping("/api/dwsurvey/app/v6/answer/export-log")
 public class ExportLogController {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired

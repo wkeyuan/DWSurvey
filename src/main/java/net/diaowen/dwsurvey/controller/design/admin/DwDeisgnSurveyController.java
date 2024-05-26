@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/api/dwsurvey/app/dw-design-survey")
+@RequestMapping("/api/dwsurvey/app/v6/dw-design-survey")
 public class DwDeisgnSurveyController {
 
     @Autowired
@@ -101,6 +101,9 @@ public class DwDeisgnSurveyController {
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
+            // 清除缓存
+            surveyJsonManager.clearHistoryJson(surveyId);
+            // 保存新的
             surveyJsonManager.saveNew(surveyJson);
             return HttpResult.SUCCESS();
         }
