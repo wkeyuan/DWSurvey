@@ -1,19 +1,13 @@
 package net.diaowen.dwsurvey.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.service.BaseServiceImpl;
 import net.diaowen.common.utils.DwSurveyUtils;
-import net.diaowen.dwsurvey.dao.AnAnswerDao;
 import net.diaowen.dwsurvey.dao.SurveyJsonDao;
-import net.diaowen.dwsurvey.entity.AnAnswer;
-import net.diaowen.dwsurvey.entity.Question;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
 import net.diaowen.dwsurvey.entity.SurveyJson;
-import net.diaowen.dwsurvey.service.AnAnswerManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.SurveyJsonManager;
 import org.hibernate.criterion.Criterion;
@@ -28,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author keyuan
@@ -53,7 +46,7 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 
 	@Override
 	public void saveNew(SurveyJson surveyJson) {
-		/*String surveyId = surveyJson.getSurveyId();
+        /*String surveyId = surveyJson.getSurveyId();
 		SurveyJson surveyJsonDb = findBySurveyId(surveyId);
 		if(surveyJsonDb!=null){
 			surveyJsonDb.setSurveyJsonText(surveyJson.getSurveyJsonText());
@@ -64,10 +57,25 @@ public class SurveyJsonManagerImpl extends BaseServiceImpl<SurveyJson, String> i
 			super.save(surveyJson);
 		}*/
         //如果这样直接保存，则需要考虑库中保存的历史数据可能过多，需要定量清除
+		// 保存最新的
 		surveyJson.setSaveDate(new Date());
 		super.save(surveyJson);
 		//每份问卷仅保留最近的1000次操作记录
 		//前端每30秒检查下问卷是否有变动，如果有变动则自动保存一次并生成一次历史记录
+	}
+
+	@Transactional
+	public void clearHistoryJson(String surveyId) {
+		// 根据时间排序查出所有数据，只保留最后的100条。
+		Criterion cri1 = Restrictions.eq("surveyId",surveyId);
+		List<SurveyJson> surveyJsons = surveyJsonDao.findByOrder("saveDate",false, cri1);
+		if (surveyJsons!=null && surveyJsons.size()> 100) {
+			int size = surveyJsons.size();
+			for (int i = 100; i<size; i++) {
+//				String surveyJsonId = surveyJsons.get(i).getId();
+				surveyJsonDao.delete(surveyJsons.get(i));
+			}
+		}
 	}
 
 	public SurveyJson findBySurveyId(String surveyId) {

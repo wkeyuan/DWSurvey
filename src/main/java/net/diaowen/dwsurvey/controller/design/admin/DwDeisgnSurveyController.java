@@ -100,6 +100,9 @@ public class DwDeisgnSurveyController {
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
+            // 清除缓存
+            surveyJsonManager.clearHistoryJson(surveyId);
+            // 保存新的
             surveyJsonManager.saveNew(surveyJson);
             return HttpResult.SUCCESS();
         }
