@@ -319,9 +319,11 @@ public class DwAnswerSurveyController {
                         boolean enabled = anPwdAttr.get("enabled").asBoolean();
                         String anPwdCode = anPwdAttr.get("anPwdCode").asText();
                         logger.debug("anPwdCode {}", anPwdCode);
-                        if (enabled && StringUtils.isNotEmpty(anPwdCode) && StringUtils.isNotEmpty(anPwd) && !anPwdCode.equals(anPwd)) {
-                            answerCheckResult.buildResult(DwAnswerCheckResult.CHECK403);
-                            return answerCheckResult;
+                        if (enabled && StringUtils.isNotEmpty(anPwdCode)) {
+                            if (StringUtils.isEmpty(anPwd) || !anPwdCode.equals(anPwd)) {
+                                answerCheckResult.buildResult(DwAnswerCheckResult.CHECK403);
+                                return answerCheckResult;
+                            }
                         }
                     }
 //                 截止数量检查
