@@ -9,17 +9,17 @@ import java.util.List;
 public class QuTemplateBankCommon {
 
     public static Question getUploadQuestion() {
-        return new Question(QuType.UPLOADFILE, "上传题标题", null);
+        return new Question(QuType.UPLOADFILE, "上传题标题", "上传题", "<i class=\"fa-solid fa-cloud-arrow-up\"></i>");
     }
 
     public static Question getTextareaQuestion() {
-        Question textareaQuestion = new Question(QuType.FILLBLANK, "多行填空题标题", null);
+        Question textareaQuestion = new Question(QuType.FILLBLANK, "多行填空题标题", "多行填空题", "<i class=\"fa-regular fa-rectangle-list\"></i>");
         textareaQuestion.setAnswerInputRow(3);
         return textareaQuestion;
     }
 
     public static Question getSelectQuestion() {
-        Question selectQuestion = new Question(QuType.RADIO, "下拉题标题", null);
+        Question selectQuestion = new Question(QuType.RADIO, "下拉题标题", "下拉题", "<i class=\"fa-regular fa-circle-check\"></i>");
         selectQuestion.setHv(4);
         List<QuRadio> selectQuRadios = new ArrayList<>();
         selectQuRadios.add(new QuRadio("选项1","选项1"));
@@ -29,7 +29,7 @@ public class QuTemplateBankCommon {
     }
 
     public static Question getOrderQuestion() {
-        Question orderQuestion = new Question(QuType.ORDERQU, "排序题标题", null);
+        Question orderQuestion = new Question(QuType.ORDERQU, "排序题标题", "排序题", "<i class=\"fa-solid fa-arrow-down-1-9\"></i>");
         List<QuOrderby> quOrderbys = new ArrayList<>();
         quOrderbys.add(new QuOrderby("选项1","选项1"));
         quOrderbys.add(new QuOrderby("选项2", "选项2"));
@@ -38,7 +38,7 @@ public class QuTemplateBankCommon {
     }
 
     public static Question getScoreQuestion() {
-        Question scoreQuestion = new Question(QuType.SCORE, "评分题标题", null);
+        Question scoreQuestion = new Question(QuType.SCORE, "评分题标题", "评分题", "<i class=\"fa-solid fa-star\"></i>");
         scoreQuestion.setParamInt02(5);
         List<QuScore> quScores = new ArrayList<>();
         quScores.add(new QuScore("选项1","选项1"));
@@ -48,7 +48,7 @@ public class QuTemplateBankCommon {
     }
 
     public static Question getmFbkQuestion() {
-        Question mFbkQuestion = new Question(QuType.MULTIFILLBLANK, "多项填空题标题", null);
+        Question mFbkQuestion = new Question(QuType.MULTIFILLBLANK, "多项填空题标题", "多项填空题", "<i class=\"fa-solid fa-list-check\"></i>");
         List<QuMultiFillblank> quMultiFillblanks = new ArrayList<>();
         quMultiFillblanks.add(new QuMultiFillblank("选项1","选项1"));
         quMultiFillblanks.add(new QuMultiFillblank("选项2", "选项2"));
@@ -57,20 +57,21 @@ public class QuTemplateBankCommon {
     }
 
     public static Question getInputQuestion() {
-        return new Question(QuType.FILLBLANK, "填空题标题", null);
+        return new Question(QuType.FILLBLANK, "填空题标题", "填空题", "<i class=\"fa-solid fa-font\"></i>");
     }
 
     public static Question getCheckboxQuestion() {
-        Question checkboxQuestion = new Question(QuType.CHECKBOX, "多选题标题", null);
+        Question checkboxQuestion = new Question(QuType.CHECKBOX, "多选题标题", "多选题");
         List<QuCheckbox> quCheckboxs = new ArrayList<>();
         quCheckboxs.add(new QuCheckbox("选项1","选项1"));
         quCheckboxs.add(new QuCheckbox("选项2", "选项2"));
         checkboxQuestion.setQuCheckboxs(quCheckboxs);
+        checkboxQuestion.setDwQuIcon("<i class=\"fa-regular fa-square-check\"></i>");
         return checkboxQuestion;
     }
 
     public static Question getRadioQuestion() {
-        Question radioQuestion = new Question(QuType.RADIO, "单选题标题", null);
+        Question radioQuestion = new Question(QuType.RADIO, "单选题标题", "单选题");
         List<QuRadio> quRadios = new ArrayList<>();
         quRadios.add(new QuRadio("选项1","选项1"));
         quRadios.add(new QuRadio("选项2", "选项2"));
