@@ -42,10 +42,8 @@ public class DwAnswerEsUtils {
                                 JsonNode jsonOption = jsonQuRadios.get(i);
                                 String jsonOptionDwId = jsonOption.get("dwId").asText();
                                 if (optionDwId.equals(jsonOptionDwId)) {
-                                    if (jsonOption.get("scoreNum").isFloat()) {
-                                        quAnScoreNum = jsonOption.get("scoreNum").floatValue();
-                                        break;
-                                    }
+                                    quAnScoreNum = Float.parseFloat(jsonOption.get("scoreNum").asText());
+                                    break;
                                 }
                             }
                         }
