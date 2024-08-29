@@ -53,3 +53,4 @@ Thumbs.db
 hs_err_pid*
 
 /src/main/resources/http_ca.crt
+src/main/resources/static
