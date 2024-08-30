@@ -11,6 +11,7 @@ import net.diaowen.dwsurvey.entity.SurveyJson;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnCheckbox;
+import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnRadio;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnScore;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
@@ -29,53 +30,64 @@ public class DwAnswerEsUtils {
             List<EsAnQuestion> esAnQuestionList = dwEsSurveyAnswer.getAnQuestions();
             for (EsAnQuestion esAnQu:esAnQuestionList) {
                 float quAnScoreNum = 0;
-                JsonNode jsonQuestion = jsonNodeQu(jsonNodeQus, esAnQu.getQuDwId());
-                if (jsonQuestion!=null) {
-                    String quType = esAnQu.getQuType();
-                    if ("RADIO".equals(quType)) {
-                        // 计算单选分数
-                        String optionDwId = esAnQu.getAnRadio().getOptionDwId();
-                        JsonNode jsonQuRadios = jsonQuestion.get("quRadios");
-                        if (jsonQuRadios!=null && jsonQuRadios.isArray() && jsonQuRadios.size()>0) {
-                            int jsonNodeSize = jsonQuRadios.size();
-                            for (int i=0; i<jsonNodeSize; i++) {
-                                JsonNode jsonOption = jsonQuRadios.get(i);
-                                String jsonOptionDwId = jsonOption.get("dwId").asText();
-                                if (optionDwId.equals(jsonOptionDwId)) {
-                                    quAnScoreNum = Float.parseFloat(jsonOption.get("scoreNum").asText());
-                                    break;
+                if (esAnQu!=null) {
+                    JsonNode jsonQuestion = jsonNodeQu(jsonNodeQus, esAnQu.getQuDwId());
+                    if (jsonQuestion!=null) {
+                        String quType = esAnQu.getQuType();
+                        if ("RADIO".equals(quType)) {
+                            // 计算单选分数
+                            EsAnRadio esAnRadio = esAnQu.getAnRadio();
+                            if (esAnRadio!=null) {
+                                String optionDwId = esAnRadio.getOptionDwId();
+                                JsonNode jsonQuRadios = jsonQuestion.get("quRadios");
+                                if (jsonQuRadios!=null && jsonQuRadios.isArray() && jsonQuRadios.size()>0) {
+                                    int jsonNodeSize = jsonQuRadios.size();
+                                    for (int i=0; i<jsonNodeSize; i++) {
+                                        JsonNode jsonOption = jsonQuRadios.get(i);
+                                        String jsonOptionDwId = jsonOption.get("dwId").asText();
+                                        if (optionDwId.equals(jsonOptionDwId)) {
+                                            quAnScoreNum = Float.parseFloat(jsonOption.get("scoreNum").asText());
+                                            break;
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    } else if ("CHECKBOX".equals(quType)) {
-                        List<EsAnCheckbox> anCheckboxes = esAnQu.getAnCheckboxs();
-                        JsonNode jsonQuCheckboxs = jsonQuestion.get("quCheckboxs");
-                        for (EsAnCheckbox esAnCheckbox: anCheckboxes) {
-                            String optionDwId = esAnCheckbox.getOptionDwId();
-                            if (jsonQuCheckboxs!=null && jsonQuCheckboxs.isArray() && jsonQuCheckboxs.size()>0) {
-                                int jsonNodeSize = jsonQuCheckboxs.size();
-                                for (int i=0; i<jsonNodeSize; i++) {
-                                    JsonNode jsonOption = jsonQuCheckboxs.get(i);
-                                    String jsonOptionDwId = jsonOption.get("dwId").asText();
-                                    if (optionDwId.equals(jsonOptionDwId)) {
-                                        quAnScoreNum+= jsonOption.get("scoreNum").asDouble();
-                                        break;
+                        } else if ("CHECKBOX".equals(quType)) {
+                            List<EsAnCheckbox> anCheckboxes = esAnQu.getAnCheckboxs();
+                            if (anCheckboxes!=null) {
+                                JsonNode jsonQuCheckboxs = jsonQuestion.get("quCheckboxs");
+                                for (EsAnCheckbox esAnCheckbox: anCheckboxes) {
+                                    if (esAnCheckbox!=null) {
+                                        String optionDwId = esAnCheckbox.getOptionDwId();
+                                        if (jsonQuCheckboxs!=null && jsonQuCheckboxs.isArray() && jsonQuCheckboxs.size()>0) {
+                                            int jsonNodeSize = jsonQuCheckboxs.size();
+                                            for (int i=0; i<jsonNodeSize; i++) {
+                                                JsonNode jsonOption = jsonQuCheckboxs.get(i);
+                                                String jsonOptionDwId = jsonOption.get("dwId").asText();
+                                                if (optionDwId.equals(jsonOptionDwId)) {
+                                                    quAnScoreNum+= jsonOption.get("scoreNum").asDouble();
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else if ("SCORE".equals(quType)) {
+                            List<EsAnScore> anScores = esAnQu.getAnScores();
+                            if (anScores!=null) {
+                                for (EsAnScore anScore: anScores) {
+                                    String answerScore = anScore.getAnswerScore();
+                                    if (NumberUtils.isNumber(answerScore)) {
+                                        quAnScoreNum+= Float.parseFloat(answerScore);
                                     }
                                 }
                             }
                         }
-                    } else if ("SCORE".equals(quType)) {
-                        List<EsAnScore> anScores = esAnQu.getAnScores();
-                        for (EsAnScore anScore: anScores) {
-                            String answerScore = anScore.getAnswerScore();
-                            if (NumberUtils.isNumber(answerScore)) {
-                                quAnScoreNum+= Float.parseFloat(answerScore);
-                            }
-                        }
                     }
+                    esAnQu.setQuAnScore(quAnScoreNum);
+                    surveyAnScoreNum+=quAnScoreNum;
                 }
-                esAnQu.setQuAnScore(quAnScoreNum);
-                surveyAnScoreNum+=quAnScoreNum;
                 logger.info("quAnScoreNum {}", quAnScoreNum);
             }
         }
