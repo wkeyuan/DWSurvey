@@ -392,8 +392,7 @@ public class DwAnswerSurveyController {
             }else{
                 Cookie cookieBgTime = CookieUtils.getCookie(request, bgTimeAttrName);
                 SimpleDateFormat dateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
-                assert cookieBgTime != null;
-                bgAnTime = dateFormat.parse(cookieBgTime.getValue());
+                if (cookieBgTime!=null) bgAnTime = dateFormat.parse(cookieBgTime.getValue());
             }
             Date endAnTime = new Date();
             entity.getAnswerCommon().getAnTime().setBgAnDate(bgAnTime);
