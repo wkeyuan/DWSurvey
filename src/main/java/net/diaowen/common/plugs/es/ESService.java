@@ -9,6 +9,8 @@ import java.io.IOException;
 @Service
 public class ESService {
 
+    public final static String INDEX_PREV = "armor_";
+
     @Resource(name="clientByPasswd")
     private ElasticsearchClient elasticsearchClient;
 

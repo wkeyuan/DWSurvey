@@ -43,8 +43,8 @@ import java.util.*;
 public class DwAnswerEsClientService {
     private Logger logger = LoggerFactory.getLogger(getClass());
     //答卷索引名称
-    private final static String ANSWER_INDEX_NAME = "dwsurvey_answer_index";
-    private final static String ANSWER_INDEX_NAME_AGG = "dwsurvey_answer_index_aggs";
+    private final static String ANSWER_INDEX_NAME = ESService.INDEX_PREV + "dwsurvey_answer_index";
+    private final static String ANSWER_INDEX_NAME_AGG = ESService.INDEX_PREV + "dwsurvey_answer_index_aggs";
     @Resource
     private ESClientService esClientService;
 
