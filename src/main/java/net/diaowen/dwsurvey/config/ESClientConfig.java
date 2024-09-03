@@ -195,4 +195,13 @@ public class ESClientConfig {
         return new ElasticsearchAsyncClient(transport);
     }
 
+    @Bean
+    public ElasticsearchClient noPwdClient(){
+        // 用builder创建RestClient对象
+        RestClient client = RestClient
+                .builder(new HttpHost("127.0.0.1",9200,"http"))
+                .build();
+        return new ElasticsearchClient(new RestClientTransport(client, new JacksonJsonpMapper()));
+    }
+
 }
