@@ -238,6 +238,7 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
             exportUtil.createRow(0);
             int cellIndex = 0;
             int quNum=0;
+            exportUtil.setCell(cellIndex++, "序号");
             for (int i=0; i<jsonNodeSize; i++) {
                 JsonNode jsonQuestion = jsonNodeQus.get(i);
                 String quType = jsonQuestion.get("quType").asText();

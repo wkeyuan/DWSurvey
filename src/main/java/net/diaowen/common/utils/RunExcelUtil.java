@@ -81,6 +81,7 @@ public class RunExcelUtil extends Thread {
         SXSSFRow row = exportUtil.getRow(rowIndex);
         int jsonNodeSize = jsonNodeQus.size();
         List<EsAnQuestion> anQuestionList = dwEsSurveyAnswer.getAnQuestions();
+        exportUtil.setCell(row, cellIndex++, String.valueOf(rowIndex));
         for (int i=0; i<jsonNodeSize; i++) {
             JsonNode jsonQuestion = jsonNodeQus.get(i);
             String quType = jsonQuestion.get("quType").asText();
