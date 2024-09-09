@@ -11,7 +11,8 @@ public class ESService {
 
     public final static String INDEX_PREV = "";
 
-    @Resource(name="clientByPasswd")
+//    @Resource(name="clientByPasswd")
+    @Resource(name = "noPwdClient")
     private ElasticsearchClient elasticsearchClient;
 
     // 创建索引

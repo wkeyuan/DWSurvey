@@ -25,7 +25,9 @@ import java.util.Map;
 @Service
 public class ESClientService {
     private static Logger logger = LoggerFactory.getLogger(ESClientConfig.class);
-    @Resource(name="clientByPasswd")
+
+//    @Resource(name="clientByPasswd")
+    @Resource(name = "noPwdClient")
     private ElasticsearchClient elasticsearchClient;
 
     private static class SomeApplicationData {}
