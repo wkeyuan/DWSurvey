@@ -112,7 +112,7 @@ public class RunExcelUtil extends Thread {
                 String quItemId = null;
                 if (esAnQuestion!=null) {
                     EsAnRadio esAnRadio = esAnQuestion.getAnRadio();
-                    quItemId = esAnRadio.getOptionDwId();
+                    if (esAnRadio!=null) quItemId = esAnRadio.getOptionDwId();
                 }
 
                 for (int j=0;j<optionSize;j++) {
