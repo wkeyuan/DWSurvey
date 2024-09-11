@@ -338,7 +338,7 @@ public class DwAnswerSurveyController {
                         JsonNode anEndTimeAttr = surveyAttrs.get("anEndTimeAttr");
                         boolean enabled = anEndTimeAttr.get("enabled").asBoolean();
                         String anEndTimeStr = anEndTimeAttr.get("endTime").asText();
-                        if (enabled && anEndTimeStr!=null) {
+                        if (enabled && anEndTimeStr!=null && !"null".equals(anEndTimeStr)) {
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             try {
                                 Date anEndDate = simpleDateFormat.parse(anEndTimeStr);
