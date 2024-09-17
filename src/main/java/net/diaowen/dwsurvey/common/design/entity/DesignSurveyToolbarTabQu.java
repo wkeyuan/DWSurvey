@@ -1,8 +1,7 @@
-package net.diaowen.dwsurvey.common;
+package net.diaowen.dwsurvey.common.design.entity;
 
 import net.diaowen.dwsurvey.entity.Question;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DesignSurveyToolbarTabQu {

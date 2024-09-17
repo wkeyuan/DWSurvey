@@ -1,19 +1,16 @@
 package net.diaowen.dwsurvey.controller.design.admin;
 
-import co.elastic.clients.elasticsearch.nodes.Http;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.diaowen.common.CheckType;
-import net.diaowen.common.QuType;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.httpclient.HttpResult;
-import net.diaowen.common.plugs.httpclient.PageResult;
-import net.diaowen.dwsurvey.common.DesignSurveyBankUtils;
-import net.diaowen.dwsurvey.common.DesignSurveyToolbarTab;
-import net.diaowen.dwsurvey.common.DesignSurveyToolbarTabQu;
-import net.diaowen.dwsurvey.common.DesignSurveyToolbarUtils;
+import net.diaowen.dwsurvey.common.design.bank.DesignSurveyBankUtils;
+import net.diaowen.dwsurvey.common.design.entity.DesignSurveyToolbarTab;
+import net.diaowen.dwsurvey.common.design.entity.DesignSurveyToolbarTabQu;
+import net.diaowen.dwsurvey.common.design.toolbar.DesignToolbarUtils;
+import net.diaowen.dwsurvey.common.design.toolbar.survey.DesignSurveyToolbarUtils;
 import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.SurveyJsonManager;
@@ -21,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/api/dwsurvey/app/v6/dw-design-survey")
@@ -43,10 +37,11 @@ public class DwDeisgnSurveyController {
      */
     @RequestMapping(value = "/toolbar-qus.do",method = RequestMethod.GET)
     @ResponseBody
-    public HttpResult<List<DesignSurveyToolbarTab>> toolbarQuestions() {
+    public HttpResult<List<DesignSurveyToolbarTab>> toolbarQuestions(String surveyType) {
         // 标准问卷的Tabs
 //        List<DesignSurveyToolbarTab> tabs = DesignSurveyToolbarUtils.surveyToolbarTabs();
-        List<DesignSurveyToolbarTab> tabs = DesignSurveyToolbarUtils.surveyToolbarTabsV1();
+//        List<DesignSurveyToolbarTab> tabs = DesignSurveyToolbarUtils.surveyToolbarTabsV1();
+          List<DesignSurveyToolbarTab> tabs = DesignToolbarUtils.surveyToolbarTabsByType(surveyType);
         return HttpResult.SUCCESS(tabs);
     }
 

@@ -1,4 +1,4 @@
-package net.diaowen.dwsurvey.common;
+package net.diaowen.dwsurvey.common.design.entity;
 
 import java.util.List;
 

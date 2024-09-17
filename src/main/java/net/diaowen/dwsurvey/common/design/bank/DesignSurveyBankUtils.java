@@ -1,7 +1,8 @@
-package net.diaowen.dwsurvey.common;
+package net.diaowen.dwsurvey.common.design.bank;
 
 import net.diaowen.common.CheckType;
 import net.diaowen.common.QuType;
+import net.diaowen.dwsurvey.common.design.entity.DesignSurveyToolbarTabQu;
 import net.diaowen.dwsurvey.entity.QuRadio;
 import net.diaowen.dwsurvey.entity.Question;
 
