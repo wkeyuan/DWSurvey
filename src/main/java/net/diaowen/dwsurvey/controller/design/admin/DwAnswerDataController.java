@@ -45,8 +45,6 @@ public class DwAnswerDataController {
     @RequestMapping(value = "/list.do",method = RequestMethod.GET)
     @ResponseBody
     public Page<DwEsSurveyAnswer> surveyJsonBySurveyId(Page<DwEsSurveyAnswer> page, String surveyId, String bgAnDate, String endAnDate, String ip, String city){
-        logger.info("bgAnDate {}", bgAnDate);
-        logger.info("endAnDate {}", endAnDate);
         return dwAnswerEsClientService.findPageByFromSize(page, surveyId, bgAnDate, endAnDate, ip, city, null, 0);
     }
 

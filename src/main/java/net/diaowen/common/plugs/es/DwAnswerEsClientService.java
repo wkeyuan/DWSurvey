@@ -123,8 +123,8 @@ public class DwAnswerEsClientService {
 //            必须带的参数
                 queryList.add(TermQuery.of(b -> b.field("answerCommon.surveyId").value(surveyId))._toQuery());
 //            可选参数，答卷时间
-                if (StringUtils.isNotBlank(beginDate)) queryList.add(Query.of(b -> b.range(c -> c.field("answerCommon.anTime.bgAnDate").from(beginDate))));
-                if (StringUtils.isNotBlank(endDate)) queryList.add(Query.of(b -> b.range(c -> c.field("answerCommon.anTime.bgAnDate").to(endDate))));
+                if (StringUtils.isNotBlank(beginDate) && StringUtils.isNotBlank(endDate)) queryList.add(Query.of(b -> b.range(c -> c.field("answerCommon.anTime.endAnDate").from(beginDate).to(endDate).timeZone("Asia/Shanghai"))));//.format("yyyy-MM-dd'T'HH:mm:ss")
+//                if (StringUtils.isNotBlank(endDate)) queryList.add(Query.of(b -> b.range(c -> c.field("answerCommon.anTime.endAnDate").to(endDate))));//.format("yyyy-MM-dd'T'HH:mm:ss")
                 if (StringUtils.isNotBlank(ip)) queryList.add(Query.of(b -> b.term( c -> c.field("answerCommon.anIp.ip").value(ip))));
 //                if (StringUtils.isNotBlank(city)) queryList.add(Query.of(b -> b.fuzzy(c -> c.field("anIp.city").value(city).fuzziness("1"))));
 //                if (StringUtils.isNotBlank(city)) queryList.add(Query.of(b -> b.match(c -> c.field("anIp.city").field("anIp.addr").query(city))));
