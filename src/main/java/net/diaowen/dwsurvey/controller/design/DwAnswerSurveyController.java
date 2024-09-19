@@ -333,6 +333,27 @@ public class DwAnswerSurveyController {
                         }
                     }
 
+                    //开始时间检查
+                    if (surveyAttrs.has("anStartTimeAttr")) {
+                        JsonNode anEndTimeAttr = surveyAttrs.get("anStartTimeAttr");
+                        boolean enabled = anEndTimeAttr.get("enabled").asBoolean();
+                        String anStartTimeStr = anEndTimeAttr.get("startTime").asText();
+                        if (enabled && anStartTimeStr!=null && !"null".equals(anStartTimeStr)) {
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            try {
+                                Date anStartDate = simpleDateFormat.parse(anStartTimeStr);
+                                long anEndDateTime = anStartDate.getTime();
+                                Date curDate = new Date();
+                                if (curDate.getTime()<=anEndDateTime) {
+                                    answerCheckResult.buildResult(DwAnswerCheckResult.CHECK4081);
+                                    return answerCheckResult;
+                                }
+                            } catch (ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+
 //                 截止时间检查
                     if (surveyAttrs.has("anEndTimeAttr")) {
                         JsonNode anEndTimeAttr = surveyAttrs.get("anEndTimeAttr");
