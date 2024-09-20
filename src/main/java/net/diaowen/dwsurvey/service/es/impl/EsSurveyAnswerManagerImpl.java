@@ -113,22 +113,24 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
         JsonNode jsonNodeQus = null;
         if (surveyJsonNode!=null && surveyJsonNode.has("questions")) jsonNodeQus = surveyJsonNode.get("questions");
 
-        int size = 6000;
+        int size = 2000;
         Page<DwEsSurveyAnswer> page = new Page<>();
-        page.setPageSize(size);
-        page = dwAnswerEsClientService.findPageByScroll(page, surveyId);
 
         List<SurveyAnswer> answers = new ArrayList<>();
         List<Question> questions = new ArrayList<>();
         SXSSF_XLSXExportUtil exportUtil = new SXSSF_XLSXExportUtil(fileName, savePath);
         try {
             exportXLSTitle(exportUtil, jsonNodeQus);
-            int answerListSize = Integer.parseInt(String.valueOf(page.getTotalItems()));
+
             logger.info("begin export answer {}",new Date());
             if(exportLog!=null && exportLog.getThreadMaxExportNum()!=null) size = exportLog.getThreadMaxExportNum();
             int expDataContent = 1;
             if(exportLog!=null && exportLog.getExpDataContent()!=null) expDataContent = exportLog.getExpDataContent();
             AtomicInteger ai=new AtomicInteger(0);
+
+            page.setPageSize(size);
+            page = dwAnswerEsClientService.findPageByScroll(page, surveyId);
+            int answerListSize = Integer.parseInt(String.valueOf(page.getTotalItems()));
 
             int lastSize = answerListSize;
             int poolSize = 0;
