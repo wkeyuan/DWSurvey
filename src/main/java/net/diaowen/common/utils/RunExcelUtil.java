@@ -44,11 +44,15 @@ public class RunExcelUtil extends Thread {
 
     private JsonNode jsonNodeQus;
 
+    private int pageSize;
+
+    private int poolIndex;
+
     RunExcelUtil(){
 
     }
 
-    public RunExcelUtil(String surveyId, SXSSF_XLSXExportUtil exportUtil, List<DwEsSurveyAnswer> answers, int beginIndex, int endIndex, String savePath, boolean isExpUpQu, AtomicInteger ai, int expDataContent, JsonNode jsonNodeQus){
+    public RunExcelUtil(String surveyId, SXSSF_XLSXExportUtil exportUtil, List<DwEsSurveyAnswer> answers, int beginIndex, int endIndex, String savePath, boolean isExpUpQu, AtomicInteger ai, int expDataContent, JsonNode jsonNodeQus, int pageSize, int poolIndex){
         this.surveyId = surveyId;
         this.exportUtil = exportUtil;
         this.sheet = exportUtil.getSheet();
@@ -60,12 +64,21 @@ public class RunExcelUtil extends Thread {
         this.ai = ai;
         this.expDataContent = expDataContent;
         this.jsonNodeQus = jsonNodeQus;
+        this.pageSize = pageSize;
+        this.poolIndex = poolIndex;
     }
 
     @Override
     public void run() {
         for (int j = beginIndex; j < endIndex; j++) {
-            DwEsSurveyAnswer dwEsSurveyAnswer = answers.get(j);
+            //DwEsSurveyAnswer dwEsSurveyAnswer = answers.get(j);
+            //========== es 导出增加 BEGIN ========
+            int anIndex = j;
+            if (beginIndex>=pageSize) {
+                anIndex = j - (pageSize*poolIndex);
+            }
+            DwEsSurveyAnswer dwEsSurveyAnswer = answers.get(anIndex);
+            //========== es 导出增加 END ========
             String surveyAnswerId = dwEsSurveyAnswer.getEsId();
             exportUtil.createNewRow(j+1);
             exportXLSRow(surveyAnswerId, jsonNodeQus, dwEsSurveyAnswer, (j+1), savePath, isExpUpQu);

@@ -142,7 +142,12 @@ public class ESClientService {
 
     public  <TDocument> SearchResponse<TDocument> findPageByScrollId(String scrollId, Class<TDocument> tDocumentClass) throws IOException {
 //        SearchResponse<TDocument> response = elasticsearchClient.search(s -> s.index(indexName).query(query).size(size).scroll(Time.of(t -> t.time("5m"))), tDocumentClass);
-        SearchResponse<TDocument> response = elasticsearchClient.scroll(s->s.scrollId(scrollId), tDocumentClass);
+        logger.info("findPageByScrollId scrollId {}", scrollId);
+//        SearchResponse<TDocument> response = elasticsearchClient.scroll(s->s.scrollId(scrollId), tDocumentClass);
+        // 使用scrollId进行后续的查询
+        // 使用scrollId进行搜索
+        SearchResponse<TDocument> response = elasticsearchClient.scroll(s -> s.scrollId(scrollId).scroll(t -> t.time("5m")), tDocumentClass);
+        logger.info("response {}", response.scrollId());
         return response;
     }
 
@@ -176,5 +181,9 @@ public class ESClientService {
     public DeleteByQueryResponse deleteByQuery(String indexName, Query query) throws IOException {
         DeleteByQueryRequest deleteByQueryRequest = DeleteByQueryRequest.of(i -> i.index(indexName).query(query));
         return elasticsearchClient.deleteByQuery(deleteByQueryRequest);
+    }
+
+    public void clearScroll(String clearScrollId) throws IOException {
+        elasticsearchClient.clearScroll(c->c.scrollId(clearScrollId));
     }
 }

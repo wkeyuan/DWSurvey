@@ -137,31 +137,47 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
                 poolSize = Integer.parseInt(String.valueOf(answerListSize / size));
             }
 
+            String scrollId = page.getScrollId();
             //保证至少有一个
             ExecutorService exe = Executors.newFixedThreadPool(poolSize+1);
-            logger.info("导出 countSize {} lastSize {} poolSize {} ",answerListSize,lastSize,lastSize>0?poolSize+1:poolSize);
+            logger.info("导出 countSize {} lastSize {} poolSize {} scoreId {}",answerListSize,lastSize,lastSize>0?poolSize+1:poolSize, scrollId);
             for (int index = 0; index<poolSize; index++ ){
                 int beginIndex = index*size;
                 int endIndex = beginIndex+size;
                 logger.info("index {} beginIndex {} endIndex {}", index,beginIndex,endIndex);
+                Page<DwEsSurveyAnswer> forPage = new Page<>();
+                List<DwEsSurveyAnswer> pageResult = new ArrayList<>();
                 if (index>0) {
+                    forPage.setPageSize(size);
+                    forPage.setScrollId(scrollId);
+                    logger.info("forPage scrollId {}", scrollId);
                     // 获取新的results
-                    page = dwAnswerEsClientService.findPageByScrollId(page);
+                    forPage = dwAnswerEsClientService.findPageByScrollId(forPage);
+                    pageResult = forPage.getResult();
+                    scrollId = forPage.getScrollId();
+                    logger.info("pageResult {}, scrollId {}", pageResult.size(), scrollId);
+                } else {
+                    pageResult = page.getResult();
                 }
-                List<DwEsSurveyAnswer> pageResult = page.getResult();
-                exe.execute(new RunExcelUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus));
+                exe.execute(new RunExcelUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus, size, index));
             }
             if(lastSize>0){
                 int beginIndex = poolSize*size;
                 int endIndex = beginIndex+lastSize;
                 logger.info("lastSize {} beginIndex {} endIndex {}", lastSize,beginIndex,endIndex);
+                Page<DwEsSurveyAnswer> forPage = new Page<>();
+                List<DwEsSurveyAnswer> pageResult = new ArrayList<>();
                 if (poolSize>0) {
-                    page = dwAnswerEsClientService.findPageByScrollId(page);
+                    forPage.setPageSize(size);
+                    forPage.setScrollId(scrollId);
+                    // 获取新的results
+                    forPage = dwAnswerEsClientService.findPageByScrollId(forPage);
+                    pageResult = forPage.getResult();
                 }
-                List<DwEsSurveyAnswer> pageResult = page.getResult();
-                exe.execute(new RunExcelUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus));
+                exe.execute(new RunExcelUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus, size, poolSize));
             }
             exe.shutdown();
+            dwAnswerEsClientService.clearScroll(scrollId);
             while (true) {
                 updateExportProgress(answerListSize,ai.get(),exportLog);
                 if (exe.isTerminated()) {

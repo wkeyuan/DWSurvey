@@ -207,7 +207,7 @@ public class DwAnswerEsClientService {
     public Page<DwEsSurveyAnswer> findPageByScrollId(Page<DwEsSurveyAnswer> page) {
         page.setResult(new ArrayList<>());
         String scrollId = page.getScrollId();
-        if (scrollId==null) {
+        if (scrollId!=null) {
             try {
                 SearchResponse<DwEsSurveyAnswer> searchResponse = esClientService.findPageByScrollId(scrollId, DwEsSurveyAnswer.class);
                 searchResponseData2Page(page, searchResponse);
@@ -424,6 +424,16 @@ public class DwAnswerEsClientService {
         if (ids!=null) {
             for (int i=0; i<ids.length; i++) {
                 deleteById(ids[i]);
+            }
+        }
+    }
+
+    public void clearScroll (String scrollId) {
+        if (scrollId!=null) {
+            try {
+                esClientService.clearScroll(scrollId);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }
