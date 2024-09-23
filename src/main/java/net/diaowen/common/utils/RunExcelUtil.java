@@ -9,6 +9,10 @@ import net.diaowen.common.utils.parsehtml.HtmlUtil;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswerCommon;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnIp;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.*;
 import net.diaowen.dwsurvey.service.QuestionManager;
@@ -77,11 +81,15 @@ public class RunExcelUtil extends Thread {
             if (beginIndex>=pageSize) {
                 anIndex = j - (pageSize*poolIndex);
             }
-            DwEsSurveyAnswer dwEsSurveyAnswer = answers.get(anIndex);
-            //========== es 导出增加 END ========
-            String surveyAnswerId = dwEsSurveyAnswer.getEsId();
             exportUtil.createNewRow(j+1);
-            exportXLSRow(surveyAnswerId, jsonNodeQus, dwEsSurveyAnswer, (j+1), savePath, isExpUpQu);
+            try{
+                DwEsSurveyAnswer dwEsSurveyAnswer = answers.get(anIndex);
+                //========== es 导出增加 END ========
+                String surveyAnswerId = dwEsSurveyAnswer.getEsId();
+                exportXLSRow(surveyAnswerId, jsonNodeQus, dwEsSurveyAnswer, (j+1), savePath, isExpUpQu);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             int exportCount = ai.addAndGet(1);
             //logger.info("export ai {}",exportCount);
         }
@@ -405,12 +413,35 @@ public class RunExcelUtil extends Thread {
 
         }
 
-        exportUtil.setCell(row, cellIndex++,  dwEsSurveyAnswer.getAnswerCommon().getAnIp().getIp());
-        exportUtil.setCell(row, cellIndex++,  dwEsSurveyAnswer.getAnswerCommon().getAnIp().getCity());
-        exportUtil.setCell(row, cellIndex++,  new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(dwEsSurveyAnswer.getAnswerCommon().getAnTime().getEndAnDate()));
-        exportUtil.setCell(row, cellIndex++, String.valueOf(dwEsSurveyAnswer.getAnswerCommon().getAnTime().getTotalTime() / 1000));
+        DwEsSurveyAnswerCommon answerCommon = dwEsSurveyAnswer.getAnswerCommon();
+        String answerIp = "";
+        String city = "";
+        String endAnDate = "";
+        String totalTime = "";
+        Integer handleState = 0;
+        if (answerCommon!=null) {
+            EsAnIp anIp = answerCommon.getAnIp();
+            if (anIp!=null) {
+                answerIp = anIp.getIp();
+                city = anIp.getCity();
+            }
+            EsAnTime anTime = answerCommon.getAnTime();
+            if (anTime!=null && anTime.getEndAnDate()!=null) {
+                endAnDate = new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒").format(anTime.getEndAnDate());
+            }
+            if (anTime!=null && anTime.getTotalTime()!=null) {
+                totalTime = String.valueOf(anTime.getTotalTime() / 1000);
+            }
+            EsAnState anState = dwEsSurveyAnswer.getAnswerCommon().getAnState();
+            if (anState!=null) {
+                handleState = anState.getHandleState();
+            }
+        }
+        exportUtil.setCell(row, cellIndex++,  answerIp);
+        exportUtil.setCell(row, cellIndex++,  city);
+        exportUtil.setCell(row, cellIndex++,  endAnDate);
+        exportUtil.setCell(row, cellIndex++, totalTime);
 
-        Integer handleState = dwEsSurveyAnswer.getAnswerCommon().getAnState().getHandleState();
         String handleStateStr = "未操作";
         if(handleState!=null){
             if(handleState==1) handleStateStr = "通过";
