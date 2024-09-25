@@ -70,14 +70,15 @@ public class DwAnswerEsClientService {
             EsAnTime esAnTime = dwEsSurveyAnswer.getAnswerCommon().getAnTime();
 //            List<EsAnQuestion> anQuestions = dwEsSurveyAnswer.getAnQuestions();
             String newAnswerJson = JSON.toJSONString(dwEsSurveyAnswer);
-            logger.info("save answer source {}", newAnswerJson);
+//            logger.info("save answer source {}", newAnswerJson);
             IndexResponse indexResponse = esClientService.createDoc(ANSWER_INDEX_NAME, newAnswerJson);
             // 保存分析使用的副本-最终放在异步定时任务中
             List<DwEsSurveyAnswerAnOption> dwEsSurveyAnswerAnOptionList = dwEsSurveyAnswerAnOptions(dwEsSurveyAnswer, indexResponse.id());
             for (DwEsSurveyAnswerAnOption esSurveyAnswerAnOption: dwEsSurveyAnswerAnOptionList) {
                 String esSurveyAnswerAnOptionJson = JSON.toJSONString(esSurveyAnswerAnOption);
-                logger.info("save answer source esSurveyAnswerAnOptionJson {}", esSurveyAnswerAnOptionJson);
+//                logger.info("save answer source esSurveyAnswerAnOptionJson {}", esSurveyAnswerAnOptionJson);
                 IndexResponse indexResponse2 = esClientService.createDoc(ANSWER_INDEX_NAME_AGG, esSurveyAnswerAnOptionJson);
+//                logger.info("save answer esSurveyAnswerAnOptionJson {}", indexResponse2.id());
             }
             return indexResponse;
         } catch (IOException e) {
