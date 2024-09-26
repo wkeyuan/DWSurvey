@@ -152,12 +152,10 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
                 if (index>0) {
                     forPage.setPageSize(size);
                     forPage.setScrollId(scrollId);
-                    logger.info("forPage scrollId {}", scrollId);
                     // 获取新的results
                     forPage = dwAnswerEsClientService.findPageByScrollId(forPage);
                     pageResult = forPage.getResult();
                     scrollId = forPage.getScrollId();
-                    logger.info("pageResult {}, scrollId {}", pageResult.size(), scrollId);
                 } else {
                     pageResult = page.getResult();
                 }
@@ -185,13 +183,14 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
             while (true) {
                 updateExportProgress(answerListSize,ai.get(),exportLog);
                 if (exe.isTerminated()) {
-                    logger.info("XLS导出完成 {} {}",ai.get(),savePath);
+                    logger.info("XLS导出最后一步，正在生成文件 {} {}",ai.get(),savePath);
                     exportUtil.exportXLS();
 //					updateExportLog(exportLog,1);//在一下结束导出中执行
                     break;
                 }
                 Thread.sleep(200);
             }
+            logger.info("XLS导出完成，文件地址 {}", savePath);
             logger.info("end export answer {}",new Date());
             logger.info("end export answer getProgress {}", JSON.toJSONString(exportLog));
             Thread.sleep(1000);
