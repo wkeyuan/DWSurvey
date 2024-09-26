@@ -146,6 +146,7 @@ public class RunExcelUtil extends Thread {
                         break;
                     }
                 }
+                if (answerOptionName==null) answerOptionName = "";
                 answerOptionName = HtmlUtil.removeTagFromText(answerOptionName);
                 answerOptionName = answerOptionName.replace("&nbsp;"," ");
                 if (answerScore==null) answerScore = 0f;
@@ -182,7 +183,7 @@ public class RunExcelUtil extends Thread {
                             }
                         }
                     }
-
+                    if (answerOptionName==null) answerOptionName = "";
                     answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
                     answerOptionName = answerOptionName.replace("&nbsp;"," ");
                     if (answerScore==null) answerScore = 0f;
@@ -212,6 +213,7 @@ public class RunExcelUtil extends Thread {
                             }
                         }
                     }
+                    if (answerOptionName==null) answerOptionName = "";
                     answerOptionName = answerOptionName.replace("&nbsp;"," ");
                     exportUtil.setCell(row, cellIndex++, answerOptionName);
                 }
@@ -231,6 +233,7 @@ public class RunExcelUtil extends Thread {
                             }
                         }
                     }
+                    if (answerOptionName==null) answerOptionName = "";
                     answerOptionName = answerOptionName.replace("&nbsp;"," ");
                     exportUtil.setCell(row, cellIndex++, answerOptionName);
                 }
@@ -315,6 +318,7 @@ public class RunExcelUtil extends Thread {
                             }
                         }
                     }
+                    if (answerColOptionName==null) answerColOptionName = "";
                     answerColOptionName=HtmlUtil.removeTagFromText(answerColOptionName);
                     answerColOptionName = answerColOptionName.replace("&nbsp;"," ");
                     exportUtil.setCell(row, cellIndex++, answerColOptionName);
@@ -348,6 +352,7 @@ public class RunExcelUtil extends Thread {
                                     }
                                 }
                             }
+                            if (answerOptionName==null) answerOptionName = "";
                             answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
                             answerOptionName = answerOptionName.replace("&nbsp;"," ");
                             exportUtil.setCell(row, cellIndex++, answerOptionName);
@@ -383,6 +388,7 @@ public class RunExcelUtil extends Thread {
                                     }
                                 }
                             }
+                            if (answerOptionName==null) answerOptionName = "";
                             answerOptionName=HtmlUtil.removeTagFromText(answerOptionName);
                             answerOptionName = answerOptionName.replace("&nbsp;"," ");
                             exportUtil.setCell(row, cellIndex++, answerOptionName);
