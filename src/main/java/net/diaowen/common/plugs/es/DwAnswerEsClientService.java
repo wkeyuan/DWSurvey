@@ -142,7 +142,7 @@ public class DwAnswerEsClientService {
                 int size = page.getPageSize();
 
                 List<SortOptions> sortOptions = new ArrayList<>();
-                sortOptions.add(SortOptions.of(b -> b.field(c -> c.field("answerCommon.anTime.bgAnDate").order(SortOrder.Desc))));
+                sortOptions.add(SortOptions.of(b -> b.field(c -> c.field("answerCommon.anTime.endAnDate").order(SortOrder.Desc))));
 
                 SearchResponse<DwEsSurveyAnswer> searchResponse = esClientService.findPageByFromSize(ANSWER_INDEX_NAME, query, sortOptions, from, size, DwEsSurveyAnswer.class);
 
@@ -186,8 +186,9 @@ public class DwAnswerEsClientService {
             page.setScrollId(searchResponse.scrollId());
             return page;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return page;
     }
 
     private static void searchResponseData2Page(Page<DwEsSurveyAnswer> page, SearchResponse<DwEsSurveyAnswer> searchResponse) {
