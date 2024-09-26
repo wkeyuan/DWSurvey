@@ -176,7 +176,7 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
                     forPage = dwAnswerEsClientService.findPageByScrollId(forPage);
                     pageResult = forPage.getResult();
                 } else {
-                    pageResult = forPage.getResult();
+                    pageResult = page.getResult();
                 }
                 exe.execute(new RunExcelUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus, size, poolSize));
             }

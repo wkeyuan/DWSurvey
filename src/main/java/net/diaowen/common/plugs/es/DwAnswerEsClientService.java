@@ -181,7 +181,9 @@ public class DwAnswerEsClientService {
 //            必须带的参数
             queryList.add(TermQuery.of(b -> b.field("answerCommon.surveyId").value(surveyId))._toQuery());
             Query query = Query.of(b -> b.bool(c -> c.must(queryList)));
-            SearchResponse<DwEsSurveyAnswer> searchResponse = esClientService.findPageByScroll(ANSWER_INDEX_NAME, query, page.getPageSize(), DwEsSurveyAnswer.class);
+            List<SortOptions> sortOptions = new ArrayList<>();
+            sortOptions.add(SortOptions.of(b -> b.field(c -> c.field("answerCommon.anTime.endAnDate").order(SortOrder.Asc))));
+            SearchResponse<DwEsSurveyAnswer> searchResponse = esClientService.findPageByScroll(ANSWER_INDEX_NAME, query, sortOptions, page.getPageSize(), DwEsSurveyAnswer.class);
             searchResponseData2Page(page, searchResponse);
             page.setScrollId(searchResponse.scrollId());
             return page;

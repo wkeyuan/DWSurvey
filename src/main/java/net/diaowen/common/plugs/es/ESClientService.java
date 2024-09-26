@@ -104,7 +104,7 @@ public class ESClientService {
         return response;
     }
 
-    public  <TDocument> SearchResponse<TDocument> findPageByScroll(String indexName, Query query, int size, Class<TDocument> tDocumentClass) throws IOException {
+    public  <TDocument> SearchResponse<TDocument> findPageByScroll(String indexName, Query query, List<SortOptions> sortOptions, int size, Class<TDocument> tDocumentClass) throws IOException {
        /*
        SearchRequest.Builder searchRequest = new SearchRequest.Builder();
         searchRequest.query(q -> q.matchAll(m -> m));
@@ -127,7 +127,7 @@ public class ESClientService {
         Query byMaxPrice = RangeQuery.of(r -> r.field("price").gte(JsonData.of(maxPrice)))._toQuery();
         SearchResponse<ObjectNode> searchResponse = elasticsearchClient.search(s -> s.index("products").query(q -> q.bool(b -> b.must(byName).must(byMaxPrice))), ObjectNode.class);
         */
-        SearchResponse<TDocument> response = elasticsearchClient.search(s -> s.index(indexName).query(query).size(size).scroll(Time.of(t -> t.time("5m"))), tDocumentClass);
+        SearchResponse<TDocument> response = elasticsearchClient.search(s -> s.index(indexName).query(query).size(size).sort(sortOptions).scroll(Time.of(t -> t.time("5m"))), tDocumentClass);
 //        response.took() //用时
         List<Hit<TDocument>> hits = response.hits().hits();
         /*for (Hit<TDocument> hit: hits) {
