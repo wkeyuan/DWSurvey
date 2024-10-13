@@ -197,3 +197,40 @@ PUT dwsurvey_answer_index_aggs/_mapping
     }
   }
 }
+
+
+
+// 20241013补充
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "province": {
+                "type": "keyword"
+              }
+            }
+          }
+      }
+      }
+    }
+}
+
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "province": {
+                "type": "keyword"
+              }
+            }
+          }
+      }
+      }
+    }
+}

@@ -22,16 +22,12 @@ PUT dwsurvey_answer_index
                   }
                 }
               },
-              "city": {
-                "analyzer": "ik_max_word",
-                "type": "text",
-                "fields": {
-                  "keyword": {
-                    "type": "keyword",
-                    "ignore_above": 256
-                  }
-                }
-              },
+              "province": {
+                  "type": "keyword"
+                },
+                "city": {
+                  "type": "keyword"
+                },
               "ip": {
                 "type": "text",
                 "fields": {

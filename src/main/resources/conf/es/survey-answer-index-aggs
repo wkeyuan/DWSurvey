@@ -22,15 +22,11 @@ PUT dwsurvey_answer_index_aggs
                   }
                 }
               },
+              "province": {
+                "type": "keyword"
+              },
               "city": {
-                "analyzer": "ik_max_word",
-                "type": "text",
-                "fields": {
-                  "keyword": {
-                    "type": "keyword",
-                    "ignore_above": 256
-                  }
-                }
+                "type": "keyword"
               },
               "ip": {
                 "type": "text",
