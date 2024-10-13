@@ -28,6 +28,12 @@ PUT dwsurvey_answer_index
                 "city": {
                   "type": "keyword"
                 },
+                "county": {
+                  "type": "keyword"
+                 },
+                "town": {
+                  "type": "keyword"
+                },
               "ip": {
                 "type": "text",
                 "fields": {

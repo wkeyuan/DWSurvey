@@ -210,6 +210,12 @@ PUT dwsurvey_answer_index_aggs/_mapping
             "properties": {
               "province": {
                 "type": "keyword"
+              },
+              "county": {
+                 "type": "keyword"
+              },
+              "town": {
+                 "type": "keyword"
               }
             }
           }
@@ -227,7 +233,13 @@ PUT dwsurvey_answer_index/_mapping
             "properties": {
               "province": {
                 "type": "keyword"
-              }
+              },
+             "county": {
+               "type": "keyword"
+             },
+             "town": {
+               "type": "keyword"
+             }
             }
           }
       }
