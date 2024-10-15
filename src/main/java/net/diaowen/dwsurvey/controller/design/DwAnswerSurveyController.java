@@ -109,7 +109,10 @@ public class DwAnswerSurveyController {
             IPLocation ipLocation = ipService.getIpLocation(ipAddr);
             if(ipLocation!=null){
                 esAnIp.setAddr(ipLocation.getAddress());
+                esAnIp.setProvince(ipLocation.getProvince());
                 esAnIp.setCity(ipLocation.getCity());
+                esAnIp.setCounty(ipLocation.getCounty());
+                esAnIp.setTown(ipLocation.getTown());
             }
             esAnIp.setIp(ipAddr);
             dwEsSurveyAnswer.getAnswerCommon().setAnIp(esAnIp);
