@@ -246,3 +246,64 @@ PUT dwsurvey_answer_index/_mapping
       }
     }
 }
+
+// 20241015补充
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anSource": {
+            "properties": {
+              "dbSource": {
+                "type": "keyword"
+              },
+              "pcm": {
+                 "type": "keyword"
+              },
+              "sys": {
+                 "type": "keyword"
+              },
+              "bro": {
+                 "type": "keyword"
+              },
+              "userAgentString": {
+                  "type": "text",
+                  "analyzer": "standard"
+              }
+            }
+          }
+      }
+      }
+    }
+}
+
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anSource": {
+              "properties": {
+                "dbSource": {
+                  "type": "keyword"
+                },
+                "pcm": {
+                   "type": "keyword"
+                },
+                "sys": {
+                   "type": "keyword"
+                },
+                "bro": {
+                   "type": "keyword"
+                },
+                "userAgentString": {
+                    "type": "text",
+                    "analyzer": "standard"
+                }
+              }
+            }
+      }
+      }
+    }
+}

@@ -73,4 +73,26 @@ public class UserAgentUtils {
         return result;
     }
 
+    public static String[] userAgentPsd(HttpServletRequest request){
+        String[] result = new String[]{null,null,null};
+        try{
+            String agent=request.getHeader("User-Agent");
+            if(agent!=null){
+                UserAgent userAgentObj = UserAgent.parseUserAgentString(agent);
+                Browser browser = userAgentObj.getBrowser();
+                OperatingSystem operatingSystem = userAgentObj.getOperatingSystem();
+
+                Browser browserGroup = browser.getGroup();
+                OperatingSystem sysGroup = operatingSystem.getGroup();
+                DeviceType deviceType = operatingSystem.getDeviceType();
+                result[0] = sysGroup.getName();
+                result[1] = browserGroup.getName();
+                result[2] = deviceType.getName();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

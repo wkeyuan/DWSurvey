@@ -1,9 +1,6 @@
 package net.diaowen.dwsurvey.entity.es.answer;
 
-import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnIp;
-import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
-import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
-import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnUser;
+import net.diaowen.dwsurvey.entity.es.answer.extend.*;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
 
 import java.io.Serializable;
@@ -28,6 +25,8 @@ public class DwEsSurveyAnswerCommon implements Serializable {
     private Integer isDelete;
     // 总分
     private Float sumScore;
+    // 来源
+    private EsAnSource anSource;
 
     public String getSurveyId() {
         return surveyId;
@@ -107,5 +106,13 @@ public class DwEsSurveyAnswerCommon implements Serializable {
 
     public void setSid(String sid) {
         this.sid = sid;
+    }
+
+    public EsAnSource getAnSource() {
+        return anSource;
+    }
+
+    public void setAnSource(EsAnSource anSource) {
+        this.anSource = anSource;
     }
 }

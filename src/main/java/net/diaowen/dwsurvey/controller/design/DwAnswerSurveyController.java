@@ -132,6 +132,7 @@ public class DwAnswerSurveyController {
             //检查通过继续执行
             //计算分数
             DwAnswerEsUtils.calcSumScore(surveyJson, dwEsSurveyAnswer);
+            DwAnswerEsUtils.addAnSource(request, dwEsSurveyAnswer);
             IndexResponse indexResponse = dwAnswerEsClientService.createAnswerDocByObj(dwEsSurveyAnswer);
             if (indexResponse!=null && indexResponse.id()!=null) {
                 String indexResponseId = indexResponse.id();

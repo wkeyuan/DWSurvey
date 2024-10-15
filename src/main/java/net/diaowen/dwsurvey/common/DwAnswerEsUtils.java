@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.json.Json;
+import net.diaowen.common.utils.UserAgentUtils;
 import net.diaowen.dwsurvey.entity.AnCheckbox;
 import net.diaowen.dwsurvey.entity.Question;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
 import net.diaowen.dwsurvey.entity.SurveyJson;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnSource;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnCheckbox;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.EsAnRadio;
@@ -17,6 +19,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class DwAnswerEsUtils {
@@ -127,6 +130,18 @@ public class DwAnswerEsUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void addAnSource(HttpServletRequest request, DwEsSurveyAnswer esSurveyAnswer) {
+        String[] userAgentInt = UserAgentUtils.userAgentPsd(request);
+        if(userAgentInt.length == 3){
+            EsAnSource esAnSource = esSurveyAnswer.getAnswerCommon().getAnSource();
+            if (esAnSource==null) esAnSource = new EsAnSource();
+            esAnSource.setSys(userAgentInt[0]);
+            esAnSource.setBro(userAgentInt[1]);
+            esAnSource.setPcm(userAgentInt[2]);
+            esSurveyAnswer.getAnswerCommon().setAnSource(esAnSource);
+        }
     }
 
 }
