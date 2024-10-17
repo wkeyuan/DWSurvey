@@ -384,8 +384,9 @@ public class DwAnswerSurveyController {
                         boolean randomCode = anRefreshAttr.get("randomCode").asBoolean();
                         if (randomCode && ipAnCount>3) {
                             // 大于3次启用验证码
-                            answerCheckResult.buildResult(DwAnswerCheckResult.CHECK409);
-                            return answerCheckResult;
+//                            answerCheckResult.buildResult(DwAnswerCheckResult.CHECK409);
+//                            return answerCheckResult;
+                            answerCheckResult.setShowCaptcha(true);
                         }
                     }
                 }
