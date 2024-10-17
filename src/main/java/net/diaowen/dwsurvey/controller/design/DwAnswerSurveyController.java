@@ -82,7 +82,7 @@ public class DwAnswerSurveyController {
         // 针对答卷场景需要考虑这些数据通过静态缓存获取。
         SurveyJson surveyJson = getSurveyJson(surveyId, sid);
         DwSurveyAnswerResult dwSurveyAnswerResult = new DwSurveyAnswerResult();
-        DwAnswerCheckResult dwAnswerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd);
+        DwAnswerCheckResult dwAnswerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd, false);
         surveyJson = getSurveyJsonResult(dwAnswerCheckResult, surveyJson);
         if (surveyJson!=null) {
             dwSurveyAnswerResult.setSurveyJson(surveyJson);
@@ -121,7 +121,8 @@ public class DwAnswerSurveyController {
             surveyBgEndTime(request, sid, dwEsSurveyAnswer);
             calcAnQuQum(dwEsSurveyAnswer);
             //执行前置检查
-            DwAnswerCheckResult dwAnswerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd);
+            DwAnswerCheckResult dwAnswerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd, true);
+            logger.debug("isShowCaptcha {}", dwAnswerCheckResult.isShowCaptcha());
             if (!dwAnswerCheckResult.isAnCheckIsPass() && dwAnswerCheckResult.getAnCheckResultCode()==409) {
                 String anRandomCode = surveyAnswerJson.getAnRandomCode();
                 if (!imageCaptchaService.validateResponseForID(request.getSession().getId(), anRandomCode)) {
@@ -205,21 +206,21 @@ public class DwAnswerSurveyController {
         return surveyJson;
     }
 
-    private DwAnswerCheckResult getDwAnswerCheckResultById(HttpServletRequest request, String surveyId, String anPwd) {
+    private DwAnswerCheckResult getDwAnswerCheckResultById(HttpServletRequest request, String surveyId, String anPwd, boolean isSubmit) {
         DwAnswerCheckResult answerCheckResult = new DwAnswerCheckResult();
         if (StringUtils.isNotEmpty(surveyId) && surveyId.length()>30) {
             SurveyJson surveyJson = surveyJsonManager.findBySurveyId(surveyId);
-            answerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd);
+            answerCheckResult = getDwAnswerCheckResultBySurveyJson(request, surveyJson, anPwd, isSubmit);
         } else {
             answerCheckResult.buildResult(DwAnswerCheckResult.CHECK501);
         }
         return answerCheckResult;
     }
 
-    private DwAnswerCheckResult getDwAnswerCheckResultBySurveyJson(HttpServletRequest request, SurveyJson surveyJson, String anPwd) {
+    private DwAnswerCheckResult getDwAnswerCheckResultBySurveyJson(HttpServletRequest request, SurveyJson surveyJson, String anPwd, boolean isSubmit) {
         DwAnswerCheckResult answerCheckResult = new DwAnswerCheckResult();
         if (surveyJson !=null) {
-            answerCheckResult = checkAnswerUser(request, surveyJson, anPwd);
+            answerCheckResult = checkAnswerUser(request, surveyJson, anPwd, isSubmit);
         } else {
             answerCheckResult.buildResult(DwAnswerCheckResult.CHECK500);
         }
@@ -262,7 +263,7 @@ public class DwAnswerSurveyController {
     }
 
     //当一个用户访问答卷时检查对答卷状态进行检查
-    public DwAnswerCheckResult checkAnswerUser(HttpServletRequest request, SurveyJson surveyJson, String anPwd){
+    public DwAnswerCheckResult checkAnswerUser(HttpServletRequest request, SurveyJson surveyJson, String anPwd, boolean isSubmit){
         // 对需要处理的属性进行处理
         String surveyId = surveyJson.getSurveyId();
         String sid = surveyJson.getSid();
@@ -312,6 +313,21 @@ public class DwAnswerSurveyController {
                             return answerCheckResult;
                         }
                     }
+
+                    //                anRefreshAttr.randomCode   // 重复回答启用验证码, 客户端判断
+                    if (surveyAttrs.has("anRefreshAttr")) {
+                        JsonNode anRefreshAttr = surveyAttrs.get("anRefreshAttr");
+                        boolean randomCode = anRefreshAttr.get("randomCode").asBoolean();
+                        if (randomCode && ipAnCount>3) {
+                            // 大于3次启用验证码
+                            answerCheckResult.setShowCaptcha(true);
+                            if (isSubmit) {
+                                answerCheckResult.buildResult(DwAnswerCheckResult.CHECK409);
+                                return answerCheckResult;
+                            }
+                        }
+                    }
+
 //                 密码回答检查
                     if (surveyAttrs.has("anPwdAttr")) {
                         JsonNode anPwdAttr = surveyAttrs.get("anPwdAttr");
@@ -378,17 +394,7 @@ public class DwAnswerSurveyController {
                             }
                         }
                     }
-//                anRefreshAttr.randomCode   // 重复回答启用验证码, 客户端判断
-                    if (surveyAttrs.has("anRefreshAttr")) {
-                        JsonNode anRefreshAttr = surveyAttrs.get("anRefreshAttr");
-                        boolean randomCode = anRefreshAttr.get("randomCode").asBoolean();
-                        if (randomCode && ipAnCount>3) {
-                            // 大于3次启用验证码
-//                            answerCheckResult.buildResult(DwAnswerCheckResult.CHECK409);
-//                            return answerCheckResult;
-                            answerCheckResult.setShowCaptcha(true);
-                        }
-                    }
+
                 }
             }
             // 通过
