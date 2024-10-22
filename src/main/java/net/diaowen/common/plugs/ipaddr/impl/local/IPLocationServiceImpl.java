@@ -7,14 +7,23 @@ import net.diaowen.common.plugs.ipaddr.impl.local.qqwry.IPv4;
 import net.diaowen.common.plugs.ipaddr.impl.local.qqwry.IPv4Loc;
 import net.diaowen.common.plugs.ipaddr.impl.local.qqwry.IPv4Locator;
 import net.diaowen.common.plugs.ipaddr.impl.local.qqwry.IPv4LocatorFactoryBean;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.system.ApplicationHome;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
