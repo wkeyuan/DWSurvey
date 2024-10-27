@@ -216,6 +216,9 @@ PUT dwsurvey_answer_index_aggs/_mapping
               },
               "town": {
                  "type": "keyword"
+              },
+              "cityV6": {
+                  "type": "keyword"
               }
             }
           }
@@ -239,7 +242,10 @@ PUT dwsurvey_answer_index/_mapping
              },
              "town": {
                "type": "keyword"
-             }
+             },
+            "cityV6": {
+                "type": "keyword"
+            }
             }
           }
       }

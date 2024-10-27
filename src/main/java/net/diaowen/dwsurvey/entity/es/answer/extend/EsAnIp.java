@@ -5,8 +5,10 @@ public class EsAnIp {
     private String ip;
     //省级
     private String province;
-    //市级
+    //市级 兼容早期的分词
     private String city;
+    //市级 keyword 新分词
+    private String cityV6;
     //县级
     private String county;
     //乡级
@@ -60,5 +62,13 @@ public class EsAnIp {
 
     public void setTown(String town) {
         this.town = town;
+    }
+
+    public String getCityV6() {
+        return cityV6;
+    }
+
+    public void setCityV6(String cityV6) {
+        this.cityV6 = cityV6;
     }
 }

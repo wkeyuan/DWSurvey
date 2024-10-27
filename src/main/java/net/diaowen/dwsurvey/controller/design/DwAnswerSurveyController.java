@@ -111,6 +111,7 @@ public class DwAnswerSurveyController {
                 esAnIp.setAddr(ipLocation.getAddress());
                 esAnIp.setProvince(ipLocation.getProvince());
                 esAnIp.setCity(ipLocation.getCity());
+                esAnIp.setCityV6(ipLocation.getCity());
                 esAnIp.setCounty(ipLocation.getCounty());
                 esAnIp.setTown(ipLocation.getTown());
             }
