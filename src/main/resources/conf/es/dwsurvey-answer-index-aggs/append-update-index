@@ -1,1 +1,193 @@
 // 追加补充的ES脚本
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sumScore": {
+          "type": "float"
+        }
+      }
+    }
+  }
+}
+
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sid": {
+            "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+
+// 加矩阵辅助统计字段
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "esAnMatrixRadio": {
+      "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "colDwId": {
+                "type": "keyword"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+    },
+    "esAnMatrixCheckbox": {
+      "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnCheckboxs": {
+                "properties": {
+                  "optionDwId": {
+                    "type": "keyword"
+                  },
+                  "otherText": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+    }
+  }
+}
+
+
+
+// 20241013补充
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "province": {
+                "type": "keyword"
+              },
+              "county": {
+                 "type": "keyword"
+              },
+              "town": {
+                 "type": "keyword"
+              },
+              "cityV6": {
+                  "type": "keyword"
+              }
+            }
+          }
+      }
+      }
+    }
+}
+
+// 20241015补充
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anSource": {
+            "properties": {
+              "dbSource": {
+                "type": "keyword"
+              },
+              "pcm": {
+                 "type": "keyword"
+              },
+              "sys": {
+                 "type": "keyword"
+              },
+              "bro": {
+                 "type": "keyword"
+              },
+              "userAgentString": {
+                  "type": "text",
+                  "analyzer": "standard"
+              }
+            }
+          }
+      }
+      }
+    }
+}
+
+//词统计
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "esAnWordAgg": {
+        "properties": {
+          "word": {
+            "type": "keyword"
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+}
+
+
+//级联统计
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "esAnCascadeAggs": {
+        "properties": {
+          "level0Value": {
+            "type": "keyword"
+          },
+          "level1Value": {
+            "type": "keyword"
+          },
+          "level2Value": {
+            "type": "keyword"
+          },
+          "level3Value": {
+            "type": "keyword"
+          },
+          "level4Value": {
+            "type": "keyword"
+          },
+          "level5Value": {
+            "type": "keyword"
+          },
+          "level6Value": {
+            "type": "keyword"
+          },
+          "level7Value": {
+            "type": "keyword"
+          },
+          "level8Value": {
+            "type": "keyword"
+          },
+          "level9Value": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+}

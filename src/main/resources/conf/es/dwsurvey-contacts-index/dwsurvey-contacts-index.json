@@ -1,0 +1,119 @@
+// 首次安装只需要执行此完整的ES脚本
+// PUT dwsurvey_contacts_index
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 3,
+      "number_of_replicas": 1
+    }
+  },
+  "mappings": {
+      "properties": {
+        "adminUserId": {
+          "type": "keyword"
+        },
+        "createDate": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+        },
+        "customAttrs": {
+          "properties": {
+            "attrName": {
+              "type": "keyword"
+            },
+            "attrValue": {
+              "type": "keyword"
+            }
+          }
+        },
+        "deptName": {
+          "type": "keyword"
+        },
+        "dwContactsDepts": {
+          "properties": {
+            "deptCode": {
+              "type": "keyword"
+            },
+            "deptId": {
+              "type": "keyword"
+            },
+            "deptName": {
+              "type": "keyword"
+            }
+          }
+        },
+        "dwContactsGroups": {
+          "properties": {
+            "groupId": {
+              "type": "keyword"
+            },
+            "groupName": {
+              "type": "keyword"
+            }
+          }
+        },
+        "dwContactsJobTitles": {
+          "properties": {
+            "roleId": {
+              "type": "keyword"
+            },
+            "roleName": {
+              "type": "keyword"
+            }
+          }
+        },
+        "dwContactsTags": {
+          "properties": {
+            "tagId": {
+              "type": "keyword"
+            },
+            "tagName": {
+              "type": "keyword"
+            }
+          }
+        },
+        "esId": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "initPwd": {
+          "type": "keyword"
+        },
+        "loginName": {
+          "type": "keyword"
+        },
+        "mail": {
+          "type": "keyword"
+        },
+        "phone": {
+          "type": "keyword"
+        },
+        "repeatData": {
+          "type": "boolean"
+        },
+        "teamId": {
+          "type": "keyword"
+        },
+        "uname": {
+          "type": "keyword"
+        },
+        "unitName": {
+          "type": "keyword"
+        },
+        "userCheck": {
+          "type": "integer"
+        },
+        "userId": {
+          "type": "keyword"
+        },
+        "wxOpenId": {
+          "type": "keyword"
+        }
+      }
+    }
+}

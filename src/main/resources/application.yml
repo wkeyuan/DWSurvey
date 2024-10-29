@@ -1,3 +1,8 @@
 spring:
   profiles:
     active: dev
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
+    min-response-size: 2048

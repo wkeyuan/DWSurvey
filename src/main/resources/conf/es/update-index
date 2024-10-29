@@ -1,4 +1,5 @@
-// 如果打开问卷页面慢且请求后端问卷数据慢，则可以在数据库给t_survey_json的surveyId与sid加上普通index索引
+// 全局的更新字段，如果打开问卷页面慢且请求后端问卷数据慢，则可以在数据库给t_survey_json的surveyId与sid加上普通index索引
+// 具体每个索引的更新在对应目录下面
 ALTER TABLE `dwsurvey_pro`.`t_survey_json`
 ADD INDEX `sid_index` (`sid` ASC) VISIBLE;
 ALTER TABLE `dwsurvey_pro`.`t_survey_json`
@@ -310,6 +311,110 @@ PUT dwsurvey_answer_index/_mapping
               }
             }
       }
+      }
+    }
+}
+
+// 新增评分其它
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anOrders": {
+            "properties": {
+              "otherText": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  },
+                  "analyzer": "ik_max_word"
+                }
+            }
+          }
+        }
+      }
+  }
+}
+
+//词统计
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "esAnWordAgg": {
+        "properties": {
+          "word": {
+            "type": "keyword"
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+}
+
+//级联
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anCascades": {
+            "properties": {
+              "level": {
+                "type": "integer"
+              },
+              "value": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+  }
+}
+
+//级联统计
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "esAnCascadeAggs": {
+        "properties": {
+          "level0Value": {
+            "type": "keyword"
+          },
+          "level1Value": {
+            "type": "keyword"
+          },
+          "level2Value": {
+            "type": "keyword"
+          },
+          "level3Value": {
+            "type": "keyword"
+          },
+          "level4Value": {
+            "type": "keyword"
+          },
+          "level5Value": {
+            "type": "keyword"
+          },
+          "level6Value": {
+            "type": "keyword"
+          },
+          "level7Value": {
+            "type": "keyword"
+          },
+          "level8Value": {
+            "type": "keyword"
+          },
+          "level9Value": {
+            "type": "keyword"
+          }
+        }
       }
     }
 }

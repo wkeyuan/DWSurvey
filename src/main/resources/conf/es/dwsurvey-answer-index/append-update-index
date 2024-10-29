@@ -1,2 +1,231 @@
-// 追加补充的ES脚本
+// 追加补充的ES脚本，不确定可以依次执行，之前没有的就会成功
+// 新增评分字段更新
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sumScore": {
+          "type": "float"
+        }
+      }
+    },
+    "anQuestions": {
+        "properties": {
+          "quAnScore": {
+            "type": "float"
+          }
+        }
+    }
+  }
+}
+
+// 新增矩阵题字段索引
+// 加矩阵字段
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anMatrixRadios": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "colDwId": {
+                "type": "keyword"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixCheckboxes": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnCheckboxs": {
+                "properties": {
+                  "optionDwId": {
+                    "type": "keyword"
+                  },
+                  "otherText": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixFbks": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnFbks": {
+                "properties": {
+                  "answer": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "optionDwId": {
+                    "type": "keyword"
+                  }
+                }
+              }
+            }
+          },
+          "anMatrixScales": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "answerScore": {
+                "type": "float"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          }
+        }
+    }
+  }
+}
+
+// 加sid
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sid": {
+            "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+// 20241013补充
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "province": {
+                "type": "keyword"
+              },
+             "county": {
+               "type": "keyword"
+             },
+             "town": {
+               "type": "keyword"
+             },
+            "cityV6": {
+                "type": "keyword"
+            }
+            }
+          }
+      }
+      }
+    }
+}
+
+// 20241015补充
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anSource": {
+              "properties": {
+                "dbSource": {
+                  "type": "keyword"
+                },
+                "pcm": {
+                   "type": "keyword"
+                },
+                "sys": {
+                   "type": "keyword"
+                },
+                "bro": {
+                   "type": "keyword"
+                },
+                "userAgentString": {
+                    "type": "text",
+                    "analyzer": "standard"
+                }
+              }
+            }
+      }
+      }
+    }
+}
+
+// 20241015补充
+// 新增评分其它
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anOrders": {
+            "properties": {
+              "otherText": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  },
+                  "analyzer": "ik_max_word"
+                }
+            }
+          }
+        }
+      }
+  }
+}
+
+// 20241015补充
+//级联
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anCascades": {
+            "properties": {
+              "level": {
+                "type": "integer"
+              },
+              "value": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+  }
+}
 
