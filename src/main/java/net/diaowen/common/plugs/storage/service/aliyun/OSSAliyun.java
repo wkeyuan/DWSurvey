@@ -52,6 +52,7 @@ public class OSSAliyun {
         createAndGetBucketName(ossClient,bucketName);
         //目录如果开头是 / 会报错
         if (fileName.startsWith("/"))  fileName = fileName.substring(1);
+        if (fileName.startsWith("\\")) fileName = fileName.substring(1);
         PutObjectRequest putObjectRequest;
         putObjectRequest = new PutObjectRequest(bucketName, fileName, new ByteArrayInputStream(bytes));
         putObjectRequest.setMetadata(metadata);
@@ -78,6 +79,7 @@ public class OSSAliyun {
         createAndGetBucketName(ossClient,bucketName);
         //目录如果开头是 / 会报错
         if (fileName.startsWith("/")) fileName = fileName.substring(1);
+        if (fileName.startsWith("\\")) fileName = fileName.substring(1);
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, inputStream);
         putObjectRequest.setMetadata(metadata);
         ossClient.putObject(putObjectRequest);
@@ -326,9 +328,8 @@ public class OSSAliyun {
 
     public static String clearObjectName(String objectName){
         //目录如果开头是 / 会报错
-        if (objectName.startsWith("/")) {
-            objectName = objectName.substring(1);
-        }
+        if (objectName.startsWith("/")) objectName = objectName.substring(1);
+        if (objectName.startsWith("\\")) objectName = objectName.substring(1);
         return objectName;
     }
 
