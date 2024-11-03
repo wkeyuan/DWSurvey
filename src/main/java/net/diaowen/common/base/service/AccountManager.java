@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import net.diaowen.common.base.entity.User;
+import net.diaowen.common.plugs.httpclient.HttpStatus;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
+import net.diaowen.dwsurvey.entity.RandomCode;
+import net.diaowen.dwsurvey.service.RandomCodeManager;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -31,7 +34,8 @@ public class AccountManager {
 
 	@Autowired
 	private UserDao userDao;
-
+	@Autowired
+	private RandomCodeManager randomCodeManager;
 //	@Autowired
 //	private NotifyMessageProducer notifyMessageProducer;//JMS消息推送
 
@@ -133,9 +137,22 @@ public class AccountManager {
 				//是邮箱账号
 				user = userDao.findUniqueBy("email", loginName);
 			}
+			if(user==null){
+				user = findUserByPhone(loginName);
+			}
 		}
 		return user;
 	}
+
+	@Transactional(readOnly = true)
+	public User findUserByPhone(String cellphone){
+		List<User> users=userDao.findBy("cellphone", cellphone);
+		if(users!=null && users.size()>0){
+			return users.get(0);
+		}
+		return null;
+	}
+
 
 	/*验证邮箱是否存在*/
 	@Transactional(readOnly = true)
@@ -173,6 +190,49 @@ public class AccountManager {
 		return null;
 	}
 
-
+	@Transactional
+	public Object[] registerSms(User user) {
+		Object[] result = new Object[2];
+		if (isSupervisor(user)) {
+			logger.warn("操作员{}尝试修改超级管理员用户", SecurityUtils.getSubject()
+					.getPrincipal());
+			throw new ServiceException("不能修改超级管理员用户");
+		}
+		//判断验证码正确性
+		RandomCode lastRc = randomCodeManager.findLastRc(user.getCellphone(),1,1);
+		if(lastRc!=null){
+			if(lastRc.getRdCode().equals(user.getActivationCode())){
+				Date createDate = lastRc.getCreateDate();
+				Date curDate = new Date();
+				long d = (curDate.getTime()-createDate.getTime())/1000;
+				if(d<=600){
+					lastRc.setRdStatus(2);
+					randomCodeManager.save(lastRc);
+					//判断是否有重复用户
+					User findUser = findUserByLoginNameOrEmail(user.getLoginName());
+					if(findUser==null){
+						String shaPassword = DigestUtils.sha1Hex(user.getPlainPassword());
+						user.setShaPassword(shaPassword);
+						user.setStatus(2);
+						userDao.save(user);
+						result[0] = user;
+					}else{
+//						result[1]="10000";//用户重复
+						result[1]= HttpStatus.SERVER_30001;
+					}
+				}else{
+//					result[1]="10001";//短信验证码超时
+					result[1]= HttpStatus.SERVER_30005;
+				}
+			}else{
+//				result[1]="10002";//短信验证码不正确
+				result[1]= HttpStatus.SERVER_30006;
+			}
+		}else{
+//			result[1]="10003";//短信验证码未生成
+			result[1]= HttpStatus.SERVER_30007;
+		}
+		return result;
+	}
 
 }

@@ -44,7 +44,7 @@ public class UserAdminController {
     @ResponseBody
     public HttpResult add(@RequestBody User user) {
         try{
-            if("demo".equals(DWSurveyConfig.DWSURVEY_SITE)) return HttpResult.FAILURE("DEMO环境不允许操作");
+//            if("demo".equals(DWSurveyConfig.DWSURVEY_SITE)) return HttpResult.FAILURE("DEMO环境不允许操作");
             User result = userManager.adminSave(user);
             if(result!=null) return HttpResult.SUCCESS();
         }catch (Exception e){

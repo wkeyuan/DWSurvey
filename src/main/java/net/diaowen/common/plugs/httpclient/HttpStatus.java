@@ -31,6 +31,7 @@ public class HttpStatus {
 	public static HttpStatus SERVER_30006 = new HttpStatus(30006,"短信验证码不正确");
 	public static HttpStatus SERVER_30007 = new HttpStatus(30007,"短信验证码未生成");
 	public static HttpStatus SERVER_30008 = new HttpStatus(30008,"60秒内，不可以重复操作");
+	public static HttpStatus SERVER_30009 = new HttpStatus(30009,"图形验证码不正确");
 
 	/**
 	 * 数据问题

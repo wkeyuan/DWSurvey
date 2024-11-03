@@ -49,7 +49,7 @@ public class DwWebController {
                 return HttpResult.SUCCESS(footerInfo);
             }else{
                 //非登录用户返回不带版本号
-                footerInfo.setVersionNumber("");
+//                footerInfo.setVersionNumber("");
                 return HttpResult.SUCCESS(footerInfo);
             }
         }catch (Exception e){

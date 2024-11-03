@@ -208,4 +208,13 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 		}
 	}
 
+	@Override
+	public User findBySessionId(String servletSessionId) {
+		return userDao.findUniqueBy("sessionId",servletSessionId);
+	}
+
+	@Override
+	public User findByOpenId(String wxOpenId) {
+		return userDao.findUniqueBy("wxOpenId",wxOpenId);
+	}
 }
