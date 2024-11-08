@@ -90,10 +90,9 @@ public class ExportLogController {
         if(exportLog!=null && exportLog.getProgress()==1){
             String filePath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH + exportLog.getParam4();
             String fileName = exportLog.getParam3();
-            Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
-            String dateFormat = simpleDateFormat.format(new Date())+ RandomUtils.getVerifyCode();
-            fileName = fileName + dateFormat;
+            String dateFormat = simpleDateFormat.format(new Date())+ "-DW" + RandomUtils.getVerifyCode();
+            fileName = survey.getSurveyName() + "-" + dateFormat + fileName.substring(fileName.lastIndexOf("."));
             logger.info("Download Answer FilePath {}",filePath);
             logger.info("Download Answer fileName {}",fileName);
 //                                response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("dwsurvey"+survey.getSid()+dateFormName+".xlsx", "UTF-8"));
