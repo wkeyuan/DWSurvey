@@ -76,6 +76,10 @@ public class IPService {
 		if(ip!=null && ip.indexOf(",")>0){
 			ip=ip.substring(0,ip.indexOf(","));
 		}
+		//如果带有端口去掉端口
+		if (ip!=null && ip.indexOf(":")>0) {
+			ip = ip.substring(0, ip.indexOf(":"));
+		}
 		return ip;
 	}
 

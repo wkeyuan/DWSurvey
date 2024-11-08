@@ -4,6 +4,7 @@ import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.utils.DwsUtils;
+import net.diaowen.common.utils.RandomUtils;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.entity.ExportLog;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -87,6 +90,10 @@ public class ExportLogController {
         if(exportLog!=null && exportLog.getProgress()==1){
             String filePath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH + exportLog.getParam4();
             String fileName = exportLog.getParam3();
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+            String dateFormat = simpleDateFormat.format(new Date())+ RandomUtils.getVerifyCode();
+            fileName = fileName + dateFormat;
             logger.info("Download Answer FilePath {}",filePath);
             logger.info("Download Answer fileName {}",fileName);
 //                                response.setHeader("Content-Disposition", "attachment; filename=" + java.net.URLEncoder.encode("dwsurvey"+survey.getSid()+dateFormName+".xlsx", "UTF-8"));
