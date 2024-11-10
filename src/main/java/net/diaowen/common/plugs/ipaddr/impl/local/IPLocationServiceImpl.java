@@ -46,6 +46,8 @@ public class IPLocationServiceImpl implements IPLocationService {
             IPv4LocatorFactoryBean fb = new IPv4LocatorFactoryBean();
 //            fb.setFile(new File(filePath));
 //            fb.setFile(ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX+filePath));
+            ipFilePath = ipFilePath.replace("/", File.separator);// 文件系统路径
+            ipFilePath = ipFilePath.replace("\\", File.separator);// 文件系统路径
             logger.info("ipFilePath:"+ipFilePath);
             fb.setFile(new File(ipFilePath));
             fb.afterPropertiesSet();
