@@ -353,6 +353,7 @@ public class SecurityController {
     @ResponseBody
     public HttpResult wxLoginQRCode(HttpServletRequest request) {
         try{
+            if (!DWSurveyConfig.DWSURVEY_WEIXIN_OPEN) return HttpResult.SUCCESS("微信服务未开启");
             String sessionId = request.getSession().getId();
             if(StringUtils.isNotEmpty(DWSurveyConfig.DWSURVEY_WEIXIN_APP_ID)){
                 String ticket = weixinMpService.QRcodeTicket(WeixinMpService.USER_LOGIN_WEIXIN+"_"+sessionId);

@@ -192,10 +192,12 @@ public class WeixinMpService {
     }
 
     public void taskRefAccessToken() {
-        AccessToken resultAccessToken = refAccessToken();
-        if(resultAccessToken!=null){
-            accessToken = resultAccessToken;
-            jsApiTicket = refJsApiTicket();
+        if (DWSurveyConfig.DWSURVEY_WEIXIN_OPEN) {
+            AccessToken resultAccessToken = refAccessToken();
+            if(resultAccessToken!=null){
+                accessToken = resultAccessToken;
+                jsApiTicket = refJsApiTicket();
+            }
         }
     }
 
