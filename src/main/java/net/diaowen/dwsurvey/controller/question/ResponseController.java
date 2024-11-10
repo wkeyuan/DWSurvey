@@ -18,6 +18,7 @@ import net.diaowen.dwsurvey.service.SurveyAnswerManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -508,26 +509,37 @@ public class ResponseController {
 			encoderContent+="&ruleCode="+ruleCode;
 		}
 		ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
-		BufferedImage twoDimensionImg = ZxingUtil.qRCodeCommon(encoderContent, "jpg", 16);
-		ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);
-		if(down==null){
-			response.setHeader("Cache-Control", "no-store");
-			response.setHeader("Pragma", "no-cache");
-			response.setDateHeader("Expires", 0);
-			response.setContentType("image/jpeg");
-			ServletOutputStream responseOutputStream = response.getOutputStream();
-			responseOutputStream.write(jpegOutputStream.toByteArray());
-			responseOutputStream.flush();
-			responseOutputStream.close();
+//		BufferedImage twoDimensionImg = ZxingUtil.qRCodeCommon(encoderContent, "jpg", 16);
+		ApplicationHome applicationHome =new ApplicationHome();
+		String homeDirPath = applicationHome.getDir().getPath();
+		BufferedImage twoDimensionImg = null;
+		File logoFile = new File(homeDirPath+"/dwfile/resource/logo.png");
+		if (logoFile.exists()) {
+			twoDimensionImg = ZxingUtil.logoRCodeCommon(encoderContent, "jpg", 16, logoFile);
 		}else{
-			response.addHeader("Content-Disposition", "attachment;filename=" + new String(("diaowen_"+surveyId+".jpg").getBytes()));
-			byte[] bys = jpegOutputStream.toByteArray();
-			response.addHeader("Content-Length", "" + bys.length);
-			ServletOutputStream responseOutputStream = response.getOutputStream();
-			response.setContentType("application/octet-stream");
-			responseOutputStream.write(bys);
-			responseOutputStream.flush();
-			responseOutputStream.close();
+			twoDimensionImg = ZxingUtil.qRCodeCommon(encoderContent, "jpg", 16);
+		}
+		if (twoDimensionImg!=null) {
+			ImageIO.write(twoDimensionImg, "jpg", jpegOutputStream);
+			if(down==null){
+				response.setHeader("Cache-Control", "no-store");
+				response.setHeader("Pragma", "no-cache");
+				response.setDateHeader("Expires", 0);
+				response.setContentType("image/jpeg");
+				ServletOutputStream responseOutputStream = response.getOutputStream();
+				responseOutputStream.write(jpegOutputStream.toByteArray());
+				responseOutputStream.flush();
+				responseOutputStream.close();
+			}else{
+				response.addHeader("Content-Disposition", "attachment;filename=" + new String(("diaowen_"+surveyId+".jpg").getBytes()));
+				byte[] bys = jpegOutputStream.toByteArray();
+				response.addHeader("Content-Length", "" + bys.length);
+				ServletOutputStream responseOutputStream = response.getOutputStream();
+				response.setContentType("application/octet-stream");
+				responseOutputStream.write(bys);
+				responseOutputStream.flush();
+				responseOutputStream.close();
+			}
 		}
 		return null;
 	}
