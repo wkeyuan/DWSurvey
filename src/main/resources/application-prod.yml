@@ -18,6 +18,11 @@ dwsurvey:
         phone-login: true
         pwd-login: true
       register: true
+  sms:
+    code-open: false
+    sendcloud:
+      smsUser:
+      smsKey:
   weixin:
     open: false
     app-id: xxx
