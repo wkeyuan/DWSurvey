@@ -6,3 +6,9 @@ server:
     enabled: true
     mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
     min-response-size: 2048
+dwsurvey:
+  # 产品版本号信息，V5-代表最新的前后端分离版本
+  version:
+    info: DWSurvey Bus V6.11.241118
+    number: Bus V6.11.241118
+    built: 2024/11/18

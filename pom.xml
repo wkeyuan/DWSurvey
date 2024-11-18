@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.diaowen</groupId>
-    <artifactId>dwsurvey-pro-vue</artifactId>
-    <version>6.3.2405013</version>
+    <artifactId>dwsurvey-bus-vue</artifactId>
+    <version>6.11.241118</version>
     <packaging>jar</packaging>
     <name>dwsurvey</name>
     <description>DWSurvey project for Spring Boot</description>
