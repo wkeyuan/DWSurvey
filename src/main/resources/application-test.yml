@@ -23,12 +23,28 @@ dwsurvey:
       # 站点联系人电话
       site-phone: 18888888888
   # 用于微信集成相关，目前社区版还没未启用。
+    login-register:
+      login:
+        wx-login: false
+        phone-login: true
+        pwd-login: true
+      register: true
+  sms:
+    code-open: false
+    sendcloud:
+      smsUser:
+      smsKey:
   weixin:
+    open: false
     app-id: xxx
     app-secret: xxx
     server:
       token: xxx
       encodingAESKey:
+  dw-open: # 预留配置
+    api:
+      status: test # test=开发测试模式，不进行API验证；prod=生产模式；验证签名，disable=关闭API功能
+      timestamp: 30 # 签名有效期
   file-storage:
     prefix:  #路径前缀，方便给所有资源加上统一的路径，如：/dws-storage
     type: local #存储方式 local=本地存储（会存储在dwsurvey.web.file-path），yun=使用云存储（默认提供阿里云存储实现,注意配置OSS BUCKET 跨域访问）
