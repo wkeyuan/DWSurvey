@@ -6,17 +6,18 @@ import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.es.DwAnswerEsClientService;
 import net.diaowen.common.plugs.httpclient.HttpResult;
+import net.diaowen.common.plugs.httpclient.ResultUtils;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.utils.ZipUtil;
 import net.diaowen.dwsurvey.common.AggregationResultItem;
+import net.diaowen.dwsurvey.common.PermissionCode;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
-import net.diaowen.dwsurvey.entity.AnUplodFile;
-import net.diaowen.dwsurvey.entity.ExportLog;
-import net.diaowen.dwsurvey.entity.SurveyDirectory;
+import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 import net.diaowen.dwsurvey.service.SurveyAnswerManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.es.EsSurveyAnswerManager;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,13 +46,31 @@ public class DwAnswerDataController {
     @RequestMapping(value = "/list.do",method = RequestMethod.GET)
     @ResponseBody
     public Page<DwEsSurveyAnswer> surveyJsonBySurveyId(Page<DwEsSurveyAnswer> page, String surveyId, String bgAnDate, String endAnDate, String ip, String city){
-        return dwAnswerEsClientService.findPageByFromSize(page, surveyId, bgAnDate, endAnDate, ip, city, null, 0);
+        User user = accountManager.getCurUser();
+        if(user!=null){
+            SurveyDirectory survey=surveyDirectoryManager.get(surveyId);
+            if(survey!=null){
+                HttpResult httpResult = surveyDirectoryManager.isSurveyRoleOrPerm(user.getId(),survey.getUserId(), PermissionCode.HT_SURVEY_DATA_ANSWER_LIST);
+                if(httpResult!=null) return page;
+                page = dwAnswerEsClientService.findPageByFromSize(page, surveyId, bgAnDate, endAnDate, ip, city, null, 0);
+            }
+        }
+        return page;
     }
 
     @RequestMapping(value = "/survey-stats.do",method = RequestMethod.GET)
     @ResponseBody
     public HttpResult<Map<String, Map<String, AggregationResultItem>>> aggregationSearch(String surveyId){
-        return HttpResult.SUCCESS(dwAnswerEsClientService.aggregationSearch(surveyId));
+        User user = accountManager.getCurUser();
+        if(user!=null){
+            SurveyDirectory survey = surveyDirectoryManager.get(surveyId);
+            if(survey!=null){
+                HttpResult httpResult = surveyDirectoryManager.isSurveyRoleOrPerm(user.getId(),survey.getUserId(), PermissionCode.HT_SURVEY_DATA_ANALYSIS);
+                if(httpResult!=null) return httpResult;
+                return HttpResult.SUCCESS(dwAnswerEsClientService.aggregationSearch(surveyId));
+            }
+        }
+        return HttpResult.FAILURE();
     }
 
     @Autowired
@@ -69,12 +88,12 @@ public class DwAnswerDataController {
             if(user!=null){
                 SurveyDirectory survey=surveyDirectoryManager.findUniqueBy(surveyId);
                 if(survey!=null){
-//                    HttpResult httpResult = surveyDirectoryManager.isSurveyRoleOrPerm(user.getId(),survey.getUserId(), PermissionCode.HT_SURVEY_DATA_ANSWER_EXPORT);
-//                    if(httpResult!=null) return HttpResult.FAILURE_MSG("没有权限");
+                    HttpResult httpResult = surveyDirectoryManager.isSurveyRoleOrPerm(user.getId(),survey.getUserId(), PermissionCode.HT_SURVEY_DATA_ANSWER_EXPORT);
+                    if(httpResult!=null) return HttpResult.FAILURE_MSG("没有权限");
                     boolean isExpUpQu = false;
 //                    List<AnUplodFile> anUplodFiles = anUploadFileManager.findAnswer(surveyId);
 //                    if(anUplodFiles!=null && anUplodFiles.size()>0 && expUpQu!=null && "1".equals(expUpQu)) isExpUpQu = true;
-                    if (!user.getId().equals(survey.getUserId())) return HttpResult.FAILURE_MSG("没有权限");
+//                    if (!user.getId().equals(survey.getUserId())) return HttpResult.FAILURE_MSG("没有权限");
                     if ("1".equals(expUpQu)) isExpUpQu = true;
                     ExportLog exportLog = esSurveyAnswerManager.buildExportXls(surveyId,savePath,threadMax,isExpUpQu?1:0, expDataContent);
                     String exportLogId = exportLog.getId();
@@ -97,7 +116,7 @@ public class DwAnswerDataController {
             if (map!=null && map.containsKey("id")) {
                 String[] ids = map.get("id");
                 logger.debug("deleteAnswer esid {}", ids);
-                dwAnswerEsClientService.deleteByIds(ids);
+                esSurveyAnswerManager.deleteByIds(ids);
                 return HttpResult.SUCCESS();
             }
         } catch (IOException e) {

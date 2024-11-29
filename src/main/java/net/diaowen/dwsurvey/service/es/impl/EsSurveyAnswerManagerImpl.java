@@ -5,13 +5,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.diaowen.common.QuType;
+import net.diaowen.common.base.entity.User;
+import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.es.DwAnswerEsClientService;
+import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.utils.RunExcelUtil;
 import net.diaowen.common.utils.ZipUtil;
 import net.diaowen.common.utils.excel.SXSSF_XLSXExportUtil;
 import net.diaowen.common.utils.parsehtml.HtmlUtil;
 import net.diaowen.dwsurvey.common.DwAnswerCheckResult;
+import net.diaowen.dwsurvey.common.PermissionCode;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
@@ -19,6 +23,7 @@ import net.diaowen.dwsurvey.service.ExportLogManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.SurveyJsonManager;
 import net.diaowen.dwsurvey.service.es.EsSurveyAnswerManager;
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +57,8 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
     private SurveyJsonManager surveyJsonManager;
     @Autowired
     private TaskExecutor taskExecutor;
+    @Autowired
+    private AccountManager accountManager;
 
     @Transactional
     public ExportLog buildExportXls(String surveyId, String savePath,Integer threadMax,Integer expUpQu, Integer expDataContent) {
@@ -428,5 +436,27 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
             exportLog.setProgress(bfbProgress);
             exportLogManager.save(exportLog);
         }
+    }
+
+    @Override
+    public HttpResult deleteByIds(String[] ids) throws IOException {
+        User user = accountManager.getCurUser();
+        if (user!=null) {
+            for (String esId:ids) {
+                DwEsSurveyAnswer dwEsSurveyAnswer = dwAnswerEsClientService.findById(esId);
+                if (dwEsSurveyAnswer!=null) {
+                    String surveyId = dwEsSurveyAnswer.getAnswerCommon().getSurveyId();
+                    if (StringUtils.isNotEmpty(surveyId)) {
+                        SurveyDirectory survey = surveyDirectoryManager.getSurvey(surveyId);
+                        if (survey!=null) {
+                            HttpResult httpResult = surveyDirectoryManager.isSurveyRoleOrPerm(user.getId(),survey.getUserId(), PermissionCode.QT_SURVEY_DATA_ANSWER_DELETE);
+                            if(httpResult!=null) return HttpResult.FAILURE_MSG("没有权限");
+                        }
+                    }
+                }
+            }
+        }
+        dwAnswerEsClientService.deleteByIds(ids);
+        return null;
     }
 }

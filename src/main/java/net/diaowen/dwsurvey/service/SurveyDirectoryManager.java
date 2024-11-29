@@ -97,4 +97,9 @@ public interface SurveyDirectoryManager extends BaseService<SurveyDirectory, Str
 
     public SurveyDirectory upAnQuNum(SurveyDirectory survey);
 
+	HttpResult isSurveyRoleOrPerm(String userId, String surveyUserId,String permCode);
+
+	HttpResult isSurveyRoleOrPerm(String userId, String surveyUserId,String[] permCodes);
+
+
 }

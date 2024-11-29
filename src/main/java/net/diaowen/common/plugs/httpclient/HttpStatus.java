@@ -37,6 +37,7 @@ public class HttpStatus {
 	 * 数据问题
 	 */
 	public static HttpStatus SERVER_10001 = new HttpStatus(10001,"项目来源不存在");
+	public static HttpStatus SERVER_10002 = new HttpStatus(10002,"没有数据操作权限");
 
 	private HttpStatus(int statusCode, String message) {
 		this.statusCode = statusCode;

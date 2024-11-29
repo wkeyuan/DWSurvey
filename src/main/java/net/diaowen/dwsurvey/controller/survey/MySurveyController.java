@@ -132,6 +132,12 @@ public class MySurveyController {
                     if(map.containsKey("id")){
                         String[] ids = map.get("id");
                         if(ids!=null){
+                            for (String id:ids) {
+                                SurveyDirectory surveyDirectory= surveyDirectoryManager.findById(id);
+                                if (surveyDirectory!=null && !surveyDirectory.getUserId().equals(curUser.getId())) {
+                                    return new HttpResult(HttpStatus.SERVER_10002);
+                                }
+                            }
                             surveyDirectoryManager.delete(ids);
                             return HttpResult.SUCCESS();
                         }

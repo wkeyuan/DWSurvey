@@ -7,6 +7,7 @@ import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.es.DwAnswerEsClientService;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.page.Page;
+import net.diaowen.common.plugs.security.ShiroAuthorizationUtils;
 import net.diaowen.common.service.BaseServiceImpl;
 import net.diaowen.common.utils.RandomUtils;
 import java.io.File;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.diaowen.dwsurvey.common.PermissionCode;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.dao.SurveyDirectoryDao;
 import net.diaowen.dwsurvey.entity.Question;
@@ -24,6 +26,7 @@ import net.diaowen.dwsurvey.entity.SurveyDirectory;
 import net.diaowen.dwsurvey.entity.SurveyStats;
 import net.diaowen.dwsurvey.service.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -662,5 +665,66 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
         return survey;
     }
 
+    public HttpResult isSurveyRoleOrPerm(String userId, String surveyUserId, String permCode) {
+        if(userId!=null && surveyUserId!=null){
+            if(!userId.equals(surveyUserId)){
+                //如果不是创建者，则判断是否是管理员
+                //不是创建者，则查看是否超管、企业管理员、部门管理、拥有系统或部门管理权限的用户，需要分不同情况去判断
+                HttpResult httpResult = ShiroAuthorizationUtils.isSurveyDataSysAdminHttpResult(PermissionCode.HT_SURVEY_MANAGER_SYS);
+                if (httpResult != null) {
+                    //则判断是否拥有部门数据权限
+                    httpResult = ShiroAuthorizationUtils.isSurveyDataDeptAdminHttpResult(PermissionCode.HT_SURVEY_MANAGER_DEPT);
+                    if (httpResult != null) return httpResult;
+                    //拥有部门问卷权限，则判断是否拥有对应permcode权限
+                    httpResult = ShiroAuthorizationUtils.isPermissionHttpResult(permCode);
+                    if(httpResult != null ) return httpResult;
+                    //则判断这份问卷是否属于这个部门
+                    //根据 surveyUserId, 查找用户所属的属门与管理员是否在同一个部门
+                    //select deptId from t_user_dept where surveyUserId = '222'
+                    //select deptId from t_user_dept where user = '333'
+                    //判断他们是否有交集
+                    /*List<EntUserDept> userDepts = entUserDeptManager.findByUserId(userId);
+                    List<EntUserDept> surveyUserDepts = entUserDeptManager.findByUserId(surveyUserId);
+                    if(!isUnion(userDepts,surveyUserDepts)){
+                        return HttpResult.FAILURE_MSG("没有相应数据权限");
+                    }*/
+                }
+            }
+        } else {
+            return HttpResult.FAILURE_MSG("未登录或没有相应数据权限");
+        }
+        return null;
+    }
+
+    public HttpResult isSurveyRoleOrPerm(String userId, String surveyUserId, String[] permCode) {
+        if(userId!=null && surveyUserId!=null){
+            if(!userId.equals(surveyUserId)){
+                //如果不是创建者，则判断是否是管理员
+                //不是创建者，则查看是否超管、企业管理员、部门管理、拥有系统或部门管理权限的用户，需要分不同情况去判断
+                HttpResult httpResult = ShiroAuthorizationUtils.isSurveyDataSysAdminHttpResult(PermissionCode.HT_SURVEY_MANAGER_SYS);
+                if (httpResult != null) {
+                    //则判断是否拥有部门数据权限
+                    httpResult = ShiroAuthorizationUtils.isSurveyDataDeptAdminHttpResult(PermissionCode.HT_SURVEY_MANAGER_DEPT);
+                    if (httpResult != null) return httpResult;
+                    //拥有部门问卷权限，则判断是否拥有对应permcode权限
+                    boolean isPerm = ShiroAuthorizationUtils.isPerm(permCode, Logical.OR);
+                    if(!isPerm) return HttpResult.FAILURE("没有数据权限");
+                    //则判断这份问卷是否属于这个部门
+                    //根据 surveyUserId, 查找用户所属的属门与管理员是否在同一个部门
+                    //select deptId from t_user_dept where surveyUserId = '222'
+                    //select deptId from t_user_dept where user = '333'
+                    //判断他们是否有交集
+                    /*List<EntUserDept> userDepts = entUserDeptManager.findByUserId(userId);
+                    List<EntUserDept> surveyUserDepts = entUserDeptManager.findByUserId(surveyUserId);
+                    if(!isUnion(userDepts,surveyUserDepts)){
+                        return HttpResult.FAILURE_MSG("没有相应数据权限");
+                    }*/
+                }
+            }
+        }else{
+            return HttpResult.FAILURE_MSG("未登录或没有相应数据权限");
+        }
+        return null;
+    }
 
 }
