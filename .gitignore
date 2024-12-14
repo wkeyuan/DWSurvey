@@ -55,3 +55,4 @@ hs_err_pid*
 src/main/resources/http_ca.crt
 src/main/resources/static/static
 src/main/resources/static/index.html
+src/main/resources/static

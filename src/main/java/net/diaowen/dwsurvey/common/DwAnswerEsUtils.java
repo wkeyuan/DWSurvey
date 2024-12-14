@@ -47,10 +47,16 @@ public class DwAnswerEsUtils {
                                     int jsonNodeSize = jsonQuRadios.size();
                                     for (int i=0; i<jsonNodeSize; i++) {
                                         JsonNode jsonOption = jsonQuRadios.get(i);
-                                        String jsonOptionDwId = jsonOption.get("dwId").asText();
-                                        if (optionDwId.equals(jsonOptionDwId)) {
-                                            quAnScoreNum = Float.parseFloat(jsonOption.get("scoreNum").asText());
-                                            break;
+                                        JsonNode jsonOptionDwIdObj = jsonOption.get("dwId");
+                                        if (jsonOptionDwIdObj!=null) {
+                                            String jsonOptionDwId = jsonOptionDwIdObj.asText();
+                                            if (optionDwId.equals(jsonOptionDwId)) {
+                                                JsonNode scoreNumObj = jsonOption.get("scoreNum");
+                                                if (scoreNumObj!=null && scoreNumObj.isNumber()) {
+                                                    quAnScoreNum = Float.parseFloat(scoreNumObj.asText());
+                                                    break;
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -66,10 +72,16 @@ public class DwAnswerEsUtils {
                                             int jsonNodeSize = jsonQuCheckboxs.size();
                                             for (int i=0; i<jsonNodeSize; i++) {
                                                 JsonNode jsonOption = jsonQuCheckboxs.get(i);
-                                                String jsonOptionDwId = jsonOption.get("dwId").asText();
-                                                if (optionDwId.equals(jsonOptionDwId)) {
-                                                    quAnScoreNum+= jsonOption.get("scoreNum").asDouble();
-                                                    break;
+                                                JsonNode jsonOptionDwIdObj = jsonOption.get("dwId");
+                                                if (jsonOptionDwIdObj!=null) {
+                                                    String jsonOptionDwId = jsonOptionDwIdObj.asText();
+                                                    if (optionDwId.equals(jsonOptionDwId)) {
+                                                        JsonNode scoreNumObj = jsonOption.get("scoreNum");
+                                                        if (scoreNumObj!=null && scoreNumObj.isNumber()) {
+                                                            quAnScoreNum+= scoreNumObj.asDouble();
+                                                            break;
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
