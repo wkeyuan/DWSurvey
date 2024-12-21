@@ -79,8 +79,74 @@ public class QuTemplateBankCommon {
         return radioQuestion;
     }
 
-    // 获取矩阵题型
+    public static Question getSignatureQuestion() {
+        Question qu = new Question(QuType.SIGNATURE, "请在下方完成签名", "签名题", "<i class=\"fa-solid fa-file-signature\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-qianming");
+        return qu;
+    }
 
-    // 获取标准问卷组件集合
+    public static Question getImgRadio() {
+        Question qu = new Question(QuType.IMGRADIO, "请选择图片", "图片单选题", "<i class=\"fa-regular fa-image\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-tupiandanxuan");
+        return qu;
+    }
+
+    public static Question getImgCheckbox() {
+        Question qu = new Question(QuType.IMGCHECKBOX, "请选择图片", "图片多选题", "<i class=\"fa-regular fa-images\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-tupianduoxuan");
+        return qu;
+    }
+
+    public static Question getGeolocation() {
+        Question qu= new Question(QuType.GEOLOCATION, "请点击定位按钮完成定位", "定位题", "<i class=\"fa-solid fa-location-dot\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-dizhi");
+        return qu;
+    }
+
+    public static Question getImageHot() {
+        Question qu = new Question(QuType.IMAGE_HOT, "请点击图片任意区域", "热点题", "<i class=\"fa-solid fa-arrows-to-eye\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-riqi");
+        return qu;
+    }
+
+    public static Question getUploadImage() {
+        Question qu = new Question(QuType.UPLOAD_IMAGE, "请上传图片", "图片上传题", "<i class=\"fa-solid fa-cloud-arrow-up\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-riqi");
+        return qu;
+    }
+
+    public static Question getColorPicker() {
+        Question qu = new Question(QuType.COLOR_PICKER, "请选择颜色", "颜色题", "<i class=\"fa-solid fa-palette\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-riqi");
+        return qu;
+    }
+
+
+    // 显示组件
+    public static Question getDivider() {
+        Question qu = new Question(QuType.DIVIDER, "", "分割线", "<i class=\"fa-regular fa-file-lines\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-riqi");
+        return qu;
+    }
+
+    public static Question getCarousel() {
+        Question qu = new Question(QuType.CAROUSEL, "", "轮播图", "<i class=\"fa-solid fa-photo-film\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-riqi");
+        return qu;
+    }
+
+    public static Question getMap() {
+        Question qu = new Question(QuType.MAP, "", "地图组件", "<i class=\"fa-solid fa-map-location-dot\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-riqi");
+        return qu;
+    }
+
+
+    public static Question getMatrixAutoAdd() {
+        Question qu = new Question(QuType.MATRIX_AUTO_ADD, "矩阵自增题", "矩阵自增题", "<i class=\"fa-solid fa-plus-minus\"></i>");
+        qu.setDwsurveyfont("icon-dwsurvey-riqi");
+        return qu;
+    }
+
 
 }

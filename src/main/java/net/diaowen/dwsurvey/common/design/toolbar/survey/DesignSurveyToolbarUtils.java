@@ -5,6 +5,7 @@ import net.diaowen.common.QuType;
 import net.diaowen.dwsurvey.common.QuTemplateBankCommon;
 import net.diaowen.dwsurvey.common.design.bank.DesignToolbarBankUtils;
 import net.diaowen.dwsurvey.common.design.common.DesignCommonToolbarUtils;
+import net.diaowen.dwsurvey.common.design.common.DesignExtCommonToolbarUtils;
 import net.diaowen.dwsurvey.common.design.entity.DesignSurveyToolbarTab;
 import net.diaowen.dwsurvey.common.design.entity.DesignSurveyToolbarTabQu;
 import net.diaowen.dwsurvey.entity.*;
@@ -72,9 +73,12 @@ public class DesignSurveyToolbarUtils {
         questionsMatrix.add(matrixInput);
         questionsMatrix.add(matrixScale);
         questionsMatrix.add(matrixSlider);
-//        questionsMatrix.add(matrixNumber);
-//        questionsMatrix.add(matrixSelect);
-//        questionsMatrix.add(matrixGroup);
+        questionsMatrix.add(matrixNumber);
+        questionsMatrix.add(matrixSelect);
+        questionsMatrix.add(matrixGroup);
+        Question matrixAutoAdd = QuTemplateBankCommon.getMatrixAutoAdd();
+        matrixAutoAdd.setDwsurveyfont("icon-dwsurvey-juzhenzuhe");
+        questionsMatrix.add(matrixAutoAdd);
         return questionsMatrix;
     }
 
@@ -135,6 +139,7 @@ public class DesignSurveyToolbarUtils {
         List<DesignSurveyToolbarTab> tabs = new ArrayList<>();
         tabs.add(toolbarTab1());
         tabs.add(DesignToolbarBankUtils.toolbarTab2());
+        tabs.add(DesignExtCommonToolbarUtils.extToolbarTab3());
         return tabs;
     }
 }

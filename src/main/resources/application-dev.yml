@@ -36,10 +36,10 @@ dwsurvey:
       smsKey:
   weixin:
     open: false
-    app-id: xxx
-    app-secret: xxx
+    app-id: wxf0df5490b4ba5d31
+    app-secret: d34ee95fd84733f255e8f1dfd36ecf74
     server:
-      token: xxx
+      token: ByqGSM44BAEwggEf
       encodingAESKey:
   dw-open: # 预留配置
     api:

@@ -35,6 +35,8 @@ public class EsAnQuestion {
     //量表与滑块共用
     private List<EsAnMatrixScale> anMatrixScales;
 
+    private EsAnLocation anLocation;
+
     public String getQuDwId() {
         return quDwId;
     }
@@ -145,6 +147,14 @@ public class EsAnQuestion {
 
     public void setQuAnScore(float quAnScore) {
         this.quAnScore = quAnScore;
+    }
+
+    public EsAnLocation getAnLocation() {
+        return anLocation;
+    }
+
+    public void setAnLocation(EsAnLocation anLocation) {
+        this.anLocation = anLocation;
     }
 
     /** 以下为未持久化字段 **/
