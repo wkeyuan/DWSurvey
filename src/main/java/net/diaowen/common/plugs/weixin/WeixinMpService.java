@@ -34,7 +34,9 @@ public class WeixinMpService {
     public static String USER_BIND_WEIXIN = "UserBindWx";
     public static String USER_LOGIN_WEIXIN = "UserLoginWx";
     private String STATE = "189922";
-    private static AccessToken accessToken=null;
+//    private static AccessToken accessToken=new AccessToken();
+//    private static String jsApiTicket = "O3SMpm8bG7kJnF36aXbe8wa1RPCPMdPIjJ27MLyeDapZjX0biZEWvFiEvxIu-r0HTPCMdk7l30zFFwkUmTTK-g";
+    private static AccessToken accessToken = null;
     private static String jsApiTicket = null;
     @Autowired
     private SuperHttpDao superHttpDao;
@@ -213,6 +215,7 @@ public class WeixinMpService {
 //            String postJson = "{\"expire_seconds\": 900, \"action_name\": \"QR_STR_SCENE\", \"action_info\": {\"scene\": {\"scene_str\": \""+userId+"\"}}}";
 //            HttpPost httpPost = HttpClientUtils.buildHttpPostFormJson(accessTokenUrl,postJson);
                 String result = superHttpDao.doPost(httpPost);
+                logger.info("token result {}", result);
                 if(result!=null) {
 //                    JSONObject jsonObject = JSONObject.fromObject(result);
                     JSONObject jsonObject = JSON.parseObject(result);
@@ -369,6 +372,7 @@ public class WeixinMpService {
             HttpPost httpPost = HttpClientUtils.buildHttpPostFormJson(accessTokenUrl,postJson);
             String result = superHttpDao.doPost(httpPost);
             if(result!=null) {
+                logger.debug("QRcodeTicket result {}",result);
 //                JSONObject jsonObject = JSONObject.fromObject(result);
                 JSONObject jsonObject = JSON.parseObject(result);
                 if(jsonObject.get("errcode")==null){
@@ -405,11 +409,12 @@ public class WeixinMpService {
             if(result!=null) {
 //                JSONObject jsonObject = JSONObject.fromObject(result);
                 JSONObject jsonObject = JSON.parseObject(result);
-                if(jsonObject.get("errcode")==null){
+                logger.debug("refJsApiTicket result {}", result);
+                if(jsonObject.getString("ticket")!=null){
                     //                {"ticket":"gQH47joAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL2taZ2Z3TVRtNzJXV1Brb3ZhYmJJAAIEZ23sUwMEmm3sUw==","expire_seconds":60,"url":"http://weixin.qq.com/q/kZgfwMTm72WWPkovabbI"}
                     String ticket = jsonObject.getString("ticket");
-                    int expire_seconds = jsonObject.getIntValue("expire_seconds");
-                    String url = jsonObject.getString("url");
+//                    int expire_seconds = jsonObject.getIntValue("expire_seconds");
+//                    String url = jsonObject.getString("url");
                     return ticket;
                 }
             }

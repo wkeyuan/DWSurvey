@@ -6,15 +6,16 @@ import net.diaowen.dwsurvey.entity.es.answer.extend.location.EsCitySearchResult;
 public class EsAnLocation {
     // 定位品牌：wx, amap; 备注：微信定位结果会转换成高德信息统一返回保存
     private String locationBrand;
-    // 定位来源: mobile, pc
-    private String locationSource;
+    // 客户端来源: m, pc
+    private String locationClient;
     // 定位级别: vague 模糊,accurate 精确, high 高精度
     private String accuracyLevel;
     // 是否完成定位
     private Boolean isLocation;
 
     // 定位数据: GCJ-02 坐标
-    private Float[] position;
+    private Float longitude; // 经度，浮点数，范围为180 ~ -180。
+    private Float latitude;// 纬度，浮点数，范围为90 ~ -90
     // 定位精度
     private Float accuracy;
     // 定位类型: ip/h5/sdk/ipcity/wx
@@ -48,12 +49,12 @@ public class EsAnLocation {
         this.locationBrand = locationBrand;
     }
 
-    public String getLocationSource() {
-        return locationSource;
+    public String getLocationClient() {
+        return locationClient;
     }
 
-    public void setLocationSource(String locationSource) {
-        this.locationSource = locationSource;
+    public void setLocationClient(String locationClient) {
+        this.locationClient = locationClient;
     }
 
     public String getAccuracyLevel() {
@@ -64,12 +65,20 @@ public class EsAnLocation {
         this.accuracyLevel = accuracyLevel;
     }
 
-    public Float[] getPosition() {
-        return position;
+    public Float getLongitude() {
+        return longitude;
     }
 
-    public void setPosition(Float[] position) {
-        this.position = position;
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
     }
 
     public Float getAccuracy() {

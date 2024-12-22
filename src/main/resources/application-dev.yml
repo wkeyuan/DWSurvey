@@ -35,11 +35,11 @@ dwsurvey:
       smsUser:
       smsKey:
   weixin:
-    open: false
-    app-id: wxf0df5490b4ba5d31
-    app-secret: d34ee95fd84733f255e8f1dfd36ecf74
+    open: true
+    app-id: wx810d4fe0b741ca07
+    app-secret: 61ecbbd7725e83854321458a7e08e3aa
     server:
-      token: ByqGSM44BAEwggEf
+      token:
       encodingAESKey:
   dw-open: # 预留配置
     api:

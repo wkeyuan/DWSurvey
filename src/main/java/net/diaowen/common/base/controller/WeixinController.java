@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -198,25 +199,25 @@ public class WeixinController {
     public HttpResult jsApiTicketGet(HttpServletRequest request, HttpServletResponse response){
         String resultEchostr = "error";
         try{
-            // 微信加密签名
-            String signature = request.getParameter("signature");
-            // 时间戳
-            String timestamp = request.getParameter("timestamp");
-            // 随机数
-            String nonce = request.getParameter("nonce");
             // 随机字符串
-            String echostr = request.getParameter("echostr");
+            String url = request.getParameter("url");
+            System.out.println("url:"+url);
+            String jsapiTicket = weixinMpService.getJsApiTicket();
+            String nonceStr = RandomUtils.buildEntCode();
+            String timestamp = Long.toString(System.currentTimeMillis() / 1000);
+            Map<String,String> maps = new HashMap<>();
+            maps.put("jsapiTicket",jsapiTicket);
+            maps.put("nonceStr",nonceStr);
+            maps.put("timestamp",timestamp);
+            maps.put("appId",DWSurveyConfig.DWSURVEY_WEIXIN_APP_ID);
 
-//            String[] sortStr =  new String[]{timestamp,nonce,DWSurveyConfig.DWSURVEY_WEIXIN_SERVER_TOKEN};
-//            String str = SHA1.sortStr(sortStr);
-//            String sha1_0 =  SHA1.getSha1(str);
-//            Map<String,Object> maps = new HashMap<>();
-//            maps.put("appId",RandomUtils.getVerifyCode());
-//            maps.put("timestamp",new Date().getTime());
-//            maps.put("nonceStr",RandomUtils.getVerifyCode());
-//            maps.put("signature",RandomUtils.getVerifyCode());
-//            maps.put("jsapi_ticket",RandomUtils.getVerifyCode());
-            return HttpResult.SUCCESS(weixinMpService.getJsApiTicket());
+            String sortStr = "jsapi_ticket="+jsapiTicket+"&noncestr="+nonceStr+"&timestamp="+timestamp+"&url="+url;
+//            sortStr = sortStr.toLowerCase();
+            System.out.println("sortStr2:"+sortStr);
+            String sha1 =  SHA1.getSha1(sortStr);
+            maps.put("signature",sha1);
+            System.out.println("sign"+sha1);
+            return HttpResult.SUCCESS(maps);
         }catch (Exception e){
             e.printStackTrace();;
         }

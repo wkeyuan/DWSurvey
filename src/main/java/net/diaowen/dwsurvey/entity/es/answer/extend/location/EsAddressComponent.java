@@ -29,8 +29,6 @@ public class EsAddressComponent {
     private String building;
     //楼类型
     private String buildingType;
-    // 仅逆地理编码时返回，所属商圈信息
-    private EsBusinessArea[] businessAreas;
 
     public String getProvince() {
         return province;
@@ -126,14 +124,6 @@ public class EsAddressComponent {
 
     public void setBuildingType(String buildingType) {
         this.buildingType = buildingType;
-    }
-
-    public EsBusinessArea[] getBusinessAreas() {
-        return businessAreas;
-    }
-
-    public void setBusinessAreas(EsBusinessArea[] businessAreas) {
-        this.businessAreas = businessAreas;
     }
 
     public String getCountry() {
