@@ -1,5 +1,3 @@
-// 首次安装只需要执行此完整的ES脚本
-// PUT dwsurvey_contacts_index
 {
   "settings": {
     "index": {

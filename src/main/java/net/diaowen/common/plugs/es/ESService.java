@@ -9,7 +9,7 @@ import java.io.IOException;
 @Service
 public class ESService {
 
-    public final static String INDEX_PREV = "";
+    public final static String INDEX_PREV = "test";
 
 //    @Resource(name="clientByPasswd")
     @Resource(name = "noPwdClient")
