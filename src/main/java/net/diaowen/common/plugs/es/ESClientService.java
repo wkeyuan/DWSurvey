@@ -22,12 +22,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * es客户端，所有ES操作都会汇集到这里发出
+ */
 @Service
 public class ESClientService {
     private static Logger logger = LoggerFactory.getLogger(ESClientConfig.class);
 
-//    @Resource(name="clientByPasswd")
-    @Resource(name = "noPwdClient")
+    @Resource(name = "defaultClient")
     private ElasticsearchClient elasticsearchClient;
 
     private static class SomeApplicationData {}
@@ -53,6 +55,13 @@ public class ESClientService {
         logger.info("Indexed with version " + response.id());
         return response;
     }
+
+    /*
+    // 删除索引
+    public void delIndex(String name) throws IOException {
+        elasticsearchClient.indices().delete(c -> c.index(name));
+    }
+    */
 
     /**
      * 查询文档 from+size 分页方式

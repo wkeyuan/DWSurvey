@@ -44,17 +44,17 @@ import java.util.*;
 public class DwEsInitService {
     private Logger logger = LoggerFactory.getLogger(getClass());
     //答卷索引名称
-    private final static String ANSWER_INDEX_NAME = ESService.INDEX_PREV + "dwsurvey_answer_index";
-    private final static String ANSWER_INDEX_NAME_AGG = ESService.INDEX_PREV + "dwsurvey_answer_index_aggs";
-    private final static String ANSWER_CONTACT_RELATE = ESService.INDEX_PREV + "dwsurvey_contact_relate_index";
-    private final static String ANSWER_CONTACT = ESService.INDEX_PREV + "dwsurvey_contacts_index";
     @Resource
     private ESClientService esClientService;
+    @Resource ESService esService;
 
     //创建索引方法
     @PostConstruct
     public void createIndex(){
         try {
+            esService.initIndexName();
+            String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
+            logger.debug("ANSWER_INDEX_NAME {}", ANSWER_INDEX_NAME);
             if (!esClientService.indexExists(ANSWER_INDEX_NAME)) {
                 boolean isSuccess = esClientService.createIndex(ANSWER_INDEX_NAME,"conf/es/dwsurvey-answer-index/dwsurvey_answer_index.json");
                 if (isSuccess) {
@@ -63,6 +63,7 @@ public class DwEsInitService {
                     logger.error("ES索引 {} 初始化失败，请手工创建", ANSWER_INDEX_NAME);
                 }
             }
+            String ANSWER_INDEX_NAME_AGG = ESService.getAnswerIndexNameAgg();
             if (!esClientService.indexExists(ANSWER_INDEX_NAME_AGG)) {
                 boolean isSuccess = esClientService.createIndex(ANSWER_INDEX_NAME_AGG,"conf/es/dwsurvey-answer-index-aggs/dwsurvey_answer_index_aggs.json");
                 if (isSuccess) {
@@ -71,6 +72,7 @@ public class DwEsInitService {
                     logger.error("ES索引 {} 初始化失败，请手工创建", ANSWER_INDEX_NAME_AGG);
                 }
             }
+            String ANSWER_CONTACT_RELATE = ESService.getAnswerContactRelate();
             if (!esClientService.indexExists(ANSWER_CONTACT_RELATE)) {
                 boolean isSuccess = esClientService.createIndex(ANSWER_CONTACT_RELATE,"conf/es/dwsurvey-contact-relate-index/dwsurvey_contact_relate_index.json");
                 if (isSuccess) {
@@ -79,6 +81,7 @@ public class DwEsInitService {
                     logger.error("ES索引 {} 初始化失败，请手工创建", ANSWER_CONTACT_RELATE);
                 }
             }
+            String ANSWER_CONTACT = ESService.getAnswerContact();
             if (!esClientService.indexExists(ANSWER_CONTACT)) {
                 boolean isSuccess = esClientService.createIndex(ANSWER_CONTACT,"conf/es/dwsurvey-contacts-index/dwsurvey_contacts_index.json");
                 if (isSuccess) {

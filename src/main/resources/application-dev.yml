@@ -148,7 +148,14 @@ logging:
       apache: ERROR
 elasticsearch:
   username: elastic
-  passwd: v9ytDv_3bg0NCdbitpvo
+  passwd: gSbY_1NlVdwhmU8P8p7V
   apikey: ==
-  hosts: 127.0.0.1:9200 # 多个IP逗号隔开
-#  cert-name: http_ca.crt
+  hosts: 127.0.0.1:9201 # 多个IP逗号隔开
+  cert-name: http_ca.crt
+#  后加的ES参数
+#  协议方式，使用证书这里改成https
+  scheme: http
+#  索引统一前缀，默认为空不加前缀, 如果加建议格式如：dw_
+  index-prev: dw_c_ww_a_
+# 认证方式 noPwd, pwd, cert
+  security: pwd

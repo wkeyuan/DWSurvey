@@ -42,23 +42,8 @@ import java.util.*;
 @Service
 public class DwAnswerEsClientService {
     private Logger logger = LoggerFactory.getLogger(getClass());
-    //答卷索引名称
-    private final static String ANSWER_INDEX_NAME = ESService.INDEX_PREV + "dwsurvey_answer_index";
-    private final static String ANSWER_INDEX_NAME_AGG = ESService.INDEX_PREV + "dwsurvey_answer_index_aggs";
     @Resource
     private ESClientService esClientService;
-
-    //创建索引方法
-    public boolean createAnswerIndex(){
-        try {
-            if (!esClientService.indexExists(ANSWER_INDEX_NAME)) {
-                return esClientService.createIndex(ANSWER_INDEX_NAME,"conf/es/survey-answer-index.json");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
 
     public IndexResponse createAnswerDoc(String answerJson) {
         DwEsSurveyAnswer dwEsSurveyAnswer = JSON.parseObject(answerJson, DwEsSurveyAnswer.class);
@@ -67,6 +52,8 @@ public class DwAnswerEsClientService {
     //保存答卷
     public IndexResponse createAnswerDocByObj(DwEsSurveyAnswer dwEsSurveyAnswer) {
         try {
+            String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
+            String ANSWER_INDEX_NAME_AGG = ESService.getAnswerIndexNameAgg();
             EsAnTime esAnTime = dwEsSurveyAnswer.getAnswerCommon().getAnTime();
 //            List<EsAnQuestion> anQuestions = dwEsSurveyAnswer.getAnQuestions();
             String newAnswerJson = JSON.toJSONString(dwEsSurveyAnswer);
@@ -120,6 +107,7 @@ public class DwAnswerEsClientService {
     public Page<DwEsSurveyAnswer> findPageByFromSize(Page<DwEsSurveyAnswer> page, String surveyId, String beginDate, String endDate, String ip, String city, Integer handleState, Integer isDelete){
         if (StringUtils.isNotBlank(surveyId)) {
             try {
+                String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
                 List<Query> queryList = new ArrayList<>();
 //            必须带的参数
                 queryList.add(TermQuery.of(b -> b.field("answerCommon.surveyId").value(surveyId))._toQuery());
@@ -161,6 +149,7 @@ public class DwAnswerEsClientService {
 //        SearchResponse<DwEsSurveyAnswer> searchResponse = esClientService.findPageByFromSize(ANSWER_INDEX_NAME, query, sortOptions, from, size, DwEsSurveyAnswer.class);
         DwEsSurveyAnswer dwEsSurveyAnswer = null;
         try {
+            String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
             GetResponse<DwEsSurveyAnswer> response = esClientService.getDocById(ANSWER_INDEX_NAME, answerId, DwEsSurveyAnswer.class);
             if (response.found()) {
                 dwEsSurveyAnswer = response.source();
@@ -177,6 +166,7 @@ public class DwAnswerEsClientService {
 
     public Page<DwEsSurveyAnswer> findPageByScroll(Page<DwEsSurveyAnswer> page, String surveyId) {
         try {
+            String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
             List<Query> queryList = new ArrayList<>();
 //            必须带的参数
             queryList.add(TermQuery.of(b -> b.field("answerCommon.surveyId").value(surveyId))._toQuery());
@@ -231,6 +221,7 @@ public class DwAnswerEsClientService {
 
     public long getCount(String surveyId, String ipAddr) {
         try {
+            String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
             if (StringUtils.isNotEmpty(surveyId)) {
                 List<Query> queryList = new ArrayList<>();
 //            必须带的参数
@@ -249,6 +240,8 @@ public class DwAnswerEsClientService {
     }
 
     public Map<String, Map<String, AggregationResultItem>> aggregationSearch(String surveyId) {
+        String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
+        String ANSWER_INDEX_NAME_AGG = ESService.getAnswerIndexNameAgg();
         Map<String, Map<String, AggregationResultItem>> aggMaps = new HashMap<>();
 //      分题型一个个查询选项分组数据，然后把数据合并到一个map返回前端使用
 //      必须带的参数
@@ -417,6 +410,8 @@ public class DwAnswerEsClientService {
     }
 
     public void deleteById(String esId) throws IOException {
+        String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
+        String ANSWER_INDEX_NAME_AGG = ESService.getAnswerIndexNameAgg();
         esClientService.deleteById(ANSWER_INDEX_NAME, esId);
         List<Query> queryList = new ArrayList<>();
         queryList.add(TermQuery.of(b -> b.field("relateAnswerResponseId").value(esId))._toQuery());

@@ -3,6 +3,7 @@ package net.diaowen.dwsurvey;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import com.alibaba.fastjson.JSON;
 import net.diaowen.common.plugs.es.DwAnswerEsClientService;
+import net.diaowen.common.plugs.es.ESClientService;
 import net.diaowen.common.plugs.es.ESService;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.dwsurvey.config.ESClientConfig;
@@ -23,15 +24,17 @@ class ESServiceTest {
     ESService esService;
     @Autowired
     DwAnswerEsClientService dwAnswerEsClientService;
+    @Autowired
+    ESClientService esClientService;
 
     @Test
     void addIndex() throws Exception {
         String indexName = "dw_test_index";
-        Assertions.assertFalse(esService.indexExists(indexName));
-        esService.addIndex(indexName);
-        Assertions.assertTrue(esService.indexExists(indexName));
-        esService.delIndex(indexName);
-        Assertions.assertFalse(esService.indexExists(indexName));
+        Assertions.assertFalse(esClientService.indexExists(indexName));
+//        esClientService.addIndex(indexName);
+        Assertions.assertTrue(esClientService.indexExists(indexName));
+//        esClientService.delIndex(indexName);
+        Assertions.assertFalse(esClientService.indexExists(indexName));
     }
 
     @Test

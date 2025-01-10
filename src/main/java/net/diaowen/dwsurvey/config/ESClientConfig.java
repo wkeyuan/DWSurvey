@@ -11,6 +11,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.conn.ConnectionKeepAliveStrategy;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.message.BasicHeader;
@@ -27,7 +28,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
-import javax.net.ssl.SSLContext;
+import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
@@ -52,16 +53,20 @@ public class ESClientConfig {
     private String passwd;
     @Setter
     private String apikey;
-//    @Setter
-//    private String certName;
+    @Setter
+    private String certName;
     private static String CERT_NAME = "http_ca.crt";
+    @Setter
+    private String security;
+    @Setter
+    private String scheme = "cert";
 
     @PostConstruct
     private void init() {
-//        CERT_NAME = certName;
-        CERT_NAME = "http_ca.crt";
+        if (org.apache.commons.lang3.StringUtils.isNotEmpty(certName)) CERT_NAME = certName;
         logger.info("CERT_NAME {}", CERT_NAME);
-        logger.info("passwd {}", passwd);
+        logger.info("security {}", security);
+        logger.info("scheme {}", scheme);
     }
 
     /**
@@ -75,7 +80,7 @@ public class ESClientConfig {
         HttpHost httpHost;
         for (int i = 0; i < hostArray.length; i++) {
             String[] strings = hostArray[i].split(":");
-            httpHost = new HttpHost(strings[0], Integer.parseInt(strings[1]), "https");
+            httpHost = new HttpHost(strings[0], Integer.parseInt(strings[1]), scheme);
             httpHosts[i] = httpHost;
         }
         return httpHosts;
@@ -108,13 +113,14 @@ public class ESClientConfig {
     }
 
     /**
-     * 依据账号密码，获取一个 ElasticsearchTransport 对象
+     * 依据账号密码，获取一个 ElasticsearchTransport 对象 SSL
      * @param username
      * @param passwd
      * @param hosts
      * @return ElasticsearchTransport
      */
-    private static ElasticsearchTransport getElasticsearchTransport(String username, String passwd, HttpHost...hosts) {
+    private static ElasticsearchTransport getElasticsearchTransportSSL(String username, String passwd, HttpHost...hosts) {
+
         // 账号密码的配置
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, passwd));
@@ -137,7 +143,7 @@ public class ESClientConfig {
      * @param hosts
      * @return
      */
-    private static ElasticsearchTransport getElasticsearchTransport(String apiKey, HttpHost...hosts) {
+    private static ElasticsearchTransport getElasticsearchTransportSSL(String apiKey, HttpHost...hosts) {
         // 将ApiKey放入header中
         Header[] headers = new Header[] {new BasicHeader("Authorization", "ApiKey " + apiKey)};
         // es自签证书的设置
@@ -154,12 +160,34 @@ public class ESClientConfig {
     }
 
     /**
+     * 依据账号密码，获取一个 ElasticsearchTransport 对象
+     * @param username
+     * @param passwd
+     * @param hosts
+     * @return ElasticsearchTransport
+     */
+    private static ElasticsearchTransport getHttpElasticsearchTransport(String username, String passwd, HttpHost...hosts) {
+        // 账号密码的配置
+        final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, passwd));
+        // 自签证书的设置，并且还包含了账号密码
+        RestClientBuilder.HttpClientConfigCallback callback = httpAsyncClientBuilder -> httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+        // 用builder创建RestClient对象
+        RestClient client = RestClient
+                .builder(hosts)
+                .setHttpClientConfigCallback(callback)
+                .build();
+        return new RestClientTransport(client, new JacksonJsonpMapper());
+    }
+
+
+    /**
      * 通过密码认证，获取ElasticsearchClient
      * @return ElasticsearchClient
      */
     @Bean
-    public ElasticsearchClient clientByPasswd() throws Exception {
-        ElasticsearchTransport transport = getElasticsearchTransport(username, passwd, toHttpHost());
+    public ElasticsearchClient clientBySSLPasswd() throws Exception {
+        ElasticsearchTransport transport = getElasticsearchTransportSSL(username, passwd, toHttpHost());
         return new ElasticsearchClient(transport);
     }
 
@@ -168,8 +196,8 @@ public class ESClientConfig {
      * @return ElasticsearchClient
      */
     @Bean
-    public ElasticsearchClient clientByApiKey() throws Exception {
-        ElasticsearchTransport transport = getElasticsearchTransport(apikey, toHttpHost());
+    public ElasticsearchClient clientBySSLApiKey() throws Exception {
+        ElasticsearchTransport transport = getElasticsearchTransportSSL(apikey, toHttpHost());
         return new ElasticsearchClient(transport);
     }
 
@@ -179,8 +207,8 @@ public class ESClientConfig {
      * @return ElasticsearchAsyncClient
      */
     @Bean
-    public ElasticsearchAsyncClient asyncClientByPasswd() {
-        ElasticsearchTransport transport = getElasticsearchTransport(username, passwd, toHttpHost());
+    public ElasticsearchAsyncClient asyncClientBySSLPasswd() {
+        ElasticsearchTransport transport = getElasticsearchTransportSSL(username, passwd, toHttpHost());
         return new ElasticsearchAsyncClient(transport);
     }
 
@@ -190,18 +218,49 @@ public class ESClientConfig {
      * @return ElasticsearchAsyncClient
      */
     @Bean
-    public ElasticsearchAsyncClient asyncClientByApiKey() {
-        ElasticsearchTransport transport = getElasticsearchTransport(apikey, toHttpHost());
+    public ElasticsearchAsyncClient asyncClientBySSLApiKey() {
+        ElasticsearchTransport transport = getElasticsearchTransportSSL(apikey, toHttpHost());
         return new ElasticsearchAsyncClient(transport);
     }
 
+
+    /**
+     * 无密码认证
+     * @return
+     */
     @Bean
     public ElasticsearchClient noPwdClient(){
         // 用builder创建RestClient对象
         RestClient client = RestClient
-                .builder(new HttpHost("127.0.0.1",9200,"http"))
+                //.builder(new HttpHost("127.0.0.1",9200,"http"))
+                .builder(toHttpHost())
                 .build();
         return new ElasticsearchClient(new RestClientTransport(client, new JacksonJsonpMapper()));
+    }
+
+    /**
+     * 通过http密码认证，获取ElasticsearchClient
+     * @return ElasticsearchClient
+     */
+    public ElasticsearchClient clientByPasswd() throws Exception {
+        ElasticsearchTransport transport = getHttpElasticsearchTransport(username, passwd, toHttpHost());
+        return new ElasticsearchClient(transport);
+    }
+
+
+    @Bean
+    public ElasticsearchClient defaultClient() throws Exception {
+       // 根据认证方式，判断使用哪种认证提供服务
+        if ("pwd".equals(security)) {
+            // 密码认证
+            return clientByPasswd();
+        } else if ("noPwd".equals(security)) {
+            // 无认证
+            return noPwdClient();
+        } else {
+            // 证书认证
+            return clientBySSLPasswd();
+        }
     }
 
 }
