@@ -152,3 +152,11 @@ elasticsearch:
   apikey: eyJ2ZXIiOiI4LjguMSIsImFkciI6WyIxOTIuMTY4LjUuMjo5MjAwIl0sImZnciI6ImZmMTQ0YTlhMDI4YzM3MjYwMjc5NWVhOTA0ZDYwMzM5ODg0MTEwNzZlOTMzNTU2YzcxMGE2OWFjNGYyZDAzNDgiLCJrZXkiOiJDUDBQQVlrQi1qQXBIU3E2Vk1CMDpDXzdLTk9odVJtcWVKWjgwUEkwdWVRIn0=
   hosts: localhost:9200 # 多个IP逗号隔开
 #  cert-name: http_ca.crt
+  cert-name: http_ca.crt
+  #  后加的ES参数
+  #  协议方式，使用证书这里改成https
+  scheme: http
+  #  索引统一前缀，默认为空不加前缀, 如果加建议格式如：dw_
+  index-prev: dw_c_ww_a_
+  # 认证方式 noPwd, pwd, cert
+  security: noPwd
