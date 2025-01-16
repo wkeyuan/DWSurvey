@@ -92,7 +92,7 @@ public class DwEsInitService {
             }
         } catch (IOException e) {
             logger.error("索引初始化创建异常，请确认ES服务是否安装，同时注意是否安装IK分词插件");
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
