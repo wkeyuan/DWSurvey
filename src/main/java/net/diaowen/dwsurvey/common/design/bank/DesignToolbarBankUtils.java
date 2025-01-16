@@ -20,10 +20,6 @@ public class DesignToolbarBankUtils {
     public static List<Question> commonQus () {
         List<Question> questions12 = new ArrayList<Question>();
         //日期 时间 邮箱 性别 学历 收入
-        Question dataFbk = new Question(QuType.FILLBLANK, "请输入日期", "日期题", "<i class=\"fa-solid fa-calendar-days\"></i>");
-        dataFbk.setCheckType(CheckType.DATE);
-        Question timeFbk = new Question(QuType.FILLBLANK, "请输入时间", "时间题","<i class=\"fa-regular fa-clock\"></i>");
-        timeFbk.setCheckType(CheckType.TIME);
         Question emailFbk = new Question(QuType.FILLBLANK, "请输入邮箱", "邮箱题","<i class=\"fa-regular fa-envelope\"></i>");
         emailFbk.setCheckType(CheckType.EMAIL);
 
@@ -51,11 +47,6 @@ public class DesignToolbarBankUtils {
         incomeRadios.add(new QuRadio("20000元以上", "20000元以上"));
         incomeRadio.setQuRadios(incomeRadios);
 
-        dataFbk.setDwsurveyfont("icon-dwsurvey-riqi");
-        timeFbk.setDwsurveyfont("icon-dwsurvey-shijian");
-
-        questions12.add(dataFbk);
-        questions12.add(timeFbk);
         return questions12;
     }
 

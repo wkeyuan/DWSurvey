@@ -55,35 +55,27 @@ public class DesignSurveyToolbarUtils {
         Question matrixRadio = new Question(QuType.MATRIX_RADIO, "矩阵单选", "矩阵单选", "<i class=\"fa-solid fa-list-check\"></i>");
         Question matrixCheckbox = new Question(QuType.MATRIX_CHECKBOX, "矩阵多选", "矩阵多选", "<i class=\"fa-solid fa-table-cells\"></i>");
         Question matrixInput = new Question(QuType.MATRIX_INPUT, "矩阵填空", "矩阵填空", "<i class=\"fa-solid fa-grip\"></i>");
-        Question matrixNumber = new Question(QuType.MATRIX_NUMBER, "矩阵单选", "矩阵数值", "<i class=\"fa-solid fa-border-all\"></i>");
-        Question matrixSelect = new Question(QuType.MATRIX_SELECT, "矩阵单选", "矩阵下拉", "<i class=\"fa-solid fa-rectangle-list\"></i>");
-        Question matrixScale = new Question(QuType.MATRIX_SCALE, "矩阵量表", "矩阵量表", "<i class=\"fa-solid fa-ruler-combined\"></i>");
-        Question matrixSlider = new Question(QuType.MATRIX_SLIDER, "矩阵滑块", "矩阵滑块", "<i class=\"fa-solid fa-sliders\"></i>");
-        Question matrixGroup = new Question(QuType.MATRIX_GROUP, "矩阵单选", "矩阵组合", "<i class=\"fa-solid fa-object-group\"></i>");
         matrixRadio.setDwsurveyfont("icon-dwsurvey-juzhendanxuan");
         matrixCheckbox.setDwsurveyfont("icon-dwsurvey-juzhenduoxuan");
         matrixInput.setDwsurveyfont("icon-dwsurvey-juzhentiankong");
-        matrixNumber.setDwsurveyfont("icon-dwsurvey-juzhenshuzhi");
-        matrixSelect.setDwsurveyfont("icon-dwsurvey-juzhenxiala");
-        matrixScale.setDwsurveyfont("icon-dwsurvey-juzhenliangbiao");
-        matrixSlider.setDwsurveyfont("icon-dwsurvey-juzhenhuakuai");
-        matrixGroup.setDwsurveyfont("icon-dwsurvey-juzhenzuhe");
         questionsMatrix.add(matrixRadio);
         questionsMatrix.add(matrixCheckbox);
         questionsMatrix.add(matrixInput);
-        questionsMatrix.add(matrixScale);
-        questionsMatrix.add(matrixSlider);
-        questionsMatrix.add(matrixNumber);
-        questionsMatrix.add(matrixSelect);
-        questionsMatrix.add(matrixGroup);
-        Question matrixAutoAdd = QuTemplateBankCommon.getMatrixAutoAdd();
-        matrixAutoAdd.setDwsurveyfont("icon-dwsurvey-juzhenzuhe");
-        questionsMatrix.add(matrixAutoAdd);
+
+        Question dataFbk = new Question(QuType.FILLBLANK, "请输入日期", "日期题", "<i class=\"fa-solid fa-calendar-days\"></i>");
+        dataFbk.setCheckType(CheckType.DATE);
+        Question timeFbk = new Question(QuType.FILLBLANK, "请输入时间", "时间题","<i class=\"fa-regular fa-clock\"></i>");
+        timeFbk.setCheckType(CheckType.TIME);
+        dataFbk.setDwsurveyfont("icon-dwsurvey-riqi");
+        timeFbk.setDwsurveyfont("icon-dwsurvey-shijian");
+
+        questionsMatrix.add(dataFbk);
+        questionsMatrix.add(timeFbk);
         return questionsMatrix;
     }
 
     public static DesignSurveyToolbarTabQu matrixTabQu() {
-        return new DesignSurveyToolbarTabQu("矩阵题型", matrixQus());
+        return new DesignSurveyToolbarTabQu("矩阵扩展", matrixQus());
     }
 
     /**
@@ -139,7 +131,6 @@ public class DesignSurveyToolbarUtils {
         List<DesignSurveyToolbarTab> tabs = new ArrayList<>();
         tabs.add(toolbarTab1());
         tabs.add(DesignToolbarBankUtils.toolbarTab2());
-        tabs.add(DesignExtCommonToolbarUtils.extToolbarTab3());
         return tabs;
     }
 }
