@@ -159,6 +159,7 @@ public class SecurityController {
                             }finally{
                                 user.setShaPassword(user.getShaPasswordTemp());
                                 user.setLastLoginTime(new Date());
+                                updateLastLogin(user);
                                 accountManager.saveUp(user);
                             }
 
@@ -221,6 +222,7 @@ public class SecurityController {
                             formAuthFilter.resetAccountLock(userName);
                             subject.getSession().setAttribute("loginUserName", userName);
                             user.setLastLoginTime(new Date());
+                            updateLastLogin(user);
                             accountManager.saveUp(user);
 //                            authed = dwUserRoleManager.rolePermsByUserId(user.getId());
                             if("1".equals(user.getId())) authed = new String[]{RoleCode.DWSURVEY_SUPER_ADMIN};
@@ -427,6 +429,7 @@ public class SecurityController {
                 user.setShaPassword(user.getShaPasswordTemp());
                 user.setLastLoginTime(new Date());
                 user.setSessionId("");
+                updateLastLogin(user);
                 accountManager.saveUp(user);
             }
         }
@@ -476,5 +479,12 @@ public class SecurityController {
         return HttpResult.SUCCESS(props);
     }
 
+    private User updateLastLogin(User user) {
+        user.setLastLoginTime(new Date());
+        Integer loginCount = user.getLoginCount();
+        if (loginCount==null) loginCount = 0;
+        user.setLoginCount(loginCount+1);
+        return user;
+    }
 
 }

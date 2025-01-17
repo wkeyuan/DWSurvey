@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.diaowen</groupId>
-    <artifactId>dwsurvey-bus-vue</artifactId>
+    <artifactId>dwsurvey-oss-vue</artifactId>
     <version>6.11.241118</version>
     <packaging>jar</packaging>
     <name>dwsurvey</name>

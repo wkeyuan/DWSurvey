@@ -67,6 +67,9 @@ public class User extends IdEntity {
 	private String wxOpenId;
 	private String sessionId;
 
+	//登录次数
+	private Integer loginCount;
+
 	// Hibernate自动维护的Version字段
 	// @Version
 	public Integer getVersion() {
@@ -254,6 +257,14 @@ public class User extends IdEntity {
 
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
+	}
+
+	public Integer getLoginCount() {
+		return loginCount;
+	}
+
+	public void setLoginCount(Integer loginCount) {
+		this.loginCount = loginCount;
 	}
 
 	private String plainPassword;
