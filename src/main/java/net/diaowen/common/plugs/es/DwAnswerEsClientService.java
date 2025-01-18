@@ -234,7 +234,7 @@ public class DwAnswerEsClientService {
             }
         } catch (IOException e) {
             logger.error("es getCountByIp 异常 {}，程序将继续执行，但IP过滤次数功能可能无效", ipAddr);
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return 0;
     }

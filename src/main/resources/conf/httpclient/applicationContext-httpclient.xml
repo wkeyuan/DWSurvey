@@ -81,6 +81,7 @@
      -->
 	<task:scheduled-tasks>
 		<task:scheduled ref="taskService" method="taskRefAccessToken" cron="0 0/115 * * * ?" />
+		<task:scheduled ref="taskService" method="checkVersion" cron="0 0 1 * * ?" />
 	</task:scheduled-tasks>
 
 </beans>

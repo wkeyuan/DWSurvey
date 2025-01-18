@@ -1,6 +1,7 @@
 package net.diaowen.common.base.service;
 
 import net.diaowen.common.plugs.httpclient.HttpResult;
+import net.diaowen.common.plugs.version.DwVersionService;
 import net.diaowen.common.plugs.weixin.WeixinMpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +20,15 @@ public class TaskService {
 
     @Autowired
     private WeixinMpService weixinMpService;
+    @Autowired
+    private DwVersionService dwVersionService;
 
     public void taskRefAccessToken() {
         weixinMpService.taskRefAccessToken();
+    }
+
+    public void checkVersion() {
+        dwVersionService.checkVersion();
     }
 
 }

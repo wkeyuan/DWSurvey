@@ -30,6 +30,10 @@ public class DWSurveyConfig {
     public static Integer DWSURVEY_OPEN_API_TIMESTAMP = 3;
     public static String DWSURVEY_OPEN_API_STATUS = null;
 
+
+    public static String DWSURVEY_VERSION_API = null;
+    public static String DWSURVEY_VERSION_NAME = null;
+    public static String DWSURVEY_VERSION_NAME_CODE = null;
     public static String DWSURVEY_VERSION_INFO = null;
     public static String DWSURVEY_VERSION_NUMBER = null;
     public static String DWSURVEY_VERSION_BUILT = null;
@@ -133,6 +137,21 @@ public class DWSurveyConfig {
     @Value("${dwsurvey.dw-open.api.timestamp}")
     public void setDwsurveyApiTimestamp(Integer apiTimestamp) {
         DWSurveyConfig.DWSURVEY_OPEN_API_TIMESTAMP = apiTimestamp;
+    }
+
+    @Value("${dwsurvey.version.api}")
+    public void setDwsurveyApiUrl(String dwsurveyApiUrl) {
+        DWSURVEY_VERSION_API = dwsurveyApiUrl;
+    }
+
+    @Value("${dwsurvey.version.name}")
+    public void setDwsurveyVersionName(String dwsurveyVersionName) {
+        DWSURVEY_VERSION_NAME = dwsurveyVersionName;
+    }
+
+    @Value("${dwsurvey.version.name-code}")
+    public void setDwsurveyVersionNameCode(String dwsurveyVersionNameCode) {
+        DWSURVEY_VERSION_NAME_CODE = dwsurveyVersionNameCode;
     }
 
     @Value("${dwsurvey.version.info}")

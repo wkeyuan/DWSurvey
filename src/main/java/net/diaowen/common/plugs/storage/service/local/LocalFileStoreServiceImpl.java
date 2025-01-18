@@ -143,7 +143,7 @@ public class LocalFileStoreServiceImpl implements FileStorageService {
             logger.info("local read {}",filePath);
             return FileUtils.readFileToString(file,"utf-8");
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             logger.error(e.getMessage());
         }
         return null;
