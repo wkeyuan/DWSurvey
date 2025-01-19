@@ -108,7 +108,7 @@ public class SysLogManagerImpl extends BaseServiceImpl<SysLog, String> implement
 	 */
 	public boolean ipLoginOk(String ip) {
 		long ipCount =  ipLoginCount("登录失败",2,ip);
-		logger.info("ip {}，ipCount {}",ip,ipCount);
+//		logger.info("ip {}，ipCount {}",ip,ipCount);
 		if (ipCount>10000) return false;
 		return true;
 	}

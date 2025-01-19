@@ -35,9 +35,9 @@ dwsurvey:
       smsUser:
       smsKey:
   weixin:
-    open: true
-    app-id: wx810d4fe0b741ca07
-    app-secret: 61ecbbd7725e83854321458a7e08e3aa
+    open: false
+    app-id: x
+    app-secret: x
     server:
       token:
       encodingAESKey:

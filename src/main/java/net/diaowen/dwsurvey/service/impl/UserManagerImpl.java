@@ -38,12 +38,10 @@ public class UserManagerImpl extends BaseServiceImpl<User, String> implements Us
 		this.baseDao=userDao;
 	}
 
+	@Transactional
 	@Override
 	public User adminSave(User entity) {
 		if(entity!=null){
-			if(StringUtils.isNotEmpty(entity.getId())){
-				entity.setId(null);
-			}
 			String pwd=entity.getPwd();
 			if(pwd!=null && !"".equals(pwd)){
 				//加点盐
