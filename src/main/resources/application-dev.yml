@@ -30,7 +30,7 @@ dwsurvey:
         pwd-login: true
       register: true
   sms:
-    code-open: false
+    code-open: true
     sendcloud:
       smsUser:
       smsKey:
