@@ -505,6 +505,9 @@ public class ResponseController {
 		if ("v6".equals(version)) {
 			encoderContent = baseUrl + "/#/v6/diaowen/an/"+sid;
 		}
+		if ("v8".equals(version)) {
+			encoderContent = baseUrl + "/v8/diaowen/an/"+sid;
+		}
 		if(StringUtils.isNotEmpty(ruleCode)){
 			encoderContent+="&ruleCode="+ruleCode;
 		}
