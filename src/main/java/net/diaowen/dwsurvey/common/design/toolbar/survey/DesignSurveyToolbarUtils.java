@@ -130,7 +130,7 @@ public class DesignSurveyToolbarUtils {
     public static List<DesignSurveyToolbarTab> surveyToolbarTabsV1() {
         List<DesignSurveyToolbarTab> tabs = new ArrayList<>();
         tabs.add(toolbarTab1());
-        tabs.add(DesignToolbarBankUtils.toolbarTab2());
+//        tabs.add(DesignToolbarBankUtils.toolbarTab2());
         return tabs;
     }
 }
