@@ -9,11 +9,11 @@ server:
 dwsurvey:
   # 产品版本号信息，V5-代表最新的前后端分离版本
   version:
-    api: http://localhost:8899
+    api: https://www.surveyform.cn
     name: 社区版
     name-code: OSS
-    built: 20241118
-    code: V6.11
+    built: 20250122
+    code: V6.12
     # OSS-V6.11-241118
     number: ${dwsurvey.version.name-code}-${dwsurvey.version.code}-${dwsurvey.version.built}
     # DWSurvey-OSS-V6.11-241118
