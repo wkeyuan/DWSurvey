@@ -16,14 +16,13 @@
 🎉🎉在调问（DWSurvey）问卷表单的第13个年头，我们完成了VUE3版本的升级，推出了全新框架和基于vue的开源版本。在开源问卷表单的路上，我们依然在认真、努力地前行。
 如果您有任何的需求和建议，随时联系调问的产品团队，也可以直接在社区留言，我们会认真对待每一个用户的声音。每一次更新迭代改动，都会记录在此 <a href="https://www.diaowen.net/upload-log">更新日志</a>
 
-  
+用心做好每一个功能，我们很需要你的鼓励！右上角Star🌟，等你点亮！
+
 ![img_3.png](src/main/resources/static/img/img_3.png)
 <p>任何问题都可以加产品微信</p>
 
 ![img_4.png](src/main/resources/static/img/img_4.png)
 <p>调问问卷公众号</p>
-
-用心做好每一个功能，我们很需要你的鼓励！右上角Star🌟，等你点亮！
 
 ## 技术架构
     
@@ -51,7 +50,8 @@
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0416/132431_5d99a296_1401416.gif "dwsurvey-2.gif")
 
 
-##系统亮点&核心功能
+## 系统亮点&核心功能
+
 最新开源版本为V7版本，此开源版本具备成熟的基础能力，足以满足一般场景下的问卷需求，前后端分别采用Vue2、Element UI、Spring Boot框架。
 如果您有更高级的功能需求，您也可以体验最新商用V8版本，前后端分别采用Vue3、Element Plus、Spring Boot框架。体验地址
 几个版本的功能差异，详见这里
@@ -73,7 +73,7 @@
 * 成熟稳定，经过多年技术发展，技术体系完善
 * 完善的支持服务，QQ群，微信群全天24小时技术服务
 
-<div style="font-weight: 600;padding: 10px;color: #278bee;"> 🎉🎉🎉  目前已支持功能包括 </div>
+<strong> 🎉🎉🎉  目前已支持功能包括</strong> 
 
 * 支持题型：
 
