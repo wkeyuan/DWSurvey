@@ -14,7 +14,9 @@ DWSurvey是一款简单、高效、成熟、稳定、专业的开源问卷系统
 <div>
 全新的 <strong>企业版</strong> 已经发布，前后端分别采用 React（Ant design）、VUE（Element）、Spring Boot，详情可前往体验
 <p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
-<p><strong>企业版V6新版体验地址</strong></p>
+<p><strong>企业版V8新Vue3版体验地址</strong></p>
+<p><strong>V8新版本：<a href="https://demo.diaowen.net">https://demo.diaowen.net</a></strong></p>
+<p><strong>企业版V6新Vue2版体验地址</strong></p>
 <p><strong>V6新版本：<a href="https://ent.surveyform.cn">https://ent.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
 <p><strong>企业版V5体验地址</strong></p>
 <p><strong>V5版本：<a href="https://element-ent.surveyform.cn">https://element-ent.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
@@ -27,7 +29,7 @@ DWSurvey是一款简单、高效、成熟、稳定、专业的开源问卷系统
 <div>
 新一代的 <strong>专业版</strong> 已经发布，前端采用<strong>纯VUE实现</strong>（ElementUI）、后端使用 Spring Boot、Elasticsearch，敬请关注
 <p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
-<p><strong>V6新版本：<a href="https://pro.surveyform.cn">https://pro.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
+<p><strong>V8新版本：<a href="https://pro.surveyform.cn">https://pro.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
 </div>
 </div>
 
