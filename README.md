@@ -1,150 +1,116 @@
 # 调问开源问卷系统（DWSurvey）
 
-    此代码仓库为基于 Spring Boot、Vue 实现的后端仓库
+    十二年开源沉淀，帮你建设属于自己的问卷表单系统
 
 [![star](https://gitee.com/wkeyuan/DWSurvey/badge/star.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/stargazers)
 [![fork](https://gitee.com/wkeyuan/DWSurvey/badge/fork.svg?theme=dark)](https://gitee.com/wkeyuan/DWSurvey/members)
 ![GitHub Repo stars](https://img.shields.io/github/stars/wkeyuan/DWSurvey?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/wkeyuan/DWSurvey?style=social)
 
-DWSurvey是一款简单、高效、成熟、稳定、专业的开源问卷系统，自2012年启动至今经过9年的积累，已经形成一套完善的基于 JAVA WEB 的开源问卷表单解决方案。
 
-<div style="padding: 10px;border-left:solid 6px #278bee;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
-<div style="font-weight: 600;padding: 10px;color: #278bee;"> 🎉🎉🎉  企业版 </div>
-<div>
-全新的 <strong>企业版</strong> 已经发布，前后端分别采用 React（Ant design）、VUE（Element）、Spring Boot，详情可前往体验
+##关于调问
+
+🎉🎉调问（DWSurvey）问卷表单自2012年项目启动至今，已经过12年沉淀积累，先后进行了6次大框架升级，前端完成了从JSP、JQuery到Vue框架的改造。服务了数千家包括企业、政府部门、高职院校在内的真实客户。
+这些客户，使我们知道了问卷表单中很多被忽略的细节和实际场景中会用到的需求。这些反馈就像养分不断滋养着调问问卷表单的成长。
+
+🎉🎉在调问（DWSurvey）问卷表单的第13个年头，我们完成了VUE3版本的升级，推出了全新框架和基于vue的开源版本。在开源问卷表单的路上，我们依然在认真、努力地前行。
+如果您有任何的需求和建议，随时联系调问的产品团队，也可以直接在社区留言，我们会认真对待每一个用户的声音。每一次更新迭代改动，都会记录在此 更新日志
+
+  
+![img_3.png](src/main/resources/static/img/img_3.png)
+任何问题都可以加产品微信
+
+![img_4.png](src/main/resources/static/img/img_4.png)
+调问问卷公众号
+
+用心做好每一个功能，我们很需要你的鼓励！右上角Star🌟，等你点亮！
+
+##技术架构
+    
+前后端完全分离，前端分别提供Vue2，Vue3 框架实现，后端开发语言主要基于JAVA，通过 HTTP API进行服务调用整合以实现业务功能，数据库采用 MySQL、Elasticsearch 存储， 缓存采用Redis，保证业务的高性能、可靠性和可扩展性。
+    
+本产品应用服务支持 Docker 镜像一键部署，需要预先在服务器上准备好 Docker 环境，目前社区版已经提供好一键安装Docker 镜像可以免费下载，整体实施起来比较简单。
+关于后续更新，在完成部署之后，可通过更新容器镜像进行升级。
+
+*Docker具体操作请参考*
+<a href="https://www.diaowen.net/install/docker">https://www.diaowen.net/install/docker</a>
+
+##系统演示及截图
+
 <p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
+
+<p><strong>社区免费版一键安装包</strong></p>
+<p><strong>下载地址：<a href="https://www.diaowen.net/install/docker">https://www.diaowen.net/install/docker</a></strong></p>
+
 <p><strong>企业版V8新Vue3版体验地址</strong></p>
 <p><strong>V8新版本：<a href="https://demo.diaowen.net">https://demo.diaowen.net</a></strong></p>
-<p><strong>企业版V6新Vue2版体验地址</strong></p>
-<p><strong>V6新版本：<a href="https://ent.surveyform.cn">https://ent.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
-<p><strong>企业版V5体验地址</strong></p>
-<p><strong>V5版本：<a href="https://element-ent.surveyform.cn">https://element-ent.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
-</div>
-</div>
-<hr/>
 
-<div style="padding: 10px;border-left:solid 6px #9211dc;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
-<div style="font-weight: 600;padding: 10px;color: #9211dc;"> 🎉🎉🎉  专业版 </div>
-<div>
-新一代的 <strong>专业版</strong> 已经发布，前端采用<strong>纯VUE实现</strong>（ElementUI）、后端使用 Spring Boot、Elasticsearch，敬请关注
-<p>调问网官网地址：<a href="https://www.diaowen.net">https://www.diaowen.net</a></p>
-<p><strong>V8新版本：<a href="https://pro.surveyform.cn">https://pro.surveyform.cn</a></strong>账号密码(service@diaowen.net/123456)</p>
-</div>
-</div>
-
-<hr/>
-<div style="padding: 10px;border-left:solid 6px #42b983;background: #f3f5f7;font-size: 16px;color: #2c3e50;">
-<div style="font-weight: 600;padding: 10px;"> ☀️☀️☀️  社区版 </div>
-<div>
-️ 全新的 <strong>社区版</strong> 也已经发布，前后端分别采用Vue、ElementUI、Spring Boot，详情可前往体验。
-<p>社区版文档地址：<a href="https://www.diaowen.net/docs">https://www.diaowen.net/docs</a></p>
-
-[comment]: <> (<p>社区版体验地址：<a href="https://oss.surveyform.cn">https://oss.surveyform.cn</a></p>)
-</div>
-</div>
-
-<p style="color: #333;">后续我们将持续迭代更新，<strong>并有专人维护</strong>，敬请关注，别忘了<a href="https://gitee.com/wkeyuan/DWSurvey">点下源码仓库</a> 右上角Star关注，便于下次查找。</p>
-
-### 快速安装（一行命令完成）
-
-1､下载调问问卷社区版安装包
-
-最新的JAR包放在QQ群3（`811287103`已满），请加群4（`398556555`），加群备注`安装包`。
-
-2、输入启动命令
-
-``` cmd
-    java  -Dfile.encoding=utf-8 -jar dwsurvey-oss-vue-v.*.*.jar --server.port=8080 --spring.datasource.username=root --spring.datasource.password=123456
-```
-3、打开浏览器访问 http://localhost:8080，输入账号密码： service@diaowen.net/123456
-
-
-``` js
-    //可选，文件编码，windows上如果有乱码则使用，linux一般不会出现
-    -Dfile.encoding=utf-8 
-    //必填，安装包名称， 后面的v.*.*.jar依据您下载的最新安装包来定。
-    dwsurvey-oss-vue-v.*.*.jar
-    //可选，指定启动服务占用的端口，默认值8080
-    --server.port=8080 
-    //可选，数据库账号，默认值为root
-    --spring.datasource.username=root 
-    //可选，数据库账密码，默认值123456,.
-    --spring.datasource.password=123456
-```
-
-更详细参数说明请查看[配置说明文档](http://www.diaowen.net/docs/)
-
-## 特性
-
+![img.png](src/main/resources/static/img/img.png)
+![img_1.png](src/main/resources/static/img/img_1.png)
+![img_2.png](src/main/resources/static/img/img_2.png)
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0416/132431_5d99a296_1401416.gif "dwsurvey-2.gif")
 
-### 汇总
 
-* 多种技术方案，满足不同的技术选型需求
-* 完善的浏览器兼容、保证传统客户也能正常使用
+##系统亮点&核心功能
+最新开源版本为V7版本，此开源版本具备成熟的基础能力，足以满足一般场景下的问卷需求，前后端分别采用Vue2、Element UI、Spring Boot框架。
+如果您有更高级的功能需求，您也可以体验最新商用V8版本，前后端分别采用Vue3、Element Plus、Spring Boot框架。体验地址
+几个版本的功能差异，详见这里
+任何需求及Bug请戳反馈社区，我们将第一时间排期完善。
+同时历史老版本分别采Jsp+Struts2、Jsp+SpringBoot、Vue2+JQuery+SpringBoot, 详情点击（后期只修Bug，不再进行功能迭代），各历史版本仓库链接地址放在文末。
+
+
+我们力求打造出可以稳定可商用、满足各种问卷场景的开源问卷表单系统。相较而言，调问问卷表单具有如下两点：
 * 部署简单，一行命令完成部署
 * 更新方便，直接替换原安装文件不用担心数据被覆盖
+* 完善的浏览器兼容、保证传统客户也能正常使用
+* 多种端适配，不管是PC还是移动端同一个地址系统自动适配
 * 最高支持多达40多种题型，如单选题、多选题、填空题、评分题、排序题、分页、分段...
 * 可见即所得设计理念、所有内容支持快速富文本编辑
-* 多种端适配，不管是PC还是移动端同一个地址系统自动适配
+* 调问问卷DSL自定义逻辑可以快速地操作问卷底层能力，实现复杂的逻辑定制，提高问卷逻辑设置的效率。目前已经实现了多条件组合的显示逻辑、非逻辑、题目内容引用替换、题目选项分组随机、计算逻辑等功能，更多功能正在陆续开发中。
 * 支持答卷密码、结束跳转、仅微信答卷限制等
 * 数据实时统计，答卷的数据以可视化的方案展现，不同的统计图表
 * 后端满足JPA规范，为未来支持更多数据库提供条件
 * 成熟稳定，经过多年技术发展，技术体系完善
 * 完善的支持服务，QQ群，微信群全天24小时技术服务
 
-### 完善的浏览器兼容
+<div style="font-weight: 600;padding: 10px;color: #278bee;"> 🎉🎉🎉  目前已支持功能包括 </div>
 
-**支持现代浏览器和IE6**
+* 支持题型：
 
-在实际收集问卷过程中，不是所有用户都会安装最新的浏览器，DWSurvey在答卷端支持所有的浏览器环境，方案B、方案C更是全站完全支持
+单选题，多选题，填空题，评分题，排序题，多行填空题，多项填空题，日期题，时间题，下拉单选题，文件上传题，分页，分段，量表题，滑块题，级联题，矩阵单选题，矩阵多选题，矩阵评分题，矩阵填空题，矩陈量表题，矩陈滑块题，签名题，定位题，双重定位 ，模糊定位，精确定位，矩阵数值题，矩阵组合题，矩阵下拉题，矩阵自增题，甄别题，甄别数据记录，图片单选题，图片多选题，绘图题，地图组件，分割线，图片轮播，图片上传，水印设置
+* 题型扩展能力
 
-| IE / Edge | Firefox | Chrome | Safari | Opera |
-| :-----| ----: | :----: | :----: | :----: | 
-| IE6+,Edge | 支持 | 支持 | 支持 | 支持 | 
+题目高级编辑，时间题高级设置，量表题，滑块题，多项填空高级设置，表单14种格式验证，填空题高级设置，多选题选项，单选题高级设置，多选题高级设置，下拉题高级设置，排序题高级设置，填空题数据验证长度
+* 支持题库
 
+专业选择题，院校选择题，行业选择题，职业选择题，行政区选择题，常用题库（姓名、性别、学历等）
+* 逻辑控制
 
-### 各技术方案简介
+显示逻辑，跳转逻辑，隐藏逻辑，DSL逻辑_显示语句，DSL逻辑_隐藏语句，DSL逻辑_跳转语句，DSL逻辑_条件语句，DSL逻辑_多条件组合，DSL逻辑_互斥语句，DSL逻辑_验证语句，DSL逻辑_赋值语句，DSL逻辑_计算语句
 
-<table>
-<tr><th><strong>方案A</strong></th><th colspan="2" align="left"><strong>前后端分离，基于 Vue、Element ui、Spring Boot</strong></th></tr>
-<tr><td colspan="3">方案特性：基于VUE、前后分离开发更容易，部署维护更简单</td></tr>
-<tr><td rowspan="2">前端</td><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/dwsurvey-vue">https://gitee.com/wkeyuan/dwsurvey-vue</a></td></tr>
-<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey_Vue">https://github.com/wkeyuan/DWSurvey_Vue</a></td></tr>
-<tr><td rowspan="2">后端</td><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/DWSurvey">https://gitee.com/wkeyuan/DWSurvey</a></td></tr>
-<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey">https://github.com/wkeyuan/DWSurvey</a></td></tr>
+* 样式管理
 
-<tr><th><strong>方案B</strong></th><th colspan="2" align="left"><strong>Spring Boot + JSP</strong></th></tr>
-<tr><td colspan="3">方案特性: 原生JS+HTML技术，支持更多浏览器，如IE6</td></tr>
-<tr><td colspan="1">Gitee</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-springboot-jsp">https://gitee.com/wkeyuan/dwsurvey-springboot-jsp</a></td></tr>
-<tr><td colspan="1">GitHub</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-springboot-jsp">https://gitee.com/wkeyuan/dwsurvey-springboot-jsp</a></td></tr>
+页眉图设置，背景图设置，Logo图设置，主题色设置，预置主题，背景色设置，Logo行背景色，进度条色设置，显示题号设置，显示进度设置，显示表头设置，显示题型设置，显示标题设置，显示问卷说明设置，显示题目分数设置，矩陈题移动端适配，PC与移动端自适应
 
-<tr><th><strong>方案C</strong></th><th colspan="2" align="left"><strong>Struts2 + JSP</strong></th></tr>
-<tr><td colspan="3">方案特性: 原生JS+HTML技术，支持更多浏览器，如IE6 |</td></tr>
-<tr><td colspan="1">Gitee</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-struts2-jsp">https://gitee.com/wkeyuan/dwsurvey-struts2-jsp</a></td></tr>
-<tr><td colspan="1">GitHub</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-struts2-jsp">https://gitee.com/wkeyuan/dwsurvey-struts2-jsp</a></td></tr>
-</table>
+##运行环境
 
+社区版环境版本：jdk1.8, tomcat8.5.59
+数据库：Mysql5.7+，
+建议最低运行配置：Linux cpu & 2核4G
 
-## 各版本简介
+##安装&使用文档
 
-我们提供各种不版本及服务，保证您不同场景的需求都得到满足
+### 快速安装（一行命令完成）
 
-| 版本  | 特性及地址 |  
-| :-----| ---- |  
-| 社区版 | 源码全量开源，可独立部署，可二次开发 | 
-| 官网地址 | [http://www.diaowen.net](http://www.diaowen.net) |
-| 企业版 | 源码全量开源，前后端分离，可独立部署，可二次开发 |
-| 企业版地址 | [http://ent.surveyform.cn](http://ent.surveyform.cn) |
-| 在线平台 | 提供标准API，可快速集成到应用中，功能更丰富，不需要部署，可直接发布问卷收集 |
-| 平台地址 | [https://www.surveyform.cn](https://www.surveyform.cn) |
+<strong>推荐通过Docker一键安装包完成</strong>
+<a href="https://www.diaowen.net/install/docker">https://www.diaowen.net/install/docker</a>
 
-下面是如何使用Spring Boot方案的快速指南。
+更详细安装说明请查看[说明文档](http://www.diaowen.net/docs/)
 
 ## 本地开发
 
-环境版本：jdk1.8, tomcat8.5.59
+开发工具：vscode, idea
+node版本：v18.16+
 
 ### 基本步骤
 
@@ -194,62 +160,48 @@ mvn package
 
 初始账号：```service@diaowen.net``` 密码：```123456```
 
-## 特色
+##关注我们&互动
 
-### 全新体验、流程简单
+对于调问问卷系统的任何问题，都可以加客服微信进行咨询，也可以关注我们的公众号，我们每周都将会将会在公众号同步更迭代信息。
 
-以一种全新的设计体验，告别繁琐的设计流程，通过简单有趣的方式，轻轻松松完成问卷设计，多种技术方案，只为呈现更精美的表单问卷.
+![img_3.png](src/main/resources/static/img/img_3.png)
+任何问题都可以加产品微信
 
-丰富的题型支持，通过拖拽即可完成题目选择，并可以随意拖动其位置，还可置入所需图片、企业LOGO、设置答题逻辑，一份优美的问卷就是这么简单。
+![img_4.png](src/main/resources/static/img/img_4.png)
+调问问卷公众号
 
-![我的问卷](src/main/resources/static/img/WX20211203-092339@2x.png)
+调问现在有4个供大家交流的QQ群：用户群1：635994795（已满）、用户群2：301105635（已满）、用户群3：811287103（已满）、用户群4：398556555，
+如果遇到加群被拒绝的情况，说明交流群已满，请先加客服微信，我们将根据您的情况，拉到对应的QQ群中。
 
-![问卷编辑](src/main/resources/static/img/WX20211203-092358@2x.png)
+### 各技术版本简介
 
-![问卷预览](src/main/resources/static/img/WX20211203-092406@2x.png)
+<table>
+<tr><th><strong>方案A</strong></th><th colspan="2" align="left"><strong>前后端分离，基于 Vue、Element ui、Spring Boot</strong></th></tr>
+<tr><td colspan="3">方案特性：基于VUE、前后分离开发更容易，部署维护更简单</td></tr>
+<tr><td rowspan="2">前端</td><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/dwsurvey-vue">https://gitee.com/wkeyuan/dwsurvey-vue</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey_Vue">https://github.com/wkeyuan/DWSurvey_Vue</a></td></tr>
+<tr><td rowspan="2">后端</td><td>Gitee</td><td><a href="https://gitee.com/wkeyuan/DWSurvey">https://gitee.com/wkeyuan/DWSurvey</a></td></tr>
+<tr><td>GitHub</td><td><a href="https://github.com/wkeyuan/DWSurvey">https://github.com/wkeyuan/DWSurvey</a></td></tr>
 
-![答卷地址](src/main/resources/static/img/WX20211203-092416@2x.png)
+<tr><th><strong>方案B</strong></th><th colspan="2" align="left"><strong>Spring Boot + JSP</strong></th></tr>
+<tr><td colspan="3">方案特性: 原生JS+HTML技术，支持更多浏览器，如IE6</td></tr>
+<tr><td colspan="1">Gitee</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-springboot-jsp">https://gitee.com/wkeyuan/dwsurvey-springboot-jsp</a></td></tr>
+<tr><td colspan="1">GitHub</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-springboot-jsp">https://gitee.com/wkeyuan/dwsurvey-springboot-jsp</a></td></tr>
 
-![答卷规则](src/main/resources/static/img/WX20211203-092427@2x.png)
+<tr><th><strong>方案C</strong></th><th colspan="2" align="left"><strong>Struts2 + JSP</strong></th></tr>
+<tr><td colspan="3">方案特性: 原生JS+HTML技术，支持更多浏览器，如IE6 |</td></tr>
+<tr><td colspan="1">Gitee</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-struts2-jsp">https://gitee.com/wkeyuan/dwsurvey-struts2-jsp</a></td></tr>
+<tr><td colspan="1">GitHub</td><td colspan="2"><a href="https://gitee.com/wkeyuan/dwsurvey-struts2-jsp">https://gitee.com/wkeyuan/dwsurvey-struts2-jsp</a></td></tr>
+</table>
 
-![数据统计](src/main/resources/static/img/WX20211203-092439@2x.png)
-
-![原始数据](src/main/resources/static/img/WX20211203-092458@2x.png)
-
-## 有问题怎么办？
-
-对于调问网问卷系统安装及使用的问题，可以在用户交流群里，向作者或其它同学提问。
-
-调问网交流QQ群 ```群1：635994795(满)```，```群2：301105635(满)```， ```群3：811287103(满)```，群4：398556555（可加）（加群时请说明来由）
-
-微信公众号
-
-<img src="http://www.diaowen.net/images/dw_ewm.png" alt="图片替换文本" width="200" height="200" align="top" />
-
-## 源代码地址
+## 社区版源代码地址
 
 gitee: http://gitee.com/wkeyuan/DWSurvey
 
 github: https://github.com/wkeyuan/DWSurvey
 
-## 开源协议
+## 版权说明
 
-DWSurvey以通用公共许可证AGPL3.0为开源协议，需要更优质的服务可以购买我们的商业版与企业版！
+DWSurvey以通用公共许可证AGPL3.0为开源协议，部署使用要求保留"Power by diaowen.net"标识，且衍生版本需要及时开源。
+需要更优质的服务可以购买我们的专业版与企业版！更多信息，请查看调问官网
 
-- - -
-
-## 关于调问网
-
-没事喜欢瞎折腾，业余时间也想做点有意思的事情，同时对产品也比较感兴趣，一翻调研之后就决定来做个问卷系统。
-于是便利用业余时间来做这款问卷表单平台，因为在2012的时候，国内的问卷系统都还比较初级，问卷设计流程复杂，页面也不美观。
-所以就开始边调研、边画原型、边写前后端代码，最初的想法是一定要好用美观，在这之后的一年里就不断的设计开发，前前后后修改过3个版本。
-
-- - -
-
-## 作者
-
-柯远 ```keyuan258@gmail.com```
-
-### 谢谢您的支持
-
-觉得不错就点下右上角的star，随时关注我们的动态，非常感谢！
