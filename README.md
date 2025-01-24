@@ -9,49 +9,28 @@
 
 ## 关于调问
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;color: #262626;">
 调问（DWSurvey）问卷表单🎉🎉自2012年项目启动至今，已经过12年沉淀积累，先后进行了6次大框架升级，前端完成了从JSP、JQuery到Vue框架的改造。服务了数千家包括企业、政府部门、高职院校在内的真实客户。
+
 这些客户，使我们知道了问卷表单中很多被忽略的细节和实际场景中会用到的需求。这些反馈就像养分不断滋养着调问问卷表单的成长。
-</div>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 在调问（DWSurvey）问卷表单的第13个年头🎉🎉，我们完成了VUE3版本的升级，推出了全新框架和基于vue的开源版本。在开源问卷表单的路上，我们依然在认真、努力地前行。
-如果您有任何的需求和建议，随时联系调问的产品团队，也可以直接在社区留言，我们会认真对待每一个用户的声音。每一次更新迭代改动，都会记录在此 <a href="https://www.diaowen.net/upload-log">更新日志</a>
-</div>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
-用心做好每一个功能，我们很需要你的鼓励！右上角Star🌟，等你点亮！
-</div>
+如果您有任何的需求和建议，随时联系调问的产品团队，也可以直接在社区留言，我们会认真对待每一个用户的声音。
 
-<div style="padding-top: 10px;">
-<div style="display: flex;align-items: center;justify-content: left;gap: 20px;">
-<div>
-<div>
-<img src="src/main/resources/static/img/img_3.png" style="width: 130px"/>
-</div>
-<div style="text-align: center">产品微信</div>
-</div>
+用心做好每一个功能，我们很需要你的鼓励！右上角Star🌟加关注，等你点亮！
 
-<div>
-<div>
-<img src="src/main/resources/static/img/img_4.png" style="width: 130px"/>
-</div>
-<div style="text-align: center">调问问卷公众号</div>
-</div>
-</div>
-</div>
 
+![产品微信](src/main/resources/static/img/img_3.png)
+
+![调问问卷公众号](src/main/resources/static/img/img_4.png)
 
 ## 技术架构
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 前后端完全分离，前端分别提供Vue2，Vue3 框架实现，后端开发语言主要基于JAVA，通过 HTTP API进行服务调用整合以实现业务功能，数据库采用 MySQL、Elasticsearch 存储， 缓存采用Redis，保证业务的高性能、可靠性和可扩展性。
-</div>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 本产品应用服务支持 Docker 镜像一键部署，需要预先在服务器上准备好 Docker 环境，目前社区版已经提供好一键安装Docker 镜像可以免费下载，整体实施起来比较简单。
+
 关于后续更新，在完成部署之后，可通过更新容器镜像进行升级。
-</div>
 
 ## 系统演示及截图
 
@@ -76,29 +55,17 @@
 
 ## 系统亮点&核心功能
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 最新开源版本为V7版本，此开源版本具备成熟的基础能力，足以满足一般场景下的问卷需求，前后端分别采用Vue2、Element UI、Spring Boot框架。
-</div>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 如果您有更高级的功能需求，您也可以体验最新商用V8版本，前后端分别采用<strong>Vue3、Element Plus、Spring Boot</strong>框架。
-</div>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 体验几个版本的功能差异，<a href="https://www.diaowen.net">详见这里</a>
-</div>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 同时任何需求及Bug请在社区反馈或联系产品客服，我们将第一时间排期完善。
-</div>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 同时历史老版本分别采Jsp+Struts2、Jsp+SpringBoot、Vue2+JQuery+SpringBoot, <a href="https://www.diaowen.net">详情点击</a>（后期只修Bug，不再进行功能迭代），各历史版本仓库链接地址放在文末。
-</div>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 我们力求打造出可以稳定可商用、满足各种问卷场景的开源问卷表单系统。
-</div>
 
 <strong>相较而言，调问问卷表单具有如下两点：🎉🎉🎉 </strong>
 
@@ -119,44 +86,31 @@
 
 * 支持题型：
 
-<div style="text-indent: 2em;font-size: 12px;line-height: 20px;padding-top: 5px;color: #262626;">
-单选题，多选题，填空题，评分题，排序题，多行填空题，多项填空题，日期题，时间题，下拉单选题，文件上传题，分页，分段，量表题，滑块题，级联题，矩阵单选题，矩阵多选题，矩阵评分题，矩阵填空题，矩陈量表题，矩陈滑块题，签名题，定位题，双重定位 ，模糊定位，精确定位，矩阵数值题，矩阵组合题，矩阵下拉题，矩阵自增题，甄别题，甄别数据记录，图片单选题，图片多选题，绘图题，地图组件，分割线，图片轮播，图片上传，水印设置
-</div>
+> 单选题，多选题，填空题，评分题，排序题，多行填空题，多项填空题，日期题，时间题，下拉单选题，文件上传题，分页，分段，量表题，滑块题，级联题，矩阵单选题，矩阵多选题，矩阵评分题，矩阵填空题，矩陈量表题，矩陈滑块题，签名题，定位题，双重定位 ，模糊定位，精确定位，矩阵数值题，矩阵组合题，矩阵下拉题，矩阵自增题，甄别题，甄别数据记录，图片单选题，图片多选题，绘图题，地图组件，分割线，图片轮播，图片上传，水印设置
 
 * 题型扩展能力
 
-<div style="text-indent: 2em;font-size: 12px;line-height: 20px;padding-top: 5px;color: #262626;">
-题目高级编辑，时间题高级设置，量表题，滑块题，多项填空高级设置，表单14种格式验证，填空题高级设置，多选题选项，单选题高级设置，多选题高级设置，下拉题高级设置，排序题高级设置，填空题数据验证长度
-</div>
-
+> 题目高级编辑，时间题高级设置，量表题，滑块题，多项填空高级设置，表单14种格式验证，填空题高级设置，多选题选项，单选题高级设置，多选题高级设置，下拉题高级设置，排序题高级设置，填空题数据验证长度
 
 * 支持题库
 
-<div style="text-indent: 2em;font-size: 12px;line-height: 20px;padding-top: 5px;color: #262626;">
-专业选择题，院校选择题，行业选择题，职业选择题，行政区选择题，常用题库（姓名、性别、学历等）
-</div>
+> 专业选择题，院校选择题，行业选择题，职业选择题，行政区选择题，常用题库（姓名、性别、学历等）
 
 * 逻辑控制
 
-<div style="text-indent: 2em;font-size: 12px;line-height: 20px;padding-top: 5px;color: #262626;">
-显示逻辑，跳转逻辑，隐藏逻辑，DSL逻辑_显示语句，DSL逻辑_隐藏语句，DSL逻辑_跳转语句，DSL逻辑_条件语句，DSL逻辑_多条件组合，DSL逻辑_互斥语句，DSL逻辑_验证语句，DSL逻辑_赋值语句，DSL逻辑_计算语句
-</div>
+> 显示逻辑，跳转逻辑，隐藏逻辑，DSL逻辑_显示语句，DSL逻辑_隐藏语句，DSL逻辑_跳转语句，DSL逻辑_条件语句，DSL逻辑_多条件组合，DSL逻辑_互斥语句，DSL逻辑_验证语句，DSL逻辑_赋值语句，DSL逻辑_计算语句
 
 * 样式管理
 
-<div style="text-indent: 2em;font-size: 12px;line-height: 20px;padding-top: 5px;color: #262626;">
-页眉图设置，背景图设置，Logo图设置，主题色设置，预置主题，背景色设置，Logo行背景色，进度条色设置，显示题号设置，显示进度设置，显示表头设置，显示题型设置，显示标题设置，显示问卷说明设置，显示题目分数设置，矩陈题移动端适配，PC与移动端自适应
-</div>
+> 页眉图设置，背景图设置，Logo图设置，主题色设置，预置主题，背景色设置，Logo行背景色，进度条色设置，显示题号设置，显示进度设置，显示表头设置，显示题型设置，显示标题设置，显示问卷说明设置，显示题目分数设置，矩陈题移动端适配，PC与移动端自适应
 
 ## 运行环境
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;padding-top: 10px;color: #262626;">
 社区版环境版本：jdk1.8, tomcat8.5.59
 
 数据库：Mysql5.7+，
 
 建议最低运行配置：Linux cpu & 2核4G
-</div>
 
 ## 安装&使用文档
 
@@ -221,33 +175,20 @@ mvn package
 
 ## 加入社群
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;color: #262626;">
 对于调问问卷系统的任何问题，都可以加客服微信进行咨询，也可以关注我们的公众号，我们每周都将会将会在公众号同步更迭代信息。
-</div>
 
-
-<div style="padding-top: 10px;">
-<div style="display: flex;align-items: center;justify-content: left;gap: 20px;">
-<div>
-<div>
+<p>
 <img src="src/main/resources/static/img/img_3.png" style="width: 130px"/>
-</div>
-<div style="text-align: center">产品微信</div>
-</div>
+</p>
 
-<div>
-<div>
+<p>
 <img src="src/main/resources/static/img/img_4.png" style="width: 130px"/>
-</div>
-<div style="text-align: center">调问问卷公众号</div>
-</div>
-</div>
-</div>
+</p>
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;color: #262626;padding-top: 10px;">
 调问现在有4个供大家交流的QQ群：用户群1：635994795（已满）、用户群2：301105635（已满）、用户群3：811287103（已满）、用户群4：398556555，
+
 如果遇到加群被拒绝的情况，说明交流群已满，请先加客服微信，我们将根据您的情况，拉到对应的QQ群中。
-</div>
+
 
 ### 各技术版本简介
 
@@ -278,8 +219,6 @@ github: https://github.com/wkeyuan/DWSurvey
 
 ## 版权说明
 
-<div style="text-indent: 2em;font-size: 13px;line-height: 20px;color: #262626;">
 DWSurvey以通用公共许可证AGPL3.0为开源协议，部署使用要求保留"Power by diaowen.net"标识，且衍生版本需要及时开源。
 需要更优质的服务可以购买我们的专业版与企业版！更多信息，请查看调问官网
- </div>
 
