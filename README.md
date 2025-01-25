@@ -1,8 +1,9 @@
-# DWSurvey 调问开源问卷表单系统
+<p align="center">
+<a href="">
+    <img src='readmeimgs/202501/lg-svg2.svg' alt='star'/>
+</a>
+</p>
 
-![img.png](readmeimgs/logoimg.png)
-
-    十二年开源沉淀，帮你建设属于自己的问卷表单系统
 
 <p align="center">
 <a href='https://gitee.com/wkeyuan/DWSurvey'>
@@ -20,32 +21,34 @@
 </p>
 <p align="center">
 <a href="https://www.diaowen.net/" target="_blank">官网</a>&nbsp;
-<a href="https://www.diaowen.net/" target="_blank">在线体验</a>&nbsp;
+<a href="https://demo.diaowen.net/" target="_blank">在线体验</a>&nbsp;
 <a href="https://www.diaowen.net/install/docker"  target="_blank" >一键部署</a>&nbsp;
 <a href="https://gitee.com/wkeyuan/DWSurvey/issues" target="_blank">用户社区</a>&nbsp;
 </p>
 
-**<p align="center">🫣 如果您觉得项目有帮助，请点击右上角Star 🌟 给我们鼓励，支持调问开源团队</p>**
+**<p align="center"> 如果您觉得项目有帮助，请点击右上角Star 🌟 给我们鼓励，支持调问开源团队🤝 </p>**
+
+---
 
 简体中文 |  [English](./README_en.md)
 
-## 关于调问
+## 一、关于调问
 
-调问（DWSurvey）问卷表单🎉🎉自2012年项目启动至今，已经过12年沉淀积累，先后进行了6次大框架升级，前端完成了从JSP、JQuery到Vue框架的改造。服务了数千家包括企业、政府部门、高职院校在内的真实客户。
+---
 
-这些客户，使我们知道了问卷表单中很多被忽略的细节和实际场景中会用到的需求。这些反馈就像养分不断滋养着调问问卷表单的成长。
+调问是国内首款开源问卷表单系统，🎉🎉 自2012年项目启动至今，已经过12年沉淀积累。
 
-在调问（DWSurvey）问卷表单的第13个年头🎉🎉，我们完成了VUE3版本的升级，推出了全新框架和基于vue的开源版本。在开源问卷表单的路上，我们依然在认真、努力地前行。
+调问先后进行了6次大框架重写升级，前端完成了从JSP、JQuery到Vue框架的改造，后端完成了从Struts2、Spring、Spring Boot升级改造。
 
-如果您有任何的需求和建议，随时联系调问的产品团队，也可以直接在社区留言，我们会认真对待每一个用户的声音。
+在这期间已经服务了数千家包括企业、政府部门、高职院校在内的真实客户，这些客户，使我们知道了问卷表单中很多被忽略的细节和实际场景中会用到的需求，这些反馈就像养分不断滋养着调问问卷表单的成长。
 
-用心做好每一个功能，我们很需要你的鼓励！右上角Star🌟加关注，等你点亮！
+在调问问卷表单的第13个年头🎉🎉，我们完成了VUE3版本的升级，推出了全新框架和基于Vue重写后的开源社区版本。在开源问卷表单的路上，我们依然在认真、努力地前行。
 
-![产品微信](readmeimgs/2024img/img_3.png)
+如果您有任何的需求和建议，可随时联系调问的产品团队，也可以直接在社区留言，我们会认真对待每一个用户的声音。
 
-![调问问卷公众号](readmeimgs/2024img/img_4.png)
+用心做好每一个功能，我们很需要你的鼓励！如果对您有帮助，请点亮右上角Star🌟，支持我们继续迭代产品！
 
-## 技术架构
+### 技术架构
 
 前后端完全分离，前端分别提供Vue2，Vue3 框架实现，后端开发语言主要基于JAVA，通过 HTTP API进行服务调用整合以实现业务功能，数据库采用 MySQL、Elasticsearch 存储， 缓存采用Redis，保证业务的高性能、可靠性和可扩展性。
 
@@ -53,7 +56,7 @@
 
 关于后续更新，在完成部署之后，可通过更新容器镜像进行升级。
 
-## 产品介绍
+### 产品介绍
 
 <p>
 调问网官网地址：
@@ -66,11 +69,11 @@
 
 调问自开源以来一直坚持前后端所有代码100%开源💯，保证所有功能的稳定与可改造能力👏。
 
-<p><strong>安装下载地址（安装包）：<a href="https://www.diaowen.net/install/docker">https://www.diaowen.net/install/docker</a></strong></p>
+<p><strong>🔥 安装下载地址（安装包）：<a href="https://www.diaowen.net/install/docker">https://www.diaowen.net/install/docker</a></strong></p>
 
 <p>
 <strong>
-源码下载地址（含前后端）：<a href="https://gitee.com/wkeyuan/DWSurvey">https://gitee.com/wkeyuan/DWSurvey</a>
+🔥 源码下载地址（含前后端）：<a href="https://gitee.com/wkeyuan/DWSurvey">https://gitee.com/wkeyuan/DWSurvey</a>
 </strong>
 </p>
 
@@ -79,7 +82,9 @@
 <p>企业版目前提供服务的有Vue3、Vue2两个版本</p>
 <p><strong>V8新版本：<a href="https://demo.diaowen.net">https://demo.diaowen.net</a></strong></p>
 
-## 系统亮点&核心功能
+## 二、系统亮点&核心功能
+
+---
 
 最新开源版本为V7版本，此开源版本具备成熟的基础能力，足以满足一般场景下的问卷需求，前后端分别采用Vue2、Element UI、Spring Boot框架。
 
@@ -133,15 +138,16 @@
 
 > 🎉 页眉图设置，背景图设置，Logo图设置，主题色设置，预置主题，背景色设置，Logo行背景色，进度条色设置，显示题号设置，显示进度设置，显示表头设置，显示题型设置，显示标题设置，显示问卷说明设置，显示题目分数设置，矩陈题移动端适配，PC与移动端自适应
 
-## 运行环境
 
-社区版环境版本：jdk1.8, tomcat8.5.59
+## 三、安装使用与运行环境
+
+### 运行环境
+
+社区版环境版本：jdk1.8, Tomcat8.5.59
 
 数据库：Mysql5.7+，
 
 建议最低运行配置：Linux cpu & 2核4G
-
-## 安装&使用文档
 
 ### 快速安装（最快3分钟完成）
 
@@ -149,7 +155,7 @@
 
 更详细安装说明请查看[说明文档](http://www.diaowen.net/docs/)
 
-## 本地开发
+## 四、本地开发
 
 开发工具：vscode, idea
 node版本：v18.16+
@@ -202,7 +208,7 @@ mvn package
 
 初始账号：```service@diaowen.net``` 密码：```123456```
 
-## 加入社群
+## 五、加入社群讨论&联系我们
 
 对于调问问卷系统的任何问题，都可以加客服微信进行咨询，也可以关注我们的公众号，我们每周都将会将会在公众号同步更迭代信息。
 

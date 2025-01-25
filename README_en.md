@@ -27,7 +27,7 @@
 
 **<p align="center">🫣 If you find the project helpful, please click on the Star button in the upper right corner 🌟  Encourage us and support the inquiry of open source teams</p>**
 
-简体中文 |  [English](./README_en.md)
+[简体中文](./README.md) |  English
 
 ## About dwsurvey
 
