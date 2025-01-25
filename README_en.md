@@ -1,8 +1,8 @@
-# DWSurvey 调问开源问卷表单系统
+# DWSurvey Open source questionnaire form system
 
 ![img.png](readmeimgs/logoimg.png)
 
-    十二年开源沉淀，帮你建设属于自己的问卷表单系统
+    Twelve years of open-source accumulation, helping you build your own questionnaire form system
 
 <p align="center">
 <a href='https://gitee.com/wkeyuan/DWSurvey'>
@@ -19,81 +19,81 @@
 </a>
 </p>
 <p align="center">
-<a href="https://www.diaowen.net/" target="_blank">官网</a>&nbsp;
-<a href="https://www.diaowen.net/" target="_blank">在线体验</a>&nbsp;
-<a href="https://www.diaowen.net/install/docker"  target="_blank" >一键部署</a>&nbsp;
-<a href="https://gitee.com/wkeyuan/DWSurvey/issues" target="_blank">用户社区</a>&nbsp;
+<a href="https://www.diaowen.net/" target="_blank">Website</a>&nbsp;
+<a href="https://www.diaowen.net/" target="_blank">Experience</a>&nbsp;
+<a href="https://www.diaowen.net/install/docker" target="_blank" >Deployment</a>&nbsp;
+<a href="https://gitee.com/wkeyuan/DWSurvey/issues" target="_blank">Community</a>&nbsp;
 </p>
 
-**<p align="center">🫣 如果您觉得项目有帮助，请点击右上角Star 🌟 给我们鼓励，支持调问开源团队</p>**
+**<p align="center">🫣 If you find the project helpful, please click on the Star button in the upper right corner 🌟  Encourage us and support the inquiry of open source teams</p>**
 
 简体中文 |  [English](./README_en.md)
 
-## 关于调问
+## About dwsurvey
 
-调问（DWSurvey）问卷表单🎉🎉自2012年项目启动至今，已经过12年沉淀积累，先后进行了6次大框架升级，前端完成了从JSP、JQuery到Vue框架的改造。服务了数千家包括企业、政府部门、高职院校在内的真实客户。
+DWSurvey questionnaire form 🎉🎉 Since the project was launched in 2012, it has accumulated 12 years of accumulation, and has undergone 6 major framework upgrades. The front-end has completed the transformation from JSP, jQuery to Vue framework. We have served thousands of real clients, including enterprises, government departments, and vocational colleges.
 
-这些客户，使我们知道了问卷表单中很多被忽略的细节和实际场景中会用到的需求。这些反馈就像养分不断滋养着调问问卷表单的成长。
+These customers have made us aware of many overlooked details in the questionnaire form and the requirements that will be used in practical scenarios. These feedbacks are like nutrients constantly nourishing the growth of the survey form.
 
-在调问（DWSurvey）问卷表单的第13个年头🎉🎉，我们完成了VUE3版本的升级，推出了全新框架和基于vue的开源版本。在开源问卷表单的路上，我们依然在认真、努力地前行。
+In the 13th year of the DWSurvey questionnaire form 🎉🎉， We have completed the upgrade of VUE3 version and launched a new framework and an open-source version based on Vue. On the path of open source questionnaire forms, we are still moving forward seriously and striving.
 
-如果您有任何的需求和建议，随时联系调问的产品团队，也可以直接在社区留言，我们会认真对待每一个用户的声音。
+If you have any needs or suggestions, please feel free to contact the product team for inquiries, or leave a message directly in the community. We will take every user's voice seriously.
 
-用心做好每一个功能，我们很需要你的鼓励！右上角Star🌟加关注，等你点亮！
+We need your encouragement to do every function with care! Star in the upper right corner 🌟 Follow and wait for you to light up!
 
 ![产品微信](readmeimgs/2024img/img_3.png)
 
 ![调问问卷公众号](readmeimgs/2024img/img_4.png)
 
-## 技术架构
+## Technical Architecture
 
-前后端完全分离，前端分别提供Vue2，Vue3 框架实现，后端开发语言主要基于JAVA，通过 HTTP API进行服务调用整合以实现业务功能，数据库采用 MySQL、Elasticsearch 存储， 缓存采用Redis，保证业务的高性能、可靠性和可扩展性。
+The front-end and back-end are completely separated, with Vue2 and Vue3 frameworks provided for implementation. The back-end development language is mainly based on JAVA, integrating service calls through HTTP APIs to achieve business functions. The database is stored in MySQL and Elasticsearch, and the cache is stored in Redis to ensure high performance, reliability, and scalability of the business.
 
-本产品应用服务支持 Docker 镜像一键部署，需要预先在服务器上准备好 Docker 环境，目前社区版已经提供好一键安装Docker 镜像可以免费下载，整体实施起来比较简单。
+This product's application service supports one click deployment of Docker images, and requires a Docker environment to be prepared on the server in advance. Currently, the community version provides one click installation of Docker images that can be downloaded for free, making the overall implementation relatively simple.
 
-关于后续更新，在完成部署之后，可通过更新容器镜像进行升级。
+Regarding subsequent updates, upgrading can be done by updating the container image after deployment is completed.
 
-## 产品介绍
+## Product Introduction
 
 <p>
-调问网官网地址：
+DWSurvey Official website address：
 <strong>
 <a href="https://www.diaowen.net">https://www.diaowen.net</a>
 </strong>
 </p>
 
-### 社区版
+### Community 
 
-调问自开源以来一直坚持前后端所有代码100%开源💯，保证所有功能的稳定与可改造能力👏。
+Since its inception, Zhaowen has consistently adhered to 100% open source for all front-end and back-end code 💯， Ensure the stability and adaptability of all functions 👏。
 
-<p><strong>安装下载地址（安装包）：<a href="https://www.diaowen.net/install/docker">https://www.diaowen.net/install/docker</a></strong></p>
+<p><strong>Installation and download address (installation package)：<a href="https://www.diaowen.net/install/docker">https://www.diaowen.net/install/docker</a></strong></p>
 
 <p>
 <strong>
-源码下载地址（含前后端）：<a href="https://gitee.com/wkeyuan/DWSurvey">https://gitee.com/wkeyuan/DWSurvey</a>
+Source code download address (including front-end and back-end)：<a href="https://gitee.com/wkeyuan/DWSurvey">https://gitee.com/wkeyuan/DWSurvey</a>
 </strong>
 </p>
 
-### 企业版
+### Enterprise 
 
-<p>企业版目前提供服务的有Vue3、Vue2两个版本</p>
-<p><strong>V8新版本：<a href="https://demo.diaowen.net">https://demo.diaowen.net</a></strong></p>
+<p>The Enterprise Edition currently offers two versions of services: Vue3 and Vue2</p>
+<p><strong>V8 new version：<a href="https://demo.diaowen.net">https://demo.diaowen.net</a></strong></p>
 
-## 系统亮点&核心功能
+## System Highlights&Core Functions
 
-最新开源版本为V7版本，此开源版本具备成熟的基础能力，足以满足一般场景下的问卷需求，前后端分别采用Vue2、Element UI、Spring Boot框架。
+The latest open source version is V7, which has mature basic capabilities and is sufficient to meet the questionnaire needs in general scenarios. The front-end and back-end adopt Vue2, Element UI, and Spring Boot frameworks respectively.
 
-如果您有更高级的功能需求，您也可以体验最新商用V8版本，前后端分别采用<strong>Vue3、Element Plus、Spring Boot</strong>框架。
+If you have more advanced functional requirements, you can also experience the latest commercial V8 version, which uses Vue3, Element Plus, and Spring Boot frameworks for the front-end and back-end respectively.
 
-体验几个版本的功能差异，<a href="https://www.diaowen.net">详见这里</a>
+Experience the functional differences of several versions, see here for details
 
-同时任何需求及Bug请在社区反馈或联系产品客服，我们将第一时间排期完善。
+Please provide feedback on any requirements or bugs in the community or contact product customer service, and we will arrange for improvement as soon as possible.
 
-同时历史老版本分别采Jsp+Struts2、Jsp+SpringBoot、Vue2+JQuery+SpringBoot, <a href="https://www.diaowen.net">详情点击</a>（后期只修Bug，不再进行功能迭代），各历史版本仓库链接地址放在文末。
+At the same time, the historical old versions adopt Jsp+Struts2 Jsp+SpringBoot、Vue2+JQuery+SpringBoot,  Click on the details (only fix bugs later, no further feature iterations), and place the link addresses of each historical version repository at the end of the article.
 
-我们力求打造出可以稳定可商用、满足各种问卷场景的开源问卷表单系统。
+We strive to create an open-source questionnaire form system that is stable, commercially viable, and suitable for various questionnaire scenarios.
 
-<strong>相较而言，调问问卷表单具有如下两点：🎉🎉🎉 </strong>
+In comparison, the questionnaire form has the following two points: 🎉🎉🎉
 
 * 首创性🎉🥇引入拖拽式创建问卷
 * 可见即所得设计理念、所有内容支持快速富文本编辑
