@@ -1,5 +1,5 @@
 <p align="center">
-<a href="">
+<a href="https://www.diaowen.net" target="_blank">
     <img src='readmeimgs/202501/lg-svg2.svg' alt='star'/>
 </a>
 </p>
@@ -61,7 +61,7 @@
 <p>
 调问网官网地址：
 <strong>
-<a href="https://www.diaowen.net">https://www.diaowen.net</a>
+<a href="https://www.diaowen.net" target="_blank">https://www.diaowen.net</a>
 </strong>
 </p>
 
@@ -69,18 +69,18 @@
 
 调问自开源以来一直坚持前后端所有代码100%开源💯，保证所有功能的稳定与可改造能力👏。
 
-<p><strong>🔥 安装下载地址（安装包）：<a href="https://www.diaowen.net/install/docker">https://www.diaowen.net/install/docker</a></strong></p>
+<p><strong>🔥 安装下载地址（安装包）：<a href="https://www.diaowen.net/install/docker" target="_blank">https://www.diaowen.net/install/docker</a></strong></p>
 
 <p>
 <strong>
-🔥 源码下载地址（含前后端）：<a href="https://gitee.com/wkeyuan/DWSurvey">https://gitee.com/wkeyuan/DWSurvey</a>
+🔥 源码下载地址（含前后端）：<a href="https://gitee.com/wkeyuan/DWSurvey" target="_blank">https://gitee.com/wkeyuan/DWSurvey</a>
 </strong>
 </p>
 
 ### 企业版
 
 <p>企业版目前提供服务的有Vue3、Vue2两个版本</p>
-<p><strong>V8新版本：<a href="https://demo.diaowen.net">https://demo.diaowen.net</a></strong></p>
+<p><strong>V8新版本：<a href="https://demo.diaowen.net" target="_blank">https://demo.diaowen.net</a></strong></p>
 
 ## 二、系统亮点&核心功能
 
@@ -90,11 +90,11 @@
 
 如果您有更高级的功能需求，您也可以体验最新商用V8版本，前后端分别采用<strong>Vue3、Element Plus、Spring Boot</strong>框架。
 
-体验几个版本的功能差异，<a href="https://www.diaowen.net">详见这里</a>
+体验几个版本的功能差异，<a href="https://www.diaowen.net" target="_blank">详见这里</a>
 
 同时任何需求及Bug请在社区反馈或联系产品客服，我们将第一时间排期完善。
 
-同时历史老版本分别采Jsp+Struts2、Jsp+SpringBoot、Vue2+JQuery+SpringBoot, <a href="https://www.diaowen.net">详情点击</a>（后期只修Bug，不再进行功能迭代），各历史版本仓库链接地址放在文末。
+同时历史老版本分别采Jsp+Struts2、Jsp+SpringBoot、Vue2+JQuery+SpringBoot, <a href="https://www.diaowen.net" target="_blank">详情点击</a>（后期只修Bug，不再进行功能迭代），各历史版本仓库链接地址放在文末。
 
 我们力求打造出可以稳定可商用、满足各种问卷场景的开源问卷表单系统。
 
@@ -151,7 +151,7 @@
 
 ### 快速安装（最快3分钟完成）
 
-<strong>推荐通过Docker一键安装包完成</strong> <a href="https://www.diaowen.net/install/docker">一键安装</a>
+<strong>推荐通过Docker一键安装包完成</strong> <a href="https://www.diaowen.net/install/docker" target="_blank">一键安装</a>
 
 更详细安装说明请查看[说明文档](http://www.diaowen.net/docs/)
 
