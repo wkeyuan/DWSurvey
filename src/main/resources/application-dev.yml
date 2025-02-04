@@ -3,7 +3,7 @@ dwsurvey:
   site: 'demo'
   web:
     # 后端文件存储目录，默认即在安装包同级目录下
-    file-path: dwfile/dwsurvey/
+    file-path: diaowen/dwsurvey/
     # 使用哪种部署模式，后期可能会去掉，可以先保持默认
     static-type: static
     # 站点访问地址，如果配置有域名则为域名地址
@@ -148,7 +148,7 @@ logging:
       apache: ERROR
 elasticsearch:
   username: elastic
-  passwd: gSbY_1NlVdwhmU8P8p7V
+  passwd: O*-LCV2x8J7sRGwKV*ok
   apikey: ==
   hosts: 127.0.0.1:9200 # 多个IP逗号隔开
   cert-name: http_ca.crt
@@ -158,4 +158,4 @@ elasticsearch:
 #  索引统一前缀，默认为空不加前缀, 如果加建议格式如：dw_
   index-prev: oss_
 # 认证方式 noPwd, pwd, cert
-  security: pwd
+  security: cert
