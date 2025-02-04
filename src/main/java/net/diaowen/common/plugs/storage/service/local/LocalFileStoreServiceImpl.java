@@ -1,9 +1,5 @@
 package net.diaowen.common.plugs.storage.service.local;
 
-import com.baidu.ueditor.define.AppInfo;
-import com.baidu.ueditor.define.BaseState;
-import com.baidu.ueditor.define.State;
-import com.baidu.ueditor.upload.StorageManager;
 import net.diaowen.common.plugs.storage.service.FileStorageService;
 import net.diaowen.common.utils.RandomUtils;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
@@ -21,6 +17,8 @@ import java.util.Date;
 public class LocalFileStoreServiceImpl implements FileStorageService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
+
+    public static final int BUFFER_SIZE = 8192;
 
     @Override
     public void saveFile(MultipartFile multipartFile, String savePath, String fileName,boolean isPub) {
@@ -56,9 +54,9 @@ public class LocalFileStoreServiceImpl implements FileStorageService {
         if(dirFilePath!=null){
             File localFile = new File(dirFilePath);
             byte[] dataBuf = new byte[ 2048 ];
-            BufferedInputStream bis = new BufferedInputStream(inputStream, StorageManager.BUFFER_SIZE);
+            BufferedInputStream bis = new BufferedInputStream(inputStream, BUFFER_SIZE);
             try {
-                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(localFile), StorageManager.BUFFER_SIZE);
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(localFile), BUFFER_SIZE);
                 int count = 0;
                 while ((count = bis.read(dataBuf)) != -1) bos.write(dataBuf, 0, count);
                 bis.close();
