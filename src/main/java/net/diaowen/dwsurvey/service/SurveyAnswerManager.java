@@ -7,6 +7,7 @@ import net.diaowen.common.base.entity.User;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.service.BaseService;
 import net.diaowen.dwsurvey.entity.*;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,4 +59,5 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	Long countResult(String surveyId);
 
 
+	SurveyAnswer saveAnswerByEsAnswer(DwEsSurveyAnswer dwEsSurveyAnswer);
 }

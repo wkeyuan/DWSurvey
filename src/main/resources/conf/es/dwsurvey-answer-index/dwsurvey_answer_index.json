@@ -454,6 +454,9 @@
                   }
                 }
               },
+              "answerId": {
+                "type": "keyword"
+              },
               "answerDwId": {
                 "type": "keyword"
               },

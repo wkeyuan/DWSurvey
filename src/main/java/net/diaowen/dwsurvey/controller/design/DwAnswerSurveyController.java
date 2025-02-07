@@ -138,6 +138,9 @@ public class DwAnswerSurveyController {
             //计算分数
             DwAnswerEsUtils.calcSumScore(surveyJson, dwEsSurveyAnswer);
             DwAnswerEsUtils.addAnSource(request, dwEsSurveyAnswer);
+            // 先保存一份到mysql
+            surveyAnswerManager.saveAnswerByEsAnswer(dwEsSurveyAnswer);
+            // 再保存到es
             IndexResponse indexResponse = dwAnswerEsClientService.createAnswerDocByObj(dwEsSurveyAnswer);
             if (indexResponse!=null && indexResponse.id()!=null) {
                 String indexResponseId = indexResponse.id();

@@ -4,6 +4,7 @@ import net.diaowen.common.base.entity.IdEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name="t_survey_answer_json")
@@ -26,6 +27,7 @@ public class SurveyAnswerJson extends IdEntity {
 
     // 验证码
     private String anRandomCode;
+    private Date createDate;
 
     public String getSurveyId() {
         return surveyId;
@@ -97,5 +99,13 @@ public class SurveyAnswerJson extends IdEntity {
 
     public void setAnRandomCode(String anRandomCode) {
         this.anRandomCode = anRandomCode;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

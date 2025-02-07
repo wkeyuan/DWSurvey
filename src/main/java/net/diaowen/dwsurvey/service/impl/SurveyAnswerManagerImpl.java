@@ -1,5 +1,6 @@
 package net.diaowen.dwsurvey.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import net.diaowen.common.QuType;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.plugs.page.Page;
@@ -10,7 +11,14 @@ import net.diaowen.common.utils.parsehtml.HtmlUtil;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.dao.SurveyAnswerDao;
 import net.diaowen.dwsurvey.entity.*;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswerCommon;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnIp;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnUser;
 import net.diaowen.dwsurvey.service.*;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.util.FileUtil;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -74,7 +82,7 @@ public class SurveyAnswerManagerImpl extends
 
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,
-			Map<String, Map<String, Object>> quMaps) {
+						   Map<String, Map<String, Object>> quMaps) {
 		surveyAnswerDao.saveAnswer(surveyAnswer, quMaps);
 	}
 
@@ -613,7 +621,6 @@ public class SurveyAnswerManagerImpl extends
 	}
 
 
-
 	@Transactional
 	public SurveyDirectory upAnQuNum(String surveyId){
 		SurveyDirectory survey = directoryManager.get(surveyId);
@@ -739,5 +746,57 @@ public class SurveyAnswerManagerImpl extends
 	@Override
 	public Long countResult(String surveyId) {
 		return surveyAnswerDao.countResult(surveyId);
+	}
+
+	@Override
+	public SurveyAnswer saveAnswerByEsAnswer(DwEsSurveyAnswer dwEsSurveyAnswer) {
+		// 原始索引
+		try{
+			SurveyAnswer surveyAnswer = new SurveyAnswer();
+			DwEsSurveyAnswerCommon answerCommon = dwEsSurveyAnswer.getAnswerCommon();
+			if (answerCommon!=null) {
+				String surveyId = answerCommon.getSurveyId();
+				surveyAnswer.setSurveyId(surveyId);
+				EsAnUser anUser = answerCommon.getAnUser();
+				if (anUser!=null) {
+					String userId = anUser.getUserId();
+					surveyAnswer.setUserId(userId);
+				}
+				EsAnIp anIp = answerCommon.getAnIp();
+				if (anIp!=null) {
+					String city = anIp.getCityV6();
+					String ip = anIp.getIp();
+					surveyAnswer.setCity(city);
+					surveyAnswer.setIpAddr(ip);
+				}
+				EsAnTime anTime = answerCommon.getAnTime();
+				if (anTime!=null) {
+					Float totalTime = anTime.getTotalTime();
+					Date bgDate = anTime.getBgAnDate();
+					Date endDate = anTime.getEndAnDate();
+					surveyAnswer.setBgAnDate(bgDate);
+					surveyAnswer.setEndAnDate(endDate);
+					surveyAnswer.setTotalTime(totalTime);
+				}
+				EsAnState anState = answerCommon.getAnState();
+				if (anState!=null) {
+					surveyAnswer.setIsEffective(anState.getIsEff());
+					surveyAnswer.setHandleState(anState.getHandleState());
+				}
+				// 完整json
+				SurveyAnswerJson surveyAnswerJson = new SurveyAnswerJson();
+				String newAnswerJson = JSON.toJSONString(dwEsSurveyAnswer);
+				surveyAnswerJson.setAnswerJson(newAnswerJson);
+				surveyAnswerJson.setSurveyId(surveyId);
+				surveyAnswerJson.setJsonVersion(8);
+				surveyAnswerJson.setCreateDate(new Date());
+				surveyAnswerDao.saveAnswer(surveyAnswer, surveyAnswerJson);
+				dwEsSurveyAnswer.getAnswerCommon().setAnswerId(surveyAnswer.getId());
+				return surveyAnswer;
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

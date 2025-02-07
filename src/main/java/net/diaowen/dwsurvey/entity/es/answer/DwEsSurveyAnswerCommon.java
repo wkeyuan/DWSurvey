@@ -10,6 +10,8 @@ public class DwEsSurveyAnswerCommon implements Serializable {
 
     private String surveyId;
     private String sid;
+    // 原始记录ID
+    private String answerId;
     //前端生成的答卷ID
     private String answerDwId;
     //问卷ID
@@ -114,5 +116,13 @@ public class DwEsSurveyAnswerCommon implements Serializable {
 
     public void setAnSource(EsAnSource anSource) {
         this.anSource = anSource;
+    }
+
+    public String getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(String answerId) {
+        this.answerId = answerId;
     }
 }
