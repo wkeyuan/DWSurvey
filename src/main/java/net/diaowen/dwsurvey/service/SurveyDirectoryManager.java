@@ -3,6 +3,7 @@ package net.diaowen.dwsurvey.service;
 import java.io.IOException;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONObject;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.service.BaseService;
@@ -101,5 +102,5 @@ public interface SurveyDirectoryManager extends BaseService<SurveyDirectory, Str
 
 	HttpResult isSurveyRoleOrPerm(String userId, String surveyUserId,String[] permCodes);
 
-
+    JSONObject getSurveyCountJson();
 }

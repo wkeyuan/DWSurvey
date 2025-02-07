@@ -478,16 +478,20 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 
 	@Override
 	public Long countResult(String surveyId) {
-		Criterion cri2= Restrictions.lt("handleState", 3);
-		Criterion cri3=Restrictions.eq("isEffective", 1);
-		Criteria c = null;
-		if(surveyId!=null){
-			Criterion cri1 = Restrictions.eq("surveyId",surveyId);
-			c = createCriteria(cri1,cri2,cri3);
-		}else{
-			c = createCriteria(cri2,cri3);
+		if (surveyId!=null) {
+			Criterion cri2= Restrictions.lt("handleState", 3);
+			Criterion cri3=Restrictions.eq("isEffective", 1);
+			Criteria c = null;
+			if(surveyId!=null){
+				Criterion cri1 = Restrictions.eq("surveyId",surveyId);
+				c = createCriteria(cri1,cri2,cri3);
+			}else{
+				c = createCriteria(cri2,cri3);
+			}
+			return countCriteriaResult(c);
+		} else {
+			return countHqlResult("select count(*) from SurveyAnswer");
 		}
-		return countCriteriaResult(c);
 	}
 
 }

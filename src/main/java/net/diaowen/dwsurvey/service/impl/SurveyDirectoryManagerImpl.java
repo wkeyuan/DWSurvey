@@ -1,5 +1,6 @@
 package net.diaowen.dwsurvey.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.diaowen.common.QuType;
 import net.diaowen.common.base.entity.User;
@@ -727,4 +728,14 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
         return null;
     }
 
+    @Override
+    public JSONObject getSurveyCountJson() {
+        JSONObject jsonParams = new JSONObject();
+        jsonParams.put("surveyCount", surveyDirectoryDao.surveyCount("all"));
+        jsonParams.put("designCount", surveyDirectoryDao.surveyCount("design"));
+        jsonParams.put("collectCount", surveyDirectoryDao.surveyCount("collect"));
+        jsonParams.put("closeCount", surveyDirectoryDao.surveyCount("close"));
+        jsonParams.put("answerCount", surveyAnswerManager.countResult(null));
+        return jsonParams;
+    }
 }

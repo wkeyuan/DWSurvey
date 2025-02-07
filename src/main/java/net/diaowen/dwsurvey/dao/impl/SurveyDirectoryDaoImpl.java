@@ -17,5 +17,16 @@ import net.diaowen.dwsurvey.entity.SurveyDirectory;
 //@Repository("surveyDirectoryDao")
 @Repository
 public class SurveyDirectoryDaoImpl extends BaseDaoImpl<SurveyDirectory, String> implements SurveyDirectoryDao {
-	
+    @Override
+    public Object surveyCount(String state) {
+        String hql = "select count(*) from SurveyDirectory ";
+        if ("design".equals(state)) {
+            hql = hql + " where surveyState=0";
+        } else if ("collect".equals(state)) {
+            hql = hql + " where surveyState=1";
+        } else if ("close".equals(state)) {
+            hql = hql + " where surveyState=2";
+        }
+        return countHqlResult(hql);
+    }
 }

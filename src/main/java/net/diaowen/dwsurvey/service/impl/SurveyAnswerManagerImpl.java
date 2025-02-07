@@ -736,4 +736,8 @@ public class SurveyAnswerManagerImpl extends
 		super.delete(t);
 	}
 
+	@Override
+	public Long countResult(String surveyId) {
+		return surveyAnswerDao.countResult(surveyId);
+	}
 }

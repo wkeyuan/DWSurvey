@@ -54,4 +54,8 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	public SurveyDirectory upAnQuNum(SurveyDirectory surveyDirectory);
 
 	public List<SurveyDirectory> upAnQuNum(List<SurveyDirectory> result);
+
+	Long countResult(String surveyId);
+
+
 }

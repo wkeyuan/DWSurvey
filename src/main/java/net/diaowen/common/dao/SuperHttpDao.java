@@ -77,10 +77,10 @@ public class SuperHttpDao {
 				return EntityUtils.toString(response.getEntity(), "UTF-8");
 			}
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			logger.error("doPost(HttpPost httpPost) ClientProtocolException : {} ", httpPost.getURI().toString());
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			logger.error("doPost(HttpPost httpPost) IOException : {} ", httpPost.getURI().toString());
 		} finally {
 			if (response != null) {
