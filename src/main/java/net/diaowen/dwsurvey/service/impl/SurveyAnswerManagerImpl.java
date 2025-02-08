@@ -18,7 +18,7 @@ import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnUser;
 import net.diaowen.dwsurvey.service.*;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.util.FileUtil;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -610,6 +610,53 @@ public class SurveyAnswerManagerImpl extends
 		return page;
 	}
 
+	/**
+	 * 取一份卷子回答的数据
+	 */
+	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page,String surveyId,String ipAddr,String city, Integer isEff, Integer handleState, String anUserkey, Integer saveStatus) {
+		List<Criterion> list = new ArrayList<>();
+		Criterion cri0=Restrictions.eq("isEffective", 1);
+		if(isEff!=null){
+			cri0=Restrictions.eq("isEffective", isEff);
+		}
+		list.add(cri0);
+		list.add(Restrictions.eq("surveyId", surveyId));
+//		list.add(Restrictions.lt("handleState", 3));
+		page.setOrderBy("endAnDate");
+		page.setOrderDir("desc");
+		Criterion cri2=Restrictions.lt("handleState", 3);
+		if(handleState!=null && handleState!=100){
+			//handleState 100 表示查全部状态
+			cri2=Restrictions.eq("handleState", handleState);
+		}
+		if(handleState!=null && handleState==300){
+			//handleState 300 表示查询删除的数据，此处配合前台表示查询删除与真别的数据，真别数据isEffective=0
+			cri2=Restrictions.or(Restrictions.lt("handleState", 3),Restrictions.eq("handleState", 300));
+		}
+		list.add(cri2);
+		if(org.apache.commons.lang.StringUtils.isNotEmpty(ipAddr)){
+			Criterion cri3=Restrictions.like("ipAddr", "%"+ipAddr+"%");
+			list.add(cri3);
+		}
+		if(org.apache.commons.lang.StringUtils.isNotEmpty(city)){
+			Criterion cri4=Restrictions.like("city", "%"+city+"%");
+			list.add(cri4);
+		}
+		if(StringUtils.isNotEmpty(anUserkey)){
+			Criterion cri5=Restrictions.like("anUserkey", anUserkey);
+			list.add(cri5);
+		}
+		if(saveStatus==null || saveStatus==0){
+			Criterion cri5=Restrictions.or(Restrictions.eq("answerSaveStatus", 0),Restrictions.isNull("answerSaveStatus"));
+			list.add(cri5);
+		}else{
+			//saveStatus 1，查询暂存
+			list.add(Restrictions.eq("answerSaveStatus", saveStatus));
+		}
+		page=findPageByCri(page,list);
+		return page;
+	}
+
 	public List<SurveyAnswer> answerList(String surveyId,Integer isEff) {
 		Criterion cri1=Restrictions.eq("surveyId", surveyId);
 		Criterion cri2=Restrictions.lt("handleState", 2);
@@ -749,10 +796,12 @@ public class SurveyAnswerManagerImpl extends
 	}
 
 	@Override
-	public SurveyAnswer saveAnswerByEsAnswer(DwEsSurveyAnswer dwEsSurveyAnswer) {
+	public SurveyAnswer saveAnswerByEsAnswer(SurveyAnswer surveyAnswer, DwEsSurveyAnswer dwEsSurveyAnswer) {
 		// 原始索引
+		//默认未被break
+		surveyAnswer.setIsEffective(1);
+		surveyAnswer.setBreakType(0);
 		try{
-			SurveyAnswer surveyAnswer = new SurveyAnswer();
 			DwEsSurveyAnswerCommon answerCommon = dwEsSurveyAnswer.getAnswerCommon();
 			if (answerCommon!=null) {
 				String surveyId = answerCommon.getSurveyId();

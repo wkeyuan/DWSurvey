@@ -4,6 +4,7 @@ import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.license.LicenseStatus;
 import co.elastic.clients.elasticsearch.nodes.Http;
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,16 +20,15 @@ import net.diaowen.dwsurvey.common.AnswerCheckData;
 import net.diaowen.dwsurvey.common.DwAnswerCheckResult;
 import net.diaowen.dwsurvey.common.DwAnswerEsUtils;
 import net.diaowen.dwsurvey.common.DwSurveyAnswerResult;
-import net.diaowen.dwsurvey.entity.SurveyAnswer;
-import net.diaowen.dwsurvey.entity.SurveyAnswerJson;
-import net.diaowen.dwsurvey.entity.SurveyDirectory;
-import net.diaowen.dwsurvey.entity.SurveyJson;
+import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnIp;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
+import net.diaowen.dwsurvey.service.SurveyAnswerJsonManager;
 import net.diaowen.dwsurvey.service.SurveyAnswerManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
 import net.diaowen.dwsurvey.service.SurveyJsonManager;
+import net.diaowen.dwsurvey.service.impl.answer.SubmitSurveyAnswerCheckService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +63,10 @@ public class DwAnswerSurveyController {
     private IPService ipService;
     @Autowired
     private ImageCaptchaService imageCaptchaService;
+    @Autowired
+    private SubmitSurveyAnswerCheckService answerCheckService;
+    @Autowired
+    private SurveyAnswerJsonManager surveyAnswerJsonManager;
 
     @RequestMapping(value = "/survey-json-by-sid.do",method = RequestMethod.GET)
     @ResponseBody
@@ -139,23 +143,31 @@ public class DwAnswerSurveyController {
             DwAnswerEsUtils.calcSumScore(surveyJson, dwEsSurveyAnswer);
             DwAnswerEsUtils.addAnSource(request, dwEsSurveyAnswer);
             // 先保存一份到mysql
-            surveyAnswerManager.saveAnswerByEsAnswer(dwEsSurveyAnswer);
+            String sessionId = request.getSession().getId();
+            SurveyAnswer surveyAnswer = new SurveyAnswer();
+            surveyAnswer.setHttpSessionId(sessionId);
+            surveyAnswerManager.saveAnswerByEsAnswer(surveyAnswer, dwEsSurveyAnswer);
+            dwAnswerCheckResult.setDbAnswerId(surveyAnswer.getId());
             // 再保存到es
-            IndexResponse indexResponse = dwAnswerEsClientService.createAnswerDocByObj(dwEsSurveyAnswer);
-            if (indexResponse!=null && indexResponse.id()!=null) {
-                String indexResponseId = indexResponse.id();
-                logger.debug(" answer save success id {}", indexResponseId);
-                // 保存成功
-                dwAnswerCheckResult.buildResult(DwAnswerCheckResult.SUCCESS201);
-                dwAnswerCheckResult.setIndexResponseId(indexResponseId);
-                // 如果需要返回答卷结果
-//                dwAnswerCheckResult.setDwEsSurveyAnswer(dwEsSurveyAnswer);
-                dwAnswerCheckResult.setSumScore(dwEsSurveyAnswer.getAnswerCommon().getSumScore());
-                addAnswerNumCookie(request, response, sid);
-                return HttpResult.SUCCESS(dwAnswerCheckResult);
-            } else {
-                return HttpResult.SUCCESS(DwAnswerCheckResult.SERVER502);
+            try{
+                IndexResponse indexResponse = dwAnswerEsClientService.createAnswerDocByObj(dwEsSurveyAnswer);
+                if (indexResponse!=null && indexResponse.id()!=null) {
+                    String indexResponseId = indexResponse.id();
+                    logger.debug(" answer save success id {}", indexResponseId);
+                    // 保存成功
+                    dwAnswerCheckResult.setIndexResponseId(indexResponseId);
+                } else {
+                    return HttpResult.SUCCESS(DwAnswerCheckResult.SERVER502);
+                }
+            } catch (Exception e) {
+                logger.error("ES服务异常，答卷功能不受影响，但会影响数据分析功能");
             }
+            // 保存成功
+            dwAnswerCheckResult.buildResult(DwAnswerCheckResult.SUCCESS201);
+            // 如果需要返回答卷结果
+            dwAnswerCheckResult.setSumScore(dwEsSurveyAnswer.getAnswerCommon().getSumScore());
+            addAnswerNumCookie(request, response, sid);
+            return HttpResult.SUCCESS(dwAnswerCheckResult);
         }catch (Exception e){
             e.printStackTrace();
             return HttpResult.EXCEPTION(e.getMessage());
@@ -165,11 +177,36 @@ public class DwAnswerSurveyController {
     //获取答卷数据,要注意先做安全验证
     @RequestMapping(value = "/get-survey-answer.do", method = RequestMethod.GET)
     @ResponseBody
-    public HttpResult<DwEsSurveyAnswer> answerDataById(String answerId){
+    public HttpResult<DwEsSurveyAnswer> answerDataById(HttpServletRequest request, String answerId){
         // 要先做安全验证
-        logger.debug("answerId {}", answerId);
-        DwEsSurveyAnswer dwEsSurveyAnswer = dwAnswerEsClientService.findById(answerId);
-        return HttpResult.SUCCESS(dwEsSurveyAnswer);
+//        logger.debug("answerId {}", answerId);
+//        DwEsSurveyAnswer dwEsSurveyAnswer = dwAnswerEsClientService.findById(answerId);
+//        return HttpResult.SUCCESS(dwEsSurveyAnswer);
+        try {
+            String sessionId = request.getSession().getId();
+            SurveyAnswer answer = null;
+            if(StringUtils.isNotEmpty(answerId)){
+                answer = surveyAnswerManager.findById(answerId);
+            }
+            if(answer!=null){
+                boolean isPerm = false;
+                //自己填写的可以获取结果
+                String httpSessionId = answer.getHttpSessionId();
+                if(sessionId.equals(httpSessionId)) isPerm = true;
+                SurveyDirectory survey = surveyDirectoryManager.findUniqueBy(answer.getSurveyId());
+                if(!isPerm) isPerm = answerCheckService.isAnswerPerm(request, answer, survey, null);
+                if(isPerm){
+                    SurveyAnswerJson surveyAnswerJson = surveyAnswerJsonManager.findByAnswerId(answerId);
+                    String answerJson = surveyAnswerJson.getAnswerJson();
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    DwEsSurveyAnswer dwEsSurveyAnswer = objectMapper.readValue(answerJson, DwEsSurveyAnswer.class);
+                    return HttpResult.SUCCESS(dwEsSurveyAnswer);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return HttpResult.FAILURE_MSG("没有权限");
     }
 
     @RequestMapping(value = "/check-answer-pwd.do", method = RequestMethod.GET)

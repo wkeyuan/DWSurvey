@@ -46,6 +46,14 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	 */
 	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page, String surveyId);
 
+	/**
+	 * 取出某份问卷的答卷数据
+	 * @param page
+	 * @param surveyId
+	 * @return
+	 */
+	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page,String surveyId,String ipAddr,String city, Integer isEffective, Integer handleState, String anUserkey, Integer saveStatus);
+
 	public void deleteData(String[] ids);
 
 	public int getquestionAnswer(String surveyAnswerId, Question question);
@@ -59,5 +67,5 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	Long countResult(String surveyId);
 
 
-	SurveyAnswer saveAnswerByEsAnswer(DwEsSurveyAnswer dwEsSurveyAnswer);
+	SurveyAnswer saveAnswerByEsAnswer(SurveyAnswer surveyAnswer, DwEsSurveyAnswer dwEsSurveyAnswer);
 }

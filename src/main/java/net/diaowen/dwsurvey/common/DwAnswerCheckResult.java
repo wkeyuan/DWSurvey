@@ -20,6 +20,7 @@ public class DwAnswerCheckResult {
     private boolean showCaptcha = false;
 
     //答卷ID
+    private String dbAnswerId = null;
     private String indexResponseId = null;
     private Float sumScore = null; // 总得分
     private DwEsSurveyAnswer dwEsSurveyAnswer = null;
@@ -119,6 +120,14 @@ public class DwAnswerCheckResult {
 
     public void setSumScore(Float sumScore) {
         this.sumScore = sumScore;
+    }
+
+    public String getDbAnswerId() {
+        return dbAnswerId;
+    }
+
+    public void setDbAnswerId(String dbAnswerId) {
+        this.dbAnswerId = dbAnswerId;
     }
 
     public void buildResult(DwAnswerCheckResult dwAnswerCheckResult){
