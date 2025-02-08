@@ -61,6 +61,8 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
     private QuestionBankManager questionBankManager;
     @Autowired
     private UserManager userManager;
+    @Autowired
+    private DwAnswerEsClientService dwAnswerEsClientService;
 
     @Override
     public void setBaseDao() {
@@ -645,9 +647,6 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
         fos.close();
     }
 
-    @Autowired
-    private DwAnswerEsClientService dwAnswerEsClientService;
-
     @Transactional
     public List<SurveyDirectory> upAnQuNum(List<SurveyDirectory> surveyDirectoryList) {
         for (SurveyDirectory survey:surveyDirectoryList) {
@@ -660,7 +659,8 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
     public SurveyDirectory upAnQuNum(SurveyDirectory survey) {
 //        SurveyDirectory survey = findUniqueBy(surveyId);
         String surveyId = survey.getId();
-        long answerCount = dwAnswerEsClientService.getCount(surveyId, null);
+//        long answerCount = dwAnswerEsClientService.getCount(surveyId, null);
+        long answerCount = surveyAnswerManager.countResult(surveyId);
         survey.setAnswerNum((int) answerCount);
         saveByAdmin(survey);
         return survey;

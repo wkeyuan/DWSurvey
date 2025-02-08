@@ -91,23 +91,23 @@ public class ESClientConfig {
      * @return SSLContext
      */
     private static SSLContext buildSSLContext() {
-        ClassPathResource resource = new ClassPathResource(CERT_NAME);
         SSLContext sslContext = null;
         try {
-            CertificateFactory factory = CertificateFactory.getInstance("X.509");
-            Certificate trustedCa;
-            try (InputStream is = resource.getInputStream()) {
+            ClassPathResource resource = new ClassPathResource(CERT_NAME);
+            if (resource.exists()) {
+                CertificateFactory factory = CertificateFactory.getInstance("X.509");
+                Certificate trustedCa;
+                InputStream is = resource.getInputStream();
                 trustedCa = factory.generateCertificate(is);
+                KeyStore trustStore = KeyStore.getInstance("pkcs12");
+                trustStore.load(null, null);
+                trustStore.setCertificateEntry("ca", trustedCa);
+                SSLContextBuilder sslContextBuilder = SSLContexts.custom()
+                        .loadTrustMaterial(trustStore, null);
+                sslContext = sslContextBuilder.build();
             }
-            KeyStore trustStore = KeyStore.getInstance("pkcs12");
-            trustStore.load(null, null);
-            trustStore.setCertificateEntry("ca", trustedCa);
-            SSLContextBuilder sslContextBuilder = SSLContexts.custom()
-                    .loadTrustMaterial(trustStore, null);
-            sslContext = sslContextBuilder.build();
-        } catch (CertificateException | IOException | KeyStoreException | NoSuchAlgorithmException |
-                 KeyManagementException e) {
-            logger.error("ES连接认证失败", e);
+        } catch (Exception e) {
+            logger.error("ES连接认证失败 {}", e);
         }
         return sslContext;
     }
