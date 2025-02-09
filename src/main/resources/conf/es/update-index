@@ -1,0 +1,420 @@
+// 全局的更新字段，如果打开问卷页面慢且请求后端问卷数据慢，则可以在数据库给t_survey_json的surveyId与sid加上普通index索引
+// 具体每个索引的更新在对应目录下面
+ALTER TABLE `dwsurvey_pro`.`t_survey_json`
+ADD INDEX `sid_index` (`sid` ASC) VISIBLE;
+ALTER TABLE `dwsurvey_pro`.`t_survey_json`
+ADD INDEX `survey_index` (`survey_id` ASC) VISIBLE;
+// 新增评分字段更新
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sumScore": {
+          "type": "float"
+        }
+      }
+    },
+    "anQuestions": {
+        "properties": {
+          "quAnScore": {
+            "type": "float"
+          }
+        }
+    }
+  }
+}
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sumScore": {
+          "type": "float"
+        }
+      }
+    }
+  }
+}
+// 新增矩阵题字段索引
+// 加矩阵字段
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anMatrixRadios": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "colDwId": {
+                "type": "keyword"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixCheckboxes": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnCheckboxs": {
+                "properties": {
+                  "optionDwId": {
+                    "type": "keyword"
+                  },
+                  "otherText": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          },
+          "anMatrixFbks": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnFbks": {
+                "properties": {
+                  "answer": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "optionDwId": {
+                    "type": "keyword"
+                  }
+                }
+              }
+            }
+          },
+          "anMatrixScales": {
+            "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "answerScore": {
+                "type": "float"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+          }
+        }
+    }
+  }
+}
+// 加sid
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sid": {
+            "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "sid": {
+            "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+
+// 加矩阵辅助统计字段
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+    "esAnMatrixRadio": {
+      "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "colDwId": {
+                "type": "keyword"
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+    },
+    "esAnMatrixCheckbox": {
+      "properties": {
+              "rowDwId": {
+                "type": "keyword"
+              },
+              "rowAnCheckboxs": {
+                "properties": {
+                  "optionDwId": {
+                    "type": "keyword"
+                  },
+                  "otherText": {
+                    "analyzer": "ik_max_word",
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              },
+              "rowAnScore": {
+                "type": "float"
+              }
+            }
+    }
+  }
+}
+
+
+
+// 20241013补充
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "province": {
+                "type": "keyword"
+              },
+              "county": {
+                 "type": "keyword"
+              },
+              "town": {
+                 "type": "keyword"
+              },
+              "cityV6": {
+                  "type": "keyword"
+              }
+            }
+          }
+      }
+      }
+    }
+}
+
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "province": {
+                "type": "keyword"
+              },
+             "county": {
+               "type": "keyword"
+             },
+             "town": {
+               "type": "keyword"
+             },
+            "cityV6": {
+                "type": "keyword"
+            }
+            }
+          }
+      }
+      }
+    }
+}
+
+// 20241015补充
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anSource": {
+            "properties": {
+              "dbSource": {
+                "type": "keyword"
+              },
+              "pcm": {
+                 "type": "keyword"
+              },
+              "sys": {
+                 "type": "keyword"
+              },
+              "bro": {
+                 "type": "keyword"
+              },
+              "userAgentString": {
+                  "type": "text",
+                  "analyzer": "standard"
+              }
+            }
+          }
+      }
+      }
+    }
+}
+
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+      "answerCommon": {
+        "properties": {
+          "anSource": {
+              "properties": {
+                "dbSource": {
+                  "type": "keyword"
+                },
+                "pcm": {
+                   "type": "keyword"
+                },
+                "sys": {
+                   "type": "keyword"
+                },
+                "bro": {
+                   "type": "keyword"
+                },
+                "userAgentString": {
+                    "type": "text",
+                    "analyzer": "standard"
+                }
+              }
+            }
+      }
+      }
+    }
+}
+
+// 新增评分其它
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anOrders": {
+            "properties": {
+              "otherText": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  },
+                  "analyzer": "ik_max_word"
+                }
+            }
+          }
+        }
+      }
+  }
+}
+
+//词统计
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "esAnWordAgg": {
+        "properties": {
+          "word": {
+            "type": "keyword"
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+}
+
+//级联
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anCascades": {
+            "properties": {
+              "level": {
+                "type": "integer"
+              },
+              "value": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+  }
+}
+
+//级联统计
+PUT dwsurvey_answer_index_aggs/_mapping
+{
+  "properties": {
+      "esAnCascadeAggs": {
+        "properties": {
+          "level0Value": {
+            "type": "keyword"
+          },
+          "level1Value": {
+            "type": "keyword"
+          },
+          "level2Value": {
+            "type": "keyword"
+          },
+          "level3Value": {
+            "type": "keyword"
+          },
+          "level4Value": {
+            "type": "keyword"
+          },
+          "level5Value": {
+            "type": "keyword"
+          },
+          "level6Value": {
+            "type": "keyword"
+          },
+          "level7Value": {
+            "type": "keyword"
+          },
+          "level8Value": {
+            "type": "keyword"
+          },
+          "level9Value": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+}

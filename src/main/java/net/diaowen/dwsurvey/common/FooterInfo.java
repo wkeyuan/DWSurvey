@@ -15,6 +15,10 @@ public class FooterInfo {
     private String sitePhone;
     private String years;
 
+    private String siteStatus;
+
+    private String layoutType;
+
     public String getVersionInfo() {
         return versionInfo;
     }
@@ -85,5 +89,21 @@ public class FooterInfo {
 
     public void setYears(String years) {
         this.years = years;
+    }
+
+    public String getSiteStatus() {
+        return siteStatus;
+    }
+
+    public void setSiteStatus(String siteStatus) {
+        this.siteStatus = siteStatus;
+    }
+
+    public String getLayoutType() {
+        return layoutType;
+    }
+
+    public void setLayoutType(String layoutType) {
+        this.layoutType = layoutType;
     }
 }

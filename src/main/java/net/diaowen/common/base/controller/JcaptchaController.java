@@ -1,9 +1,14 @@
 package net.diaowen.common.base.controller;
 
 import com.octo.captcha.service.image.ImageCaptchaService;
+import net.diaowen.common.plugs.httpclient.HttpResult;
+import net.diaowen.common.plugs.httpclient.HttpStatus;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -55,5 +60,18 @@ public class JcaptchaController {
         responseOutputStream.close();
         return null;
 	}
+
+    @RequestMapping("/jcaptcha-check.do")
+    @ResponseBody
+    public HttpResult checkCode(HttpServletRequest request, @RequestParam String captchaCode) throws Exception {
+        try{
+            if(StringUtils.isNotEmpty(captchaCode)){
+                if (imageCaptchaService.validateResponseForID(request.getSession().getId(), captchaCode)) return HttpResult.SUCCESS();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new HttpResult(HttpStatus.SERVER_30009,captchaCode);
+    }
 
 }

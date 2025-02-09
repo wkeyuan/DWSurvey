@@ -26,7 +26,7 @@ public class Question extends IdEntity{
 
 	//所属问卷或题库
 	private String belongId;
-	//题目名称
+	//题目名称(text)
 	private String quName;
 	// 题干
 	private String quTitle;
@@ -79,6 +79,23 @@ public class Question extends IdEntity{
 	//填空的input
 	private Integer answerInputWidth;
 	private Integer answerInputRow;
+
+	public  Question() {
+
+	}
+
+	public  Question(QuType quType, String quTitle, String quName) {
+		this.quType = quType;
+		this.quTitle = quTitle;
+		this.quName = quName;
+	}
+
+	public  Question(QuType quType, String quTitle, String quName, String dwQuIcon) {
+		this.quType = quType;
+		this.quTitle = quTitle;
+		this.quName = quName;
+		this.dwQuIcon = dwQuIcon;
+	}
 
 	public String getBelongId() {
 		return belongId;
@@ -440,6 +457,65 @@ public class Question extends IdEntity{
 	}
 	public void setStatJson(String statJson) {
 		this.statJson = statJson;
+	}
+
+	private String dwsurveyfont = null;
+	@Transient
+	private String eventName = null;
+	private String dwQuIcon = "<i class=\"fa-regular fa-circle-dot\"></i>";//用于左右布局图标
+	@Transient
+	public String getDwsurveyfont() {
+		return dwsurveyfont;
+	}
+
+	public void setDwsurveyfont(String dwsurveyfont) {
+		this.dwsurveyfont = dwsurveyfont;
+	}
+
+	public String getEventName() {
+		return eventName;
+	}
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
+
+	@Transient
+	public String getDwQuIcon() {
+		return dwQuIcon;
+	}
+
+	public void setDwQuIcon(String dwQuIcon) {
+		this.dwQuIcon = dwQuIcon;
+	}
+
+	private List<QuOption> quOptions = null;
+	private List<QuOption> quRows = null;
+	private List<QuOption> quCols = null;
+
+	@Transient
+	public List<QuOption> getQuOptions() {
+		return quOptions;
+	}
+
+	public void setQuOptions(List<QuOption> quOptions) {
+		this.quOptions = quOptions;
+	}
+	@Transient
+	public List<QuOption> getQuRows() {
+		return quRows;
+	}
+
+	public void setQuRows(List<QuOption> quRows) {
+		this.quRows = quRows;
+	}
+	@Transient
+	public List<QuOption> getQuCols() {
+		return quCols;
+	}
+
+	public void setQuCols(List<QuOption> quCols) {
+		this.quCols = quCols;
 	}
 
 }

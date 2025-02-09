@@ -4,5 +4,6 @@ import net.diaowen.common.dao.BaseDao;
 import net.diaowen.dwsurvey.entity.SurveyDirectory;
 
 public interface SurveyDirectoryDao extends BaseDao<SurveyDirectory, String>{
-	
+
+    Object surveyCount(String all);
 }

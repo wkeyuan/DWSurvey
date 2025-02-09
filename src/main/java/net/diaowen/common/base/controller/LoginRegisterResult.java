@@ -85,4 +85,9 @@ public class LoginRegisterResult {
         return loginResult;
     }
 
+    public static LoginRegisterResult SUCCESS(String[] currentAuthority, HttpResult httpResult){
+        LoginRegisterResult loginRegisterResult = SUCCESS(currentAuthority);
+        loginRegisterResult.setHttpResult(httpResult);
+        return loginRegisterResult;
+    }
 }

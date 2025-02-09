@@ -30,7 +30,7 @@ public class DwWebController {
      */
     @RequestMapping(value = "/footer-info.do",method = RequestMethod.GET)
     @ResponseBody
-    public HttpResult<SurveyDirectory> footerInfo() {
+    public HttpResult<FooterInfo> footerInfo() {
         try{
             FooterInfo footerInfo = new FooterInfo();
             footerInfo.setVersionInfo(DWSurveyConfig.DWSURVEY_VERSION_INFO);
@@ -42,13 +42,14 @@ public class DwWebController {
             footerInfo.setSiteMail(DWSurveyConfig.DWSURVEY_WEB_INFO_SITE_MAIL);
             footerInfo.setSitePhone(DWSurveyConfig.DWSURVEY_WEB_INFO_SITE_PHONE);
             footerInfo.setYears("2012-"+new SimpleDateFormat("yyyy").format(new Date()));
+            footerInfo.setSiteStatus(DWSurveyConfig.DWSURVEY_SITE);
             User user = accountManager.getCurUser();
             if(user!=null){
                 //登录用户返回带版本号
                 return HttpResult.SUCCESS(footerInfo);
             }else{
                 //非登录用户返回不带版本号
-                footerInfo.setVersionNumber("");
+//                footerInfo.setVersionNumber("");
                 return HttpResult.SUCCESS(footerInfo);
             }
         }catch (Exception e){

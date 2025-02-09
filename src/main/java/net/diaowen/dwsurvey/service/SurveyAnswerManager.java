@@ -7,6 +7,7 @@ import net.diaowen.common.base.entity.User;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.service.BaseService;
 import net.diaowen.dwsurvey.entity.*;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
  * http://dwsurvey.net
  */
 public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
+
+	public void saveAnswer(SurveyAnswer surveyAnswer, SurveyAnswerJson surveyAnswerJson);
 
 	public void saveAnswer(SurveyAnswer surveyAnswer, Map<String, Map<String, Object>> quMaps);
 
@@ -43,6 +46,14 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	 */
 	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page, String surveyId);
 
+	/**
+	 * 取出某份问卷的答卷数据
+	 * @param page
+	 * @param surveyId
+	 * @return
+	 */
+	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page,String surveyId,String ipAddr,String city, Integer isEffective, Integer handleState, String anUserkey, Integer saveStatus);
+
 	public void deleteData(String[] ids);
 
 	public int getquestionAnswer(String surveyAnswerId, Question question);
@@ -52,4 +63,9 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 	public SurveyDirectory upAnQuNum(SurveyDirectory surveyDirectory);
 
 	public List<SurveyDirectory> upAnQuNum(List<SurveyDirectory> result);
+
+	Long countResult(String surveyId);
+
+
+	SurveyAnswer saveAnswerByEsAnswer(SurveyAnswer surveyAnswer, DwEsSurveyAnswer dwEsSurveyAnswer);
 }

@@ -1,0 +1,133 @@
+PUT dwsurvey_answer_index/_mapping
+{
+  "properties": {
+    "anQuestions": {
+        "properties": {
+          "anLocation": {
+            "properties": {
+              "locationBrand": {
+                "type": "keyword"
+              },
+             "locationClient": {
+                "type": "keyword"
+              },
+                "accuracyLevel": {
+                   "type": "keyword"
+                 },
+               "isLocation": {
+                  "type": "boolean"
+                },
+              "longitude": {
+                 "type": "float"
+               },
+               "latitude": {
+                 "type": "float"
+               },
+             "accuracy": {
+                "type": "float"
+              },
+            "locationType": {
+               "type": "keyword"
+             },
+              "altitude": {
+                 "type": "float"
+               },
+                 "altitudeAccuracy": {
+                    "type": "float"
+                  },
+                "heading": {
+                   "type": "keyword"
+                 },
+               "speed": {
+                  "type": "float"
+                },
+              "formattedAddress": {
+                 "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  },
+                  "analyzer": "ik_max_word"
+               },
+             "addressComponent": {
+                "properties": {
+                    "country": {
+                     "type": "keyword"
+                   },
+                    "province": {
+                        "type": "keyword"
+                      },
+                      "city": {
+                       "type": "keyword"
+                     },
+                      "citycode": {
+                          "type": "keyword"
+                        },
+                        "district": {
+                        "type": "keyword"
+                      },
+                      "adcode": {
+                       "type": "keyword"
+                     },
+                      "township": {
+                          "type": "keyword"
+                        },
+                        "street": {
+                           "type": "keyword"
+                         },
+                          "streetNumber": {
+                              "type": "keyword"
+                            },
+                            "neighborhood": {
+                            "type": "keyword"
+                          },
+                          "neighborhoodType": {
+                           "type": "keyword"
+                         },
+                          "building": {
+                              "type": "keyword"
+                            },
+                          "buildingType": {
+                              "type": "keyword"
+                            }
+                }
+              },
+              "isCitysearch": {
+               "type": "boolean"
+             },
+             "citySearchResult": {
+                "properties": {
+                "info": {
+                     "type": "keyword"
+                },
+                "infocode": {
+                     "type": "keyword"
+                },
+                "country": {
+                     "type": "keyword"
+                },
+                "province": {
+                     "type": "keyword"
+                },
+                "city": {
+                     "type": "keyword"
+                },
+                "adcode": {
+                     "type": "keyword"
+                },
+                "rectangle": {
+                     "type": "keyword"
+                },
+                "bounds": {
+                     "type": "keyword"
+                }
+               }
+              }
+            }
+          }
+        }
+      }
+  }
+}

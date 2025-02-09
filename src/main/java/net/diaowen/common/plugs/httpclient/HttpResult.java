@@ -58,44 +58,48 @@ public class HttpResult<T> {
 		this.data = data;
 	}
 
-	public static HttpResult buildResult(HttpStatus httpStatus){
-		return new HttpResult(httpStatus);
+	public static <T> HttpResult<T> buildResult(HttpStatus httpStatus){
+		return new HttpResult<>(httpStatus);
 	}
 
-	public static  <T> HttpResult buildResult(HttpStatus httpStatus,T data){
-		return new HttpResult(httpStatus,data);
+	public static  <T> HttpResult<T> buildResult(HttpStatus httpStatus,T data){
+		return new HttpResult<>(httpStatus,data);
 	}
 
-	public static HttpResult SUCCESS() {
-		return new HttpResult(HttpStatus.SUCCESS,null);
+	public static <T> HttpResult<T> SUCCESS() {
+		return new HttpResult<>(HttpStatus.SUCCESS,null);
 	}
 
-	public static <T> HttpResult SUCCESS(T data) {
-		return new HttpResult(HttpStatus.SUCCESS,data);
+	public static <T> HttpResult<T> SUCCESS(T data) {
+		return new HttpResult<>(HttpStatus.SUCCESS,data);
 	}
 
-	public static HttpResult NOLOGIN() {
-		return new HttpResult(HttpStatus.NOLOGIN,null);
+	public static <T> HttpResult<T> NOLOGIN() {
+		return new HttpResult<>(HttpStatus.NOLOGIN,null);
 	}
 
-	public static HttpResult FAILURE() {
-		return new HttpResult(HttpStatus.FAILURE,null);
+	public static <T> HttpResult<T> FAILURE() {
+		return new HttpResult<>(HttpStatus.FAILURE,null);
 	}
 
-	public static <T> HttpResult FAILURE(T data) {
-		return new HttpResult(HttpStatus.FAILURE,data);
+	public static <T> HttpResult<T> FAILURE(T data) {
+		return new HttpResult<>(HttpStatus.FAILURE,data);
 	}
 
-	public static <T> HttpResult FAILURE(String msg,T data) {
-		return new HttpResult(HttpStatus.FAILURE.getStatusCode(),msg,data);
+	public static <T> HttpResult<T> FAILURE(String msg,T data) {
+		return new HttpResult<>(HttpStatus.FAILURE.getStatusCode(),msg,data);
 	}
 
-	public static HttpResult FAILURE_MSG(String msg) {
-		return new HttpResult(400,msg);
+	public static <T> HttpResult<T> FAILURE_MSG(String msg) {
+		return new HttpResult<>(400,msg);
 	}
 
-	public static <T> HttpResult EXCEPTION(T data) {
-		return new HttpResult(HttpStatus.EXCEPTION,data);
+	public static <T> HttpResult<T> EXCEPTION(String msg) {
+		return new HttpResult<>(400,msg);
+	}
+
+	public static <T> HttpResult<T> EXCEPTION(T data) {
+		return new HttpResult<>(HttpStatus.EXCEPTION,data);
 	}
 
 }
