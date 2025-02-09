@@ -7,13 +7,13 @@ server:
     mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
     min-response-size: 2048
 dwsurvey:
-  # 产品版本号信息，V5-代表最新的前后端分离版本
+  # 产品版本号信息，V5-代表最新的前后端分离版本，vue+jquery; v6 版本纯vue实现
   version:
     api: https://www.surveyform.cn
     name: 社区版
     name-code: OSS
     built: 250209
-    code: V7.0.0.250209
+    code: V6.12.0
     # OSS-V6.11-241118
     number: ${dwsurvey.version.name-code}-${dwsurvey.version.code}-${dwsurvey.version.built}
     # DWSurvey-OSS-V6.11-241118
