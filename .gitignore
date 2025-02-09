@@ -54,3 +54,6 @@ hs_err_pid*
 
 src/main/resources/static/static
 src/main/resources/static/index.html
+
+diaowen
+src/main/resources/http_ca.crt
