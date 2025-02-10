@@ -1,7 +1,7 @@
 dwsurvey:
   site: 'local'
   web:
-    file-path: diaowen/file/
+    file-path: dwfile/dwsurvey/
     static-type: static
     site-url: https://pro.surveyform.cn
     resource-url: https://pro.surveyform.cn
