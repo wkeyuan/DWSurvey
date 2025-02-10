@@ -148,7 +148,7 @@ logging:
       apache: ERROR
 elasticsearch:
   username: elastic
-  passwd: O*-LCV2x8J7sRGwKV*ok
+  passwd: A0ThxyWi1gMNJzv7iU7M
   apikey: ==
   hosts: 127.0.0.1:9200 # 多个IP逗号隔开
   cert-name: http_ca.crt

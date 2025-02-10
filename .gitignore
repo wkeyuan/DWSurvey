@@ -52,7 +52,7 @@ Thumbs.db
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-src/main/resources/http_ca.crt
+#src/main/resources/http_ca.crt
 src/main/resources/static/static
 src/main/resources/static/index.html
 src/main/resources/static

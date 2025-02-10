@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "answerId": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

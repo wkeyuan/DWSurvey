@@ -10,6 +10,7 @@ import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
+import co.elastic.clients.elasticsearch.indices.PutMappingRequest;
 import co.elastic.clients.json.JsonData;
 import net.diaowen.dwsurvey.config.ESClientConfig;
 import org.slf4j.Logger;
@@ -31,6 +32,13 @@ public class ESClientService {
 
     @Resource(name = "defaultClient")
     private ElasticsearchClient elasticsearchClient;
+
+    public boolean putMapping(String indexName, String resourcePath) throws IOException {
+        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+            PutMappingRequest req = PutMappingRequest.of(b -> b.index(indexName).withJson(inputStream));
+            return Boolean.TRUE.equals(elasticsearchClient.indices().putMapping(req).acknowledged());
+        }
+    }
 
     private static class SomeApplicationData {}
 
