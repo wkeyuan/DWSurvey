@@ -50,9 +50,9 @@ public class MySurveyController {
 
         User user = accountManager.getCurUser();
         if(user!=null){
-            Page page = ResultUtils.getPageByPageResult(pageResult);
+            Page<SurveyDirectory> page = ResultUtils.getPageByPageResult(pageResult);
             page = surveyDirectoryManager.findByUser(page,surveyName, surveyState);
-            page.setResult(surveyAnswerManager.upAnQuNum(page.getResult()));
+            page.setResult(surveyDirectoryManager.upAnQuNum(page.getResult()));
             pageResult = ResultUtils.getPageResultByPage(page,pageResult);
         }
         return pageResult;
@@ -72,7 +72,7 @@ public class MySurveyController {
             if(user!=null){
                 surveyStatsManager.findBySurvey(id);
                 SurveyDirectory survey = surveyDirectoryManager.findUniqueBy(id);
-                survey = surveyAnswerManager.upAnQuNum(survey);
+                survey = surveyDirectoryManager.upAnQuNum(survey);
                 return HttpResult.SUCCESS(survey);
             }else{
                 return HttpResult.buildResult(HttpStatus.NOLOGIN);
@@ -132,6 +132,12 @@ public class MySurveyController {
                     if(map.containsKey("id")){
                         String[] ids = map.get("id");
                         if(ids!=null){
+                            for (String id:ids) {
+                                SurveyDirectory surveyDirectory= surveyDirectoryManager.findById(id);
+                                if (surveyDirectory!=null && !surveyDirectory.getUserId().equals(curUser.getId())) {
+                                    return new HttpResult(HttpStatus.SERVER_10002);
+                                }
+                            }
                             surveyDirectoryManager.delete(ids);
                             return HttpResult.SUCCESS();
                         }

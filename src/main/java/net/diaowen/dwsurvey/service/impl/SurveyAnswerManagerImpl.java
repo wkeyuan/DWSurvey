@@ -1,5 +1,6 @@
 package net.diaowen.dwsurvey.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import net.diaowen.common.QuType;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.plugs.page.Page;
@@ -10,7 +11,14 @@ import net.diaowen.common.utils.parsehtml.HtmlUtil;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.dao.SurveyAnswerDao;
 import net.diaowen.dwsurvey.entity.*;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
+import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswerCommon;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnIp;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
+import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnUser;
 import net.diaowen.dwsurvey.service.*;
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.util.FileUtil;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -67,9 +75,14 @@ public class SurveyAnswerManagerImpl extends
 		this.baseDao = surveyAnswerDao;
 	}
 
+	public void saveAnswer(SurveyAnswer surveyAnswer,
+						   SurveyAnswerJson surveyAnswerJson) {
+		surveyAnswerDao.saveAnswer(surveyAnswer, surveyAnswerJson);
+	}
+
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,
-			Map<String, Map<String, Object>> quMaps) {
+						   Map<String, Map<String, Object>> quMaps) {
 		surveyAnswerDao.saveAnswer(surveyAnswer, quMaps);
 	}
 
@@ -426,7 +439,7 @@ public class SurveyAnswerManagerImpl extends
 					String answerScore="";
 					for (AnScore anScore : anScores) {
 						if(quScoreId.equals(anScore.getQuRowId())){
-							answerScore=anScore.getAnswserScore();
+							answerScore=anScore.getAnswerScore();
 							break;
 						}
 					}
@@ -597,6 +610,53 @@ public class SurveyAnswerManagerImpl extends
 		return page;
 	}
 
+	/**
+	 * 取一份卷子回答的数据
+	 */
+	public Page<SurveyAnswer> answerPage(Page<SurveyAnswer> page,String surveyId,String ipAddr,String city, Integer isEff, Integer handleState, String anUserkey, Integer saveStatus) {
+		List<Criterion> list = new ArrayList<>();
+		Criterion cri0=Restrictions.eq("isEffective", 1);
+		if(isEff!=null){
+			cri0=Restrictions.eq("isEffective", isEff);
+		}
+		list.add(cri0);
+		list.add(Restrictions.eq("surveyId", surveyId));
+//		list.add(Restrictions.lt("handleState", 3));
+		page.setOrderBy("endAnDate");
+		page.setOrderDir("desc");
+		Criterion cri2=Restrictions.lt("handleState", 3);
+		if(handleState!=null && handleState!=100){
+			//handleState 100 表示查全部状态
+			cri2=Restrictions.eq("handleState", handleState);
+		}
+		if(handleState!=null && handleState==300){
+			//handleState 300 表示查询删除的数据，此处配合前台表示查询删除与真别的数据，真别数据isEffective=0
+			cri2=Restrictions.or(Restrictions.lt("handleState", 3),Restrictions.eq("handleState", 300));
+		}
+		list.add(cri2);
+		if(org.apache.commons.lang.StringUtils.isNotEmpty(ipAddr)){
+			Criterion cri3=Restrictions.like("ipAddr", "%"+ipAddr+"%");
+			list.add(cri3);
+		}
+		if(org.apache.commons.lang.StringUtils.isNotEmpty(city)){
+			Criterion cri4=Restrictions.like("city", "%"+city+"%");
+			list.add(cri4);
+		}
+		if(StringUtils.isNotEmpty(anUserkey)){
+			Criterion cri5=Restrictions.like("anUserkey", anUserkey);
+			list.add(cri5);
+		}
+		if(saveStatus==null || saveStatus==0){
+			Criterion cri5=Restrictions.or(Restrictions.eq("answerSaveStatus", 0),Restrictions.isNull("answerSaveStatus"));
+			list.add(cri5);
+		}else{
+			//saveStatus 1，查询暂存
+			list.add(Restrictions.eq("answerSaveStatus", saveStatus));
+		}
+		page=findPageByCri(page,list);
+		return page;
+	}
+
 	public List<SurveyAnswer> answerList(String surveyId,Integer isEff) {
 		Criterion cri1=Restrictions.eq("surveyId", surveyId);
 		Criterion cri2=Restrictions.lt("handleState", 2);
@@ -606,7 +666,6 @@ public class SurveyAnswerManagerImpl extends
 		}
 		return surveyAnswerDao.findByOrder("endAnDate",false,cri1, cri2);
 	}
-
 
 
 	@Transactional
@@ -731,4 +790,62 @@ public class SurveyAnswerManagerImpl extends
 		super.delete(t);
 	}
 
+	@Override
+	public Long countResult(String surveyId) {
+		return surveyAnswerDao.countResult(surveyId);
+	}
+
+	@Override
+	public SurveyAnswer saveAnswerByEsAnswer(SurveyAnswer surveyAnswer, DwEsSurveyAnswer dwEsSurveyAnswer) {
+		// 原始索引
+		//默认未被break
+		surveyAnswer.setIsEffective(1);
+		surveyAnswer.setBreakType(0);
+		try{
+			DwEsSurveyAnswerCommon answerCommon = dwEsSurveyAnswer.getAnswerCommon();
+			if (answerCommon!=null) {
+				String surveyId = answerCommon.getSurveyId();
+				surveyAnswer.setSurveyId(surveyId);
+				EsAnUser anUser = answerCommon.getAnUser();
+				if (anUser!=null) {
+					String userId = anUser.getUserId();
+					surveyAnswer.setUserId(userId);
+				}
+				EsAnIp anIp = answerCommon.getAnIp();
+				if (anIp!=null) {
+					String city = anIp.getCityV6();
+					String ip = anIp.getIp();
+					surveyAnswer.setCity(city);
+					surveyAnswer.setIpAddr(ip);
+				}
+				EsAnTime anTime = answerCommon.getAnTime();
+				if (anTime!=null) {
+					Float totalTime = anTime.getTotalTime();
+					Date bgDate = anTime.getBgAnDate();
+					Date endDate = anTime.getEndAnDate();
+					surveyAnswer.setBgAnDate(bgDate);
+					surveyAnswer.setEndAnDate(endDate);
+					surveyAnswer.setTotalTime(totalTime);
+				}
+				EsAnState anState = answerCommon.getAnState();
+				if (anState!=null) {
+					surveyAnswer.setIsEffective(anState.getIsEff());
+					surveyAnswer.setHandleState(anState.getHandleState());
+				}
+				// 完整json
+				SurveyAnswerJson surveyAnswerJson = new SurveyAnswerJson();
+				String newAnswerJson = JSON.toJSONString(dwEsSurveyAnswer);
+				surveyAnswerJson.setAnswerJson(newAnswerJson);
+				surveyAnswerJson.setSurveyId(surveyId);
+				surveyAnswerJson.setJsonVersion(8);
+				surveyAnswerJson.setCreateDate(new Date());
+				surveyAnswerDao.saveAnswer(surveyAnswer, surveyAnswerJson);
+				dwEsSurveyAnswer.getAnswerCommon().setAnswerId(surveyAnswer.getId());
+				return surveyAnswer;
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

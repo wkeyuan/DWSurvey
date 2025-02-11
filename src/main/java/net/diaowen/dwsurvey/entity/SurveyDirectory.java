@@ -63,6 +63,9 @@ public class SurveyDirectory extends IdEntity{
 	private String htmlPath;
 	private String jsonPath;
 
+	// survey=问卷调查，exam=在线考试，vote=投票评选，satisfaction=满意度调查，eval=在线测评，360eval=360测评
+	private String surveyType;
+
 	public String getParentId() {
 		return parentId;
 	}
@@ -246,6 +249,13 @@ public class SurveyDirectory extends IdEntity{
 		this.excerptNum = excerptNum;
 	}
 
+	public String getSurveyType() {
+		return surveyType;
+	}
+
+	public void setSurveyType(String surveyType) {
+		this.surveyType = surveyType;
+	}
 
 	//用户名
 	private String userName;
@@ -277,4 +287,13 @@ public class SurveyDirectory extends IdEntity{
 		this.surveyAnswer = surveyAnswer;
 	}
 
+	private SurveyJson surveyJson;
+	@Transient
+	public SurveyJson getSurveyJson() {
+		return surveyJson;
+	}
+
+	public void setSurveyJson(SurveyJson surveyJson) {
+		this.surveyJson = surveyJson;
+	}
 }

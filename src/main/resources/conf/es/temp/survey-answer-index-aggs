@@ -1,0 +1,173 @@
+PUT dwsurvey_answer_index_aggs
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 3,
+      "number_of_replicas": 1
+    }
+  },
+  "mappings": {
+    "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "addr": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "province": {
+                "type": "keyword"
+              },
+              "city": {
+                "type": "keyword"
+              },
+              "county": {
+                    "type": "keyword"
+                 },
+                 "town": {
+                    "type": "keyword"
+                 },
+              "ip": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "anState": {
+            "properties": {
+              "anQuNum": {
+                "type": "integer"
+              },
+              "handleState": {
+                "type": "integer"
+              },
+              "isEff": {
+                "type": "integer"
+              }
+            }
+          },
+          "anTime": {
+            "properties": {
+              "bgAnDate": {
+                "type":   "date",
+                "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+              },
+              "endAnDate": {
+                "type":   "date",
+                "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+              },
+              "totalTime": {
+                "type": "long"
+              }
+            }
+          },
+          "anUser": {
+            "properties": {
+              "userId": {
+                "type": "keyword"
+              },
+              "userName": {
+                "type": "keyword"
+              }
+            }
+          },
+          "surveyDwId": {
+            "type": "keyword"
+          },
+          "answerDwId": {
+            "type": "keyword"
+          },
+          "surveyId": {
+            "type": "keyword"
+          },
+          "sid": {
+            "type": "keyword"
+          },
+          "sumScore": {
+            "type": "float"
+          }
+        }
+      },
+      "answerOptionDwId": {
+        "type": "keyword"
+      },
+      "answerNum": {
+        "type": "float"
+      },
+      "answerText": {
+        "analyzer": "ik_max_word",
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "quDwId": {
+        "type": "keyword"
+      },
+      "quType": {
+        "type": "keyword"
+      },
+      "relateDwIds": {
+        "type": "keyword"
+      },
+      "relateAnswerResponseId": {
+        "type": "keyword"
+      },
+      "esAnMatrixRadio": {
+        "properties": {
+          "rowDwId": {
+            "type": "keyword"
+          },
+          "colDwId": {
+            "type": "keyword"
+          },
+          "rowAnScore": {
+            "type": "float"
+          }
+        }
+      },
+      "esAnMatrixCheckbox": {
+        "properties": {
+          "rowDwId": {
+            "type": "keyword"
+          },
+          "rowAnCheckboxs": {
+            "properties": {
+              "optionDwId": {
+                "type": "keyword"
+              },
+              "otherText": {
+                "analyzer": "ik_max_word",
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "rowAnScore": {
+            "type": "float"
+          }
+      }
+      }
+    }
+  }
+}

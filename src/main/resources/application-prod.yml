@@ -1,29 +1,52 @@
 dwsurvey:
   site: 'local'
   web:
-    file-path: diaowen/file/
+    file-path: dwfile/dwsurvey/
     static-type: static
-    site-url: http://localhost:8080
-    resource-url: http://localhost:8080
+    site-url: https://pro.surveyform.cn
+    resource-url: https://pro.surveyform.cn
     #    site-url: http://ent82.surveyform.cn
     info:
       site-name: 调问网
-      site-url: http://www.diaowen.net
+      site-url: https://www.diaowen.net
       site-icp: 京ICP备13050030号-3
       site-mail: service@diaowen.net
-      site-phone: 18888888888
+      site-phone: 158 0152 6771
+    login-register:
+      login:
+        wx-login: false
+        phone-login: true
+        pwd-login: true
+      register: true
+  sms:
+    code-open: false
+    sendcloud:
+      smsUser:
+      smsKey:
   weixin:
+    open: false
     app-id: xxx
     app-secret: xxx
     server:
       token: xxx
       encodingAESKey:
-  version:
-    info: DWSurvey OSS V5.4.0 Boot
-    number: OSS V5.4.0
-    built: 2023/04/15
+  dw-open: # 预留配置
+    api:
+      status: test # test=开发测试模式，不进行API验证；prod=生产模式；验证签名，disable=关闭API功能
+      timestamp: 30 # 签名有效期
+  file-storage:
+    prefix:  #路径前缀，方便给所有资源加上统一的路径，如：/dws-storage
+    type: local #存储方式 local=本地存储（会存储在dwsurvey.web.file-path），yun=使用云存储（默认提供阿里云存储实现,注意配置OSS BUCKET 跨域访问）
+    aliyun:
+      endpoint: https://oss-cn-beijing.aliyuncs.com
+      access-keyid:
+      secret-accesskey:
+      bucket: # 注意打开云存方案的跨域权限
+        prefix: dwsurvey
+        web-pub: web-pub
+        web-pri: web-pri
 server:
-  port: 8080
+  port: 80
 
 spring:
   jackson:
@@ -36,7 +59,7 @@ spring:
 
   datasource:
     #type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/dwsurvey_21test?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/dwsurvey_pro?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456,.
     type: com.alibaba.druid.pool.DruidDataSource
@@ -98,3 +121,16 @@ logging:
     org:
       hibernate: ERROR
       apache: ERROR
+elasticsearch:
+  username: elastic
+  passwd: KWAkyvx0ewXTY3Cqv0H2
+  apikey: ==
+  hosts: 127.0.0.1:9200 # 多个IP逗号隔开
+  cert-name: http_ca.crt
+  #  后加的ES参数
+  #  协议方式，使用证书这里改成https
+  scheme: http
+  #  索引统一前缀，默认为空不加前缀, 如果加建议格式如：dw_
+  index-prev: dw_c_ww_a_
+  # 认证方式 noPwd, pwd, cert
+  security: noPwd

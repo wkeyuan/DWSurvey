@@ -31,11 +31,13 @@ public class HttpStatus {
 	public static HttpStatus SERVER_30006 = new HttpStatus(30006,"短信验证码不正确");
 	public static HttpStatus SERVER_30007 = new HttpStatus(30007,"短信验证码未生成");
 	public static HttpStatus SERVER_30008 = new HttpStatus(30008,"60秒内，不可以重复操作");
+	public static HttpStatus SERVER_30009 = new HttpStatus(30009,"图形验证码不正确");
 
 	/**
 	 * 数据问题
 	 */
 	public static HttpStatus SERVER_10001 = new HttpStatus(10001,"项目来源不存在");
+	public static HttpStatus SERVER_10002 = new HttpStatus(10002,"没有数据操作权限");
 
 	private HttpStatus(int statusCode, String message) {
 		this.statusCode = statusCode;

@@ -4,12 +4,14 @@ import net.diaowen.common.plugs.file.FileMagic;
 import net.diaowen.common.plugs.file.FileMagicUtils;
 import net.diaowen.common.plugs.file.TikaFileUtils;
 import net.diaowen.common.plugs.httpclient.HttpResult;
+import net.diaowen.common.plugs.storage.DwFileStorageManager;
 import net.diaowen.common.utils.RandomUtils;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.common.FileMeta;
 import net.diaowen.dwsurvey.common.UpFileResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,19 +32,22 @@ import java.util.*;
 @RequestMapping("/api/dwsurvey/up")
 public class UploadController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    /**
-     * 上传文件数据，安全存储
-     * /WebRoot/WEB-INF/upfile
-     */
+
+    @Autowired
+    private DwFileStorageManager fileStorageManager;
+
     @RequestMapping("/up-file.do")
     @ResponseBody
     public HttpResult uploadFile(HttpServletRequest request,HttpServletResponse response) {
         String savePath = File.separator+"file" + File.separator + "images"+ File.separator;
-
         return proUpfile((MultipartHttpServletRequest) request, savePath);
     }
 
 
+    /**
+     * 上传文件数据，安全存储
+     * /WebRoot/WEB-INF/upfile
+     */
     @RequestMapping("/up-file-wb.do")
     @ResponseBody
     public HttpResult uploadFileWb(HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -56,13 +61,7 @@ public class UploadController {
         HttpResult httpResult = HttpResult.FAILURE();
         MultipartHttpServletRequest multiRequest = request;
 //        String rootPath = multiRequest.getSession().getServletContext().getRealPath("/");
-        String rootPath = DWSurveyConfig.DWSURVEY_WEB_FILE_PATH;
-
         savePath = savePath + RandomUtils.randomStr(8,10) + File.separator;
-        File dirFile = new File(rootPath+savePath);
-        if  (!dirFile .exists()  && !dirFile .isDirectory()) {
-            dirFile.mkdirs();
-        }
 
         List<UpFileResult> upFileResults = new ArrayList<UpFileResult>();
         //创建一个通用的多部分解析器
@@ -84,13 +83,11 @@ public class UploadController {
                 //取得上传文件
                 MultipartFile file = multiRequest.getFile(iter.next());
                 if(file != null){
-
                     FileMagic fileMagic = FileMagicUtils.getFileMagic(file.getInputStream(),file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
                     if(!FileMagicUtils.isUserUpFileMagic(fileMagic)) {
                         logger.warn("不支持类型 {} {}", fileMagic, file.getOriginalFilename());
-                        return HttpResult.FAILURE_MSG("不支持类型或类型不一致，实际类型为"+ TikaFileUtils.getMimeType(file.getInputStream(),file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."))));
+                        return HttpResult.FAILURE_MSG("不支持类型或类型不一致，可能类型为"+ TikaFileUtils.getMimeType(file.getInputStream(),file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."))));
                     }
-
                     //取得当前上传文件的文件名称
                     String myFileName = file.getOriginalFilename();
                     //如果名称不为“”,说明该文件存在，否则说明该文件不存在
@@ -101,13 +98,14 @@ public class UploadController {
                         String newFileName = RandomUtils.randomStr(8,10)+ext;
                         //定义上传路径
 //                        String path = savePath + fileName;
-                        String path = savePath + newFileName;
-                        File localFile = new File(rootPath+path);
-                        file.transferTo(localFile);
-//                        files.put(fileName, path);
+//                        String path = savePath + newFileName;
+//                        File localFile = new File(rootPath+path);
+//                        file.transferTo(localFile);
+
+                        String filePath = fileStorageManager.saveFile(file,savePath,newFileName);
                         UpFileResult upFileResult = new UpFileResult();
                         upFileResult.setFilename(fileName);
-                        upFileResult.setLocation(path);
+                        upFileResult.setLocation(filePath);
                         upFileResults.add(upFileResult);
                     }
                 }
@@ -143,8 +141,8 @@ public class UploadController {
      * @return LinkedList<FileMeta> as json format
      ****************************************************/
     @RequestMapping(value="/ajax/upload.do",method = {RequestMethod.POST})
-    public @ResponseBody
-    LinkedList<FileMeta> upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    public LinkedList<FileMeta> upload(MultipartHttpServletRequest request, HttpServletResponse response) {
         LinkedList<FileMeta> files = new LinkedList<FileMeta>();
         FileMeta fileMeta = null;
         //创建目录
@@ -193,12 +191,12 @@ public class UploadController {
 
                 try {
 //                fileMeta.setBytes(mpf.getBytes());
-                    String filePath = savePath + newFileName;
-                    fileMeta.setFilePath(filePath);
+//                String filePath = savePath + newFileName;
                     // copy file to local disk (make sure the path "e.g. D:/temp/files" exists)
-                    FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(rootPath+filePath));
-
-                } catch (IOException e) {
+//                FileCopyUtils.copy(mpf.getBytes(), new FileOutputStream(rootPath+filePath));
+                    String filePath = fileStorageManager.saveFile(mpf,savePath,newFileName);
+                    fileMeta.setFilePath(filePath);
+                } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
@@ -206,6 +204,7 @@ public class UploadController {
                 files.add(fileMeta);
             }
         }catch (Exception e){
+//            sb.append("{\"success\":\"false\",\"error\":\"上传失败\"}");
             e.printStackTrace();
         }
         // result will be like this
@@ -230,7 +229,6 @@ public class UploadController {
                 file.getOriginalFilename().lastIndexOf(".") + 1);
         return fileName.toString().trim() + "." + extName;
     }
-
 
 
 

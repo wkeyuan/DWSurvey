@@ -4,6 +4,21 @@ import net.diaowen.common.plugs.page.Page;
 
 public class ResultUtils {
 
+    public static <T> Page<T> getPageByPage(Page page){
+        Integer current = page.getPageNo();
+        if(current==null){
+            current=1;
+        }
+        Integer pageSize = page.getPageSize();
+        if(pageSize==null){
+            pageSize = 10;
+        }
+        Page<T> newPage = new Page<T>();
+        newPage.setPageNo(current);
+        newPage.setPageSize(pageSize);
+        return newPage;
+    }
+
     public static <T> Page<T> getPageByPageResult(PageResult<T> pageResult){
         Page<T> page = new Page<T>();
         Integer current = pageResult.getCurrent();

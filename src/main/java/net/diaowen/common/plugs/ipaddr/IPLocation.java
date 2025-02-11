@@ -7,6 +7,12 @@ public class IPLocation {
     private String province;
     //IP对应的市
     private String city;
+    //区县
+    private String county;
+    //乡
+    private String town;
+    //街道
+    private String village;
     //解析后完整地址
     private String address;
 
@@ -51,5 +57,29 @@ public class IPLocation {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public String getVillage() {
+        return village;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
     }
 }

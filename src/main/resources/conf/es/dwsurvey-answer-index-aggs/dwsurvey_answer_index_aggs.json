@@ -1,0 +1,373 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 3,
+      "number_of_replicas": 1
+    }
+  },
+  "mappings": {
+    "properties": {
+      "answerCommon": {
+        "properties": {
+          "anIp": {
+            "properties": {
+              "addr": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                },
+                "analyzer": "ik_max_word"
+              },
+              "city": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                },
+                "analyzer": "ik_max_word"
+              },
+              "cityV6": {
+                "type": "keyword"
+              },
+              "county": {
+                "type": "keyword"
+              },
+              "ip": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "province": {
+                "type": "keyword"
+              },
+              "town": {
+                "type": "keyword"
+              }
+            }
+          },
+          "anSource": {
+            "properties": {
+              "anClient": {
+                "type": "keyword"
+              },
+              "bro": {
+                "type": "keyword"
+              },
+              "dbSource": {
+                "type": "keyword"
+              },
+              "pcOrM": {
+                "type": "keyword"
+              },
+              "pcm": {
+                "type": "keyword"
+              },
+              "sys": {
+                "type": "keyword"
+              },
+              "userAgentString": {
+                "type": "text",
+                "analyzer": "standard"
+              }
+            }
+          },
+          "anState": {
+            "properties": {
+              "anQuNum": {
+                "type": "integer"
+              },
+              "handleState": {
+                "type": "integer"
+              },
+              "isEff": {
+                "type": "integer"
+              }
+            }
+          },
+          "anTime": {
+            "properties": {
+              "bgAnDate": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+              },
+              "endAnDate": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+              },
+              "totalTime": {
+                "type": "long"
+              }
+            }
+          },
+          "anUser": {
+            "properties": {
+              "contactsEsId": {
+                "type": "keyword"
+              },
+              "dwEsContacts": {
+                "properties": {
+                  "adminUserId": {
+                    "type": "keyword"
+                  },
+                  "createDate": {
+                    "type": "date",
+                    "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+                  },
+                  "customAttrs": {
+                    "properties": {
+                      "attrName": {
+                        "type": "keyword"
+                      },
+                      "attrValue": {
+                        "type": "keyword"
+                      }
+                    }
+                  },
+                  "dwContactsDepts": {
+                    "properties": {
+                      "deptCode": {
+                        "type": "keyword"
+                      },
+                      "deptId": {
+                        "type": "keyword"
+                      },
+                      "deptName": {
+                        "type": "keyword"
+                      }
+                    }
+                  },
+                  "dwContactsGroups": {
+                    "properties": {
+                      "groupId": {
+                        "type": "keyword"
+                      },
+                      "groupName": {
+                        "type": "keyword"
+                      }
+                    }
+                  },
+                  "dwContactsJobTitles": {
+                    "properties": {
+                      "roleId": {
+                        "type": "keyword"
+                      },
+                      "roleName": {
+                        "type": "keyword"
+                      }
+                    }
+                  },
+                  "dwContactsTags": {
+                    "properties": {
+                      "tagId": {
+                        "type": "keyword"
+                      },
+                      "tagName": {
+                        "type": "keyword"
+                      }
+                    }
+                  },
+                  "esId": {
+                    "type": "keyword"
+                  },
+                  "initPwd": {
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "loginName": {
+                    "type": "keyword"
+                  },
+                  "mail": {
+                    "type": "keyword"
+                  },
+                  "phone": {
+                    "type": "keyword"
+                  },
+                  "repeatData": {
+                    "type": "boolean"
+                  },
+                  "teamId": {
+                    "type": "keyword"
+                  },
+                  "uname": {
+                    "type": "keyword"
+                  },
+                  "userCheck": {
+                    "type": "long"
+                  },
+                  "userId": {
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "wxOpenId": {
+                    "type": "keyword"
+                  }
+                }
+              },
+              "relateContactEsId": {
+                "type": "keyword"
+              },
+              "userId": {
+                "type": "keyword"
+              },
+              "userName": {
+                "type": "keyword"
+              }
+            }
+          },
+          "answerId": {
+            "type": "keyword"
+          },
+          "answerDwId": {
+            "type": "keyword"
+          },
+          "isDelete": {
+            "type": "long"
+          },
+          "sid": {
+            "type": "keyword"
+          },
+          "sumScore": {
+            "type": "float"
+          },
+          "surveyDwId": {
+            "type": "keyword"
+          },
+          "surveyId": {
+            "type": "keyword"
+          }
+        }
+      },
+      "answerNum": {
+        "type": "float"
+      },
+      "answerOptionDwId": {
+        "type": "keyword"
+      },
+      "answerText": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        },
+        "analyzer": "ik_max_word"
+      },
+      "esAnCascadeAggs": {
+        "properties": {
+          "level0Value": {
+            "type": "keyword"
+          },
+          "level1Value": {
+            "type": "keyword"
+          },
+          "level2Value": {
+            "type": "keyword"
+          },
+          "level3Value": {
+            "type": "keyword"
+          },
+          "level4Value": {
+            "type": "keyword"
+          },
+          "level5Value": {
+            "type": "keyword"
+          },
+          "level6Value": {
+            "type": "keyword"
+          },
+          "level7Value": {
+            "type": "keyword"
+          },
+          "level8Value": {
+            "type": "keyword"
+          },
+          "level9Value": {
+            "type": "keyword"
+          }
+        }
+      },
+      "esAnMatrixCheckbox": {
+        "properties": {
+          "rowAnCheckboxs": {
+            "properties": {
+              "optionDwId": {
+                "type": "keyword"
+              },
+              "otherText": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                },
+                "analyzer": "ik_max_word"
+              }
+            }
+          },
+          "rowAnScore": {
+            "type": "float"
+          },
+          "rowDwId": {
+            "type": "keyword"
+          }
+        }
+      },
+      "esAnMatrixRadio": {
+        "properties": {
+          "colDwId": {
+            "type": "keyword"
+          },
+          "rowAnScore": {
+            "type": "float"
+          },
+          "rowDwId": {
+            "type": "keyword"
+          }
+        }
+      },
+      "esAnWordAgg": {
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "word": {
+            "type": "keyword"
+          }
+        }
+      },
+      "quDwId": {
+        "type": "keyword"
+      },
+      "quType": {
+        "type": "keyword"
+      },
+      "relateAnswerResponseId": {
+        "type": "keyword"
+      },
+      "relateDwIds": {
+        "type": "keyword"
+      }
+    }
+  }
+}

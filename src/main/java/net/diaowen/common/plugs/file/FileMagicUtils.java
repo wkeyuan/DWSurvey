@@ -21,7 +21,7 @@ public class FileMagicUtils {
         return new FileMagic[]{FileMagic.PNG,FileMagic.JPG,FileMagic.JPEG,FileMagic.GIF,
                 FileMagic.TXT,FileMagic.PDF,
                 FileMagic.XLSX,FileMagic.XLS,FileMagic.DOC,FileMagic.DOCX,FileMagic.PPT,FileMagic.PPTX,
-                FileMagic.ZIP,FileMagic.RAR,FileMagic.Z7Z};
+                FileMagic.ZIP,FileMagic.RAR,FileMagic.Z7Z,FileMagic.OLE2};
     }
 
     //根据文件获取对应的文件类型

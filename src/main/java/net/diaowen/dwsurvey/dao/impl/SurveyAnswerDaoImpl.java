@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,16 @@ import java.util.Map;
 @Repository
 public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> implements SurveyAnswerDao {
 
+
+	@Transactional
+	@Override
+	public void saveAnswer(SurveyAnswer surveyAnswer, SurveyAnswerJson surveyAnswerJson) {
+		Session session=this.getSession();
+		surveyAnswer.setEndAnDate(new Date());
+		session.save(surveyAnswer);
+		surveyAnswerJson.setAnswerId(surveyAnswer.getId());
+		session.save(surveyAnswerJson);
+	}
 
 	@Override
 	public void saveAnswer(SurveyAnswer surveyAnswer,
@@ -467,16 +478,20 @@ public class SurveyAnswerDaoImpl extends BaseDaoImpl<SurveyAnswer, String> imple
 
 	@Override
 	public Long countResult(String surveyId) {
-		Criterion cri2= Restrictions.lt("handleState", 3);
-		Criterion cri3=Restrictions.eq("isEffective", 1);
-		Criteria c = null;
-		if(surveyId!=null){
-			Criterion cri1 = Restrictions.eq("surveyId",surveyId);
-			c = createCriteria(cri1,cri2,cri3);
-		}else{
-			c = createCriteria(cri2,cri3);
+		if (surveyId!=null) {
+			Criterion cri2= Restrictions.lt("handleState", 3);
+			Criterion cri3=Restrictions.eq("isEffective", 1);
+			Criteria c = null;
+			if(surveyId!=null){
+				Criterion cri1 = Restrictions.eq("surveyId",surveyId);
+				c = createCriteria(cri1,cri2,cri3);
+			}else{
+				c = createCriteria(cri2,cri3);
+			}
+			return countCriteriaResult(c);
+		} else {
+			return countHqlResult("select count(*) from SurveyAnswer");
 		}
-		return countCriteriaResult(c);
 	}
 
 }

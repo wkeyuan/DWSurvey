@@ -30,6 +30,13 @@ public class QuScore extends IdEntity {
 	// 是否显示 0不显示
 	private Integer visibility = 1;
 
+	public QuScore(){
+
+	}
+	public QuScore(String optionTitle, String optionName){
+		this.optionTitle = optionTitle;
+		this.optionName = optionName;
+	}
 	public String getQuId() {
 		return quId;
 	}

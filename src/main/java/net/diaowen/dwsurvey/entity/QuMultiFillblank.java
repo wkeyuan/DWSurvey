@@ -31,6 +31,13 @@ public class QuMultiFillblank extends IdEntity{
 	//是否显示  0不显示
 	private Integer visibility=1;
 
+	public QuMultiFillblank(){
+
+	}
+	public QuMultiFillblank(String optionTitle, String optionName){
+		this.optionTitle = optionTitle;
+		this.optionName = optionName;
+	}
 	public String getQuId() {
 		return quId;
 	}
