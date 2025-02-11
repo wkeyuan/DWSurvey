@@ -382,7 +382,7 @@ public class RunExcelUtil extends Thread {
                                     for (EsAnFbk esAnFbk: rowAnCheckboxs) {
                                         String anQuColId = esAnFbk.getOptionDwId();
                                         if (quChenRowId.equals(anQuRowId) && quChenColumnId.equals(anQuColId)) {
-                                            answerOptionName = colName;
+                                            answerOptionName = esAnFbk.getAnswer();
                                             break;
                                         }
                                     }
