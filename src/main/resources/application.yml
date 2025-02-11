@@ -12,8 +12,8 @@ dwsurvey:
     api: https://www.surveyform.cn
     name: 社区版
     name-code: OSS
-    built: 250209
-    code: V6.12.0
+    built: 20250211
+    code: V6.13.0
     # OSS-V6.11-241118
     number: ${dwsurvey.version.name-code}-${dwsurvey.version.code}-${dwsurvey.version.built}
     # DWSurvey-OSS-V6.11-241118
