@@ -62,7 +62,7 @@ public class DwAnswerDataController {
      */
     @RequestMapping(value = "/list.do",method = RequestMethod.GET)
     @ResponseBody
-    public Page survey(HttpServletRequest request, Page<DwEsSurveyAnswer> page, String surveyId, String ipAddr, String city, Integer isEffective, Integer handleState, String anUserKey, Integer saveStatus) {
+    public Page survey(HttpServletRequest request, Page<DwEsSurveyAnswer> page, String surveyId, String ipAddr, String city, Integer isEffective, Integer handleState, String anUserKey, Integer saveStatus, String bgAnDate, String endAnDate) {
         UserAgentUtils.userAgent(request);
         User user = accountManager.getCurUser();
         if(user!=null){
@@ -77,16 +77,21 @@ public class DwAnswerDataController {
                 for (SurveyAnswer surveyAnswer:surveyAnswers) {
                     String answerId = surveyAnswer.getId();
                     SurveyAnswerJson surveyAnswerJson = surveyAnswerJsonManager.findByAnswerId(answerId);
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    try {
-                        DwEsSurveyAnswer dwEsSurveyAnswer = objectMapper.readValue(surveyAnswerJson.getAnswerJson(), DwEsSurveyAnswer.class);
-                        dwEsSurveyAnswer.getAnswerCommon().setAnswerId(answerId);
-                        dwEsSurveyAnswers.add(dwEsSurveyAnswer);
-                    } catch (JsonProcessingException e) {
-                        logger.error("dwEsSurveyAnswer 转换错误 {}", e.getMessage());
+                    if (surveyAnswerJson!=null) {
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        try {
+                            DwEsSurveyAnswer dwEsSurveyAnswer = objectMapper.readValue(surveyAnswerJson.getAnswerJson(), DwEsSurveyAnswer.class);
+                            dwEsSurveyAnswer.getAnswerCommon().setAnswerId(answerId);
+                            dwEsSurveyAnswers.add(dwEsSurveyAnswer);
+                        } catch (JsonProcessingException e) {
+                            logger.error("dwEsSurveyAnswer 转换错误 {}", e.getMessage());
+                        }
                     }
                 }
                 page.setResult(dwEsSurveyAnswers);
+                if (dwEsSurveyAnswers.size()<=0) {
+                    return surveyJsonBySurveyId(page, surveyId, bgAnDate, endAnDate, ipAddr, city);
+                }
             }
         }
         return page;
@@ -96,13 +101,17 @@ public class DwAnswerDataController {
     @ResponseBody
     public Page<DwEsSurveyAnswer> surveyJsonBySurveyId(Page<DwEsSurveyAnswer> page, String surveyId, String bgAnDate, String endAnDate, String ip, String city){
         User user = accountManager.getCurUser();
-        if(user!=null){
-            SurveyDirectory survey=surveyDirectoryManager.get(surveyId);
-            if(survey!=null){
-                HttpResult httpResult = surveyDirectoryManager.isSurveyRoleOrPerm(user.getId(),survey.getUserId(), PermissionCode.HT_SURVEY_DATA_ANSWER_LIST);
-                if(httpResult!=null) return page;
-                page = dwAnswerEsClientService.findPageByFromSize(page, surveyId, bgAnDate, endAnDate, ip, city, null, 0);
+        try{
+            if(user!=null){
+                SurveyDirectory survey=surveyDirectoryManager.get(surveyId);
+                if(survey!=null){
+                    HttpResult httpResult = surveyDirectoryManager.isSurveyRoleOrPerm(user.getId(),survey.getUserId(), PermissionCode.HT_SURVEY_DATA_ANSWER_LIST);
+                    if(httpResult!=null) return page;
+                    page = dwAnswerEsClientService.findPageByFromSize(page, surveyId, bgAnDate, endAnDate, ip, city, null, 0);
+                }
             }
+        }catch (Exception e){
+            logger.error("list-es.do {}", e.getMessage());
         }
         return page;
     }
