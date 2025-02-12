@@ -1,30 +1,27 @@
 package net.diaowen.dwsurvey.config;
 
 import net.diaowen.common.plugs.security.*;
-import net.diaowen.common.plugs.security.filter.FormAuthenticationWithLockFilter;
-import net.diaowen.common.plugs.security.filter.MyRolesAuthorizationFilter;
-import net.diaowen.common.plugs.security.filter.MyUserFilter;
-import net.diaowen.common.plugs.security.filter.RolesOrAuthorizationFilter;
+import net.diaowen.common.plugs.security.cache.ShiroCacheManager;
+import net.diaowen.common.plugs.security.token.JwtDefaultSubjectFactory;
+import net.diaowen.common.plugs.security.token.jwt.JwtFilter;
+import net.diaowen.common.plugs.security.token.jwt.JwtRealm;
+import net.diaowen.common.plugs.security.token.redis.RedisTokenFilter;
+import net.diaowen.common.plugs.security.token.redis.RedisTokenRealm;
 import net.diaowen.dwsurvey.common.PermissionCode;
-import org.apache.shiro.cache.MemoryConstrainedCacheManager;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.spring.LifecycleBeanPostProcessor;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
+import org.apache.shiro.mgt.SubjectFactory;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
-import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -32,24 +29,92 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
-//@ImportResource(locations= {"classpath:conf/security/applicationContext-shiro.xml"})
+////@ImportResource(locations= {"classpath:conf/security/applicationContext-shiro.xml"})
 public class ShiroConfig {
 
-
+    /*
+     * a. 告诉shiro不要使用默认的DefaultSubject创建对象，因为不能创建Session
+     * */
+    @Bean
+    public SubjectFactory subjectFactory() {
+        return new JwtDefaultSubjectFactory();
+    }
 
     @Bean
-    public ShiroDbRealm myShiroRealm() {
-        ShiroDbRealm customRealm = new ShiroDbRealm();
+    public Realm myShiroRealm() {
+        Realm customRealm = new JwtRealm();
         return customRealm;
+    }
+
+    @Bean
+    public Realm redisTokenRealm() {
+        Realm redisTokenRealm = new RedisTokenRealm();
+        return redisTokenRealm;
+    }
+
+    @Bean
+    public Realm shiroDbRealm() {
+        ShiroDbRealm shiroDbRealm = new ShiroDbRealm();
+        return shiroDbRealm;
+    }
+
+
+
+    /**
+     * cacheManager 缓存 redis实现
+     * 使用的是shiro-redis开源插件
+     */
+    @Bean
+    public ShiroCacheManager redisCacheManager() {
+        ShiroCacheManager redisCacheManager = new ShiroCacheManager();
+        return redisCacheManager;
     }
 
     //权限管理，配置主要是Realm的管理认证  SecurityManager
     @Bean
     public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
-        securityManager.setRememberMeManager(rememberMeManager());
+//        securityManager.setRealm(myShiroRealm());
+        securityManager.setRealm(redisTokenRealm());
+        /*List<Realm> realmList = new ArrayList<>();
+        realmList.add(myShiroRealm());
+        realmList.add(shiroDbRealm());
+        securityManager.setRealms(realmList);*/
+        //禁止Subject的getSession方法
+        securityManager.setCacheManager(redisCacheManager());
+        securityManager.setSubjectFactory(subjectFactory());
+       /* SubjectDAO subjectDAO = securityManager.getSubjectDAO();
+        if(subjectDAO instanceof DefaultSubjectDAO){
+            System.out.println("subjectDAO--");
+            DefaultSubjectDAO defaultSubjectDAO = (DefaultSubjectDAO) subjectDAO;
+            SessionStorageEvaluator sessionStorageEvaluator = defaultSubjectDAO.getSessionStorageEvaluator();
+            if (sessionStorageEvaluator instanceof DefaultSessionStorageEvaluator){
+                System.out.println("sessionStorageEvaluator--");
+                DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) sessionStorageEvaluator;
+                defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+            }
+        }*/
+        // 关闭 ShiroDAO 功能
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
+        // 不需要将 Shiro Session 中的东西存到任何地方（包括 Http Session 中）
+        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
+        securityManager.setSubjectDAO(subjectDAO);
+
         return securityManager;
+    }
+
+    @Bean
+    public JwtFilter jwtFilter() {
+        JwtFilter jwtFilter = new JwtFilter();
+        return jwtFilter;
+    }
+
+    @Bean
+    public RedisTokenFilter redisTokenFilter() {
+        RedisTokenFilter redisTokenFilter = new RedisTokenFilter();
+        return redisTokenFilter;
     }
 
     @Bean
@@ -61,7 +126,6 @@ public class ShiroConfig {
         formAuthFilter.setRememberMeParam("rememberMe");
         return formAuthFilter;
     }
-
 
     @Bean
     public UserFilter userAuthFilter() {
@@ -95,7 +159,7 @@ public class ShiroConfig {
     }
 
     private String rolesOrPermsValue(String rolesOrPerms){
-        return "rolesOrPerms["+ ShiroAuthorizationUtils.getQtRoleArrayStr(","+rolesOrPerms)+"]";
+        return "rolesOrPerms["+ShiroAuthorizationUtils.getQtRoleArrayStr(","+rolesOrPerms)+"]";
     }
 
     private String rolesOrPermsValue(String[] rolesOrPerms){
@@ -117,15 +181,18 @@ public class ShiroConfig {
             buf.append(",");
             buf.append(roleOrPerm);
         }
-        return "rolesOrPerms["+ ShiroAuthorizationUtils.getHtRoleArrayStr(buf.toString())+"]";
+        return "rolesOrPerms["+ShiroAuthorizationUtils.getHtRoleArrayStr(buf.toString())+"]";
     }
+
     //Filter工厂，设置对应的过滤条件和跳转条件
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
+
         Map<String, String> map = new LinkedHashMap<>();
+        map.put("/jwt/**", "jwtAuthc");
         //登出
         map.put("/logout", "logout");
         //对所有用户认证
@@ -137,7 +204,7 @@ public class ShiroConfig {
         map.put("/ic/**", "user");
         map.put("/design/**", "user");
         map.put("/da/**", "user");
-        map.put("/api/dwsurvey/app/**", "user");
+        map.put("/api/dwsurvey/app/**", "jwtAuthc");
 
         /**前台权限**/
         //模板权限
@@ -174,8 +241,8 @@ public class ShiroConfig {
 
 //        map.put("/api/dwsurvey/admin/**", "roles[SUPER_ADMIN]");
         /*** 后台权限 ***/
-        map.put("/api/dwsurvey/admin/**", "user");
-        map.put("/api/dwsurvey/admin/**", rolesOrPermsValueHt(PermissionCode.HT_MANAGER_MENU));//必须先具有后台菜单权限才能进一步判断后台权限
+        map.put("/api/dwsurvey/admin/**", "jwtAuthc");
+//        map.put("/api/dwsurvey/admin/**", rolesOrPermsValueHt(PermissionCode.HT_MANAGER_MENU));//必须先具有后台菜单权限才能进一步判断后台权限
         map.put("/api/dwsurvey/admin/analysis.do", rolesOrPermsValueHt(PermissionCode.HT_DASHBOARD_ANALYSIS));
 //        map.put("/api/dwsurvey/admin/monitor.do", rolesOrPermsValue(PermissionCode.HT_DASHBOARD_MONITOR));
         //问卷部分
@@ -226,6 +293,7 @@ public class ShiroConfig {
 
         map.put("/sy/**", "roles[admin]");
 
+
         //登录
         shiroFilterFactoryBean.setLoginUrl("/login.do");
         //首页
@@ -235,6 +303,9 @@ public class ShiroConfig {
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         Map<String, Filter> filters = new HashMap<>();
+
+//        filters.put("jwtAuthc", jwtFilter());
+        filters.put("jwtAuthc", redisTokenFilter());
         filters.put("authc", formAuthFilter());
         filters.put("user", userAuthFilter());
         filters.put("roles", rolesAuthFilter());

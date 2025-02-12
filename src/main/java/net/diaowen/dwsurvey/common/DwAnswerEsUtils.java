@@ -103,11 +103,10 @@ public class DwAnswerEsUtils {
                     esAnQu.setQuAnScore(quAnScoreNum);
                     surveyAnScoreNum+=quAnScoreNum;
                 }
-                logger.info("quAnScoreNum {}", quAnScoreNum);
             }
         }
         dwEsSurveyAnswer.getAnswerCommon().setSumScore(surveyAnScoreNum);
-        logger.info("setSumScore {}", surveyAnScoreNum);
+        logger.debug("setSumScore {}", surveyAnScoreNum);
     }
 
     public static JsonNode jsonNodeQu (JsonNode jsonNodeQus, String quId) {

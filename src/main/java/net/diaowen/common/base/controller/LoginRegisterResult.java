@@ -8,6 +8,7 @@ public class LoginRegisterResult {
     private String status;
     private String type;
     private String[] currentAuthority;
+    private String token;
     private HttpResult httpResult;
 
     public String getStatus() {
@@ -32,6 +33,14 @@ public class LoginRegisterResult {
 
     public void setCurrentAuthority(String[] currentAuthority) {
         this.currentAuthority = currentAuthority;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public HttpResult getHttpResult() {
@@ -88,6 +97,12 @@ public class LoginRegisterResult {
     public static LoginRegisterResult SUCCESS(String[] currentAuthority, HttpResult httpResult){
         LoginRegisterResult loginRegisterResult = SUCCESS(currentAuthority);
         loginRegisterResult.setHttpResult(httpResult);
+        return loginRegisterResult;
+    }
+
+    public static LoginRegisterResult SUCCESS(String token, String[] currentAuthority, HttpResult httpResult){
+        LoginRegisterResult loginRegisterResult = SUCCESS(currentAuthority,httpResult);
+        loginRegisterResult.setToken(token);
         return loginRegisterResult;
     }
 }

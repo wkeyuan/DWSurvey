@@ -5,7 +5,7 @@ import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.httpclient.HttpStatus;
 import net.diaowen.common.plugs.ipaddr.IPService;
-import net.diaowen.common.plugs.security.filter.FormAuthenticationWithLockFilter;
+import net.diaowen.common.plugs.security.FormAuthenticationWithLockFilter;
 import net.diaowen.common.plugs.sms.SmsService;
 import net.diaowen.common.plugs.weixin.WeixinMpService;
 import net.diaowen.common.utils.RandomUtils;

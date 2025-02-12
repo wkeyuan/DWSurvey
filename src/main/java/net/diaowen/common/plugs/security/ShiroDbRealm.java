@@ -18,29 +18,19 @@
  */
 package net.diaowen.common.plugs.security;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
-import net.diaowen.common.utils.security.DigestUtils;
 import net.diaowen.dwsurvey.common.RoleCode;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
@@ -84,7 +74,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		if(user!=null){
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			if ("1".equals(user.getId())) {
-				info.addRole(RoleCode.DWSURVEY_SUPER_ADMIN);
+				info.addRole(RoleCode.SUPER_ADMIN);
 			}
 			return info;
 		}

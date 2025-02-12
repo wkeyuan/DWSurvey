@@ -140,12 +140,12 @@ public class ShiroAuthorizationUtils {
     }
 
     public static String[] superAdmin(){
-        return new String[]{RoleCode.SUPER_ADMIN,RoleCode.DWSURVEY_SUPER_ADMIN};
+        return new String[]{RoleCode.SUPER_ADMIN};
     }
 
 
     public static String[] sysSurveyDataAdminRoles(){
-        return new String[]{RoleCode.ENT_ADMIN,RoleCode.SUPER_ADMIN,RoleCode.DWSURVEY_SUPER_ADMIN};
+        return new String[]{RoleCode.ENT_ADMIN,RoleCode.SUPER_ADMIN};
     }
 
     public static String[] deptSurveyDataAdminRoles(){
@@ -179,15 +179,15 @@ public class ShiroAuthorizationUtils {
      * @return
      */
     public static String[] defaultQTAdminRoles(){
-        return new String[]{RoleCode.PROJECT_ADMIN,RoleCode.DEPT_ADMIN,RoleCode.ENT_ADMIN,RoleCode.SUPER_ADMIN, RoleCode.DWSURVEY_SUPER_ADMIN};
+        return new String[]{RoleCode.PROJECT_ADMIN,RoleCode.DEPT_ADMIN,RoleCode.ENT_ADMIN,RoleCode.SUPER_ADMIN};
     }
 
     public static String[] defaultHTAdminRoles(){
-        return new String[]{RoleCode.DEPT_ADMIN,RoleCode.ENT_ADMIN,RoleCode.SUPER_ADMIN, RoleCode.DWSURVEY_SUPER_ADMIN};
+        return new String[]{RoleCode.DEPT_ADMIN,RoleCode.ENT_ADMIN,RoleCode.SUPER_ADMIN};
     }
 
     public static String getQtRoleArrayStr(String rolesOrPermsCode){
-        String temp = RoleCode.PROJECT_ADMIN+","+RoleCode.DEPT_ADMIN+","+RoleCode.ENT_ADMIN+","+RoleCode.SUPER_ADMIN+","+RoleCode.DWSURVEY_SUPER_ADMIN;
+        String temp = RoleCode.PROJECT_ADMIN+","+RoleCode.DEPT_ADMIN+","+RoleCode.ENT_ADMIN+","+RoleCode.SUPER_ADMIN;
         if(rolesOrPermsCode!=null){
             return temp+rolesOrPermsCode;
         }
@@ -196,7 +196,7 @@ public class ShiroAuthorizationUtils {
 
 
     public static String getHtRoleArrayStr(String rolesOrPermsCode){
-        String temp = RoleCode.DEPT_ADMIN+","+RoleCode.ENT_ADMIN+","+RoleCode.SUPER_ADMIN+","+RoleCode.DWSURVEY_SUPER_ADMIN;
+        String temp = RoleCode.DEPT_ADMIN+","+RoleCode.ENT_ADMIN+","+RoleCode.SUPER_ADMIN;
         if(rolesOrPermsCode!=null){
             return temp+rolesOrPermsCode;
         }

@@ -5,7 +5,7 @@ import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.httpclient.PageResult;
 import net.diaowen.common.plugs.httpclient.ResultUtils;
 import net.diaowen.common.plugs.page.Page;
-import net.diaowen.common.plugs.security.filter.FormAuthenticationWithLockFilter;
+import net.diaowen.common.plugs.security.FormAuthenticationWithLockFilter;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;

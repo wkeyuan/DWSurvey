@@ -6,10 +6,6 @@ import net.diaowen.common.plugs.cache.redis.RedisManager;
 import net.diaowen.common.plugs.security.token.JwtToken;
 import net.diaowen.common.plugs.security.token.JwtUtils;
 import net.diaowen.dwsurvey.common.RoleCode;
-import net.diaowen.dwsurvey.entity.DwRole;
-import net.diaowen.dwsurvey.entity.DwRolePerm;
-import net.diaowen.dwsurvey.entity.DwUserRole;
-import net.diaowen.dwsurvey.service.DwUserRoleManager;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -20,8 +16,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 /**
  * JWT TOKEN 方案认证类
  */
@@ -29,8 +23,6 @@ public class JwtRealm extends AuthorizingRealm {
 
     @Autowired
     protected AccountManager accountManager;
-    @Autowired
-    private DwUserRoleManager userRoleManager;
     @Autowired
     private RedisManager redisManager;
 
@@ -80,16 +72,6 @@ public class JwtRealm extends AuthorizingRealm {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
             if ("1".equals(user.getId())) {
                 info.addRole(RoleCode.SUPER_ADMIN);
-            }
-            //初始化用户角色及权限
-            List<DwUserRole> dwUserRoleList = userRoleManager.findByUserId(user.getId());
-            for (DwUserRole dwUserRole:dwUserRoleList) {
-                DwRole dwRole = dwUserRole.getDwRole();
-                List<DwRolePerm> dwRolePerms = dwRole.getDwRolePerms();
-                info.addRole(dwRole.getRoleCode());
-                for (DwRolePerm dwRolePerm:dwRolePerms) {
-                    info.addStringPermission(dwRolePerm.getPermCode());
-                }
             }
             return info;
         }
