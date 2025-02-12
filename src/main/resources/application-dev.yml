@@ -132,6 +132,17 @@ spring:
         cache:
           use_second_level_cache: false
           use_query_cache: false
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        min-idle: 10
+        max-idle: 50
+        max-active: 200
+        max-wait: 3000
   main:
     allow-circular-references: true
   mvc:
