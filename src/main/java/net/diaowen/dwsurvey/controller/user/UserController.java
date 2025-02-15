@@ -1,11 +1,14 @@
 package net.diaowen.dwsurvey.controller.user;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,20 +24,23 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/api/dwsurvey/app/user")
+@Api(tags = "用户中心")
 public class UserController {
 
     @Autowired
     private AccountManager accountManager;
 
-    @RequestMapping("/currentUser.do")
+    @RequestMapping(value = "/currentUser.do",method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "获取当前登录用户")
     public HttpResult currentUser() throws Exception {
         User user=accountManager.getCurUser();
         return HttpResult.SUCCESS(user);
     }
 
-    @RequestMapping("/up-info.do")
+    @RequestMapping(value =  "/up-info.do", method = RequestMethod.POST)
     @ResponseBody
+    @ApiOperation(value = "更新当前登录用户信息")
     public HttpResult save(HttpServletRequest request,String name,String avatar) throws Exception {
         User user=accountManager.getCurUser();
 //		user.setEmail(email);
@@ -46,10 +52,10 @@ public class UserController {
     }
 
 
-    @RequestMapping("/up-pwd.do")
+    @RequestMapping(value = "/up-pwd.do", method = RequestMethod.POST)
     @ResponseBody
+    @ApiOperation(value = "修改密码")
     public HttpResult updatePwd(String curpwd,String pwd) throws Exception {
-        System.out.println("curpwd:"+curpwd);
         boolean isOk = accountManager.updatePwd(curpwd,pwd);
         if(isOk){
             return HttpResult.SUCCESS();

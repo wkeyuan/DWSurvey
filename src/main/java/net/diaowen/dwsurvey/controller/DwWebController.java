@@ -1,5 +1,6 @@
 package net.diaowen.dwsurvey.controller;
 
+import io.swagger.annotations.ApiOperation;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.httpclient.HttpResult;
@@ -30,6 +31,7 @@ public class DwWebController {
      */
     @RequestMapping(value = "/footer-info.do",method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "获取footer")
     public HttpResult<FooterInfo> footerInfo() {
         try{
             FooterInfo footerInfo = new FooterInfo();

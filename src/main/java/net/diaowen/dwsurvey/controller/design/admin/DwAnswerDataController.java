@@ -4,6 +4,10 @@ import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
 import co.elastic.clients.elasticsearch._types.aggregations.StringTermsBucket;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.es.DwAnswerEsClientService;
@@ -28,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +46,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/api/dwsurvey/app/v6/dw-answer-data-survey")
+@Api(tags = "答卷数据管理")
 public class DwAnswerDataController {
     private static Logger logger = LoggerFactory.getLogger(DwAnswerDataController.class);
     @Resource
@@ -62,7 +68,12 @@ public class DwAnswerDataController {
      */
     @RequestMapping(value = "/list.do",method = RequestMethod.GET)
     @ResponseBody
-    public Page survey(HttpServletRequest request, Page<DwEsSurveyAnswer> page, String surveyId, String ipAddr, String city, Integer isEffective, Integer handleState, String anUserKey, Integer saveStatus, String bgAnDate, String endAnDate) {
+    @ApiOperation(value = "获取答卷列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="pageSize",value="页数据数",paramType = "query",dataType = "java.lang.Integer"),
+            @ApiImplicitParam(name="current",value="当前页码",paramType = "query",dataType = "java.lang.Integer"),
+    })
+    public Page survey(HttpServletRequest request, @ApiIgnore Page<DwEsSurveyAnswer> page, String surveyId, String ipAddr, String city, Integer isEffective, Integer handleState, String anUserKey, Integer saveStatus, String bgAnDate, String endAnDate) {
         UserAgentUtils.userAgent(request);
         User user = accountManager.getCurUser();
         if(user!=null){
@@ -118,6 +129,7 @@ public class DwAnswerDataController {
 
     @RequestMapping(value = "/survey-stats.do",method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "获取问卷统计数据")
     public HttpResult<Map<String, Map<String, AggregationResultItem>>> aggregationSearch(String surveyId){
         User user = accountManager.getCurUser();
         if(user!=null){
@@ -141,6 +153,7 @@ public class DwAnswerDataController {
 
     @RequestMapping(value="/export-by-sync.do",method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "数据导出服务")
     public HttpResult<ExportLog> exportBySync(String surveyId, String expUpQu, Integer isEff, Integer handleState, Integer threadMax, Integer expDataContent) {
         logger.info("exportBySync surveyId {} ",surveyId);
         try{
@@ -173,11 +186,11 @@ public class DwAnswerDataController {
 
     @RequestMapping(value = "/delete-answer.do",method = RequestMethod.DELETE)
     @ResponseBody
+    @ApiOperation(value = "删除答卷数据")
     public HttpResult deleteAnswer(@RequestBody Map<String, String[]> map){
         try {
             if (map!=null && map.containsKey("id")) {
                 String[] ids = map.get("id");
-                logger.debug("deleteAnswer esid {}", ids);
                 esSurveyAnswerManager.deleteByIds(ids);
                 return HttpResult.SUCCESS();
             }

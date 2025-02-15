@@ -174,4 +174,4 @@ elasticsearch:
   security: noPwd
 springfox:
   documentation:
-    enabled: false
+    enabled: true

@@ -9,7 +9,7 @@ server:
 dwsurvey:
   # 产品版本号信息，V5-代表最新的前后端分离版本，vue+jquery; v6 版本纯vue实现
   version:
-    api: https://www.surveyform.cn
+    api: https://www.surveyform
     name: 社区版
     name-code: OSS
     built: 20250215

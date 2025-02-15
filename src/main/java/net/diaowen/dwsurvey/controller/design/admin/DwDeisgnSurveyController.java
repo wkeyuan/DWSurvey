@@ -3,6 +3,8 @@ package net.diaowen.dwsurvey.controller.design.admin;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.httpclient.HttpResult;
@@ -22,6 +24,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/dwsurvey/app/v6/dw-design-survey")
+@Api(tags = "问卷管理")
 public class DwDeisgnSurveyController {
 
     @Autowired
@@ -37,6 +40,7 @@ public class DwDeisgnSurveyController {
      */
     @RequestMapping(value = "/toolbar-qus.do",method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "拉取问卷工具栏显示的题型组件")
     public HttpResult<List<DesignSurveyToolbarTab>> toolbarQuestions(String surveyType) {
         // 标准问卷的Tabs
 //        List<DesignSurveyToolbarTab> tabs = DesignSurveyToolbarUtils.surveyToolbarTabs();
@@ -51,6 +55,7 @@ public class DwDeisgnSurveyController {
      */
     @RequestMapping(value = "/bank-qus.do",method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "拉取题库部分的题型集合")
     public HttpResult<List<DesignSurveyToolbarTabQu>> bankQuestions() {
         List<DesignSurveyToolbarTabQu> tabQus1 = DesignSurveyBankUtils.quBankToolbarTabQus();
         return HttpResult.SUCCESS(tabQus1);
@@ -64,6 +69,7 @@ public class DwDeisgnSurveyController {
      */
     @RequestMapping(value = "/survey-json-by-survey-id.do",method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(value = "获取问卷数据")
     public HttpResult surveyJsonBySurveyId(@RequestParam String surveyId){
         // 针对答卷场景需要考虑这些数据通过静态缓存获取。
         SurveyJson surveyJson = surveyJsonManager.findBySurveyId(surveyId);
@@ -77,6 +83,7 @@ public class DwDeisgnSurveyController {
 
     @RequestMapping(value = "/save-survey-json.do",method = RequestMethod.POST)
     @ResponseBody
+    @ApiOperation(value = "保存问卷数据")
     public HttpResult saveSurveyJson(@RequestBody SurveyJson surveyJson){
         User user= accountManager.getCurUser();
         if(user!=null){
@@ -105,6 +112,7 @@ public class DwDeisgnSurveyController {
 
     @RequestMapping(value = "/dev-survey.do",method = RequestMethod.POST)
     @ResponseBody
+    @ApiOperation(value = "发布问卷")
     public HttpResult devSurvey(@RequestParam String surveyId){
         String jsonPath = surveyJsonManager.devSurvey(surveyId);
         if (jsonPath!=null) return HttpResult.SUCCESS();

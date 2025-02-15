@@ -1,5 +1,7 @@
 package net.diaowen.dwsurvey.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import net.diaowen.common.plugs.file.FileMagic;
 import net.diaowen.common.plugs.file.FileMagicUtils;
 import net.diaowen.common.plugs.file.TikaFileUtils;
@@ -30,14 +32,16 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/api/dwsurvey/up")
+@Api(tags = "上传文件")
 public class UploadController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private DwFileStorageManager fileStorageManager;
 
-    @RequestMapping("/up-file.do")
+    @RequestMapping(value = "/up-file.do", method = RequestMethod.POST)
     @ResponseBody
+    @ApiOperation(value = "上传文件")
     public HttpResult uploadFile(HttpServletRequest request,HttpServletResponse response) {
         String savePath = File.separator+"file" + File.separator + "images"+ File.separator;
         return proUpfile((MultipartHttpServletRequest) request, savePath);
@@ -48,8 +52,9 @@ public class UploadController {
      * 上传文件数据，安全存储
      * /WebRoot/WEB-INF/upfile
      */
-    @RequestMapping("/up-file-wb.do")
+    @RequestMapping(value = "/up-file-wb.do", method = RequestMethod.POST)
     @ResponseBody
+    @ApiOperation(value = "上传文件到安全目录")
     public HttpResult uploadFileWb(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String savePath = File.separator+"webin"+File.separator+"upload" + File.separator ;
         HttpResult result = proUpfile((MultipartHttpServletRequest) request, savePath);
@@ -142,6 +147,7 @@ public class UploadController {
      ****************************************************/
     @RequestMapping(value="/ajax/upload.do",method = {RequestMethod.POST})
     @ResponseBody
+    @ApiOperation(value="v5版本上传用到的接口", hidden = true)
     public LinkedList<FileMeta> upload(MultipartHttpServletRequest request, HttpServletResponse response) {
         LinkedList<FileMeta> files = new LinkedList<FileMeta>();
         FileMeta fileMeta = null;
