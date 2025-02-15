@@ -14,6 +14,8 @@ import net.diaowen.common.plugs.es.DwAnswerEsClientService;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.ipaddr.IPLocation;
 import net.diaowen.common.plugs.ipaddr.IPService;
+import net.diaowen.common.plugs.security.token.JwtUtils;
+import net.diaowen.common.plugs.web.Token;
 import net.diaowen.common.utils.CookieUtils;
 import net.diaowen.common.utils.NumberUtils;
 import net.diaowen.dwsurvey.common.AnswerCheckData;
@@ -90,6 +92,10 @@ public class DwAnswerSurveyController {
         surveyJson = getSurveyJsonResult(dwAnswerCheckResult, surveyJson);
         if (surveyJson!=null) {
             dwSurveyAnswerResult.setSurveyJson(surveyJson);
+            // 相关认证信息
+            //0、token 访止重复提交
+            String token = Token.getToken(request);
+            dwAnswerCheckResult.setAnToken(token);
             surveyBgTimeInit(request,response,sid);
         }
         dwSurveyAnswerResult.setAnswerCheckResult(dwAnswerCheckResult);
@@ -143,7 +149,7 @@ public class DwAnswerSurveyController {
             DwAnswerEsUtils.calcSumScore(surveyJson, dwEsSurveyAnswer);
             DwAnswerEsUtils.addAnSource(request, dwEsSurveyAnswer);
             // 先保存一份到mysql
-            String sessionId = request.getSession().getId();
+            String sessionId = request.getRequestedSessionId();
             SurveyAnswer surveyAnswer = new SurveyAnswer();
             surveyAnswer.setHttpSessionId(sessionId);
             surveyAnswerManager.saveAnswerByEsAnswer(surveyAnswer, dwEsSurveyAnswer);
@@ -305,12 +311,14 @@ public class DwAnswerSurveyController {
 
     //当一个用户访问答卷时检查对答卷状态进行检查
     public DwAnswerCheckResult checkAnswerUser(HttpServletRequest request, SurveyJson surveyJson, String anPwd, boolean isSubmit){
+        DwAnswerCheckResult answerCheckResult = new DwAnswerCheckResult();
+        String sessionCode = getSessionCode(request, answerCheckResult);
+        String tokenStr = JwtUtils.getRequestToken(request);
         // 对需要处理的属性进行处理
         String surveyId = surveyJson.getSurveyId();
         String sid = surveyJson.getSid();
         String surveyJsonSimple = surveyJson.getSurveyJsonSimple();
         ObjectMapper objectMapper = new ObjectMapper();
-        DwAnswerCheckResult answerCheckResult = new DwAnswerCheckResult();
         try {
             SurveyDirectory survey = surveyDirectoryManager.getSurvey(surveyId);
 
@@ -504,5 +512,12 @@ public class DwAnswerSurveyController {
             if (cookieValue != null && NumberUtils.isNumeric(cookieValue))  cookieAnNum = Integer.parseInt(cookieValue);
         }
         return cookieAnNum;
+    }
+
+    public String getSessionCode(HttpServletRequest request, DwAnswerCheckResult dwAnswerCheckResult) {
+        String sessionCode = request.getHeader("sessionCode");
+        if(sessionCode==null) sessionCode = request.getParameter("sessionCode");
+        if(sessionCode==null) dwAnswerCheckResult.setSessionCode(request.getRequestedSessionId());
+        return sessionCode;
     }
 }

@@ -105,6 +105,21 @@ public class DwEsInitService {
                 e.printStackTrace();
                 logger.warn("dwsurvey_answer_index_aggs_append250211 字段已经存在 {}", e.getMessage());
             }
+            // 对新增索引字段的初始化
+            try {
+                boolean putMappingResult = esClientService.putMapping(ANSWER_INDEX_NAME, "conf/es/dwsurvey-answer-index/dwsurvey_answer_index_append250215.json");
+                logger.info("append250215.json putMappingResult {} {}", ANSWER_INDEX_NAME, putMappingResult);
+            }catch (Exception e){
+                e.printStackTrace();
+                logger.warn("dwsurvey_answer_index_append250215.json 字段已经存在 {}", e.getMessage());
+            }
+            try {
+                boolean putMappingResult = esClientService.putMapping(ANSWER_INDEX_NAME_AGG, "conf/es/dwsurvey-answer-index-aggs/dwsurvey_answer_index_aggs_append250215.json");
+                logger.info("append250215.json putMappingResult {} {}", ANSWER_INDEX_NAME_AGG, putMappingResult);
+            }catch (Exception e){
+                e.printStackTrace();
+                logger.warn("dwsurvey_answer_index_aggs_append250215 字段已经存在 {}", e.getMessage());
+            }
         } catch (IOException e) {
             logger.error("索引初始化创建异常，请确认ES服务是否安装，同时注意是否安装IK分词插件 {}", e.getMessage());
         }

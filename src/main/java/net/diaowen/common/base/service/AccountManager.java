@@ -10,6 +10,8 @@ import net.diaowen.dwsurvey.entity.RandomCode;
 import net.diaowen.dwsurvey.service.RandomCodeManager;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +58,10 @@ public class AccountManager {
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 		//判断是否有重复用户
-		String shaPassword = DigestUtils.sha1Hex(user.getPlainPassword());
-		user.setShaPassword(shaPassword);
+		if(user.getPlainPassword()!=null) {
+			String shaPassword = DigestUtils.sha1Hex(user.getPlainPassword());
+			user.setShaPassword(shaPassword);
+		}
 		boolean bool=user.getId()==null?true:false;
 		userDao.save(user);
 		if (shiroRealm != null) {
@@ -234,5 +238,24 @@ public class AccountManager {
 		}
 		return result;
 	}
+
+	public User findById(String id) {
+		return userDao.findUniqueBy("id",id);
+	}
+
+	@Transactional(readOnly = true)
+	public User findUserByThirdUserId(String thirdUserId) {
+		Criterion cri2  =  Restrictions.eq("thirdUserId",thirdUserId);
+		return userDao.findFirst(cri2);
+	}
+
+	public User findByParam(String userId, String thirdUserId, String loginName){
+		User user = null;
+		if(userId!=null) user = findById(userId);
+		if(user==null && thirdUserId!=null) user = findUserByThirdUserId(thirdUserId);
+		if(user==null && loginName!=null) user = findUserByLoginNameOrEmail(loginName);
+		return user;
+	}
+
 
 }

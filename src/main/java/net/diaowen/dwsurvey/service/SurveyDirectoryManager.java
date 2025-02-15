@@ -103,4 +103,6 @@ public interface SurveyDirectoryManager extends BaseService<SurveyDirectory, Str
 	HttpResult isSurveyRoleOrPerm(String userId, String surveyUserId,String[] permCodes);
 
     JSONObject getSurveyCountJson();
+
+	public Page<SurveyDirectory> findPage(Page<SurveyDirectory> page,String userId, String surveyName, Integer visibility, Integer surveyState,Integer answerNum,String startTime,String endTime,String groupId1,String groupId2);
 }

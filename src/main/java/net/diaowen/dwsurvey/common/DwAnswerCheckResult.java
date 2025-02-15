@@ -18,6 +18,8 @@ public class DwAnswerCheckResult {
     private String anToken;
     // 是否启用图片验证码
     private boolean showCaptcha = false;
+    // 会话code
+    private String sessionCode = null;
 
     //答卷ID
     private String dbAnswerId = null;
@@ -128,6 +130,14 @@ public class DwAnswerCheckResult {
 
     public void setDbAnswerId(String dbAnswerId) {
         this.dbAnswerId = dbAnswerId;
+    }
+
+    public String getSessionCode() {
+        return sessionCode;
+    }
+
+    public void setSessionCode(String sessionCode) {
+        this.sessionCode = sessionCode;
     }
 
     public void buildResult(DwAnswerCheckResult dwAnswerCheckResult){

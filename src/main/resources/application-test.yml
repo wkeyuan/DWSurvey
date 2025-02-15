@@ -10,6 +10,8 @@ dwsurvey:
     site-url: http://localhost:8081
     # 资源访问地址，便于存储模式的切换，目前可以保持与site-url一样
     resource-url: http://localhost:8080
+    # 前端路由形式 createWebHashHistory = '#', createWebHistory = ''
+    router-history: '/#'
     # 站点信息配置，会出现在底部footer区
     info:
       # 站点名称
@@ -43,7 +45,7 @@ dwsurvey:
       encodingAESKey:
   dw-open: # 预留配置
     api:
-      status: test # test=开发测试模式，不进行API验证；prod=生产模式；验证签名，disable=关闭API功能
+      status: disable # test=开发测试模式，不进行API验证；prod=生产模式；验证签名，disable=关闭API功能
       timestamp: 30 # 签名有效期
   file-storage:
     prefix:  #路径前缀，方便给所有资源加上统一的路径，如：/dws-storage
@@ -171,3 +173,6 @@ elasticsearch:
   index-prev: dw_c_ww_a_
   # 认证方式 noPwd, pwd, cert
   security: noPwd
+springfox:
+  documentation:
+    enabled: true

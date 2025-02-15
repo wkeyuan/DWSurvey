@@ -29,6 +29,8 @@ public class DwEsSurveyAnswerCommon implements Serializable {
     private Float sumScore;
     // 来源
     private EsAnSource anSource;
+    //第三方平台信息
+    private EsAnThirdInfo esAnThirdInfo;
 
     public String getSurveyId() {
         return surveyId;
@@ -124,5 +126,13 @@ public class DwEsSurveyAnswerCommon implements Serializable {
 
     public void setAnswerId(String answerId) {
         this.answerId = answerId;
+    }
+
+    public EsAnThirdInfo getEsAnThirdInfo() {
+        return esAnThirdInfo;
+    }
+
+    public void setEsAnThirdInfo(EsAnThirdInfo esAnThirdInfo) {
+        this.esAnThirdInfo = esAnThirdInfo;
     }
 }

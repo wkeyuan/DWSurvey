@@ -102,4 +102,10 @@ public class HttpResult<T> {
 		return new HttpResult<>(HttpStatus.EXCEPTION,data);
 	}
 
+	public static boolean isOk(HttpResult httpResult) {
+		if(httpResult!=null && httpResult.resultCode==200){
+			return true;
+		}
+		return false;
+	}
 }

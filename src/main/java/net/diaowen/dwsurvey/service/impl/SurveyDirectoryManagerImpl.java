@@ -14,6 +14,8 @@ import net.diaowen.common.utils.RandomUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -737,5 +739,55 @@ public class SurveyDirectoryManagerImpl extends BaseServiceImpl<SurveyDirectory,
         jsonParams.put("closeCount", surveyDirectoryDao.surveyCount("close"));
         jsonParams.put("answerCount", surveyAnswerManager.countResult(null));
         return jsonParams;
+    }
+
+    public Page<SurveyDirectory> findPage(Page<SurveyDirectory> page,String userId, String surveyName, Integer visibility, Integer surveyState,Integer answerNum,String startTime,String endTime,String groupId1,String groupId2) {
+        List<Criterion> criterions=new ArrayList<Criterion>();
+        criterions.add(Restrictions.eq("dirType", 2));
+        criterions.add(Restrictions.eq("surveyModel", 1));
+
+        if(visibility!=null && (visibility==1 || visibility==0)){
+            criterions.add(Restrictions.eq("visibility", visibility));
+        }else{
+            criterions.add(Restrictions.eq("visibility", 1));
+        }
+
+        if(org.apache.commons.lang.StringUtils.isNotEmpty(userId)){
+            criterions.add(Restrictions.eq("userId", userId));
+        }
+
+        if(org.apache.commons.lang.StringUtils.isNotEmpty(surveyName)){
+            criterions.add(Restrictions.like("surveyName", "%"+surveyName+"%"));
+        }
+
+        if(surveyState!=null){
+            criterions.add(Restrictions.eq("surveyState", surveyState));
+        }
+
+        if(answerNum!=null){
+            criterions.add(Restrictions.gt("answerNum", answerNum));
+        }
+
+        if(org.apache.commons.lang.StringUtils.isNotEmpty(startTime) && org.apache.commons.lang.StringUtils.isNotEmpty(endTime)){
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                criterions.add(Restrictions.between("createDate",simpleDateFormat.parse(startTime),simpleDateFormat.parse(endTime)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(org.apache.commons.lang.StringUtils.isNotEmpty(groupId1)){
+            criterions.add(Restrictions.eq("groupId1", groupId1));
+        }
+
+        if(org.apache.commons.lang.StringUtils.isNotEmpty(groupId2)){
+            criterions.add(Restrictions.eq("groupId2", groupId2));
+        }
+
+        page.setOrderBy("createDate");
+        page.setOrderDir("desc");
+        page=surveyDirectoryDao.findPageList(page,criterions);
+        return page;
     }
 }

@@ -5,7 +5,8 @@ dwsurvey:
     static-type: static
     site-url: https://pro.surveyform.cn
     resource-url: https://pro.surveyform.cn
-    #    site-url: http://ent82.surveyform.cn
+    # 前端路由形式 createWebHashHistory = '#', createWebHistory = ''
+    router-history: '/#'
     info:
       site-name: 调问网
       site-url: https://www.diaowen.net
@@ -32,7 +33,7 @@ dwsurvey:
       encodingAESKey:
   dw-open: # 预留配置
     api:
-      status: test # test=开发测试模式，不进行API验证；prod=生产模式；验证签名，disable=关闭API功能
+      status: disable # test=开发测试模式，不进行API验证；prod=生产模式；验证签名，disable=关闭API功能
       timestamp: 30 # 签名有效期
   file-storage:
     prefix:  #路径前缀，方便给所有资源加上统一的路径，如：/dws-storage
@@ -145,3 +146,6 @@ elasticsearch:
   index-prev: dw_c_ww_a_
   # 认证方式 noPwd, pwd, cert
   security: noPwd
+springfox:
+  documentation:
+    enabled: false

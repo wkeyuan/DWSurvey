@@ -66,6 +66,16 @@ public interface SurveyAnswerManager extends BaseService<SurveyAnswer, String>{
 
 	Long countResult(String surveyId);
 
-
 	SurveyAnswer saveAnswerByEsAnswer(SurveyAnswer surveyAnswer, DwEsSurveyAnswer dwEsSurveyAnswer);
+
+	public Long getCountByAnUserKey(String surveyId, String anUserKey);
+
+	public Long getCountByUserId(String surveyId, String userId);
+
+	public SurveyAnswer findByAnUserKey(String surveyId, String anUserKey);
+
+	public SurveyAnswer findByAnUserId(String surveyId, String userId,Integer answerSaveStatus);
+
+	public SurveyAnswer findByOpenId(String surveyId, String wxopenId);
+
 }

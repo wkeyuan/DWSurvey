@@ -1,0 +1,37 @@
+{
+  "properties": {
+    "answerCommon": {
+      "properties": {
+        "esAnThirdInfo": {
+          "properties": {
+            "op": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              },
+              "analyzer": "ik_max_word"
+            },
+            "anUserKey": {
+              "type": "keyword"
+            },
+            "thirdEditUid": {
+              "type": "keyword"
+            },
+            "thirdEditUname": {
+              "type": "keyword"
+            },
+            "thirdEditAuth": {
+              "type": "long"
+            }
+          }
+        }
+      }
+    },
+    "httpSessionId": {
+      "type": "keyword"
+    }
+  }
+}

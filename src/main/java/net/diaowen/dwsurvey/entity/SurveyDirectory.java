@@ -66,6 +66,12 @@ public class SurveyDirectory extends IdEntity{
 	// survey=问卷调查，exam=在线考试，vote=投票评选，satisfaction=满意度调查，eval=在线测评，360eval=360测评
 	private String surveyType;
 
+	private String groupId1;//行业
+	private String groupId2;//场景
+
+	private String bindId;//问卷绑定的第三方平台ID
+	private String refId;
+
 	public String getParentId() {
 		return parentId;
 	}
@@ -220,6 +226,38 @@ public class SurveyDirectory extends IdEntity{
 		this.surveyNameText = surveyNameText;
 	}
 
+	public String getGroupId1() {
+		return groupId1;
+	}
+
+	public void setGroupId1(String groupId1) {
+		this.groupId1 = groupId1;
+	}
+
+	public String getGroupId2() {
+		return groupId2;
+	}
+
+	public void setGroupId2(String groupId2) {
+		this.groupId2 = groupId2;
+	}
+
+	public String getBindId() {
+		return bindId;
+	}
+
+	public void setBindId(String bindId) {
+		this.bindId = bindId;
+	}
+
+	public String getRefId() {
+		return refId;
+	}
+
+	public void setRefId(String refId) {
+		this.refId = refId;
+	}
+
 	public String groupName;
 	@Transient
 	public String getGroupName() {
@@ -295,5 +333,15 @@ public class SurveyDirectory extends IdEntity{
 
 	public void setSurveyJson(SurveyJson surveyJson) {
 		this.surveyJson = surveyJson;
+	}
+
+	private String surveyAnswerUrl;
+	@Transient
+	public String getSurveyAnswerUrl() {
+		return surveyAnswerUrl;
+	}
+
+	public void setSurveyAnswerUrl(String surveyAnswerUrl) {
+		this.surveyAnswerUrl = surveyAnswerUrl;
 	}
 }

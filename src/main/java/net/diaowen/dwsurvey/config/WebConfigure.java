@@ -1,6 +1,7 @@
 package net.diaowen.dwsurvey.config;
 
 import net.diaowen.common.plugs.filter.DwWebResourceFilter;
+import net.diaowen.common.plugs.json.jackson.core.spring.JsonReturnHandler;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -8,12 +9,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -88,6 +91,13 @@ public class WebConfigure implements WebMvcConfigurer {
         //配置server虚拟路径，handler为前台访问的目录，locations为files相对应的本地路径
         //registry.addResourceHandler("/WEB-INF/**").addResourceLocations("file:/home/IdeaProjects/dwsurvey/src/main/webapp/WEB-INF");
 //        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    }
+
+
+    @Override
+    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> handlers) {
+        handlers.add(new JsonReturnHandler());
+        WebMvcConfigurer.super.addReturnValueHandlers(handlers);
     }
 
 

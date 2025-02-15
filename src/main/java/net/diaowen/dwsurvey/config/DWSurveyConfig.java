@@ -11,6 +11,7 @@ public class DWSurveyConfig {
     public static String DWSURVEY_WEB_SITE_URL = null;
     public static String DWSURVEY_WEB_RESOURCE_URL = null;
     public static String DWSURVEY_WEB_STATIC_TYPE = null;
+    public static String DWSURVEY_WEB_ROUTER_HISTORY = null;
 
     public static Boolean DWSURVEY_WEB_LOGIN_WX = null;
     public static Boolean DWSURVEY_WEB_LOGIN_PHONE = null;
@@ -71,6 +72,12 @@ public class DWSurveyConfig {
     public void setWebSiteUrl(String webSiteUrl) {
         DWSurveyConfig.DWSURVEY_WEB_SITE_URL = webSiteUrl;
     }
+
+    @Value("${dwsurvey.web.router-history}")
+    public void setWebRouterHistory(String routerHistory) {
+        DWSurveyConfig.DWSURVEY_WEB_ROUTER_HISTORY = routerHistory;
+    }
+
 
     @Value("${dwsurvey.web.static-type}")
     public void setWebStaticType(String webStaticType) {

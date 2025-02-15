@@ -848,4 +848,53 @@ public class SurveyAnswerManagerImpl extends
 		}
 		return null;
 	}
+
+	@Override
+	public Long getCountByAnUserKey(String surveyId, String anUserKey) {
+		String hql = "select count(*) from SurveyAnswer x where x.isEffective=1 and x.surveyId=?1 and x.anUserKey=?2";
+		Long count = (Long) surveyAnswerDao.findUniObjs(hql, surveyId, anUserKey);
+		return count;
+	}
+
+	@Override
+	public Long getCountByUserId(String surveyId, String userId) {
+		String hql = "select count(*) from SurveyAnswer x where x.isEffective=1 and x.surveyId=?1 and x.userId=?2";
+		Long count = (Long) surveyAnswerDao.findUniObjs(hql, surveyId, userId);
+		return count;
+	}
+
+	public SurveyAnswer findByAnUserKey(String surveyId, String anUserKey) {
+		Criterion cri1=Restrictions.eq("surveyId", surveyId);
+		Criterion cri2=Restrictions.eq("anUserKey", anUserKey);
+		List<SurveyAnswer> surveyAnswers = surveyAnswerDao.findByOrder("endAnDate",false,cri1, cri2);
+		if(surveyAnswers!=null && surveyAnswers.size()>0){
+			return surveyAnswers.get(0);
+		}
+		return null;
+	}
+
+	public SurveyAnswer findByAnUserId(String surveyId, String userId, Integer answerSaveStatus) {
+		Criterion cri1=Restrictions.eq("surveyId", surveyId);
+		Criterion cri2=Restrictions.eq("userId", userId);
+		Criterion cri3=Restrictions.eq("answerSaveStatus", answerSaveStatus);
+		if(answerSaveStatus==null || answerSaveStatus==0){
+			cri3=Restrictions.or(Restrictions.isNull("answerSaveStatus"),Restrictions.eq("answerSaveStatus", 0));
+		}
+		List<SurveyAnswer> surveyAnswers = surveyAnswerDao.findByOrder("endAnDate",false,cri1, cri2, cri3);
+		if(surveyAnswers!=null && surveyAnswers.size()>0){
+			return surveyAnswers.get(0);
+		}
+		return null;
+	}
+
+	public SurveyAnswer findByOpenId(String surveyId, String wxopenId) {
+		Criterion cri1=Restrictions.eq("surveyId", surveyId);
+		Criterion cri2=Restrictions.eq("openid", wxopenId);
+		List<SurveyAnswer> surveyAnswers = surveyAnswerDao.findByOrder("endAnDate",false,cri1, cri2);
+		if(surveyAnswers!=null && surveyAnswers.size()>0){
+			return surveyAnswers.get(0);
+		}
+		return null;
+	}
+
 }

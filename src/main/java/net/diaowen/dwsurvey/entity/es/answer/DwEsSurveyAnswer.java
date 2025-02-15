@@ -19,6 +19,8 @@ public class DwEsSurveyAnswer implements Serializable {
 
     //答卷密码
     private String anPwd;
+    //sessionId
+    private String httpSessionId;
 
     public DwEsSurveyAnswerCommon getAnswerCommon() {
         return answerCommon;
@@ -50,5 +52,13 @@ public class DwEsSurveyAnswer implements Serializable {
 
     public void setEsId(String esId) {
         this.esId = esId;
+    }
+
+    public String getHttpSessionId() {
+        return httpSessionId;
+    }
+
+    public void setHttpSessionId(String httpSessionId) {
+        this.httpSessionId = httpSessionId;
     }
 }

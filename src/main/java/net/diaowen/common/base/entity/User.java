@@ -67,6 +67,9 @@ public class User extends IdEntity {
 	private String wxOpenId;
 	private String sessionId;
 
+	//第三方平台用户ID
+	private String thirdUserId;
+
 	//登录次数
 	private Integer loginCount;
 
@@ -265,6 +268,14 @@ public class User extends IdEntity {
 
 	public void setLoginCount(Integer loginCount) {
 		this.loginCount = loginCount;
+	}
+
+	public String getThirdUserId() {
+		return thirdUserId;
+	}
+
+	public void setThirdUserId(String thirdUserId) {
+		this.thirdUserId = thirdUserId;
 	}
 
 	private String plainPassword;
