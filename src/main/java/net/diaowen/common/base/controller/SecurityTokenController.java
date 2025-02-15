@@ -183,7 +183,6 @@ public class SecurityTokenController {
     @RequestMapping("/login-pwd.do")
     @ResponseBody
     public LoginRegisterResult loginPwd(HttpServletRequest request, HttpServletResponse response, @RequestParam String userName, @RequestParam String password, String tag) {
-        logger.debug("password en {}",password);
         if(StringUtils.isNotEmpty(password)) {
             try {
                 password = RSAUtils.decrypt(password,DWSurveyConfig.DWSURVEY_RSA_PRIVATEKEY);
@@ -191,7 +190,6 @@ public class SecurityTokenController {
                 e.printStackTrace();
             }
         }
-        logger.debug("password de {}",password);
         return loginPwdJwt(request,response,userName,password,tag);
     }
 
