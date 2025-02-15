@@ -128,6 +128,7 @@ public class SecurityTokenController {
         String[] authed = null;
         User user = null;
         try{
+            if (!DWSurveyConfig.DWSURVEY_WEB_LOGIN_PHONE) return LoginRegisterResult.FAILURE(HttpResult.FAILURE_MSG("未开通短信登录"));
             if (!sysLogManager.ipLoginOk(ipService.getIp(request))) return LoginRegisterResult.FAILURE(HttpResult.FAILURE_MSG("当前登录受限，登录失败！"));
             user = accountManager.findUserByLoginNameOrEmail(mobile);
             if(user!=null){
@@ -266,6 +267,7 @@ public class SecurityTokenController {
     @ResponseBody
     public HttpResult wxLoginQRCode(HttpServletRequest request) {
         try{
+            if (!DWSurveyConfig.DWSURVEY_WEIXIN_OPEN) return HttpResult.SUCCESS("微信服务未开启");
             String sessionId = request.getSession().getId();
             if(StringUtils.isNotEmpty(DWSurveyConfig.DWSURVEY_WEIXIN_APP_ID)){
                 String ticket = weixinMpService.QRcodeTicket(WeixinMpService.USER_LOGIN_WEIXIN+"_"+sessionId);
@@ -294,6 +296,7 @@ public class SecurityTokenController {
         User user = null;
         String loginName = null;
         try{
+            if (!DWSurveyConfig.DWSURVEY_WEB_LOGIN_WX) return LoginRegisterResult.FAILURE(HttpResult.FAILURE_MSG("未开通微信登录"));
             if (!sysLogManager.ipLoginOk(ipService.getIp(request))) return LoginRegisterResult.FAILURE(HttpResult.FAILURE_MSG("当前登录受限，登录失败！"));
 //            String scaneValue = WeixinMpService.USER_LOGIN_WEIXIN+"_"+sessionId;
             user = userManager.findBySessionId(sessionId);
