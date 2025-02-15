@@ -32,7 +32,7 @@ dwsurvey:
         pwd-login: true
       register: true
   sms:
-    code-open: true
+    code-open: false
     sendcloud:
       smsUser:
       smsKey:
@@ -174,4 +174,4 @@ elasticsearch:
   security: noPwd
 springfox:
   documentation:
-    enabled: true
+    enabled: false

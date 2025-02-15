@@ -143,7 +143,7 @@ elasticsearch:
   #  协议方式，使用证书这里改成https
   scheme: http
   #  索引统一前缀，默认为空不加前缀, 如果加建议格式如：dw_
-  index-prev: dw_c_ww_a_
+  index-prev: oss_
   # 认证方式 noPwd, pwd, cert
   security: noPwd
 springfox:
