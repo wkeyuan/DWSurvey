@@ -17,6 +17,9 @@
             "anUserKey": {
               "type": "keyword"
             },
+            "anUserName": {
+              "type": "keyword"
+            },
             "thirdEditUid": {
               "type": "keyword"
             },

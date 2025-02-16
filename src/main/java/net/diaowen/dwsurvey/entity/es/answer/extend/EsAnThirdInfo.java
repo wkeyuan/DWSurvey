@@ -5,10 +5,12 @@ package net.diaowen.dwsurvey.entity.es.answer.extend;
  */
 public class EsAnThirdInfo {
 
-    //外部参数字段
+    //外部参数字段，其它附加参数（按字符串原文存储）
     private String op;
-    //第三方平台答题用户标识
+    //第三方平台答题用户标识, 如用户ID
     private String anUserKey;
+    //第三方平台答题用户名称
+    private String anUserName;
 
     //第三方平台标记的 编辑用户ID
     private String thirdEditUid;
@@ -55,5 +57,13 @@ public class EsAnThirdInfo {
 
     public void setThirdEditAuth(Integer thirdEditAuth) {
         this.thirdEditAuth = thirdEditAuth;
+    }
+
+    public String getAnUserName() {
+        return anUserName;
+    }
+
+    public void setAnUserName(String anUserName) {
+        this.anUserName = anUserName;
     }
 }
