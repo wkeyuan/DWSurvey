@@ -295,7 +295,7 @@ public class ShiroConfig {
 
 
         //登录
-        shiroFilterFactoryBean.setLoginUrl("/login.do");
+        shiroFilterFactoryBean.setLoginUrl("/#/login");
         //首页
         shiroFilterFactoryBean.setSuccessUrl("/design/my-survey/list.do");
         //错误页面，认证不通过跳转

@@ -147,7 +147,7 @@ public class DwAnswerDataController {
                 } catch (Exception e){
                     logger.error("统计服务不可用 {}", e.getMessage());
                 }
-                return HttpResult.FAILURE_MSG("统计服务不可用");
+                return HttpResult.FAILURE_MSG("ES服务未启用，统计服务不可用");
             }
         }
         return HttpResult.FAILURE();
