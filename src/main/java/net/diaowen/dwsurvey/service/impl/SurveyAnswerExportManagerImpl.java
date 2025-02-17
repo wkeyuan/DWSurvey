@@ -1,17 +1,16 @@
-package net.diaowen.dwsurvey.service.es.impl;
+package net.diaowen.dwsurvey.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.diaowen.common.QuType;
 import net.diaowen.common.base.entity.User;
 import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.es.DwAnswerEsClientService;
 import net.diaowen.common.plugs.httpclient.HttpResult;
 import net.diaowen.common.plugs.page.Page;
-import net.diaowen.common.utils.RunExcelEsUtil;
 import net.diaowen.common.utils.RunExcelUtil;
+import net.diaowen.common.utils.SpringContextHolder;
 import net.diaowen.common.utils.ZipUtil;
 import net.diaowen.common.utils.excel.SXSSF_XLSXExportUtil;
 import net.diaowen.common.utils.parsehtml.HtmlUtil;
@@ -20,9 +19,7 @@ import net.diaowen.dwsurvey.common.PermissionCode;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
-import net.diaowen.dwsurvey.service.ExportLogManager;
-import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
-import net.diaowen.dwsurvey.service.SurveyJsonManager;
+import net.diaowen.dwsurvey.service.*;
 import net.diaowen.dwsurvey.service.es.EsSurveyAnswerManager;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.util.FileUtil;
@@ -45,7 +42,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
+public class SurveyAnswerExportManagerImpl implements SurveyAnswerExportManager {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
@@ -60,6 +57,8 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
     private TaskExecutor taskExecutor;
     @Autowired
     private AccountManager accountManager;
+    @Autowired
+    private SurveyAnswerManager surveyAnswerManager;
 
     @Transactional
     public ExportLog buildExportXls(String surveyId, String savePath,Integer threadMax,Integer expUpQu, Integer expDataContent) {
@@ -123,7 +122,7 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
         if (surveyJsonNode!=null && surveyJsonNode.has("questions")) jsonNodeQus = surveyJsonNode.get("questions");
 
         int size = 2000;
-        Page<DwEsSurveyAnswer> page = new Page<>();
+        Page<SurveyAnswer> page = new Page<>();
 
         List<SurveyAnswer> answers = new ArrayList<>();
         List<Question> questions = new ArrayList<>();
@@ -138,7 +137,8 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
             AtomicInteger ai=new AtomicInteger(0);
 
             page.setPageSize(size);
-            page = dwAnswerEsClientService.findPageByScroll(page, surveyId);
+//            page = dwAnswerEsClientService.findPageByScroll(page, surveyId);
+            page = surveyAnswerManager.answerPage(page, surveyId);
             int answerListSize = Integer.parseInt(String.valueOf(page.getTotalItems()));
 
             int lastSize = answerListSize;
@@ -148,47 +148,47 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
                 poolSize = Integer.parseInt(String.valueOf(answerListSize / size));
             }
 
-            String scrollId = page.getScrollId();
+//            String scrollId = page.getScrollId();
             //保证至少有一个
             ExecutorService exe = Executors.newFixedThreadPool(poolSize+1);
-            logger.info("导出 countSize {} lastSize {} poolSize {} scoreId {}",answerListSize,lastSize,lastSize>0?poolSize+1:poolSize, scrollId);
+            logger.info("导出 countSize {} lastSize {} poolSize {} scoreId {}",answerListSize,lastSize,lastSize>0?poolSize+1:poolSize);
             for (int index = 0; index<poolSize; index++ ){
                 int beginIndex = index*size;
                 int endIndex = beginIndex+size;
                 logger.info("index {} beginIndex {} endIndex {}", index,beginIndex,endIndex);
-                Page<DwEsSurveyAnswer> forPage = new Page<>();
-                List<DwEsSurveyAnswer> pageResult = new ArrayList<>();
+                Page<SurveyAnswer> forPage = new Page<>();
+                List<SurveyAnswer> pageResult = new ArrayList<>();
                 if (index>0) {
                     forPage.setPageSize(size);
-                    forPage.setScrollId(scrollId);
+//                    forPage.setScrollId(scrollId);
+                    forPage.setPageNo(index);
                     // 获取新的results
-                    forPage = dwAnswerEsClientService.findPageByScrollId(forPage);
+                    forPage = surveyAnswerManager.answerPage(forPage, surveyId);
                     pageResult = forPage.getResult();
-                    scrollId = forPage.getScrollId();
+//                    scrollId = forPage.getScrollId();
                 } else {
                     pageResult = page.getResult();
                 }
-                exe.execute(new RunExcelEsUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus, size, index));
+                exe.execute(new RunExcelUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus, size, index));
             }
             if(lastSize>0){
                 int beginIndex = poolSize*size;
                 int endIndex = beginIndex+lastSize;
                 logger.info("lastSize {} beginIndex {} endIndex {}", lastSize,beginIndex,endIndex);
-                Page<DwEsSurveyAnswer> forPage = new Page<>();
-                List<DwEsSurveyAnswer> pageResult = new ArrayList<>();
+                Page<SurveyAnswer> forPage = new Page<>();
+                List<SurveyAnswer> pageResult = new ArrayList<>();
                 if (poolSize>0) {
                     forPage.setPageSize(size);
-                    forPage.setScrollId(scrollId);
+                    forPage.setPageNo(poolSize);
                     // 获取新的results
-                    forPage = dwAnswerEsClientService.findPageByScrollId(forPage);
+                    forPage = surveyAnswerManager.answerPage(forPage, surveyId);
                     pageResult = forPage.getResult();
                 } else {
                     pageResult = page.getResult();
                 }
-                exe.execute(new RunExcelEsUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus, size, poolSize));
+                exe.execute(new RunExcelUtil(surveyId,exportUtil,pageResult,beginIndex,endIndex,savePath,isExpUpQu,ai,expDataContent, jsonNodeQus, size, poolSize));
             }
             exe.shutdown();
-            dwAnswerEsClientService.clearScroll(scrollId);
             while (true) {
                 updateExportProgress(answerListSize,ai.get(),exportLog);
                 if (exe.isTerminated()) {
@@ -413,6 +413,11 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
         exportLogManager.save(exportLog);
     }
 
+    public SurveyAnswerManager getSurveyAnswerManager() {
+        SurveyAnswerManager surveyAnswerManager = SpringContextHolder.getBean(SurveyAnswerManager.class);
+        return surveyAnswerManager;
+    }
+
     public void updateExportProgress(long answerListSize, int count,ExportLog exportLog) {
         if(count>0 && (count%5==0 || (count+30) > answerListSize)){
             float bfbProgress = (float)(count)/(float) (answerListSize+100);//大于100，让excel实际导完，但还要收尾工作让导出状态不至于提高结束
@@ -439,25 +444,4 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
         }
     }
 
-    @Override
-    public HttpResult deleteByIds(String[] ids) throws IOException {
-        User user = accountManager.getCurUser();
-        if (user!=null) {
-            for (String esId:ids) {
-                DwEsSurveyAnswer dwEsSurveyAnswer = dwAnswerEsClientService.findById(esId);
-                if (dwEsSurveyAnswer!=null) {
-                    String surveyId = dwEsSurveyAnswer.getAnswerCommon().getSurveyId();
-                    if (StringUtils.isNotEmpty(surveyId)) {
-                        SurveyDirectory survey = surveyDirectoryManager.getSurvey(surveyId);
-                        if (survey!=null) {
-                            HttpResult httpResult = surveyDirectoryManager.isSurveyRoleOrPerm(user.getId(),survey.getUserId(), PermissionCode.QT_SURVEY_DATA_ANSWER_DELETE);
-                            if(httpResult!=null) return HttpResult.FAILURE_MSG("没有权限");
-                        }
-                    }
-                }
-            }
-        }
-        dwAnswerEsClientService.deleteByIds(ids);
-        return null;
-    }
 }

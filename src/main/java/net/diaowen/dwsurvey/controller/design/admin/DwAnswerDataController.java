@@ -22,6 +22,7 @@ import net.diaowen.dwsurvey.common.PermissionCode;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
 import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
+import net.diaowen.dwsurvey.service.SurveyAnswerExportManager;
 import net.diaowen.dwsurvey.service.SurveyAnswerJsonManager;
 import net.diaowen.dwsurvey.service.SurveyAnswerManager;
 import net.diaowen.dwsurvey.service.SurveyDirectoryManager;
@@ -61,6 +62,8 @@ public class DwAnswerDataController {
     private SurveyAnswerJsonManager surveyAnswerJsonManager;
     @Autowired
     private EsSurveyAnswerManager esSurveyAnswerManager;
+    @Autowired
+    private SurveyAnswerExportManager surveyAnswerExportManager;
 
     /**
      * 获取答卷列表
@@ -170,9 +173,9 @@ public class DwAnswerDataController {
 //                    if(anUplodFiles!=null && anUplodFiles.size()>0 && expUpQu!=null && "1".equals(expUpQu)) isExpUpQu = true;
 //                    if (!user.getId().equals(survey.getUserId())) return HttpResult.FAILURE_MSG("没有权限");
                     if ("1".equals(expUpQu)) isExpUpQu = true;
-                    ExportLog exportLog = esSurveyAnswerManager.buildExportXls(surveyId,savePath,threadMax,isExpUpQu?1:0, expDataContent);
+                    ExportLog exportLog = surveyAnswerExportManager.buildExportXls(surveyId,savePath,threadMax,isExpUpQu?1:0, expDataContent);
                     String exportLogId = exportLog.getId();
-                    esSurveyAnswerManager.exportLogXLS(surveyId,exportLogId,savePath,isExpUpQu,isEff,handleState);
+                    surveyAnswerExportManager.exportLogXLS(surveyId,exportLogId,savePath,isExpUpQu,isEff,handleState);
                     return HttpResult.SUCCESS(exportLog);
                 }
             }
@@ -191,10 +194,17 @@ public class DwAnswerDataController {
         try {
             if (map!=null && map.containsKey("id")) {
                 String[] ids = map.get("id");
-                esSurveyAnswerManager.deleteByIds(ids);
+                if(ids!=null){
+                    surveyAnswerManager.deleteData(ids);
+                    try{
+                        esSurveyAnswerManager.deleteByIds(ids);
+                    }catch (Exception e) {
+                        logger.error("deleteAnswer es {}", e.getMessage());
+                    }
+                }
                 return HttpResult.SUCCESS();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
             return HttpResult.EXCEPTION(e.getMessage());

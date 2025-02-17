@@ -1,13 +1,9 @@
 package net.diaowen.common.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import jakarta.json.Json;
-import net.diaowen.common.QuType;
-import net.diaowen.common.base.entity.User;
 import net.diaowen.common.utils.excel.SXSSF_XLSXExportUtil;
 import net.diaowen.common.utils.parsehtml.HtmlUtil;
 import net.diaowen.dwsurvey.config.DWSurveyConfig;
-import net.diaowen.dwsurvey.entity.*;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswer;
 import net.diaowen.dwsurvey.entity.es.answer.DwEsSurveyAnswerCommon;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnIp;
@@ -15,10 +11,6 @@ import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
 import net.diaowen.dwsurvey.entity.es.answer.question.EsAnQuestion;
 import net.diaowen.dwsurvey.entity.es.answer.question.option.*;
-import net.diaowen.dwsurvey.service.QuestionManager;
-import net.diaowen.dwsurvey.service.SurveyAnswerJsonManager;
-import net.diaowen.dwsurvey.service.impl.QuestionManagerImpl;
-import net.diaowen.dwsurvey.service.impl.SurveyAnswerJsonManagerImpl;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.aspectj.util.FileUtil;
@@ -28,19 +20,18 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class RunExcelUtil extends Thread {
+public class RunExcelEsUtil extends Thread {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private String surveyId;
     private SXSSF_XLSXExportUtil exportUtil;
     private SXSSFSheet sheet;
-    private List<SurveyAnswer> answers;
+    private List<DwEsSurveyAnswer> answers;
     private int beginIndex;
     private int endIndex;
     private String savePath;
@@ -54,11 +45,11 @@ public class RunExcelUtil extends Thread {
 
     private int poolIndex;
 
-    RunExcelUtil(){
+    RunExcelEsUtil(){
 
     }
 
-    public RunExcelUtil(String surveyId, SXSSF_XLSXExportUtil exportUtil, List<SurveyAnswer> answers, int beginIndex, int endIndex, String savePath, boolean isExpUpQu, AtomicInteger ai, int expDataContent, JsonNode jsonNodeQus, int pageSize, int poolIndex){
+    public RunExcelEsUtil(String surveyId, SXSSF_XLSXExportUtil exportUtil, List<DwEsSurveyAnswer> answers, int beginIndex, int endIndex, String savePath, boolean isExpUpQu, AtomicInteger ai, int expDataContent, JsonNode jsonNodeQus, int pageSize, int poolIndex){
         this.surveyId = surveyId;
         this.exportUtil = exportUtil;
         this.sheet = exportUtil.getSheet();
@@ -85,10 +76,10 @@ public class RunExcelUtil extends Thread {
             }
             exportUtil.createNewRow(j+1);
             try{
-                SurveyAnswer surveyAnswer = answers.get(j);
-                String surveyAnswerId = surveyAnswer.getId();
+                DwEsSurveyAnswer dwEsSurveyAnswer = answers.get(anIndex);
                 //========== es 导出增加 END ========
-                exportXLSRow(surveyAnswerId, jsonNodeQus, surveyAnswer, (j+1), savePath, isExpUpQu);
+                String surveyAnswerId = dwEsSurveyAnswer.getEsId();
+                exportXLSRow(surveyAnswerId, jsonNodeQus, dwEsSurveyAnswer, (j+1), savePath, isExpUpQu);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -98,13 +89,11 @@ public class RunExcelUtil extends Thread {
         logger.info("export finish row {} - {}", this.beginIndex, this.endIndex);
     }
 
-    private void exportXLSRow(String surveyAnswerId, JsonNode jsonNodeQus,SurveyAnswer surveyAnswer,int rowIndex, String savePath, boolean isExpUpQu) {
+    private void exportXLSRow(String surveyAnswerId, JsonNode jsonNodeQus,DwEsSurveyAnswer dwEsSurveyAnswer,int rowIndex, String savePath, boolean isExpUpQu) {
         int cellIndex = 0;
         int quNum=0;
         SXSSFRow row = exportUtil.getRow(rowIndex);
         int jsonNodeSize = jsonNodeQus.size();
-        SurveyAnswerJsonManager surveyAnswerJsonManager = SpringContextHolder.getBean(SurveyAnswerJsonManagerImpl.class);
-        DwEsSurveyAnswer dwEsSurveyAnswer = surveyAnswerJsonManager.getDwEsSurveyAnswer(surveyAnswer.getId());
         List<EsAnQuestion> anQuestionList = dwEsSurveyAnswer.getAnQuestions();
         exportUtil.setCell(row, cellIndex++, String.valueOf(rowIndex));
         for (int i=0; i<jsonNodeSize; i++) {
