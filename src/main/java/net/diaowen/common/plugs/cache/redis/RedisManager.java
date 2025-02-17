@@ -27,9 +27,6 @@ public class RedisManager {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-
     public void redisTest(){
 //        ValueOperations valueOperations = redisTemplate.opsForValue();
 //        String value = RandomUtils.buildOrderCode();
