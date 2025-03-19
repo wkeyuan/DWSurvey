@@ -3,6 +3,7 @@ package net.diaowen.dwsurvey.service.impl;
 import com.alibaba.fastjson.JSON;
 import net.diaowen.common.QuType;
 import net.diaowen.common.base.entity.User;
+import net.diaowen.common.base.service.AccountManager;
 import net.diaowen.common.plugs.page.Page;
 import net.diaowen.common.service.BaseServiceImpl;
 import net.diaowen.common.utils.RunAnswerUtil;
@@ -18,6 +19,7 @@ import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnState;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnTime;
 import net.diaowen.dwsurvey.entity.es.answer.extend.EsAnUser;
 import net.diaowen.dwsurvey.service.*;
+import net.diaowen.dwsurvey.service.es.EsSurveyAnswerManager;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.util.FileUtil;
 import org.hibernate.criterion.Criterion;
@@ -69,6 +71,10 @@ public class SurveyAnswerManagerImpl extends
 	private AnUploadFileManager anUploadFileManager;
 	@Autowired
 	private SurveyDirectoryManager directoryManager;
+	@Autowired
+	private EsSurveyAnswerManager esSurveyAnswerManager;
+	@Autowired
+	private AccountManager accountManager;
 
 	@Override
 	public void setBaseDao() {
@@ -700,9 +706,11 @@ public class SurveyAnswerManagerImpl extends
 	public void deleteData(String[] ids) {
 		String surveyId = null;
 		for (String id:ids) {
-			SurveyAnswer surveyAnswer = get(id);
-			surveyId = surveyAnswer.getSurveyId();
-			delete(surveyAnswer);
+			SurveyAnswer surveyAnswer = findById(id);
+			if (surveyAnswer!=null) {
+				surveyId = surveyAnswer.getSurveyId();
+				delete(surveyAnswer);
+			}
 		}
 		if(surveyId!=null) upAnQuNum(surveyId);
 	}
@@ -710,84 +718,93 @@ public class SurveyAnswerManagerImpl extends
 	@Override
 	@Transactional
 	public void delete(SurveyAnswer t) {
-		if(t!=null){
-			String belongAnswerId=t.getId();
-			t.setHandleState(2);
-			surveyAnswerDao.save(t);
-			//更新当前答卷的回答记录值
-			// 得到题列表
-			List<Question> questions = questionManager.findDetails(t.getSurveyId(),"2");
-			for (Question question : questions) {
-				String quId=question.getId();
-				QuType quType = question.getQuType();
+		User user = accountManager.getCurUser();
+		if(t!=null && user!=null){
+			SurveyDirectory surveyDirectory = directoryManager.getSurvey(t.getSurveyId());
+			if (user.getId().equals(surveyDirectory.getUserId())) {
+				String belongAnswerId=t.getId();
+				t.setHandleState(2);
+				surveyAnswerDao.save(t);
+				// 更新当前答卷的回答记录值, 分别执行了
+				 try{
+					 System.out.println("belongAnswerId:"+belongAnswerId);
+					 esSurveyAnswerManager.deleteByAnswerId(belongAnswerId);
+				 }catch (Exception e){}
+				// 得到题列表
+				List<Question> questions = questionManager.findDetails(t.getSurveyId(),"2");
+				for (Question question : questions) {
+					String quId=question.getId();
+					QuType quType = question.getQuType();
 
-				if (quType == QuType.YESNO) {// 是非题
+					if (quType == QuType.YESNO) {// 是非题
 
-				} else if (quType == QuType.RADIO) {// 单选题
-					AnRadio anRadio=anRadioManager.findAnswer(belongAnswerId, quId);
-					if(anRadio!=null){
-						anRadio.setVisibility(0);
-						//是否显示  1显示 0不显示
-						anRadioManager.save(anRadio);
-					}
-				} else if (quType == QuType.CHECKBOX) {// 多选题
-					List<AnCheckbox> anCheckboxs=anCheckboxManager.findAnswer(belongAnswerId, quId);
-					if(anCheckboxs!=null){
-						for (AnCheckbox anCheckbox : anCheckboxs) {
-							anCheckbox.setVisibility(0);
+					} else if (quType == QuType.RADIO) {// 单选题
+						AnRadio anRadio=anRadioManager.findAnswer(belongAnswerId, quId);
+						if(anRadio!=null){
+							anRadio.setVisibility(0);
 							//是否显示  1显示 0不显示
-							anCheckboxManager.save(anCheckbox);
+							anRadioManager.save(anRadio);
 						}
-					}
-				} else if (quType == QuType.FILLBLANK) {// 填空题
-					AnFillblank anFillblank=anFillblankManager.findAnswer(belongAnswerId, quId);
-					if(anFillblank!=null){
-						anFillblank.setVisibility(0);
-						//是否显示  1显示 0不显示
-						anFillblankManager.save(anFillblank);
-					}
-				} else if (quType == QuType.ANSWER) {// 多行填空题
-
-					AnAnswer anAnswer=anAnswerManager.findAnswer(belongAnswerId, quId);
-					if(anAnswer!=null){
-						anAnswer.setVisibility(0);
-						//是否显示  1显示 0不显示
-						anAnswerManager.save(anAnswer);
-					}
-
-				} else if (quType == QuType.COMPRADIO) {// 复合单选题
-
-
-				} else if (quType == QuType.COMPCHECKBOX) {// 复合多选题
-
-				} else if (quType == QuType.ENUMQU) {// 枚举题
-
-				} else if (quType == QuType.MULTIFILLBLANK) {// 组合填空题
-					List<AnDFillblank> anDFillblanks=anDFillblankManager.findAnswer(belongAnswerId, quId);
-					if(anDFillblanks!=null){
-						for (AnDFillblank anDFillblank : anDFillblanks) {
-							anDFillblank.setVisibility(0);
-							//是否显示  1显示 0不显示
-							anDFillblankManager.save(anDFillblank);
+					} else if (quType == QuType.CHECKBOX) {// 多选题
+						List<AnCheckbox> anCheckboxs=anCheckboxManager.findAnswer(belongAnswerId, quId);
+						if(anCheckboxs!=null){
+							for (AnCheckbox anCheckbox : anCheckboxs) {
+								anCheckbox.setVisibility(0);
+								//是否显示  1显示 0不显示
+								anCheckboxManager.save(anCheckbox);
+							}
 						}
-					}
-				} else if (quType == QuType.SCORE) {// 评分题
-
-					List<AnScore> anScores=anScoreManager.findAnswer(belongAnswerId, quId);
-					if(anScores!=null){
-						for (AnScore anScore : anScores) {
-							anScore.setVisibility(0);
+					} else if (quType == QuType.FILLBLANK) {// 填空题
+						AnFillblank anFillblank=anFillblankManager.findAnswer(belongAnswerId, quId);
+						if(anFillblank!=null){
+							anFillblank.setVisibility(0);
 							//是否显示  1显示 0不显示
-							anScoreManager.save(anScore);
+							anFillblankManager.save(anFillblank);
+						}
+					} else if (quType == QuType.ANSWER) {// 多行填空题
+
+						AnAnswer anAnswer=anAnswerManager.findAnswer(belongAnswerId, quId);
+						if(anAnswer!=null){
+							anAnswer.setVisibility(0);
+							//是否显示  1显示 0不显示
+							anAnswerManager.save(anAnswer);
+						}
+
+					} else if (quType == QuType.COMPRADIO) {// 复合单选题
+
+
+					} else if (quType == QuType.COMPCHECKBOX) {// 复合多选题
+
+					} else if (quType == QuType.ENUMQU) {// 枚举题
+
+					} else if (quType == QuType.MULTIFILLBLANK) {// 组合填空题
+						List<AnDFillblank> anDFillblanks=anDFillblankManager.findAnswer(belongAnswerId, quId);
+						if(anDFillblanks!=null){
+							for (AnDFillblank anDFillblank : anDFillblanks) {
+								anDFillblank.setVisibility(0);
+								//是否显示  1显示 0不显示
+								anDFillblankManager.save(anDFillblank);
+							}
+						}
+					} else if (quType == QuType.SCORE) {// 评分题
+
+						List<AnScore> anScores=anScoreManager.findAnswer(belongAnswerId, quId);
+						if(anScores!=null){
+							for (AnScore anScore : anScores) {
+								anScore.setVisibility(0);
+								//是否显示  1显示 0不显示
+								anScoreManager.save(anScore);
+							}
+
 						}
 
 					}
 
 				}
-
+				super.delete(t);
 			}
 		}
-		super.delete(t);
+
 	}
 
 	@Override

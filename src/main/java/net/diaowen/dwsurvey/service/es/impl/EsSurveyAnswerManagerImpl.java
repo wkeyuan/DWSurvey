@@ -459,4 +459,13 @@ public class EsSurveyAnswerManagerImpl implements EsSurveyAnswerManager {
         dwAnswerEsClientService.deleteByIds(ids);
         return null;
     }
+
+    @Override
+    public void deleteByAnswerId(String belongAnswerId) {
+        try {
+            dwAnswerEsClientService.deleteByAnswerId(belongAnswerId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

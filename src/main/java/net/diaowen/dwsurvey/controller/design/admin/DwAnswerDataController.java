@@ -178,10 +178,18 @@ public class DwAnswerDataController {
             if (map!=null && map.containsKey("id")) {
                 String[] ids = map.get("id");
                 logger.debug("deleteAnswer esid {}", ids);
-                esSurveyAnswerManager.deleteByIds(ids);
+                surveyAnswerManager.deleteData(ids);
+                try{
+                    if (map.containsKey("esId")) {
+                        String[] esIds = map.get("esId");
+                        esSurveyAnswerManager.deleteByIds(esIds);
+                    }
+                } catch (Exception e){
+                    logger.error(e.getMessage());
+                }
                 return HttpResult.SUCCESS();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
             return HttpResult.EXCEPTION(e.getMessage());

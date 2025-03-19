@@ -436,4 +436,14 @@ public class DwAnswerEsClientService {
             }
         }
     }
+
+    public void deleteByAnswerId(String answerId) throws IOException {
+        String ANSWER_INDEX_NAME = ESService.getAnswerIndexName();
+        String ANSWER_INDEX_NAME_AGG = ESService.getAnswerIndexNameAgg();
+        List<Query> queryList = new ArrayList<>();
+        queryList.add(TermQuery.of(b -> b.field("answerCommon.answerId").value(answerId))._toQuery());
+        Query query = Query.of(b -> b.bool(c -> c.must(queryList)));
+        esClientService.deleteByQuery(ANSWER_INDEX_NAME, query);
+        esClientService.deleteByQuery(ANSWER_INDEX_NAME_AGG, query);
+    }
 }
