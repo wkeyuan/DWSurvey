@@ -14,4 +14,6 @@ public interface EsSurveyAnswerManager {
     public String exportXLS(String surveyId, String savePath, boolean isExpUpQu, Integer isEff, Integer handleState, ExportLog exportLog);
 
     HttpResult deleteByIds(String[] ids) throws IOException;
+
+    void deleteByAnswerId(String belongAnswerId);
 }
